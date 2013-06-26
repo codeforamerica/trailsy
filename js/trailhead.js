@@ -50,11 +50,12 @@ function startup() {
   }
 
   function showTrailList() {
-    var trail_list_query = "select t.names " +
-      "from (select name1 as names from summit_trail_segments " +
-      "union select name2 from summit_trail_segments " +
-      "union select name3 from summit_trail_segments) " +
-      "as t order by 1";
+    // var trail_list_query = "select t.names " +
+    //   "from (select name1 as names from summit_trail_segments " +
+    //   "union select name2 from summit_trail_segments " +
+    //   "union select name3 from summit_trail_segments) " +
+    //   "as t order by 1";
+    var trail_list_query = "select name,length,source from trail_data order by 1";
     var calldata = {
       q: trail_list_query,
       api_key: api_key,
@@ -71,9 +72,11 @@ function startup() {
 
   function listTrails(response) {
     $.each(response.rows, function(index, val) {
-      console.log(val.names);
+      var trailName = val.name;
+      var trailSource = val.source;
+      console.log(trailName);
       $trailDiv = $("<div>").appendTo("#trailList");
-      $("<span id='" + val.names + "'>" + val.names + "</span>").appendTo($trailDiv).click(getTrail);
+      $("<span class='trail' id='" + trailName + "'>" + trailName + " (" + trailSource + ")" + "</span>").appendTo($trailDiv).click(getTrail);
       console.log($trailDiv);
     });
 
@@ -82,6 +85,7 @@ function startup() {
   function getTrail(e) {
     console.log(e.target.id);
     var trailName = e.target.id;
+ 
     //SQL injection. Yum.
     var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments where " + 
     "name1='" + trailName + "' or " + 
@@ -97,7 +101,6 @@ function startup() {
       url: endpoint,
       data: calldata
     }).done(function(response, textStatus, errorThrown) {
-      console.log(response);
       showTrail(response);
     });
   }
@@ -108,7 +111,15 @@ function startup() {
       map.removeLayer(currentTrail);
     }
     console.log("showTrail");
+    console.log(response);
+
+    if (response.features[0].geometry === null) {
+      alert("No trail segment data found.");
+    }
     currentTrail = L.geoJson(response, { style: { weight: 1, color: "#FF0000" }}).addTo(map);
-    map.fitBounds(currentTrail.getBounds());
+    var zoomLevel = map.getBoundsZoom(currentTrail.getBounds());
+    console.log(zoomLevel);
+    // map.setZoom(zoomLevel - 2);
+    // map.fitBounds(currentTrail.getBounds());
   }
 }
