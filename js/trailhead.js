@@ -1,9 +1,18 @@
 $(document).ready(startup);
 
+/* The Big Nested Function 
+==========================*/
+
+// Print to ensure file is loaded 
+
 function startup() {
   console.log("trailhead.js");
 
+// Map generated in CfA Account
+
   var MAPBOX_MAP_ID = "codeforamerica.map-4urpxezk";
+
+// Map added
 
   var map = L.map('trailMap', {
     zoomControl: true,
@@ -11,7 +20,9 @@ function startup() {
   }).setView([41.1, -81.5], 10);
   L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
   // L.tileLayer.provider('Nokia.terrainDay').addTo(map);
-  var trailheads = [];
+
+// Prepping for API calls (defining data for the call)
+
   var trails = [];
   // var trailhead_query = "select ST_AsText(the_geom), name, trail1, trail2, trail3 from summit_trailheads";
   var trailhead_query = "select * from summit_trailheads";
@@ -23,16 +34,27 @@ function startup() {
     format: "GeoJSON"
   };
 
+// The API Call / jQuery doing an AJAX call
+
   var request = $.ajax({
     dataType: "json",
     url: endpoint,
     data: calldata
+
+// When call is complete, send response to showMap
+
   }).done(function(response, textStatus, errorThrown) {
     showMap(response);
   });
 
+// 
+
   function showMap(response) {
     console.log('showMap');
+
+// Creating Leaflet object/layer from geoJSON response
+// Specify what to do with each feature (trailhead), add all to map
+
     L.geoJson(response, {
       pointToLayer: function(feature, latlng) {
         console.log(feature);
@@ -49,6 +71,8 @@ function startup() {
     showTrailList();
   }
 
+// Get the list of trails
+
   function showTrailList() {
     // var trail_list_query = "select t.names " +
     //   "from (select name1 as names from summit_trail_segments " +
@@ -61,6 +85,9 @@ function startup() {
       api_key: api_key,
       format: "json"
     };
+
+// Another AJAX call, for the trails
+
     var request = $.ajax({
       dataType: "json",
       url: endpoint,
@@ -70,17 +97,24 @@ function startup() {
     });
   }
 
+// jQuery loop
+
   function listTrails(response) {
     $.each(response.rows, function(index, val) {
       var trailName = val.name;
       var trailSource = val.source;
       console.log(trailName);
+
+// Making a new div for text / each trail
+
       $trailDiv = $("<div>").appendTo("#trailList");
       $("<span class='trail' id='" + trailName + "'>" + trailName + " (" + trailSource + ")" + "</span>").appendTo($trailDiv).click(getTrail);
       console.log($trailDiv);
     });
 
   }
+
+// On click of trailDiv, do the following. Click event handling.
 
   function getTrail(e) {
     console.log(e.target.id);
@@ -91,12 +125,15 @@ function startup() {
     "name1='" + trailName + "' or " + 
     "name2='" + trailName + "' or " + 
     "name3='" + trailName + "'";
+
+// Another call
+
     var calldata = {
       q: trail_query,
       api_key: api_key,
       format: "geoJSON"
     };
-    var requesy = $.ajax({
+    var request = $.ajax({
       dataType: "json",
       url: endpoint,
       data: calldata
@@ -104,6 +141,8 @@ function startup() {
       showTrail(response);
     });
   }
+
+// We have to know if a trail is already being displayed, so we can take it off
 
   var currentTrail = "";
   function showTrail(response) {
@@ -117,9 +156,9 @@ function startup() {
       alert("No trail segment data found.");
     }
     currentTrail = L.geoJson(response, { style: { weight: 1, color: "#FF0000" }}).addTo(map);
-    var zoomLevel = map.getBoundsZoom(currentTrail.getBounds());
+    // var zoomLevel = map.getBoundsZoom(currentTrail.getBounds());
     console.log(zoomLevel);
     // map.setZoom(zoomLevel - 2);
-    // map.fitBounds(currentTrail.getBounds());
+    map.fitBounds(currentTrail.getBounds());
   }
 }
