@@ -122,7 +122,7 @@ function startup() {
     var trailName = e.target.id;
  
     //SQL injection. Yum.
-    var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments_2 where " + 
+    var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments where " + 
     "name1='" + trailName + "' or " + 
     "name2='" + trailName + "' or " + 
     "name3='" + trailName + "' or " +
@@ -160,9 +160,6 @@ function startup() {
       alert("No trail segment data found.");
     }
     currentTrail = L.geoJson(response, { style: { weight: 1, color: "#FF0000" }}).addTo(map);
-    // var zoomLevel = map.getBoundsZoom(currentTrail.getBounds());
-    console.log(zoomLevel);
-    // map.setZoom(zoomLevel - 2);
     map.fitBounds(currentTrail.getBounds());
   }
 }
