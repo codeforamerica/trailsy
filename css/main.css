@@ -1,0 +1,140 @@
+#navbar {
+	position: fixed;
+	top: 0px;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 40px;
+	background: #3a3636;
+}
+
+#title {
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 18px;
+	color: #fff;
+	margin-top: 10px;
+	margin-left: 48px;
+	margin-bottom: 10px;
+}
+
+.wrapper {
+	position: fixed;
+	float:left;
+	width:100%;
+	height:auto;
+	margin-top: 40px; /* need to account for the size of the nav */
+	margin-right: 20px;
+	background-color: #fff;
+}
+
+.row {
+	overflow: hidden;	
+	margin: 20px;
+	display: block;
+	width: 100%;
+	min-height: 300px;
+}
+
+
+.span4 {
+	float: left;
+	width: 320px;
+	height: auto;
+	color: #eee;
+	margin-right: 5px;
+}
+
+.span8 {
+	float: left;
+	width: 640px;
+	height: 400px;
+	color: #eee;
+	margin-left: 5px;
+	overflow: hidden;
+}
+
+#trailList {
+	height: 640px;
+	border: 2px;
+	border-style:solid;
+	border-color:#CFDBC5;
+	border-radius: 2px;
+	overflow: scroll;
+}
+
+.trail { 
+	float: left;
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 14px;
+	color: #3a3636;
+	padding-left: 12px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	vertical-align: middle;
+}
+
+.trailSource {
+	float: right;
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 14px;
+	color: #3a3636;
+	position: relative;
+	top: 60px;
+	right: 5px;
+}
+
+.trail-box {
+	height: 80px;
+	background-color: #CFDBC5;
+	margin: 10px;
+	border: 4px;
+	border-color: #fff;
+  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
+  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+}
+
+.trailList-title {
+	margin-top: -10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 40px;
+	background-color: #CFDBC5;
+
+}
+
+.trailList-title p {
+	padding-top: 10px;
+	padding-left: 10px;
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 18px;
+	color: #000;	
+}
+
+#trailMap {
+	position: absolute;
+	width: 640px; 
+	height: 640px;
+}
+
+.trailMap-title {
+	margin-top: -10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 40px;
+	background-color: #CFDBC5;
+}
+
+.trailMap-title p {
+	padding-top: 10px;
+	padding-left: 10px;
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 18px;
+	color: #000;	
+}
+
+p {
+	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 18px;
+	color: #000;	
+}

@@ -107,8 +107,9 @@ function startup() {
 
 // Making a new div for text / each trail
 
-      $trailDiv = $("<div>").appendTo("#trailList");
-      $("<span class='trail' id='" + trailName + "'>" + trailName + " (" + trailSource + ")" + "</span>").appendTo($trailDiv).click(getTrail);
+      $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
+      $("<span class='trail' id='" + trailName + "'>" + trailName + "</span>").appendTo($trailDiv).click(getTrail);
+      $("<span class='trailSource' id='" + trailSource + "'>" + trailSource + "</span>").appendTo($trailDiv).click(getTrail);
       console.log($trailDiv);
     });
 
