@@ -122,10 +122,13 @@ function startup() {
     var trailName = e.target.id;
  
     //SQL injection. Yum.
-    var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments where " + 
+    var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments_2 where " + 
     "name1='" + trailName + "' or " + 
     "name2='" + trailName + "' or " + 
-    "name3='" + trailName + "'";
+    "name3='" + trailName + "' or " +
+    "name1='" + trailName + " Trail' or " + 
+    "name2='" + trailName + " Trail' or " + 
+    "name3='" + trailName + " Trail'";
 
 // Another call
 
