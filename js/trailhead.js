@@ -28,26 +28,11 @@ function startup() {
   var trailhead_query = "select * from summit_trailheads";
   var api_key = "3751baeceb14d394f251b28768ca7e27fc20ad07";
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
-  var calldata = {
-    q: trailhead_query,
-    api_key: api_key,
-    format: "GeoJSON"
-  };
 
 // The API Call / jQuery doing an AJAX call
-
-  var request = $.ajax({
-    dataType: "json",
-    url: endpoint,
-    data: calldata
-
 // When call is complete, send response to showMap
+  makeSQLQuery(trailhead_query, showMap);
 
-  }).done(function(response, textStatus, errorThrown) {
-    showMap(response);
-  });
-
-// 
 
   function showMap(response) {
     console.log('showMap');
@@ -79,40 +64,47 @@ function startup() {
     //   "union select name2 from summit_trail_segments " +
     //   "union select name3 from summit_trail_segments) " +
     //   "as t order by 1";
-    var trail_list_query = "select name,length,source from trail_data order by 1";
-    var calldata = {
-      q: trail_list_query,
-      api_key: api_key,
-      format: "json"
-    };
-
-// Another AJAX call, for the trails
-
-    var request = $.ajax({
-      dataType: "json",
-      url: endpoint,
-      data: calldata
-    }).done(function(response, textStatus, errorThrown) {
-      listTrails(response, textStatus, errorThrown);
-    });
+    var trail_list_query = "select the_geom, name,length,source from trail_data order by name";
+    // Another AJAX call, for the trails
+    makeSQLQuery(trail_list_query, listTrails);
   }
 
 // jQuery loop
 
   function listTrails(response) {
-    $.each(response.rows, function(index, val) {
-      var trailName = val.name;
-      var trailSource = val.source;
+    console.log(response);
+    console.log(response.rows);
+    $.each(response.features, function(index, val) {
+      console.log(val);
+      var trailName = val.properties.name;
+      var trailSource = val.properties.source;
       console.log(trailName);
 
 // Making a new div for text / each trail
 
       $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-      $("<span class='trail' id='" + trailName + "'>" + trailName + "</span>").appendTo($trailDiv).click(getTrail);
-      $("<span class='trailSource' id='" + trailSource + "'>" + trailSource + "</span>").appendTo($trailDiv).click(getTrail);
+      $("<span class='trail' id='" + trailName + "'>" + trailName + "</span>").appendTo($trailDiv).click(getTrailHead);
+      $("<span class='trailSource' id='" + trailSource + "'>" + trailSource + "</span>").appendTo($trailDiv).click(getTrailHead);
       console.log($trailDiv);
     });
 
+  }
+
+
+  function getTrailHead(e) {
+    var trailName = e.target.id;
+    console.log(trailName);
+    var trailhead_query = "select * from summit_trailheads where " +
+    "trail1='" + trailName + "' or " + 
+    "trail2='" + trailName + "' or " + 
+    "trail3='" + trailName + "' or " +
+    "trail1='" + trailName + " Trail' or " + 
+    "trail2='" + trailName + " Trail' or " + 
+    "trail3='" + trailName + " Trail'";
+
+    makeSQLQuery(trailhead_query, function(response) { 
+      console.log(response); 
+    });
   }
 
 // On click of trailDiv, do the following. Click event handling.
@@ -130,20 +122,7 @@ function startup() {
     "name2='" + trailName + " Trail' or " + 
     "name3='" + trailName + " Trail'";
 
-// Another call
-
-    var calldata = {
-      q: trail_query,
-      api_key: api_key,
-      format: "geoJSON"
-    };
-    var request = $.ajax({
-      dataType: "json",
-      url: endpoint,
-      data: calldata
-    }).done(function(response, textStatus, errorThrown) {
-      showTrail(response);
-    });
+    makeSQLQuery(trail_query, showTrail);
   }
 
 // We have to know if a trail is already being displayed, so we can take it off
@@ -162,4 +141,32 @@ function startup() {
     currentTrail = L.geoJson(response, { style: { weight: 1, color: "#FF0000" }}).addTo(map);
     map.fitBounds(currentTrail.getBounds());
   }
+
+
+  function makeSQLQuery(query, done, error) {
+    console.log("makeSQLQuery");
+    var callData = {
+      q: query,
+      api_key: api_key,
+      format: "geoJSON"
+    };
+    var request = $.ajax({
+      dataType: "json",
+      url: endpoint,
+      data: callData
+    }).done(function(response, textStatus, errorThrown) {
+      done(response);
+    }).error(function(response, textStatus, errorThrown) {
+      if (typeof(error) === "function") {
+        error(response);
+      }
+      else {
+        console.log("ERROR:");
+        console.log(query);
+        console.log(errorThrown);
+      }
+    });
+  }
+
 }
+
