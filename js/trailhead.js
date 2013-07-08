@@ -16,7 +16,7 @@ function startup() {
     lng: -81.5
   };
   // Map added
-
+  var METERSTOMILES = 0.00062137;
 
   // L.tileLayer.provider('Nokia.terrainDay').addTo(map);
 
@@ -38,8 +38,8 @@ function startup() {
 
   var currentLocation = getLocation();
 
-  displayMap(currentLocation);
-
+  displayInitialMap(currentLocation);
+  $("#redoSearch").click(redoSearch);
 
   // returns { lat: x, lng: y }
 
@@ -50,12 +50,20 @@ function startup() {
 
   // given location, display a map
 
-  function displayMap(location) {
+  function displayInitialMap(location) {
     map = L.map('trailMap', {
       zoomControl: true,
       inertiaMaxSpeed: 100
     }).setView([location.lat, location.lng], 11);
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    getNearestTrailheads(currentLocation);
+  }
+
+  function redoSearch() {
+    currentLocation = map.getCenter();
+    console.log(["getCenter: ", currentLocation]);
+    activeTrailheads = [];
+    trails = [];
     getNearestTrailheads(currentLocation);
   }
 
@@ -67,8 +75,8 @@ function startup() {
       "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
       "from summit_trailheads " +
       "ORDER BY distance " +
-      // "";
-      "LIMIT 100";
+    // "";
+    "LIMIT 100";
     makeSQLQuery(nearest_trailhead_query, makeNearestTrailheadArray);
   }
 
@@ -135,21 +143,21 @@ function startup() {
       for (var k = 0; k < trails.length; k++) {
         trail = trails[k];
         if (trailhead.properties.trail1 == trail.properties.name) {
-          console.log("MATCH1");
-          console.log(trailhead);
-          console.log(trail);
+          // console.log("MATCH1");
+          // console.log(trailhead);
+          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
         }
         if (trailhead.properties.trail2 == trail.properties.name) {
-          console.log("MATCH2");
-          console.log(trailhead);
-          console.log(trail);
+          // console.log("MATCH2");
+          // console.log(trailhead);
+          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
         }
         if (trailhead.properties.trail3 == trail.properties.name) {
-          console.log("MATCH3");
-          console.log(trailhead);
-          console.log(trail);
+          // console.log("MATCH3");
+          // console.log(trailhead);
+          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
         }
       }
@@ -165,18 +173,22 @@ function startup() {
   // noting if a particular trailhead has no trails associated with it
 
   function listTrails(activeTrailheads) {
-    console.log(activeTrailheads);
+    console.log("listTrails");
+    $("#trailList").html("");
     $.each(activeTrailheads, function(index, val) {
       var trailheadName = val.properties.name;
       var trailheadTrailNames = val.trails;
       var trailheadSource = val.properties.source;
-      console.log(trailheadTrailNames);
+      console.log(val);
+      var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
+      // console.log(trailheadTrailNames);
       var $trailDiv;
+
       // Making a new div for text / each trail
       for (var i = 0; i < trailheadTrailNames.length; i++) {
         var trailName = trailheadTrailNames[i];
         $trailDiv = $("<div class='trail-box' id='" + trailName + "|" + trailheadName + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
-        $("<span class='trail' >" + trailName + "</span>").appendTo($trailDiv);
+        $("<span class='trail' >" + trailName + " (" + trailheadName + " - " + trailheadDistance + " miles) " + "</span>").appendTo($trailDiv);
         $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
         // console.log($trailDiv);
       }
@@ -197,7 +209,11 @@ function startup() {
   // and display that trail only for now
 
   function getTrailsForTrailhead(e) {
-    console.log("getTrailsForTrailhead");
+    console.log(["getTrailsForTrailhead", e.target.id]);
+    // temporary until we get the events sorted out
+    if (e.target !== this) {
+      return;
+    }
     var trailName = e.target.id.split("|")[0];
     var trailheadName = e.target.id.split("|")[1];
     console.log([trailName, trailheadName]);
@@ -207,10 +223,11 @@ function startup() {
 
   // show the clicked trailhead as a default marker icon
   var currentTrailheadMarker;
+
   function showTrailHead(trailheadName) {
-    console.log("showTrailHead");
+    console.log(["showTrailHead", trailheadName]);
     for (var i = 0; i < activeTrailheads.length; i++) {
-      console.log([activeTrailheads[i], trailheadName]);
+      // console.log([activeTrailheads[i], trailheadName]);
       if (activeTrailheads[i].properties.name === trailheadName) {
         currentTrailhead = activeTrailheads[i];
       }
@@ -219,7 +236,7 @@ function startup() {
     if (currentTrailheadMarker) {
       map.removeLayer(currentTrailheadMarker);
     }
-    currentTrailheadMarker = new L.Marker([currentTrailhead.marker._latlng.lat,currentTrailhead.marker._latlng.lng]);
+    currentTrailheadMarker = new L.Marker([currentTrailhead.marker._latlng.lat, currentTrailhead.marker._latlng.lng]);
     currentTrailheadMarker.addTo(map);
   }
 
