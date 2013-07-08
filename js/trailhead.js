@@ -263,7 +263,6 @@ function startup() {
   function getTrailPath(trailName) {
     console.log("getTrailPath");
 
-    //SQL injection. Yum.
     var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments where " +
       "name1='" + trailName + "' or " +
       "name2='" + trailName + "' or " +
@@ -295,7 +294,7 @@ function startup() {
   // }
   // We have to know if a trail is already being displayed, so we can take it off
 
-  var currentTrail = "";
+  var currentTrail = {};
 
   function showTrail(response) {
     if (currentTrail) {
@@ -309,11 +308,15 @@ function startup() {
     }
     currentTrail = L.geoJson(response, {
       style: {
-        weight: 1,
+        weight: 2,
         color: "#FF0000"
       }
     }).addTo(map);
-    map.fitBounds(currentTrail.getBounds());
+    console.log(currentTrail);
+    var curZoom = map.getBoundsZoom(currentTrail.getBounds());
+    var newZoom = curZoom > 13 ? 13 : curZoom;
+    map.setView(currentTrail.getBounds().getCenter(), newZoom);
+    console.log(curZoom);
   }
 
 
