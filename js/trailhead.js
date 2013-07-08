@@ -15,10 +15,12 @@ function startup() {
     lat: 41.1,
     lng: -81.5
   };
+
   // Map added
   var METERSTOMILES = 0.00062137;
+  var MAX_ZOOM = 13;
 
-  // L.tileLayer.provider('Nokia.terrainDay').addTo(map);
+  
 
   // Prepping for API calls (defining data for the call)
 
@@ -55,7 +57,8 @@ function startup() {
       zoomControl: true,
       inertiaMaxSpeed: 100
     }).setView([location.lat, location.lng], 11);
-    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     getNearestTrailheads(currentLocation);
   }
 
@@ -314,7 +317,7 @@ function startup() {
     }).addTo(map);
     console.log(currentTrail);
     var curZoom = map.getBoundsZoom(currentTrail.getBounds());
-    var newZoom = curZoom > 13 ? 13 : curZoom;
+    var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
     map.setView(currentTrail.getBounds().getCenter(), newZoom);
     console.log(curZoom);
   }
