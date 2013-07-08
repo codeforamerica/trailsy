@@ -40,9 +40,6 @@ function startup() {
 
   displayMap(currentLocation);
 
-  getNearestTrailheads(currentLocation);
-
-
 
   // returns { lat: x, lng: y }
 
@@ -59,6 +56,7 @@ function startup() {
       inertiaMaxSpeed: 100
     }).setView([location.lat, location.lng], 11);
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    getNearestTrailheads(currentLocation);
   }
 
   // get all trailhead info, in order of distance from "location"
@@ -69,8 +67,8 @@ function startup() {
       "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
       "from summit_trailheads " +
       "ORDER BY distance " +
-    // "";
-    "LIMIT 100";
+      // "";
+      "LIMIT 100";
     makeSQLQuery(nearest_trailhead_query, makeNearestTrailheadArray);
   }
 
@@ -82,9 +80,9 @@ function startup() {
     console.log("makeNearestTrailheadArray");
     console.log(response);
     for (var i = 0; i < response.features.length; i++) {
-      currentFeature = response.features[i];
+      var currentFeature = response.features[i];
       currentFeatureLatLng = new L.LatLng(currentFeature.geometry.coordinates[1], currentFeature.geometry.coordinates[0]);
-      newMarker = L.circleMarker(currentFeatureLatLng, {
+      var newMarker = L.circleMarker(currentFeatureLatLng, {
         title: 'test',
         radius: 4
       }).bindPopup(currentFeature.properties.name);
@@ -103,12 +101,12 @@ function startup() {
 
   function showNearestTrailheads(activeTrailheads) {
     console.log("showNearestTrailheads");
-    var currentTrailheadArray = [];
+    var currentTrailheadMarkerArray = [];
     for (var i = 0; i < activeTrailheads.length; i++) {
-      currentTrailheadArray.push(activeTrailheads[i].marker);
+      currentTrailheadMarkerArray.push(activeTrailheads[i].marker);
     }
 
-    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadArray);
+    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
 
     map.addLayer(currentTrailheadLayerGroup);
     getTrailList();
@@ -177,9 +175,9 @@ function startup() {
       // Making a new div for text / each trail
       for (var i = 0; i < trailheadTrailNames.length; i++) {
         var trailName = trailheadTrailNames[i];
-        $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-        $("<span class='trail' id='" + trailName + "|" + trailheadName + "'>" + trailName + "</span>").appendTo($trailDiv).click(getTrailsForTrailhead);
-        $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv).click(getTrailsForTrailhead);
+        $trailDiv = $("<div class='trail-box' id='" + trailName + "|" + trailheadName + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
+        $("<span class='trail' >" + trailName + "</span>").appendTo($trailDiv);
+        $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
         // console.log($trailDiv);
       }
 
