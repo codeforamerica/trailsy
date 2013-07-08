@@ -232,11 +232,11 @@ function startup() {
         currentTrailhead = activeTrailheads[i];
       }
     }
-    console.log(currentTrailhead.marker._latlng.lng);
     if (currentTrailheadMarker) {
       map.removeLayer(currentTrailheadMarker);
     }
-    currentTrailheadMarker = new L.Marker([currentTrailhead.marker._latlng.lat, currentTrailhead.marker._latlng.lng]);
+    console.log(["currentTrailheadMarker", currentTrailhead.marker, currentTrailhead.marker.getLatLng().lat]);
+    currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
     currentTrailheadMarker.addTo(map);
   }
 
