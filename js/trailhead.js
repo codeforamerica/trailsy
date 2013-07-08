@@ -20,7 +20,7 @@ function startup() {
   var METERSTOMILES = 0.00062137;
   var MAX_ZOOM = 13;
 
-  
+
 
   // Prepping for API calls (defining data for the call)
 
@@ -39,7 +39,7 @@ function startup() {
   //makeSQLQuery(trailhead_query, showMap);
 
   var currentLocation = getLocation();
-
+  var currentLocationMarker = {};
   displayInitialMap(currentLocation);
   $("#redoSearch").click(redoSearch);
 
@@ -55,11 +55,24 @@ function startup() {
   function displayInitialMap(location) {
     map = L.map('trailMap', {
       zoomControl: true,
-      inertiaMaxSpeed: 100
+      zoomAnimationThreshold: 20
     }).setView([location.lat, location.lng], 11);
+    map.on({
+      moveend: dropCenterMarker
+    });
     // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     getNearestTrailheads(currentLocation);
+    dropCenterMarker();
+  }
+
+  function dropCenterMarker() {
+    if (currentLocationMarker) {
+      map.removeLayer(currentLocationMarker);
+    }
+    var center = map.getCenter();
+    console.log(center);
+    currentLocationMarker = new L.Marker([center.lat, center.lng]).addTo(map);
   }
 
   function redoSearch() {
@@ -318,7 +331,14 @@ function startup() {
     console.log(currentTrail);
     var curZoom = map.getBoundsZoom(currentTrail.getBounds());
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
-    map.setView(currentTrail.getBounds().getCenter(), newZoom);
+    map.setView(currentTrail.getBounds().getCenter(), newZoom, {
+      pan: {
+        animate: true
+      },
+      zoom: {
+        animate: true
+      }
+    });
     console.log(curZoom);
   }
 
