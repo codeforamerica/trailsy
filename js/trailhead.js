@@ -109,7 +109,8 @@ function startup() {
       var trailhead = {
         properties: currentFeature.properties,
         marker: newMarker,
-        trails: []
+        trails: [],
+        popupContent: ""
       };
       activeTrailheads.push(trailhead);
     }
@@ -147,7 +148,7 @@ function startup() {
   // given the list of trails from the trail_data table,
   // populate activeTrailheads[x].trails with all of the trails
   // that match each trailhead's named trails from the trailhead table
-
+  // also, just because we can, add links to the trails within each trailhead popup 
   function makeNearestTrailList(response) {
     console.log("showNearestTrailList");
     for (var i = 0; i < response.features.length; i++) {
@@ -172,6 +173,7 @@ function startup() {
         }
       }
       popupContent = popupContent + "</div>";
+      trailhead.popupContent = popupContent;
       trailhead.marker.bindPopup(popupContent);
     }
 
@@ -191,7 +193,6 @@ function startup() {
       var trailheadID = val.properties.cartodb_id;
       var trailheadTrailNames = val.trails;
       var trailheadSource = val.properties.source;
-      console.log(val);
       var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
       // console.log(trailheadTrailNames);
       var $trailDiv;
@@ -216,11 +217,11 @@ function startup() {
 
       // diagnostic div to show trailheads with no trail matches
       // TODO: find out why these happen!
-      if (trailheadTrailNames.length === 0) {
-        $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-        $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS</span>").appendTo($trailDiv);
-        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
-      }
+      // if (trailheadTrailNames.length === 0) {
+      //   $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
+      //   $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS</span>").appendTo($trailDiv);
+      //   $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
+      // }
     });
   }
 
@@ -262,6 +263,7 @@ function startup() {
       map.removeLayer(currentTrailheadMarker);
     }
     currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
+    currentTrailheadMarker.bindPopup(currentTrailhead.popupContent);
     currentTrailheadMarker.addTo(map);
   }
 
