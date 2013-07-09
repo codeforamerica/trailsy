@@ -155,7 +155,9 @@ function startup() {
       trails.push(response.features[i]);
     }
     for (var j = 0; j < activeTrailheads.length; j++) {
-      trailhead = activeTrailheads[j];
+      var trailhead = activeTrailheads[j];
+      var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
+
       for (var k = 0; k < trails.length; k++) {
         trail = trails[k];
         if (trailhead.properties.trail1 == trail.properties.name) {
@@ -163,20 +165,25 @@ function startup() {
           // console.log(trailhead);
           // console.log(trail);
           trailhead.trails.push(trail.properties.name);
+          popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
         if (trailhead.properties.trail2 == trail.properties.name) {
           // console.log("MATCH2");
           // console.log(trailhead);
           // console.log(trail);
           trailhead.trails.push(trail.properties.name);
+          popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
         if (trailhead.properties.trail3 == trail.properties.name) {
           // console.log("MATCH3");
           // console.log(trailhead);
           // console.log(trail);
           trailhead.trails.push(trail.properties.name);
+          popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
       }
+      popupContent = popupContent + "</div>";
+      trailhead.marker.bindPopup(popupContent);
     }
     listTrails(activeTrailheads);
   }

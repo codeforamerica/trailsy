@@ -33,6 +33,18 @@
 
 }
 
+.trailhead-popup {
+  color: black;
+}
+
+.trailhead-name {
+  font-weight: bold;
+}
+
+.trailhead-trailname {
+  color: green;
+}
+
 .wrapper {
 	position: fixed;
 	float:left;
