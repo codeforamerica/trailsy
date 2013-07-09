@@ -13,22 +13,24 @@
 }
 
 #navbar {
-	position: fixed;
+	position: absolute;
 	top: 0px;
-	left: 0;
+	left: 30px;
 	right: 0;
-	width: 100%;
-	height: 40px;
+	width: 970px;
+	height: 60px;
 	background: #3a3636;
 }
 
 #title {
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
+	position: relative;
+	top: -20px;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 24px;
 	color: #fff;
-	margin-top: 10px;
 	margin-left: 48px;
-	margin-bottom: 10px;
+	padding-bottom: 12px;
+
 }
 
 .wrapper {
@@ -40,6 +42,17 @@
 	margin-right: 20px;
 	background-color: #fff;
 }
+
+.narrow-menu {
+	overflow: hidden;	
+	margin-top: 20px;
+	margin-left: 21px;
+	display: block;
+	width: 970px;
+	min-height: 50px;
+	background-color: #eee;
+}
+
 
 .row {
 	overflow: hidden;	
@@ -78,7 +91,7 @@
 
 .trail { 
 	float: left;
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 14px;
 	color: #3a3636;
 	padding-left: 12px;
@@ -89,7 +102,7 @@
 
 .trailSource {
 	float: right;
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 14px;
 	color: #3a3636;
 	position: relative;
@@ -120,7 +133,7 @@
 .trailList-title p {
 	padding-top: 10px;
 	padding-left: 10px;
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 18px;
 	color: #000;	
 }
@@ -142,7 +155,7 @@
 .trailMap-title p {
 	padding-top: 10px;
 	padding-left: 10px;
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 18px;
 	color: #000;	
 }
