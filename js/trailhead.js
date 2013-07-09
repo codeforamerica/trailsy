@@ -35,7 +35,7 @@ function startup() {
   var currentLocationMarker = {};
 
   $("#redoSearch").click(redoSearch);
-
+  $(document).on('click', '.trailhead-trailname', getTrailsForTrailhead);
 
   displayInitialMap(currentLocation);
   
@@ -160,21 +160,21 @@ function startup() {
         trail = trails[k];
         if (trailhead.properties.trail1 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
-          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "' class='trailhead-trailname'>" + trail.properties.name + "</div>";
+          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
         if (trailhead.properties.trail2 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
-          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "' class='trailhead-trailname'>" + trail.properties.name + "</div>";
+          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
         if (trailhead.properties.trail3 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
-          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "' class='trailhead-trailname'>" + trail.properties.name + "</div>";
+          popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
       }
       popupContent = popupContent + "</div>";
       trailhead.marker.bindPopup(popupContent);
     }
-    $(".trailhead-trailname").click(getTrailsForTrailhead); 
+
     listTrails(activeTrailheads);
   }
 
@@ -226,8 +226,6 @@ function startup() {
         $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
     });
-    console.log(activeTrailheads);
-    console.log(trails);
   }
 
 
