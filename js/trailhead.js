@@ -57,23 +57,23 @@ function startup() {
       zoomControl: true,
       zoomAnimationThreshold: 20
     }).setView([location.lat, location.lng], 11);
-    map.on({
-      moveend: dropCenterMarker
-    });
+    // map.on({
+    //   moveend: dropCenterMarker
+    // });
     // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     getNearestTrailheads(currentLocation);
-    dropCenterMarker();
+    // dropCenterMarker();
   }
 
-  function dropCenterMarker() {
-    if (currentLocationMarker) {
-      map.removeLayer(currentLocationMarker);
-    }
-    var center = map.getCenter();
-    console.log(center);
-    currentLocationMarker = new L.Marker([center.lat, center.lng]).addTo(map);
-  }
+  // function dropCenterMarker() {
+  //   if (currentLocationMarker) {
+  //     map.removeLayer(currentLocationMarker);
+  //   }
+  //   var center = map.getCenter();
+  //   console.log(center);
+  //   currentLocationMarker = new L.Marker([center.lat, center.lng]).addTo(map);
+  // }
 
   function redoSearch() {
     currentLocation = map.getCenter();
