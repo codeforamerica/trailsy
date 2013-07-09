@@ -16,33 +16,29 @@ function startup() {
     lng: -81.5
   };
 
-  // Map added
   var METERSTOMILES = 0.00062137;
   var MAX_ZOOM = 13;
 
-
-
-  // Prepping for API calls (defining data for the call)
-
   var map = {};
-  var trails = [];
-  var activeTrailheads = [];
+  var trails = []; // all of the trails from trail_data
+  var activeTrailheads = []; // the current set of trailheads ordered by distance
+
   // var trailhead_query = "select ST_AsText(the_geom), name, trail1, trail2, trail3 from summit_trailheads";
   // var trailhead_query = "select * from summit_trailheads";
+  // Prepping for API calls (defining data for the call)
   var api_key = "3751baeceb14d394f251b28768ca7e27fc20ad07";
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
 
 
-
-  // The API Call / jQuery doing an AJAX call
-  // When call is complete, send response to showMap
-  //makeSQLQuery(trailhead_query, showMap);
-
-  var currentLocation = getLocation();
+  var currentTrail = {};  // We have to know if a trail is already being displayed, so we can remove it
+  var currentLocation = getLocation(); // not sure if this needs to be scoped here. might be useful later.
   var currentLocationMarker = {};
-  displayInitialMap(currentLocation);
+
   $("#redoSearch").click(redoSearch);
 
+  displayInitialMap(currentLocation);
+  
+  
   // returns { lat: x, lng: y }
 
   function getLocation(callback) {
@@ -60,20 +56,17 @@ function startup() {
     // map.on({
     //   moveend: dropCenterMarker
     // });
+
+    // Switch between MapBox and other providers by commenting/uncommenting these
     // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
-    getNearestTrailheads(currentLocation);
-    // dropCenterMarker();
+
+    getNearestTrailheads(location);
   }
 
-  // function dropCenterMarker() {
-  //   if (currentLocationMarker) {
-  //     map.removeLayer(currentLocationMarker);
-  //   }
-  //   var center = map.getCenter();
-  //   console.log(center);
-  //   currentLocationMarker = new L.Marker([center.lat, center.lng]).addTo(map);
-  // }
+
+  // run the trailhead search again after setting 
+  // currentLocation to the center of the currently viewed map
 
   function redoSearch() {
     currentLocation = map.getCenter();
@@ -82,6 +75,7 @@ function startup() {
     trails = [];
     getNearestTrailheads(currentLocation);
   }
+
 
   // get all trailhead info, in order of distance from "location"
 
@@ -96,7 +90,8 @@ function startup() {
     makeSQLQuery(nearest_trailhead_query, makeNearestTrailheadArray);
   }
 
-  // given the getNearestTrailheads response,
+
+  // given the getNearestTrailheads response, a geoJSON collection of trailheads by distance,
   // populate activeTrailheads[] with the each trailhead's stored properties, a Leaflet marker, 
   // and a place to put the trails for that trailhead
 
@@ -120,6 +115,7 @@ function startup() {
     showNearestTrailheads(activeTrailheads);
   }
 
+
   // given activeTrailheads (which is a broader scoped variable, but we'll ignore that for now),
   // add all of the markers to the map in a single Leaflet layer group
 
@@ -136,6 +132,7 @@ function startup() {
     getTrailList();
   }
 
+
   // get the list of trails
 
   function getTrailList() {
@@ -144,6 +141,7 @@ function startup() {
     // Another AJAX call, for the trails
     makeSQLQuery(trail_list_query, makeNearestTrailList);
   }
+
 
   // given the list of trails from the trail_data table,
   // populate activeTrailheads[x].trails with all of the trails
@@ -157,7 +155,6 @@ function startup() {
     for (var j = 0; j < activeTrailheads.length; j++) {
       var trailhead = activeTrailheads[j];
       var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
-
       for (var k = 0; k < trails.length; k++) {
         trail = trails[k];
         if (trailhead.properties.trail1 == trail.properties.name) {
@@ -179,8 +176,6 @@ function startup() {
     listTrails(activeTrailheads);
   }
 
-
-  // jQuery loop
 
   // given activeTrailheads, now populated with matching trail names,
   // fill out the left trail(head) pane,
@@ -241,6 +236,7 @@ function startup() {
     getTrailPath(trailName);
   }
 
+
   // show the clicked trailhead as a default marker icon
   var currentTrailheadMarker;
 
@@ -260,23 +256,6 @@ function startup() {
     currentTrailheadMarker.addTo(map);
   }
 
-  // function getTrailHeadsForTrail(e) {
-  //   var trailName = e.target.id;
-  //   console.log(trailName);
-  //   var trailhead_query = "select * from summit_trailheads where " +
-  //     "trail1='" + trailName + "' or " +
-  //     "trail2='" + trailName + "' or " +
-  //     "trail3='" + trailName + "' or " +
-  //     "trail1='" + trailName + " Trail' or " +
-  //     "trail2='" + trailName + " Trail' or " +
-  //     "trail3='" + trailName + " Trail' " +
-  //     "ORDER BY distance";
-
-  //   makeSQLQuery(trailhead_query, function(response) {
-  //     console.log(response);
-  //     showTrailHead(response);
-  //   });
-  // }
 
   // On click of trailDiv, do the following. Click event handling.
 
@@ -294,34 +273,15 @@ function startup() {
     makeSQLQuery(trail_query, showTrail);
   }
 
-  // function showTrailHead(response) {
-  //   if (!response.features.length) {
-  //     alert("No trailheads found for that trail.");
-  //     return;
-  //   }
-  //   console.log(response);
-  //   trailheadName = response.features[0].properties.name;
-  //   console.log(trailheadName);
 
-  //   var currentTrailhead = {};
-  //   for (var i = 0; i < trailheads.length; i++) {
-  //     if (trailheads[i].name === trailheadName) {
-  //       currentTrailhead = trailheads[i];
-  //     }
-  //   }
-  //   map.panTo(currentTrailhead.marker.getLatLng());
 
-  // }
-  // We have to know if a trail is already being displayed, so we can take it off
-
-  var currentTrail = {};
-
+  // given a geoJSON set of linestring features,
+  // draw them all on the map in a single layer we can remove later
   function showTrail(response) {
     if (currentTrail) {
       map.removeLayer(currentTrail);
     }
     console.log("showTrail");
-    console.log(response);
 
     if (response.features[0].geometry === null) {
       alert("No trail segment data found.");
@@ -332,9 +292,11 @@ function startup() {
         color: "#FF0000"
       }
     }).addTo(map);
-    console.log(currentTrail);
+    // figure out what zoom is required to display the entire trail
     var curZoom = map.getBoundsZoom(currentTrail.getBounds());
+    // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
+    // set the view to that zoom, and the center of the trail's bounding box 
     map.setView(currentTrail.getBounds().getCenter(), newZoom, {
       pan: {
         animate: true
@@ -343,7 +305,6 @@ function startup() {
         animate: true
       }
     });
-    console.log(curZoom);
   }
 
 
