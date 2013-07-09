@@ -196,9 +196,22 @@ function startup() {
       // Making a new div for text / each trail
       for (var i = 0; i < trailheadTrailNames.length; i++) {
         var trailName = trailheadTrailNames[i];
+       
         $trailDiv = $("<div class='trail-box' id='" + trailName + "|" + trailheadName + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
+       
+       /* Original that creates one element containing 3 attributes, to be split below
         $("<span class='trail' >" + trailName + " (" + trailheadName + " - " + trailheadDistance + " miles) " + "</span>").appendTo($trailDiv);
+        */
+
+        $("<span class='trail' >" + trailName + "</span>").appendTo($trailDiv);
+
+        $("<span class='trailheadName' >" + trailheadName + "</span>").appendTo($trailDiv); 
+
+        $("<span class='trailheadDistance' >" + trailheadDistance + "miles" + "</span>").appendTo($trailDiv);
+       
         $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
+
+       
         // console.log($trailDiv);
       }
 
