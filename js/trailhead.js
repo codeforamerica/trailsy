@@ -212,7 +212,7 @@ function startup() {
 
         $("<span class='trailheadDistance' >" + trailheadDistance + "miles" + "</span>").appendTo($trailDiv);
        
-        $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
+        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
 
        
         // console.log($trailDiv);
@@ -223,7 +223,7 @@ function startup() {
       if (trailheadTrailNames.length === 0) {
         $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
         $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS</span>").appendTo($trailDiv);
-        $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
+        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
     });
     console.log(activeTrailheads);
