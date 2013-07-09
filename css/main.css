@@ -30,7 +30,7 @@
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 24px;
 	color: #fff;
-	margin-left: 48px;
+	padding-left: 24px;
 	padding-bottom: 12px;
 
 }
@@ -66,6 +66,7 @@
 	min-height: 300px;
 }
 
+/* List Elements */
 
 .span4 {
 	float: left;
@@ -74,19 +75,10 @@
 	color: #eee;
 }
 
-.span8 {
-	float: left;
-	width: 640px;
-	height: 400px;
-	color: #eee;
-	margin-left: 5px;
-	overflow: hidden;
-}
-
-/* List Elements */
-
 #trailList {
+	position: relative;
 	height: 640px;
+	width: 100%;
 	border: 3px;
 	border-style:solid;
 	border-color:#CFDBC5;
@@ -94,46 +86,10 @@
 	overflow: scroll;
 }
 
-
-.trail { 
-	float: left;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-	color: #3a3636;
-	padding-left: 12px;
-	vertical-align: 20%;
-
-}
-
-.trailheadName {
-	float: left;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
-	color: #3a3636;
-	padding-left: 12px;
-	padding-bottom: 6px;
-}
-
-.trailheadDistance {
-	float: left;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
-	color: #3a3636;
-	padding-left: 12px;
-	padding-bottom: 6px;
-}
-
-.trailSource {
-	float: left;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
-	color: #3a3636;
-	padding-left: 12px;
-	padding-bottom: 6px;
-}
-
 .trail-box {
+	position: relative;
 	height: 100px;
+	width: auto;
 	margin-top: 10px;
 	margin-right: 5px;
 	margin-left: 5px;
@@ -142,6 +98,47 @@
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
   	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+}
+
+
+.trail { 
+	position: relative;
+	height: auto;
+	min-width: 50%;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 20px;
+	color: #3a3636;
+	padding-top: 12px;
+	padding-left: 18px;
+	padding-bottom: 6px;
+}
+
+.trailheadName {
+	max-width: 50%;	
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 12px;
+	color: #3a3636;
+	padding-left: 18px;
+	padding-bottom: 6px;
+}
+
+.trailheadDistance {
+	max-width: 50%;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 12px;
+	color: #3a3636;
+	padding-left: 18px;
+	padding-bottom: 6px;
+}
+
+.trailSource {
+	position: relative;
+	bottom: 22px;
+	float: right;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 12px;
+	color: #3a3636;
+	padding-right: 18px;
 }
 
 .trailList-title {
@@ -165,6 +162,14 @@
 
 /* Map Elements */
 
+.span8 {
+	float: left;
+	width: 640px;
+	height: 400px;
+	color: #eee;
+	margin-left: 5px;
+	overflow: hidden;
+}
 
 #trailMap {
 	position: absolute;

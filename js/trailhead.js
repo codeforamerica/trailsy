@@ -203,13 +203,13 @@ function startup() {
         $("<span class='trail' >" + trailName + " (" + trailheadName + " - " + trailheadDistance + " miles) " + "</span>").appendTo($trailDiv);
         */
 
-        $("<span class='trail' >" + trailName + "</span>").appendTo($trailDiv);
+        $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
 
-        $("<span class='trailheadName' >" + trailheadName + "</span>").appendTo($trailDiv); 
+        $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv); 
 
-        $("<span class='trailheadDistance' >" + trailheadDistance + "miles" + "</span>").appendTo($trailDiv);
+        $("<div class='trailheadDistance' >" + trailheadDistance + "miles" + "</div>").appendTo($trailDiv);
        
-        $("<span class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</span>").appendTo($trailDiv);
+        $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
 
        
         // console.log($trailDiv);
