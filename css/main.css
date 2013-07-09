@@ -12,6 +12,8 @@
     z-index: 1;
 }
 
+/* Header */
+
 #navbar {
 	position: absolute;
 	top: 0px;
@@ -33,17 +35,7 @@
 
 }
 
-.trailhead-popup {
-  color: black;
-}
-
-.trailhead-name {
-  font-weight: bold;
-}
-
-.trailhead-trailname {
-  color: green;
-}
+/* Major Layout */
 
 .wrapper {
 	position: fixed;
@@ -80,7 +72,6 @@
 	width: 320px;
 	height: auto;
 	color: #eee;
-	margin-right: 5px;
 }
 
 .span8 {
@@ -92,42 +83,62 @@
 	overflow: hidden;
 }
 
+/* List Elements */
+
 #trailList {
 	height: 640px;
-	boxrder: 2px;
+	border: 3px;
 	border-style:solid;
 	border-color:#CFDBC5;
 	border-radius: 2px;
 	overflow: scroll;
 }
 
+
 .trail { 
 	float: left;
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 14px;
+	font-size: 18px;
 	color: #3a3636;
 	padding-left: 12px;
-	padding-top: 6px;
+	vertical-align: 20%;
+
+}
+
+.trailheadName {
+	float: left;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 12px;
+	color: #3a3636;
+	padding-left: 12px;
 	padding-bottom: 6px;
-	vertical-align: middle;
+}
+
+.trailheadDistance {
+	float: left;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 12px;
+	color: #3a3636;
+	padding-left: 12px;
+	padding-bottom: 6px;
 }
 
 .trailSource {
-	float: right;
+	float: left;
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 14px;
+	font-size: 12px;
 	color: #3a3636;
-	position: relative;
-	top: 60px;
-	right: 5px;
+	padding-left: 12px;
+	padding-bottom: 6px;
 }
 
 .trail-box {
-	height: 80px;
+	height: 100px;
+	margin-top: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
 	background-color: #CFDBC5;
-	margin: 10px;
-	border: 4px;
-	border-color: #fff;
+	border-color: #3a3636;
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
   	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
@@ -149,6 +160,11 @@
 	font-size: 18px;
 	color: #000;	
 }
+
+
+
+/* Map Elements */
+
 
 #trailMap {
 	position: absolute;
@@ -176,4 +192,16 @@ p {
 	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 18px;
 	color: #000;	
+}
+
+.trailhead-popup {
+  color: black;
+}
+
+.trailhead-name {
+  font-weight: bold;
+}
+
+.trailhead-trailname {
+  color: green;
 }
