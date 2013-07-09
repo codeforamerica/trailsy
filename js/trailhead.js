@@ -161,23 +161,14 @@ function startup() {
       for (var k = 0; k < trails.length; k++) {
         trail = trails[k];
         if (trailhead.properties.trail1 == trail.properties.name) {
-          // console.log("MATCH1");
-          // console.log(trailhead);
-          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
         if (trailhead.properties.trail2 == trail.properties.name) {
-          // console.log("MATCH2");
-          // console.log(trailhead);
-          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
         if (trailhead.properties.trail3 == trail.properties.name) {
-          // console.log("MATCH3");
-          // console.log(trailhead);
-          // console.log(trail);
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div class='trailhead-trailname'>" + trail.properties.name + "</div>";
         }
@@ -232,13 +223,19 @@ function startup() {
   // and display that trail only for now
 
   function getTrailsForTrailhead(e) {
-    console.log(["getTrailsForTrailhead", e.target.id]);
-    // temporary until we get the events sorted out
+    console.log(["getTrailsForTrailhead"]);
+    var divID = "";
+    // temporary fix until we decide what to do on trailname click
+    // this makes trailname click do the same thing as general div click
     if (e.target !== this) {
-      return;
+      divID = this.id;
     }
-    var trailName = e.target.id.split("|")[0];
-    var trailheadName = e.target.id.split("|")[1];
+    else {
+      divID = e.target.id;
+    }
+    console.log(["divID", divID]);
+    var trailName = divID.split("|")[0];
+    var trailheadName = divID.split("|")[1];
     console.log([trailName, trailheadName]);
     showTrailHead(trailheadName);
     getTrailPath(trailName);
