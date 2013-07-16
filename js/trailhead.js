@@ -28,7 +28,9 @@ function startup() {
   // Prepping for API calls (defining data for the call)
   var api_key = "3751baeceb14d394f251b28768ca7e27fc20ad07";
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
-
+  var TRAILHEADS_TABLE = "summit_trailheads";
+  var TRAILSEGMENTS_TABLE = "summit_trail_segments";
+  var TRAILDATA_TABLE = "trail_data";
 
   var currentTrail = {};  // We have to know if a trail is already being displayed, so we can remove it
   var currentLocation = getLocation(); // not sure if this needs to be scoped here. might be useful later.
@@ -82,9 +84,9 @@ function startup() {
 
   function getNearestTrailheads(location) {
     console.log("getNearestTrailHeads");
-    var nearest_trailhead_query = "select summit_trailheads.*, " +
+    var nearest_trailhead_query = "select trailheads.*, " +
       "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
-      "from summit_trailheads " +
+      "from " + TRAILHEADS_TABLE + " as trailheads " +
       "ORDER BY distance " +
     // "";
     "LIMIT 100";
@@ -139,7 +141,7 @@ function startup() {
 
   function getTrailList() {
     console.log("getTrailList");
-    var trail_list_query = "select the_geom, name,length,source from trail_data order by name";
+    var trail_list_query = "select the_geom, name,length,source from " + TRAILDATA_TABLE + " order by name";
     // Another AJAX call, for the trails
     makeSQLQuery(trail_list_query, makeNearestTrailList);
   }
@@ -217,11 +219,11 @@ function startup() {
 
       // diagnostic div to show trailheads with no trail matches
       // TODO: find out why these happen!
-      // if (trailheadTrailNames.length === 0) {
-      //   $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-      //   $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS</span>").appendTo($trailDiv);
-      //   $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
-      // }
+      if (trailheadTrailNames.length === 0) {
+        $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
+        $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS</span>").appendTo($trailDiv);
+        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
+      }
     });
   }
 
@@ -273,7 +275,7 @@ function startup() {
   function getTrailPath(trailName) {
     console.log("getTrailPath");
 
-    var trail_query = "select st_collect(the_geom) the_geom from summit_trail_segments where " +
+    var trail_query = "select st_collect(the_geom) the_geom from " + TRAILSEGMENTS_TABLE + " where " +
       "name1='" + trailName + "' or " +
       "name2='" + trailName + "' or " +
       "name3='" + trailName + "' or " +
