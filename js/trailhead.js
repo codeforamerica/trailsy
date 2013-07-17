@@ -28,10 +28,17 @@ function startup() {
   // Prepping for API calls (defining data for the call)
   var api_key = "3751baeceb14d394f251b28768ca7e27fc20ad07";
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
+  
+  // comment these/uncomment the next set to switch between tables
   var TRAILHEADS_TABLE = "summit_trailheads";
-  var TRAILSEGMENTS_TABLE = "summit_trail_segments";
-  var TRAILDATA_TABLE = "trail_data";
+  var TRAILSEGMENTS_TABLE = "summit_trailsegments";
+  var TRAILDATA_TABLE = "summit_traildata";
 
+  // var TRAILHEADS_TABLE = "summit_trailheads_test";
+  // var TRAILSEGMENTS_TABLE = "summit_trail_segments_test";
+  // var TRAILDATA_TABLE = "summit_traildata_test";
+  
+  
   var currentTrail = {};  // We have to know if a trail is already being displayed, so we can remove it
   var currentLocation = getLocation(); // not sure if this needs to be scoped here. might be useful later.
   var currentLocationMarker = {};
@@ -158,18 +165,26 @@ function startup() {
     }
     for (var j = 0; j < activeTrailheads.length; j++) {
       var trailhead = activeTrailheads[j];
+      console.log("-------------");
+      console.log(trailhead.properties.name);
+      console.log(trailhead.properties.trail1);
+      console.log(trailhead.properties.trail2);
+      console.log(trailhead.properties.trail3);
       var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
       for (var k = 0; k < trails.length; k++) {
         trail = trails[k];
-        if (trailhead.properties.trail1 == trail.properties.name) {
+        if (trailhead.properties.trail1.length && trail.properties.name.indexOf(trailhead.properties.trail1) === 0) {
+        // if (trailhead.properties.trail1 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
-        if (trailhead.properties.trail2 == trail.properties.name) {
+        if (trailhead.properties.trail2.length && trail.properties.name.indexOf(trailhead.properties.trail2) === 0) {
+        // if (trailhead.properties.trail2 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
-        if (trailhead.properties.trail3 == trail.properties.name) {
+        if (trailhead.properties.trail3.length && trail.properties.name.indexOf(trailhead.properties.trail3) === 0) {
+        // if (trailhead.properties.trail3 == trail.properties.name) {
           trailhead.trails.push(trail.properties.name);
           popupContent = popupContent + "<div " + "id='map|" + trail.properties.name + "|" + trailhead.properties.name + "|" + trailhead.properties.cartodb_id + "' class='trailhead-trailname'>" + "<a href='#'>" + trail.properties.name + "</a></div>";
         }
@@ -178,7 +193,7 @@ function startup() {
       trailhead.popupContent = popupContent;
       trailhead.marker.bindPopup(popupContent);
     }
-
+    console.log(activeTrailheads);
     listTrails(activeTrailheads);
   }
 
