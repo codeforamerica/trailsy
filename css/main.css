@@ -215,6 +215,17 @@ p {
   color: green;
 }
 
+.trail1 {
+  background-color: lightpink;
+}
+
+.trail2 {
+  background-color: lightblue;
+}
+
+.trail3 {
+  background-color: lightgreen;
+}
 
 /*----CSS Menu------*/
 
