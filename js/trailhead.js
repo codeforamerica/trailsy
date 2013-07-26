@@ -182,42 +182,40 @@ function startup() {
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
-            console.log($popupContentMainDiv.val());
+      console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
-1e15ff5d0933543c4c0e39626857cefdc896589b
+      1e15ff5d0933543c4c0e39626857cefdc896589b
       if (trailhead.properties.trail1 in trailData) {
         console.log("trail1 match");
         trailhead.trails.push(trailhead.properties.trail1);
         var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail1")
-        .attr("data-trailname", trailhead.properties.trail1)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail1)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail1)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail1)
+          .appendTo($popupTrailheadDiv);
       }
       if (trailhead.properties.trail2 in trailData) {
         trailhead.trails.push(trailhead.properties.trail2);
         console.log("trail2 match");
-        trailhead.trails.push(trailhead.properties.trail2);
         var $popupTrail2Div = $("<div>").addClass("trailhead-trailname trail2")
-        .attr("data-trailname", trailhead.properties.trail2)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail2)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail2)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail2)
+          .appendTo($popupTrailheadDiv);
       }
       if (trailhead.properties.trail3 in trailData) {
         trailhead.trails.push(trailhead.properties.trail3);
         console.log("trail3 match");
-        trailhead.trails.push(trailhead.properties.trail3);
         var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail3")
-        .attr("data-trailname", trailhead.properties.trail3)
-        .data("data-trailheadname", trailhead.properties.name)
-        .data("data-trailheadid",trailhead.properties.cartodb_id)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail3)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail3)
+          .data("data-trailheadname", trailhead.properties.name)
+          .data("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail3)
+          .appendTo($popupTrailheadDiv);
       }
       // popupContent = popupContent + "</div>";
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
@@ -250,12 +248,12 @@ function startup() {
         var trailName = trailheadTrailNames[i];
 
         $trailDiv = $("<div>").addClass('trail-box')
-        .data("source", "list")
-        .data("trailname",trailName)
-        .data("trailheadName",trailheadName)
-        .data("trailheadid", trailheadID)
-        .appendTo("#trailList")
-        .click(getTrailsForTrailhead);
+          .data("source", "list")
+          .data("trailname", trailName)
+          .data("trailheadName", trailheadName)
+          .data("trailheadid", trailheadID)
+          .appendTo("#trailList")
+          .click(getTrailsForTrailhead);
 
         // $trailDiv = $("<div class='trail-box' id='list|" + trailName + "|" + trailheadName + "|" + trailheadID + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
 
@@ -476,6 +474,6 @@ function startup() {
 
   // really? jQuery doesn't have outerhtml()?
   jQuery.fn.outerHTML = function(s) {
-    return s ? this.before(s).remove(): jQuery("<p>").append(this.eq(0).clone()).html();
+    return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
 }
