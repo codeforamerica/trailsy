@@ -1,78 +1,241 @@
-#crosshair {
-    position: absolute;
-    top: 310px;
-    height: 19px;
-    width: 19px;
-    left: 310px;
-    /*margin-left: -8px;*/
-    display: block;
-    background: url(images/crosshair.gif);
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: 1;
+/* Top-level
+============================== */
+/* These things effect the entire page */
+
+
+/* This is included re a Paul Irish recommendation
+http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+*/
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+ }
+
+/* Background color */
+
+body {
+	background-color: #F2F4E9;
 }
 
-/* Header */
+/* Responsive container */
 
-#navbar {
-	position: absolute;
-	top: 0px;
-	left: 30px;
-	right: 0;
-	width: 970px;
-	height: 60px;
-	background: #3a3636;
-}
-
-#title {
+.container {
 	position: relative;
-	top: -20px;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 24px;
-	color: #fff;
-	padding-left: 24px;
-	padding-bottom: 12px;
-
+	z-index: 999;
 }
 
-/* Major Layout */
 
-.wrapper {
-	position: fixed;
-	float:left;
-	width:100%;
-	height:auto;
-	margin-top: 40px; /* need to account for the size of the nav */
-	margin-right: 20px;
+/* Header
+============================== */
+/* Logo, deployment, toggle btw parks and trails, about */
+/* styles largely inherited from Bootstrap.css */
+
+/* .navbar styled completely in Boostrap */
+
+/
+
+.navbar-inner {
+	background-color: #8DBB7D;
+}
+
+/* Brand or Mark
+============ */
+
+/* Responsive container */
+
+.navbar .brand {
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 30px;
+	color: #F7E497;
+  	display: inline-block;
+  	padding: 20px 30px 25px 25px;
+  	font-weight: 200;
+}
+
+.navbar .brand:hover,
+.navbar .brand:focus {
+  text-decoration: none;
+}
+
+/* Name of Local Deployment (i.e. Summit County)
+============ */
+
+.navbar .subBrand {
+	display: inline-block;
+	float: left;
+  	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 200;
+  	padding: 25px 20px 20px 0px;
+	color: #fff;
+	font-size: 18px;
+}
+
+.navbar .subBrand:hover{
+	text-decoration: none;
+}
+
+/* Top-line navigation menu
+============ */
+/* trails, parks and about us (not clearly defined) */
+
+
+/* This margin-left is for use in the Narrow Search .nav menu*/
+.navbar .nav {
+	margin-left: 40px;
+}
+
+.navbar .nav li:hover {
+	background-color: #8DBB7D;
+}
+
+.navbar .nav > li > a {
+  float: none;
+  padding: 25px 20px 20px 5px;
+  color: #fff;
+
+/* Verify the need for the following styles (e.g. override Bootstrap) */
+
+  text-decoration: none;
+  text-shadow: none;
+}
+
+
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+
+/* Search
+============================== */
+/* Look into attaching this to the top-line nav */
+
+.row {
+	margin-left: 0px;
+	height: auto;
+	margin-bottom: 20px;
+}
+
+/* Why chained selector? */
+.span12.navbar {
+	min-height: 40px;
+	max-height: 40px;
+	margin-left: 0px;
+	margin-bottom: 20px;
+}
+
+.navbar-inner.searchbar {
 	background-color: #fff;
 }
 
-.row {
-	overflow: hidden;	
-	margin: 20px;
-	display: block;
-	width: 100%;
-	min-height: 300px;
+/* This is currently "Narrow Your Search" */
+.searchbarTitle,
+.searchbarTitle:hover {
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	letter-spacing: 1px;
+	font-size: 20px;
+	color: #8DBB7D;
+	display: inline-block;
+	line-height: 65px;
+	float: left;
+	text-decoration: none;
+
 }
+
+/* Menu (unordered list) */
+.searchbar .nav {
+	display: inline-block;
+	height: 100%;
+}
+
+/* Menu list items */
+
+.searchbar .nav {
+	float: left;
+}
+
+.searchbar .nav > li {
+	width: 100px;
+}
+
+.searchbar .nav#ActivityAccess {
+	width: 150px;
+}
+
+
+
+/* Menu labels, some styling to override Bootstrap */
+.searchbar .nav > li > a {
+	list-style: none;
+  	color: #aaa;
+  	text-decoration: none;
+  	padding: none;
+ }
+
+.searchbar .nav > li > a:focus,
+.searchbar .nav > li > a:hover {
+ 	color: #fff;
+}
+
+/* Search element, overriding Bootstrap */
+.navbar-search .search-query {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+/* This may be a duplicate of some kind? */
+.searchform {
+	padding: 10px 0px 0px 7px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+/* List & Map
+============================== */
+
 
 /* List Elements */
 
-.span4 {
+.row .span4 {
+	margin-left: 0px;
 	float: left;
-	width: 320px;
 	height: auto;
-	color: #eee;
+	background-color: #fff;
 }
 
 #trailList {
 	position: relative;
-	height: 640px;
+	height: 620px;
 	width: 100%;
-	border: 3px;
-	border-style:solid;
-	border-color:#CFDBC5;
-	border-radius: 2px;
 	overflow: scroll;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+}
+
+.trailList-title {
+	height: 40px;
+	background-color: #fff;
+	border-color: #3a3636;
+  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
+  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+  	z-index: 1;
+}
+
+.trailList-title p {
+	padding: 12px 0px 0px 25px;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	letter-spacing: 1px;
+	font-size: 16px;
+	color: #8DBB7D;
 }
 
 .trail-box {
@@ -82,7 +245,7 @@
 	margin-top: 10px;
 	margin-right: 5px;
 	margin-left: 5px;
-	background-color: #CFDBC5;
+	background-color: #fff;
 	border-color: #3a3636;
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
   	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
@@ -90,7 +253,7 @@
 }
 
 .trail-box:hover {
-	background-color: #b5c7a6;
+	background-color: #8DBB7D;
 }
 
 .trail { 
@@ -133,6 +296,10 @@
 	padding-right: 18px;
 }
 
+<<<<<<< HEAD
+/* Map Elements
+============================== */
+=======
 .trail-box {
 	height: 100px;
 	margin-top: 10px;
@@ -162,23 +329,23 @@
 	color: #000;	
 }
 
+.trail-popup {
+  color: #000;
+}
+>>>>>>> 5b1000c48d9bfb01e114c5b59e5d1df1814e2167
 
 
-/* Map Elements */
-
-.span8 {
+.row .span8 {
+	position: relative;
 	float: left;
-	width: 640px;
-	height: 400px;
-	color: #eee;
-	margin-left: 5px;
-	overflow: hidden;
+	height: auto;
 }
 
 #trailMap {
-	position: absolute;
-	width: 640px; 
-	height: 640px;
+	background-color: #fff;
+	width: 100%;
+	height:  620px;
+	position: relative;
 }
 
 .trailMap-title {
@@ -197,12 +364,6 @@
 	color: #000;	
 }
 
-p {
-	font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-	color: #000;	
-}
-
 .trailhead-popup {
   color: black;
 }
@@ -215,21 +376,29 @@ p {
   color: green;
 }
 
-/*----Redo Search Button------*/
+.trail1 {
+  background-color: lightpink;
+}
 
+.trail2 {
+  background-color: lightblue;
+}
+
+.trail3 {
+  background-color: lightgreen;
+}
+
+
+/*----Redo Search Button (Temporary - Auto Refresh Search)
+============================== */
 #redoSearch {
 	opacity: 0%;
-	height: auto;
-	width: 330px;
-	border-width: 0px;
-	opacity: 0%;
-	background: #CFDBC5;  
+	width: auto;
 }
 
 #redoSearch span {
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 18px;
-	color: #757575;
 }
 
 #redoSearch:hover {
@@ -240,88 +409,18 @@ p {
 	color: #3a3636;
 }
 
-a.lvl1:hover + ul.lvl2 {display: block}
 
-/*----CSS Menu------*/
-
-.narrow-menu {
-	width: 970px; 
-	padding-left: 20px;
-}
-
-.narrow-menu#menu-title a {
-	font-family: 'Oswald', sans-serif; letter-spacing: 1px;
-	font-size: 18px;
-	max-width: 50%;
-}
-
-.narrow-menu ul {
-	background: #CFDBC5;  
-	list-style: none;
-	position: relative;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
-}
-
-.narrow-menu ul li {
-	position: relative;
-	float: left;
-}
-
-.narrow-menu ul li a {
-	color: #757575; text-decoration: none;
-}
-
-
-.narrow-menu ul li:hover > ul {
-	display: none;
-}
-
-
-	.narrow-menu ul:after {
-		content: ""; clear: both; display: block;
-	}
-
-	.narrow-menu ul li:hover {
-		background: #b5c7a6;
-	}
-
-	.narrow-menu ul li:hover a {
-		font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-		font-size: 18px;
-		color: #3a3636;
-	}
-
-	.narrow-menu ul li a {
-		display: block; padding: 25px 40px;
-		color: #757575; text-decoration: none;
-	}
-
-.narrow-menu ul ul {
-	background: #5f6975; border-radius: 0px; padding: 0;
-	position: absolute; top: 100%;
-}
-
-	.narrow-menu ul ul li {
-		float: none;
-		border-top: 1px solid #6b727c;
-		border-bottom: 1px solid #575f6a;
-		position: relative;
-	}
-
-		.narrow-menu ul ul li a {
-			padding: 15px 40px;
-			color: #fff;
-		}
-
-			.narrow-menu ul ul li a:hover {
-				background: #4b545f;
-			}
-
-.narrow-menu ul ul ul {
-	position: absolute; left: 100%; top:0;
+#crosshair {
+    position: absolute;
+    top: 310px;
+    height: 19px;
+    width: 19px;
+    left: 310px;
+    /*margin-left: -8px;*/
+    display: block;
+    background: url(images/crosshair.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 1;
 }
 
