@@ -1,9 +1,9 @@
 $(document).ready(startup);
 
-/* The Big Nested Function 
+/* The Big Nested Function
 ==========================*/
 
-// Print to ensure file is loaded 
+// Print to ensure file is loaded
 
 function startup() {
   console.log("trailhead.js");
@@ -79,7 +79,7 @@ function startup() {
   }
 
 
-  // run the trailhead search again after setting 
+  // run the trailhead search again after setting
   // currentLocation to the center of the currently viewed map
 
   function redoSearch() {
@@ -130,7 +130,7 @@ function startup() {
 
   function trailheadMarkerClick(e) {
     console.log("trailheadMarkerClick");
-    
+
   }
 
   // given activeTrailheads (which is a broadly-scoped variable, but we'll ignore that for now),
@@ -184,6 +184,7 @@ function startup() {
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
             console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
+1e15ff5d0933543c4c0e39626857cefdc896589b
       if (trailhead.properties.trail1 in trailData) {
         console.log("trail1 match");
         trailhead.trails.push(trailhead.properties.trail1);
@@ -213,6 +214,8 @@ function startup() {
         .attr("data-trailname", trailhead.properties.trail3)
         .data("data-trailheadname", trailhead.properties.name)
         .data("data-trailheadid",trailhead.properties.cartodb_id)
+        .attr("data-trailheadname", trailhead.properties.name)
+        .attr("data-trailheadid",trailhead.properties.cartodb_id)
         .append("<a href='#'>").html(trailhead.properties.trail3)
         .appendTo($popupTrailheadDiv);
       }
