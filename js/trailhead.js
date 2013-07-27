@@ -192,9 +192,11 @@ function startup() {
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
       console.log($popupContentMainDiv.val());
 
+      var trailheadTrailCount = 0;
       if (trailhead.properties.trail1 in trailData) {
         trailhead.trails.push(trailhead.properties.trail1);
-        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail1")
+        trailheadTrailCount += 1;
+        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
           .attr("data-trailname", trailhead.properties.trail1)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
@@ -203,7 +205,8 @@ function startup() {
       }
       if (trailhead.properties.trail2 in trailData) {
         trailhead.trails.push(trailhead.properties.trail2);
-        var $popupTrail2Div = $("<div>").addClass("trailhead-trailname trail2")
+        trailheadTrailCount += 1;
+        var $popupTrail2Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
           .attr("data-trailname", trailhead.properties.trail2)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
@@ -212,7 +215,8 @@ function startup() {
       }
       if (trailhead.properties.trail3 in trailData) {
         trailhead.trails.push(trailhead.properties.trail3);
-        var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail3")
+        trailheadTrailCount += 1;
+        var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
           .attr("data-trailname", trailhead.properties.trail3)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
