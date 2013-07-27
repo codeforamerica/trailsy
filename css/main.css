@@ -115,7 +115,6 @@ body {
 .row {
 	margin-left: 0px;
 	height: auto;
-	margin-bottom: 20px;
 }
 
 /* Why chained selector? */
@@ -123,7 +122,7 @@ body {
 	min-height: 40px;
 	max-height: 40px;
 	margin-left: 0px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 .navbar-inner.searchbar {
@@ -198,6 +197,7 @@ body {
 /* List & Map
 ============================== */
 
+/* Row Containing Both */
 
 /* List Elements */
 
@@ -309,23 +309,6 @@ body {
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
-}
-
-.trailList-title {
-	margin-top: -10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	height: 40px;
-	background-color: #CFDBC5;
-
-}
-
-.trailList-title p {
-	padding-top: 10px;
-	padding-left: 10px;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-	color: #000;	
 }
 
 .trail-popup {

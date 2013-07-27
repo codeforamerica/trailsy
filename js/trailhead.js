@@ -184,7 +184,6 @@ function startup() {
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
             console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
-1e15ff5d0933543c4c0e39626857cefdc896589b
       if (trailhead.properties.trail1 in trailData) {
         console.log("trail1 match");
         trailhead.trails.push(trailhead.properties.trail1);
