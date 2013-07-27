@@ -42,7 +42,7 @@ function startup() {
   // UI events to react to
 
   $("#redoSearch").click(redoSearch);
-  $(document).on('click', '.trailhead-trailname', getTrailsForTrailhead);
+  $(document).on('click', '.trailhead-trailname', populateTrailsForTrailhead);
   $("#showAllTrailSegments").click(function() {
     getAllTrailPaths(showTrail);
   });
@@ -116,7 +116,15 @@ function startup() {
       var newMarker = L.circleMarker(currentFeatureLatLng, {
         title: 'test',
         radius: 4
-      }).bindPopup(currentFeature.properties.name).on("click", trailheadMarkerClick);
+      }).bindPopup(currentFeature.properties.name);
+
+      // adding closure to call trailheadMarkerClick with trailheadID on marker click
+      newMarker.on("click", function(trailheadID) {
+        return function() {
+          trailheadMarkerClick(trailheadID);
+        };
+      }(currentFeature.properties.cartodb_id));
+
       var trailhead = {
         properties: currentFeature.properties,
         marker: newMarker,
@@ -125,19 +133,19 @@ function startup() {
       };
       activeTrailheads.push(trailhead);
     }
-    showNearestTrailheads(activeTrailheads);
+    mapNearestTrailheads(activeTrailheads);
   }
 
-  function trailheadMarkerClick(e) {
-    console.log("trailheadMarkerClick");
-
+  function trailheadMarkerClick(id) {
+    console.log(id);
+    highlightTrailhead(id);
   }
 
   // given activeTrailheads (which is a broadly-scoped variable, but we'll ignore that for now),
   // add all of the markers to the map in a single Leaflet layer group
 
-  function showNearestTrailheads(activeTrailheads) {
-    console.log("showNearestTrailheads");
+  function mapNearestTrailheads(activeTrailheads) {
+    console.log("mapNearestTrailheads");
     var currentTrailheadMarkerArray = [];
     for (var i = 0; i < activeTrailheads.length; i++) {
       currentTrailheadMarkerArray.push(activeTrailheads[i].marker);
@@ -182,42 +190,39 @@ function startup() {
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
-            console.log($popupContentMainDiv.val());
+      console.log($popupContentMainDiv.val());
 
       if (trailhead.properties.trail1 in trailData) {
-        console.log("trail1 match");
         trailhead.trails.push(trailhead.properties.trail1);
         var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail1")
-        .attr("data-trailname", trailhead.properties.trail1)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail1)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail1)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail1)
+          .appendTo($popupTrailheadDiv);
       }
       if (trailhead.properties.trail2 in trailData) {
         trailhead.trails.push(trailhead.properties.trail2);
-        console.log("trail2 match");
         var $popupTrail2Div = $("<div>").addClass("trailhead-trailname trail2")
-        .attr("data-trailname", trailhead.properties.trail2)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail2)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail2)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail2)
+          .appendTo($popupTrailheadDiv);
       }
       if (trailhead.properties.trail3 in trailData) {
         trailhead.trails.push(trailhead.properties.trail3);
-        console.log("trail3 match");
         var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail3")
-        .attr("data-trailname", trailhead.properties.trail3)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .append("<a href='#'>").html(trailhead.properties.trail3)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail3)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .append("<a href='#'>").html(trailhead.properties.trail3)
+          .appendTo($popupTrailheadDiv);
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
       trailhead.marker.bindPopup(trailhead.popupContent);
     }
-    listTrails(activeTrailheads);
+    makeTrailDivs(activeTrailheads);
   }
 
 
@@ -225,8 +230,8 @@ function startup() {
   // fill out the left trail(head) pane,
   // noting if a particular trailhead has no trails associated with it
 
-  function listTrails(activeTrailheads) {
-    console.log("listTrails");
+  function makeTrailDivs(activeTrailheads) {
+    console.log("makeTrailDivs");
     $("#trailList").html("");
     $.each(activeTrailheads, function(index, val) {
       var trailheadName = val.properties.name;
@@ -241,18 +246,12 @@ function startup() {
         var trailName = trailheadTrailNames[i];
 
         $trailDiv = $("<div>").addClass('trail-box')
-        .data("source", "list")
-        .data("trailname",trailName)
-        .data("trailheadName",trailheadName)
-        .data("trailheadid", trailheadID)
-        .appendTo("#trailList")
-        .click(getTrailsForTrailhead);
-
-        // $trailDiv = $("<div class='trail-box' id='list|" + trailName + "|" + trailheadName + "|" + trailheadID + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
-
-        /* Original that creates one element containing 3 attributes, to be split below
-        $("<span class='trail' >" + trailName + " (" + trailheadName + " - " + trailheadDistance + " miles) " + "</span>").appendTo($trailDiv);
-        */
+          .data("source", "list")
+          .data("trailname", trailName)
+          .data("trailheadName", trailheadName)
+          .data("trailheadid", trailheadID)
+          .appendTo("#trailList")
+          .click(populateTrailsForTrailhead);
 
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
         $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv);
@@ -273,11 +272,11 @@ function startup() {
 
 
   // on a click of a trailhead div,
-  // get the trailName that they clicked on
-  // and display that trail only for now
+  // get the trailName and trailHead that they clicked on
+  // highlight the trailhead (showing all of the trails there) and highlight the trail path
 
-  function getTrailsForTrailhead(e) {
-    console.log("getTrailsForTrailhead");
+  function populateTrailsForTrailhead(e) {
+    console.log("populateTrailsForTrailhead");
     var $myTarget;
     // temporary fix until we decide what to do on trailname click
     // this makes trailname click do the same thing as general div click
@@ -299,7 +298,9 @@ function startup() {
   }
 
 
-  // show the clicked trailhead as a default marker icon
+  // show the clicked trailhead as a default marker icon,
+  // TODO: show all trails in popup,
+  // TODO: draw all trails
   var currentTrailheadMarker;
 
   function highlightTrailhead(trailheadID) {
@@ -316,17 +317,24 @@ function startup() {
     currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
     currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent).openPopup();
     highlightTrailheadDivs(currentTrailhead);
-    getTrailPathsForTrailhead(currentTrailhead.properties.name);
+    getAllTrailPathsForTrailhead(currentTrailhead);
   }
 
-  function highlightTrailheadDivs(currentTrailhead) {
+  function highlightTrailheadDivs(trailhead) {
     console.log("highlightTrailheadDivs");
     console.log(currentTrailhead);
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
     for (var i = 0; i < currentTrailhead.trails.length; i++) {
-      var highlightID = "list|" + currentTrailhead.trails[i] + "|" + currentTrailhead.properties.name + "|" + currentTrailhead.properties.cartodb_id;
-      console.log(highlightID);
-      $(document.getElementById(highlightID)).addClass("trail" + (i + 1));
+      // // TODO: change this to a jQuery data attribute search
+      // var highlightID = "list|" + currentTrailhead.trails[i] + "|" + currentTrailhead.properties.name + "|" + currentTrailhead.properties.cartodb_id;
+      // console.log(highlightID);
+      // $(document.getElementById(highlightID)).addClass("trail" + (i + 1));
+
+      var trailName = currentTrailhead.trails[i];
+      console.log(["trailName"], trailName);
+      var trailheadName = currentTrailhead.properties.name;
+      console.log(["trailheadName", trailheadName]);
+      console.log($(["data-trailname='" + trailName + "'"]).addClass("trail" + (i + 1)));
     }
   }
 
@@ -346,14 +354,48 @@ function startup() {
     makeSQLQuery(trail_query, showTrail);
   }
 
-  function getTrailPathsForTrailhead(trailhead) {
-    console.log("getTrailPathsForTrailhead");
+  function getAllTrailPathsForTrailhead(trailhead) {
+    console.log("getAllTrailPathsForTrailhead");
+    console.log(trailhead);
+    var responses = [];
+    var queryTaskArray = [];
     // got trailhead.trails, now get the segment collection for all of them
     // get segment collection for each
     // then merge the GeoJSON?
-    var trail_query = "select st_collect(the_geom) the_geom from " + TRAILSEGMENTS_TABLE + " segments," + TRAILHEADS_TABLE + " trailheads where " +
-      "trailheads.name = " + trailhead + " and " +
-      "trailheads.name = segments.name1 ";
+    for (var i = 0; i < trailhead.trails.length; i++) {
+      var trailName = trailhead.trails[i];
+      var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
+        "segments.name1 = '" + trailName + "' or " +
+        "segments.name2 = '" + trailName + "' or " +
+        "segments.name3 = '" + trailName + "'";
+      var queryTask = function(trail_query) {
+        return function(callback) {
+          makeSQLQuery(trail_query, function(response) {
+            responses.push(response);
+            callback(null, trailName);
+          });
+        };
+      }(trail_query);
+      queryTaskArray.push(queryTask);
+    }
+    async.parallel(queryTaskArray, function(err, results) {
+      console.log("done");
+      responses = mergeResponses(responses);
+      showTrail(responses);
+    });
+  }
+
+  // TODO: make this work!
+
+  function mergeResponses(responses) {
+    console.log("mergeResponses");
+    var combined = responses[0];
+    combined.features[0].properties.order = 0;
+    for (var i = 1; i < responses.length; i++) {
+      combined.features = combined.features.concat(responses[i].features);
+      combined.features[i].properties.order = i;
+    }
+    return combined;
   }
 
   function getAllTrailPaths(callback) {
@@ -397,9 +439,25 @@ function startup() {
       alert("No trail segment data found.");
     }
     currentTrailLayer = L.geoJson(response, {
-      style: {
-        weight: 2,
-        color: "#FF0000"
+      style: function(feature) {
+        console.log("order");
+        console.log(feature.properties.order);
+        if (feature.properties.order === 0) {
+          return {
+            weight: 2,
+            color: "#FF0000"
+          };
+        } else if (feature.properties.order === 1) {
+          return {
+            weight: 2,
+            color: "#00FF00"
+          };
+        } else {
+          return {
+            weight: 2,
+            color: "#0000FF"
+          };
+        }
       },
       onEachFeature: function(feature, layer) {
         var popupHTML = "<div class='trail-popup'>";
@@ -467,6 +525,6 @@ function startup() {
 
   // really? jQuery doesn't have outerhtml()?
   jQuery.fn.outerHTML = function(s) {
-    return s ? this.before(s).remove(): jQuery("<p>").append(this.eq(0).clone()).html();
+    return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
 }
