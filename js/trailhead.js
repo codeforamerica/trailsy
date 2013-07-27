@@ -254,7 +254,35 @@ function startup() {
         .data("trailheadName",trailheadName)
         .data("trailheadid", trailheadID)
         .appendTo("#trailList")
-        .click(getTrailsForTrailhead);
+        .click(getTrailsForTrailhead)
+        .click(function(e) {
+          // if panel is closed.
+          if (!$('.detailPanelContainer').is(':visible')) {
+            // TODO: put the corresponding trail data in the panel.
+            // opens the panel
+            $('.detailPanelContainer').show().toggleClass("span0 span4");
+            $('.trailMapContainer').toggleClass("span8 span4");
+            // adds a "open" class or something to the trail that opened the panel.
+            $(this).addClass('activeTrail');
+          } else {
+            // if the panel is showing
+            // - if a trail with the "open" class is clicked, close the panel and remove the open class.
+            if ($(this).hasClass('activeTrail')) {
+              $(this).removeClass('activeTrail');
+              $('.detailPanelContainer').hide().toggleClass("span0 span4");
+              $('.trailMapContainer').toggleClass("span8 span4");
+            } else {
+              // - if a trail WITHOUT the open class is clicked, change the content in the panel and move the open class to the one that was clicked.
+              // change the content of the panel to reflect new activeTrail
+              $('.activeTrail').removeClass('activeTrail');
+              $(this).addClass('activeTrail');
+            };
+          }
+
+
+        });
+
+
 
         // $trailDiv = $("<div class='trail-box' id='list|" + trailName + "|" + trailheadName + "|" + trailheadID + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
 
