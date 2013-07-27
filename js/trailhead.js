@@ -17,7 +17,7 @@ function startup() {
   };
 
   var METERSTOMILES = 0.00062137;
-  var MAX_ZOOM = 13;
+  var MAX_ZOOM = 14;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -150,9 +150,7 @@ function startup() {
     for (var i = 0; i < activeTrailheads.length; i++) {
       currentTrailheadMarkerArray.push(activeTrailheads[i].marker);
     }
-
     var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
-
     map.addLayer(currentTrailheadLayerGroup);
     getTrailInfo();
   }
@@ -298,7 +296,7 @@ function startup() {
     var trailheadID = $myTarget.data("trailheadid");
 
     highlightTrailhead(trailheadID);
-    getTrailPath(trailName);
+    // getTrailPath(trailName);
   }
 
 
@@ -344,19 +342,19 @@ function startup() {
 
   // On click of trailName, do the following. Click event handling.
 
-  function getTrailPath(trailName) {
-    console.log("getTrailPath");
+  // function getTrailPath(trailName) {
+  //   console.log("getTrailPath");
 
-    var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' as trailName from " + TRAILSEGMENTS_TABLE + " where " +
-      "name1='" + trailName + "' or " +
-      "name2='" + trailName + "' or " +
-      "name3='" + trailName + "' or " +
-      "name1='" + trailName + " Trail' or " +
-      "name2='" + trailName + " Trail' or " +
-      "name3='" + trailName + " Trail'";
+  //   var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' as trailName from " + TRAILSEGMENTS_TABLE + " where " +
+  //     "name1='" + trailName + "' or " +
+  //     "name2='" + trailName + "' or " +
+  //     "name3='" + trailName + "' or " +
+  //     "name1='" + trailName + " Trail' or " +
+  //     "name2='" + trailName + " Trail' or " +
+  //     "name3='" + trailName + " Trail'";
 
-    makeSQLQuery(trail_query, showTrail);
-  }
+  //   makeSQLQuery(trail_query, showTrail);
+  // }
 
   function getAllTrailPathsForTrailhead(trailhead) {
     console.log("getAllTrailPathsForTrailhead");
@@ -371,7 +369,10 @@ function startup() {
       var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
         "segments.name1 = '" + trailName + "' or " +
         "segments.name2 = '" + trailName + "' or " +
-        "segments.name3 = '" + trailName + "'";
+        "segments.name3 = '" + trailName + "' or " + 
+        "segments.name1 = '" + trailName + " Trail' or " +
+        "segments.name2 = '" + trailName + " Trail' or " + 
+        "segments.name3 = '" + trailName + " Trail'";
       var queryTask = function(trail_query) {
         return function(callback) {
           makeSQLQuery(trail_query, function(response) {
@@ -446,20 +447,20 @@ function startup() {
       style: function(feature) {
         console.log("order");
         console.log(feature.properties.order);
-        if (feature.properties.order === 0) {
+        if (feature.properties.order === 0 || !feature.properties.order) {
           return {
-            weight: 2,
-            color: "#FF0000"
+            weight: 3,
+            color: $(".trail1").css("background-color")
           };
         } else if (feature.properties.order === 1) {
           return {
-            weight: 2,
-            color: "#00FF00"
+            weight: 3,
+            color: $(".trail2").css("background-color")
           };
-        } else {
+        } else if (feature.properties.order === 2) {
           return {
-            weight: 2,
-            color: "#0000FF"
+            weight: 3,
+            color: $(".trail3").css("background-color")
           };
         }
       },
@@ -484,7 +485,7 @@ function startup() {
         popupHTML = popupHTML + "</div>";
         layer.bindPopup(popupHTML);
       }
-    }).addTo(map);
+    }).addTo(map).bringToBack();
     console.log("currentTrailLayer:");
     console.log(currentTrailLayer);
     // figure out what zoom is required to display the entire trail layer
