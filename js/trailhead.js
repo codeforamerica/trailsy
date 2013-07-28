@@ -21,7 +21,31 @@ function startup() {
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
+  // { *trailname*: { geometry: null,  // this field is added for CartoDB's approval
+  //                  properties: { cartodb_id: *uniqueID*,
+  //                                length: *length of trail in meters*,
+  //                                name: *name of trail*,
+  //                                source: *whose data this info came from*,
+  //                              }
+  //                }
+  // }
   var activeTrailheads = []; // all trailheads (from trailsegments)
+  // [ {  marker: *Leaflet marker*,
+  //      trails: *[array of matched trail names],
+  //      popupContent: *HTML of Leaflet popup*,
+  //      properties: { cartodb_id: *uniqueID*,
+  //                    distance: *from current location in meters*,
+  //                    name: *name*,
+  //                    source: *whose data this info came from*,
+  //                    trail1: *trail at this trailhead*,
+  //                    trail2: *trail at this trailhead*,
+  //                    trail3: *trail at this trailhead*,
+  //                    updated_at: *update time*,
+  //                    created_at: *creation time*,
+  //                    wkt: *original wkt for trailhead point*
+  //                  }, 
+  //   }[, ...}]
+  // ]
   var currentTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
   var currentLocation = {};
 
@@ -44,7 +68,7 @@ function startup() {
   $("#redoSearch").click(redoSearch);
   $(document).on('click', '.trailhead-trailname', populateTrailsForTrailhead);
   $("#showAllTrailSegments").click(function() {
-    getAllTrailPaths(showTrail);
+    getAllTrailPaths(drawTrailLayer);
   });
   $("#showUnusedTrailSegments").click(function() {
     getAllTrailPaths(filterKnownTrails);
@@ -318,6 +342,7 @@ function startup() {
     }
     currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
     currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent).openPopup();
+    console.log(currentTrailhead);
     highlightTrailheadDivs(currentTrailhead);
     getAllTrailPathsForTrailhead(currentTrailhead);
   }
@@ -353,7 +378,7 @@ function startup() {
   //     "name2='" + trailName + " Trail' or " +
   //     "name3='" + trailName + " Trail'";
 
-  //   makeSQLQuery(trail_query, showTrail);
+  //   makeSQLQuery(trail_query, drawTrailLayer);
   // }
 
   function getAllTrailPathsForTrailhead(trailhead) {
@@ -386,12 +411,11 @@ function startup() {
     async.parallel(queryTaskArray, function(err, results) {
       console.log("done");
       responses = mergeResponses(responses);
-      showTrail(responses);
+      drawTrailLayer(responses);
     });
   }
 
-  // TODO: make this work!
-
+  // merge the geoJSON trail features into one geoJSON FeatureCollection
   function mergeResponses(responses) {
     console.log("mergeResponses");
     var combined = responses[0];
@@ -428,14 +452,14 @@ function startup() {
       return true;
     });
     console.log(filteredResponse);
-    showTrail(filteredResponse);
+    drawTrailLayer(filteredResponse);
   }
 
   // given a geoJSON set of linestring features,
   // draw them all on the map in a single layer we can remove later
 
-  function showTrail(response) {
-    console.log("showTrail");
+  function drawTrailLayer(response) {
+    console.log("drawTrailLayer");
     console.log(response);
     if (currentTrailLayer) {
       map.removeLayer(currentTrailLayer);
