@@ -162,6 +162,7 @@ function startup() {
   }
 
   // on trailhead marker click, this is invoked with the id of the trailhead
+
   function trailheadMarkerClick(id) {
     console.log(id);
     highlightTrailhead(id, 0);
@@ -282,7 +283,7 @@ function startup() {
           .data("trailheadName", trailheadName)
           .data("trailheadid", trailheadID)
           .appendTo("#trailList")
-          .click(populateTrailsForTrailhead);
+          .click(populateTrailsForTrailheadDiv);
 
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
         $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv);
@@ -303,11 +304,27 @@ function startup() {
 
   // event handler for click of a trail name in a trailhead popup
   // 
+
   function trailnameClick(e) {
     console.log("trailnameClick");
     console.log(e.target);
-    populateTrailsForTrailhead(e);
+    populateTrailsForTrailheadTrailName(e);
     // setCurrentTrail
+  }
+
+  // given jquery 
+  function parseTrailElementData($element) {
+    console.log($element);
+    //var trailName = $element[0].data("trailname");
+    //var trailheadName = $element[0].data("trailheadname");
+    var trailheadID = $element.data("trailheadid");
+    var highlightedTrailIndex = $element.data("index");
+    results = {
+      trailheadID: trailheadID,
+      highlightedTrailIndex: highlightedTrailIndex
+    };
+    console.log(["results", results]);
+    return results;
   }
 
   // event handler for click of trailDiv
@@ -315,11 +332,11 @@ function startup() {
   // get the trailName and trailHead that they clicked on
   // highlight the trailhead (showing all of the trails there) and highlight the trail path
 
-  function populateTrailsForTrailhead(e) {
-    console.log("populateTrailsForTrailhead");
+  function populateTrailsForTrailheadDiv(e) {
+    console.log("populateTrailsForTrailheadDiv");
     var $myTarget;
-    // temporary fix until we decide what to do on trailname click
     // this makes trailname click do the same thing as general div click
+    // (almost certainly a better solution exists)
     console.log(["this", this]);
     if (e.target !== this) {
       console.log("this.id");
@@ -328,17 +345,14 @@ function startup() {
       console.log("e.target.id");
       $myTarget = $(e.target);
     }
-    console.log($myTarget);
-    var trailName = $myTarget.data("trailname");
-    console.log(trailName);
-    var trailheadName = $myTarget.data("trailheadname");
-    var trailheadID = $myTarget.data("trailheadid");
-    var highlightedTrailIndex = $myTarget.data("index");
-    console.log(["highlightedTrailIndex", highlightedTrailIndex]);
-    highlightTrailhead(trailheadID, highlightedTrailIndex);
-    // getTrailPath(trailName);
+    var parsed = parseTrailElementData($myTarget);
+    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
   }
 
+  function populateTrailsForTrailheadTrailName(e) {
+    var parsed = parseTrailElementData($(e.target));
+    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);   
+  }
 
   // given a trailheadID (TODO: and a trail index within that trailhead?)
   // display the trailhead marker and popup,
@@ -346,6 +360,7 @@ function startup() {
   // with the trailhead record
 
   var currentTrailheadMarker;
+
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
     console.log(trailheadID);
@@ -367,6 +382,7 @@ function startup() {
   // given a trailhead (TODO: and a trail index within that trailhead?),
   // find the matching trailDivs, highlight them, and move them onscreen
   // TODO: actually make this work
+
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
     console.log(currentTrailhead);
@@ -403,9 +419,9 @@ function startup() {
       var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
         "segments.name1 = '" + trailName + "' or " +
         "segments.name2 = '" + trailName + "' or " +
-        "segments.name3 = '" + trailName + "' or " + 
+        "segments.name3 = '" + trailName + "' or " +
         "segments.name1 = '" + trailName + " Trail' or " +
-        "segments.name2 = '" + trailName + " Trail' or " + 
+        "segments.name2 = '" + trailName + " Trail' or " +
         "segments.name3 = '" + trailName + " Trail'";
       var queryTask = function(trail_query) {
         return function(callback) {
@@ -420,13 +436,13 @@ function startup() {
     async.parallel(queryTaskArray, function(err, results) {
       console.log("done");
       responses = mergeResponses(responses);
-      drawMultiTrailLayer(responses);          
+      drawMultiTrailLayer(responses);
       setCurrentTrail(highlightedTrailIndex);
     });
   }
 
   // merge multiple geoJSON trail features into one geoJSON FeatureCollection
-  
+
   function mergeResponses(responses) {
     console.log("mergeResponses");
     var combined = responses[0];
@@ -536,21 +552,26 @@ function startup() {
   // given the index of a trail within a trailhead,
   // highlight that trail on the map, and call zoomToLayer with it
 
-  function setCurrentTrail (index) {
+  function setCurrentTrail(index) {
     console.log("setCurrentTrail");
     console.log(index);
     if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
       console.log("currentHighlightedTrailLayer exists");
-      currentHighlightedTrailLayer.setStyle({ weight: 2});
+      currentHighlightedTrailLayer.setStyle({
+        weight: 2
+      });
     }
     console.log(currentTrailLayers);
     currentHighlightedTrailLayer = currentTrailLayers[index];
-    currentHighlightedTrailLayer.setStyle({ weight: 10});
+    currentHighlightedTrailLayer.setStyle({
+      weight: 10
+    });
     zoomToLayer(currentHighlightedTrailLayer);
   }
 
   // given a leaflet layer, zoom to fit its bounding box or to MAX_ZOOM,
   // whichever is smaller
+
   function zoomToLayer(layer) {
     console.log("zoomToLayer");
     console.log(layer);
