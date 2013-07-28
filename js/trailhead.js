@@ -46,7 +46,9 @@ function startup() {
   //                  }, 
   //   }[, ...}]
   // ]
-  var currentTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
+  var currentMultiTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
+  var currentTrailLayers = [];
+  var currentHighlightedTrailLayer = {};
   var currentLocation = {};
 
   // Prepping for API calls (defining data for the call)
@@ -66,9 +68,9 @@ function startup() {
   // UI events to react to
 
   $("#redoSearch").click(redoSearch);
-  $(document).on('click', '.trailhead-trailname', populateTrailsForTrailhead);
+  $(document).on('click', '.trailhead-trailname', trailnameClick);
   $("#showAllTrailSegments").click(function() {
-    getAllTrailPaths(drawTrailLayer);
+    getAllTrailPaths(drawMultiTrailLayer);
   });
   $("#showUnusedTrailSegments").click(function() {
     getAllTrailPaths(filterKnownTrails);
@@ -101,7 +103,6 @@ function startup() {
     });
     getTrailheads(location);
   }
-
 
   // run the trailhead search again after setting
   // currentLocation to the center of the currently viewed map
@@ -160,13 +161,14 @@ function startup() {
     mapNearestTrailheads(activeTrailheads);
   }
 
+  // on trailhead marker click, this is invoked with the id of the trailhead
   function trailheadMarkerClick(id) {
     console.log(id);
-    highlightTrailhead(id);
+    highlightTrailhead(id, 0);
   }
 
-  // given activeTrailheads (which is a broadly-scoped variable, but we'll ignore that for now),
-  // add all of the markers to the map in a single Leaflet layer group
+
+  // given activeTrailheads, add all of the markers to the map in a single Leaflet layer group
 
   function mapNearestTrailheads(activeTrailheads) {
     console.log("mapNearestTrailheads");
@@ -180,7 +182,7 @@ function startup() {
   }
 
 
-  // get the list of trails
+  // get the trailData from the DB
 
   function getTrailInfo() {
     console.log("getTrailInfo");
@@ -190,7 +192,7 @@ function startup() {
   }
 
 
-  // given the list of trails from the trail_data table,
+  // given the GeoJSON of trails from the trail_data table,
   // populate activeTrailheads[x].trails with all of the trails
   // that match each trailhead's named trails from the trailhead table
   // also, just because we can, add links to the trails within each trailhead popup 
@@ -222,6 +224,7 @@ function startup() {
           .attr("data-trailname", trailhead.properties.trail1)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailheadTrailCount - 1)
           .append("<a href='#'>").html(trailhead.properties.trail1)
           .appendTo($popupTrailheadDiv);
       }
@@ -232,6 +235,7 @@ function startup() {
           .attr("data-trailname", trailhead.properties.trail2)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailheadTrailCount - 1)
           .append("<a href='#'>").html(trailhead.properties.trail2)
           .appendTo($popupTrailheadDiv);
       }
@@ -242,6 +246,7 @@ function startup() {
           .attr("data-trailname", trailhead.properties.trail3)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailheadTrailCount - 1)
           .append("<a href='#'>").html(trailhead.properties.trail3)
           .appendTo($popupTrailheadDiv);
       }
@@ -296,8 +301,17 @@ function startup() {
     });
   }
 
+  // event handler for click of a trail name in a trailhead popup
+  // 
+  function trailnameClick(e) {
+    console.log("trailnameClick");
+    console.log(e.target);
+    populateTrailsForTrailhead(e);
+    // setCurrentTrail
+  }
 
-  // on a click of a trailhead div,
+  // event handler for click of trailDiv
+  // TODO: (and also supplemental handler for click of trail name?)
   // get the trailName and trailHead that they clicked on
   // highlight the trailhead (showing all of the trails there) and highlight the trail path
 
@@ -306,6 +320,7 @@ function startup() {
     var $myTarget;
     // temporary fix until we decide what to do on trailname click
     // this makes trailname click do the same thing as general div click
+    console.log(["this", this]);
     if (e.target !== this) {
       console.log("this.id");
       $myTarget = $(this);
@@ -318,18 +333,20 @@ function startup() {
     console.log(trailName);
     var trailheadName = $myTarget.data("trailheadname");
     var trailheadID = $myTarget.data("trailheadid");
-
-    highlightTrailhead(trailheadID);
+    var highlightedTrailIndex = $myTarget.data("index");
+    console.log(["highlightedTrailIndex", highlightedTrailIndex]);
+    highlightTrailhead(trailheadID, highlightedTrailIndex);
     // getTrailPath(trailName);
   }
 
 
-  // show the clicked trailhead as a default marker icon,
-  // TODO: show all trails in popup,
-  // TODO: draw all trails
-  var currentTrailheadMarker;
+  // given a trailheadID (TODO: and a trail index within that trailhead?)
+  // display the trailhead marker and popup,
+  // then call highlightTrailheadDivs() and getAllTrailPathsForTrailhead()
+  // with the trailhead record
 
-  function highlightTrailhead(trailheadID) {
+  var currentTrailheadMarker;
+  function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
     console.log(trailheadID);
     for (var i = 0; i < activeTrailheads.length; i++) {
@@ -344,10 +361,13 @@ function startup() {
     currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent).openPopup();
     console.log(currentTrailhead);
     highlightTrailheadDivs(currentTrailhead);
-    getAllTrailPathsForTrailhead(currentTrailhead);
+    getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
   }
 
-  function highlightTrailheadDivs(trailhead) {
+  // given a trailhead (TODO: and a trail index within that trailhead?),
+  // find the matching trailDivs, highlight them, and move them onscreen
+  // TODO: actually make this work
+  function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
     console.log(currentTrailhead);
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
@@ -365,25 +385,14 @@ function startup() {
     }
   }
 
-  // On click of trailName, do the following. Click event handling.
+  // given a trailhead (TODO: and a trail index with that trailhead?),
+  // get the paths for any associated trails,
+  // then call drawMultiTrailLayer() and setCurrentTrail()
 
-  // function getTrailPath(trailName) {
-  //   console.log("getTrailPath");
-
-  //   var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' as trailName from " + TRAILSEGMENTS_TABLE + " where " +
-  //     "name1='" + trailName + "' or " +
-  //     "name2='" + trailName + "' or " +
-  //     "name3='" + trailName + "' or " +
-  //     "name1='" + trailName + " Trail' or " +
-  //     "name2='" + trailName + " Trail' or " +
-  //     "name3='" + trailName + " Trail'";
-
-  //   makeSQLQuery(trail_query, drawTrailLayer);
-  // }
-
-  function getAllTrailPathsForTrailhead(trailhead) {
+  function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
     console.log("getAllTrailPathsForTrailhead");
     console.log(trailhead);
+    console.log(highlightedTrailIndex);
     var responses = [];
     var queryTaskArray = [];
     // got trailhead.trails, now get the segment collection for all of them
@@ -411,11 +420,13 @@ function startup() {
     async.parallel(queryTaskArray, function(err, results) {
       console.log("done");
       responses = mergeResponses(responses);
-      drawTrailLayer(responses);
+      drawMultiTrailLayer(responses);          
+      setCurrentTrail(highlightedTrailIndex);
     });
   }
 
-  // merge the geoJSON trail features into one geoJSON FeatureCollection
+  // merge multiple geoJSON trail features into one geoJSON FeatureCollection
+  
   function mergeResponses(responses) {
     console.log("mergeResponses");
     var combined = responses[0];
@@ -427,11 +438,18 @@ function startup() {
     return combined;
   }
 
+  // get all trail segment paths
+  // (for diagnostics)
+
   function getAllTrailPaths(callback) {
     var trail_query = "select the_geom, name1, name2, name3 from " + TRAILSEGMENTS_TABLE;
     makeSQLQuery(trail_query, callback);
   }
 
+  // given a GeoJSON collection of segments paths, 
+  // filter out the ones in known trails,
+  // then call drawMultiTrailLayer to draw 'em
+  // (for diagnostics)
 
   function filterKnownTrails(response) {
     console.log(response);
@@ -452,22 +470,23 @@ function startup() {
       return true;
     });
     console.log(filteredResponse);
-    drawTrailLayer(filteredResponse);
+    drawMultiTrailLayer(filteredResponse);
   }
 
   // given a geoJSON set of linestring features,
   // draw them all on the map in a single layer we can remove later
 
-  function drawTrailLayer(response) {
-    console.log("drawTrailLayer");
+  function drawMultiTrailLayer(response) {
+    console.log("drawMultiTrailLayer");
     console.log(response);
-    if (currentTrailLayer) {
-      map.removeLayer(currentTrailLayer);
+    if (currentMultiTrailLayer) {
+      map.removeLayer(currentMultiTrailLayer);
+      currentTrailLayers = [];
     }
     if (response.features[0].geometry === null) {
       alert("No trail segment data found.");
     }
-    currentTrailLayer = L.geoJson(response, {
+    currentMultiTrailLayer = L.geoJson(response, {
       style: function(feature) {
         console.log("order");
         console.log(feature.properties.order);
@@ -508,16 +527,39 @@ function startup() {
         }
         popupHTML = popupHTML + "</div>";
         layer.bindPopup(popupHTML);
+        currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToBack();
-    console.log("currentTrailLayer:");
-    console.log(currentTrailLayer);
+    zoomToLayer(currentMultiTrailLayer);
+  }
+
+  // given the index of a trail within a trailhead,
+  // highlight that trail on the map, and call zoomToLayer with it
+
+  function setCurrentTrail (index) {
+    console.log("setCurrentTrail");
+    console.log(index);
+    if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
+      console.log("currentHighlightedTrailLayer exists");
+      currentHighlightedTrailLayer.setStyle({ weight: 2});
+    }
+    console.log(currentTrailLayers);
+    currentHighlightedTrailLayer = currentTrailLayers[index];
+    currentHighlightedTrailLayer.setStyle({ weight: 10});
+    zoomToLayer(currentHighlightedTrailLayer);
+  }
+
+  // given a leaflet layer, zoom to fit its bounding box or to MAX_ZOOM,
+  // whichever is smaller
+  function zoomToLayer(layer) {
+    console.log("zoomToLayer");
+    console.log(layer);
     // figure out what zoom is required to display the entire trail layer
-    var curZoom = map.getBoundsZoom(currentTrailLayer.getBounds());
+    var curZoom = map.getBoundsZoom(layer.getBounds());
     // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
     // set the view to that zoom, and the center of the trail's bounding box 
-    map.setView(currentTrailLayer.getBounds().getCenter(), newZoom, {
+    map.setView(layer.getBounds().getCenter(), newZoom, {
       pan: {
         animate: true
       },
@@ -527,6 +569,8 @@ function startup() {
     });
   }
 
+  // given a SQL query, and done/error callbacks,
+  // make the query
 
   function makeSQLQuery(query, done, error) {
     console.log("makeSQLQuery");
@@ -553,6 +597,7 @@ function startup() {
   }
 
   // really? jQuery doesn't have outerhtml()?
+
   jQuery.fn.outerHTML = function(s) {
     return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
