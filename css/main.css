@@ -298,13 +298,17 @@ body {
 
 .detailPanelContainer {
 	display: none;
+	webkit-transition: width 0.3s ease, margin 0.3s ease;
+	transition: width 0.3s ease, margin 0.3s ease;
 }
 
 .trailMapContainer {
 	margin-left: 0;
-
-
 }
+ .span0 {
+ 	width: 0%;
+ 	margin-left: 0;
+ }
 
 /* Detail Panel Elements
 ============================== */

@@ -259,7 +259,7 @@ function startup() {
 
         function showTrailDetails(e) {
           if (!$('.detailPanelContainer').is(':visible')) {
-            // TODO: put the corresponding trail data in the panel.
+            decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
             openDetailPanel();
             $(this).addClass('activeTrail');
           } else {
@@ -267,7 +267,7 @@ function startup() {
               $(this).removeClass('activeTrail');
               closeDetailPanel();
             } else {
-              // TODO: change the content of the panel to reflect new activeTrail
+              decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
               $('.activeTrail').removeClass('activeTrail');
               $(this).addClass('activeTrail');
             };
@@ -284,7 +284,12 @@ function startup() {
           $('.trailMapContainer').toggleClass("span8 span4");
         }
 
-
+        function decorateDetailPanel(trailName, trailheadName, source, trailheadDistance) {
+          $('#detail-panel .trailName').html(trailName);
+          $('#detail-panel .trailheadName').html(trailheadName);
+          $('#detail-panel .source').html(source);
+          $('#detail-panel .trailheadDistance').html(trailheadDistance);
+        }
 
         // $trailDiv = $("<div class='trail-box' id='list|" + trailName + "|" + trailheadName + "|" + trailheadID + "'>").appendTo("#trailList").click(getTrailsForTrailhead);
 
