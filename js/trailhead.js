@@ -396,7 +396,7 @@ function startup() {
       var trailheadName = currentTrailhead.properties.name;
       console.log(["trailheadName", trailheadName]);
       var trailheadID = currentTrailhead.properties.cartodb_id;
-      $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="'+ trailheadID + '"]').addClass("trail" + (i + 1));
+      $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]').addClass("trail" + (i + 1));
       // TODO: make this animate so that the selected trailhead trails are visible in the trailList
       // if (i === 0) {
       //   $('#trailList').animate({
@@ -505,20 +505,24 @@ function startup() {
     }
     currentMultiTrailLayer = L.geoJson(response, {
       style: function(feature) {
+        var color;
         if (feature.properties.order === 0 || !feature.properties.order) {
+          color = getClassBackgroundColor("trail1");
           return {
             weight: 3,
-            color: $(".trail1").css("background-color")
+            color: color
           };
         } else if (feature.properties.order === 1) {
+          color = getClassBackgroundColor("trail2");
           return {
             weight: 3,
-            color: $(".trail2").css("background-color")
+            color: color
           };
         } else if (feature.properties.order === 2) {
+          color = getClassBackgroundColor("trail3");
           return {
             weight: 3,
-            color: $(".trail3").css("background-color")
+            color: color
           };
         }
       },
@@ -546,6 +550,14 @@ function startup() {
       }
     }).addTo(map).bringToBack();
     zoomToLayer(currentMultiTrailLayer);
+  }
+
+  // return the default CSS background-color for the class given
+  function getClassBackgroundColor(className) {
+    var $t = $("<div class='" + className + "'>").hide().appendTo("body");
+    var c = $t.css("background-color");
+    $t.remove();
+    return c;
   }
 
   // given the index of a trail within a trailhead,
