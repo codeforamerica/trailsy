@@ -32,7 +32,7 @@ body {
 
 /* .navbar styled completely in Boostrap */
 
-/
+
 
 .navbar-inner {
 	background-color: #8DBB7D;
@@ -389,21 +389,20 @@ body {
 }
 
 .trailhead-trailname {
-  color: green;
+  color: white;
+  cursor: pointer;
 }
 
 .trail1 {
-  background-color: lightpink;
-<<<<<<< HEAD
-=======
+  background-color: red;
 }
 
 .trail2 {
-  background-color: lightblue;
+  background-color: green;
 }
 
 .trail3 {
-  background-color: lightgreen;
+  background-color: blue;
 }
 
 /*----CSS Menu------*/
@@ -428,14 +427,6 @@ body {
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
   	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
-}
-
-.trail2 {
-  background-color: lightblue;
-}
-
-.trail3 {
-  background-color: lightgreen;
 }
 
 
