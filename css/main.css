@@ -144,26 +144,15 @@ body {
 
 }
 
-/* Menu (unordered list) */
-.searchbar .nav {
-	display: inline-block;
-	height: 100%;
+
+.filters {
+	display:inline-block;
+	padding: 10px 0px 0px 30px;
 }
 
-/* Menu list items */
-
-.searchbar .nav {
-	float: left;
+.bootstrap-select:not([class*="span"]) {
+	width: 160px;
 }
-
-.searchbar .nav > li {
-	width: 100px;
-}
-
-.searchbar .nav#ActivityAccess {
-	width: 150px;
-}
-
 
 
 /* Menu labels, some styling to override Bootstrap */
