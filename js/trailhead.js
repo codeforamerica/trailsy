@@ -376,10 +376,10 @@ function startup() {
       map.removeLayer(currentTrailheadMarker);
     }
     currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
-    currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent).openPopup();
-    console.log(currentTrailhead);
+    currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent);
     highlightTrailheadDivs(currentTrailhead);
     getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
+    currentTrailheadMarker.openPopup();
   }
 
   // given a trailhead (TODO: and a trail index within that trailhead?),
@@ -396,13 +396,15 @@ function startup() {
       var trailheadName = currentTrailhead.properties.name;
       console.log(["trailheadName", trailheadName]);
       var trailheadID = currentTrailhead.properties.cartodb_id;
+      // add class for highlighting
       $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]').addClass("trail" + (i + 1));
       // TODO: make this animate so that the selected trailhead trails are visible in the trailList
-      // if (i === 0) {
-      //   $('#trailList').animate({
-      //     scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top
-      //   }, 500);
-      // }
+      if (i === 0) {
+        $('#trailList').animate({
+          // scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop();
+          scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top - $("#trailList").offset().top + $("#trailList").scrollTop()
+        }, 500);
+      }
     }
   }
 
