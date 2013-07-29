@@ -187,7 +187,7 @@ function startup() {
 
   function getTrailInfo() {
     console.log("getTrailInfo");
-    var trail_list_query = "select the_geom, name, length,source, cartodb_id from " + TRAILDATA_TABLE + " order by name";
+    var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
     // Another AJAX call, for the trails
     makeSQLQuery(trail_list_query, addTrailsToTrailheads);
   }
@@ -281,7 +281,8 @@ function startup() {
           .attr("data-trailheadid", trailheadID)
           .attr("data-index", i)
           .appendTo("#trailList")
-          .click(populateTrailsForTrailheadDiv);
+          .click(populateTrailsForTrailheadDiv)
+          .click(showTrailDetails);
 
         function showTrailDetails(e) {
           if (!$('.detailPanelContainer').is(':visible')) {
