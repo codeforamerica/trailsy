@@ -207,26 +207,21 @@ function startup() {
     console.log(trailData);
     for (var j = 0; j < activeTrailheads.length; j++) {
       var trailhead = activeTrailheads[j];
-      // console.log("-------------");
-      // console.log(trailhead.properties.name);
-      // console.log(trailhead.properties.trail1);
-      // console.log(trailhead.properties.trail2);
-      // console.log(trailhead.properties.trail3);
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-
-
 
 //  Should we be able to refactor this, since we're repeating a lot in each "if"? 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
             console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
+      var trailheadTrailCount = 0;
       if (trailhead.properties.trail1 in trailData) {
         trailhead.trails.push(trailhead.properties.trail1);
-        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail1")
+        trailheadTrailCount += 1;
+        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount) 
         .attr("data-trailname", trailhead.properties.trail1)
-//  Should this be trailheadName? trailheadID?
         .attr("data-trailheadname", trailhead.properties.name)
         .attr("data-trailheadid",trailhead.properties.cartodb_id)
+        .attr("data-index", trailheadTrailCount - 1)
         .append("<a href='#'>").html(trailhead.properties.trail1)
         .appendTo($popupTrailheadDiv);
       }
@@ -243,15 +238,13 @@ function startup() {
       }
       if (trailhead.properties.trail3 in trailData) {
         trailhead.trails.push(trailhead.properties.trail3);
-        console.log("trail3 match");
+        trailheadTrailCount += 1;
         trailhead.trails.push(trailhead.properties.trail3);
-        var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail3")
+        var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
         .attr("data-trailname", trailhead.properties.trail3)
-  // why are these two ".data " not included for trail1 or trail2?
-        .data("data-trailheadname", trailhead.properties.name)
-        .data("data-trailheadid",trailhead.properties.cartodb_id)
         .attr("data-trailheadname", trailhead.properties.name)
         .attr("data-trailheadid",trailhead.properties.cartodb_id)
+        .attr("data-index", trailheadTrailCount - 1)
         .append("<a href='#'>").html(trailhead.properties.trail3)
         .appendTo($popupTrailheadDiv);
       }
