@@ -154,7 +154,7 @@ function startup() {
 
   function getTrailInfo() {
     console.log("getTrailInfo");
-    var trail_list_query = "select the_geom, name,length,source, cartodb_id from " + TRAILDATA_TABLE + " order by name";
+    var trail_list_query = "select the_geom, name, length,source, cartodb_id from " + TRAILDATA_TABLE + " order by name";
     // Another AJAX call, for the trails
     makeSQLQuery(trail_list_query, addTrailsToTrailheads);
   }
@@ -181,6 +181,9 @@ function startup() {
       // console.log(trailhead.properties.trail3);
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
 
+
+
+//  Should we be able to refactor this, since we're repeating a lot in each "if"? 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
             console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
@@ -189,6 +192,7 @@ function startup() {
         trailhead.trails.push(trailhead.properties.trail1);
         var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail1")
         .attr("data-trailname", trailhead.properties.trail1)
+//  Should this be trailheadName? trailheadID?
         .attr("data-trailheadname", trailhead.properties.name)
         .attr("data-trailheadid",trailhead.properties.cartodb_id)
         .append("<a href='#'>").html(trailhead.properties.trail1)
@@ -211,6 +215,7 @@ function startup() {
         trailhead.trails.push(trailhead.properties.trail3);
         var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail3")
         .attr("data-trailname", trailhead.properties.trail3)
+  // why are these two ".data " not included for trail1 or trail2?
         .data("data-trailheadname", trailhead.properties.name)
         .data("data-trailheadid",trailhead.properties.cartodb_id)
         .attr("data-trailheadname", trailhead.properties.name)
@@ -244,7 +249,7 @@ function startup() {
       var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
       var $trailDiv;
 
-      // Making a new div for text / each trail
+      // Making a new div for text / each trail + Detail Panel
       for (var i = 0; i < trailheadTrailNames.length; i++) {
         var trailName = trailheadTrailNames[i];
 
@@ -274,6 +279,7 @@ function startup() {
           }
         }
 
+        //  Helper functions for ShowTrailDetails
         function openDetailPanel() {
           $('.detailPanelContainer').show().toggleClass("span0 span4");
           $('.trailMapContainer').toggleClass("span8 span4");
@@ -322,6 +328,7 @@ function startup() {
   function getTrailsForTrailhead(e) {
     console.log("getTrailsForTrailhead");
     var $myTarget;
+    // Not sure I follow this...AJW
     // temporary fix until we decide what to do on trailname click
     // this makes trailname click do the same thing as general div click
     if (e.target !== this) {
@@ -334,6 +341,7 @@ function startup() {
     console.log($myTarget);
     var trailName = $myTarget.data("trailname");
     console.log(trailName);
+    //  little confused by the use of camelCase and non...AJW
     var trailheadName = $myTarget.data("trailheadname");
     var trailheadID = $myTarget.data("trailheadid");
 
@@ -421,6 +429,7 @@ function startup() {
         return false;
       }
       // }
+      //  should there be an else here?
       return true;
     });
     console.log(filteredResponse);
@@ -444,6 +453,7 @@ function startup() {
         weight: 2,
         color: "#FF0000"
       },
+      //  Don't recognize this syntax...ask Dan - Alan.
       onEachFeature: function(feature, layer) {
         var popupHTML = "<div class='trail-popup'>";
         // if we have a named trail, show its name
