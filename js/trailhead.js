@@ -278,10 +278,11 @@ function startup() {
         var trailName = trailheadTrailNames[i];
 
         $trailDiv = $("<div>").addClass('trail-box')
-          .data("source", "list")
-          .data("trailname", trailName)
-          .data("trailheadName", trailheadName)
-          .data("trailheadid", trailheadID)
+          .attr("data-source", "list")
+          .attr("data-trailname", trailName)
+          .attr("data-trailheadName", trailheadName)
+          .attr("data-trailheadid", trailheadID)
+          .attr("data-index", i)
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv);
 
@@ -313,12 +314,14 @@ function startup() {
   }
 
   // given jquery 
+
   function parseTrailElementData($element) {
     console.log($element);
+    console.log($element.outerHTML());
     //var trailName = $element[0].data("trailname");
     //var trailheadName = $element[0].data("trailheadname");
     var trailheadID = $element.data("trailheadid");
-    var highlightedTrailIndex = $element.data("index");
+    var highlightedTrailIndex = $element.data("index") || 0;
     results = {
       trailheadID: trailheadID,
       highlightedTrailIndex: highlightedTrailIndex
@@ -351,7 +354,7 @@ function startup() {
 
   function populateTrailsForTrailheadTrailName(e) {
     var parsed = parseTrailElementData($(e.target));
-    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);   
+    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
   }
 
   // given a trailheadID (TODO: and a trail index within that trailhead?)
@@ -388,16 +391,18 @@ function startup() {
     console.log(currentTrailhead);
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
     for (var i = 0; i < currentTrailhead.trails.length; i++) {
-      // // TODO: change this to a jQuery data attribute search
-      // var highlightID = "list|" + currentTrailhead.trails[i] + "|" + currentTrailhead.properties.name + "|" + currentTrailhead.properties.cartodb_id;
-      // console.log(highlightID);
-      // $(document.getElementById(highlightID)).addClass("trail" + (i + 1));
-
       var trailName = currentTrailhead.trails[i];
       console.log(["trailName"], trailName);
       var trailheadName = currentTrailhead.properties.name;
       console.log(["trailheadName", trailheadName]);
-      console.log($(["data-trailname='" + trailName + "'"]).addClass("trail" + (i + 1)));
+      var trailheadID = currentTrailhead.properties.cartodb_id;
+      $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="'+ trailheadID + '"]').addClass("trail" + (i + 1));
+      // TODO: make this animate so that the selected trailhead trails are visible in the trailList
+      // if (i === 0) {
+      //   $('#trailList').animate({
+      //     scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top
+      //   }, 500);
+      // }
     }
   }
 
@@ -407,8 +412,6 @@ function startup() {
 
   function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
     console.log("getAllTrailPathsForTrailhead");
-    console.log(trailhead);
-    console.log(highlightedTrailIndex);
     var responses = [];
     var queryTaskArray = [];
     // got trailhead.trails, now get the segment collection for all of them
@@ -434,7 +437,6 @@ function startup() {
       queryTaskArray.push(queryTask);
     }
     async.parallel(queryTaskArray, function(err, results) {
-      console.log("done");
       responses = mergeResponses(responses);
       drawMultiTrailLayer(responses);
       setCurrentTrail(highlightedTrailIndex);
@@ -494,7 +496,6 @@ function startup() {
 
   function drawMultiTrailLayer(response) {
     console.log("drawMultiTrailLayer");
-    console.log(response);
     if (currentMultiTrailLayer) {
       map.removeLayer(currentMultiTrailLayer);
       currentTrailLayers = [];
@@ -504,8 +505,6 @@ function startup() {
     }
     currentMultiTrailLayer = L.geoJson(response, {
       style: function(feature) {
-        console.log("order");
-        console.log(feature.properties.order);
         if (feature.properties.order === 0 || !feature.properties.order) {
           return {
             weight: 3,
@@ -554,14 +553,11 @@ function startup() {
 
   function setCurrentTrail(index) {
     console.log("setCurrentTrail");
-    console.log(index);
     if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
-      console.log("currentHighlightedTrailLayer exists");
       currentHighlightedTrailLayer.setStyle({
         weight: 2
       });
     }
-    console.log(currentTrailLayers);
     currentHighlightedTrailLayer = currentTrailLayers[index];
     currentHighlightedTrailLayer.setStyle({
       weight: 10
