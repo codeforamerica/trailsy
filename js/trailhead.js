@@ -249,7 +249,7 @@ function startup() {
       var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
       var $trailDiv;
 
-      // Making a new div for text / each trail + Detail Panel
+      // Making a new div for text / each trail 
       for (var i = 0; i < trailheadTrailNames.length; i++) {
         var trailName = trailheadTrailNames[i];
 
@@ -261,6 +261,77 @@ function startup() {
         .appendTo("#trailList")
         .click(getTrailsForTrailhead)
         .click(showTrailDetails);
+
+    //  Filter these new divs based on criteria in filter nav
+
+    //  when dogs:checked,
+    //  cycle through list,
+    //  In list, hide all activeTrails where (dogs:no)
+    //  On map, hide all activeTrails where (dogs:no)
+    //  when dogs:unchecked,
+    //  cycle thru list, show all active trails where (dogs:no OR dogs:yes)
+    //  In list
+    //  On map
+
+    //  when bikes:checked,
+    //  cycle through list,
+    //  In list, hide all activeTrails where (bikess:no)
+    //  On map, hide all activeTrails where (bikes:no)
+    //  when dogs:unchecked,
+    //  cycle thru list, show all active trails where (bikes:no OR bikes:yes)
+    //  In list
+    //  On map
+
+    //  when access:checked,
+    //  cycle through list,
+    //  In list, hide all activeTrails where (access:no)
+    //  On map, hide all activeTrails where (acess:no)
+    //  when dogs:unchecked,
+    //  cycle thru list, show all active trails where (acess:no OR acess:yes)
+    //  In list
+    //  On map
+
+    //  when horses:checked,
+    //  cycle through list,
+    //  In list, hide all activeTrails where (horses:no)
+    //  On map, hide all activeTrails where (horses:no)
+    //  when dogs:unchecked,
+    //  cycle thru list, show all active trails where (horses:no OR horses:yes)
+    //  In list
+    //  On map
+
+
+    //  TRAIL Length -  THis is muddled and not dealing with state changes
+    //  When "Short" checked
+    //  Cycle through list
+    //  hide all active trails that have length != 1
+
+    //  when "Medium" checked
+    //  cycle thru list
+    //  hide active trails with length > 2
+    //  show active trails with length <= 2
+
+    //  when "Long" checked
+    //  cycle thru list
+    //  show all trails with length <=3
+
+
+    //  Trail Difficulty
+    //  When "Easy" checked
+    //  Cycle through list
+    //  hide all active trails that have difficulty != 1
+
+    //  when "Medium" checked
+    //  cycle thru list
+    //  hide active trails with diffuculty > 2
+    //  show active trails with diffuculty <= 2
+
+    //  when "Long" checked
+    //  cycle thru list
+    //  show all trails with difficulty <=3
+
+
+    // Making a new div for Detail Panel
 
         function showTrailDetails(e) {
           if (!$('.detailPanelContainer').is(':visible')) {

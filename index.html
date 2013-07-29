@@ -4,17 +4,19 @@
   <title>Trailhead Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
   <script src="js/bootstrap.js"></script>
-  <script src="js/bootstrap-select.js"></script>
   <script src="js/trailhead.js"></script>
- <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <script src="js/bootstrap-select.js"></script>
+
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/bootstrap-responsive.css">
-  <link rel="stylesheet" href="css/bootstrap-select.min.css"
   <link rel="stylesheet" href="css/main.css"/>
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.css"/>
+  <link rel="stylesheet" href="css/bootstrap-select.css">
 
   <script src="http://cdn.leafletjs.com/leaflet-0.6.1/leaflet.js"></script>
   <script src="js/wicket.js"></script>
@@ -22,7 +24,6 @@
   <script src="js/leaflet-providers.js"></script>
 
 <!--//   <script type="text/javascript" src="js/jquery.slidedrawer.min.js"></script>  // -->
-
 
 </head>
 <body>
@@ -42,20 +43,19 @@
         <div class="span12 navbar">
           <div class="navbar-inner searchbar dropwdown">
             <a class="searchbarTitle">NARROW YOUR SEARCH</a>
-            <ul class="nav pull-left">
-              <li class="dropdown" id="Difficulty">
-                <a role="button" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Difficulty
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <!-- tryin out jquery ui slider bound to select -->
-
-
-                  <li><a href='#'>Medium</a></li>
-                  <li><a href="#">Hard</a></li>
-                </ul>
-              </li>
-              <li class="dropdown" id="Length">
+            <select class="selectpicker" multiple title='Trail Difficulty'>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </select>
+<!--             <ul class="nav pull-left"> -->
+                  <!-- tryin out bootstrap-select-->
+<!--                 <select class="selectpicker" multiple title='Trail Difficulty'>
+                  <option>Mustard</option>
+                  <option>Ketchup</option>
+                  <option>Relish</option>
+                </select> -->
+<!--               <li class="dropdown" id="Length">
                 <a role="button" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Length
                   <b class="caret"></b>
                 </a>
@@ -76,7 +76,7 @@
                 </ul>
                 </a>
               </li>
-            </ul>
+            </ul> -->
             <form class="navbar-search pull-right searchform">
               <input type="text" class="search-query" placeholder="Search for trails">
             </form>
@@ -111,5 +111,11 @@
       </div>
     </div>
   </div>
+<script type="text/javascript">
+      $(document).ready(function() {
+      $('.selectpicker').selectpicker();
+      });
+</script>
+
 </body>
 </html>
