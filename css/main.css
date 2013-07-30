@@ -242,16 +242,17 @@ div.trailMapContainer.span4{
 
 .trailList-title {
 	height: 40px;
-	background-color: #fff;
+	width: 100%;
+	background-color: #F2F4E9;
 	border-color: #3a3636;
-  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
-  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
-  	z-index: 1;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
 }
 
 .trailList-title p {
-	padding: 12px 0px 0px 25px;
+	padding: 10px 0px 0px 20px;
 	font-family: 'Oswald', sans-serif;
 	font-weight: 300;
 	letter-spacing: 1px;
@@ -263,9 +264,10 @@ div.trailMapContainer.span4{
 	position: relative;
 	height: 80px;
 	width: auto;
-	margin-top: 10px;
-	margin-right: 5px;
-	margin-left: 5px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	margin-right: 4px;
+	margin-left: 4px;
 	background-color: #fff;
 	border-color: #3a3636;
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
@@ -292,8 +294,9 @@ div.trailMapContainer.span4{
 
 .trail-box .trailheadName {
 	position: absolute;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 12px;
 	color: #3a3636;
 	top: 45px;
 	left: 14px;
@@ -301,8 +304,9 @@ div.trailMapContainer.span4{
 
 .trail-box .trailheadDistance {
 	position: absolute;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 12px;
 	text-align: right;
 	color: #3a3636;
 	top: 45px;
@@ -311,10 +315,11 @@ div.trailMapContainer.span4{
 
 .trailSource {
 	position: absolute;
-	top: 15px;
+	top: 16px;
 	right: 10px;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 12px;
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
+   font-size: 12px;
 	line-height: 20px;
 	color: #3a3636;
 	text-align: right;
@@ -441,7 +446,7 @@ div.trailMapContainer.span4{
 }
 
 .trail1 {
-  background-color: #8DBB7D;
+  background-color: #F7E497;
 }
 
 .trail-box.trail1:hover {
@@ -449,7 +454,7 @@ div.trailMapContainer.span4{
 }
 
 .trail2 {
-  background-color: #7D8DBB;
+  background-color: #D2C280;
 }
 
 .trail2:hover {
@@ -457,7 +462,7 @@ div.trailMapContainer.span4{
 }
 
 .trail3 {
-  background-color: #BB7D8D;
+  background-color: #80774F;
 }
 
 .trail3:hover {
