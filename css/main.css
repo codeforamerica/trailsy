@@ -219,7 +219,7 @@ body {
 
 .row .span4 {
 	margin-left: 0px;
-	margin-right: 10px;
+	margin-right: 20px;
 	float: left;
 	height: auto;
 	background-color: #fff;
@@ -391,6 +391,7 @@ body {
 }
 
 .row .span8 {
+	margin-left: 0px;
 	position: relative;
 	float: left;
 	height: auto;
@@ -398,7 +399,6 @@ body {
 
 #trailMap {
 	background-color: #fff;
-	margin-left: 20px;
 	width: 100%;
 	height:  620px;
 	position: relative;
