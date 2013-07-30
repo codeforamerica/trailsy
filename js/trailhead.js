@@ -218,21 +218,21 @@ function startup() {
       var trailhead = activeTrailheads[j];
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
 
-//  Should we be able to refactor this, since we're repeating a lot in each "if"? 
+      //  Should we be able to refactor this, since we're repeating a lot in each "if"? 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
-            console.log($popupContentMainDiv.val());
+      console.log($popupContentMainDiv.val());
       // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
       var trailheadTrailCount = 0;
       if (trailhead.properties.trail1 in trailData) {
         trailhead.trails.push(trailhead.properties.trail1);
         trailheadTrailCount += 1;
-        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount) 
-        .attr("data-trailname", trailhead.properties.trail1)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .attr("data-index", trailheadTrailCount - 1)
-        .append("<a href='#'>").html(trailhead.properties.trail1)
-        .appendTo($popupTrailheadDiv);
+        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
+          .attr("data-trailname", trailhead.properties.trail1)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailheadTrailCount - 1)
+          .append("<a href='#'>").html(trailhead.properties.trail1)
+          .appendTo($popupTrailheadDiv);
       }
       if (trailhead.properties.trail2 in trailData) {
         trailhead.trails.push(trailhead.properties.trail2);
@@ -250,12 +250,12 @@ function startup() {
         trailheadTrailCount += 1;
         trailhead.trails.push(trailhead.properties.trail3);
         var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
-        .attr("data-trailname", trailhead.properties.trail3)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid",trailhead.properties.cartodb_id)
-        .attr("data-index", trailheadTrailCount - 1)
-        .append("<a href='#'>").html(trailhead.properties.trail3)
-        .appendTo($popupTrailheadDiv);
+          .attr("data-trailname", trailhead.properties.trail3)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailheadTrailCount - 1)
+          .append("<a href='#'>").html(trailhead.properties.trail3)
+          .appendTo($popupTrailheadDiv);
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
       trailhead.marker.bindPopup(trailhead.popupContent);
@@ -314,14 +314,17 @@ function startup() {
         }
 
         //  Helper functions for ShowTrailDetails
+
         function openDetailPanel() {
           $('.detailPanelContainer').show().toggleClass("span0 span4");
           $('.trailMapContainer').toggleClass("span8 span4");
+          map.invalidateSize();
         }
 
         function closeDetailPanel() {
           $('.detailPanelContainer').hide().toggleClass("span0 span4");
           $('.trailMapContainer').toggleClass("span8 span4");
+          map.invalidateSize();
         }
 
         function decorateDetailPanel(trailName, trailheadName, source, trailheadDistance) {
@@ -603,6 +606,7 @@ function startup() {
   }
 
   // return the default CSS background-color for the class given
+
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");
     var c = $t.css("background-color");
