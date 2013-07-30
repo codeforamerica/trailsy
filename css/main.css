@@ -219,6 +219,7 @@ body {
 
 .row .span4 {
 	margin-left: 0px;
+	margin-right: 10px;
 	float: left;
 	height: auto;
 	background-color: #fff;
@@ -319,9 +320,6 @@ body {
 	transition: width 0.3s ease, margin 0.3s ease;
 }
 
-.trailMapContainer {
-	margin-left: 0;
-}
  .span0 {
  	width: 0%;
  	margin-left: 0;
@@ -330,20 +328,20 @@ body {
 /* Detail Panel Elements
 ============================== */
 
+
 #detail-panel{
 	position: relative;
 	height: 620px;
 	width: 100%;
-	margin-left: 20px;
 	background-color: #fff;
 	overflow: scroll;
 	border: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.075);	
 }
 
 .trailName {
 	position: absolute;
-	top: 0;
+	top: -10px;
 	background-color: #f2f4e9;
 	display: inline-block;
 	width: 100%;
