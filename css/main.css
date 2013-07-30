@@ -149,6 +149,11 @@ body {
 	display:inline-block;
 	padding: 10px 0px 0px 30px;
 }
+
+.btn-group .bootstrap-select:open {
+	background-color: #8DBB7D;
+
+}
 .btn-group > .btn:first-child {
 	-webkit-border-bottom-left-radius: 0;
 	border-bottom-left-radius: 0;
@@ -167,9 +172,6 @@ body {
 	border: none;
 }
 
-.btn .caret:hover {
-	background-color: #fff;
-}
 
 .btn:hover, btn:focus, btn:active {
 	color: #fff;
@@ -414,6 +416,8 @@ div.trailMapContainer.span4{
 	width: 100%;
 	height:  620px;
 	position: relative;
+	border: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.075);	
 }
 
 .trailMap-title {
