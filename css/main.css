@@ -343,57 +343,75 @@ div.trailMapContainer.span4{
 ============================== */
 
 
-#detail-panel{
+.detail-panel{
 	position: relative;
 	height: 620px;
 	width: 100%;
 	background-color: #fff;
 	overflow: scroll;
 	border: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.075);	
+  font-family: 'Oswald', sans-serif;
+	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
+  -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
 }
 
-.trailName {
-	position: absolute;
-	top: -10px;
+.detail-panel .detailPanelTitle {
+	position: relative;
 	background-color: #f2f4e9;
 	display: inline-block;
 	width: 100%;
-	padding-left: 20px;
-	font-family: 'Oswald', sans-serif;
-	font-weight: 300;
+	padding: 20px 10px 20px 10px;
+	font-weight: lighter;
 	letter-spacing: 1px;
 	font-size: 20px;
 	color: #8DBB7D;
-	line-height: 75px;
-	float: left;
 	text-decoration: none;
   	border-bottom: 1px solid #ccc;
   	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.trailheadName {
-	display: inline-block;
-	position: absolute;
-	top: 75px;
+.detail-panel .detailPanelBody {
+  padding: 20px 10px;
+}
+
+.detail-panel .detailTrailheadName {
+	position: relative;
+  margin-left: 20px;
+}
+
+.detail-panel .detailDirections {
+  margin-left: 10px;
+}
+
+.detail-panel .detailSource {
+	position: relative;
+  margin-left: 20px;
 	width: 100%;
 }
 
-.source {
-	display: inline-block;
-	position: absolute;
-	top: 100px;
+.detail-panel .detailTrailheadDistance {
+	position: relative;
+  margin-left: 20px;
 	width: 100%;
 }
 
-.trailheadDistance {
-	display: inline-block;
-	position: absolute;
-	top: 120px;
-	width: 100%;
+.detail-panel .detailPanelHeader {
+  font-weight: lighter;
 }
 
-.detail-body {
+.detail-panel .detailPanelPicture {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.detail-panel .detailDescription {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  font-weight: lighter;
+}
+
+.detail-panel .detail-body {
 
 }
 
@@ -503,7 +521,7 @@ div.trailMapContainer.span4{
     left: 310px;
     /*margin-left: -8px;*/
     display: block;
-    background: url(images/crosshair.gif);
+    background: url(img/crosshair.gif);
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 1;
