@@ -328,10 +328,10 @@ function startup() {
         }
 
         function decorateDetailPanel(trailName, trailheadName, source, trailheadDistance) {
-          $('#detail-panel .trailName').html(trailName);
-          $('#detail-panel .trailheadName').html(trailheadName);
-          $('#detail-panel .source').html(source);
-          $('#detail-panel .trailheadDistance').html(trailheadDistance);
+          $('.detail-panel .trailName').html(trailName);
+          $('.detail-panel .detailTrailheadName').html(trailheadName);
+          $('.detail-panel .detailSource').html(source);
+          $('.detail-panel .detailTrailheadDistance').html(trailheadDistance);
         }
 
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
