@@ -491,7 +491,7 @@ div.trailMapContainer.span4{
     left: 310px;
     /*margin-left: -8px;*/
     display: block;
-    background: url(images/crosshair.gif);
+    background: url(img/crosshair.gif);
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 1;
