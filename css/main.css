@@ -298,8 +298,8 @@ div.trailMapContainer.span4{
 	position: absolute;
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    font-weight: 300;
-   font-size: 12px;
-	color: #3a3636;
+   font-size: 14px;
+	color: #757272;
 	top: 45px;
 	left: 14px;
 }
@@ -308,22 +308,23 @@ div.trailMapContainer.span4{
 	position: absolute;
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    font-weight: 300;
-   font-size: 12px;
+   font-size: 14px;
 	text-align: right;
-	color: #3a3636;
+	color: #757272;
 	top: 45px;
 	right: 10px;
 }
 
 .trailSource {
+	display: none;
 	position: absolute;
 	top: 16px;
 	right: 10px;
    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    font-weight: 300;
-   font-size: 12px;
+   font-size: 14px;
 	line-height: 20px;
-	color: #3a3636;
+	color: #757272;
 	text-align: right;
 }
 
@@ -372,32 +373,48 @@ div.trailMapContainer.span4{
 }
 
 .detail-panel .detailPanelBody {
-  padding: 20px 10px;
+  	padding: 20px 10px;
 }
 
 .detail-panel .detailTrailheadName {
 	position: relative;
-  margin-left: 20px;
+  	margin-left: 20px;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 14px;
 }
 
 .detail-panel .detailDirections {
-  margin-left: 10px;
+	position: relative;
+	float: right;
+  	margin-left: 10px;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  	font-weight: 300;
+  	font-size: 14px;
 }
 
 .detail-panel .detailSource {
 	position: relative;
-  margin-left: 20px;
+  	margin-left: 20px;
 	width: 100%;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 14px;
 }
 
 .detail-panel .detailTrailheadDistance {
 	position: relative;
-  margin-left: 20px;
+  	margin-left: 20px;
 	width: 100%;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;
 }
 
 .detail-panel .detailPanelHeader {
-  font-weight: lighter;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;
 }
 
 .detail-panel .detailPanelPicture {
@@ -408,11 +425,18 @@ div.trailMapContainer.span4{
 .detail-panel .detailDescription {
   margin-top: 20px;
   border-top: 1px solid #ccc;
-  font-weight: lighter;
-}
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;}
 
 .detail-panel .detail-body {
 
+}
+
+.miles {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;
 }
 
 /* Map Elements
