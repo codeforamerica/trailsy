@@ -149,6 +149,33 @@ body {
 	display:inline-block;
 	padding: 10px 0px 0px 30px;
 }
+.btn-group > .btn:first-child {
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-left-radius: 0;
+	-moz-border-radius-topleft: 0;
+	border-top-right-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.btn {
+	background-image: none;
+	background-color: #fff;
+	box-shadow: none;
+	border: none;
+}
+
+.btn .caret:hover {
+	background-color: #fff;
+}
+
+.btn:hover, btn:focus, btn:active {
+	color: #fff;
+	text-shadow: none;
+	background-color: #8DBB7D; 
+}
 
 .bootstrap-select:not([class*="span"]) {
 	width: 160px;
@@ -242,7 +269,7 @@ body {
 }
 
 .trail-box:hover {
-	background-color: #8DBB7D;
+	background-color: #D4E5CE;
 }
 
 .trail {
@@ -287,6 +314,7 @@ body {
 
 .detailPanelContainer {
 	display: none;
+	position: relative;
 	webkit-transition: width 0.3s ease, margin 0.3s ease;
 	transition: width 0.3s ease, margin 0.3s ease;
 }
@@ -309,23 +337,48 @@ body {
 	margin-left: 20px;
 	background-color: #fff;
 	overflow: scroll;
-	border-left: 1px solid #d4d4d4;
-	border-right: 1px solid #d4d4d4;
-	border-bottom: 1px solid #d4d4d4;
+	border: 1px solid #d4d4d4;
 	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
 }
 
-.detail-title {
+.trailName {
 	position: absolute;
 	top: 0;
+	background-color: #f2f4e9;
+	display: inline-block;
 	width: 100%;
-	height: 40px;
-	background-color: #eee;
+	padding-left: 20px;
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	letter-spacing: 1px;
+	font-size: 20px;
+	color: #8DBB7D;
+	line-height: 75px;
+	float: left;
+	text-decoration: none;
+  	border-bottom: 1px solid #ccc;
+  	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.detail-title.h3 {
-	padding-left: 10px;
-	padding-bottom: 10px;
+.trailheadName {
+	display: inline-block;
+	position: absolute;
+	top: 75px;
+	width: 100%;
+}
+
+.source {
+	display: inline-block;
+	position: absolute;
+	top: 100px;
+	width: 100%;
+}
+
+.trailheadDistance {
+	display: inline-block;
+	position: absolute;
+	top: 120px;
+	width: 100%;
 }
 
 .detail-body {
@@ -383,39 +436,27 @@ body {
 }
 
 .trail1 {
-  background-color: red;
+  background-color: #8DBB7D;
+}
+
+.trail-box.trail1:hover {
+	background-color: #8DBB7D;
 }
 
 .trail2 {
-  background-color: green;
+  background-color: #7D8DBB;
+}
+
+.trail2:hover {
+	background-color: #7D8DBB;
 }
 
 .trail3 {
-  background-color: blue;
+  background-color: #BB7D8D;
 }
 
-/*----CSS Menu------*/
-
-.narrow-menu {
-	width: 970px;
-	padding-left: 20px;
-}
-
-.narrow-menu#menu-title a {
-	font-family: 'Oswald', sans-serif; letter-spacing: 1px;
-	font-size: 18px;
-	max-width: 50%;
-}
-
-.narrow-menu ul {
-	background: #CFDBC5;
-	list-style: none;
-	position: relative;
-	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+.trail3:hover {
+	background-color: #7D8DBB;
 }
 
 

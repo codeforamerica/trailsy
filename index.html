@@ -44,23 +44,27 @@
         <div class="span12 navbar">
           <div class="navbar-inner searchbar dropwdown">
             <a class="searchbarTitle">NARROW YOUR SEARCH</a>
+
+
             <div class="filters">
-              <select class="selectpicker" multiple title='Trail Activities'>
-                <option>Dogs</option>
-                <option>Bikes</option>
-                <option>Equestrian</option>
+              <select class="selectpicker show-tick" id="activityFilter" multiple data-selected-text-form title='Trail Activities'>
+                <option value="dogs">Dogs</option>
+                <option value="bikes">Bikes</option>
+                <option value="equestrian">Equestrian</option>
               </select>
-              <select class="selectpicker" multiple title='Trail Difficulty'>
-                <option>Easy</option>
-                <option>Medium</option>
-                <option>Hard</option>
+              <select class="selectpicker difficultyFilter" multiple title='Trail Difficulty'>
+                <option value="easy">Easy</option>
+                <option value="moderate">Moderate</option>
+                <option value="difficult">Difficult</option>
               </select>
-              <select class="selectpicker" multiple title='Trail Length'>
-                <option>Short</option>
-                <option>Medium</option>
-                <option>Long</option>
+              <select class="selectpicker lengthFilter" multiple title='Trail Length'>
+                <option value="short">Short</option>
+                <option value="medium">Medium</option>
+                <option value="long">Long</option>
               </select>
           </div>
+
+
           <form class="navbar-search pull-right searchform">
             <input type="text" class="search-query" placeholder="Search for trails">
           </form>
