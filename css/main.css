@@ -328,6 +328,19 @@ div.trailMapContainer.span4{
 	text-align: right;
 }
 
+.trailIndicatorLight {
+  display: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
 .detailPanelContainer {
 	display: none;
 	position: relative;
@@ -532,27 +545,40 @@ div.trailMapContainer.span4{
 }
 
 .trail1 {
-  background-color: #F7E497;
+  /*background-color: #536E49;*/
+  /*background-color: #F7E497;*/
+  background-color: #DBAE92;
 }
 
-.trail-box.trail1:hover {
+/*.trail-box.trail1:hover {
 	background-color: #F2F4E9;
+}
+*/
+
+.trail1:hover {
+  background-color: #666666;
 }
 
 .trail2 {
-  background-color: #D2C280;
+  background-color: #A36D95;
+  /*background-color: #B5BA7D;*/
+  /*background-color: #D2C280;*/
 }
 
 .trail2:hover {
-	background-color: #F2F4E9;
+	/*background-color: #F2F4E9;*/
+  background-color: #666666;
 }
 
 .trail3 {
-  background-color: #80774F;
+  background-color: #3F7A29;
+  /*background-color: #6B6E49;*/
+  /* background-color: #80774F; */
 }
 
 .trail3:hover {
-	background-color: #F2F4E9;
+	/*background-color: #F2F4E9;*/
+  background-color: #666666;
 }
 
 

@@ -281,7 +281,8 @@ function startup() {
       var $trailDiv;
 
       // Making a new div for text / each trail 
-      for (var i = 0; i < trailheadTrailNames.length; i++) {
+      for (var i = 0; i < trailheadTrailNames.length && i < 3; i++) {
+
         var trailName = trailheadTrailNames[i];
 
         $trailDiv = $("<div>").addClass('trail-box')
@@ -293,6 +294,8 @@ function startup() {
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv)
           .click(showTrailDetails);
+
+        $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
         function showTrailDetails(e) {
           if (!$('.detailPanelContainer').is(':visible')) {
@@ -430,12 +433,17 @@ function startup() {
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
-    for (var i = 0; i < currentTrailhead.trails.length; i++) {
+    $(".trailIndicatorLight").hide();
+    for (var i = 0; i < currentTrailhead.trails.length && i < 3; i++) {
       var trailName = currentTrailhead.trails[i];
       var trailheadName = currentTrailhead.properties.name;
       var trailheadID = currentTrailhead.properties.cartodb_id;
       // add class for highlighting
-      $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]').addClass("trail" + (i + 1));
+      var $trailbox = $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]');
+      // $trailbox.addClass("trail" + (i + 1));
+      var color = getClassBackgroundColor("trail" + (i + 1));
+      console.log(color);
+      $trailbox.find($(".trailIndicatorLight")).css("background-color", color).show();
       // TODO: make this animate so that the selected trailhead trails are visible in the trailList
       if (i === 0) {
         $('#trailList').animate({
@@ -550,19 +558,22 @@ function startup() {
           color = getClassBackgroundColor("trail1");
           return {
             weight: 3,
-            color: color
+            color: color,
+            opacity: 0.75
           };
         } else if (feature.properties.order === 1) {
           color = getClassBackgroundColor("trail2");
           return {
             weight: 3,
-            color: color
+            color: color,
+            opacity: 0.75
           };
         } else if (feature.properties.order === 2) {
           color = getClassBackgroundColor("trail3");
           return {
             weight: 3,
-            color: color
+            color: color,
+            opacity: 0.75
           };
         }
       },
