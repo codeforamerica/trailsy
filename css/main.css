@@ -173,7 +173,7 @@ body {
 }
 
 
-.btn:hover, btn:focus, btn:active {
+.filter > .btn:hover, btn:focus, btn:active {
 	color: #fff;
 	text-shadow: none;
 	background-color: #8DBB7D; 
