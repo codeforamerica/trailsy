@@ -52,7 +52,6 @@ function startup() {
   var currentLocation = {};
 
   // Prepping for API calls (defining data for the call)
-  var api_key = "3751baeceb14d394f251b28768ca7e27fc20ad07";
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
 
   // comment these/uncomment the next set to switch between tables
@@ -642,7 +641,9 @@ function startup() {
     // set the view to that zoom, and the center of the trail's bounding box 
     map.setView(layer.getBounds().getCenter(), newZoom, {
       pan: {
-        animate: true
+        animate: true,
+        duration: 3.0,
+        easeLinearity: 0.05
       },
       zoom: {
         animate: true
@@ -657,7 +658,7 @@ function startup() {
     console.log("makeSQLQuery");
     var callData = {
       q: query,
-      api_key: api_key,
+      // api_key: api_key,
       format: "geoJSON"
     };
     var request = $.ajax({
