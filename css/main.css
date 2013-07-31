@@ -559,6 +559,7 @@ div.trailMapContainer.span4{
 /*----Redo Search Button (Temporary - Auto Refresh Search)
 ============================== */
 #redoSearch {
+	padding-top: 20px;
 	opacity: 0%;
 	width: auto;
 }
@@ -566,14 +567,6 @@ div.trailMapContainer.span4{
 #redoSearch span {
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 18px;
-}
-
-#redoSearch:hover {
-	background: #b5c7a6;
-}
-
-#redoSearch span:hover {
-	color: #3a3636;
 }
 
 
