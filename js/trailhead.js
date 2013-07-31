@@ -356,7 +356,6 @@ function startup() {
 
   function trailnameClick(e) {
     console.log("trailnameClick");
-    console.log(e.target);
     populateTrailsForTrailheadTrailName(e);
     // setCurrentTrail
   }
@@ -364,17 +363,12 @@ function startup() {
   // given jquery 
 
   function parseTrailElementData($element) {
-    console.log($element);
-    console.log($element.outerHTML());
-    //var trailName = $element[0].data("trailname");
-    //var trailheadName = $element[0].data("trailheadname");
     var trailheadID = $element.data("trailheadid");
     var highlightedTrailIndex = $element.data("index") || 0;
     results = {
       trailheadID: trailheadID,
       highlightedTrailIndex: highlightedTrailIndex
     };
-    console.log(["results", results]);
     return results;
   }
 
@@ -389,12 +383,9 @@ function startup() {
 
     // this makes trailname click do the same thing as general div click
     // (almost certainly a better solution exists)
-    console.log(["this", this]);
     if (e.target !== this) {
-      console.log("this.id");
       $myTarget = $(this);
     } else {
-      console.log("e.target.id");
       $myTarget = $(e.target);
     }
     var parsed = parseTrailElementData($myTarget);
@@ -415,7 +406,6 @@ function startup() {
 
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
-    console.log(trailheadID);
     for (var i = 0; i < activeTrailheads.length; i++) {
       if (activeTrailheads[i].properties.cartodb_id == trailheadID) {
         currentTrailhead = activeTrailheads[i];
@@ -437,13 +427,10 @@ function startup() {
 
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
-    console.log(currentTrailhead);
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
     for (var i = 0; i < currentTrailhead.trails.length; i++) {
       var trailName = currentTrailhead.trails[i];
-      console.log(["trailName"], trailName);
       var trailheadName = currentTrailhead.properties.name;
-      console.log(["trailheadName", trailheadName]);
       var trailheadID = currentTrailhead.properties.cartodb_id;
       // add class for highlighting
       $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]').addClass("trail" + (i + 1));
@@ -528,7 +515,6 @@ function startup() {
     };
     // spin through response, removing any segments that aren't part of a known trail
     filteredResponse.features = response.features.filter(function(element, index, array) {
-      console.log(element.properties);
       // for (i = 0; i < trailData.length; i++) {
       if (element.properties.name1 in trailData ||
         element.properties.name2 in trailData ||
@@ -636,7 +622,6 @@ function startup() {
 
   function zoomToLayer(layer) {
     console.log("zoomToLayer");
-    console.log(layer);
     // figure out what zoom is required to display the entire trail layer
     var curZoom = map.getBoundsZoom(layer.getBounds());
     // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
