@@ -372,6 +372,28 @@ div.trailMapContainer.span4{
   	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.close-btn {
+	position: absolute;
+	bottom: 17px;
+	right: 10px;
+	width: 50px;
+	height: 28px;
+	border: 1px solid #cccccc
+	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
+	-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+  	background-color: #8DBB7D;
+}
+
+.close-btn p {
+	display: inline-block;
+	text-align: center;
+	color: #F2F4E9;
+	text-shadow: 1px 1px 1px #3a4120;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 12px;
+}
 .detail-panel .detailPanelBody {
   	padding: 20px 10px;
 }
@@ -417,13 +439,31 @@ div.trailMapContainer.span4{
    	font-size: 14px;
 }
 
+.detail-panel #left {
+	margin-top: 15px;
+	max-width: 50%;
+	float: left;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;
+}
+
+.detail-panel #right {
+	margin-top: 15px;
+	max-width: 50%;
+	float: right;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 14px;
+}
+
 .detail-panel .detailPanelPicture {
   border-top: 1px solid #ccc;
   margin-top: 20px;
 }
 
 .detail-panel .detailDescription {
-  margin-top: 20px;
+  margin-top: 15px;
   border-top: 1px solid #ccc;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
@@ -504,7 +544,7 @@ div.trailMapContainer.span4{
 }
 
 .trail2:hover {
-	background-color: #7D8DBB;
+	background-color: #F2F4E9;
 }
 
 .trail3 {
@@ -512,7 +552,7 @@ div.trailMapContainer.span4{
 }
 
 .trail3:hover {
-	background-color: #7D8DBB;
+	background-color: #F2F4E9;
 }
 
 
