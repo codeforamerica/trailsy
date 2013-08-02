@@ -292,13 +292,11 @@ function startup() {
           .attr("data-index", i)
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv)
-          .click(function(trailName, trailheadName, trailheadID, trailheadDistance) {
+          .click(function(trailName, trailheadName, trailheadSource, trailheadDistance) {
             return function(e) {
-              console.log(e);
-              console.log(this);
-              showTrailDetails(e.currentTarget, trailName, trailheadName, trailheadID, trailheadDistance);
+              showTrailDetails(e.currentTarget, trailName, trailheadName, trailheadSource, trailheadDistance);
             };
-          }(trailName, trailheadName, trailheadID, trailheadDistance));
+          }(trailName, trailheadName, trailheadSource, trailheadDistance));
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
