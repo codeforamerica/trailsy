@@ -292,26 +292,15 @@ function startup() {
           .attr("data-index", i)
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv)
-          .click(showTrailDetails);
+          .click(function(trailName, trailheadName, trailheadID, trailheadDistance) {
+            return function(e) {
+              console.log(e);
+              console.log(this);
+              showTrailDetails(e.currentTarget, trailName, trailheadName, trailheadID, trailheadDistance);
+            };
+          }(trailName, trailheadName, trailheadID, trailheadDistance));
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
-
-        function showTrailDetails(e) {
-          if (!$('.detailPanelContainer').is(':visible')) {
-            decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
-            openDetailPanel();
-            $(this).addClass('activeTrail');
-          } else {
-            if ($(this).hasClass('activeTrail')) {
-              $(this).removeClass('activeTrail');
-              closeDetailPanel();
-            } else {
-              decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
-              $('.activeTrail').removeClass('activeTrail');
-              $(this).addClass('activeTrail');
-            }
-          }
-        }
 
         // Making a new div for Detail Panel
 
@@ -332,6 +321,23 @@ function startup() {
     });
   }
 
+
+  function showTrailDetails(currentTarget, trailName, trailheadName, trailheadSource, trailheadDistance) {
+    if (!$('.detailPanelContainer').is(':visible')) {
+      decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
+      openDetailPanel();
+      $(currentTarget).addClass('activeTrail');
+    } else {
+      if ($(currentTarget).hasClass('activeTrail')) {
+        $(currentTarget).removeClass('activeTrail');
+        closeDetailPanel();
+      } else {
+        decorateDetailPanel(trailName, trailheadName, trailheadSource, trailheadDistance);
+        $('.activeTrail').removeClass('activeTrail');
+        $(currentTarget).addClass('activeTrail');
+      }
+    }
+  }
 
   //  Helper functions for ShowTrailDetails
 
