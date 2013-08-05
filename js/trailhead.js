@@ -173,7 +173,7 @@ function startup() {
   // on trailhead marker click, this is invoked with the id of the trailhead
 
   function trailheadMarkerClick(id) {
-    console.log(id);
+    console.log("trailheadMarkerClick");
     highlightTrailhead(id, 0);
   }
 
@@ -218,44 +218,23 @@ function startup() {
       var trailhead = activeTrailheads[j];
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
 
-      //  Should we be able to refactor this, since we're repeating a lot in each "if"? 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
       var trailheadTrailCount = 0;
-      if (trailhead.properties.trail1 in trailData) {
-        trailhead.trails.push(trailhead.properties.trail1);
-        trailheadTrailCount += 1;
-        var $popupTrail1Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
-          .attr("data-trailname", trailhead.properties.trail1)
-          .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.cartodb_id)
-          .attr("data-index", trailheadTrailCount - 1)
-          .append("<a href='#'>").html(trailhead.properties.trail1)
-          .appendTo($popupTrailheadDiv);
-      }
-      if (trailhead.properties.trail2 in trailData) {
-        trailhead.trails.push(trailhead.properties.trail2);
-        trailheadTrailCount += 1;
-        var $popupTrail2Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
-          .attr("data-trailname", trailhead.properties.trail2)
-          .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.cartodb_id)
-          .attr("data-index", trailheadTrailCount - 1)
-          .append("<a href='#'>").html(trailhead.properties.trail2)
-          .appendTo($popupTrailheadDiv);
-      }
-      if (trailhead.properties.trail3 in trailData) {
-        trailhead.trails.push(trailhead.properties.trail3);
-        trailheadTrailCount += 1;
-        var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
-          .attr("data-trailname", trailhead.properties.trail3)
-          .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.cartodb_id)
-          .attr("data-index", trailheadTrailCount - 1)
-          .append("<a href='#'>").html(trailhead.properties.trail3)
-          .appendTo($popupTrailheadDiv);
+      for (var trailNum = 0; trailNum < 3; trailNum++) {
+        var trailWithNum = "trail" + trailNum;
+        if (trailhead.properties[trailWithNum] in trailData) {
+          trailhead.trails.push(trailhead.properties[trailWithNum]);
+          trailheadTrailCount += 1;
+          var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
+            .attr("data-trailname", trailhead.properties[trailWithNum])
+            .attr("data-trailheadname", trailhead.properties.name)
+            .attr("data-trailheadid", trailhead.properties.cartodb_id)
+            .attr("data-index", trailheadTrailCount - 1)
+            .append("<a href='#'>").html(trailhead.properties[trailWithNum])
+            .appendTo($popupTrailheadDiv);
+        }
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
-      // trailhead.marker.bindPopup(trailhead.popupContent);
     }
     makeTrailDivs(activeTrailheads);
   }
