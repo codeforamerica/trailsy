@@ -484,7 +484,7 @@ function startup() {
       }(trail_query);
       queryTaskArray.push(queryTask);
     }
-    async.parallel(queryTaskArray, function(err, results) {
+    async.series(queryTaskArray, function(err, results) {
       responses = mergeResponses(responses);
       drawMultiTrailLayer(responses);
       setCurrentTrail(highlightedTrailIndex);
