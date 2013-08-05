@@ -217,10 +217,10 @@ function startup() {
     for (var j = 0; j < activeTrailheads.length; j++) {
       var trailhead = activeTrailheads[j];
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
+      // note: this should probably be 1-indexed to be consistent with the CSS styling, or the CSS styling needs to be 0-indexed.
       var trailheadTrailCount = 0;
-      for (var trailNum = 0; trailNum < 3; trailNum++) {
+      for (var trailNum = 1; trailNum <= 3; trailNum++) {
         var trailWithNum = "trail" + trailNum;
         if (trailhead.properties[trailWithNum] in trailData) {
           trailhead.trails.push(trailhead.properties[trailWithNum]);
