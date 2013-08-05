@@ -150,7 +150,7 @@ function startup() {
       var newMarker = L.circleMarker(currentFeatureLatLng, {
         title: 'test',
         radius: 4
-      }).bindPopup(currentFeature.properties.name);
+      });
 
       // adding closure to call trailheadMarkerClick with trailheadID on marker click
       newMarker.on("click", function(trailheadID) {
@@ -255,7 +255,7 @@ function startup() {
           .appendTo($popupTrailheadDiv);
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
-      trailhead.marker.bindPopup(trailhead.popupContent);
+      // trailhead.marker.bindPopup(trailhead.popupContent);
     }
     makeTrailDivs(activeTrailheads);
   }
