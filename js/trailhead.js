@@ -208,7 +208,7 @@ function startup() {
   // also, just because we can, add links to the trails within each trailhead popup 
 
   function addTrailsToTrailheads(response) {
-    console.log("showNearestTrailList");
+    console.log("addTrailsToTrailheads");
     for (var i = 0; i < response.features.length; i++) {
       trailData[response.features[i].properties.name] = response.features[i];
       // console.log("trailData:");
@@ -220,8 +220,6 @@ function startup() {
 
       //  Should we be able to refactor this, since we're repeating a lot in each "if"? 
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
-      console.log($popupContentMainDiv.val());
-      // var popupContent = "<div class='trailhead-popup'>" + "<div class='trailhead-name'>" + trailhead.properties.name + "</div>";
       var trailheadTrailCount = 0;
       if (trailhead.properties.trail1 in trailData) {
         trailhead.trails.push(trailhead.properties.trail1);
@@ -248,7 +246,6 @@ function startup() {
       if (trailhead.properties.trail3 in trailData) {
         trailhead.trails.push(trailhead.properties.trail3);
         trailheadTrailCount += 1;
-        trailhead.trails.push(trailhead.properties.trail3);
         var $popupTrail3Div = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
           .attr("data-trailname", trailhead.properties.trail3)
           .attr("data-trailheadname", trailhead.properties.name)
@@ -280,7 +277,7 @@ function startup() {
       var $trailDiv;
 
       // Making a new div for text / each trail 
-      for (var i = 0; i < trailheadTrailNames.length && i < 3; i++) {
+      for (var i = 0; i < trailheadTrailNames.length; i++) {
 
         var trailName = trailheadTrailNames[i];
 
@@ -437,7 +434,7 @@ function startup() {
     console.log("highlightTrailheadDivs");
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
     $(".trailIndicatorLight").hide();
-    for (var i = 0; i < currentTrailhead.trails.length && i < 3; i++) {
+    for (var i = 0; i < currentTrailhead.trails.length; i++) {
       var trailName = currentTrailhead.trails[i];
       var trailheadName = currentTrailhead.properties.name;
       var trailheadID = currentTrailhead.properties.cartodb_id;
