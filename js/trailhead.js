@@ -108,10 +108,10 @@ function startup() {
     });
   }
 
-  // run the trailhead search again after setting
-  // currentLocation to the center of the currently viewed map
+  // set currentLocation to the center of the currently viewed map
+  // then get the ordered trailheads and add trailData to trailheads
 
-  function reorderTrailsWithNewLocation(e) {
+  function reorderTrailsWithNewLocation() {
     setCurrentLocationFromMap();
     getOrderedTrailheads(currentLocation, function() {
       addTrailDataToTrailheads(trailData);
@@ -209,7 +209,6 @@ function startup() {
       };
       trailheads.push(trailhead);
     }
-    mapActiveTrailheads(trailheads);
   }
 
   // on trailhead marker click, this is invoked with the id of the trailhead
@@ -258,6 +257,7 @@ function startup() {
   // populate trailheads[x].trails with all of the trails in trailData
   // that match each trailhead's named trails from the trailhead table
   // also add links to the trails within each trailhead popup 
+  // TODO: use "currentTrailheads" instead of original one everywhere. populate that one here.
 
   function addTrailDataToTrailheads(myTrailData) {
     console.log("addTrailDataToTrailheads");
@@ -285,6 +285,7 @@ function startup() {
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
     }
+    mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
   }
 
