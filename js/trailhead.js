@@ -77,7 +77,12 @@ function startup() {
     getAllTrailPaths(filterKnownTrails);
   });
 
+  // -----------------------------------
+  // Kick things off
+  
   initialSetup();
+  
+  // -----------------------------------
 
   //  Difficulty Filtering
   //  Length Filtering
@@ -85,6 +90,10 @@ function startup() {
 
   function filterTrailList() {}
 
+
+  // on startup, get location, display the map,
+  // get and display the trailheads, populate trailData, 
+  // add trailData to trailheads
 
   function initialSetup() {
     console.log("initialSetup");
@@ -101,7 +110,6 @@ function startup() {
 
   // run the trailhead search again after setting
   // currentLocation to the center of the currently viewed map
-  // or running filters
 
   function reorderTrailsWithNewLocation(e) {
     setCurrentLocationFromMap();
@@ -130,10 +138,12 @@ function startup() {
 
   function setCurrentLocation() {
     // for now, just returns Akron
+    // should use browser geolocation,
+    // and only return Akron if we're far from home base
     currentLocation = AKRON;
   }
 
-  // given location, display a map, hand off to getOrderedTrailheads
+  // display the map based on currentLocation
 
   function displayInitialMap() {
     console.log("displayInitialMap");
@@ -291,8 +301,8 @@ function startup() {
       var trailheadID = val.properties.cartodb_id;
       var trailheadTrailNames = val.trails;
       if (trailheadTrailNames.length === 0) {
-        console.log("empty trailhead");
-        return false; // next $.each
+        console.log("empty trailhead: " + trailheadName);
+        return true; // next $.each
       }
       var trailheadSource = val.properties.source;
       var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
@@ -462,11 +472,9 @@ function startup() {
       var trailheadID = currentTrailhead.properties.cartodb_id;
       // add class for highlighting
       var $trailbox = $('.trail-box[data-trailname="' + trailName + '"][data-trailheadid="' + trailheadID + '"]');
-      // $trailbox.addClass("trail" + (i + 1));
       var color = getClassBackgroundColor("trail" + (i + 1));
-      console.log(color);
       $trailbox.find($(".trailIndicatorLight")).css("background-color", color).show();
-      // TODO: make this animate so that the selected trailhead trails are visible in the trailList
+      // if this is the first trail for the trailhead, animate it to the top of the trailList
       if (i === 0) {
         $('#trailList').animate({
           // scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop();
