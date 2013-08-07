@@ -79,9 +79,9 @@ function startup() {
 
   // -----------------------------------
   // Kick things off
-  
+
   initialSetup();
-  
+
   // -----------------------------------
 
   //  Difficulty Filtering
@@ -105,9 +105,7 @@ function startup() {
     setCurrentLocation();
     displayInitialMap();
     getOrderedTrailheads(currentLocation, function() {
-      console.log("b");
       getTrailData(function() {
-        console.log("pre-addTrailDataToTrailheads a");
         addTrailDataToTrailheads(trailData);
       });
     });
@@ -224,20 +222,6 @@ function startup() {
     highlightTrailhead(id, 0);
   }
 
-
-  // given trailheads, add all of the markers to the map in a single Leaflet layer group
-
-  function mapActiveTrailheads(trailheads) {
-    console.log("mapActiveTrailheads");
-    var currentTrailheadMarkerArray = [];
-    for (var i = 0; i < trailheads.length; i++) {
-      currentTrailheadMarkerArray.push(trailheads[i].marker);
-    }
-    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
-    map.addLayer(currentTrailheadLayerGroup);
-  }
-
-
   // get the trailData from the DB
 
   function getTrailData(callback) {
@@ -263,7 +247,6 @@ function startup() {
   // populate trailheads[x].trails with all of the trails in trailData
   // that match each trailhead's named trails from the trailhead table.
   // Also add links to the trails within each trailhead popup 
-  // TODO: use "currentTrailheads" instead of original one everywhere. populate that one here.
 
   function addTrailDataToTrailheads(myTrailData) {
     console.log("addTrailDataToTrailheads");
@@ -295,6 +278,22 @@ function startup() {
     makeTrailDivs(trailheads);
   }
 
+  // given trailheads, add all of the markers to the map in a single Leaflet layer group
+  // except for trailheads with no matched trails
+
+  function mapActiveTrailheads(trailheads) {
+    console.log("mapActiveTrailheads");
+    var currentTrailheadMarkerArray = [];
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].trails.length) {
+        currentTrailheadMarkerArray.push(trailheads[i].marker);
+      } else {
+        console.log(["trailhead not displayed: ", trailheads[i].properties.name]);
+      }
+    }
+    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
+    map.addLayer(currentTrailheadLayerGroup);
+  }
 
   // given trailheads, now populated with matching trail names,
   // fill out the left trail(head) pane,
@@ -308,7 +307,6 @@ function startup() {
       var trailheadID = trailhead.properties.cartodb_id;
       var trailheadTrailNames = trailhead.trails;
       if (trailheadTrailNames.length === 0) {
-        console.log("empty trailhead: " + trailheadName);
         return true; // next $.each
       }
       var trailheadSource = trailhead.properties.source;
@@ -440,7 +438,7 @@ function startup() {
     highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
   }
 
-  // given a trailheadID (TODO: and a trail index within that trailhead?)
+  // given a trailheadID and a trail index within that trailhead
   // display the trailhead marker and popup,
   // then call highlightTrailheadDivs() and getAllTrailPathsForTrailhead()
   // with the trailhead record
@@ -465,7 +463,7 @@ function startup() {
     currentTrailheadMarker.openPopup();
   }
 
-  // given a trailhead (TODO: and a trail index within that trailhead?),
+  // given a trailhead, and a trail index within that trailhead
   // find the matching trailDivs, highlight them, and move them onscreen
 
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
