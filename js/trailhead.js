@@ -187,12 +187,12 @@ function startup() {
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
   // and a place to put the trails for that trailhead
 
-  function populateTrailheadArray(response) {
+  function populateTrailheadArray(trailheadsGeoJSON) {
     console.log("populateTrailheadArray");
-    console.log(response);
+    console.log(trailheadsGeoJSON);
     trailheads = [];
-    for (var i = 0; i < response.features.length; i++) {
-      var currentFeature = response.features[i];
+    for (var i = 0; i < trailheadsGeoJSON.features.length; i++) {
+      var currentFeature = trailheadsGeoJSON.features[i];
       currentFeatureLatLng = new L.LatLng(currentFeature.geometry.coordinates[1], currentFeature.geometry.coordinates[0]);
       var newMarker = L.circleMarker(currentFeatureLatLng, {
         title: 'test',
@@ -217,6 +217,7 @@ function startup() {
   }
 
   // on trailhead marker click, this is invoked with the id of the trailhead
+  // not used for anything but logging at the moment
 
   function trailheadMarkerClick(id) {
     console.log("trailheadMarkerClick");
@@ -251,17 +252,17 @@ function startup() {
     });
   }
 
-  function populateTrailData(response, callback) {
-    for (var i = 0; i < response.features.length; i++) {
-      trailData[response.features[i].properties.name] = response.features[i];
+  function populateTrailData(trailDataGeoJSON) {
+    for (var i = 0; i < trailDataGeoJSON.features.length; i++) {
+      trailData[trailDataGeoJSON.features[i].properties.name] = trailDataGeoJSON.features[i];
     }
   }
 
 
-  // given the GeoJSON of trails from the trail_data table,
+  // given trailData,
   // populate trailheads[x].trails with all of the trails in trailData
-  // that match each trailhead's named trails from the trailhead table
-  // also add links to the trails within each trailhead popup 
+  // that match each trailhead's named trails from the trailhead table.
+  // Also add links to the trails within each trailhead popup 
   // TODO: use "currentTrailheads" instead of original one everywhere. populate that one here.
 
   function addTrailDataToTrailheads(myTrailData) {
@@ -302,16 +303,16 @@ function startup() {
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
     $("#trailList").html("");
-    $.each(trailheads, function(index, val) {
-      var trailheadName = val.properties.name;
-      var trailheadID = val.properties.cartodb_id;
-      var trailheadTrailNames = val.trails;
+    $.each(trailheads, function(index, trailhead) {
+      var trailheadName = trailhead.properties.name;
+      var trailheadID = trailhead.properties.cartodb_id;
+      var trailheadTrailNames = trailhead.trails;
       if (trailheadTrailNames.length === 0) {
         console.log("empty trailhead: " + trailheadName);
         return true; // next $.each
       }
-      var trailheadSource = val.properties.source;
-      var trailheadDistance = (val.properties.distance * METERSTOMILES).toFixed(1);
+      var trailheadSource = trailhead.properties.source;
+      var trailheadDistance = (trailhead.properties.distance * METERSTOMILES).toFixed(1);
       var $trailDiv;
 
       // Making a new div for text / each trail 
@@ -344,7 +345,7 @@ function startup() {
       }
 
       // diagnostic div to show trailheads with no trail matches
-      // TODO: find out why these happen!
+      // (These shouldn't happen any more because of the trailheadTrailNames.length check above.)
       if (trailheadTrailNames.length === 0) {
         $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
         $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS (" +
@@ -415,8 +416,7 @@ function startup() {
     return results;
   }
 
-  // event handler for click of trailDiv
-  // TODO: (and also supplemental handler for click of trail name?)
+  // two event handlers for click of trailDiv and trail in trailhead popup:
   // get the trailName and trailHead that they clicked on
   // highlight the trailhead (showing all of the trails there) and highlight the trail path
 
@@ -466,7 +466,6 @@ function startup() {
 
   // given a trailhead (TODO: and a trail index within that trailhead?),
   // find the matching trailDivs, highlight them, and move them onscreen
-  // TODO: actually make this work
 
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
@@ -481,16 +480,16 @@ function startup() {
       var color = getClassBackgroundColor("trail" + (i + 1));
       $trailbox.find($(".trailIndicatorLight")).css("background-color", color).show();
       // if this is the first trail for the trailhead, animate it to the top of the trailList
+      // TODO: This should probably not animate until we activate the indicator lights
       if (i === 0) {
         $('#trailList').animate({
-          // scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop();
           scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top - $("#trailList").offset().top + $("#trailList").scrollTop()
         }, 500);
       }
     }
   }
 
-  // given a trailhead (TODO: and a trail index with that trailhead?),
+  // given a trailhead and a trail index within that trailhead
   // get the paths for any associated trails,
   // then call drawMultiTrailLayer() and setCurrentTrail()
 
@@ -576,7 +575,7 @@ function startup() {
   }
 
   // given a geoJSON set of linestring features,
-  // draw them all on the map in a single layer we can remove later
+  // draw them all on the map (in a single layer we can remove later)
 
   function drawMultiTrailLayer(response) {
     console.log("drawMultiTrailLayer");
@@ -640,7 +639,7 @@ function startup() {
     zoomToLayer(currentMultiTrailLayer);
   }
 
-  // return the default CSS background-color for the class given
+  // return the calculated CSS background-color for the class given
 
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");
@@ -715,7 +714,7 @@ function startup() {
     });
   }
 
-  // really? jQuery doesn't have outerhtml()?
+  // get the outerHTML for a jQuery element
 
   jQuery.fn.outerHTML = function(s) {
     return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
