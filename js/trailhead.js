@@ -457,6 +457,7 @@ function startup() {
     if (currentTrailheadMarker) {
       map.removeLayer(currentTrailheadMarker);
     }
+    // make a default marker, add it to the map with the trailhead's pre-computed popupContent
     currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
     currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent);
     highlightTrailheadDivs(currentTrailhead);
@@ -469,6 +470,7 @@ function startup() {
 
   function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
     console.log("highlightTrailheadDivs");
+    // deselect all of the trailDivs
     $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
     $(".trailIndicatorLight").hide();
     for (var i = 0; i < currentTrailhead.trails.length; i++) {
@@ -499,7 +501,6 @@ function startup() {
     var queryTaskArray = [];
     // got trailhead.trails, now get the segment collection for all of them
     // get segment collection for each
-    // then merge the GeoJSON?
     for (var i = 0; i < trailhead.trails.length; i++) {
       var trailName = trailhead.trails[i];
       var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
@@ -509,17 +510,17 @@ function startup() {
         "segments.name1 = '" + trailName + " Trail' or " +
         "segments.name2 = '" + trailName + " Trail' or " +
         "segments.name3 = '" + trailName + " Trail'";
-      var queryTask = function(trail_query) {
+      var queryTask = function(trail_query, index) {
         return function(callback) {
           makeSQLQuery(trail_query, function(response) {
-            responses.push(response);
+            responses[index] = response;
             callback(null, trailName);
           });
         };
-      }(trail_query);
+      }(trail_query, i);
       queryTaskArray.push(queryTask);
     }
-    async.series(queryTaskArray, function(err, results) {
+    async.parallel(queryTaskArray, function(err, results) {
       responses = mergeResponses(responses);
       drawMultiTrailLayer(responses);
       setCurrentTrail(highlightedTrailIndex);
