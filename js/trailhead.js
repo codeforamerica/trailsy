@@ -90,6 +90,11 @@ function startup() {
 
   function filterTrailList() {}
 
+  // The next three functions perform trailhead/trail mapping
+  // on a) initial startup, b) requested resort of trailheads based on the map, 
+  // and c) a change in filter settings
+  // They all call addTrailDataToTrailheads() as their final action 
+  // --------------------------------------------------------------
 
   // on startup, get location, display the map,
   // get and display the trailheads, populate trailData, 
