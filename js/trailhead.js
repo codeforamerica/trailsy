@@ -51,6 +51,7 @@ function startup() {
   var currentHighlightedTrailLayer = {};
   var currentLocation = {};
   var currentFilters = {};
+  var currentTrail = null;
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -334,7 +335,7 @@ function startup() {
           .click(populateTrailsForTrailheadDiv)
           .click(function(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
             return function(e) {
-              showTrailDetails(e.currentTarget, trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
+              showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
             };
           }(trailID, trailName, trailheadName, trailheadSource, trailheadDistance));
 
@@ -360,19 +361,18 @@ function startup() {
   }
 
 
-  function showTrailDetails(currentTarget, trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+  function showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
     if (!$('.detailPanelContainer').is(':visible')) {
       decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
       openDetailPanel();
-      $(currentTarget).addClass('activeTrail');
+      currentTrail = trailData[trailID];
     } else {
-      if ($(currentTarget).hasClass('activeTrail')) {
-        $(currentTarget).removeClass('activeTrail');
+      if (currentTrail = trailData[trailID]) {
+        currentTrail = null;
         closeDetailPanel();
       } else {
         decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
-        $('.activeTrail').removeClass('activeTrail');
-        $(currentTarget).addClass('activeTrail');
+        currentTrail = trailData[trailID];
       }
     }
   }
