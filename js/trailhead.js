@@ -373,12 +373,13 @@ function startup() {
 
 
   function showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+    console.log("showTrailDetails");
     if (!$('.detailPanelContainer').is(':visible')) {
       decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
       openDetailPanel();
       currentTrail = trailData[trailID];
     } else {
-      if (currentTrail = trailData[trailID]) {
+      if (currentTrail == trailData[trailID]) {
         currentTrail = null;
         closeDetailPanel();
       } else {
