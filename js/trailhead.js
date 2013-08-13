@@ -255,15 +255,13 @@ function startup() {
     for (var j = 0; j < trailheads.length; j++) {
       var trailhead = trailheads[j];
       trailhead.trails = [];
-      var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-      var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
-      // note: this should probably be 1-indexed to be consistent with the CSS styling, or the CSS styling needs to be 0-indexed.
-      var trailheadTrailCount = 0;
+      // for each original trailhead trail name
       for (var trailNum = 1; trailNum <= 3; trailNum++) {
         var trailWithNum = "trail" + trailNum;
         if (trailhead.properties[trailWithNum] === "") {
           continue;
         }
+        var trailheadTrailName = trailhead.properties[trailWithNum];
         // TODO: add a test for the case of duplicate trail names.
         // Right now this
         // loop through all of the trailData objects, looking for trail names that match
@@ -274,25 +272,77 @@ function startup() {
         // to do that, we'll need to either query the DB for the trail segment info,
         // or check distance against the (yet-to-be) pre-loaded trail segment info
         $.each(myTrailData, function(trailID, trail) {
-
           if (trailhead.properties[trailWithNum] == trail.properties.name) {
             trailhead.trails.push(trailID);
-            trailheadTrailCount += 1;
-            var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
-              .attr("data-trailname", trail.properties.name)
-              .attr("data-trailid", trailID)
-              .attr("data-trailheadname", trailhead.properties.name)
-              .attr("data-trailheadid", trailhead.properties.cartodb_id)
-              .attr("data-index", trailheadTrailCount - 1)
-              .append("<a href='#'>").html(trailhead.properties[trailWithNum])
-              .appendTo($popupTrailheadDiv);
           }
         });
       }
-      trailhead.popupContent = $popupContentMainDiv.outerHTML();
     }
+    fixDuplicateTrailNames(trailheads);
+    makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
+  }
+
+
+  // this is so very wrong and terrible and makes me want to never write anything again.
+  // alas, it works for now.
+  // for each trailhead, if two or more of the matched trails from addTrailDataToTrailheads() have the same name,
+  // remove any trails that don't match the trailhead source
+
+  function fixDuplicateTrailNames(trailheads) {
+    console.log("fixDuplicateTrailNames");
+    for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
+      var trailhead = trailheads[trailheadIndex];
+      var trailheadTrailNames = {};
+      for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
+        var trailName = trailData[trailhead.trails[trailsIndex]].properties.name;
+        trailheadTrailNames[trailName] = trailheadTrailNames[trailName] || [];
+        var sourceAndTrailID = {
+          source: trailData[trailhead.trails[trailsIndex]].properties.source,
+          trailID: trailData[trailhead.trails[trailsIndex]].properties.cartodb_id
+        };
+        trailheadTrailNames[trailName].push(sourceAndTrailID);
+      }
+      for (var trailheadTrailName in trailheadTrailNames) {
+        if (trailheadTrailNames.hasOwnProperty(trailheadTrailName)) {
+          if (trailheadTrailNames[trailheadTrailName].length > 1) {
+            // remove the ID from the trailhead trails array if the source doesn't match
+            for (var i = 0; i < trailheadTrailNames[trailheadTrailName].length; i++) {
+              var mySourceAndTrailID = trailheadTrailNames[trailheadTrailName][i];
+              if (mySourceAndTrailID.source != trailhead.properties.source) {
+                var idToRemove = mySourceAndTrailID.trailID;
+                var removeIndex = $.inArray(idToRemove.toString(), trailhead.trails);
+                trailhead.trails.splice(removeIndex, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // given the trailheads,
+  // make the popup menu for each one, including each trail present
+  // and add it to the trailhead object
+  function makeTrailheadPopups(trailheads) {
+    for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
+      var trailhead = trailheads[trailheadIndex];
+      var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
+      var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
+      for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
+        var trail = trailData[trailhead.trails[trailsIndex]];
+        var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
+          .attr("data-trailname", trail.properties.name)
+          .attr("data-trailid", trail.properties.cartodb_id)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-index", trailsIndex)
+          .append("<a href='#'>").html(trail.properties.name)
+          .appendTo($popupTrailheadDiv);
+      }
+      trailhead.popupContent = $popupContentMainDiv.outerHTML();
+    }
   }
 
   // given trailheads, add all of the markers to the map in a single Leaflet layer group
