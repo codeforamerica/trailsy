@@ -261,10 +261,21 @@ function startup() {
       var trailheadTrailCount = 0;
       for (var trailNum = 1; trailNum <= 3; trailNum++) {
         var trailWithNum = "trail" + trailNum;
-        // if (trailhead.properties[trailWithNum] in myTrailData) {
+        if (trailhead.properties[trailWithNum] === "") {
+          continue;
+        }
+        // TODO: add a test for the case of duplicate trail names.
+        // Right now this
+        // loop through all of the trailData objects, looking for trail names that match
+        // the trailhead trailname.
+        // this works great, except for things like "Ledges Trail," which get added twice,
+        // one for the CVNP instance and one for the MPSSC instance.
+        // we should test for duplicate names and only use the nearest one.
+        // to do that, we'll need to either query the DB for the trail segment info,
+        // or check distance against the (yet-to-be) pre-loaded trail segment info
         $.each(myTrailData, function(trailID, trail) {
-          if (trail.properties.name == trailhead.properties[trailWithNum] && 
-              trail.properties.source == trailhead.properties.source) {
+
+          if (trailhead.properties[trailWithNum] == trail.properties.name) {
             trailhead.trails.push(trailID);
             trailheadTrailCount += 1;
             var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + trailheadTrailCount)
