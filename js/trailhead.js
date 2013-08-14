@@ -16,7 +16,7 @@ function startup() {
     lng: -81.5
   };
 
-  var METERSTOMILES = 0.00062137;
+  var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
 
   var map = {};
@@ -377,13 +377,14 @@ function startup() {
         return true; // next $.each
       }
       var trailheadSource = trailhead.properties.source;
-      var trailheadDistance = (trailhead.properties.distance * METERSTOMILES).toFixed(1);
+      var trailheadDistance = metersToMiles(trailhead.properties.distance);
       var $trailDiv;
 
       // Making a new div for text / each trail 
       for (var i = 0; i < trailheadTrailIDs.length; i++) {
 
         var trailID = trailheadTrailIDs[i];
+        var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
@@ -394,11 +395,11 @@ function startup() {
           .attr("data-index", i)
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv)
-          .click(function(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+          .click(function(trail, trailhead) {
             return function(e) {
-              showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
+              showTrailDetails(trail, trailhead);
             };
-          }(trailID, trailName, trailheadName, trailheadSource, trailheadDistance));
+          }(trail, trailhead));
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
@@ -421,20 +422,23 @@ function startup() {
     });
   }
 
+  function metersToMiles(i) {
+    return (i * METERSTOMILESFACTOR).toFixed(1);
+  }
 
-  function showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+  function showTrailDetails(trail, trailhead) {
     console.log("showTrailDetails");
     if (!$('.detailPanelContainer').is(':visible')) {
-      decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
+      decorateDetailPanel(trail, trailhead);
       openDetailPanel();
-      currentTrail = trailData[trailID];
+      currentTrail = trail;
     } else {
-      if (currentTrail == trailData[trailID]) {
+      if (currentTrail == trail) {
         currentTrail = null;
         closeDetailPanel();
       } else {
-        decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
-        currentTrail = trailData[trailID];
+        decorateDetailPanel(trail, trailhead);
+        currentTrail = trail;
       }
     }
   }
@@ -454,11 +458,11 @@ function startup() {
     map.invalidateSize();
   }
 
-  function decorateDetailPanel(trailID, trailName, trailheadName, source, trailheadDistance) {
-    $('.detail-panel .trailName').html(trailName);
-    $('.detail-panel .detailTrailheadName').html(trailheadName);
-    $('.detail-panel .detailSource').html(source);
-    $('.detail-panel .detailTrailheadDistance').html(trailheadDistance);
+  function decorateDetailPanel(trail, trailhead) {
+    $('.detail-panel .trailName').html(trail.properties.name);
+    $('.detail-panel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detail-panel .detailSource').html(trailhead.properties.source);
+    $('.detail-panel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
   }
 
   // event handler for click of a trail name in a trailhead popup
