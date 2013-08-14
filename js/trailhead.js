@@ -53,6 +53,7 @@ function startup() {
   var currentLocation = {};
   var currentFilters = {};
   var currentDetailTrail = null;
+  var userMarker = null;
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -162,6 +163,21 @@ function startup() {
     L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     map.on("popupopen", function() {
       console.log("popupOpen");
+    });
+    map.on("locationfound", function(location) {
+      if (!userMarker)
+        userMarker = L.userMarker(location.latlng, {
+          smallIcon: true,
+          pulsing: true,
+          accuracy: 0
+        }).addTo(map);
+      console.log(location.latlng);
+      userMarker.setLatLng(location.latlng);
+    });
+    map.locate({
+      watch: true,
+      setView: false,
+      enableHighAccuracy: true
     });
   }
 
@@ -326,6 +342,7 @@ function startup() {
   // given the trailheads,
   // make the popup menu for each one, including each trail present
   // and add it to the trailhead object
+
   function makeTrailheadPopups(trailheads) {
     for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
       var trailhead = trailheads[trailheadIndex];
@@ -435,7 +452,7 @@ function startup() {
       currentDetailTrail = trail;
       currentDetailTrailhead = trailhead;
     } else {
-      if (currentDetailTrail == trail && currentDetailTrailhead == trailhead ) {
+      if (currentDetailTrail == trail && currentDetailTrailhead == trailhead) {
         currentDetailTrail = null;
         currentDetailTrailhead = null;
         closeDetailPanel();
