@@ -1,27 +1,33 @@
-/* Top-level
+/* Universals
 ============================== */
 /* These things effect the entire page */
-
-
-/* This is included re a Paul Irish recommendation
-http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-*/
 
 *, *:before, *:after {
   -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
  }
 
 /* Background color */
-
 body {
 	background-color: #F2F4E9;
 }
 
 /* Responsive container */
-
 .container {
 	position: relative;
-	z-index: 999;
+	max-width: 100%;
+}
+
+/* Other Universal */
+html {
+  overflow-y: scroll;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
 }
 
 
@@ -30,25 +36,37 @@ body {
 /* Logo, deployment, toggle btw parks and trails, about */
 /* styles largely inherited from Bootstrap.css */
 
-/* .navbar styled completely in Boostrap */
-
-
-
-.navbar-inner {
-	background-color: #8DBB7D;
+/* row containing both "Navbar" and "Filter & Search*/
+.top-ui {
+	margin-bottom: 20px;
 }
 
-/* Brand or Mark
-============ */
+.navbar {
+	width: 100%;
+	margin-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
 
-/* Responsive container */
+.navbar-inner {
+	background-color: #5E4534;
+	border: none;
+	box-shadow: none;
+	text-align: justify;
+	padding: 1em 5% 1em;
+}
+
+.navbar-inner::after {
+	content: '';
+	display: inline-block;
+}
 
 .navbar .brand {
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	line-height: 30px;
 	font-size: 30px;
-	color: #F7E497;
+	color: #FFF;
   	display: inline-block;
-  	padding: 20px 30px 25px 25px;
   	font-weight: 200;
 }
 
@@ -57,100 +75,61 @@ body {
   text-decoration: none;
 }
 
-/* Name of Local Deployment (i.e. Summit County)
-============ */
-
+/* .subBrand is equal to the "Deployment name" */
 .navbar .subBrand {
+	margin-left: 20px;
 	display: inline-block;
-	float: left;
   	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 200;
-  	padding: 25px 20px 20px 0px;
 	color: #fff;
-	font-size: 18px;
+	font-size: 15px;
 }
 
-.navbar .subBrand:hover{
+.navbar .subBrand:hover {
 	text-decoration: none;
 }
 
-/* Top-line navigation menu
-============ */
-/* trails, parks and about us (not clearly defined) */
-
-
-/* This margin-left is for use in the Narrow Search .nav menu*/
-.navbar .nav {
-	margin-left: 40px;
-}
-
-.navbar .nav li:hover {
-	background-color: #8DBB7D;
-}
-
-.navbar .nav > li > a {
-  float: none;
-  padding: 25px 20px 20px 5px;
-  color: #fff;
-
-/* Verify the need for the following styles (e.g. override Bootstrap) */
-
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
-.navbar .nav > li > a:focus,
-.navbar .nav > li > a:hover {
-  color: #fff;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-
-/* Search
+/* Filter & Search
 ============================== */
-/* Look into attaching this to the top-line nav */
 
-.row {
-	margin-left: 0px;
-	height: auto;
-}
-
-/* Why chained selector? */
-.span12.navbar {
-	min-height: 40px;
-	max-height: 40px;
-	margin-left: 0px;
-	margin-bottom: 40px;
-}
-
-.navbar-inner.searchbar {
+/* 100% wide container*/
+.searchbar {
 	background-color: #fff;
+	text-align: justify;
+	line-height: 30px;
 }
 
-/* This is currently "Narrow Your Search" */
-.searchbarTitle,
-.searchbarTitle:hover {
-	font-family: 'Oswald', sans-serif;
-	font-weight: 300;
-	letter-spacing: 1px;
-	font-size: 20px;
-	color: #8DBB7D;
-	display: inline-block;
-	line-height: 65px;
-	float: left;
-	text-decoration: none;
-
-}
-
-
+/* Filter Container */
 .filters {
-	display:inline-block;
-	padding: 10px 0px 0px 30px;
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
 }
 
-.btn-group .bootstrap-select:open {
+.filters::after {
+	content: '';
+	display: inline-block;
+}
+
+/* Filter Btn Groups */
+.bootstrap-select.btn-group: {
+	height: 100%;
+	margin-bottom: 0px;
+}
+
+.bootstrap-select.btn-group:hover {
+	background-color: #C45F37;
+}
+
+.btn.dropdown-toggle {
+	background-color: transparent;
+	height: 100%;
+	font-weight: lighter;
+}
+
+
+/*.btn-group .bootstrap-select:open {
 	background-color: #8DBB7D;
 
 }
@@ -164,13 +143,14 @@ body {
 	-webkit-border-top-right-radius: 0;
 	-webkit-border-bottom-right-radius: 0;
 	border-bottom-right-radius: 0;
-}
-.btn {
+}*/
+
+/*.btn {
 	background-image: none;
 	background-color: #fff;
 	box-shadow: none;
 	border: none;
-}
+}*/
 
 
 .filter > .btn:hover, btn:focus, btn:active {
@@ -184,7 +164,7 @@ body {
 }
 
 
-/* Menu labels, some styling to override Bootstrap */
+/*/* Menu labels, some styling to override Bootstrap */
 .searchbar .nav > li > a {
 	list-style: none;
   	color: #aaa;
@@ -197,7 +177,7 @@ body {
  	color: #fff;
 }
 
-/* Search element, overriding Bootstrap */
+ Search element, overriding Bootstrap 
 .navbar-search .search-query {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -219,19 +199,12 @@ body {
 
 /* List Elements */
 
-.row .span4 {
-	margin-left: 0px;
-	margin-right: 30px;
-	float: left;
-	height: auto;
-	background-color: #fff;
-}
-
 div.trailMapContainer.span4{
 	margin-right: 0px;
 }
 
 #trailList {
+	z-index: 999;
 	position: relative;
 	height: 580px;
 	width: 100%;
@@ -243,6 +216,7 @@ div.trailMapContainer.span4{
 }
 
 .trailList-title {
+	z-index: 999;
 	height: 40px;
 	width: 100%;
 	background-color: #F2F4E9;
