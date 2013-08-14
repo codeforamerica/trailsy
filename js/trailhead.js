@@ -479,9 +479,11 @@ function startup() {
   function parseTrailElementData($element) {
     var trailheadID = $element.data("trailheadid");
     var highlightedTrailIndex = $element.data("index") || 0;
+    var trailID = $element.data("trailid");
     results = {
       trailheadID: trailheadID,
-      highlightedTrailIndex: highlightedTrailIndex
+      highlightedTrailIndex: highlightedTrailIndex,
+      trailID: trailID
     };
     return results;
   }
@@ -507,6 +509,12 @@ function startup() {
 
   function populateTrailsForTrailheadTrailName(e) {
     var parsed = parseTrailElementData($(e.target));
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].properties.cartodb_id == parsed.trailheadID) {
+        trailhead = trailheads[i];
+      }
+    }
+    decorateDetailPanel(trailData[parsed.trailID], trailhead);
     highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
   }
 
@@ -737,6 +745,7 @@ function startup() {
       weight: 10
     });
     zoomToLayer(currentHighlightedTrailLayer);
+
   }
 
   // given a leaflet layer, zoom to fit its bounding box or to MAX_ZOOM,
