@@ -18,6 +18,7 @@ function startup() {
 
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
+  var MIN_ZOOM = 12;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -51,7 +52,7 @@ function startup() {
   var currentHighlightedTrailLayer = {};
   var currentLocation = {};
   var currentFilters = {};
-  var currentTrail = null;
+  var currentDetailTrail = null;
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -431,14 +432,17 @@ function startup() {
     if (!$('.detailPanelContainer').is(':visible')) {
       decorateDetailPanel(trail, trailhead);
       openDetailPanel();
-      currentTrail = trail;
+      currentDetailTrail = trail;
+      currentDetailTrailhead = trailhead;
     } else {
-      if (currentTrail == trail) {
-        currentTrail = null;
+      if (currentDetailTrail == trail && currentDetailTrailhead == trailhead ) {
+        currentDetailTrail = null;
+        currentDetailTrailhead = null;
         closeDetailPanel();
       } else {
         decorateDetailPanel(trail, trailhead);
-        currentTrail = trail;
+        currentDetailTrail = trail;
+        currentDetailTrailhead = trailhead;
       }
     }
   }
@@ -748,8 +752,8 @@ function startup() {
 
   }
 
-  // given a leaflet layer, zoom to fit its bounding box or to MAX_ZOOM,
-  // whichever is smaller
+  // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
+  // in and MIN_ZOOM out (commented out for now)
 
   function zoomToLayer(layer) {
     console.log("zoomToLayer");
@@ -757,6 +761,7 @@ function startup() {
     var curZoom = map.getBoundsZoom(layer.getBounds());
     // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
+    // newZoom = curZoom < MIN_ZOOM ? MIN_ZOOM : curZoom;
     // set the view to that zoom, and the center of the trail's bounding box 
     map.setView(layer.getBounds().getCenter(), newZoom, {
       pan: {
