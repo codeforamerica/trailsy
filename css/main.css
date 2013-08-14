@@ -37,9 +37,7 @@ textarea {
 /* styles largely inherited from Bootstrap.css */
 
 /* row containing both "Navbar" and "Filter & Search*/
-.top-ui {
-	margin-bottom: 20px;
-}
+.top-ui {}
 
 .navbar {
 	width: 100%;
@@ -195,55 +193,66 @@ textarea {
 /* List & Map
 ============================== */
 
-/* Row Containing Both */
 
-/* List Elements */
-
-div.trailMapContainer.span4{
+div.trailMapContainer {
+	position: relative;
+	z-index: 1;
 	margin-right: 0px;
 }
 
+.left-ui {
+	z-index: 100;
+	width: 20%;
+	position: relative;
+	background: transparent;
+	top: 1em;
+	left: 4em;
+}
+
 #trailList {
-	z-index: 999;
+	z-index: 100;
 	position: relative;
 	height: 580px;
 	width: 100%;
+	min-width: 20em;
 	overflow: scroll;
+	background-color: #FFF;
+	border-radius: 2px;
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 .trailList-title {
-	z-index: 999;
-	height: 40px;
+	display: inline-block;
+	position: relative;
+	z-index: 100;;
 	width: 100%;
-	background-color: #F2F4E9;
-	border-color: #3a3636;
+	min-width: 20em;
+	background-color: #5E4534;
+/*	border-color: #3a3636;
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	*/
 }
 
 .trailList-title p {
+	display: inline-block;
+	position: relative;
 	padding: 10px 0px 0px 20px;
 	font-family: 'Oswald', sans-serif;
 	font-weight: 300;
 	letter-spacing: 1px;
 	font-size: 16px;
-	color: #8DBB7D;
+	color: #FFF;
 }
 
 .trail-box {
 	position: relative;
 	height: 80px;
-	width: auto;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	margin-right: 4px;
-	margin-left: 4px;
+	margin: 4px;
 	background-color: #fff;
 	border-color: #3a3636;
   	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
@@ -252,7 +261,7 @@ div.trailMapContainer.span4{
 }
 
 .trail-box:hover {
-	background-color: #F2F4E9;;
+	background-color: #f3ddd4;
 }
 
 /* List Item Components !!! */
@@ -263,29 +272,27 @@ div.trailMapContainer.span4{
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	font-size: 20px;
 	line-height: 20px;
-	color: #3a3636;
+	color: #C45F37;
 	top: 10px;
 	left: 14px;
 }
 
 .trail-box .trailheadName {
 	position: absolute;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
-	color: #757272;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-size: 14px;
+	color: #4e4c4c;
 	top: 45px;
 	left: 14px;
 }
 
 .trail-box .trailheadDistance {
 	position: absolute;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
+ 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-size: 14px;
 	text-align: right;
 	color: #757272;
-	top: 45px;
+	top: 10px;
 	right: 10px;
 }
 
@@ -294,9 +301,9 @@ div.trailMapContainer.span4{
 	position: absolute;
 	top: 16px;
 	right: 10px;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 14px;
 	line-height: 20px;
 	color: #757272;
 	text-align: right;
@@ -322,16 +329,11 @@ div.trailMapContainer.span4{
 	transition: width 0.3s ease, margin 0.3s ease;
 }
 
- .span0 {
- 	width: 0%;
- 	margin-left: 0;
- }
-
 /* Detail Panel Elements
 ============================== */
 
 
-.detail-panel{
+.detail-panel {
 	position: relative;
 	height: 620px;
 	width: 100%;
@@ -473,14 +475,8 @@ div.trailMapContainer.span4{
   color: #000;
 }
 
-.row .span8 {
-	margin-left: 0px;
-	position: relative;
-	/*float: left;*/
-	height: auto;
-}
-
 #trailMap {
+	z-index: 1;
 	background-color: #fff;
 	width: 100%;
 	height:  620px;
