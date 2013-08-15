@@ -16,8 +16,9 @@ function startup() {
     lng: -81.5
   };
 
-  var METERSTOMILES = 0.00062137;
+  var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
+  var MIN_ZOOM = 12;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -51,7 +52,8 @@ function startup() {
   var currentHighlightedTrailLayer = {};
   var currentLocation = {};
   var currentFilters = {};
-  var currentTrail = null;
+  var currentDetailTrail = null;
+  var userMarker = null;
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -195,6 +197,21 @@ function startup() {
     L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     map.on("popupopen", function() {
       console.log("popupOpen");
+    });
+    map.on("locationfound", function(location) {
+      if (!userMarker)
+        userMarker = L.userMarker(location.latlng, {
+          smallIcon: true,
+          pulsing: true,
+          accuracy: 0
+        }).addTo(map);
+      console.log(location.latlng);
+      userMarker.setLatLng(location.latlng);
+    });
+    map.locate({
+      watch: true,
+      setView: false,
+      enableHighAccuracy: true
     });
   }
 
@@ -359,6 +376,7 @@ function startup() {
   // given the trailheads,
   // make the popup menu for each one, including each trail present
   // and add it to the trailhead object
+
   function makeTrailheadPopups(trailheads) {
     for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
       var trailhead = trailheads[trailheadIndex];
@@ -411,13 +429,14 @@ function startup() {
         return true; // next $.each
       }
       var trailheadSource = trailhead.properties.source;
-      var trailheadDistance = (trailhead.properties.distance * METERSTOMILES).toFixed(1);
+      var trailheadDistance = metersToMiles(trailhead.properties.distance);
       var $trailDiv;
 
       // Making a new div for text / each trail 
       for (var i = 0; i < trailheadTrailIDs.length; i++) {
 
         var trailID = trailheadTrailIDs[i];
+        var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
@@ -428,11 +447,11 @@ function startup() {
           .attr("data-index", i)
           .appendTo("#trailList")
           .click(populateTrailsForTrailheadDiv)
-          .click(function(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+          .click(function(trail, trailhead) {
             return function(e) {
-              showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
+              showTrailDetails(trail, trailhead);
             };
-          }(trailID, trailName, trailheadName, trailheadSource, trailheadDistance));
+          }(trail, trailhead));
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
@@ -455,20 +474,26 @@ function startup() {
     });
   }
 
+  function metersToMiles(i) {
+    return (i * METERSTOMILESFACTOR).toFixed(1);
+  }
 
-  function showTrailDetails(trailID, trailName, trailheadName, trailheadSource, trailheadDistance) {
+  function showTrailDetails(trail, trailhead) {
     console.log("showTrailDetails");
     if (!$('.detailPanelContainer').is(':visible')) {
-      decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
+      decorateDetailPanel(trail, trailhead);
       openDetailPanel();
-      currentTrail = trailData[trailID];
+      currentDetailTrail = trail;
+      currentDetailTrailhead = trailhead;
     } else {
-      if (currentTrail == trailData[trailID]) {
-        currentTrail = null;
+      if (currentDetailTrail == trail && currentDetailTrailhead == trailhead) {
+        currentDetailTrail = null;
+        currentDetailTrailhead = null;
         closeDetailPanel();
       } else {
-        decorateDetailPanel(trailID, trailName, trailheadName, trailheadSource, trailheadDistance);
-        currentTrail = trailData[trailID];
+        decorateDetailPanel(trail, trailhead);
+        currentDetailTrail = trail;
+        currentDetailTrailhead = trailhead;
       }
     }
   }
@@ -489,11 +514,11 @@ function startup() {
     map.invalidateSize();
   }
 
-  function decorateDetailPanel(trailID, trailName, trailheadName, source, trailheadDistance) {
-    $('.detail-panel .trailName').html(trailName);
-    $('.detail-panel .detailTrailheadName').html(trailheadName);
-    $('.detail-panel .detailSource').html(source);
-    $('.detail-panel .detailTrailheadDistance').html(trailheadDistance);
+  function decorateDetailPanel(trail, trailhead) {
+    $('.detail-panel .trailName').html(trail.properties.name);
+    $('.detail-panel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detail-panel .detailSource').html(trailhead.properties.source);
+    $('.detail-panel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
   }
 
   // event handler for click of a trail name in a trailhead popup
@@ -509,9 +534,11 @@ function startup() {
   function parseTrailElementData($element) {
     var trailheadID = $element.data("trailheadid");
     var highlightedTrailIndex = $element.data("index") || 0;
+    var trailID = $element.data("trailid");
     results = {
       trailheadID: trailheadID,
-      highlightedTrailIndex: highlightedTrailIndex
+      highlightedTrailIndex: highlightedTrailIndex,
+      trailID: trailID
     };
     return results;
   }
@@ -537,6 +564,12 @@ function startup() {
 
   function populateTrailsForTrailheadTrailName(e) {
     var parsed = parseTrailElementData($(e.target));
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].properties.cartodb_id == parsed.trailheadID) {
+        trailhead = trailheads[i];
+      }
+    }
+    decorateDetailPanel(trailData[parsed.trailID], trailhead);
     highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
   }
 
@@ -767,10 +800,11 @@ function startup() {
       weight: 10
     });
     zoomToLayer(currentHighlightedTrailLayer);
+
   }
 
-  // given a leaflet layer, zoom to fit its bounding box or to MAX_ZOOM,
-  // whichever is smaller
+  // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
+  // in and MIN_ZOOM out (commented out for now)
 
   function zoomToLayer(layer) {
     console.log("zoomToLayer");
@@ -778,6 +812,7 @@ function startup() {
     var curZoom = map.getBoundsZoom(layer.getBounds());
     // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
+    // newZoom = curZoom < MIN_ZOOM ? MIN_ZOOM : curZoom;
     // set the view to that zoom, and the center of the trail's bounding box 
     map.setView(layer.getBounds().getCenter(), newZoom, {
       pan: {
