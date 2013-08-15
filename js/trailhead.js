@@ -19,6 +19,8 @@ function startup() {
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
   var MIN_ZOOM = 12;
+  var EASY_MAX_DISTANCE = 1.5;
+  var MODERATE_MAX_DISTANCE = 4.0;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -146,10 +148,46 @@ function startup() {
 
   function applyFilterChange(currentFilters, trailData) {
     // TODO:
-    var filteredTrailData = {};
+    var filteredTrailData = $.extend(true, {}, trailData);
     $.each(trailData, function(trail_id, trail) {
-
-    })
+      if (currentFilters.activityFilter) {
+        for (var i = 0; i < currentFilters.activityFilter.length; i++) {
+          var activity = currentFilters.activityFilter[i];
+          if (trail.properties[activity].toLowerCase() !== "true") {
+            delete filteredTrailData[trail_id];
+          }
+        }
+      }
+      if (currentFilters.difficultyFilter) {
+        var include = false;
+        for (var j = 0; j < currentFilters.difficultyFilter.length; j++) {
+          var difficulty = currentFilters.difficultyFilter[j];
+          if (trail.properties.difficulty.toLowerCase() == difficulty.toLowerCase()) {
+            include = true;
+            break;
+          }
+        }
+        if (!include) {
+          delete filteredTrailData[trail_id];
+        }
+      }
+      if (currentFilters.lengthFilter) {
+        var distInclude = false;
+        for (var k = 0; k < currentFilters.lengthFilter.length; k++) {
+          var distance = currentFilters.lengthFilter[k];
+          var trailDist = trail.properties["length"];
+          if ((distance.toLowerCase() == "short" && trailDist <= EASY_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "medium" && trailDist > EASY_MAX_DISTANCE && trailDist <= MODERATE_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "long" && trailDist > MODERATE_MAX_DISTANCE)) {
+            distInclude = true;
+            break;
+          }
+        }
+        if (!distInclude) {
+          delete filteredTrailData[trail_id];
+        }
+      }
+    });
 
     // loop through trailData
     // apply currentFilters object
