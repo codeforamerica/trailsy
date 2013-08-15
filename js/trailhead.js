@@ -415,15 +415,15 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel")
-    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-4");
-    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-4");
+    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-2");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
-    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-4");
-    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-4");
+    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-2");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 

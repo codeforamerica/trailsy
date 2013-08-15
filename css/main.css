@@ -202,10 +202,18 @@ textarea {
 	margin: 0;
 }
 
-div.trailMapContainer {
-	position: relative;
-	z-index: 1;
+.trailMapContainer {
+	position: absolute;
+	top: 20px;
+	right: 60px;
+	height: 600px;
 	margin-right: 0px;
+	padding: 0px;
+	border-radius: 2px;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 /*
 .left-ui {
@@ -223,8 +231,8 @@ div.trailMapContainer {
 	position: absolute;
 	top: 60px;
 	left: 60px;
-	height: 30em;
-	width: 20%;
+	height: 40em;
+/*	width: 20%;*/
 	min-width: 20em;
 	overflow: scroll;
 	background-color: #FFF;
@@ -338,8 +346,9 @@ div.trailMapContainer {
 .detailPanelContainer {
 	display: none;
 	position: absolute;
-	height: 440px;
-	left: 325px;
+	height: 600px;
+	/*Magic Number*/
+	left: 337px;
 	top: 20px;
 	z-index: 9999;
 	webkit-transition: width 0.3s ease, margin 0.3s ease;
@@ -352,8 +361,8 @@ div.trailMapContainer {
 
 .detail-panel {
 	position: absolute;
-	width: 25em;
-	height: 460px;
+	width: 20em;
+	height: 600px;
 	z-index: 9999;
 	background-color: #fff;
 	overflow: scroll;
@@ -503,10 +512,9 @@ div.trailMapContainer {
 #trailMap {
 	z-index: 1;
 	width: 100%;
-	height:  auto;
 	position: absolute;
 	top: 0px;
-	bottom: 10px;
+	bottom: 0px;
 }
 
 .trailMap-title {
