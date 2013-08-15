@@ -18,7 +18,7 @@ function startup() {
 
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
-  var MIN_ZOOM = 12;
+  var MIN_ZOOM = 11;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -47,6 +47,9 @@ function startup() {
   //                  }, 
   //   }[, ...}]
   // ]
+  var trailSegments = [];
+
+
   var currentMultiTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
   var currentTrailLayers = [];
   var currentHighlightedTrailLayer = {};
@@ -112,6 +115,9 @@ function startup() {
         addTrailDataToTrailheads(trailData);
       });
     });
+    getTrailSegments(function() {
+      //console.log(trailSegments);
+    });
   }
 
   // set currentLocation to the center of the currently viewed map
@@ -146,6 +152,7 @@ function startup() {
     // for now, just returns Akron
     // should use browser geolocation,
     // and only return Akron if we're far from home base
+
     currentLocation = AKRON;
   }
 
@@ -260,6 +267,16 @@ function startup() {
     }
   }
 
+  function getTrailSegments(callback) {
+    console.log("getTrailSegments");
+    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
+    makeSQLQuery(trail_segment_query, function(response) {
+      trailSegments = response;
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
 
   // given trailData,
   // populate trailheads[x].trails with all of the trails in trailData
@@ -268,7 +285,6 @@ function startup() {
 
   function addTrailDataToTrailheads(myTrailData) {
     console.log("addTrailDataToTrailheads");
-
     for (var j = 0; j < trailheads.length; j++) {
       var trailhead = trailheads[j];
       trailhead.trails = [];
@@ -591,12 +607,21 @@ function startup() {
     }
   }
 
+  function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailhead");
+    if (trailSegments.type == "FeatureCollection") {
+      getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex);
+    } else {
+      getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex);
+    }
+  }
+
   // given a trailhead and a trail index within that trailhead
   // get the paths for any associated trails,
   // then call drawMultiTrailLayer() and setCurrentTrail()
 
-  function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
-    console.log("getAllTrailPathsForTrailhead");
+  function getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailheadRemote");
     var responses = [];
     var queryTaskArray = [];
     // got trailhead.trails, now get the segment collection for all of them
@@ -629,199 +654,264 @@ function startup() {
     });
   }
 
-  // merge multiple geoJSON trail features into one geoJSON FeatureCollection
+  // LOCAL EDITION:
+  // given a trailhead and a trail index within that trailhead
+  // get the paths for any associated trails,
+  // then call drawMultiTrailLayer() and setCurrentTrail()
 
-  function mergeResponses(responses) {
-    console.log("mergeResponses");
-    var combined = responses[0];
-    combined.features[0].properties.order = 0;
-    for (var i = 1; i < responses.length; i++) {
-      combined.features = combined.features.concat(responses[i].features);
-      combined.features[i].properties.order = i;
-    }
-    return combined;
-  }
-
-  // get all trail segment paths
-  // (for diagnostics)
-
-  function getAllTrailPaths(callback) {
-    var trail_query = "select the_geom, name1, name2, name3 from " + TRAILSEGMENTS_TABLE;
-    makeSQLQuery(trail_query, callback);
-  }
-
-  // given a GeoJSON collection of segments paths, 
-  // filter out the ones in known trails,
-  // then call drawMultiTrailLayer to draw 'em
-  // (for diagnostics)
-
-  function filterKnownTrails(response) {
-    console.log(response);
-    var filteredResponse = {
-      type: "FeatureCollection",
-      features: []
-    };
-    // spin through response, removing any segments that aren't part of a known trail
-    filteredResponse.features = response.features.filter(function(element, index, array) {
-      // for (i = 0; i < trailData.length; i++) {
-      if (element.properties.name1 in trailData ||
-        element.properties.name2 in trailData ||
-        element.properties.name3 in trailData) {
-        return false;
+  function getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailheadLocal");
+    var responses = [];
+    var trailFeatureArray = [];
+    // got trailhead.trails, now get the segment collection for all of them
+    // get segment collection for each
+    for (var i = 0; i < trailhead.trails.length; i++) {
+      var trailID = trailhead.trails[i];
+      var trail = trailData[trailID];
+      var trailSource = trail.properties.source;
+      var trailName = trail.properties.name;
+      var segmentsForTrail = {
+        type: "FeatureCollection",
+        features: [{
+            type: "Feature",
+            properties: {
+              trailname: trailName
+            },
+            geometry: {
+              type: "GeometryCollection",
+              geometries: []
+            }
+          }]
+        };
+        for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
+          var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+          if ((segment.properties.name1 == trailName ||
+              segment.properties.name1 == trailName + " Trail" ||
+              segment.properties.name2 == trailName ||
+              segment.properties.name2 == trailName + " Trail" ||
+              segment.properties.name3 == trailName ||
+              segment.properties.name3 == trailName + " Trail") &&
+            segment.properties.source == trailSource) {
+            segment.properties.trailname = trailName;
+            console.log("match");
+            console.log(segment);
+            segmentsForTrail.features.geometry.geometries.push(segment);
+          };
+        }
+        trailFeatureArray.push(segmentsForTrail);
       }
+      responses = mergeResponses(trailFeatureArray);
+      drawMultiTrailLayer(responses);
+      setCurrentTrail(highlightedTrailIndex);
+    }
+
+
+    // merge multiple geoJSON trail features into one geoJSON FeatureCollection
+
+    function mergeResponses(responses) {
+      console.log("mergeResponses");
+      console.log(responses);
+
+      // var combined = { type: "FeatureCollection", features: [] };
+      // for (var i = 0; i < responses.length; i++) {
+      //   console.log("xxxx");
+      //   console.log(responses[i]);
+      //   // responses[i].properties.order = i;
+      //   combined.features.push(responses[i]);
       // }
-      //  should there be an else here?
-      return true;
-    });
-    console.log(filteredResponse);
-    drawMultiTrailLayer(filteredResponse);
-  }
 
-  // given a geoJSON set of linestring features,
-  // draw them all on the map (in a single layer we can remove later)
-
-  function drawMultiTrailLayer(response) {
-    console.log("drawMultiTrailLayer");
-    if (currentMultiTrailLayer) {
-      map.removeLayer(currentMultiTrailLayer);
-      currentTrailLayers = [];
-    }
-    if (response.features[0].geometry === null) {
-      alert("No trail segment data found.");
-    }
-    currentMultiTrailLayer = L.geoJson(response, {
-      style: function(feature) {
-        var color;
-        if (feature.properties.order === 0 || !feature.properties.order) {
-          color = getClassBackgroundColor("trail1");
-          return {
-            weight: 3,
-            color: color,
-            opacity: 0.75
-          };
-        } else if (feature.properties.order === 1) {
-          color = getClassBackgroundColor("trail2");
-          return {
-            weight: 3,
-            color: color,
-            opacity: 0.75
-          };
-        } else if (feature.properties.order === 2) {
-          color = getClassBackgroundColor("trail3");
-          return {
-            weight: 3,
-            color: color,
-            opacity: 0.75
-          };
-        }
-      },
-      //  Don't recognize this syntax...ask Dan - Alan.
-      onEachFeature: function(feature, layer) {
-        var popupHTML = "<div class='trail-popup'>";
-        // if we have a named trail, show its name
-        if (feature.properties.trailname) {
-          popupHTML = popupHTML + feature.properties.trailname;
-        }
-        // else we have an unused trail segment--list all of the names associated with it 
-        else {
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name1;
-          }
-          if (feature.properties.name2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name2;
-          }
-          if (feature.properties.name3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name3;
-          }
-        }
-        popupHTML = popupHTML + "</div>";
-        layer.bindPopup(popupHTML);
-        currentTrailLayers.push(layer);
+      var combined = responses[0];
+      combined.features[0].properties.order = 0;
+      for (var i = 1; i < responses.length; i++) {
+        combined.features = combined.features.concat(responses[i].features);
+        combined.features[i].properties.order = i;
       }
-    }).addTo(map).bringToBack();
-    zoomToLayer(currentMultiTrailLayer);
-  }
 
-  // return the calculated CSS background-color for the class given
+      console.log("----");
+      console.log(combined);
+      return combined;
+    }
 
-  function getClassBackgroundColor(className) {
-    var $t = $("<div class='" + className + "'>").hide().appendTo("body");
-    var c = $t.css("background-color");
-    $t.remove();
-    return c;
-  }
+    // get all trail segment paths
+    // (for diagnostics)
 
-  // given the index of a trail within a trailhead,
-  // highlight that trail on the map, and call zoomToLayer with it
+    function getAllTrailPaths(callback) {
+      var trail_query = "select the_geom, name1, name2, name3 from " + TRAILSEGMENTS_TABLE + " where 1=1";
+      makeSQLQuery(trail_query, callback);
+    }
 
-  function setCurrentTrail(index) {
-    console.log("setCurrentTrail");
-    if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
+    // given a GeoJSON collection of segments paths, 
+    // filter out the ones in known trails,
+    // then call drawMultiTrailLayer to draw 'em
+    // (for diagnostics)
+
+    function filterKnownTrails(response) {
+      console.log(response);
+      var filteredResponse = {
+        type: "FeatureCollection",
+        features: []
+      };
+      // spin through response, removing any segments that aren't part of a known trail
+      filteredResponse.features = response.features.filter(function(element, index, array) {
+        // for (i = 0; i < trailData.length; i++) {
+        if (element.properties.name1 in trailData ||
+          element.properties.name2 in trailData ||
+          element.properties.name3 in trailData) {
+          return false;
+        }
+        // }
+        //  should there be an else here?
+        return true;
+      });
+      console.log(filteredResponse);
+      drawMultiTrailLayer(filteredResponse);
+    }
+
+    // given a geoJSON set of linestring features,
+    // draw them all on the map (in a single layer we can remove later)
+
+    function drawMultiTrailLayer(response) {
+      console.log("drawMultiTrailLayer");
+      if (currentMultiTrailLayer) {
+        map.removeLayer(currentMultiTrailLayer);
+        currentTrailLayers = [];
+      }
+      if (response.features[0].geometry === null) {
+        alert("No trail segment data found.");
+      }
+      currentMultiTrailLayer = L.geoJson(response, {
+        style: function(feature) {
+          var color;
+          if (feature.properties.order === 0 || !feature.properties.order) {
+            color = getClassBackgroundColor("trail1");
+            return {
+              weight: 3,
+              color: color,
+              opacity: 0.75
+            };
+          } else if (feature.properties.order === 1) {
+            color = getClassBackgroundColor("trail2");
+            return {
+              weight: 3,
+              color: color,
+              opacity: 0.75
+            };
+          } else if (feature.properties.order === 2) {
+            color = getClassBackgroundColor("trail3");
+            return {
+              weight: 3,
+              color: color,
+              opacity: 0.75
+            };
+          }
+        },
+        //  Don't recognize this syntax...ask Dan - Alan.
+        onEachFeature: function(feature, layer) {
+          var popupHTML = "<div class='trail-popup'>";
+          // if we have a named trail, show its name
+          if (feature.properties.trailname) {
+            popupHTML = popupHTML + feature.properties.trailname;
+          }
+          // else we have an unused trail segment--list all of the names associated with it 
+          else {
+            if (feature.properties.name1) {
+              popupHTML = popupHTML + "<br>" + feature.properties.name1;
+            }
+            if (feature.properties.name2) {
+              popupHTML = popupHTML + "<br>" + feature.properties.name2;
+            }
+            if (feature.properties.name3) {
+              popupHTML = popupHTML + "<br>" + feature.properties.name3;
+            }
+          }
+          popupHTML = popupHTML + "</div>";
+          layer.bindPopup(popupHTML);
+          currentTrailLayers.push(layer);
+        }
+      }).addTo(map).bringToBack();
+      zoomToLayer(currentMultiTrailLayer);
+    }
+
+    // return the calculated CSS background-color for the class given
+
+    function getClassBackgroundColor(className) {
+      var $t = $("<div class='" + className + "'>").hide().appendTo("body");
+      var c = $t.css("background-color");
+      $t.remove();
+      return c;
+    }
+
+    // given the index of a trail within a trailhead,
+    // highlight that trail on the map, and call zoomToLayer with it
+
+    function setCurrentTrail(index) {
+      console.log("setCurrentTrail");
+      if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
+        currentHighlightedTrailLayer.setStyle({
+          weight: 2
+        });
+      }
+      currentHighlightedTrailLayer = currentTrailLayers[index];
       currentHighlightedTrailLayer.setStyle({
-        weight: 2
+        weight: 10
+      });
+      zoomToLayer(currentHighlightedTrailLayer);
+      map.invalidateSize();
+    }
+
+    // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
+    // in and MIN_ZOOM out (commented out for now)
+
+    function zoomToLayer(layer) {
+      console.log("zoomToLayer");
+      // figure out what zoom is required to display the entire trail layer
+      var curZoom = map.getBoundsZoom(layer.getBounds());
+      // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
+      var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
+      newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
+      // set the view to that zoom, and the center of the trail's bounding box 
+      map.setView(layer.getBounds().getCenter(), newZoom, {
+        pan: {
+          animate: true,
+          duration: 3.0,
+          easeLinearity: 0.05
+        },
+        zoom: {
+          animate: true
+        }
       });
     }
-    currentHighlightedTrailLayer = currentTrailLayers[index];
-    currentHighlightedTrailLayer.setStyle({
-      weight: 10
-    });
-    zoomToLayer(currentHighlightedTrailLayer);
 
-  }
+    // given a SQL query, and done/error callbacks,
+    // make the query
 
-  // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
-  // in and MIN_ZOOM out (commented out for now)
+    function makeSQLQuery(query, done, error) {
+      console.log("makeSQLQuery");
+      var callData = {
+        q: query,
+        // api_key: api_key,
+        format: "geoJSON"
+      };
+      var request = $.ajax({
+        dataType: "json",
+        url: endpoint,
+        data: callData
+      }).done(function(response, textStatus, errorThrown) {
+        done(response);
+      }).error(function(response, textStatus, errorThrown) {
+        if (typeof(error) === "function") {
+          error(response);
+        } else {
+          console.log("ERROR:");
+          console.log(query);
+          console.log(errorThrown);
+        }
+      });
+    }
 
-  function zoomToLayer(layer) {
-    console.log("zoomToLayer");
-    // figure out what zoom is required to display the entire trail layer
-    var curZoom = map.getBoundsZoom(layer.getBounds());
-    // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
-    var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
-    // newZoom = curZoom < MIN_ZOOM ? MIN_ZOOM : curZoom;
-    // set the view to that zoom, and the center of the trail's bounding box 
-    map.setView(layer.getBounds().getCenter(), newZoom, {
-      pan: {
-        animate: true,
-        duration: 3.0,
-        easeLinearity: 0.05
-      },
-      zoom: {
-        animate: true
-      }
-    });
-  }
+    // get the outerHTML for a jQuery element
 
-  // given a SQL query, and done/error callbacks,
-  // make the query
-
-  function makeSQLQuery(query, done, error) {
-    console.log("makeSQLQuery");
-    var callData = {
-      q: query,
-      // api_key: api_key,
-      format: "geoJSON"
+    jQuery.fn.outerHTML = function(s) {
+      return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
     };
-    var request = $.ajax({
-      dataType: "json",
-      url: endpoint,
-      data: callData
-    }).done(function(response, textStatus, errorThrown) {
-      done(response);
-    }).error(function(response, textStatus, errorThrown) {
-      if (typeof(error) === "function") {
-        error(response);
-      } else {
-        console.log("ERROR:");
-        console.log(query);
-        console.log(errorThrown);
-      }
-    });
   }
-
-  // get the outerHTML for a jQuery element
-
-  jQuery.fn.outerHTML = function(s) {
-    return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
-  };
-}
