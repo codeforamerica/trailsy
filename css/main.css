@@ -205,7 +205,7 @@ textarea {
 .trailMapContainer {
 	position: absolute;
 	top: 20px;
-	right: 60px;
+	right: 2%;
 	height: 600px;
 	margin-right: 0px;
 	padding: 0px;
@@ -230,7 +230,7 @@ textarea {
 	z-index: 100;
 	position: absolute;
 	top: 60px;
-	left: 60px;
+	left: 2%;
 	height: 40em;
 /*	width: 20%;*/
 	min-width: 20em;
@@ -247,7 +247,7 @@ textarea {
 	display: inline-block;
 	position: absolute;
 	top: 20px;
-	left: 60px;
+	left: 2%;
 	z-index: 100;;
 	width: 20%;
 	min-width: 20em;

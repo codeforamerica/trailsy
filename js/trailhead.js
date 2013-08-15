@@ -502,15 +502,15 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel")
-    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-2");
-    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
+    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-3");
+    $('.trailMapContainer').toggleClass("col-lg-10 col-lg-7");
     map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
-    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-2");
-    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
+    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-3");
+    $('.trailMapContainer').toggleClass("col-lg-10 col-lg-7");
     map.invalidateSize();
   }
 
