@@ -19,8 +19,8 @@ function startup() {
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
   var MIN_ZOOM = 12;
-  var EASY_MAX_DISTANCE = 1.5;
-  var MODERATE_MAX_DISTANCE = 4.0;
+  var SHORT_MAX_DISTANCE = 1.5;
+  var MEDIUM_MAX_DISTANCE = 4.0;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -176,9 +176,9 @@ function startup() {
         for (var k = 0; k < currentFilters.lengthFilter.length; k++) {
           var distance = currentFilters.lengthFilter[k];
           var trailDist = trail.properties["length"];
-          if ((distance.toLowerCase() == "short" && trailDist <= EASY_MAX_DISTANCE) ||
-            (distance.toLowerCase() == "medium" && trailDist > EASY_MAX_DISTANCE && trailDist <= MODERATE_MAX_DISTANCE) ||
-            (distance.toLowerCase() == "long" && trailDist > MODERATE_MAX_DISTANCE)) {
+          if ((distance.toLowerCase() == "short" && trailDist <= SHORT_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "medium" && trailDist > SHORT_MAX_DISTANCE && trailDist <= MEDIUM_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "long" && trailDist > MEDIUM_MAX_DISTANCE)) {
             distInclude = true;
             break;
           }
