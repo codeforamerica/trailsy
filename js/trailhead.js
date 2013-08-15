@@ -519,6 +519,13 @@ function startup() {
     $('.detail-panel .detailTrailheadName').html(trailhead.properties.name);
     $('.detail-panel .detailSource').html(trailhead.properties.source);
     $('.detail-panel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
+    $('.detail-panel .detailLength').html(trail.properties.length);
+    $('.detail-panel .detailDogs').html(trail.properties.dogs);
+    $('.detail-panel .detailBikes').html(trail.properties.bikes);
+    $('.detail-panel .detailDifficulty').html(trail.properties.difficulty);
+    $('.detail-panel .detailAccessible').html(trail.properties.opdmd_access);
+    $('.detail-panel .detailHorses').html(trail.properties.horses);
+    $('.detail-panel .detailDescription').html(trail.properties.description);
   }
 
   // event handler for click of a trail name in a trailhead popup
