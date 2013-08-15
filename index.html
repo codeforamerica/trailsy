@@ -36,20 +36,21 @@
 </script>
 </head>
 <body>
-<div class="container">
-  <div class="row top-ui">
+
+  <div class="container">
+  <!-- Top row goods -->
+    <div class="row top-ui">
 
     <!-- Header -->
-    <header class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="#">Trailsy</a>
-        <a class="subBrand" href="#">SUMMIT COUNTY</a>
-      </div>
-    </header>
+      <header class="navbar">
+        <div class="navbar-inner">
+          <a class="brand" href="#">Trailsy</a>
+          <a class="subBrand" href="#">SUMMIT COUNTY</a>
+        </div>
+      </header>
 
     <!-- Filters & Search -->
-    <div class="col-12 col-lg-12"> <!-- navbar -->
-      <div class="searchbar"> <!-- navbar-inner -->
+      <div class="searchbar"> 
         <div class="filters">
           <select class="selectpicker" id="activityFilter" multiple data-selected-text-form title='Trail Activities'>
             <option value="dogs" data-filter-type="dogs" class="filter">Dogs</option>
@@ -74,28 +75,22 @@
         </div> -->
       </div>
     </div>
-  </div>
-
-
-  <div class="row">
-    <!-- Modifying the Map Div while we flesh out the Detail Panel -->
-    <div class="trailMapContainer col-12">
-      <div id="trailMap">
-        <div class="left-ui">
-          <div class="trailList-title">
-            <p>Trails Near You</p>
-          </div>
-          <div id="trailList"></div>
-      </div>
-    </div>
-<!--         <div class="crosshair"></div> -->
-    <!-- Detail Panel First Pass -->
-    <div class="detailPanelContainer">
-      <div class="detail-panel">
-        <div class="detailPanelTitle">
-          <span class="trailName"></span>
-          <button class="closeDetail btn btn-default pull-right">close</button>
+    <section id="main" class="row">
+<!--       <div class="left-ui"> -->
+        <div class="trailList-title">
+          <p>Trails Near You</p>
         </div>
+        <div id="trailList"></div>
+<!--       </div> -->
+      <div class="detailPanelContainer">
+        <div class="detail-panel">
+<!--           <div class="detailPhoto"> -->
+            <button class="closeDetail btn btn-default pull-right">close</button>
+          <img class="detailPanelPicture" src="img/falls.JPG">
+          <div class="detailPanelTitle">
+            <span class="trailName"></span>
+<!--             </div> -->
+          </div>
           <div class="detailPanelBody">
             <div>
               <span class="detailPanelHeader">Trailhead:</span>
@@ -113,36 +108,34 @@
               <span class="detailPanelHeader">Data courtesy of:</span>
               <span class="detailSource"></span>
             </div>
-            <div class="detailPhoto">
-              <img class="detailPanelPicture" src="img/falls.JPG">
-            </div>
             <div class="DetailPanelCategories" id="container">
               <div class="detailPanelCategories" id="left">
-                Length: Short <br/>
-                Dogs:   Yes <br/>
-                Bikes:  Yes <br/>
+                  Length: Short <br/>
+                  Dogs:   Yes <br/>
+                  Bikes:  Yes <br/>
               </div>
               <div class="detailPanelCategories" id="right">
-                Difficulty: Moderate <br/>
-                Accessible: Yes <br/>
-                Bridal:     No <br/>
-             </div>
-             <br style="clear:both;"/>
+                  Difficulty: Moderate <br/>
+                  Accessible: Yes <br/>
+                  Bridal:     No <br/>
+              </div>
+                <br style="clear:both;"/>
             </div>
             <div class="detailDescription">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis convallis pulvinar. Phasellus fringilla nunc vitae elit luctus ultricies. Morbi vel urna ut urna tincidunt vestibulum at eget enim. Sed nec ligula sit amet risus rutrum ornare nec sed erat. Curabitur fermentum elit eget eros vestibulum, quis porttitor mauris sollicitudin. Nunc vel quam velit. Morbi sit amet dapibus erat. Vivamus ultrices nunc vel lacus elementum dapibus. Quisque rutrum magna purus, id tincidunt leo posuere vitae. Fusce enim ligula, consectetur id sagittis eu, ultricies eu mi. Donec a bibendum odio. Sed vel vestibulum turpis. Donec consequat eget turpis in accumsan.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis convallis pulvinar. Phasellus fringilla nunc vitae elit luctus ultricies. Morbi vel urna ut urna tincidunt vestibulum at eget enim. Sed nec ligula sit amet risus rutrum ornare nec sed erat. Curabitur fermentum elit eget eros vestibulum, quis porttitor mauris sollicitudin. Nunc vel quam velit. Morbi sit amet dapibus erat. Vivamus ultrices nunc vel lacus elementum dapibus. Quisque rutrum magna purus, id tincidunt leo posuere vitae. Fusce enim ligula, consectetur id sagittis eu, ultricies eu mi. Donec a bibendum odio. Sed vel vestibulum turpis. Donec consequat eget turpis in accumsan.
             </div>
           </div>
         </div>
       </div>
-      </div>
-    </div>
+      <div id="trailMap"></div>
+    </section>
+  </div>
 
   <script type="text/javascript">
       $(document).ready(function() {
       $('.selectpicker').selectpicker();
       });
-</script>
+  </script>
 
 
 </body>

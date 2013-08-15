@@ -15,6 +15,7 @@ body {
 .container {
 	position: relative;
 	max-width: 100%;
+	margin: 0;
 }
 
 /* Other Universal */
@@ -37,13 +38,20 @@ textarea {
 /* styles largely inherited from Bootstrap.css */
 
 /* row containing both "Navbar" and "Filter & Search*/
-.top-ui {}
+.top-ui {
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
+	top: 0;
+	margin: 0px;
+}
 
 .navbar {
 	width: 100%;
 	margin-bottom: 0px;
 	padding-left: 0px;
 	padding-right: 0px;
+	max-height: 60px;
 }
 
 .navbar-inner {
@@ -92,6 +100,9 @@ textarea {
 
 /* 100% wide container*/
 .searchbar {
+	position: absolute;
+	height:60px;
+	width: 100%;
 	background-color: #fff;
 	text-align: justify;
 	line-height: 30px;
@@ -99,10 +110,11 @@ textarea {
 
 /* Filter Container */
 .filters {
-	position: relative;
-	width: 100%;
-	height: 100%;
+	position: absolute;
+	width: 60%;
+	height: 60px;
 	display: inline-block;
+	left: 4em;
 }
 
 .filters::after {
@@ -163,17 +175,6 @@ textarea {
 
 
 /*/* Menu labels, some styling to override Bootstrap */
-.searchbar .nav > li > a {
-	list-style: none;
-  	color: #aaa;
-  	text-decoration: none;
-  	padding: none;
- }
-
-.searchbar .nav > li > a:focus,
-.searchbar .nav > li > a:hover {
- 	color: #fff;
-}
 
  Search element, overriding Bootstrap 
 .navbar-search .search-query {
@@ -193,27 +194,37 @@ textarea {
 /* List & Map
 ============================== */
 
+#main {
+	position: absolute;
+	top: 120px;
+	width: 100%;
+	height: 760px;
+	margin: 0;
+}
 
 div.trailMapContainer {
 	position: relative;
 	z-index: 1;
 	margin-right: 0px;
 }
-
+/*
 .left-ui {
 	z-index: 100;
 	width: 20%;
+	height: 80%;
 	position: relative;
 	background: transparent;
-	top: 1em;
-	left: 4em;
-}
+	top: 20px;
+	left: 60px;
+}*/
 
 #trailList {
 	z-index: 100;
-	position: relative;
-	height: 580px;
-	width: 100%;
+	position: absolute;
+	top: 60px;
+	left: 60px;
+	height: 30em;
+	width: 20%;
 	min-width: 20em;
 	overflow: scroll;
 	background-color: #FFF;
@@ -226,9 +237,11 @@ div.trailMapContainer {
 
 .trailList-title {
 	display: inline-block;
-	position: relative;
+	position: absolute;
+	top: 20px;
+	left: 60px;
 	z-index: 100;;
-	width: 100%;
+	width: 20%;
 	min-width: 20em;
 	background-color: #5E4534;
 /*	border-color: #3a3636;
@@ -324,7 +337,11 @@ div.trailMapContainer {
 
 .detailPanelContainer {
 	display: none;
-	position: relative;
+	position: absolute;
+	height: 440px;
+	left: 325px;
+	top: 20px;
+	z-index: 9999;
 	webkit-transition: width 0.3s ease, margin 0.3s ease;
 	transition: width 0.3s ease, margin 0.3s ease;
 }
@@ -334,47 +351,46 @@ div.trailMapContainer {
 
 
 .detail-panel {
-	position: relative;
-	height: 620px;
-	width: 100%;
+	position: absolute;
+	width: 25em;
+	height: 460px;
+	z-index: 9999;
 	background-color: #fff;
 	overflow: scroll;
-	border: 1px solid #d4d4d4;
-  font-family: 'Oswald', sans-serif;
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
-  -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+	border-bottom: 1px solid #d4d4d4;
+	font-family: 'Oswald', sans-serif;
+/*	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
+	-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+/*	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);*/
+}
+
+.detailPhoto {
+	position: absolute;
+	width: 100%;
 }
 
 .detail-panel .detailPanelTitle {
-	position: relative;
-	background-color: #f2f4e9;
+	position: absolute;
+	bottom: -1;
+	background-color: #C45F37;
 	display: inline-block;
 	width: 100%;
-	padding: 20px 10px 20px 10px;
+	height: 40px;
+	padding: 10px 10px 0px 10px;
 	font-weight: lighter;
 	letter-spacing: 1px;
 	font-size: 20px;
-	color: #8DBB7D;
-	text-decoration: none;
-  	border-bottom: 1px solid #ccc;
-  	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.close-btn {
+.closeDetail {
 	position: absolute;
-	bottom: 17px;
+	top: 5px;
 	right: 10px;
 	width: 50px;
-	height: 28px;
 	border: 1px solid #cccccc
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
-	-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  	background-color: #8DBB7D;
 }
 
-.close-btn p {
+.closeDetail p {
 	display: inline-block;
 	text-align: center;
 	color: #F2F4E9;
@@ -383,8 +399,17 @@ div.trailMapContainer {
    	font-weight: 300;
    	font-size: 12px;
 }
+
+.trailName {
+	margin: 0;
+	color: #FFF;
+}
+
 .detail-panel .detailPanelBody {
   	padding: 20px 10px;
+  	position: absolute;
+  	height: auto;
+  	margin-top: 15%;
 }
 
 .detail-panel .detailTrailheadName {
@@ -447,8 +472,8 @@ div.trailMapContainer {
 }
 
 .detail-panel .detailPanelPicture {
-  border-top: 1px solid #ccc;
-  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
 }
 
 .detail-panel .detailDescription {
@@ -477,12 +502,11 @@ div.trailMapContainer {
 
 #trailMap {
 	z-index: 1;
-	background-color: #fff;
 	width: 100%;
-	height:  620px;
-	position: relative;
-	border: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.075);	
+	height:  auto;
+	position: absolute;
+	top: 0px;
+	bottom: 10px;
 }
 
 .trailMap-title {

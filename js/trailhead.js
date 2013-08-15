@@ -414,15 +414,16 @@ function startup() {
   //  Helper functions for ShowTrailDetails
 
   function openDetailPanel() {
-    $('.detailPanelContainer').show().toggleClass("span0 span4");
-    $('.trailMapContainer').toggleClass("span8 span4");
+    console.log("openDetailPanel")
+    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-4");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-4");
     map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
-    $('.detailPanelContainer').hide().toggleClass("span0 span4");
-    $('.trailMapContainer').toggleClass("span8 span4");
+    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-4");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-4");
     map.invalidateSize();
   }
 

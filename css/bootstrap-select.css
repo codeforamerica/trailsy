@@ -27,6 +27,7 @@
 
 .bootstrap-select:not([class*="span"]) {
     width: 180px;
+    height: 100%;
 }
 
 .bootstrap-select {
