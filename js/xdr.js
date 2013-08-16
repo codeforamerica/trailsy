@@ -1,3 +1,5 @@
+// https://github.com/jaubourg/ajaxHooks/blob/master/src/xdr.js
+
 if ( window.XDomainRequest ) {
   console.log("xdr");
   jQuery.ajaxTransport(function( s ) {
