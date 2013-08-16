@@ -822,7 +822,7 @@ function startup() {
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToBack();
-    zoomToLayer(currentMultiTrailLayer);
+    //zoomToLayer(currentMultiTrailLayer);
   }
 
   // return the calculated CSS background-color for the class given
