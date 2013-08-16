@@ -233,8 +233,8 @@ function startup() {
     }).setView([currentLocation.lat, currentLocation.lng], 11);
 
     // Switch between MapBox and other providers by commenting/uncommenting these
-    // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
-    L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
+    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     map.on("popupopen", function() {
       console.log("popupOpen");
     });

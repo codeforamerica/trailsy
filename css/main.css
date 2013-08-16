@@ -59,7 +59,7 @@ textarea {
 	border: none;
 	box-shadow: none;
 	text-align: justify;
-	padding: 1em 5% 1em;
+	padding: 1em 3% 1em;
 }
 
 .navbar-inner::after {
@@ -111,10 +111,10 @@ textarea {
 /* Filter Container */
 .filters {
 	position: absolute;
-	width: 60%;
+	width: 50%;
 	height: 60px;
 	display: inline-block;
-	left: 4em;
+	left: 2%;
 }
 
 .filters::after {
@@ -196,9 +196,10 @@ textarea {
 
 #main {
 	position: absolute;
-	top: 120px;
-	width: 100%;
-	height: 600px;
+	top: 140px;
+	right: 2%;
+	left: 2%;
+	height: 500px;
 	margin: 0;
 }
 
@@ -268,7 +269,7 @@ textarea {
 	position: absolute;
 	height: auto;
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 20px;
 	color: #C45F37;
 	top: 10px;
@@ -289,8 +290,8 @@ textarea {
  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    	font-size: 14px;
 	text-align: right;
-	color: #757272;
-	top: 10px;
+	color: #4e4c4c;
+	top: 45px;
 	right: 10px;
 }
 
