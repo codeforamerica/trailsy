@@ -147,12 +147,6 @@ function startup() {
   // and the accompanying change to the currentFilters
 
   function applyFilterChange(currentFilters, trailData) {
-<<<<<<< HEAD
-    var filteredTrailData = {};
-    $.each(trailData, function(trail_id, trail) {
-      
-    })
-=======
     // TODO:
     var filteredTrailData = $.extend(true, {}, trailData);
     $.each(trailData, function(trail_id, trail) {
@@ -195,7 +189,6 @@ function startup() {
       }
     });
 
->>>>>>> master
     // loop through trailData
     // apply currentFilters object
     // put trails we want to display into filteredTrailData
@@ -204,33 +197,18 @@ function startup() {
 
   function filterChangeHandler(e) {
     var $currentTarget = $(e.currentTarget);
-<<<<<<< HEAD
-      console.log($currentTarget);
-    var filterType = $currentTarget.attr("id");
-    //  true if selected, false if not selected ^^
-    var currentUIFilterState = $currentTarget.val();
-      updateFilterObject(filterType, currentUIFilterState);
-=======
     console.log($currentTarget);
     var filterType = $currentTarget.attr("id");
     //  true if selected, false if not selected ^^
     var currentUIFilterState = $currentTarget.val();
     updateFilterObject(filterType, currentUIFilterState);
->>>>>>> master
   }
 
   function updateFilterObject(filterType, currentUIFilterState) {
     currentFilters[filterType] = currentUIFilterState;
-<<<<<<< HEAD
-      console.log(currentFilters);
-      applyFilterChange(currentFilters, trailData);
-  }
-=======
     console.log(currentFilters);
     applyFilterChange(currentFilters, trailData);
   }
-
->>>>>>> master
 
   // these two set currentLocation
 
@@ -542,7 +520,7 @@ function startup() {
 
   function showTrailDetails(trail, trailhead) {
     console.log("showTrailDetails");
-    if (!$('.detailPanelContainer').is(':visible')) {
+    if (!$('.detailPanelColumn').is(':visible')) {
       decorateDetailPanel(trail, trailhead);
       openDetailPanel();
       currentDetailTrail = trail;
@@ -564,15 +542,17 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel")
-    $('.detailPanelContainer').show().toggleClass("col-lg-0 col-lg-3");
-    $('.trailMapContainer').toggleClass("col-lg-10 col-lg-7");
+    $('.detailPanelColumn').show().toggleClass("col-lg-0 col-lg-3");
+    $('.trailListColumn').toggleClass("col-lg-4 col-lg-3")
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
-    $('.detailPanelContainer').hide().toggleClass("col-lg-0 col-lg-3");
-    $('.trailMapContainer').toggleClass("col-lg-10 col-lg-7");
+    $('.detailPanelColumn').hide().toggleClass("col-lg-0 col-lg-3");
+    $('.trailListColumn').toggleClass("col-lg-4 col-lg-3")
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 

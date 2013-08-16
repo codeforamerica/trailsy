@@ -198,42 +198,21 @@ textarea {
 	position: absolute;
 	top: 120px;
 	width: 100%;
-	height: 760px;
+	height: 600px;
 	margin: 0;
 }
 
-.trailMapContainer {
-	position: absolute;
-	top: 20px;
-	right: 2%;
-	height: 600px;
-	margin-right: 0px;
-	padding: 0px;
-	border-radius: 2px;
-	border-left: 1px solid #d4d4d4;
-	border-right: 1px solid #d4d4d4;
-	border-bottom: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
-}
-/*
-.left-ui {
-	z-index: 100;
-	width: 20%;
-	height: 80%;
+.trailListColumn {
 	position: relative;
-	background: transparent;
-	top: 20px;
-	left: 60px;
-}*/
+	height: 600px;
+	padding: 0px;
+}
 
 #trailList {
-	z-index: 100;
+	width: 100%;
+	height: 560px;
 	position: absolute;
-	top: 60px;
-	left: 2%;
-	height: 40em;
-/*	width: 20%;*/
-	min-width: 20em;
+	top: 40px;
 	overflow: scroll;
 	background-color: #FFF;
 	border-radius: 2px;
@@ -244,13 +223,11 @@ textarea {
 }
 
 .trailList-title {
+	width: 100%;
+	height: 40px;
 	display: inline-block;
 	position: absolute;
-	top: 20px;
-	left: 2%;
-	z-index: 100;;
-	width: 20%;
-	min-width: 20em;
+	top: 0;
 	background-color: #5E4534;
 /*	border-color: #3a3636;
 	border-left: 1px solid #d4d4d4;
@@ -343,14 +320,11 @@ textarea {
   border-radius: 10px;
 }
 
-.detailPanelContainer {
+.detailPanelColumn {
 	display: none;
-	position: absolute;
+	position: relative;
 	height: 600px;
-	/*Magic Number*/
-	left: 337px;
-	top: 20px;
-	z-index: 9999;
+	padding: 0px;
 	webkit-transition: width 0.3s ease, margin 0.3s ease;
 	transition: width 0.3s ease, margin 0.3s ease;
 }
@@ -361,9 +335,8 @@ textarea {
 
 .detail-panel {
 	position: absolute;
-	width: 20em;
+	width: 100%;
 	height: 600px;
-	z-index: 9999;
 	background-color: #fff;
 	overflow: scroll;
 	border-bottom: 1px solid #d4d4d4;
@@ -509,12 +482,22 @@ textarea {
   color: #000;
 }
 
+.trailMapContainer {
+	position: relative;;
+	height: 600px;
+	padding: 0px;
+	border-radius: 2px;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
 #trailMap {
-	z-index: 1;
+	position: relative;
 	width: 100%;
-	position: absolute;
-	top: 0px;
-	bottom: 0px;
+	height: 100%;
+	padding: 0px;
 }
 
 .trailMap-title {
