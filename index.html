@@ -90,49 +90,62 @@
         </div>
         <div id="trailList"></div>
       </div>
+
+
+
       <div class="detailPanelColumn">
         <div class="detail-panel">
-<!--           <div class="detailPhoto"> -->
             <button class="closeDetail btn btn-default pull-right">close</button>
           <img class="detailPanelPicture" src="img/falls.JPG">
           <div class="detailPanelTitle">
             <span class="trailName"></span>
-<!--             </div> -->
           </div>
+
+          <!-- Body -->
           <div class="detailPanelBody">
-            <div>
+
+            <div class="detailTopRow" id="left">
+              <span class="detailTrailheadDistance">miles</span>
+              <span class="detailDifficulty"></span>
+            </div>
+
+            <div class="detailTopRow" id="right">
+                <div class="detailDogs icon"></div>
+                <div class="detailBikes icon"></div>
+                <div class="detailHorses icon"></div>
+                <div class="icon" id="space"></div>
+                <div class="detailAccessible icon"></div><br/>
+            </div>
+
+            <div class="detailMiddleRow">
+              <div class="detailDescription"></div>
+              <span>Let's Go!</span><br/>
               <span class="detailPanelHeader">Trailhead:</span>
               <span class="detailTrailheadName"></span>
-              <span>
-                <a class="detailDirections" href="#">Directions</a>
-              </span>
-            </div>
-            <div>
-              <span class="detailPanelHeader">Distance:</span>
-              <span class="detailTrailheadDistance"></span>
+              <span>Summit County, OH</span>
               <span class="miles">miles away</span>
             </div>
-            <div>
-              <span class="detailPanelHeader">Data courtesy of:</span>
-              <span class="detailSource"></span>
+            <div class="detailBottomRow">
+              <span>
+                <a class="detailDirections" href="#">Directions</a>
+                <a class="detailPrintMap" href="#">Official Trail Map</a>
+              </span>
             </div>
-            <div class="DetailPanelCategories" id="container">
-              <div class="detailPanelCategories" id="left">
-                <div class="detailLength"></div><br/>
-                <div class="detailDogs"></div><br/>
-                <div class="detailBikes"></div><br/>
+            
+            <div class="detailFooter">
+              <div class="icon-large"></div>
+                <div>
+                  <span>Managed by:</span>
+                  <span class="detailSource"></span>
+                  <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>
+                </div>
               </div>
-              <div class="detailPanelCategories" id="right">
-                <div class="detailDifficulty"></div><br/>
-                <div class="detailAccessible"></div><br/>
-                <div class="detailHorses"></div><br/>
-              </div>
-                <br style="clear:both;"/>
             </div>
-            <div class="detailDescription"></div>
           </div>
         </div>
-      </div>
+
+
+
       <div class="trailMapContainer col-lg-8">
         <div id="trailMap"></div>
       </div>
