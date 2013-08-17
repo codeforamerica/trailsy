@@ -432,11 +432,16 @@ textarea {
 	height: 40px;
 }
 
+.detail-panel .detailTopRow span {
+	margin-left: 10px;
+}
+
 .detail-panel .detailTopRow .icon {
 	position: relative;
 	float: left;
 	height: 40px;
 	width: 20%;
+	padding-left: 10px;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   	font-weight: 300;
   	font-size: 12px;
@@ -469,6 +474,10 @@ textarea {
 	border-top-style: dotted;
 	border-width: 1px;
 	border-color: #bebebe;
+}
+
+.detail-panel .detailBottomRow a {
+	margin-right: 20px;
 }
 
 .detail-panel .detailFooter {
@@ -525,7 +534,6 @@ textarea {
 
 .detail-panel .detailDirections {
 	position: relative;
-	float: right;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   	font-weight: 300;
   	font-size: 12px;
@@ -552,7 +560,6 @@ textarea {
 
 .detail-panel .detailTrailheadDistance {
 	position: relative;
-  	margin-left: 1%;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
    	font-size: 12px;
