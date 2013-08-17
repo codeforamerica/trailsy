@@ -202,6 +202,9 @@ textarea {
 	height: 500px;
 	margin: 0;
 	overflow: hidden;
+	border-bottom-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
 }
 
 .trailListColumn {
@@ -252,12 +255,10 @@ textarea {
 .trail-box {
 	position: relative;
 	height: 80px;
-	margin: 4px;
 	background-color: #fff;
-	border-color: #3a3636;
-  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
-  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
 }
 
 .trail-box:hover {
@@ -312,13 +313,11 @@ textarea {
 .trailIndicatorLight {
 	display: none;
 	position: absolute;
-	top: 4px;
 	width: 0; 
 	height: 0; 
 	border-color: ;
-	border-top: 38px solid transparent;
-	border-bottom: 35px solid transparent; 
-	border-right: 10px solid; 
+	border-top: 80px solid transparent;
+	border-right: 8px solid; 
 }
 
 .detailPanelColumn {
@@ -605,7 +604,6 @@ textarea {
 	position: relative;;
 	height: 600px;
 	padding: 0px;
-	border-radius: 2px;
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
