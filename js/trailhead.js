@@ -663,7 +663,7 @@ function startup() {
       // add class for highlighting
       var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
       var color = getClassBackgroundColor("trail" + (i + 1));
-      $trailbox.find($(".trailIndicatorLight")).css("background-color", color).show();
+      $trailbox.find($(".trailIndicatorLight")).css("border-color", color).show();
       // if this is the first trail for the trailhead, animate it to the top of the trailList
       // TODO: This should probably not animate until we activate the indicator lights
       if (i === 0) {
@@ -826,6 +826,7 @@ function startup() {
   }
 
   // return the calculated CSS background-color for the class given
+  // This may need to be changed since AJW changed it to "border-color" above
 
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");

@@ -95,7 +95,7 @@
 
       <div class="detailPanelColumn">
         <div class="detail-panel">
-            <button class="closeDetail btn btn-default pull-right">close</button>
+            <img class="closeDetail" src="img/close-btn-orange.png">
           <img class="detailPanelPicture" src="img/falls.JPG">
           <div class="detailPanelTitle">
             <span class="trailName"></span>
@@ -105,44 +105,45 @@
           <div class="detailPanelBody">
 
             <div class="detailTopRow" id="left">
-              <span class="detailTrailheadDistance">miles</span>
+              <span class="detailLength">miles</span>
+              <br/>
               <span class="detailDifficulty"></span>
             </div>
 
             <div class="detailTopRow" id="right">
-                <div class="detailDogs icon"></div>
-                <div class="detailBikes icon"></div>
-                <div class="detailHorses icon"></div>
-                <div class="icon" id="space"></div>
-                <div class="detailAccessible icon"></div><br/>
+              <div class="detailDogs icon">Dogs?</div>
+              <div class="detailBikes icon">Bikes?</div>
+              <div class="detailHorses icon">Horses?</div>
+              <div class="icon" id="space"></div>
+              <div class="detailAccessible icon"></div><br/>
             </div>
 
             <div class="detailMiddleRow">
+              <span class="detailPanelHeader">Description:</span>
               <div class="detailDescription"></div>
+            </div>
+
+            <div class="detailBottomRow">
               <span>Let's Go!</span><br/>
               <span class="detailPanelHeader">Trailhead:</span>
               <span class="detailTrailheadName"></span>
-              <span>Summit County, OH</span>
-              <span class="miles">miles away</span>
-            </div>
-            <div class="detailBottomRow">
+              <span class="detailPanelHeader">Summit County, OH</span>
+              <span class="detailTrailheadDistance miles">miles away</span>
               <span>
-                <a class="detailDirections" href="#">Directions</a>
-                <a class="detailPrintMap" href="#">Official Trail Map</a>
+                <a class="detailPanelHeader detailDirections" href="#">Directions</a>
+                <a class="detailPanelHeader detailPrintMap" href="#">Official Trail Map</a>
               </span>
             </div>
             
             <div class="detailFooter">
-              <div class="icon-large"></div>
-                <div>
-                  <span>Managed by:</span>
-                  <span class="detailSource"></span>
-                  <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>
-                </div>
-              </div>
+              <img class="icon-large" src="img/mpssc.jpg">
+                <span>Managed by:</span>
+                <span class="detailSource"></span>
+                <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>              
             </div>
           </div>
         </div>
+      </div>
 
 
 
