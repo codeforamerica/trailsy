@@ -83,14 +83,6 @@ function startup() {
   });
   $(document).on('change', '.selectpicker', filterChangeHandler);
 
-  // UI events: filters
-
-  // // Test to see if there are filters selected
-  // var $selected = $(".filter:selected")
-  // // if nothing selected, don't filter trailData
-  // // if !$selected {}
-
-
 
   // -----------------------------------
   // Kick things off

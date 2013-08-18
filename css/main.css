@@ -3,7 +3,8 @@
 /* These things effect the entire page */
 
 *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; 
+  /* box-sizing: border-box; */
  }
 
 /* Background color */
@@ -46,6 +47,7 @@ textarea {
 	margin: 0px;
 }
 
+/* Establish the top div */
 .navbar {
 	width: 100%;
 	margin-bottom: 0px;
@@ -54,6 +56,7 @@ textarea {
 	max-height: 60px;
 }
 
+/* Contain the top div content*/
 .navbar-inner {
 	background-color: #5E4534;
 	border: none;
@@ -62,11 +65,13 @@ textarea {
 	padding: 1em 3% 1em;
 }
 
+/* Enable vertical alignment within top div */
 .navbar-inner::after {
 	content: '';
 	display: inline-block;
 }
 
+/* Brand name */
 .navbar .brand {
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 	line-height: 30px;
@@ -76,6 +81,7 @@ textarea {
   	font-weight: 200;
 }
 
+/* Make sure user doesn't think its clickable*/
 .navbar .brand:hover,
 .navbar .brand:focus {
   text-decoration: none;
@@ -91,6 +97,7 @@ textarea {
 	font-size: 15px;
 }
 
+/* Make sure user doesn't think its clickable*/
 .navbar .subBrand:hover {
 	text-decoration: none;
 }
@@ -100,7 +107,7 @@ textarea {
 
 /* 100% wide container*/
 .searchbar {
-	position: absolute;
+	position: relative;
 	height:60px;
 	width: 100%;
 	background-color: #fff;
@@ -108,13 +115,15 @@ textarea {
 	line-height: 30px;
 }
 
-/* Filter Container */
+/* Filter Menu */
 .filters {
-	position: absolute;
-	width: 50%;
-	height: 60px;
+	position: relative;
+	width: auto;
+	min-width: 400px;
+	height: 100%;
 	display: inline-block;
 	left: 2%;
+	border-left: dotted 1px #bebebe;
 }
 
 .filters::after {
@@ -122,38 +131,58 @@ textarea {
 	display: inline-block;
 }
 
+
+.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+	margin-bottom: 0px;
+}
+
 /* Filter Btn Groups */
 .bootstrap-select.btn-group: {
 	height: 100%;
 	margin-bottom: 0px;
+	border-right-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
+
+.activityFilter-highlight {
+	display: none;
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	height: 10px;
+	width: 10px;
+	background-color: #ddd;
 }
 
 .bootstrap-select.btn-group:hover {
-	background-color: #C45F37;
+	border-bottom: solid 2px;
+	border-color: #C45F37;
 }
 
 .btn.dropdown-toggle {
 	background-color: transparent;
 	height: 100%;
 	font-weight: lighter;
+	/* border-top-style: dotted; */  border-width: 1px;  
+	border-color: #bebebe;
 }
+
 
 
 /*.btn-group .bootstrap-select:open {
 	background-color: #8DBB7D;
 
-}
+} */
+
 .btn-group > .btn:first-child {
-	-webkit-border-bottom-left-radius: 0;
-	border-bottom-left-radius: 0;
-	-webkit-border-top-left-radius: 0;
-	border-top-left-radius: 0;
-	-moz-border-radius-topleft: 0;
-	border-top-right-radius: 0;
-	-webkit-border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 0;
-	border-bottom-right-radius: 0;
-}*/
+	border-right-style: dotted;
+	border-bottom: none;
+	border-top: none;
+	border-radius: 0px;
+	border-left: none;
+}
 
 /*.btn {
 	background-image: none;
@@ -176,7 +205,7 @@ textarea {
 
 /*/* Menu labels, some styling to override Bootstrap */
 
- Search element, overriding Bootstrap 
+/* Search element, overriding Bootstrap */
 .navbar-search .search-query {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -195,12 +224,11 @@ textarea {
 ============================== */
 
 #main {
-	position: absolute;
-	top: 140px;
-	right: 2%;
-	left: 2%;
+	position: relative;
 	height: 500px;
-	margin: 0;
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 12%;
 	overflow: hidden;
 	border-bottom-style: dotted;
 	border-width: 1px;
@@ -262,7 +290,9 @@ textarea {
 }
 
 .trail-box:hover {
-	background-color: #f3ddd4;
+	border-bottom: 2px solid #C45F37;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
 /* List Item Components !!! */
@@ -313,11 +343,13 @@ textarea {
 .trailIndicatorLight {
 	display: none;
 	position: absolute;
-	width: 0; 
-	height: 0; 
+	right: 0;
+	width: 5px; 
+	height: 5px; 
 	border-color: ;
-	border-top: 80px solid transparent;
-	border-right: 8px solid; 
+	border-top: 40px solid transparent; 
+	border-right: 8px;
+	/* border-radius: 20px; */
 }
 
 .detailPanelColumn {
@@ -647,9 +679,10 @@ textarea {
 }
 
 .trail1 {
-  /*background-color: #536E49;*/
-  /*background-color: #F7E497;*/
-  background-color: #DBAE92;
+	/*background-color: #536E49;*/
+	/*background-color: #F7E497;*/
+	/*background-color: #DBAE92;*/
+	background-color: #9B1818;
 }
 
 /*.trail-box.trail1:hover {
@@ -662,9 +695,10 @@ textarea {
 }
 
 .trail2 {
-  background-color: #A36D95;
+/*  background-color: #A36D95;*/
   /*background-color: #B5BA7D;*/
   /*background-color: #D2C280;*/
+  background-color: #873030;
 }
 
 .trail2:hover {
@@ -673,9 +707,10 @@ textarea {
 }
 
 .trail3 {
-  background-color: #3F7A29;
+/*  background-color: #3F7A29;*/
   /*background-color: #6B6E49;*/
   /* background-color: #80774F; */
+  background-color: #713E3E;
 }
 
 .trail3:hover {

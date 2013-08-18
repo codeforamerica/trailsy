@@ -2,7 +2,6 @@
 .bootstrap-select.btn-group[class*="span"] {
     float: none;
     display: inline-block;
-    margin-bottom: 10px;
     margin-left: 0;
 }
 .form-search .bootstrap-select.btn-group,
@@ -54,14 +53,15 @@
 }
 
 .bootstrap-select.btn-group .btn .filter-option {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     overflow: hidden;
-    position: absolute;
-    left: 12px;
-    right: 25px;
-    text-align: left;
+    position: relative;
+    text-align: center;;;
+    /* text-align: center; */
 }
 
 .bootstrap-select.btn-group .btn .caret {
+    display: none;
     position: absolute;
     right: 12px;
 }
