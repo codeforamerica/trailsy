@@ -247,8 +247,8 @@ function startup() {
     });
     map.on("locationerror", function(errorEvent) {
       console.log("Location Error:");
-      console.log(message);
-      console.log(code);
+      console.log(errorEvent.message);
+      console.log(errorEvent.code);
     });
   }
 
