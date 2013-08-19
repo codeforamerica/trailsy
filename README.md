@@ -47,7 +47,7 @@ Here are some ways *you* can contribute:
 * by reviewing patches
 * [financially][]
 
-[issues]: https://github.com/codeforamerica/streetmix/issues
+[issues]: https://github.com/codeforamerica/danavery/trailsy/issues
 [financially]: https://secure.codeforamerica.org/page/contribute
 
 ## <a name="issues"></a>Submitting an Issue
