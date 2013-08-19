@@ -19,9 +19,11 @@ function startup() {
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
   var MIN_ZOOM = 12;
+  var SECONDARY_TRAIL_ZOOM = 13;
   var SHORT_MAX_DISTANCE = 1.5;
   var MEDIUM_MAX_DISTANCE = 4.0;
-  var USE_LOCAL = 1;
+  var SHOW_ALL_TRAILS = 0;
+  var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -60,6 +62,7 @@ function startup() {
   var currentFilters = {};
   var currentDetailTrail = null;
   var userMarker = null;
+  var allSegmentLayer = {};
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -135,9 +138,11 @@ function startup() {
         addTrailDataToTrailheads(trailData);
       });
     });
-    getTrailSegments(function() {
-      //console.log(trailSegments);
-    });
+    if (USE_LOCAL) {
+      getTrailSegments(function() {
+        //console.log(trailSegments);
+      });
+    }
   }
 
   // set currentLocation to the center of the currently viewed map
@@ -262,6 +267,18 @@ function startup() {
       setView: false,
       enableHighAccuracy: true
     });
+    map.on("zoomend", function(e) {
+      console.log("zoomend");
+      if (SHOW_ALL_TRAILS) {
+        if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+          map.addLayer(allSegmentLayer);
+        }
+        if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
+          map.removeLayer(allSegmentLayer);
+        }
+      }
+    });
+    console.log(allSegmentLayer);
   }
 
   // get all trailhead info, in order of distance from "location"
@@ -348,6 +365,31 @@ function startup() {
     var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
     makeSQLQuery(trail_segment_query, function(response) {
       trailSegments = response;
+
+      allSegmentLayer = L.geoJson(trailSegments, {
+        style: function() {
+          return {
+            color: '#151',
+            weight: 1,
+            opacity: 0.5,
+            clickable: true
+          };
+        },
+        onEachFeature: function(feature, layer) {
+          var popupHTML = "<div class='trail-popup'>";
+          if (feature.properties.name1) {
+            popupHTML = popupHTML + feature.properties.name1;
+          }
+          if (feature.properties.name2) {
+            popupHTML = popupHTML + "<br>" + feature.properties.name2;
+          }
+          if (feature.properties.name3) {
+            popupHTML = popupHTML + "<br>" + feature.properties.name3;
+          }
+          popupHTML = popupHTML + "</div>";
+          layer.bindPopup(popupHTML);
+        }
+      });
       if (typeof callback == "function") {
         callback();
       }
