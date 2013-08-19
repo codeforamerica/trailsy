@@ -245,6 +245,11 @@ function startup() {
       setView: false,
       enableHighAccuracy: true
     });
+    map.on("locationerror", function(errorEvent) {
+      console.log("Location Error:");
+      console.log(message);
+      console.log(code);
+    });
   }
 
   // get all trailhead info, in order of distance from "location"
