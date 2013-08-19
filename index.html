@@ -24,6 +24,7 @@
   <script src="js/leaflet-providers.js"></script>
   <script src="js/async.js"></script>
   <script src="js/leaflet.usermarker.js"></script>
+  <script src="js/xdr.js"></script>
 
   <!--//   <script type="text/javascript" src="js/jquery.slidedrawer.min.js"></script>
 // -->
@@ -66,17 +67,17 @@
           <select class="selectpicker show-tick" id="activityFilter" multiple data-selected-text-form title='Trail Activities'>
             <option value="dogs">Dogs</option>
             <option value="bikes">Bikes</option>
-            <option value="equestrian">Equestrian</option>
+            <option value="horses">Equestrian</option>
           </select>
-          <select class="selectpicker difficultyFilter" multiple title='Trail Difficulty'>
+          <select class="selectpicker" id="difficultyFilter" multiple title='Trail Difficulty'>
             <option value="easy">Easy</option>
             <option value="moderate">Moderate</option>
             <option value="difficult">Difficult</option>
           </select>
-          <select class="selectpicker lengthFilter" multiple title='Trail Length'>
-            <option value="short">Short</option>
-            <option value="medium">Medium</option>
-            <option value="long">Long</option>
+          <select class="selectpicker" id="lengthFilter" multiple title='Trail Length'>
+            <option value="short">Short (up to 1.5 miles)</option>
+            <option value="medium">Medium (1.5 -> 4 miles)</option>
+            <option value="long">Long</option> 
           </select>
         </div>
         <div id="redoSearch" class="pull-right">

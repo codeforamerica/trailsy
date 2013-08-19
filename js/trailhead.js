@@ -18,7 +18,9 @@ function startup() {
 
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
-  var MIN_ZOOM = 11;
+  var MIN_ZOOM = 12;
+  var SHORT_MAX_DISTANCE = 1.5;
+  var MEDIUM_MAX_DISTANCE = 4.0;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -82,6 +84,16 @@ function startup() {
   $("#showUnusedTrailSegments").click(function() {
     getAllTrailPaths(filterKnownTrails);
   });
+  $(document).on('change', '.selectpicker', filterChangeHandler);
+
+  // UI events: filters
+
+  // // Test to see if there are filters selected
+  // var $selected = $(".filter:selected")
+  // // if nothing selected, don't filter trailData
+  // // if !$selected {}
+
+
 
   // -----------------------------------
   // Kick things off
@@ -94,10 +106,17 @@ function startup() {
   //  Length Filtering
   //  Helper functions
 
-  function filterTrailList() {}
+  function filterTrailList() {
+    // defining the function, not calling it
+    // click events / activation of checkboxes
+    // change currentFilters object
+    // apply current Filters to trailData
+    // initialSetup performs the mapping
+  }
+
 
   // The next three functions perform trailhead/trail mapping
-  // on a) initial startup, b) requested resort of trailheads based on the map, 
+  // on a) initial startup, b) requested re-sort of trailheads based on the map, 
   // and c) a change in filter settings
   // They all call addTrailDataToTrailheads() as their final action 
   // --------------------------------------------------------------
@@ -135,10 +154,66 @@ function startup() {
 
   function applyFilterChange(currentFilters, trailData) {
     // TODO:
+    var filteredTrailData = $.extend(true, {}, trailData);
+    $.each(trailData, function(trail_id, trail) {
+      if (currentFilters.activityFilter) {
+        for (var i = 0; i < currentFilters.activityFilter.length; i++) {
+          var activity = currentFilters.activityFilter[i];
+          if (trail.properties[activity].toLowerCase() !== "true") {
+            delete filteredTrailData[trail_id];
+          }
+        }
+      }
+      if (currentFilters.difficultyFilter) {
+        var include = false;
+        for (var j = 0; j < currentFilters.difficultyFilter.length; j++) {
+          var difficulty = currentFilters.difficultyFilter[j];
+          if (trail.properties.difficulty.toLowerCase() == difficulty.toLowerCase()) {
+            include = true;
+            break;
+          }
+        }
+        if (!include) {
+          delete filteredTrailData[trail_id];
+        }
+      }
+      if (currentFilters.lengthFilter) {
+        var distInclude = false;
+        for (var k = 0; k < currentFilters.lengthFilter.length; k++) {
+          var distance = currentFilters.lengthFilter[k];
+          var trailDist = trail.properties["length"];
+          if ((distance.toLowerCase() == "short" && trailDist <= SHORT_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "medium" && trailDist > SHORT_MAX_DISTANCE && trailDist <= MEDIUM_MAX_DISTANCE) ||
+            (distance.toLowerCase() == "long" && trailDist > MEDIUM_MAX_DISTANCE)) {
+            distInclude = true;
+            break;
+          }
+        }
+        if (!distInclude) {
+          delete filteredTrailData[trail_id];
+        }
+      }
+    });
+
     // loop through trailData
     // apply currentFilters object
     // put trails we want to display into filteredTrailData
     addTrailDataToTrailheads(filteredTrailData);
+  }
+
+  function filterChangeHandler(e) {
+    var $currentTarget = $(e.currentTarget);
+    console.log($currentTarget);
+    var filterType = $currentTarget.attr("id");
+    //  true if selected, false if not selected ^^
+    var currentUIFilterState = $currentTarget.val();
+    updateFilterObject(filterType, currentUIFilterState);
+  }
+
+  function updateFilterObject(filterType, currentUIFilterState) {
+    currentFilters[filterType] = currentUIFilterState;
+    console.log(currentFilters);
+    applyFilterChange(currentFilters, trailData);
   }
 
 
@@ -831,6 +906,7 @@ function startup() {
       }).addTo(map).bringToBack();
       zoomToLayer(currentMultiTrailLayer);
     }
+
 
     // return the calculated CSS background-color for the class given
 
