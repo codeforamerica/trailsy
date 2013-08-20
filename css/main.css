@@ -383,7 +383,7 @@ textarea {
 }
 
 .detail-panel .detailPanelTitle {
-	position: absolute;
+	position: relative;
 	bottom: -1;
 	background-color: #C45F37;
 	display: inline-block;
@@ -440,7 +440,6 @@ textarea {
   	position: absolute;
   	height: auto;
   	width: 100%;
-  	margin-top: 15%;
 }
 
 .detail-panel .detailTopRow#left {
@@ -623,6 +622,24 @@ textarea {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
    	font-size: 12px;
+}
+
+.detail-panel .detailDirections {
+	float: left;
+	margin-top: 6px;
+}
+
+.detail-panel .detailPrintMap {
+	float: left;
+	margin-top: 6px;
+}
+
+.detail-panel .social-icon {
+	position: relative;
+	display: inline-block;
+	margin-left: 5px;
+	width: 30px;
+	float: left;
 }
 
 /* Map Elements
