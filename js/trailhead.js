@@ -22,7 +22,7 @@ function startup() {
   var SECONDARY_TRAIL_ZOOM = 13;
   var SHORT_MAX_DISTANCE = 1.5;
   var MEDIUM_MAX_DISTANCE = 4.0;
-  var SHOW_ALL_TRAILS = 0;
+  var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
 
   var map = {};
@@ -62,7 +62,7 @@ function startup() {
   var currentFilters = {};
   var currentDetailTrail = null;
   var userMarker = null;
-  var allSegmentLayer = {};
+  var allSegmentLayer = null;
 
   // Prepping for API calls (defining data for the call)
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
@@ -269,7 +269,7 @@ function startup() {
     });
     map.on("zoomend", function(e) {
       console.log("zoomend");
-      if (SHOW_ALL_TRAILS) {
+      if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           map.addLayer(allSegmentLayer);
         }
@@ -369,10 +369,11 @@ function startup() {
       allSegmentLayer = L.geoJson(trailSegments, {
         style: function() {
           return {
-            color: '#151',
-            weight: 1,
+            color: '#060',
+            weight: 2,
             opacity: 0.5,
-            clickable: true
+            clickable: true,
+            dashArray: "5,5"
           };
         },
         onEachFeature: function(feature, layer) {
