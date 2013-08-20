@@ -759,7 +759,7 @@ function startup() {
         "segments.name1 = '" + trailName + " Trail' or " +
         "segments.name2 = '" + trailName + " Trail' or " +
         "segments.name3 = '" + trailName + " Trail') and " +
-        "source = '" + trailData[trailID].properties.source + "'";
+        "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trail_query, index) {
         return function(callback) {
           makeSQLQuery(trail_query, function(response) {
@@ -813,7 +813,7 @@ function startup() {
             segment.properties.name2 == trailName + " Trail" ||
             segment.properties.name3 == trailName ||
             segment.properties.name3 == trailName + " Trail") &&
-          segment.properties.source == trailSource) {
+            (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
           trailFeatureCollection.features[0].properties = {
             trailname: trailName
           };
