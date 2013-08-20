@@ -90,14 +90,6 @@ function startup() {
   });
   $(document).on('change', '.selectpicker', filterChangeHandler);
 
-  // UI events: filters
-
-  // // Test to see if there are filters selected
-  // var $selected = $(".filter:selected")
-  // // if nothing selected, don't filter trailData
-  // // if !$selected {}
-
-
 
   // -----------------------------------
   // Kick things off
@@ -222,7 +214,6 @@ function startup() {
     applyFilterChange(currentFilters, trailData);
   }
 
-
   // these two set currentLocation
 
   function setCurrentLocationFromMap() {
@@ -247,8 +238,8 @@ function startup() {
     }).setView([currentLocation.lat, currentLocation.lng], 11);
 
     // Switch between MapBox and other providers by commenting/uncommenting these
-    // L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
-    L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
+    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
     map.on("popupopen", function() {
       console.log("popupOpen");
     });
@@ -278,7 +269,11 @@ function startup() {
         }
       }
     });
-    console.log(allSegmentLayer);
+    map.on("locationerror", function(errorEvent) {
+      console.log("Location Error:");
+      console.log(errorEvent.message);
+      console.log(errorEvent.code);
+    });
   }
 
   // get all trailhead info, in order of distance from "location"
@@ -581,7 +576,7 @@ function startup() {
 
   function showTrailDetails(trail, trailhead) {
     console.log("showTrailDetails");
-    if (!$('.detailPanelContainer').is(':visible')) {
+    if (!$('.detailPanelColumn').is(':visible')) {
       decorateDetailPanel(trail, trailhead);
       openDetailPanel();
       currentDetailTrail = trail;
@@ -602,15 +597,18 @@ function startup() {
   //  Helper functions for ShowTrailDetails
 
   function openDetailPanel() {
-    $('.detailPanelContainer').show().toggleClass("span0 span4");
-    $('.trailMapContainer').toggleClass("span8 span4");
+    console.log("openDetailPanel");
+    $('.detailPanelColumn').show().toggleClass("col-lg-0 col-lg-3");
+    $('.trailListColumn').toggleClass("col-lg-4 col-lg-3");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
-    $('.detailPanelContainer').hide().toggleClass("span0 span4");
-    $('.trailMapContainer').toggleClass("span8 span4");
+    $('.detailPanelColumn').hide().toggleClass("col-lg-0 col-lg-3");
+    $('.trailListColumn').toggleClass("col-lg-4 col-lg-3");
+    $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
     map.invalidateSize();
   }
 
@@ -619,10 +617,16 @@ function startup() {
     $('.detail-panel .detailTrailheadName').html(trailhead.properties.name);
     $('.detail-panel .detailSource').html(trailhead.properties.source);
     $('.detail-panel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
+    $('.detail-panel .detailLength').html(trail.properties.length);
+    $('.detail-panel .detailDogs').html(trail.properties.dogs);
+    $('.detail-panel .detailBikes').html(trail.properties.bikes);
+    $('.detail-panel .detailDifficulty').html(trail.properties.difficulty);
+    $('.detail-panel .detailAccessible').html(trail.properties.opdmd_access);
+    $('.detail-panel .detailHorses').html(trail.properties.horses);
+    $('.detail-panel .detailDescription').html(trail.properties.description);
   }
 
   // event handler for click of a trail name in a trailhead popup
-  // 
 
   function trailnameClick(e) {
     console.log("trailnameClick");
@@ -630,7 +634,7 @@ function startup() {
     // setCurrentTrail
   }
 
-  // given jquery 
+  // given jquery
 
   function parseTrailElementData($element) {
     var trailheadID = $element.data("trailheadid");
@@ -715,7 +719,7 @@ function startup() {
       // add class for highlighting
       var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
       var color = getClassBackgroundColor("trail" + (i + 1));
-      $trailbox.find($(".trailIndicatorLight")).css("background-color", color).show();
+      $trailbox.find($(".trailIndicatorLight")).css("border-color", color).show();
       // if this is the first trail for the trailhead, animate it to the top of the trailList
       // TODO: This should probably not animate until we activate the indicator lights
       if (i === 0) {
@@ -949,11 +953,12 @@ function startup() {
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToBack();
-    zoomToLayer(currentMultiTrailLayer);
+    //zoomToLayer(currentMultiTrailLayer);
   }
 
 
   // return the calculated CSS background-color for the class given
+  // This may need to be changed since AJW changed it to "border-color" above
 
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");

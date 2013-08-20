@@ -1,27 +1,35 @@
-/* Top-level
+/* Universals
 ============================== */
 /* These things effect the entire page */
 
-
-/* This is included re a Paul Irish recommendation
-http://www.paulirish.com/2012/box-sizing-border-box-ftw/
-*/
-
 *, *:before, *:after {
-  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; 
+  /* box-sizing: border-box; */
  }
 
 /* Background color */
-
 body {
 	background-color: #F2F4E9;
 }
 
 /* Responsive container */
-
 .container {
 	position: relative;
-	z-index: 999;
+	max-width: 100%;
+	margin: 0;
+}
+
+/* Other Universal */
+html {
+  overflow-y: scroll;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
 }
 
 
@@ -30,147 +38,158 @@ body {
 /* Logo, deployment, toggle btw parks and trails, about */
 /* styles largely inherited from Bootstrap.css */
 
-/* .navbar styled completely in Boostrap */
-
-
-
-.navbar-inner {
-	background-color: #8DBB7D;
+/* row containing both "Navbar" and "Filter & Search*/
+.top-ui {
+	position: fixed;
+	width: 100%;
+	z-index: 9999;
+	top: 0;
+	margin: 0px;
 }
 
-/* Brand or Mark
-============ */
+/* Establish the top div */
+.navbar {
+	width: 100%;
+	margin-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	max-height: 60px;
+}
 
-/* Responsive container */
+/* Contain the top div content*/
+.navbar-inner {
+	background-color: #5E4534;
+	border: none;
+	box-shadow: none;
+	text-align: justify;
+	padding: 1em 3% 1em;
+}
 
+/* Enable vertical alignment within top div */
+.navbar-inner::after {
+	content: '';
+	display: inline-block;
+}
+
+/* Brand name */
 .navbar .brand {
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	line-height: 30px;
 	font-size: 30px;
-	color: #F7E497;
+	color: #FFF;
   	display: inline-block;
-  	padding: 20px 30px 25px 25px;
   	font-weight: 200;
 }
 
+/* Make sure user doesn't think its clickable*/
 .navbar .brand:hover,
 .navbar .brand:focus {
   text-decoration: none;
 }
 
-/* Name of Local Deployment (i.e. Summit County)
-============ */
-
+/* .subBrand is equal to the "Deployment name" */
 .navbar .subBrand {
+	margin-left: 20px;
 	display: inline-block;
-	float: left;
   	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 200;
-  	padding: 25px 20px 20px 0px;
 	color: #fff;
-	font-size: 18px;
+	font-size: 15px;
 }
 
-.navbar .subBrand:hover{
+/* Make sure user doesn't think its clickable*/
+.navbar .subBrand:hover {
 	text-decoration: none;
 }
 
-/* Top-line navigation menu
-============ */
-/* trails, parks and about us (not clearly defined) */
-
-
-/* This margin-left is for use in the Narrow Search .nav menu*/
-.navbar .nav {
-	margin-left: 40px;
-}
-
-.navbar .nav li:hover {
-	background-color: #8DBB7D;
-}
-
-.navbar .nav > li > a {
-  float: none;
-  padding: 25px 20px 20px 5px;
-  color: #fff;
-
-/* Verify the need for the following styles (e.g. override Bootstrap) */
-
-  text-decoration: none;
-  text-shadow: none;
-}
-
-
-.navbar .nav > li > a:focus,
-.navbar .nav > li > a:hover {
-  color: #fff;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-
-/* Search
+/* Filter & Search
 ============================== */
-/* Look into attaching this to the top-line nav */
 
-.row {
-	margin-left: 0px;
-	height: auto;
-}
-
-/* Why chained selector? */
-.span12.navbar {
-	min-height: 40px;
-	max-height: 40px;
-	margin-left: 0px;
-	margin-bottom: 40px;
-}
-
-.navbar-inner.searchbar {
+/* 100% wide container*/
+.searchbar {
+	position: relative;
+	height:60px;
+	width: 100%;
 	background-color: #fff;
+	text-align: justify;
+	line-height: 30px;
 }
 
-/* This is currently "Narrow Your Search" */
-.searchbarTitle,
-.searchbarTitle:hover {
-	font-family: 'Oswald', sans-serif;
-	font-weight: 300;
-	letter-spacing: 1px;
-	font-size: 20px;
-	color: #8DBB7D;
-	display: inline-block;
-	line-height: 65px;
-	float: left;
-	text-decoration: none;
-
-}
-
-
+/* Filter Menu */
 .filters {
-	display:inline-block;
-	padding: 10px 0px 0px 30px;
+	position: relative;
+	width: auto;
+	min-width: 400px;
+	height: 100%;
+	display: inline-block;
+	left: 2%;
+	border-left: dotted 1px #bebebe;
 }
 
-.btn-group .bootstrap-select:open {
+.filters::after {
+	content: '';
+	display: inline-block;
+}
+
+
+.bootstrap-select.btn-group, .bootstrap-select.btn-group[class*="span"] {
+	margin-bottom: 0px;
+}
+
+/* Filter Btn Groups */
+.bootstrap-select.btn-group: {
+	height: 100%;
+	margin-bottom: 0px;
+	border-right-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
+
+.activityFilter-highlight {
+	display: none;
+	position: absolute;
+	left: 20px;
+	top: 20px;
+	height: 10px;
+	width: 10px;
+	background-color: #ddd;
+}
+
+.bootstrap-select.btn-group:hover {
+	border-bottom: solid 2px;
+	border-color: #C45F37;
+}
+
+.btn.dropdown-toggle {
+	background-color: transparent;
+	height: 100%;
+	font-weight: lighter;
+	/* border-top-style: dotted; */  border-width: 1px;  
+	border-color: #bebebe;
+}
+
+
+
+/*.btn-group .bootstrap-select:open {
 	background-color: #8DBB7D;
 
-}
+} */
+
 .btn-group > .btn:first-child {
-	-webkit-border-bottom-left-radius: 0;
-	border-bottom-left-radius: 0;
-	-webkit-border-top-left-radius: 0;
-	border-top-left-radius: 0;
-	-moz-border-radius-topleft: 0;
-	border-top-right-radius: 0;
-	-webkit-border-top-right-radius: 0;
-	-webkit-border-bottom-right-radius: 0;
-	border-bottom-right-radius: 0;
+	border-right-style: dotted;
+	border-bottom: none;
+	border-top: none;
+	border-radius: 0px;
+	border-left: none;
 }
-.btn {
+
+/*.btn {
 	background-image: none;
 	background-color: #fff;
 	box-shadow: none;
 	border: none;
-}
+}*/
 
 
 .filter > .btn:hover, btn:focus, btn:active {
@@ -184,18 +203,7 @@ body {
 }
 
 
-/* Menu labels, some styling to override Bootstrap */
-.searchbar .nav > li > a {
-	list-style: none;
-  	color: #aaa;
-  	text-decoration: none;
-  	padding: none;
- }
-
-.searchbar .nav > li > a:focus,
-.searchbar .nav > li > a:hover {
- 	color: #fff;
-}
+/*/* Menu labels, some styling to override Bootstrap */
 
 /* Search element, overriding Bootstrap */
 .navbar-search .search-query {
@@ -215,70 +223,76 @@ body {
 /* List & Map
 ============================== */
 
-/* Row Containing Both */
-
-/* List Elements */
-
-.row .span4 {
-	margin-left: 0px;
-	margin-right: 30px;
-	float: left;
-	height: auto;
-	background-color: #fff;
+#main {
+	position: relative;
+	height: 500px;
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 12%;
+	overflow: hidden;
+	border-bottom-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
 }
 
-div.trailMapContainer.span4{
-	margin-right: 0px;
+.trailListColumn {
+	position: relative;
+	height: 500px;
+	padding: 0px;
 }
 
 #trailList {
-	position: relative;
-	height: 580px;
 	width: 100%;
+	height: 560px;
+	position: absolute;
+	top: 40px;
 	overflow: scroll;
+	background-color: #FFF;
+	border-radius: 2px;
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 .trailList-title {
-	height: 40px;
 	width: 100%;
-	background-color: #F2F4E9;
-	border-color: #3a3636;
+	height: 40px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	background-color: #5E4534;
+/*	border-color: #3a3636;
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);	*/
 }
 
 .trailList-title p {
+	display: inline-block;
+	position: relative;
 	padding: 10px 0px 0px 20px;
 	font-family: 'Oswald', sans-serif;
 	font-weight: 300;
 	letter-spacing: 1px;
 	font-size: 16px;
-	color: #8DBB7D;
+	color: #FFF;
 }
 
 .trail-box {
 	position: relative;
 	height: 80px;
-	width: auto;
-	margin-top: 4px;
-	margin-bottom: 4px;
-	margin-right: 4px;
-	margin-left: 4px;
 	background-color: #fff;
-	border-color: #3a3636;
-  	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,,0.5);
-  	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.5);
-  	box-shadow: 0px 1px 1px rgba(0,0,0,.1);
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
 }
 
 .trail-box:hover {
-	background-color: #F2F4E9;;
+	border-bottom: 2px solid #C45F37;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
 
 /* List Item Components !!! */
@@ -287,30 +301,28 @@ div.trailMapContainer.span4{
 	position: absolute;
 	height: auto;
 	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 20px;
-	color: #3a3636;
+	color: #C45F37;
 	top: 10px;
 	left: 14px;
 }
 
 .trail-box .trailheadName {
 	position: absolute;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
-	color: #757272;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-size: 14px;
+	color: #4e4c4c;
 	top: 45px;
 	left: 14px;
 }
 
 .trail-box .trailheadDistance {
 	position: absolute;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
+ 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-size: 14px;
 	text-align: right;
-	color: #757272;
+	color: #4e4c4c;
 	top: 45px;
 	right: 10px;
 }
@@ -320,85 +332,93 @@ div.trailMapContainer.span4{
 	position: absolute;
 	top: 16px;
 	right: 10px;
-   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   font-weight: 300;
-   font-size: 14px;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 14px;
 	line-height: 20px;
 	color: #757272;
 	text-align: right;
 }
 
 .trailIndicatorLight {
-  display: none;
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  background-color: red;
-  height: 20px;
-  width: 20px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 5px; 
+	height: 5px; 
+	border-color: ;
+	border-top: 40px solid transparent; 
+	border-right: 8px;
+	/* border-radius: 20px; */
 }
 
-.detailPanelContainer {
+.detailPanelColumn {
 	display: none;
 	position: relative;
+	height: 500px;
+	padding: 0px;
 	webkit-transition: width 0.3s ease, margin 0.3s ease;
 	transition: width 0.3s ease, margin 0.3s ease;
 }
-
- .span0 {
- 	width: 0%;
- 	margin-left: 0;
- }
 
 /* Detail Panel Elements
 ============================== */
 
 
-.detail-panel{
-	position: relative;
-	height: 620px;
+.detail-panel {
+	position: absolute;
 	width: 100%;
+	height: 500px;
 	background-color: #fff;
 	overflow: scroll;
-	border: 1px solid #d4d4d4;
-  font-family: 'Oswald', sans-serif;
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
-  -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+	border-bottom: 1px solid #d4d4d4;
+/*	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
+	-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
+/*	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);*/
+}
+
+.detailPhoto {
+	position: absolute;
+	width: 100%;
 }
 
 .detail-panel .detailPanelTitle {
 	position: relative;
-	background-color: #f2f4e9;
+	bottom: -1;
+	background-color: #C45F37;
 	display: inline-block;
 	width: 100%;
-	padding: 20px 10px 20px 10px;
+	height: 40px;
+	padding: 10px 10px 0px 10px;
+	font-family: 'Oswald', sans-serif;
 	font-weight: lighter;
 	letter-spacing: 1px;
 	font-size: 20px;
-	color: #8DBB7D;
-	text-decoration: none;
-  	border-bottom: 1px solid #ccc;
-  	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.close-btn {
+.closeDetail {
 	position: absolute;
-	bottom: 17px;
+	top: 5px;
 	right: 10px;
-	width: 50px;
-	height: 28px;
-	border: 1px solid #cccccc
-	-webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);	
-	-moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.075);
-  	background-color: #8DBB7D;
+	width: 25px;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+
+  /* Netscape */
+  -moz-opacity: 0.8;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+
+  /* Good browsers */
+  opacity: 0.8;
+}
 }
 
-.close-btn p {
+.closeDetail p {
 	display: inline-block;
 	text-align: center;
 	color: #F2F4E9;
@@ -407,8 +427,131 @@ div.trailMapContainer.span4{
    	font-weight: 300;
    	font-size: 12px;
 }
+
+.trailName {
+	font-family: 'Oswald', sans-serif;
+	margin: 0;
+	color: #FFF;
+}
+
+/* New Styles for the Body of the Detail Panel*/
+
 .detail-panel .detailPanelBody {
-  	padding: 20px 10px;
+  	position: absolute;
+  	height: auto;
+  	width: 100%;
+}
+
+.detail-panel .detailTopRow#left {
+	position: relative;
+	float: left;
+	display: inline-block;
+	height: 40px;
+	width: 25%;
+	border-right-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+
+}
+
+.detail-panel .detailTopRow#right {
+	position: relative;
+	float: left;
+	display: inline-block;
+	width: 75%;
+	height: 40px;
+}
+
+.detail-panel .detailTopRow span {
+	margin-left: 10px;
+}
+
+.detail-panel .detailTopRow .icon {
+	position: relative;
+	float: left;
+	height: 40px;
+	width: 20%;
+	padding-left: 10px;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  	font-weight: 300;
+  	font-size: 12px;
+	border-right-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
+
+/* Clearly these rows can be refactored to one class */
+
+.detail-panel .detailMiddleRow {
+	position: relative;
+	display: inline-block;
+	height: auto;
+	width: 100%;
+	padding: 10px;
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+
+}
+
+.detail-panel .detailBottomRow {
+	position: relative;
+	display: inline-block;
+	height: auto;
+	width: 100%;
+	padding: 10px;
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
+.detail-panel .detailBottomRow a {
+	margin-right: 20px;
+}
+
+.detail-panel .detailFooter {
+	position: relative;
+	display: inline-block;
+	height: auto;
+	width: 100%;
+	padding: 10px;
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
+.detail-panel .detailFooter span {
+	font-family: 'Oswald', sans-serif;
+	color: #C45F37;
+	font-size: 14px;
+	line-height: 15px;
+}
+
+
+.detail-panel .detailFooter .icon-large {
+	width: 25%;
+	float: left;
+	position: relative;
+	bottom: 0px;
+}
+
+.detailFooter span {
+	position: absolute;
+	left: 30%;
+	top: 20px;
+}
+
+.detailFooter .detailSource {
+	position: absolute;
+	left: 30%;
+	top: 40px;
+}
+
+.detailFooter .detailSourceTelephone {
+	position: absolute;
+	left: 60%;
+	top: 40px;
 }
 
 .detail-panel .detailTrailheadName {
@@ -416,71 +559,60 @@ div.trailMapContainer.span4{
   	margin-left: 20px;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
    	font-weight: 300;
-   	font-size: 14px;
+   	font-size: 12px;
 }
 
 .detail-panel .detailDirections {
 	position: relative;
-	float: right;
-  	margin-left: 10px;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
   	font-weight: 300;
-  	font-size: 14px;
+  	font-size: 12px;
 }
 
-.detail-panel .detailSource {
+.detail-panel .detailLength {
 	position: relative;
-  	margin-left: 20px;
-	width: 100%;
-   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   	font-weight: 300;
-   	font-size: 14px;
+	float: left
+	top: 2%;
+	margin-left: 2%;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  	font-weight: 300;
+  	font-size: 12px;
 }
 
-.detail-panel .detailTrailheadDistance {
+.detail-panel .detailDifficulty {
 	position: relative;
-  	margin-left: 20px;
+  	margin-left: 2%;
 	width: 100%;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
-   	font-size: 14px;
+   	font-size: 12px;
+ }
+
+.detail-panel .detailTrailheadDistance {
+	position: relative;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+ 	font-weight: 300;
+   	font-size: 12px;
 }
 
 .detail-panel .detailPanelHeader {
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
-   	font-size: 14px;
+   	font-size: 12px;
 }
 
-.detail-panel #left {
-	margin-top: 15px;
-	max-width: 50%;
-	float: left;
-  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
- 	font-weight: 300;
-   	font-size: 14px;
-}
-
-.detail-panel #right {
-	margin-top: 15px;
-	max-width: 50%;
-	float: right;
-  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
- 	font-weight: 300;
-   	font-size: 14px;
-}
 
 .detail-panel .detailPanelPicture {
-  border-top: 1px solid #ccc;
-  margin-top: 20px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
 }
 
 .detail-panel .detailDescription {
-  margin-top: 15px;
-  border-top: 1px solid #ccc;
+	display: inline-block;
+  	margin-top: 15px;
   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
- 	font-weight: 300;
-   	font-size: 14px;}
+  	font-weight: 300;
+  font-size: 12px;}
 
 .detail-panel .detail-body {
 
@@ -489,7 +621,25 @@ div.trailMapContainer.span4{
 .miles {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
  	font-weight: 300;
-   	font-size: 14px;
+   	font-size: 12px;
+}
+
+.detail-panel .detailDirections {
+	float: left;
+	margin-top: 6px;
+}
+
+.detail-panel .detailPrintMap {
+	float: left;
+	margin-top: 6px;
+}
+
+.detail-panel .social-icon {
+	position: relative;
+	display: inline-block;
+	margin-left: 5px;
+	width: 30px;
+	float: left;
 }
 
 /* Map Elements
@@ -499,20 +649,21 @@ div.trailMapContainer.span4{
   color: #000;
 }
 
-.row .span8 {
-	margin-left: 0px;
-	position: relative;
-	/*float: left;*/
-	height: auto;
+.trailMapContainer {
+	position: relative;;
+	height: 600px;
+	padding: 0px;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 }
 
 #trailMap {
-	background-color: #fff;
-	width: 100%;
-	height:  620px;
 	position: relative;
-	border: 1px solid #d4d4d4;
-	-webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.075);	
+	width: 100%;
+	height: 100%;
+	padding: 0px;
 }
 
 .trailMap-title {
@@ -545,9 +696,10 @@ div.trailMapContainer.span4{
 }
 
 .trail1 {
-  /*background-color: #536E49;*/
-  /*background-color: #F7E497;*/
-  background-color: #DBAE92;
+	/*background-color: #536E49;*/
+	/*background-color: #F7E497;*/
+	/*background-color: #DBAE92;*/
+	background-color: #9B1818;
 }
 
 /*.trail-box.trail1:hover {
@@ -560,9 +712,10 @@ div.trailMapContainer.span4{
 }
 
 .trail2 {
-  background-color: #A36D95;
+/*  background-color: #A36D95;*/
   /*background-color: #B5BA7D;*/
   /*background-color: #D2C280;*/
+  background-color: #873030;
 }
 
 .trail2:hover {
@@ -571,9 +724,10 @@ div.trailMapContainer.span4{
 }
 
 .trail3 {
-  background-color: #3F7A29;
+/*  background-color: #3F7A29;*/
   /*background-color: #6B6E49;*/
   /* background-color: #80774F; */
+  background-color: #713E3E;
 }
 
 .trail3:hover {
