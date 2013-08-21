@@ -805,22 +805,32 @@ function startup() {
           type: "Feature"
         }]
       };
+      var valid = 0;
       for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
         var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
         if ((segment.properties.name1 == trailName ||
-            segment.properties.name1 == trailName + " Trail" ||
+            segment.properties.name1 + " Trail" == trailName ||
             segment.properties.name2 == trailName ||
-            segment.properties.name2 == trailName + " Trail" ||
+            segment.properties.name2 + " Trail" == trailName ||
             segment.properties.name3 == trailName ||
-            segment.properties.name3 == trailName + " Trail") &&
-            (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
+            segment.properties.name3 + " Trail" == trailName) &&
+          (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
+          // 1) {
+
           trailFeatureCollection.features[0].properties = {
             trailname: trailName
           };
+          valid = 1;
+          // console.log("match");
           trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
         }
+        else {
+          // console.log("invalid!");
+        }
       }
-      trailFeatureArray.push(trailFeatureCollection);
+      if (valid) {
+        trailFeatureArray.push(trailFeatureCollection);
+      }
     }
     responses = mergeResponses(trailFeatureArray);
     drawMultiTrailLayer(responses);
