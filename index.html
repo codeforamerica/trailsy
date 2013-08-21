@@ -76,11 +76,6 @@
           </select>
           <div class="activityFilter-highlight"></div>
         </div>
-<!--         <div id="redoSearch" class="pull-right">
-          <a href='#'>
-            <span>Redo trail search from this location</span>
-          </a>
-        </div> -->
       </div>
     </div>
     <section id="main" class="row">
@@ -88,6 +83,9 @@
       <div class="trailListColumn col-lg-4">
         <div class="trailList-title">
           <p>Trails Near You</p>
+        </div>
+        <div id="redoSearch">
+          <a href='#'>Refresh search from new map location</a>
         </div>
         <div id="trailList"></div>
       </div>
@@ -106,31 +104,41 @@
           <div class="detailPanelBody">
 
             <div class="detailTopRow" id="left">
-              <span class="detailLength">miles</span>
+              <span class="detailLength"></span><span class="detailPanelHeader">miles</span>
               <br/>
               <span class="detailDifficulty"></span>
             </div>
 
             <div class="detailTopRow" id="right">
-              <div class="detailDogs icon">Dogs?</div>
-              <div class="detailBikes icon">Bikes?</div>
-              <div class="detailHorses icon">Horses?</div>
-              <div class="icon" id="space"></div>
-              <div class="detailAccessible icon"></div><br/>
+              <div class="icon" id="space">
+              </div>
+              <div class="detailDogs icon">
+                <img class="activity-icons" src="img/activity-icons-dogs.png">
+              </div>
+              <div class="detailBikes icon">
+                <img class="activity-icons" src="img/activity-icons-bikes.png">
+              </div>
+              <div class="detailHorses icon">
+                <img class="activity-icons" src="img/activity-icons-horses.png">
+              </div>
+              <div class="detailAccessible icon">
+                <img class="activity-icons" src="img/activity-icons-access.png">
+              </div><br/>
             </div>
 
             <div class="detailMiddleRow">
-              <span class="detailPanelHeader">Description:</span>
+              <span class="detailPanelHeader"></span>
               <div class="detailDescription"></div>
             </div>
 
             <div class="detailBottomRow">
-              <span class="detailPanelHeader">Let's Go!</span><br/>
+              <span class="detailPanelHeader"><strong>Let's Go!</strong></span><br/>
               <span class="detailPanelHeader">Trailhead:</span>
               <span class="detailTrailheadName"></span>
-              <span class="detailPanelHeader">Summit County, OH</span><br/>
-              <span class="detailTrailheadDistance miles">miles away</span><br/>
-              <a class="detailPanelHeader detailDirections" href="#">Directions</a>
+              <span class="detailPanelHeader">, Summit County, OH</span><br/>
+              <span class="detailTrailheadDistance miles"></span><span class="detailPanelHeader"> miles away</span><br/>
+              <br/>
+              <a class="detailPanelHeader detailDirections" href="#">Directions |</a>
               <a class="detailPanelHeader detailPrintMap" href="#">Official Trail Map</a>
               <img class="social-icon" src="img/email.png">
               <img class="social-icon" src="img/facebook.png">
@@ -150,7 +158,9 @@
 
 
       <div class="trailMapContainer col-lg-8">
-        <div id="trailMap"></div>
+        <div id="crosshair">
+        </div>
+        <div id="trailMap">
       </div>
     </section>
   </div>

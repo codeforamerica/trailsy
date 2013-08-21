@@ -25,7 +25,8 @@
 }
 
 .bootstrap-select:not([class*="span"]) {
-    width: 180px;
+    min-width: 180px;
+    width: auto;
     height: 100%;
 }
 
@@ -56,7 +57,7 @@
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     overflow: hidden;
     position: relative;
-    text-align: center;;;
+    text-align: center;
     /* text-align: center; */
 }
 
@@ -134,7 +135,7 @@
 }
 
 .bootstrap-select.btn-group .dropdown-menu li a i.check-mark {
-    display: none;
+/*    display: none;*/
 }
 
 .bootstrap-select.btn-group.show-tick .dropdown-menu li a span.text {
