@@ -460,9 +460,32 @@ function startup() {
   // 1) get a trailID, given a trail name and a trailhead
   // 2) get a group of trail segments, given a trail object and a trailhead object
 
+  // given a trail name and a trailhead, return the most likely trailID
+  //
+  // Will return trailID based on one of the following, by precedence:
+  // 
+  // 1) A single trail name match
+  // 2) A trail name match with a trailhead-source/trail-steward match
+  // 3) A trail name match with a trailhead-source/trail-source match
+  // 4) A trail name match (if there are more than one of these, the one returned is not defined.)
+  //
+  // Otherwise, return null
+
   function getTrailIdWithNameAndTrailhead(trailName, trailhead) {
 
   }
+
+
+  // given trail and trailhead objects, return a set of trail segments for the trail
+  // 
+  // using trail data and segment data:
+  //
+  // Will return matches based on one of the following, by precedence (all for segments that match trailname):
+  //
+  // 1) If the trail is a "MULTI" steward trail, all available segments for trail name are returned
+  // 2) Matching steward, source
+  // 3) Matching steward (using source with the most geodata)
+  // 4) Closest match, based on a single point 
 
   function getSegmentsWithTrailAndTrailhead(trail, trailhead) {
 
