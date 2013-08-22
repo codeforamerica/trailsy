@@ -53,6 +53,7 @@ function startup() {
   //   }[, ...}]
   // ]
   var trailSegments = [];
+  var groupedSegments = {};
 
 
   var currentMultiTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
@@ -68,13 +69,13 @@ function startup() {
   var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
 
   // comment these/uncomment the next set to switch between tables
-  var TRAILHEADS_TABLE = "summit_trailheads";
-  var TRAILSEGMENTS_TABLE = "summit_trailsegments";
-  var TRAILDATA_TABLE = "summit_traildata";
+  // var TRAILHEADS_TABLE = "summit_trailheads";
+  // var TRAILSEGMENTS_TABLE = "summit_trailsegments";
+  // var TRAILDATA_TABLE = "summit_traildata";
 
-  // var TRAILHEADS_TABLE = "summit_trailheads_test";
-  // var TRAILSEGMENTS_TABLE = "summit_trail_segments_test";
-  // var TRAILDATA_TABLE = "summit_traildata_test";
+  var TRAILHEADS_TABLE = "summit_trailheads_test";
+  var TRAILSEGMENTS_TABLE = "summit_trailsegments_test";
+  var TRAILDATA_TABLE = "summit_traildata_test";
 
 
   // UI events to react to
@@ -357,10 +358,9 @@ function startup() {
 
   function getTrailSegments(callback) {
     console.log("getTrailSegments");
-    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
+    var trail_segment_query = "select the_geom, name1, name2, name3, source, steward from " + TRAILSEGMENTS_TABLE;
     makeSQLQuery(trail_segment_query, function(response) {
       trailSegments = response;
-
       allSegmentLayer = L.geoJson(trailSegments, {
         style: function() {
           return {
@@ -373,19 +373,37 @@ function startup() {
         },
         onEachFeature: function(feature, layer) {
           var popupHTML = "<div class='trail-popup'>";
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + feature.properties.name1;
+          var name1 = $.trim(feature.properties.name1);
+          var name2 = $.trim(feature.properties.name2);
+          var name3 = $.trim(feature.properties.name3);
+          var steward = $.trim(feature.properties.steward);
+          var source = $.trim(feature.properties.source);
+          if (name1) {
+            groupedSegments[name1] = groupedSegments[name1] || {};
+            groupedSegments[name1][steward] = groupedSegments[name1][steward] || {};
+            groupedSegments[name1][steward][source] = groupedSegments[name1][steward][source] || [];
+            groupedSegments[name1][steward][source].push(feature);
+            popupHTML = popupHTML + name1;
           }
-          if (feature.properties.name2) {
+          if (name2) {
+            groupedSegments[name2] = groupedSegments[name2] || {};
+            groupedSegments[name2][steward] = groupedSegments[name2][steward] || {};
+            groupedSegments[name2][steward][source] = groupedSegments[name2][steward][source] || [];
+            groupedSegments[name2][steward][source].push(feature);
             popupHTML = popupHTML + "<br>" + feature.properties.name2;
           }
-          if (feature.properties.name3) {
+          if (name3) {
+            groupedSegments[name3] = groupedSegments[name3] || {};
+            groupedSegments[name3][steward] = groupedSegments[name3][steward] || {};
+            groupedSegments[name3][steward][source] = groupedSegments[name3][steward][source] || [];
+            groupedSegments[name3][steward][source].push(feature);
             popupHTML = popupHTML + "<br>" + feature.properties.name3;
           }
           popupHTML = popupHTML + "</div>";
           layer.bindPopup(popupHTML);
         }
       });
+      console.log(groupedSegments);
       if (typeof callback == "function") {
         callback();
       }
@@ -418,11 +436,18 @@ function startup() {
         // we should test for duplicate names and only use the nearest one.
         // to do that, we'll need to either query the DB for the trail segment info,
         // or check distance against the (yet-to-be) pre-loaded trail segment info
-        $.each(myTrailData, function(trailID, trail) {
-          if (trailhead.properties[trailWithNum] == trail.properties.name) {
-            trailhead.trails.push(trailID);
-          }
-        });
+
+        // 22 Aug
+        // instead of assigning directly, run a disambiguator
+        // $.each(myTrailData, function(trailID, trail) {
+        //   if (trailhead.properties[trailWithNum] == trail.properties.name) {
+        //     trailhead.trails.push(trailID);
+        //   }
+        // });
+        var trailID = getTrailIdWithNameAndTrailhead(trailhead, trailheadTrailName);
+        if (trailID) {
+          trailhead.trails.push(trailID);
+        }
       }
     }
     fixDuplicateTrailNames(trailheads);
@@ -431,6 +456,17 @@ function startup() {
     makeTrailDivs(trailheads);
   }
 
+  // two types of disambiguation needed
+  // 1) get a trailID, given a trail name and a trailhead
+  // 2) get a group of trail segments, given a trail object and a trailhead object
+
+  function getTrailIdWithNameAndTrailhead(trailName, trailhead) {
+
+  }
+
+  function getSegmentsWithTrailAndTrailhead(trail, trailhead) {
+
+  }
 
   // this is so very wrong and terrible and makes me want to never write anything again.
   // alas, it works for now.
@@ -823,8 +859,7 @@ function startup() {
           valid = 1;
           // console.log("match");
           trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
-        }
-        else {
+        } else {
           // console.log("invalid!");
         }
       }
