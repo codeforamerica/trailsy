@@ -317,6 +317,9 @@ function startup() {
           trailheadMarkerClick(trailheadID);
         };
       }(currentFeature.properties.cartodb_id));
+      currentFeature.properties.trail1 = $.trim(currentFeature.properties.trail1);
+      currentFeature.properties.trail2 = $.trim(currentFeature.properties.trail2);
+      currentFeature.properties.trail3 = $.trim(currentFeature.properties.trail3);
 
       var trailhead = {
         properties: currentFeature.properties,
@@ -426,31 +429,19 @@ function startup() {
         if (trailhead.properties[trailWithNum] === "") {
           continue;
         }
-        var trailheadTrailName = trailhead.properties[trailWithNum];
-        // TODO: add a test for the case of duplicate trail names.
-        // Right now this
-        // loop through all of the trailData objects, looking for trail names that match
-        // the trailhead trailname.
-        // this works great, except for things like "Ledges Trail," which get added twice,
-        // one for the CVNP instance and one for the MPSSC instance.
-        // we should test for duplicate names and only use the nearest one.
-        // to do that, we'll need to either query the DB for the trail segment info,
-        // or check distance against the (yet-to-be) pre-loaded trail segment info
-
-        // 22 Aug
-        // instead of assigning directly, run a disambiguator
-        // $.each(myTrailData, function(trailID, trail) {
-        //   if (trailhead.properties[trailWithNum] == trail.properties.name) {
-        //     trailhead.trails.push(trailID);
-        //   }
-        // });
-        var trailID = getTrailIdWithNameAndTrailhead(trailhead, trailheadTrailName);
+        var trailheadTrailName = trailhead.properties[trailWithNum];        
+        console.log("-----------------------------------------");
+        var trailID = getTrailIdWithNameAndTrailhead(trailheadTrailName, trailhead);
+        // console.log("result:");
+        // console.log(trailhead);
+        // console.log(trailheadTrailName);
+        // console.log(trailID);
         if (trailID) {
           trailhead.trails.push(trailID);
         }
       }
     }
-    fixDuplicateTrailNames(trailheads);
+    //fixDuplicateTrailNames(trailheads);
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
@@ -472,20 +463,26 @@ function startup() {
   // Otherwise, return null
 
   function getTrailIdWithNameAndTrailhead(trailName, trailhead) {
-
+    console.log("getTrailIdWithNameAndTrailhead");
+    console.log(trailName);
+    console.log(trailhead);
     // get our possible trail candidates (matches by trail name)
-    trailNameMatches = [];
+    var trailNameMatches = [];
     $.each(trailData, function(trailID, trail) {
-      if (trail.properties.trail1 == trailName || trailhead.properties.trail2 || trailhead.properties.trail3) {
+      if (trail.properties.name == trailName) {
         trailNameMatches.push(trailID);
       }
     });
+    console.log(trailNameMatches);
+    console.log(trailNameMatches.length);
     // check for no matches
     if (trailNameMatches.length === 0) {
+      console.log("return null");
       return null;
     }
     // check for a single match
     if (trailNameMatches.length === 1) {
+      console.log("return single");
       return trailNameMatches[0];
     }
     // loop through the trails, exiting right away if we get a source-steward match,
@@ -495,16 +492,19 @@ function startup() {
       var matchedTrailID = trailNameMatches[i];
       var matchedTrail = trailData[matchedTrailID];
       if (trailhead.properties.source == matchedTrail.properties.steward) {
+        console.log("return source-steward");
         return matchedTrailID;
       }
       if (trailhead.properties.source == matchedTrail.properties.source) {
         sourceMatchTrailID = matchedTrailID;
       }
     }
-    if (sourceMatch) {
+    if (sourceMatchTrailID) {
+      console.log("return source-source");
       return sourceMatchTrailID;
     }
     else {
+      console.log("return undefined");
       return trailNameMatches[0];
     }
   }
@@ -522,7 +522,7 @@ function startup() {
   // 4) Closest match to trailhead, based on a single point
 
   function getSegmentsWithTrailAndTrailhead(trail, trailhead) {
-    
+
   }
 
   // this is so very wrong and terrible and makes me want to never write anything again.
@@ -610,6 +610,7 @@ function startup() {
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
     $("#trailList").html("");
+    var divCount = 0;
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.cartodb_id;
@@ -641,7 +642,7 @@ function startup() {
               showTrailDetails(trail, trailhead);
             };
           }(trail, trailhead));
-
+        divCount = divCount + 1;
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
         // Making a new div for Detail Panel
@@ -661,6 +662,7 @@ function startup() {
         $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
     });
+    console.log("divCount", divCount);
   }
 
   function metersToMiles(i) {
