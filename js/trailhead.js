@@ -473,6 +473,40 @@ function startup() {
 
   function getTrailIdWithNameAndTrailhead(trailName, trailhead) {
 
+    // get our possible trail candidates (matches by trail name)
+    trailNameMatches = [];
+    $.each(trailData, function(trailID, trail) {
+      if (trail.properties.trail1 == trailName || trailhead.properties.trail2 || trailhead.properties.trail3) {
+        trailNameMatches.push(trailID);
+      }
+    });
+    // check for no matches
+    if (trailNameMatches.length === 0) {
+      return null;
+    }
+    // check for a single match
+    if (trailNameMatches.length === 1) {
+      return trailNameMatches[0];
+    }
+    // loop through the trails, exiting right away if we get a source-steward match,
+    // otherwise keep track of a possible source-source match to return 
+    var sourceMatchTrailID = null;
+    for (var i = 0; i < trailNameMatches.length; i++) {
+      var matchedTrailID = trailNameMatches[i];
+      var matchedTrail = trailData[matchedTrailID];
+      if (trailhead.properties.source == matchedTrail.properties.steward) {
+        return matchedTrailID;
+      }
+      if (trailhead.properties.source == matchedTrail.properties.source) {
+        sourceMatchTrailID = matchedTrailID;
+      }
+    }
+    if (sourceMatch) {
+      return sourceMatchTrailID;
+    }
+    else {
+      return trailNameMatches[0];
+    }
   }
 
 
@@ -488,7 +522,7 @@ function startup() {
   // 4) Closest match to trailhead, based on a single point
 
   function getSegmentsWithTrailAndTrailhead(trail, trailhead) {
-
+    
   }
 
   // this is so very wrong and terrible and makes me want to never write anything again.
