@@ -1,0 +1,41 @@
+/* Look into justification for overriding styles*/
+/* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
+/* Variables used: color, typography */
+
+.top-ui {
+	position: fixed;
+	width: 100%;
+	top: 0px;
+	margin: 0px;
+	.navbar {
+		width: 100%;
+		margin-bottom: 0;
+		padding-right: 0;
+		max-height: 60px;
+		.navbar-inner {
+			background-color: @color-brown;
+			border: none;
+			box-shadow: none;
+			text-align: justify;
+			padding: 1em 3% 1em;
+			&:after {
+				content: '';
+				display: inline-block;
+			};
+		}
+		.brand {
+			.serif-large();
+			display: inline-block;
+			color: @color-white;
+			&:hover { text-decoration: none;};
+			&:focus { text-decoration: none;};
+		}
+		.subBrand {
+			margin-left: 20px;
+			display: inline-block;
+			@sanSerif-large();
+			cursor: default;
+			&:hover { text-decoration: none; };
+		}
+	}
+}

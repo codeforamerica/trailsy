@@ -1,0 +1,222 @@
+.detailPanelColumn {
+	display: none;
+	position: relative;
+	height: 500px;
+	padding: 0;
+	webkit-transition: width 0.3s ease, margin 0.3s ease;
+	transition: width 0.3s ease, margin 0.3s ease;
+}
+
+.detail-panel {
+	position: absolute;
+	width: 100%;
+	height: 500px;
+	background-color: #fff;
+	overflow: scroll;
+	border-bottom: 1px solid #d4d4d4;
+	.detailPanelTitle {
+		position: relative;
+		bottom: -1;
+		background-color: #C45F37;
+		display: inline-block;
+		width: 100%;
+		height: 40px;
+		padding: 10px 10px 0 10px;
+		font-family: 'Oswald', sans-serif;
+		font-weight: lighter;
+		letter-spacing: 1px;
+		font-size: 20px;
+	}
+	.detailTrailheadName {
+		position: relative;
+	  	margin-left: 20px;
+	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	   	font-weight: 300;
+	   	font-size: 12px;
+	}
+	.detailLength {
+		position: relative;
+		float: left;
+		top: 2%;
+		margin-left: 2%;
+	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	  	font-weight: 300;
+	  	font-size: 12px;
+	}
+	.detailDirections {
+		position: relative;
+	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	  	font-weight: 300;
+	  	font-size: 12px;
+	  	float: left;
+		margin-top: 6px;
+	}
+	.detailDifficulty {
+		position: relative;
+	  	margin-left: 2%;
+		width: 100%;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	 	font-weight: 300;
+	   	font-size: 12px;
+	}
+	.detailTrailheadDistance {
+		position: relative;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	 	font-weight: 300;
+	   	font-size: 12px;
+	}
+	.detailPanelHeader {
+	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	 	font-weight: 300;
+	   	font-size: 12px;
+	}
+	.detailPanelPicture {
+		border-bottom: 1px solid #bebebe;
+		width: 100%;
+	}
+	.detailDescription {
+		display: inline-block;
+	  	margin-top: 15px;
+	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	  	font-weight: 300;
+	  	font-size: 12px;
+	}
+	.detailPrintMap {
+		float: left;
+		margin-top: 6px;
+	}
+	.social-icon {
+		position: relative;
+		float: left;
+		margin-left: 5px;
+		width: 30px;
+	}
+	.detailPanelBody {
+		position: absolute;
+		height: auto;
+		width: 100%;
+	}
+	.detailTopRow {
+		&#left {
+			position: relative;
+			float: left;
+			display: inline-block;
+			height: 40px;
+			width: 25%;
+			border-right-style: dotted;
+			border-width: 1px;
+			border-color: #bebebe;
+		}
+		&#right {
+			position: relative;
+			float: left;
+			width: 75%;
+			height: 40px;
+		}
+		&span {
+			margin-left: 10px;
+		}
+		.icon {
+			position: relative;
+			float: left;
+			height: 40px;
+			width: 20%;
+			padding-left: 10px;
+		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		  	font-weight: 300;
+		  	font-size: 12px;
+			border-right-style: dotted;
+			border-width: 1px;
+			border-color: #bebebe;
+		}
+	}
+	.detailMiddleRow {
+		position: relative;
+		display: inline-block;
+		height: auto;
+		width: 100%;
+		padding: 10px;
+		border-top-style: dotted;
+		border-width: 1px;
+		border-color: #bebebe;
+	}
+	.detailBottomRow {
+		position: relative;
+		display: inline-block;
+		height: auto;
+		width: 100%;
+		padding: 10px;
+		border-top-style: dotted;
+		border-width: 1px;
+		border-color: #bebebe;
+		&a {
+			margin-right: 2px;
+		}
+	}
+	.detailFooter {
+		position: relative;
+		display: inline-block;
+		height: auto;
+		width: 100%;
+		padding: 10px;
+		border-top-style: dotted;
+		border-width: 1px;
+		border-color: #bebebe;
+		&span {
+			font-family: 'Oswald', sans-serif;
+			color: #C45F37;
+			font-size: 14px;
+			line-height: 15px;
+			position: absolute;
+			left: 30%;
+			top: 20px;
+		}
+		.detailSource {
+			position: absolute;
+			left: 30%;
+			top: 40px;
+		}
+		.detailSourceTelephone {
+			position: absolute;
+			left: 60%;
+			top: 40px;
+		}
+	}
+}
+
+.closeDetail {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	width: 25px;
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=80);
+
+  /* Netscape */
+  -moz-opacity: 0.8;
+
+  /* Safari 1.x */
+  -khtml-opacity: 0.8;
+
+  /* Good browsers */
+  opacity: 0.8;
+  p {
+ 	display: inline-block;
+	text-align: center;
+	color: #F2F4E9;
+	text-shadow: 1px 1px 1px #4e4c4c;
+  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 12px;
+  }
+}
+
+.trailName {
+	font-family: 'Oswald', sans-serif;
+	margin: 0;
+	color: #FFF;
+}
+

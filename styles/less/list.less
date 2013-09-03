@@ -1,0 +1,119 @@
+/* Can we make this border consistent with others?*/
+
+.trailListColumn {
+	position: relative;
+	height: 500px;
+	padding: 0;
+	&a {
+		font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+		display: inline-block;
+		position: relative;
+		padding: 4px 0 2px 14px;
+		font-size: 12px;
+	}
+}
+
+/* This border should become a variable */
+#trailList {
+	width: 100%;
+	height: 560px;
+	position: absolute;
+	top: 65px;
+	overflow: scroll;
+	background-color: #FFF;
+	border-radius: 2px;
+	border-left: 1px solid #d4d4d4;
+	border-right: 1px solid #d4d4d4;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.trailList-title {
+	width: 100%;
+	height: 40px;
+	display: inline-block;
+	position: absolute;
+	top: 0;
+	background-color: #5E4534;
+	p {
+		display: inline-block;
+		position: relative;
+		padding: 10px 0 0 16px;
+		font-family: 'Oswald', sans-serif;
+		font-weight: 300;
+		letter-spacing: 1px;
+		font-size: 16px;
+		color: #FFF;
+	}
+}
+
+/* Border should be replaced*/
+.trail-box {
+	position: relative;
+	height: 80px;
+	background-color: #fff;
+	border-top-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+	cursor: pointer;
+	&:hover {
+		border-bottom: 2px solid #C45F37;
+		-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+	};
+	/* Font replacement */
+	.trailheadName {
+		position: absolute;
+	   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	   	font-size: 14px;
+		color: #4e4c4c;
+		top: 45px;
+		left: 14px;
+	}
+	/* Font replacement */
+	.trailheadDistance {
+		position: absolute;
+	 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	   	font-size: 14px;
+		text-align: right;
+		color: #4e4c4c;
+		top: 45px;
+		right: 10px;
+	}
+}
+
+.trailSource {
+	display: none;
+	position: absolute;
+	top: 16px;
+	right: 10px;
+   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   	font-weight: 300;
+   	font-size: 14px;
+	line-height: 20px;
+	color: #4e4c4c;
+	text-align: right;
+}
+
+.trailIndicatorLight {
+	display: none;
+	position: absolute;
+	right: 0;
+	width: 5px; 
+	height: 5px; 
+	border-top: 40px solid transparent; 
+	border-right: 8px;
+}
+
+#redoSearch {
+	position: absolute;
+	top: 40px;
+	display: inline-block;
+	width: 100%;
+	height: 25px;
+	background: #fff;
+	border-style: dotted;
+	border-width: 1px;
+	border-color: #bebebe;
+}
+
