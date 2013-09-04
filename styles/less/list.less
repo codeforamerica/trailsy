@@ -1,10 +1,10 @@
-/* Can we make this border consistent with others?*/
+/* List Module */
 
 .trailListColumn {
 	position: relative;
 	height: 500px;
 	padding: 0;
-	&a {
+	a {
 		font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
 		display: inline-block;
 		position: relative;
@@ -25,6 +25,18 @@
 	border-left: 1px solid #d4d4d4;
 	border-right: 1px solid #d4d4d4;
 	border-bottom: 1px solid #d4d4d4;
+}
+
+.trail {
+	position: absolute;
+	height: auto;
+	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+	font-size: 18px;
+	line-height: 20px;
+	color: #C45F37;
+	top: 10px;
+	left: 14px;
+	cursor: pointer;
 }
 
 .trailList-title {
@@ -53,10 +65,10 @@
 	background-color: #fff;
 	border-top-style: dotted;
 	border-width: 1px;
-	border-color: #bebebe;
+	border-color: @color-gray-border;
 	cursor: pointer;
 	&:hover {
-		border-bottom: 2px solid #C45F37;
+		border-bottom: 2px solid @color-orange;
 		-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 		-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
