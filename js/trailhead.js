@@ -24,6 +24,7 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 4.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
+  var API_HOST = "http://127.0.0.1:3000";
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
@@ -276,9 +277,24 @@ function startup() {
     });
   }
 
+  function getOrderedTrailheads(location, callback) {
+    console.log("getOrderedTrailheads");
+    var callData = {
+      loc: location.lat + "," + location.lng,
+      type: "GET",
+      path: "/trailheads.json?loc=" + location.lat + "," + location.lng
+    };
+    makeAPICall(callData, function(response) {
+      populateTrailheadArray(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
   // get all trailhead info, in order of distance from "location"
 
-  function getOrderedTrailheads(location, callback) {
+  function getOrderedTrailheadsOld(location, callback) {
     console.log("getOrderedTrailheads");
     var nearest_trailhead_query = "select trailheads.*, " +
       "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
@@ -823,8 +839,7 @@ function startup() {
           valid = 1;
           // console.log("match");
           trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
-        }
-        else {
+        } else {
           // console.log("invalid!");
         }
       }
@@ -1015,6 +1030,31 @@ function startup() {
       zoom: {
         animate: true
       }
+    });
+  }
+
+  function makeAPICall(callData, doneCallback) {
+    console.log('makeAPICall');
+    if (!($.isEmptyObject(callData.data))) {
+      callData.data = JSON.stringify(callData.data);
+    }
+    var url = API_HOST + callData.path;
+    var request = $.ajax({
+      type: callData.type,
+      url: url,
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      //beforeSend: function(xhr) {
+      //  xhr.setRequestHeader("Accept", "application/json")
+      //},
+      data: callData.data
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      $("#results").text("error: " + JSON.stringify(errorThrown));
+    }).done(function(response, textStatus, jqXHR) {
+      if (typeof doneCallback === 'function') {
+        doneCallback.call(this, response);
+      }
+      $("#results").text(JSON.stringify(response));
     });
   }
 
