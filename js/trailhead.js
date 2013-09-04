@@ -331,7 +331,7 @@ function startup() {
         return function() {
           trailheadMarkerClick(trailheadID);
         };
-      }(currentFeature.properties.cartodb_id));
+      }(currentFeature.properties.id));
 
       var trailhead = {
         properties: currentFeature.properties,
@@ -500,7 +500,7 @@ function startup() {
           .attr("data-trailname", trail.properties.name)
           .attr("data-trailid", trail.properties.cartodb_id)
           .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-trailheadid", trailhead.properties.id)
           .attr("data-index", trailsIndex)
           .append("<a href='#'>").html(trail.properties.name)
           .appendTo($popupTrailheadDiv);
@@ -535,7 +535,7 @@ function startup() {
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
-      var trailheadID = trailhead.properties.cartodb_id;
+      var trailheadID = trailhead.properties.id;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
         return true; // next $.each
@@ -686,7 +686,7 @@ function startup() {
   function populateTrailsForTrailheadTrailName(e) {
     var parsed = parseTrailElementData($(e.target));
     for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.cartodb_id == parsed.trailheadID) {
+      if (trailheads[i].properties.id == parsed.trailheadID) {
         trailhead = trailheads[i];
       }
     }
@@ -704,7 +704,7 @@ function startup() {
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
     for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.cartodb_id == trailheadID) {
+      if (trailheads[i].properties.id == trailheadID) {
         currentTrailhead = trailheads[i];
       }
     }
@@ -731,7 +731,7 @@ function startup() {
       var trailID = currentTrailhead.trails[i];
       var trailName = trailData[trailID].properties.name;
       var trailheadName = currentTrailhead.properties.name;
-      var trailheadID = currentTrailhead.properties.cartodb_id;
+      var trailheadID = currentTrailhead.properties.id;
       // add class for highlighting
       var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
       var color = getClassBackgroundColor("trail" + (i + 1));
