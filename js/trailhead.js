@@ -25,6 +25,9 @@ function startup() {
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
 
+  // this is hopefully just until we map these abbreviations in data outside of the app
+  var orgNames = { CVNP: "Cuyahoga Valley National Park", MPSSC: "Metro Parks, Serving Summit County", CMP: "Cleveland Metroparks" };
+
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
   // { *cartodb_id*: { geometry: null,  // this field is added for CartoDB's approval
@@ -432,10 +435,6 @@ function startup() {
         var trailheadTrailName = trailhead.properties[trailWithNum];        
         console.log("-----------------------------------------");
         var trailID = getTrailIdWithNameAndTrailhead(trailheadTrailName, trailhead);
-        // console.log("result:");
-        // console.log(trailhead);
-        // console.log(trailheadTrailName);
-        // console.log(trailID);
         if (trailID) {
           trailhead.trails.push(trailID);
         }
@@ -518,13 +517,45 @@ function startup() {
   //
   // 1) If the trail is a "MULTI" steward trail, all available segments for trail name are returned
   // 2) Matching steward, source
-  // 3) Matching steward (using source with the most geodata)
+  // 3) Matching steward (using source with the most segments (probably need a different indicator)
   // 4) Closest match to trailhead, based on a single point
 
   function getSegmentsWithTrailAndTrailhead(trail, trailhead) {
-
+    console.log("getSegmentsWithTrailAndTrailhead");
+    console.log(trail);
+    console.log(trailhead);
+    var trailName = trail.properties.name;
+    var trailSource = trail.properties.source;
+    var trailSteward = trail.properties.steward;
+    
+    console.log(groupedSegments[trailName]);
+    console.log(trailSteward);
+    console.log(trailSource);
+    if (groupedSegments[trailName] && groupedSegments[trailSteward] && groupedSegments[trailSteward][trailSource]) {     
+      // we have a matching steward and source
+      return collectSegments([groupedSegments[trailSteward][trailSource]]);
+    } else if (groupedSegments[trailName] && groupedSegments[trailSteward]) {
+      // we have a matching steward, different sources, return the source with the most segments
+      largestGroup = null;
+      for (var sourceGroup in groupedSegments[trailSteward]) {
+        if (sourceGroup.hasOwnProperty(sourceGroup)) {
+          if (largestGroup === null || groupedSegments[trailSteward][sourceGroup].length > largestGroup.length) {
+            largestGroup = groupedSegments[trailSteward][sourceGroup];
+          }
+        }
+      }
+      return collectSegments(largestGroup);
+    } else {
+      console.log("getSegmentsWithTrailAndTrailhead: no match");      //$.each()
+      // get largest set of name/steward/source segments
+    }
   }
 
+  function collectSegments(segmentGroups) {
+    for (var i; i < segmentGroups.length; i++) {
+      console.log(segmentGroups[i]);
+    }
+  }
   // this is so very wrong and terrible and makes me want to never write anything again.
   // alas, it works for now.
   // for each trailhead, if two or more of the matched trails from addTrailDataToTrailheads() have the same name,
@@ -881,6 +912,7 @@ function startup() {
 
   function getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex) {
     console.log("getAllTrailPathsForTrailheadLocal");
+
     var responses = [];
     var trailFeatureArray = [];
     // got trailhead.trails, now get the segment collection for all of them
@@ -890,6 +922,7 @@ function startup() {
       var trail = trailData[trailID];
       var trailSource = trail.properties.source;
       var trailName = trail.properties.name;
+      getSegmentsWithTrailAndTrailhead(trail, trailhead);
       var trailFeatureCollection = {
         type: "FeatureCollection",
         features: [{
