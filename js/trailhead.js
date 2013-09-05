@@ -26,9 +26,10 @@ function startup() {
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
   var API_HOST = "http://127.0.0.1:3000";
 
+
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
-  // { *id*: { geometry: null,  // this field is added for CartoDB's approval
+  // { *id*: { geometry: point(0,0), unused for now  
   //                  properties: { id: *uniqueID*,
   //                                length: *length of trail in meters*,
   //                                name: *name of trail*,
@@ -65,8 +66,6 @@ function startup() {
   var userMarker = null;
   var allSegmentLayer = null;
 
-  // Prepping for API calls (defining data for the call)
-  var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
 
   // comment these/uncomment the next set to switch between tables
   var TRAILHEADS_TABLE = "summit_trailheads";
@@ -129,13 +128,17 @@ function startup() {
     getOrderedTrailheads(currentLocation, function() {
       getTrailData(function() {
         addTrailDataToTrailheads(trailData);
+        // the following should happen outside of this callback nest, but 
+        // with single-threaded Rails, we want to make sure the 
+        // traildata API call happens first
+        if (USE_LOCAL) {
+          getTrailSegments(function() {
+            //console.log(trailSegments);
+          });
+        }
       });
     });
-    if (USE_LOCAL) {
-      getTrailSegments(function() {
-        //console.log(trailSegments);
-      });
-    }
+
   }
 
   // set currentLocation to the center of the currently viewed map
