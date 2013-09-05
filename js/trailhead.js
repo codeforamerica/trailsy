@@ -27,9 +27,9 @@ function startup() {
   var API_HOST = "http://127.0.0.1:3000";
 
   var map = {};
-  var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
-  // { *cartodb_id*: { geometry: null,  // this field is added for CartoDB's approval
-  //                  properties: { cartodb_id: *uniqueID*,
+  var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
+  // { *id*: { geometry: null,  // this field is added for CartoDB's approval
+  //                  properties: { id: *uniqueID*,
   //                                length: *length of trail in meters*,
   //                                name: *name of trail*,
   //                                source: *whose data this info came from*,
@@ -40,7 +40,7 @@ function startup() {
   // [ {  marker: *Leaflet marker*,
   //      trails: *[array of matched trail IDs],
   //      popupContent: *HTML of Leaflet popup*,
-  //      properties: { cartodb_id: *uniqueID*,
+  //      properties: { id: *uniqueID*,
   //                    distance: *from current location in meters*,
   //                    name: *name*,
   //                    source: *whose data this info came from*,
@@ -351,9 +351,25 @@ function startup() {
     highlightTrailhead(id, 0);
   }
 
-  // get the trailData from the DB
+  // get the trailData from the API
 
   function getTrailData(callback) {
+    console.log("getTrailData");
+    var callData = {
+      type: "GET",
+      path: "/trails.json"
+    };
+    makeAPICall(callData, function(response) {
+      populateTrailData(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  // get the trailData from the DB
+
+  function getTrailDataOld(callback) {
     console.log("getTrailData");
     var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
     // Another AJAX call, for the trails
@@ -367,45 +383,65 @@ function startup() {
 
   function populateTrailData(trailDataGeoJSON) {
     for (var i = 0; i < trailDataGeoJSON.features.length; i++) {
-      trailData[trailDataGeoJSON.features[i].properties.cartodb_id] = trailDataGeoJSON.features[i];
+      trailData[trailDataGeoJSON.features[i].properties.id] = trailDataGeoJSON.features[i];
     }
   }
 
   function getTrailSegments(callback) {
     console.log("getTrailSegments");
-    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
-    makeSQLQuery(trail_segment_query, function(response) {
+    var callData = {
+      type: "GET",
+      path: "/trailsegments.json"
+    };
+    makeAPICall(callData, function(response) {
       trailSegments = response;
-
-      allSegmentLayer = L.geoJson(trailSegments, {
-        style: function() {
-          return {
-            color: '#060',
-            weight: 2,
-            opacity: 0.5,
-            clickable: true,
-            dashArray: "5,5"
-          };
-        },
-        onEachFeature: function(feature, layer) {
-          var popupHTML = "<div class='trail-popup'>";
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + feature.properties.name1;
-          }
-          if (feature.properties.name2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name2;
-          }
-          if (feature.properties.name3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name3;
-          }
-          popupHTML = popupHTML + "</div>";
-          layer.bindPopup(popupHTML);
-        }
-      });
+      allSegmentLayer = makeAllSegmentLayer(response);
       if (typeof callback == "function") {
         callback();
       }
     });
+  }
+
+  function getTrailSegmentsOld(callback) {
+    console.log("getTrailSegments");
+    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
+    makeSQLQuery(trail_segment_query, function(response) {
+      trailSegments = response;
+      allSegmentLayer = makeAllSegmentLayer(response);
+
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  function makeAllSegmentLayer(response) {
+    allSegmentLayer = L.geoJson(trailSegments, {
+      style: function() {
+        return {
+          color: '#060',
+          weight: 2,
+          opacity: 0.5,
+          clickable: true,
+          dashArray: "5,5"
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        var popupHTML = "<div class='trail-popup'>";
+        if (feature.properties.name1) {
+          popupHTML = popupHTML + feature.properties.name1;
+        }
+        if (feature.properties.name2) {
+          popupHTML = popupHTML + "<br>" + feature.properties.name2;
+        }
+        if (feature.properties.name3) {
+          popupHTML = popupHTML + "<br>" + feature.properties.name3;
+        }
+        popupHTML = popupHTML + "</div>";
+        layer.bindPopup(popupHTML);
+      }
+    });
+    return allSegmentLayer;
   }
 
   // given trailData,
@@ -463,7 +499,7 @@ function startup() {
         trailheadTrailNames[trailName] = trailheadTrailNames[trailName] || [];
         var sourceAndTrailID = {
           source: trailData[trailhead.trails[trailsIndex]].properties.source,
-          trailID: trailData[trailhead.trails[trailsIndex]].properties.cartodb_id
+          trailID: trailData[trailhead.trails[trailsIndex]].properties.id
         };
         trailheadTrailNames[trailName].push(sourceAndTrailID);
       }
@@ -498,7 +534,7 @@ function startup() {
         var trail = trailData[trailhead.trails[trailsIndex]];
         var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
           .attr("data-trailname", trail.properties.name)
-          .attr("data-trailid", trail.properties.cartodb_id)
+          .attr("data-trailid", trail.properties.id)
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.id)
           .attr("data-index", trailsIndex)
