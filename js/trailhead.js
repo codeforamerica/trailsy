@@ -24,8 +24,8 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 4.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
-  var API_HOST = "http://127.0.0.1:3000";
-
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -817,7 +817,12 @@ function startup() {
         "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trail_query, index) {
         return function(callback) {
-          makeSQLQuery(trail_query, function(response) {
+          // makeSQLQuery(trail_query, function(response) {
+          //   responses[index] = response;
+          //   callback(null, trailID);
+          // });
+          var callData = { type: "GET", path: "/trailsegments.json"};
+          makeAPICall(callData, function(response) {
             responses[index] = response;
             callback(null, trailID);
           });
