@@ -3,41 +3,74 @@
 /* Variables used: color, typography */
 
 .top-ui {
-	position: relative;
-	width: 100%;
-	top: 0px;
-	margin: 0px;
-	.navbar {
+	@media @mobile {
+		width: 100%;
+		height: auto;
+		top: 0;
+		margin: 0;
+		.navbar {
+			width: 100%;
+			max-height: 20px;
+			margin: 0;
+			padding: 0;
+			.navbar-inner {
+				position: relative;
+				background-color: @color-brown;
+				border: none;
+				box-shadow: none;
+				text-align: justify;
+				padding: 5px 7px 7px 10px;
+			}
+			.brand {
+				font-family: Oswald, "Times New Roman", serif;
+				font-size: 12px;
+				color: @color-white;
+			}
+			.subBrand {
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				font-size: 8px;
+				color: @color-white;
+			}
+		}
+	}
+	@media desktop {
 		position: relative;
 		width: 100%;
-		margin-bottom: 0;
-		padding: 0;
-		max-height: 60px;
-		.navbar-inner {
+		top: 0;
+		margin: 0;
+		.navbar {
 			position: relative;
-			background-color: @color-brown;
-			border: none;
-			box-shadow: none;
-			text-align: justify;
-			padding: 1em 3% 1em;
-			&:after {
-				content: '';
-				display: inline-block;
-			};
-		}
-		.brand {
-			.serif-large();
-			display: inline-block;
-			color: @color-white;
-			&:hover { text-decoration: none;};
-			&:focus { text-decoration: none;};
-		}
-		.subBrand {
-			margin-left: 20px;
-			display: inline-block;
-			@sanSerif-large();
-			cursor: default;
-			&:hover { text-decoration: none; };
+			width: 100%;
+			margin-bottom: 0;
+			padding: 0;
+			max-height: 60px;
+			.navbar-inner {
+				position: relative;
+				background-color: @color-brown;
+				border: none;
+				box-shadow: none;
+				text-align: justify;
+				padding: 15px 20px 20px 30px;
+				&:after {
+					content: '';
+					display: inline-block;
+				}
+				.brand {
+					.serif-large();
+					display: inline-block;
+					color: @color-white;
+					&:hover { text-decoration: none;};
+					&:focus { text-decoration: none;};
+				}
+				.subBrand {
+					margin-left: 20px;
+					display: inline-block;
+					@sanSerif-large();
+					color: @color-white;
+					cursor: default;
+					&:hover { text-decoration: none; };
+				}
+			}
 		}
 	}
 }

@@ -19,33 +19,56 @@
 }
 
 .trailMapContainer {
-	position: relative;;
-	height: 500px;
-	padding: 0;
-	border-left: 1px solid #d4d4d4;
-	border-right: 1px solid #d4d4d4;
-	border-bottom: 1px solid #d4d4d4;
+	@media @mobile {
+		position: relative;
+		height: 100%;
+		/* Need to figure out how to make this device-height-ish...*/
+		width: 600px;
+		position: relative;
+	}
+	/* Desktop */
+	@media @desktop {
+		height: 500px;
+		padding: 0;
+		border-left: 1px solid #d4d4d4;
+		border-right: 1px solid #d4d4d4;
+		border-bottom: 1px solid #d4d4d4;
+	}
 }
 
 #trailMap {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	padding: 0;
+	@media @mobile {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+	@media @desktop {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
 }
 
+/* Not sure that we have a trail map title currently*/
 .trailMap-title {
-	margin-top: -10px;
-	margin-left: 10px;
-	margin-right: 10px;
-	height: 40px;
-	background-color: #F2F4E9;
-	p {
-		padding-top: 10px;
-		padding-left: 10px;
-		font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-		font-size: 18px;
-		color: #000;
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+		margin-top: -10px;
+		margin-left: 10px;
+		margin-right: 10px;
+		height: 40px;
+		background-color: #F2F4E9;
+		p {
+			padding-top: 10px;
+			padding-left: 10px;
+			font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+			font-size: 18px;
+			color: #000;
+		}
 	}
 }
 
@@ -71,15 +94,20 @@
 }
 
 #crosshair {
-    position: absolute;
-    top: 250px;
-    height: 20px;
-    width: 20px;
-    left: 50%;
-    /*margin-left: -8px;*/
-    display: block;
-    background: url(img/crosshair.gif);
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: 1;
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+	    position: absolute;
+	    top: 250px;
+	    height: 20px;
+	    width: 20px;
+	    left: 50%;
+	    /*margin-left: -8px;*/
+	    display: block;
+	    background: url(img/crosshair.gif);
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    z-index: 1;
+	}
 }

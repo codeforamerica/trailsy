@@ -296,7 +296,7 @@ function startup() {
 
   // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
-  // and a place to put the trails for that trailhead
+  // and a place to put the trails for that trailhead.
 
   function populateTrailheadArray(trailheadsGeoJSON) {
     console.log("populateTrailheadArray");
@@ -939,14 +939,14 @@ function startup() {
           };
         }
       },
-      //  Don't recognize this syntax...ask Dan - Alan.
+
       onEachFeature: function(feature, layer) {
         var popupHTML = "<div class='trail-popup'>";
         // if we have a named trail, show its name
         if (feature.properties.trailname) {
           popupHTML = popupHTML + feature.properties.trailname;
         }
-        // else we have an unused trail segment--list all of the names associated with it 
+        // else we have an unused trail segment--list all of the names associated with it
         else {
           if (feature.properties.name1) {
             popupHTML = popupHTML + "<br>" + feature.properties.name1;
@@ -1009,7 +1009,7 @@ function startup() {
     map.setView(layer.getBounds().getCenter(), newZoom, {
       pan: {
         animate: true,
-        duration: 3.0,
+        duration: 4.0,
         easeLinearity: 0.05
       },
       zoom: {

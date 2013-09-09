@@ -1,32 +1,37 @@
 /* Filter Module */
 
 .filters {
-	position: relative;
-	width: auto;
-	min-width: 400px;
-	height: 100%;
-	display: inline-block;
-	left: 2%;
-	border-left: 1px dotted @color-light-gray;
-	&:after {
-		content: '';
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+		position: relative;
+		width: auto;
+		min-width: 400px;
+		height: 100%;
 		display: inline-block;
-	};
-	.btn {
-
-		&:hover {
-			color: @color-white;
-			text-shadow: none;
-			background-color: @color-green;
+		left: 20px;
+		border-left: 1px dotted @color-light-gray;
+		&:after {
+			content: '';
+			display: inline-block;
 		};
-		&:focus {};
-		&:active {};
-		.dropdown-toggle {
-			background-color: transparent;
-			height: 100%;
-			font-weight: lighter;
-			border-width: 1px;
-			border-color: @color-gray-border;
+		.btn {
+
+			&:hover {
+				color: @color-white;
+				text-shadow: none;
+				background-color: @color-green;
+			};
+			&:focus {};
+			&:active {};
+			.dropdown-toggle {
+				background-color: transparent;
+				height: 100%;
+				font-weight: lighter;
+				border-width: 1px;
+				border-color: @color-gray-border;
+			}
 		}
 	}
 }
@@ -40,29 +45,49 @@
 };*/
 
 .bootstrap-select:not([class*="span"]) {
-	width: 160px;
+	/* Mobile */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+		display: none;
+	}
+	/* Desktop */
+	@media only screen and (min-width : 1224px) {
+		width: 160px;
+	}
 }
 
 .activityFilter-highlight {}
 
 .btn-group { 
-	btn {
-		&:first-child {
-			border-right-style: dotted;
-			border-bottom: none;
-			border-top: none;
-			border-radius: 0;
-			border-left: none;
-		};
+	/* Mobile */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+		display: none;
+	}
+	/* Desktop */
+	@media only screen and (min-width : 1224px) {
+		btn {
+			&:first-child {
+				border-right-style: dotted;
+				border-bottom: none;
+				border-top: none;
+				border-radius: 0;
+				border-left: none;
+			};
+		}
 	}
 }
 
 .searchbar {
-	position: relative;
-	height:60px;
-	width: 100%;
-	background-color: #fff;
-	text-align: justify;
-	line-height: 30px;
+	/* Mobile */
+	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+		display: none;
+	}
+	/* Desktop */
+	@media only screen and (min-width : 1224px) {
+		position: relative;
+		height:60px;
+		width: 100%;
+		background-color: #fff;
+		text-align: justify;
+		line-height: 30px;
+	}
 }
-

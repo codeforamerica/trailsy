@@ -12,6 +12,7 @@
 /*			Tools				*/
 @import "colors.less";
 @import "typography.less";
+@import "mediaqueries.less";
 /*@import "mixins.less";*/
 
 /*			Modules				*/
@@ -72,13 +73,21 @@ section {
 }
 
 #main {
-	position: relative;
-	height: 500px;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-top: 20px;
-	overflow: hidden;
-	border-bottom-style: dotted;
-	border-width: 1px;
-	border-color: #bebebe;
+	@media @mobile {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
+	@media @desktop {
+		position: relative;
+		height: 500px;
+		margin-left: 20px;
+		margin-right: 20px;
+		margin-top: 40px;
+		overflow: hidden;
+		border-bottom-style: dotted;
+		border-width: 1px;
+		border-color: #bebebe;
+	}
 }

@@ -32,79 +32,121 @@ body {
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
 /* Variables used: color, typography */
-.top-ui {
-  position: relative;
-  width: 100%;
-  top: 0px;
-  margin: 0px;
+@media only screen and (max-width: 529px) {
+  .top-ui {
+    width: 100%;
+    height: auto;
+    top: 0;
+    margin: 0;
+  }
+  .top-ui .navbar {
+    width: 100%;
+    max-height: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  .top-ui .navbar .navbar-inner {
+    position: relative;
+    background-color: #5e4534;
+    border: none;
+    box-shadow: none;
+    text-align: justify;
+    padding: 5px 7px 7px 10px;
+  }
+  .top-ui .navbar .brand {
+    font-family: Oswald, "Times New Roman", serif;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  .top-ui .navbar .subBrand {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 8px;
+    color: #ffffff;
+  }
 }
-.top-ui .navbar {
-  position: relative;
-  width: 100%;
-  margin-bottom: 0;
-  padding: 0;
-  max-height: 60px;
-}
-.top-ui .navbar .navbar-inner {
-  position: relative;
-  background-color: #5e4534;
-  border: none;
-  box-shadow: none;
-  text-align: justify;
-  padding: 1em 3% 1em;
-}
-.top-ui .navbar .navbar-inner:after {
-  content: '';
-  display: inline-block;
-}
-.top-ui .navbar .brand {
-  font-family: Oswald, "Times New Roman", serif;
-  font-weight: 100;
-  font-size: 30px;
-  line-height: 30px;
-  display: inline-block;
-  color: #ffffff;
-}
-.top-ui .navbar .brand:hover {
-  text-decoration: none;
-}
-.top-ui .navbar .brand:focus {
-  text-decoration: none;
-}
-.top-ui .navbar .subBrand {
-  margin-left: 20px;
-  display: inline-block;
-  cursor: default;
-}
-@san Serif-large();
-.top-ui .navbar .subBrand:hover {
-  text-decoration: none;
+@media desktop {
+  .top-ui {
+    position: relative;
+    width: 100%;
+    top: 0;
+    margin: 0;
+  }
+  .top-ui .navbar {
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0;
+    max-height: 60px;
+  }
+  .top-ui .navbar .navbar-inner {
+    position: relative;
+    background-color: #5e4534;
+    border: none;
+    box-shadow: none;
+    text-align: justify;
+    padding: 15px 20px 20px 30px;
+  }
+  .top-ui .navbar .navbar-inner:after {
+    content: '';
+    display: inline-block;
+  }
+  .top-ui .navbar .navbar-inner .brand {
+    font-family: Oswald, "Times New Roman", serif;
+    font-weight: 100;
+    font-size: 30px;
+    line-height: 30px;
+    display: inline-block;
+    color: #ffffff;
+  }
+  .top-ui .navbar .navbar-inner .brand:hover {
+    text-decoration: none;
+  }
+  .top-ui .navbar .navbar-inner .brand:focus {
+    text-decoration: none;
+  }
+  .top-ui .navbar .navbar-inner .subBrand {
+    margin-left: 20px;
+    display: inline-block;
+    color: #ffffff;
+    cursor: default;
+  }
+  @san Serif-large();
+  .top-ui .navbar .navbar-inner .subBrand:hover {
+    text-decoration: none;
+  }
 }
 /* Filter Module */
-.filters {
-  position: relative;
-  width: auto;
-  min-width: 400px;
-  height: 100%;
-  display: inline-block;
-  left: 2%;
-  border-left: 1px dotted #d4d4d4;
+@media only screen and (max-width: 529px) {
+  .filters {
+    display: none;
+  }
 }
-.filters:after {
-  content: '';
-  display: inline-block;
-}
-.filters .btn:hover {
-  color: #ffffff;
-  text-shadow: none;
-  background-color: #8dbb7d;
-}
-.filters .btn .dropdown-toggle {
-  background-color: transparent;
-  height: 100%;
-  font-weight: lighter;
-  border-width: 1px;
-  border-color: #bebebe;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .filters {
+    position: relative;
+    width: auto;
+    min-width: 400px;
+    height: 100%;
+    display: inline-block;
+    left: 20px;
+    border-left: 1px dotted #d4d4d4;
+  }
+  .filters:after {
+    content: '';
+    display: inline-block;
+  }
+  .filters .btn:hover {
+    color: #ffffff;
+    text-shadow: none;
+    background-color: #8dbb7d;
+  }
+  .filters .btn .dropdown-toggle {
+    background-color: transparent;
+    height: 100%;
+    font-weight: lighter;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
 }
 /*.bootstrap-select .btn-group: {
 	&:hover {
@@ -112,151 +154,258 @@ body {
 	}
 };*/
 .bootstrap-select:not([class*="span"]) {
-  width: 160px;
+  /* Mobile */
+
+  /* Desktop */
+
 }
-.btn-group btn:first-child {
-  border-right-style: dotted;
-  border-bottom: none;
-  border-top: none;
-  border-radius: 0;
-  border-left: none;
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .bootstrap-select:not([class*="span"]) {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1224px) {
+  .bootstrap-select:not([class*="span"]) {
+    width: 160px;
+  }
+}
+.btn-group {
+  /* Mobile */
+
+  /* Desktop */
+
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .btn-group {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1224px) {
+  .btn-group btn:first-child {
+    border-right-style: dotted;
+    border-bottom: none;
+    border-top: none;
+    border-radius: 0;
+    border-left: none;
+  }
 }
 .searchbar {
-  position: relative;
-  height: 60px;
-  width: 100%;
-  background-color: #fff;
-  text-align: justify;
-  line-height: 30px;
+  /* Mobile */
+
+  /* Desktop */
+
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .searchbar {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1224px) {
+  .searchbar {
+    position: relative;
+    height: 60px;
+    width: 100%;
+    background-color: #fff;
+    text-align: justify;
+    line-height: 30px;
+  }
 }
 /*@import "search.less";*/
 /* List Module */
-.trailListColumn {
-  position: relative;
-  height: 500px;
-  padding: 0;
+@media only screen and (max-width: 529px) {
+  .trailListColumn {
+    display: none;
+  }
+  .trailListColumn a {
+    display: none;
+  }
 }
-.trailListColumn a {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 100;
-  letter-spacing: 1px;
-  display: inline-block;
-  position: relative;
-  padding: 4px 0 2px 14px;
-  font-size: 12px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailListColumn {
+    position: relative;
+    height: 500px;
+    padding: 0;
+  }
+  .trailListColumn a {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+    display: inline-block;
+    position: relative;
+    padding: 4px 0 2px 14px;
+    font-size: 12px;
+  }
 }
 /* This border should become a variable */
-#trailList {
-  width: 100%;
-  height: 560px;
-  position: absolute;
-  top: 65px;
-  overflow: scroll;
-  background-color: #FFF;
-  border-radius: 2px;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
-  border-bottom: 1px solid #d4d4d4;
+@media only screen and (max-width: 529px) {
+  #trailList {
+    display: none;
+  }
 }
-.trail {
-  position: absolute;
-  height: auto;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 100;
-  letter-spacing: 1px;
-  font-size: 18px;
-  line-height: 20px;
-  color: #C45F37;
-  top: 10px;
-  left: 14px;
-  cursor: pointer;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  #trailList {
+    width: 100%;
+    height: 560px;
+    position: absolute;
+    top: 65px;
+    overflow: scroll;
+    background-color: #FFF;
+    border-radius: 2px;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+  }
 }
-.trailList-title {
-  width: 100%;
-  height: 40px;
-  display: inline-block;
-  position: absolute;
-  top: 0;
-  background-color: #5E4534;
+@media only screen and (max-width: 529px) {
+  .trail {
+    display: none;
+  }
 }
-.trailList-title p {
-  display: inline-block;
-  position: relative;
-  padding: 10px 0 0 16px;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 300;
-  letter-spacing: 1px;
-  font-size: 16px;
-  color: #FFF;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trail {
+    position: absolute;
+    height: auto;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 18px;
+    line-height: 20px;
+    color: #C45F37;
+    top: 10px;
+    left: 14px;
+    cursor: pointer;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .trailList-title {
+    display: none;
+  }
+  .trailList-title p {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailList-title {
+    width: 100%;
+    height: 40px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #5E4534;
+  }
+  .trailList-title p {
+    display: inline-block;
+    position: relative;
+    padding: 10px 0 0 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 16px;
+    color: #FFF;
+  }
 }
 /* Border should be replaced*/
-.trail-box {
-  position: relative;
-  height: 80px;
-  background-color: #fff;
-  border-top-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-  cursor: pointer;
-  /* Font replacement */
-
-  /* Font replacement */
-
+@media only screen and (max-width: 529px) {
+  .trail-box {
+    display: none;
+  }
+  .trail-box .trailheadName {
+    display: none;
+  }
+  .trail-box .trailheadDistance {
+    display: none;
+  }
 }
-.trail-box:hover {
-  border-bottom: 2px solid #c45f37;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trail-box {
+    position: relative;
+    height: 80px;
+    background-color: #fff;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+    cursor: pointer;
+    /* Font replacement */
+  
+    /* Font replacement */
+  
+  }
+  .trail-box:hover {
+    border-bottom: 2px solid #c45f37;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  }
+  .trail-box .trailheadName {
+    position: absolute;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    color: #4e4c4c;
+    top: 45px;
+    left: 14px;
+  }
+  .trail-box .trailheadDistance {
+    position: absolute;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+    text-align: right;
+    color: #4e4c4c;
+    top: 45px;
+    right: 10px;
+  }
 }
-.trail-box .trailheadName {
-  position: absolute;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 14px;
-  color: #4e4c4c;
-  top: 45px;
-  left: 14px;
+@media only screen and (max-width: 529px) {
+  .trailSource {
+    display: none;
+  }
 }
-.trail-box .trailheadDistance {
-  position: absolute;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-size: 14px;
-  text-align: right;
-  color: #4e4c4c;
-  top: 45px;
-  right: 10px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailSource {
+    display: none;
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    color: #4e4c4c;
+    text-align: right;
+  }
 }
-.trailSource {
-  display: none;
-  position: absolute;
-  top: 16px;
-  right: 10px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  color: #4e4c4c;
-  text-align: right;
+@media only screen and (max-width: 529px) {
+  .trailIndicatorLight {
+    display: none;
+  }
 }
-.trailIndicatorLight {
-  display: none;
-  position: absolute;
-  right: 0;
-  width: 5px;
-  height: 5px;
-  border-top: 40px solid transparent;
-  border-right: 8px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailIndicatorLight {
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 5px;
+    height: 5px;
+    border-top: 40px solid transparent;
+    border-right: 8px;
+  }
 }
-#redoSearch {
-  position: absolute;
-  top: 40px;
-  display: inline-block;
-  width: 100%;
-  height: 25px;
-  background: #fff;
-  border-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
+@media only screen and (max-width: 529px) {
+  #redoSearch {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  #redoSearch {
+    position: absolute;
+    top: 40px;
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    background: #fff;
+    border-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
 }
 /* Map Elements
 ============================== */
@@ -274,34 +423,66 @@ body {
   cursor: pointer;
 }
 .trailMapContainer {
-  position: relative;
-  height: 500px;
-  padding: 0;
-  border-left: 1px solid #d4d4d4;
-  border-right: 1px solid #d4d4d4;
-  border-bottom: 1px solid #d4d4d4;
+  /* Desktop */
+
 }
-#trailMap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
+@media only screen and (max-width: 529px) {
+  .trailMapContainer {
+    height: 100%;
+    /* Need to figure out how to make this device-height-ish...*/
+  
+    width: 600px;
+    position: relative;
+  }
 }
-.trailMap-title {
-  margin-top: -10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 40px;
-  background-color: #F2F4E9;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailMapContainer {
+    height: 500px;
+    padding: 0;
+    border-left: 1px solid #d4d4d4;
+    border-right: 1px solid #d4d4d4;
+    border-bottom: 1px solid #d4d4d4;
+  }
 }
-.trailMap-title p {
-  padding-top: 10px;
-  padding-left: 10px;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 100;
-  letter-spacing: 1px;
-  font-size: 18px;
-  color: #000;
+@media only screen and (max-width: 529px) {
+  #trailMap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  #trailMap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+/* Not sure that we have a trail map title currently*/
+@media only screen and (max-width: 529px) {
+  .trailMap-title {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailMap-title {
+    margin-top: -10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+    background-color: #F2F4E9;
+  }
+  .trailMap-title p {
+    padding-top: 10px;
+    padding-left: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: #000;
+  }
 }
 .trail1 {
   background-color: #9B1818;
@@ -321,236 +502,341 @@ body {
 .trail3:hover {
   background-color: #4e4c4c;
 }
-#crosshair {
-  position: absolute;
-  top: 250px;
-  height: 20px;
-  width: 20px;
-  left: 50%;
-  /*margin-left: -8px;*/
-
-  display: block;
-  background: url(img/crosshair.gif);
-  background-position: center center;
-  background-repeat: no-repeat;
-  z-index: 1;
+@media only screen and (max-width: 529px) {
+  #crosshair {
+    display: none;
+  }
 }
-.detailPanelColumn {
-  display: none;
-  position: relative;
-  height: 500px;
-  padding: 0;
-  webkit-transition: width 0.3s ease, margin 0.3s ease;
-  transition: width 0.3s ease, margin 0.3s ease;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  #crosshair {
+    position: absolute;
+    top: 250px;
+    height: 20px;
+    width: 20px;
+    left: 50%;
+    /*margin-left: -8px;*/
+  
+    display: block;
+    background: url(img/crosshair.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
 }
-.detail-panel {
-  position: absolute;
-  width: 100%;
-  height: 500px;
-  background-color: #fff;
-  overflow: scroll;
-  border-bottom: 1px solid #d4d4d4;
+@media only screen and (max-width: 529px) {
+  .detailPanelColumn {
+    display: none;
+  }
 }
-.detail-panel .detailPanelTitle {
-  position: relative;
-  bottom: -1;
-  background-color: #C45F37;
-  display: inline-block;
-  width: 100%;
-  height: 40px;
-  padding: 10px 10px 0 10px;
-  font-family: 'Oswald', sans-serif;
-  font-weight: lighter;
-  letter-spacing: 1px;
-  font-size: 20px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .detailPanelColumn {
+    display: none;
+    position: relative;
+    height: 500px;
+    padding: 0;
+    webkit-transition: width 0.3s ease, margin 0.3s ease;
+    transition: width 0.3s ease, margin 0.3s ease;
+  }
 }
-.detail-panel .detailTrailheadName {
-  position: relative;
-  margin-left: 20px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+@media only screen and (max-width: 529px) {
+  .detail-panel {
+    display: none;
+  }
+  .detail-panel .detailPanelTitle {
+    display: none;
+  }
+  .detail-panel .detailTrailheadName {
+    display: none;
+  }
+  .detail-panel .detailLength {
+    display: none;
+  }
+  .detail-panel .detailDirections {
+    display: none;
+  }
+  .detail-panel .detailDifficulty {
+    display: none;
+  }
+  .detail-panel .detailTrailheadDistance {
+    display: none;
+  }
+  .detail-panel .detailPanelHeader {
+    display: none;
+  }
+  .detail-panel .detailPanelPicture {
+    display: none;
+  }
+  .detail-panel .detailDescription {
+    display: none;
+  }
+  .detail-panel .detailPrintMap {
+    display: none;
+  }
+  .detail-panel .social-icon {
+    display: none;
+  }
+  .detail-panel .detailPanelBody {
+    display: none;
+  }
+  .detail-panel .detailTopRow {
+    display: none;
+  }
+  .detail-panel .detailMiddleRow {
+    display: none;
+  }
+  .detail-panel .detailBottomRow {
+    display: none;
+  }
+  .detail-panel .detailFooter {
+    display: none;
+  }
 }
-.detail-panel .detailLength {
-  position: relative;
-  float: left;
-  top: 2%;
-  margin-left: 2%;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .detail-panel {
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    background-color: #fff;
+    overflow: scroll;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .detail-panel .detailPanelTitle {
+    position: relative;
+    bottom: -1;
+    background-color: #C45F37;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    padding: 10px 10px 0 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    font-size: 20px;
+  }
+  .detail-panel .detailTrailheadName {
+    position: relative;
+    margin-left: 20px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailLength {
+    position: relative;
+    float: left;
+    top: 2%;
+    margin-left: 2%;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailDirections {
+    position: relative;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    float: left;
+    margin-top: 6px;
+  }
+  .detail-panel .detailDifficulty {
+    position: relative;
+    margin-left: 2%;
+    width: 100%;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailTrailheadDistance {
+    position: relative;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailPanelHeader {
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailPanelPicture {
+    border-bottom: 1px solid #bebebe;
+    width: 100%;
+  }
+  .detail-panel .detailDescription {
+    display: inline-block;
+    margin-top: 15px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  .detail-panel .detailPrintMap {
+    float: left;
+    margin-top: 6px;
+  }
+  .detail-panel .social-icon {
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    width: 30px;
+  }
+  .detail-panel .detailPanelBody {
+    position: absolute;
+    height: auto;
+    width: 100%;
+  }
+  .detail-panel .detailTopRow#left {
+    position: relative;
+    float: left;
+    display: inline-block;
+    height: 40px;
+    width: 25%;
+    border-right-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
+  .detail-panel .detailTopRow#right {
+    position: relative;
+    float: left;
+    width: 75%;
+    height: 40px;
+  }
+  .detail-panel .detailTopRowspan {
+    margin-left: 10px;
+  }
+  .detail-panel .detailTopRow .icon {
+    position: relative;
+    float: left;
+    height: 40px;
+    width: 20%;
+    padding-left: 10px;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    border-right-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
+  .detail-panel .detailMiddleRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
+  .detail-panel .detailBottomRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
+  .detail-panel .detailBottomRowa {
+    margin-right: 2px;
+  }
+  .detail-panel .detailFooter {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: 10px;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
+  .detail-panel .detailFooter span {
+    font-family: 'Oswald', sans-serif;
+    color: #C45F37;
+    font-size: 14px;
+    line-height: 15px;
+    position: absolute;
+    left: 30%;
+    top: 20px;
+  }
+  .detail-panel .detailFooter .icon-large {
+    width: 25%;
+    float: left;
+    position: relative;
+    bottom: 0;
+  }
+  .detail-panel .detailFooter .detailSource {
+    position: absolute;
+    left: 30%;
+    top: 40px;
+  }
+  .detail-panel .detailFooter .detailSourceTelephone {
+    position: absolute;
+    left: 60%;
+    top: 40px;
+  }
 }
-.detail-panel .detailDirections {
-  position: relative;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
-  float: left;
-  margin-top: 6px;
+@media only screen and (max-width: 529px) {
+  .closeDetail {
+    display: none;
+  }
 }
-.detail-panel .detailDifficulty {
-  position: relative;
-  margin-left: 2%;
-  width: 100%;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .closeDetail {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 25px;
+    /* IE 8 */
+  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 5-7 */
+  
+    filter: alpha(opacity=80);
+    /* Netscape */
+  
+    -moz-opacity: 0.8;
+    /* Safari 1.x */
+  
+    -khtml-opacity: 0.8;
+    /* Good browsers */
+  
+    opacity: 0.8;
+  }
+  .closeDetail p {
+    display: inline-block;
+    text-align: center;
+    color: #F2F4E9;
+    text-shadow: 1px 1px 1px #4e4c4c;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+  }
 }
-.detail-panel .detailTrailheadDistance {
-  position: relative;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+@media only screen and (max-width: 529px) {
+  .trailName {
+    display: none;
+  }
 }
-.detail-panel .detailPanelHeader {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .trailName {
+    font-family: 'Oswald', sans-serif;
+    margin: 0;
+    color: #FFF;
+  }
 }
-.detail-panel .detailPanelPicture {
-  border-bottom: 1px solid #bebebe;
-  width: 100%;
+@media only screen and (max-width: 529px) {
+  .activity-icons {
+    display: none;
+  }
 }
-.detail-panel .detailDescription {
-  display: inline-block;
-  margin-top: 15px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
-}
-.detail-panel .detailPrintMap {
-  float: left;
-  margin-top: 6px;
-}
-.detail-panel .social-icon {
-  position: relative;
-  float: left;
-  margin-left: 5px;
-  width: 30px;
-}
-.detail-panel .detailPanelBody {
-  position: absolute;
-  height: auto;
-  width: 100%;
-}
-.detail-panel .detailTopRow#left {
-  position: relative;
-  float: left;
-  display: inline-block;
-  height: 40px;
-  width: 25%;
-  border-right-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-}
-.detail-panel .detailTopRow#right {
-  position: relative;
-  float: left;
-  width: 75%;
-  height: 40px;
-}
-.detail-panel .detailTopRowspan {
-  margin-left: 10px;
-}
-.detail-panel .detailTopRow .icon {
-  position: relative;
-  float: left;
-  height: 40px;
-  width: 20%;
-  padding-left: 10px;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
-  border-right-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-}
-.detail-panel .detailMiddleRow {
-  position: relative;
-  display: inline-block;
-  height: auto;
-  width: 100%;
-  padding: 10px;
-  border-top-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-}
-.detail-panel .detailBottomRow {
-  position: relative;
-  display: inline-block;
-  height: auto;
-  width: 100%;
-  padding: 10px;
-  border-top-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-}
-.detail-panel .detailBottomRowa {
-  margin-right: 2px;
-}
-.detail-panel .detailFooter {
-  position: relative;
-  display: inline-block;
-  height: auto;
-  width: 100%;
-  padding: 10px;
-  border-top-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
-}
-.detail-panel .detailFooterspan {
-  font-family: 'Oswald', sans-serif;
-  color: #C45F37;
-  font-size: 14px;
-  line-height: 15px;
-  position: absolute;
-  left: 30%;
-  top: 20px;
-}
-.detail-panel .detailFooter .detailSource {
-  position: absolute;
-  left: 30%;
-  top: 40px;
-}
-.detail-panel .detailFooter .detailSourceTelephone {
-  position: absolute;
-  left: 60%;
-  top: 40px;
-}
-.closeDetail {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  width: 25px;
-  /* IE 8 */
-
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  /* IE 5-7 */
-
-  filter: alpha(opacity=80);
-  /* Netscape */
-
-  -moz-opacity: 0.8;
-  /* Safari 1.x */
-
-  -khtml-opacity: 0.8;
-  /* Good browsers */
-
-  opacity: 0.8;
-}
-.closeDetail p {
-  display: inline-block;
-  text-align: center;
-  color: #F2F4E9;
-  text-shadow: 1px 1px 1px #4e4c4c;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  font-size: 12px;
-}
-.trailName {
-  font-family: 'Oswald', sans-serif;
-  margin: 0;
-  color: #FFF;
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  .activity-icons {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -18px;
+    margin-top: -18px;
+  }
 }
 /*			Bootstrap-Select
 *********************************/
@@ -612,6 +898,9 @@ body {
   overflow: hidden;
   position: relative;
   text-align: center;
+  /* Font Weight is a manual addition */
+
+  font-weight: 100;
   /* text-align: center; */
 
 }
@@ -5286,14 +5575,24 @@ html {
 section {
   overflow: auto;
 }
-#main {
-  position: relative;
-  height: 500px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 20px;
-  overflow: hidden;
-  border-bottom-style: dotted;
-  border-width: 1px;
-  border-color: #bebebe;
+@media only screen and (max-width: 529px) {
+  #main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+@media only screen and (min-width: 950px) and (max-width: 1128px) {
+  #main {
+    position: relative;
+    height: 500px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+    overflow: hidden;
+    border-bottom-style: dotted;
+    border-width: 1px;
+    border-color: #bebebe;
+  }
 }
