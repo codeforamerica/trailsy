@@ -24,8 +24,8 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 4.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -38,6 +38,7 @@ function startup() {
   //                }
   // }
   var trailheads = []; // all trailheads (from trailsegments)
+  // TODO: fix this--it's out of date!
   // [ {  marker: *Leaflet marker*,
   //      trails: *[array of matched trail IDs],
   //      popupContent: *HTML of Leaflet popup*,
@@ -128,16 +129,13 @@ function startup() {
     getOrderedTrailheads(currentLocation, function() {
       getTrailData(function() {
         addTrailDataToTrailheads(trailData);
-        // the following should happen outside of this callback nest, but 
-        // with single-threaded Rails, we want to make sure the 
-        // traildata API call happens first
-        if (USE_LOCAL) {
-          getTrailSegments(function() {
-            //console.log(trailSegments);
-          });
-        }
       });
     });
+    if (USE_LOCAL) {
+      getTrailSegments(function() {
+        //console.log(trailSegments);
+      });
+    }
 
   }
 
@@ -430,15 +428,24 @@ function startup() {
         };
       },
       onEachFeature: function(feature, layer) {
-        var popupHTML = "<div class='trail-popup'>";
-        if (feature.properties.name1) {
-          popupHTML = popupHTML + feature.properties.name1;
+        var popupHTML = "<div class='trail-popup'>"; 
+        if (feature.properties.trail1) {
+          popupHTML = popupHTML + feature.properties.trail1;
         }
-        if (feature.properties.name2) {
-          popupHTML = popupHTML + "<br>" + feature.properties.name2;
+        if (feature.properties.trail2) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail2;
         }
-        if (feature.properties.name3) {
-          popupHTML = popupHTML + "<br>" + feature.properties.name3;
+        if (feature.properties.trail3) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail3;
+        }
+        if (feature.properties.trail4) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail4;
+        }
+        if (feature.properties.trail5) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail5;
+        }
+        if (feature.properties.trail6) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail6;
         }
         popupHTML = popupHTML + "</div>";
         layer.bindPopup(popupHTML);
@@ -808,12 +815,18 @@ function startup() {
       var trailID = trailhead.trails[i];
       var trailName = trailData[trailID].properties.name;
       var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
-        "(segments.name1 = '" + trailName + "' or " +
-        "segments.name2 = '" + trailName + "' or " +
-        "segments.name3 = '" + trailName + "' or " +
-        "segments.name1 = '" + trailName + " Trail' or " +
-        "segments.name2 = '" + trailName + " Trail' or " +
-        "segments.name3 = '" + trailName + " Trail') and " +
+        "(segments.trail1 = '" + trailName + "' or " +
+        "segments.trail2 = '" + trailName + "' or " +
+        "segments.trail3 = '" + trailName + "' or " +
+        "segments.trail4 = '" + trailName + "' or " +
+        "segments.trail5 = '" + trailName + "' or " +
+        "segments.trail6 = '" + trailName + "' or " +
+        "segments.trail1 = '" + trailName + " Trail' or " +
+        "segments.trail2 = '" + trailName + " Trail' or " +
+        "segments.trail3 = '" + trailName + " Trail' or " +
+        "segments.trail4 = '" + trailName + " Trail' or " +
+        "segments.trail5 = '" + trailName + " Trail' or " +
+        "segments.trail6 = '" + trailName + " Trail') and " +
         "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trail_query, index) {
         return function(callback) {
@@ -821,7 +834,10 @@ function startup() {
           //   responses[index] = response;
           //   callback(null, trailID);
           // });
-          var callData = { type: "GET", path: "/trailsegments.json"};
+          var callData = {
+            type: "GET",
+            path: "/trailsegments.json"
+          };
           makeAPICall(callData, function(response) {
             responses[index] = response;
             callback(null, trailID);
@@ -868,12 +884,18 @@ function startup() {
       var valid = 0;
       for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
         var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
-        if ((segment.properties.name1 == trailName ||
-            segment.properties.name1 + " Trail" == trailName ||
-            segment.properties.name2 == trailName ||
-            segment.properties.name2 + " Trail" == trailName ||
-            segment.properties.name3 == trailName ||
-            segment.properties.name3 + " Trail" == trailName) &&
+        if ((segment.properties.trail1 == trailName ||
+            segment.properties.trail1 + " Trail" == trailName ||
+            segment.properties.trail2 == trailName ||
+            segment.properties.trail2 + " Trail" == trailName ||
+            segment.properties.trail3 == trailName ||
+            segment.properties.trail3 + " Trail" == trailName ||
+            segment.properties.trail4 == trailName ||
+            segment.properties.trail4 + " Trail" == trailName ||
+            segment.properties.trail5 == trailName ||
+            segment.properties.trail5 + " Trail" == trailName ||
+            segment.properties.trail6 == trailName ||
+            segment.properties.trail6 + " Trail" == trailName) &&
           (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
           // 1) {
 
@@ -947,9 +969,9 @@ function startup() {
     // spin through response, removing any segments that aren't part of a known trail
     filteredResponse.features = response.features.filter(function(element, index, array) {
       // for (i = 0; i < trailData.length; i++) {
-      if (element.properties.name1 in trailData ||
-        element.properties.name2 in trailData ||
-        element.properties.name3 in trailData) {
+      if (element.properties.trail1 in trailData ||
+        element.properties.trail2 in trailData ||
+        element.properties.trail3 in trailData) {
         return false;
       }
       // }
@@ -1007,14 +1029,23 @@ function startup() {
         }
         // else we have an unused trail segment--list all of the names associated with it 
         else {
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name1;
+          if (feature.properties.trail1) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail1;
           }
-          if (feature.properties.name2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name2;
+          if (feature.properties.trail2) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail2;
           }
-          if (feature.properties.name3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name3;
+          if (feature.properties.trail3) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail3;
+          }
+          if (feature.properties.trail4) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail4;
+          }
+          if (feature.properties.trail5) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail5;
+          }
+          if (feature.properties.trail6) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail6;
           }
         }
         popupHTML = popupHTML + "</div>";
