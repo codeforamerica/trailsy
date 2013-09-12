@@ -16,6 +16,18 @@ function startup() {
     lng: -81.5
   };
 
+  // API_HOST: The API server. Here we assign a default server, then 
+  // test to check whether we're using the Heroky dev app or the Heroku production app
+  // and reassign API_HOST if necessary
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com"; 
+  if (window.location.hostname.split(".")[0] == "trailsy-dev") {
+    API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  }
+  else if (window.location.hostname.split(".")[0] == "trailsy") {
+    API_HOST = "http://trailsyserver.herokuapp.com";
+  }
+
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
   var MIN_ZOOM = 12;
@@ -24,11 +36,6 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 4.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-
-  console.log("window.location.hostname");
-  console.log(window.location.hostname);
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
