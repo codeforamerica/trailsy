@@ -24,8 +24,11 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 4.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+
+  console.log("window.location.hostname");
+  console.log(window.location.hostname);
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
