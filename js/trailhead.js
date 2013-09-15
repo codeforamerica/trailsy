@@ -25,7 +25,7 @@ function startup() {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   }
   else if (window.location.hostname.split(".")[0] == "trailsy") {
-    API_HOST = "http://trailsyserver.herokuapp.com";
+    API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
   var METERSTOMILESFACTOR = 0.00062137;
