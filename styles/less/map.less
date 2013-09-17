@@ -20,11 +20,9 @@
 
 .trailMapContainer {
 	@media @mobile {
-		position: relative;
 		height: 100%;
+		min-height: 600px;
 		/* Need to figure out how to make this device-height-ish...*/
-		width: 600px;
-		position: relative;
 	}
 	/* Desktop */
 	@media @desktop {
@@ -50,6 +48,15 @@
 		padding: 0;
 	}
 }
+
+
+.leaflet-left {
+	@media @mobile {
+		display: none;
+	}
+}
+
+
 
 /* Not sure that we have a trail map title currently*/
 .trailMap-title {

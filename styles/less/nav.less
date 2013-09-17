@@ -8,11 +8,12 @@
 		height: auto;
 		top: 0;
 		margin: 0;
-		.navbar {
+		header {
+			position: fixed;
 			width: 100%;
-			max-height: 20px;
 			margin: 0;
 			padding: 0;
+			z-index: 2;
 			.navbar-inner {
 				position: relative;
 				background-color: @color-brown;
@@ -20,25 +21,46 @@
 				box-shadow: none;
 				text-align: justify;
 				padding: 5px 7px 7px 10px;
-			}
-			.brand {
-				font-family: Oswald, "Times New Roman", serif;
-				font-size: 12px;
-				color: @color-white;
-			}
-			.subBrand {
-				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-				font-size: 8px;
-				color: @color-white;
+
+				.hamburger {
+				    cursor: pointer;
+				    display: inline-block;
+				    height: 25px;
+				    padding: 8px 4px 8px;
+				    position: relative;
+				    width: 25px;
+				    background: @color-brown;
+		/* The white stripes in the hamburger button */
+					div {
+					    background-color: @color-white;
+					    border: 1px solid @color-white;
+					    border-radius: 2px 2px 2px 2px;
+					    height: 2px;
+					    margin-top: 3px;
+					    width: 90%;
+					}
+				}
+				.brand {
+					display: inline-block;
+					font-family: Oswald, "Times New Roman", serif;
+					font-size: 12px;
+					color: @color-white;
+				}
+				.subBrand {
+					display: inline-block;
+					font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+					font-size: 8px;
+					color: @color-white;
+				}
 			}
 		}
 	}
-	@media desktop {
+	@media @desktop {
 		position: relative;
 		width: 100%;
 		top: 0;
 		margin: 0;
-		.navbar {
+		header {
 			position: relative;
 			width: 100%;
 			margin-bottom: 0;
@@ -69,6 +91,9 @@
 					color: @color-white;
 					cursor: default;
 					&:hover { text-decoration: none; };
+				}
+				.hamburger {
+					display: none;
 				}
 			}
 		}

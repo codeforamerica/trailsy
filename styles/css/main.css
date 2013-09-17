@@ -27,7 +27,14 @@
 
 body {
   #Fonts > .SansSerif;
-}*//*@import "mixins.less";*/
+}*//*@desktop-xl:  ~"only screen and (min-width: 1129px)";*/
+/* Note the 529px breakpoint. Most mobile sites are more like 240 wide.
+Need to make sure everything is responsive within that breakpoint. 
+
+At some point, update mediaqueries to be in EMS
+33.125 EMS = 530 divided by 16px (default font size *
+59.375 EMS = 950 divided by 16px
+70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
 /*			Modules				*/
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
@@ -39,13 +46,14 @@ body {
     top: 0;
     margin: 0;
   }
-  .top-ui .navbar {
+  .top-ui header {
+    position: fixed;
     width: 100%;
-    max-height: 20px;
     margin: 0;
     padding: 0;
+    z-index: 2;
   }
-  .top-ui .navbar .navbar-inner {
+  .top-ui header .navbar-inner {
     position: relative;
     background-color: #5e4534;
     border: none;
@@ -53,32 +61,53 @@ body {
     text-align: justify;
     padding: 5px 7px 7px 10px;
   }
-  .top-ui .navbar .brand {
+  .top-ui header .navbar-inner .hamburger {
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    padding: 8px 4px 8px;
+    position: relative;
+    width: 25px;
+    background: #5e4534;
+    /* The white stripes in the hamburger button */
+  
+  }
+  .top-ui header .navbar-inner .hamburger div {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px 2px 2px 2px;
+    height: 2px;
+    margin-top: 3px;
+    width: 90%;
+  }
+  .top-ui header .navbar-inner .brand {
+    display: inline-block;
     font-family: Oswald, "Times New Roman", serif;
     font-size: 12px;
     color: #ffffff;
   }
-  .top-ui .navbar .subBrand {
+  .top-ui header .navbar-inner .subBrand {
+    display: inline-block;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 8px;
     color: #ffffff;
   }
 }
-@media desktop {
+@media only screen and (min-width: 950px) {
   .top-ui {
     position: relative;
     width: 100%;
     top: 0;
     margin: 0;
   }
-  .top-ui .navbar {
+  .top-ui header {
     position: relative;
     width: 100%;
     margin-bottom: 0;
     padding: 0;
     max-height: 60px;
   }
-  .top-ui .navbar .navbar-inner {
+  .top-ui header .navbar-inner {
     position: relative;
     background-color: #5e4534;
     border: none;
@@ -86,11 +115,11 @@ body {
     text-align: justify;
     padding: 15px 20px 20px 30px;
   }
-  .top-ui .navbar .navbar-inner:after {
+  .top-ui header .navbar-inner:after {
     content: '';
     display: inline-block;
   }
-  .top-ui .navbar .navbar-inner .brand {
+  .top-ui header .navbar-inner .brand {
     font-family: Oswald, "Times New Roman", serif;
     font-weight: 100;
     font-size: 30px;
@@ -98,21 +127,24 @@ body {
     display: inline-block;
     color: #ffffff;
   }
-  .top-ui .navbar .navbar-inner .brand:hover {
+  .top-ui header .navbar-inner .brand:hover {
     text-decoration: none;
   }
-  .top-ui .navbar .navbar-inner .brand:focus {
+  .top-ui header .navbar-inner .brand:focus {
     text-decoration: none;
   }
-  .top-ui .navbar .navbar-inner .subBrand {
+  .top-ui header .navbar-inner .subBrand {
     margin-left: 20px;
     display: inline-block;
     color: #ffffff;
     cursor: default;
   }
   @san Serif-large();
-  .top-ui .navbar .navbar-inner .subBrand:hover {
+  .top-ui header .navbar-inner .subBrand:hover {
     text-decoration: none;
+  }
+  .top-ui header .navbar-inner .hamburger {
+    display: none;
   }
 }
 /* Filter Module */
@@ -121,7 +153,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .filters {
     position: relative;
     width: auto;
@@ -195,12 +227,12 @@ body {
   /* Desktop */
 
 }
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+@media only screen and (max-width: 529px) {
   .searchbar {
     display: none;
   }
 }
-@media only screen and (min-width: 1224px) {
+@media only screen and (min-width: 950px) {
   .searchbar {
     position: relative;
     height: 60px;
@@ -208,6 +240,7 @@ body {
     background-color: #fff;
     text-align: justify;
     line-height: 30px;
+    border-bottom: 1px #d4d4d4 dotted;
   }
 }
 /*@import "search.less";*/
@@ -220,7 +253,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailListColumn {
     position: relative;
     height: 500px;
@@ -242,7 +275,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   #trailList {
     width: 100%;
     height: 560px;
@@ -261,7 +294,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trail {
     position: absolute;
     height: auto;
@@ -284,7 +317,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailList-title {
     width: 100%;
     height: 40px;
@@ -316,7 +349,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trail-box {
     position: relative;
     height: 80px;
@@ -359,7 +392,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailSource {
     display: none;
     position: absolute;
@@ -378,7 +411,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailIndicatorLight {
     display: none;
     position: absolute;
@@ -394,7 +427,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   #redoSearch {
     position: absolute;
     top: 40px;
@@ -429,13 +462,12 @@ body {
 @media only screen and (max-width: 529px) {
   .trailMapContainer {
     height: 100%;
+    min-height: 600px;
     /* Need to figure out how to make this device-height-ish...*/
   
-    width: 600px;
-    position: relative;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailMapContainer {
     height: 500px;
     padding: 0;
@@ -452,12 +484,17 @@ body {
     padding: 0;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   #trailMap {
     position: relative;
     width: 100%;
     height: 100%;
     padding: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .leaflet-left {
+    display: none;
   }
 }
 /* Not sure that we have a trail map title currently*/
@@ -466,7 +503,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailMap-title {
     margin-top: -10px;
     margin-left: 10px;
@@ -507,7 +544,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   #crosshair {
     position: absolute;
     top: 250px;
@@ -528,7 +565,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .detailPanelColumn {
     display: none;
     position: relative;
@@ -591,7 +628,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .detail-panel {
     position: absolute;
     width: 100%;
@@ -778,7 +815,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .closeDetail {
     position: absolute;
     top: 5px;
@@ -815,7 +852,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .trailName {
     font-family: 'Oswald', sans-serif;
     margin: 0;
@@ -827,7 +864,7 @@ body {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   .activity-icons {
     width: 36px;
     height: 36px;
@@ -5558,22 +5595,51 @@ table {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/* Background color */
-body {
-  background-color: #F2F4E9;
-}
-/* Responsive container */
-.container {
-  position: relative;
-  max-width: 100%;
-  margin: 0;
-}
 /* Other Universal */
 html {
   overflow-y: scroll;
+  height: 100%;
+}
+/* Background color */
+@media mobile {
+  body {
+    background-color: #f2f4e9;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+@media desktop {
+  body {
+    background-color: #f2f4e9;
+  }
+}
+[data-role*="page"] {
+  height: 100%;
+}
+.container2 {
+  height: 100%;
 }
 section {
   overflow: auto;
+}
+/* Responsive container */
+@media mobile {
+  .container {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .container {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    margin: 0px;
+  }
 }
 @media only screen and (max-width: 529px) {
   #main {
@@ -5583,7 +5649,7 @@ section {
     overflow: hidden;
   }
 }
-@media only screen and (min-width: 950px) and (max-width: 1128px) {
+@media only screen and (min-width: 950px) {
   #main {
     position: relative;
     height: 500px;

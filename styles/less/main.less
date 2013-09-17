@@ -51,25 +51,52 @@
   box-sizing: border-box;
  }
 
-/* Background color */
-body {
-	background-color: #F2F4E9;
-}
-
-/* Responsive container */
-.container {
-	position: relative;
-	max-width: 100%;
-	margin: 0;
-}
-
 /* Other Universal */
 html {
   overflow-y: scroll;
+  height: 100%;
+}
+
+/* Background color */
+body {
+	@media mobile {
+	background-color: @color-tan;
+	height: 100%;
+	padding: 0;
+    margin: 0;
+	overflow-x: hidden;
+	}
+	@media desktop {
+	background-color: @color-tan;
+	}
+}
+
+[data-role*="page"] {
+	height: 100%;
+}
+
+.container2 {
+	height: 100%;
 }
 
 section {
   overflow: auto;
+}
+
+/* Responsive container */
+.container {
+	@media mobile {
+		position: relative;
+		max-width: 100%;
+		height: 100%;
+		margin: 0;
+	}
+	@media @desktop {
+		position: relative;
+		max-width: 100%;
+		height: 100%;
+		margin: 0px;
+	}
 }
 
 #main {

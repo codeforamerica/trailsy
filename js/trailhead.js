@@ -551,6 +551,9 @@ function startup() {
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
 
+        //  AJW WRITE JAVASCRIPT HERE YARR
+        $trailIndicator = if (matchMedia('only screen and (max-width: 480px)').matches)
+
         // Making a new div for Detail Panel
 
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
@@ -598,6 +601,7 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel");
+    
     $('.detailPanelColumn').show().toggleClass("col-lg-0 col-lg-3");
     $('.trailListColumn').toggleClass("col-lg-4 col-lg-3");
     $('.trailMapContainer').toggleClass("col-lg-8 col-lg-6");
