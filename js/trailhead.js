@@ -16,6 +16,18 @@ function startup() {
     lng: -81.5
   };
 
+  // API_HOST: The API server. Here we assign a default server, then 
+  // test to check whether we're using the Heroky dev app or the Heroku production app
+  // and reassign API_HOST if necessary
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com"; 
+  if (window.location.hostname.split(".")[0] == "trailsy-dev") {
+    API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  }
+  else if (window.location.hostname.split(".")[0] == "trailsy") {
+    API_HOST = "http://trailsyserver-prod.herokuapp.com";
+  }
+
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 14;
   var MIN_ZOOM = 12;
@@ -26,9 +38,9 @@ function startup() {
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
 
   var map = {};
-  var trailData = {}; // all of the trails metadata (from traildata table), with trail name as key
-  // { *cartodb_id*: { geometry: null,  // this field is added for CartoDB's approval
-  //                  properties: { cartodb_id: *uniqueID*,
+  var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
+  // { *id*: { geometry: point(0,0), unused for now  
+  //                  properties: { id: *uniqueID*,
   //                                length: *length of trail in meters*,
   //                                name: *name of trail*,
   //                                source: *whose data this info came from*,
@@ -36,10 +48,11 @@ function startup() {
   //                }
   // }
   var trailheads = []; // all trailheads (from trailsegments)
+  // TODO: fix this--it's out of date!
   // [ {  marker: *Leaflet marker*,
   //      trails: *[array of matched trail IDs],
   //      popupContent: *HTML of Leaflet popup*,
-  //      properties: { cartodb_id: *uniqueID*,
+  //      properties: { id: *uniqueID*,
   //                    distance: *from current location in meters*,
   //                    name: *name*,
   //                    source: *whose data this info came from*,
@@ -64,8 +77,6 @@ function startup() {
   var userMarker = null;
   var allSegmentLayer = null;
 
-  // Prepping for API calls (defining data for the call)
-  var endpoint = "http://cfa.cartodb.com/api/v2/sql/";
 
   // comment these/uncomment the next set to switch between tables
   var TRAILHEADS_TABLE = "summit_trailheads";
@@ -135,6 +146,7 @@ function startup() {
         //console.log(trailSegments);
       });
     }
+
   }
 
   // set currentLocation to the center of the currently viewed map
@@ -276,9 +288,24 @@ function startup() {
     });
   }
 
+  function getOrderedTrailheads(location, callback) {
+    console.log("getOrderedTrailheads");
+    var callData = {
+      loc: location.lat + "," + location.lng,
+      type: "GET",
+      path: "/trailheads.json?loc=" + location.lat + "," + location.lng
+    };
+    makeAPICall(callData, function(response) {
+      populateTrailheadArray(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
   // get all trailhead info, in order of distance from "location"
 
-  function getOrderedTrailheads(location, callback) {
+  function getOrderedTrailheadsOld(location, callback) {
     console.log("getOrderedTrailheads");
     var nearest_trailhead_query = "select trailheads.*, " +
       "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
@@ -315,7 +342,7 @@ function startup() {
         return function() {
           trailheadMarkerClick(trailheadID);
         };
-      }(currentFeature.properties.cartodb_id));
+      }(currentFeature.properties.id));
 
       var trailhead = {
         properties: currentFeature.properties,
@@ -335,9 +362,25 @@ function startup() {
     highlightTrailhead(id, 0);
   }
 
-  // get the trailData from the DB
+  // get the trailData from the API
 
   function getTrailData(callback) {
+    console.log("getTrailData");
+    var callData = {
+      type: "GET",
+      path: "/trails.json"
+    };
+    makeAPICall(callData, function(response) {
+      populateTrailData(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  // get the trailData from the DB
+
+  function getTrailDataOld(callback) {
     console.log("getTrailData");
     var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
     // Another AJAX call, for the trails
@@ -351,45 +394,74 @@ function startup() {
 
   function populateTrailData(trailDataGeoJSON) {
     for (var i = 0; i < trailDataGeoJSON.features.length; i++) {
-      trailData[trailDataGeoJSON.features[i].properties.cartodb_id] = trailDataGeoJSON.features[i];
+      trailData[trailDataGeoJSON.features[i].properties.id] = trailDataGeoJSON.features[i];
     }
   }
 
   function getTrailSegments(callback) {
     console.log("getTrailSegments");
-    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
-    makeSQLQuery(trail_segment_query, function(response) {
+    var callData = {
+      type: "GET",
+      path: "/trailsegments.json"
+    };
+    makeAPICall(callData, function(response) {
       trailSegments = response;
-
-      allSegmentLayer = L.geoJson(trailSegments, {
-        style: function() {
-          return {
-            color: '#060',
-            weight: 2,
-            opacity: 0.5,
-            clickable: true,
-            dashArray: "5,5"
-          };
-        },
-        onEachFeature: function(feature, layer) {
-          var popupHTML = "<div class='trail-popup'>";
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + feature.properties.name1;
-          }
-          if (feature.properties.name2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name2;
-          }
-          if (feature.properties.name3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name3;
-          }
-          popupHTML = popupHTML + "</div>";
-          layer.bindPopup(popupHTML);
-        }
-      });
+      allSegmentLayer = makeAllSegmentLayer(response);
       if (typeof callback == "function") {
         callback();
       }
     });
+  }
+
+  function getTrailSegmentsOld(callback) {
+    console.log("getTrailSegments");
+    var trail_segment_query = "select the_geom, name1, name2, name3, source from " + TRAILSEGMENTS_TABLE;
+    makeSQLQuery(trail_segment_query, function(response) {
+      trailSegments = response;
+      allSegmentLayer = makeAllSegmentLayer(response);
+
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  function makeAllSegmentLayer(response) {
+    allSegmentLayer = L.geoJson(trailSegments, {
+      style: function() {
+        return {
+          color: '#060',
+          weight: 2,
+          opacity: 0.5,
+          clickable: true,
+          dashArray: "5,5"
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        var popupHTML = "<div class='trail-popup'>"; 
+        if (feature.properties.trail1) {
+          popupHTML = popupHTML + feature.properties.trail1;
+        }
+        if (feature.properties.trail2) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail2;
+        }
+        if (feature.properties.trail3) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail3;
+        }
+        if (feature.properties.trail4) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail4;
+        }
+        if (feature.properties.trail5) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail5;
+        }
+        if (feature.properties.trail6) {
+          popupHTML = popupHTML + "<br>" + feature.properties.trail6;
+        }
+        popupHTML = popupHTML + "</div>";
+        layer.bindPopup(popupHTML);
+      }
+    });
+    return allSegmentLayer;
   }
 
   // given trailData,
@@ -447,7 +519,7 @@ function startup() {
         trailheadTrailNames[trailName] = trailheadTrailNames[trailName] || [];
         var sourceAndTrailID = {
           source: trailData[trailhead.trails[trailsIndex]].properties.source,
-          trailID: trailData[trailhead.trails[trailsIndex]].properties.cartodb_id
+          trailID: trailData[trailhead.trails[trailsIndex]].properties.id
         };
         trailheadTrailNames[trailName].push(sourceAndTrailID);
       }
@@ -482,9 +554,9 @@ function startup() {
         var trail = trailData[trailhead.trails[trailsIndex]];
         var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
           .attr("data-trailname", trail.properties.name)
-          .attr("data-trailid", trail.properties.cartodb_id)
+          .attr("data-trailid", trail.properties.id)
           .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.cartodb_id)
+          .attr("data-trailheadid", trailhead.properties.id)
           .attr("data-index", trailsIndex)
           .append("<a href='#'>").html(trail.properties.name)
           .appendTo($popupTrailheadDiv);
@@ -519,7 +591,7 @@ function startup() {
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
-      var trailheadID = trailhead.properties.cartodb_id;
+      var trailheadID = trailhead.properties.id;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
         return true; // next $.each
@@ -674,7 +746,7 @@ function startup() {
   function populateTrailsForTrailheadTrailName(e) {
     var parsed = parseTrailElementData($(e.target));
     for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.cartodb_id == parsed.trailheadID) {
+      if (trailheads[i].properties.id == parsed.trailheadID) {
         trailhead = trailheads[i];
       }
     }
@@ -692,7 +764,7 @@ function startup() {
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
     for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.cartodb_id == trailheadID) {
+      if (trailheads[i].properties.id == trailheadID) {
         currentTrailhead = trailheads[i];
       }
     }
@@ -719,7 +791,7 @@ function startup() {
       var trailID = currentTrailhead.trails[i];
       var trailName = trailData[trailID].properties.name;
       var trailheadName = currentTrailhead.properties.name;
-      var trailheadID = currentTrailhead.properties.cartodb_id;
+      var trailheadID = currentTrailhead.properties.id;
       // add class for highlighting
       var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
       var color = getClassBackgroundColor("trail" + (i + 1));
@@ -757,16 +829,30 @@ function startup() {
       var trailID = trailhead.trails[i];
       var trailName = trailData[trailID].properties.name;
       var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
-        "(segments.name1 = '" + trailName + "' or " +
-        "segments.name2 = '" + trailName + "' or " +
-        "segments.name3 = '" + trailName + "' or " +
-        "segments.name1 = '" + trailName + " Trail' or " +
-        "segments.name2 = '" + trailName + " Trail' or " +
-        "segments.name3 = '" + trailName + " Trail') and " +
+        "(segments.trail1 = '" + trailName + "' or " +
+        "segments.trail2 = '" + trailName + "' or " +
+        "segments.trail3 = '" + trailName + "' or " +
+        "segments.trail4 = '" + trailName + "' or " +
+        "segments.trail5 = '" + trailName + "' or " +
+        "segments.trail6 = '" + trailName + "' or " +
+        "segments.trail1 = '" + trailName + " Trail' or " +
+        "segments.trail2 = '" + trailName + " Trail' or " +
+        "segments.trail3 = '" + trailName + " Trail' or " +
+        "segments.trail4 = '" + trailName + " Trail' or " +
+        "segments.trail5 = '" + trailName + " Trail' or " +
+        "segments.trail6 = '" + trailName + " Trail') and " +
         "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trail_query, index) {
         return function(callback) {
-          makeSQLQuery(trail_query, function(response) {
+          // makeSQLQuery(trail_query, function(response) {
+          //   responses[index] = response;
+          //   callback(null, trailID);
+          // });
+          var callData = {
+            type: "GET",
+            path: "/trailsegments.json"
+          };
+          makeAPICall(callData, function(response) {
             responses[index] = response;
             callback(null, trailID);
           });
@@ -812,12 +898,18 @@ function startup() {
       var valid = 0;
       for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
         var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
-        if ((segment.properties.name1 == trailName ||
-            segment.properties.name1 + " Trail" == trailName ||
-            segment.properties.name2 == trailName ||
-            segment.properties.name2 + " Trail" == trailName ||
-            segment.properties.name3 == trailName ||
-            segment.properties.name3 + " Trail" == trailName) &&
+        if ((segment.properties.trail1 == trailName ||
+            segment.properties.trail1 + " Trail" == trailName ||
+            segment.properties.trail2 == trailName ||
+            segment.properties.trail2 + " Trail" == trailName ||
+            segment.properties.trail3 == trailName ||
+            segment.properties.trail3 + " Trail" == trailName ||
+            segment.properties.trail4 == trailName ||
+            segment.properties.trail4 + " Trail" == trailName ||
+            segment.properties.trail5 == trailName ||
+            segment.properties.trail5 + " Trail" == trailName ||
+            segment.properties.trail6 == trailName ||
+            segment.properties.trail6 + " Trail" == trailName) &&
           (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
           // 1) {
 
@@ -827,8 +919,7 @@ function startup() {
           valid = 1;
           // console.log("match");
           trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
-        }
-        else {
+        } else {
           // console.log("invalid!");
         }
       }
@@ -892,9 +983,9 @@ function startup() {
     // spin through response, removing any segments that aren't part of a known trail
     filteredResponse.features = response.features.filter(function(element, index, array) {
       // for (i = 0; i < trailData.length; i++) {
-      if (element.properties.name1 in trailData ||
-        element.properties.name2 in trailData ||
-        element.properties.name3 in trailData) {
+      if (element.properties.trail1 in trailData ||
+        element.properties.trail2 in trailData ||
+        element.properties.trail3 in trailData) {
         return false;
       }
       // }
@@ -952,14 +1043,23 @@ function startup() {
         }
         // else we have an unused trail segment--list all of the names associated with it
         else {
-          if (feature.properties.name1) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name1;
+          if (feature.properties.trail1) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail1;
           }
-          if (feature.properties.name2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name2;
+          if (feature.properties.trail2) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail2;
           }
-          if (feature.properties.name3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.name3;
+          if (feature.properties.trail3) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail3;
+          }
+          if (feature.properties.trail4) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail4;
+          }
+          if (feature.properties.trail5) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail5;
+          }
+          if (feature.properties.trail6) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail6;
           }
         }
         popupHTML = popupHTML + "</div>";
@@ -1019,6 +1119,31 @@ function startup() {
       zoom: {
         animate: true
       }
+    });
+  }
+
+  function makeAPICall(callData, doneCallback) {
+    console.log('makeAPICall');
+    if (!($.isEmptyObject(callData.data))) {
+      callData.data = JSON.stringify(callData.data);
+    }
+    var url = API_HOST + callData.path;
+    var request = $.ajax({
+      type: callData.type,
+      url: url,
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      //beforeSend: function(xhr) {
+      //  xhr.setRequestHeader("Accept", "application/json")
+      //},
+      data: callData.data
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      $("#results").text("error: " + JSON.stringify(errorThrown));
+    }).done(function(response, textStatus, jqXHR) {
+      if (typeof doneCallback === 'function') {
+        doneCallback.call(this, response);
+      }
+      $("#results").text(JSON.stringify(response));
     });
   }
 
