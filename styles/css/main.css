@@ -554,7 +554,7 @@ At some point, update mediaqueries to be in EMS
     /*margin-left: -8px;*/
   
     display: block;
-    background: url(img/crosshair.gif);
+    background: url(../../img/crosshair.gif);
     background-position: center center;
     background-repeat: no-repeat;
     z-index: 1;
