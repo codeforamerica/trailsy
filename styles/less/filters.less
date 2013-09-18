@@ -1,94 +1,138 @@
 /* Filter Module */
 
-.filters {
-	@media @mobile {
-		display: none;	
-	}
-	@media @desktop {
-		position: relative;
-		width: auto;
-		min-width: 400px;
-		height: 100%;
-		display: inline-block;
-		left: 20px;
-		border-left: 1px dotted @color-light-gray;
-		&:after {
-			content: '';
-			display: inline-block;
-		};
-		.btn {
 
+.accordion {
+	@media @mobile {}
+	@media @desktop {
+		.panel-title {
+			margin: 0;
+			padding: 0 .25em 0 .25em;
+			/* Let's abstract this transition so we can keep it consistent across animations*/
+			-webkit-transition: .1s all ease-in-out;
+			-moz-transition: .1s all ease-in-out;
+			-o-transition: .1s all ease-in-out;
+			transition: .1s all ease-in-out;
+			background: @color-light-gray;
+			color: #333;
 			&:hover {
-				color: @color-white;
-				text-shadow: none;
-				background-color: @color-green;
+				background: #CCC;
 			};
-			&:focus {};
-			&:active {};
-			.dropdown-toggle {
-				background-color: transparent;
-				height: 100%;
-				font-weight: lighter;
-				border-width: 1px;
-				border-color: @color-gray-border;
+			&:active {
+				background: #999;
+			};
+			.active {
+				background: #CCC;
+				&:active {
+					background: #999;
+				};
+			};
+		}
+		.accordion-innerwrap {
+			margin: 0 auto;
+			width: 98%;
+		}
+	}
+}
+
+.panel-container {
+	@media @mobile {}
+	@media @desktop {
+		margin: .25em 0;
+	}
+}
+
+.panel-content {
+	@media @mobile {}
+	@media @desktop {
+		list-style-type: none;
+		margin: 0;
+		li {
+			border-bottom: 1px dotted #AAA;
+			padding: .25em;
+			:last-child {
+				border-bottom: none;
+				padding-bottom: none;
 			}
 		}
 	}
 }
 
-.bootstrap-select .btn-group, .bootstrap-select .btn-group[class*="span"] {}
-
-/*.bootstrap-select .btn-group: {
-	&:hover {
-
-	}
-};*/
-
-.bootstrap-select:not([class*="span"]) {
-	/* Mobile */
-	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-		display: none;
-	}
-	/* Desktop */
-	@media only screen and (min-width : 1224px) {
-		width: 160px;
-	}
-}
-
-.activityFilter-highlight {}
-
-.btn-group { 
-	/* Mobile */
-	@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-		display: none;
-	}
-	/* Desktop */
-	@media only screen and (min-width : 1224px) {
-		btn {
-			&:first-child {
-				border-right-style: dotted;
-				border-bottom: none;
-				border-top: none;
-				border-radius: 0;
-				border-left: none;
-			};
+.js {
+	@media @mobile {}
+	@media @desktop {
+		.visuallyhidden {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+			.focusable {
+				clip: auto;
+				height: auto;
+				margin: 0;
+				overflow: visible;
+				position: static;
+				width: auto;
+			}
 		}
 	}
 }
 
-.searchbar {
-	/* Mobile */
-	@media @mobile {
-		display: none;
-	}
-	/* Desktop */
+.no-js {
+	@media @mobile {}
 	@media @desktop {
-		position: relative;
-		height:60px;
-		width: 100%;
-		background-color: #fff;
-		text-align: justify;
-		line-height: 30px;
-		border-bottom: 1px @color-light-gray dotted;
+		.visuallyhidden {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+			.focusable {
+				&:active {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+				&:focus {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+			}
+		}
+	}
+}
+
+.clearfix {
+	@media @mobile {}
+	@media @desktop {
+		*zoom: 1;
+		&:before {
+			content: "";
+			display: table;
+		}
+		&:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	}
+}
+
+.list-reset {
+	@media @mobile {}
+	@media @desktop {
+		padding: 0;
+		list-style: none;
 	}
 }

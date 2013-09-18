@@ -102,6 +102,7 @@ function startup() {
   $(document).on('change', '.selectpicker', filterChangeHandler);
 
 
+
   // -----------------------------------
   // Kick things off
 
@@ -246,8 +247,8 @@ function startup() {
     console.log("displayInitialMap");
     console.log(currentLocation);
     map = L.map('trailMap', {
-      zoomControl: true
-    }).setView([currentLocation.lat, currentLocation.lng], 11);
+      zoomControl: false
+    }).addControl(L.control.zoom({position: 'topright'})).setView([currentLocation.lat, currentLocation.lng], 11);
 
     // Switch between MapBox and other providers by commenting/uncommenting these
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);

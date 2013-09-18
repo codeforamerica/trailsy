@@ -26,13 +26,13 @@
 /*			Bootstrap-Select
 *********************************/
 
-@import "bootstrap-select.less";
+/*@import "bootstrap-select.less";*/
 
 
 /*			Bootstrap
 *********************************/
 
-@import "bootstrap3.less";
+/*@import "bootstrap3.less";*/
 
 /*			Leaflet
 *********************************/
@@ -75,10 +75,6 @@ body {
 	height: 100%;
 }
 
-.container2 {
-	height: 100%;
-}
-
 section {
   overflow: auto;
 }
@@ -92,10 +88,11 @@ section {
 		margin: 0;
 	}
 	@media @desktop {
-		position: relative;
-		max-width: 100%;
-		height: 100%;
-		margin: 0px;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
 	}
 }
 
@@ -108,13 +105,8 @@ section {
 	}
 	@media @desktop {
 		position: relative;
-		height: 500px;
-		margin-left: 20px;
-		margin-right: 20px;
-		margin-top: 40px;
+		height: 100%;
+		width: 100%;
 		overflow: hidden;
-		border-bottom-style: dotted;
-		border-width: 1px;
-		border-color: #bebebe;
 	}
 }
