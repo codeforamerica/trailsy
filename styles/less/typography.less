@@ -1,33 +1,64 @@
 /* Typography */
 
-.oswald-large {
-  font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-}
-
-.serif-large (@weight: 100, @size: 30px, @lineHeight: 30px) {
+.serif (@weight: 100, @size: 32px, @lineHeight: 30px) {
     font-family: Oswald, "Times New Roman", serif;
     font-weight: @weight;
     font-size: @size;       
     line-height: @lineHeight;
 }
 
-.sansSerif-large (@weight: 100, @size: 15x, @lineHeight: 20px) { 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+.sansSerif-bold (@weight: 100, @size: 16px, @lineHeight: 20px) {
+    font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
     font-weight: @weight;
     font-size: @size;
     line-height: @lineHeight;
 }
 
-/*	font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
-	font-size: 18px;
-	line-height: 20px;
-	color: #C45F37;
+.sansSerif-regular (@weight: 100, @size: 16px, @lineHeight: 20px) {
+    font-family: mission_gothicregular, Helvetica, Arial, sans-serif;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @lineHeight;
+}
 
-   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-   	font-size: 14px;*/
-/*	color: #4e4c4c;*/
-/*    Then, to call a mixin from that particular group, you do this:
+.sansSerif-light (@weight: 100, @size: 16px, @lineHeight: 20px) {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: @weight;
+    font-size: @size;
+    line-height: @lineHeight;
+}
 
-body {
-  #Fonts > .SansSerif;
-}*/
+@font-face {
+    font-family: 'mission_gothicbold';
+    src: url('fonts/missiongothic/mission_gothic_bold-webfont.eot');
+    src: url('fonts/missiongothic/mission_gothic_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/missiongothic/mission_gothic_bold-webfont.woff') format('woff'),
+         url('fonts/missiongothic/mission_gothic_bold-webfont.ttf') format('truetype'),
+         url('fonts/missiongothic/mission_gothic_bold-webfont.svg#/mission_gothicbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'mission_gothiclight';
+    src: url('fonts/missiongothic/mission_gothic_light-webfont.eot');
+    src: url('fonts/missiongothic/mission_gothic_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/missiongothic/mission_gothic_light-webfont.woff') format('woff'),
+         url('fonts/missiongothic/mission_gothic_light-webfont.ttf') format('truetype'),
+         url('fonts/missiongothic/mission_gothic_light-webfont.svg#/mission_gothiclight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: '/mission_gothicregular';
+    src: local('fonts/missiongothic/mission_gothic_regular-webfont.eot');
+    src: url('fonts/missiongothic/mission_gothic_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/missiongothic/mission_gothic_regular-webfont.woff') format('woff'),
+         url('fonts/missiongothic/mission_gothic_regular-webfont.ttf') format('truetype'),
+         url('fonts/missiongothic/mission_gothic_regular-webfont.svg#/mission_gothicregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

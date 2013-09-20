@@ -17,7 +17,7 @@
 		background: @color-light-gray;
 		z-index: 999;
 		a {
-			font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+			.sansSerif-light();
 			display: inline-block;
 			position: relative;
 			padding: 4px 0 2px 14px;
@@ -36,11 +36,11 @@
 		max-height: 400px;
 		position: relative;
 		overflow: scroll;
-		background-color: #FFF;
+		background-color: @color-white;
 		border-radius: 2px;
-		border-left: 1px solid #d4d4d4;
-		border-right: 1px solid #d4d4d4;
-		border-bottom: 1px solid #d4d4d4;
+		border-left: 1px solid @color-light-gray;
+		border-right: 1px solid @color-light-gray;
+		border-bottom: 1px solid @color-light-gray;
 	}
 }
 
@@ -51,10 +51,10 @@
 	@media @desktop {
 		position: absolute;
 		height: auto;
-		font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+		.sansSerif-light();
 		font-size: 18px;
 		line-height: 20px;
-		color: #C45F37;
+		color: @color-dark-orange;
 		top: 10px;
 		left: 14px;
 		cursor: pointer;
@@ -74,12 +74,12 @@
 		display: inline-block;
 		position: absolute;
 		top: 0;
-		background-color: #5E4534;
+		background-color: @color-dark-brown;
 		p {
 			display: inline-block;
 			position: relative;
 			padding: 10px 0 0 16px;
-			font-family: 'Oswald', sans-serif;
+			.sansSerif-light();
 			font-weight: 300;
 			letter-spacing: 1px;
 			font-size: 16px;
@@ -102,13 +102,13 @@
 	@media @desktop {
 		position: relative;
 		height: 80px;
-		background-color: #fff;
+		background-color: @color-white;
 		border-top-style: dotted;
 		border-width: 1px;
-		border-color: @color-gray-border;
+		border-color: @color-light-gray;
 		cursor: pointer;
 		&:hover {
-			border-bottom: 2px solid @color-orange;
+			border-bottom: 2px solid @color-dark-orange;
 			-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 			-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
@@ -116,19 +116,19 @@
 		/* Font replacement */
 		.trailheadName {
 			position: absolute;
-		   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		   	.sansSerif-light();
 		   	font-size: 14px;
-			color: #4e4c4c;
+			color: @color-dark-gray;
 			top: 45px;
 			left: 14px;
 		}
 		/* Font replacement */
 		.trailheadDistance {
 			position: absolute;
-		 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		 	.sansSerif-light();
 		   	font-size: 14px;
 			text-align: right;
-			color: #4e4c4c;
+			color: @color-dark-gray;
 			top: 45px;
 			right: 10px;
 		}
@@ -144,11 +144,11 @@
 		position: absolute;
 		top: 16px;
 		right: 10px;
-	   	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		@sansSerif-light;
 	   	font-weight: 300;
 	   	font-size: 14px;
 		line-height: 20px;
-		color: #4e4c4c;
+		color: @color-dark-gray;
 		text-align: right;
 	}
 }
@@ -178,10 +178,10 @@
 		display: inline-block;
 		width: 100%;
 		height: 25px;
-		background: #fff;
+		background: @color-white;
 		border-style: dotted;
 		border-width: 1px;
-		border-color: #bebebe;
+		border-color: @color-light-gray;
 	}
 
 }

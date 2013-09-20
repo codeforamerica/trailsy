@@ -68,13 +68,13 @@
 		position: absolute;
 		width: 100%;
 		height: 500px;
-		background-color: #fff;
+		background-color: @color-white;
 		overflow: scroll;
-		border-bottom: 1px solid #d4d4d4;
+		border-bottom: 1px solid @color-light-gray;
 		.detailPanelTitle {
 			position: relative;
 			bottom: -1;
-			background-color: #C45F37;
+			background-color: @color-dark-orange;
 			display: inline-block;
 			width: 100%;
 			height: 40px;
@@ -86,8 +86,8 @@
 		}
 		.detailTrailheadName {
 			position: relative;
+			@sansSerif-light;
 		  	margin-left: 20px;
-		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 		   	font-weight: 300;
 		   	font-size: 12px;
 		}
@@ -96,13 +96,13 @@
 			float: left;
 			top: 2%;
 			margin-left: 2%;
-		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+			@sansSerif-light;
 		  	font-weight: 300;
 		  	font-size: 12px;
 		}
 		.detailDirections {
 			position: relative;
-		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		  	@sansSerif-light;
 		  	font-weight: 300;
 		  	font-size: 12px;
 		  	float: left;
@@ -112,29 +112,29 @@
 			position: relative;
 		  	margin-left: 2%;
 			width: 100%;
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+			@sanSerif-light;
 		 	font-weight: 300;
 		   	font-size: 12px;
 		}
 		.detailTrailheadDistance {
 			position: relative;
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+			@sanSerif-light;
 		 	font-weight: 300;
 		   	font-size: 12px;
 		}
 		.detailPanelHeader {
-		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		  	@sansSerif-light;
 		 	font-weight: 300;
 		   	font-size: 12px;
 		}
 		.detailPanelPicture {
-			border-bottom: 1px solid #bebebe;
+			border-bottom: 1px solid @color-light-gray;
 			width: 100%;
 		}
 		.detailDescription {
 			display: inline-block;
 		  	margin-top: 15px;
-		  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+		  	@sansSerif-light;
 		  	font-weight: 300;
 		  	font-size: 12px;
 		}
@@ -162,7 +162,7 @@
 				width: 25%;
 				border-right-style: dotted;
 				border-width: 1px;
-				border-color: #bebebe;
+				border-color: @color-light-gray;
 			}
 			&#right {
 				position: relative;
@@ -179,12 +179,12 @@
 				height: 40px;
 				width: 20%;
 				padding-left: 10px;
-			  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+				@sanSerif-light;
 			  	font-weight: 300;
 			  	font-size: 12px;
 				border-right-style: dotted;
 				border-width: 1px;
-				border-color: #bebebe;
+				border-color: @color-light-gray;
 			}
 		}
 		.detailMiddleRow {
@@ -195,7 +195,7 @@
 			padding: 10px;
 			border-top-style: dotted;
 			border-width: 1px;
-			border-color: #bebebe;
+			border-color: @color-light-gray;
 		}
 		.detailBottomRow {
 			position: relative;
@@ -205,7 +205,7 @@
 			padding: 10px;
 			border-top-style: dotted;
 			border-width: 1px;
-			border-color: #bebebe;
+			border-color: @color-light-gray;
 			&a {
 				margin-right: 2px;
 			}
@@ -218,10 +218,10 @@
 			padding: 10px;
 			border-top-style: dotted;
 			border-width: 1px;
-			border-color: #bebebe;
+			border-color: @color-light-gray;
 			& span {
-				font-family: 'Oswald', sans-serif;
-				color: #C45F37;
+				@sansSerif-bold;
+				color: @color-dark-orange;
 				font-size: 14px;
 				line-height: 15px;
 				position: absolute;
@@ -274,10 +274,9 @@
 	  p {
 	 	display: inline-block;
 		text-align: center;
-		color: #F2F4E9;
-		text-shadow: 1px 1px 1px #4e4c4c;
-	  	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-	   	font-weight: 300;
+		color: @color-dark-gray;
+		@sansSerif-light;
+		font-weight: 300;
 	   	font-size: 12px;
 	   }
 	}

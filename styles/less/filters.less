@@ -1,9 +1,60 @@
 /* Filter Module */
 
+.is-vishidden{
+	@media @mobile {}
+	@media @desktop {
+		position: absolute;
+		overflow: hidden;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		border: 0;
+		clip: rect(1px, 1px, 1px, 1px);
+		input[type=search] {
+			width: 100%;
+			padding: 1em;
+			padding-right: 7em;
+			position: relative;
+			top: 0;
+			display: block;
+			border: 1px solid #000;
+		}
+		input[type=submit] {
+			position: absolute;
+			right: .75em;
+			top: .5em;
+			bottom: .5em;
+			z-index: 1;
+			width: 6em;
+			padding: 0;
+			cursor: pointer;
+			display: block;
+			border: 1px solid #000;
+		}
+	}
+}
+
+.pattern {
+	@media @mobile {}
+	@media @desktop {
+		background-color: @color-white;
+		padding: .5em 0 .5em 0;
+		line-height: 1;
+	}
+}
+
+.f {
+	@media @mobile {}
+	@media @desktop {
+		position: relative;
+	}
+}
+
 
 .accordion {
 	@media @mobile {}
 	@media @desktop {
+		background-color: @color-light-blue;
 		.panel-title {
 			margin: 0;
 			padding: 0 .25em 0 .25em;
@@ -12,24 +63,11 @@
 			-moz-transition: .1s all ease-in-out;
 			-o-transition: .1s all ease-in-out;
 			transition: .1s all ease-in-out;
-			background: @color-light-gray;
-			color: #333;
-			&:hover {
-				background: #CCC;
-			};
-			&:active {
-				background: #999;
-			};
-			.active {
-				background: #CCC;
-				&:active {
-					background: #999;
-				};
-			};
+			background: @color-light-blue;
+			text-color: @color-medium-gray;
 		}
 		.accordion-innerwrap {
-			margin: 0 auto;
-			width: 98%;
+			margin: 0;
 		}
 	}
 }
@@ -38,6 +76,10 @@
 	@media @mobile {}
 	@media @desktop {
 		margin: .25em 0;
+		h4 {
+			.sansSerif-light();
+			color: @color-white;
+		}
 	}
 }
 
@@ -136,3 +178,70 @@
 		list-style: none;
 	}
 }
+
+
+
+.trailFilters {
+	@media @mobile {}
+	@media @desktop {
+		height: auto;
+		.visuallyhidden_2 {
+		    margin: .2em;
+		    width: 2.5em;
+		    height: 2em;
+		    background-color: @color-light-orange;
+		    border: 1px solid @color-dark-orange;
+		    overflow: auto;
+		    float: left;
+		    &:hover {
+		    	background-color: @color-medium-orange;
+		    }
+		}
+	}
+}
+.trailLength {
+	@media @mobile {}
+	@media @desktop {		
+		height: 4em;
+		width: 100%;
+		background: @color-white;
+		padding: 1em;
+	}
+	label {
+	  margin: 5px;
+	  padding: 2px;
+	  border: 1px solid gray;
+	}
+	input:focus {
+		border-color: #ccc;
+		&:checked {
+			border-color: @color-light-gray;
+		}
+	}
+	input:checked {
+		border-color: #fff;
+	}
+}
+.trailUse {
+	@media @mobile {}
+	@media @desktop {
+		height: 4em;
+		width: 100%;
+		background: @color-white;
+		padding: 1em;
+		label {
+		  margin: 5px;
+		  padding: 5px;
+		  border: 1px solid gray;
+		}
+	}
+}
+
+/*				input:checked {
+					border-color: #fff;
+				}
+				input:focus {
+					border-color: #ccc;
+					&:checked {
+						border-color: @color-light-gray;
+				}*/
