@@ -359,7 +359,35 @@ At some point, update mediaqueries to be in EMS
   .list-reset {
     padding: 0;
     list-style: none;
+    background-color: #ffffff;
   }
+}
+.trailLength-title {
+  height: 1em;
+  width: 100%;
+  background-color: #ffffff;
+}
+.trailLength-title h2 {
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  color: #76bcc4;
+  padding-left: 1em;
+}
+.trailUse-title {
+  height: 2em;
+  width: 100%;
+  background-color: #ffffff;
+}
+.trailUse-title h2 {
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  color: #76bcc4;
+  padding-left: 1em;
+  padding-bottom: 1em;
 }
 @media only screen and (max-width: 529px) {
   
@@ -368,68 +396,95 @@ At some point, update mediaqueries to be in EMS
   .trailFilters {
     height: auto;
   }
-  .trailFilters .visuallyhidden_2 {
-    margin: .2em;
+  .trailFilters .trailLength {
+    height: 4em;
+    width: 100%;
+    background: #ffffff;
+    padding: 0em 1em 2em 1em;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox] {
+    display: none;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
+    background-color: #c45f37;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div {
+    background-color: #efb589;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div p {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div:hover {
+    background-color: #c45f37;
+  }
+  .trailFilters ul:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+  .trailFilters .trailUse {
+    height: 4em;
+    width: 100%;
+    padding: 0em 1em 1em 1em;
+    background: #ffffff;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 {
+    position: relative;
+    display: inline-block;
     width: 2.5em;
     height: 2em;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox] {
+    display: none;
     background-color: #efb589;
-    border: 1px solid #c45f37;
-    overflow: auto;
-    float: left;
+    width: 2em;
+    height: auto;
   }
-  .trailFilters .visuallyhidden_2:hover {
-    background-color: #cc8464;
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox]:checked + div {
+    background-color: #c45f37;
   }
-}
-@media only screen and (max-width: 529px) {
-  
-}
-@media only screen and (min-width: 950px) {
-  .trailLength {
-    height: 4em;
+  .trailFilters .trailUse .visuallyhidden_3 div {
+    background-color: #efb589;
     width: 100%;
-    background: #ffffff;
-    padding: 1em;
+    height: 100%;
+    cursor: pointer;
   }
-}
-.trailLength label {
-  margin: 5px;
-  padding: 2px;
-  border: 1px solid gray;
-}
-.trailLength input:focus {
-  border-color: #ccc;
-}
-.trailLength input:focus:checked {
-  border-color: #bcbec0;
-}
-.trailLength input:checked {
-  border-color: #fff;
-}
-@media only screen and (max-width: 529px) {
-  
-}
-@media only screen and (min-width: 950px) {
-  .trailUse {
-    height: 4em;
+  .trailFilters .trailUse .visuallyhidden_3 div:hover {
+    background-color: #c45f37;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 .filter-icons {
+    position: absolute;
+    width: 2.5em;
+    height: 2em;
+  }
+  .trailFilters ul:after {
+    content: "";
+    display: inline-block;
     width: 100%;
-    background: #ffffff;
-    padding: 1em;
-  }
-  .trailUse label {
-    margin: 5px;
-    padding: 5px;
-    border: 1px solid gray;
   }
 }
-/*				input:checked {
-					border-color: #fff;
-				}
-				input:focus {
-					border-color: #ccc;
-					&:checked {
-						border-color: @color-light-gray;
-				}*//*@import "search.less";*/
+/*@import "search.less";*/
 /* List Module */
 @media only screen and (max-width: 529px) {
   .trailListColumn {
