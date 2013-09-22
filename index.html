@@ -66,15 +66,17 @@
                 <div></div>
               </a>
               <a class="brand" href="#">Trailsy</a>
-              <a class="subBrand" href="#">SUMMIT COUNTY</a>
+              <a class="subBrand" href="#">SUMMIT</a>
             </div>
           </header>
         </div>
+        <!-- Accordion -->
         <section class="accordion clearfix">
           <div class="accordion-innerwrap">
+            <!-- First Accordion Panel (No Title) -->
               <ul class="panel-container list-reset" tabindex="1">
-                <li><h4 id="trigger1" class="panel-title" aria-hidden="true">Narrow Your Search</h4>
-                  <ul class="panel content list-reset visuallyhidden" aria-expanded="false">
+                <li><h4 id="trigger1" class="panel-title active" aria-hidden="true"> </h4>
+                  <ul class="panel content list-reset" aria-expanded="false">
                     <div class="searchbar">
                       <form action="#" method="post" class="f">
                         <label class="is-vishidden">Search the site</label>
@@ -82,9 +84,9 @@
                           <input type="submit" class="btn search-submit" value="">
                       </form>
                     </div>
-                      <div class="trailLength-title">
-                        <h2>Length (in miles)</h2>
-                      </div>
+                    <div class="trailLength-title">
+                      <h2>Length (in miles)</h2>
+                    </div>
                     <div class="trailFilters">
                       <ul class="trailLength">
                         <li class="visuallyhidden_2">
@@ -118,86 +120,101 @@
                           </label>
                         </li>
                       </ul>
-                      <div class="trailUse-title">
-                        <h2>Popular Trail Types</h2>
-                      </div>
-                      <ul class="trailUse">
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_hike_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_cycle_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_handicap_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_horse_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_xcountryski_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                        <li class="visuallyhidden_3">
-                          <label>
-                            <input type="checkbox"/>
-                            <div>
-                              <img src="img/icon_xcountryski_white.png" class="filter-icons"/>
-                            </div>
-                          </label>
-                        </li>
-                      </ul>
-<!--                       <select id="activityFilter" multiple data-selected-text-form title='Trail Activities'>
-                        <option value="dogs">Dogs</option>
-                        <option value="roadbike">Bikes</option>
-                        <option value="equestrian">Equestrian</option>
-                      </select>
-                      <select id="difficultyFilter" multiple title='Trail Difficulty'>
-                        <option value="easy">Easy</option>
-                        <option value="moderate">Moderate</option>
-                        <option value="difficult">Difficult</option>
-                      </select>
-                      <select id="lengthFilter" multiple title='Trail Length'>
-                        <option value="short">0-2 mi</option>
-                        <option value="medium">2-5 mi</option>
-                        <option value="long">5-12 mi</option>
-                        <option value="veryLong">12-30 mi</option>
-                      </select> -->
+                    </div>
                   </ul>
                 </li>
               </ul>
-              <ul class="panel-container list-reset" tabindex="2">
-                <li><h4 id='trigger2' class="panel-title">Trails Near You</h4>
-                  <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
-                    <div id="trailList"></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+                <!-- Second Accordion Panel (More Options) -->
+                <ul class="panel-container list-reset" tabindex="2">
+                  <li><h4 id='trigger2' class="panel-title">More Options</h4>
+                    <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
+                      <div class="trailFilters">
+                        <!-- Header -->
+                        <div class="trailUse-title"><h2>Popular Trail Types</h2>
+                        </div>
+                        <!-- More Trail Filters -->
+                        <ul class="trailUse">
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_hike_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_cycle_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_handicap_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_horse_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_xcountryski_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_3">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <img src="img/icon_xcountryski_white.png" class="filter-icons"/>
+                              </div>
+                            </label>
+                          </li>
+                        </ul>
+                          <!-- Select All & Clear Selection -->
+                        <ul class="trailSelection">
+                          <li class="visuallyhidden_4">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <p>Select</p>
+                              </div>
+                            </label>
+                          </li>
+                          <li class="visuallyhidden_4">
+                            <label>
+                              <input type="checkbox"/>
+                              <div>
+                                <p>Clear</p>
+                              </div>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                  <!-- Third Accordion Panel / The List -->
+                  <ul class="panel-container list-reset" tabindex="3">
+                    <li><h4 id='trigger3' class="panel-title">Trails Near You</h4>
+                      <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
+                        <div id="trailList"></div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
 
         </section>
       </div>
@@ -274,3 +291,22 @@
                 <a href='#'>Refresh search from new map location</a>
               </div>
  -->
+
+
+
+<!--                       <select id="activityFilter" multiple data-selected-text-form title='Trail Activities'>
+                        <option value="dogs">Dogs</option>
+                        <option value="roadbike">Bikes</option>
+                        <option value="equestrian">Equestrian</option>
+                      </select>
+                      <select id="difficultyFilter" multiple title='Trail Difficulty'>
+                        <option value="easy">Easy</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="difficult">Difficult</option>
+                      </select>
+                      <select id="lengthFilter" multiple title='Trail Length'>
+                        <option value="short">0-2 mi</option>
+                        <option value="medium">2-5 mi</option>
+                        <option value="long">5-12 mi</option>
+                        <option value="veryLong">12-30 mi</option>
+                      </select> -->

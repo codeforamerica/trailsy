@@ -20,7 +20,7 @@
 				border: none;
 				box-shadow: none;
 				text-align: justify;
-				padding: 5px 7px 7px 10px;
+				padding: 1em 0em 1em 1em;
 
 				.hamburger {
 				    cursor: pointer;
@@ -48,9 +48,10 @@
 				}
 				.subBrand {
 					@sansSerif-light;
+					text-decoration: none;
 					display: inline-block;
 					font-size: 8px;
-					color: @color-white;
+					color: @color-light-blue;
 				}
 			}
 		}
@@ -71,23 +72,28 @@
 				border: none;
 				box-shadow: none;
 				text-align: justify;
-				padding: 10px 0 10px 15px;
+				padding: .5em .25em .25em 1em;
 				&:after {
 					content: '';
 					display: inline-block;
 				}
 				.brand {
-					@sansSerif-bold();
+					.sansSerif-bold();
+					font-size: 24px;
+					line-height: 1em;
+					text-decoration: none;
 					display: inline-block;
 					color: @color-white;
 					&:hover { text-decoration: none;};
 					&:focus { text-decoration: none;};
 				}
 				.subBrand {
-					margin-left: 20px;
+					margin-left: .5em;
 					display: inline-block;
-					@sanSerif-light();
-					color: @color-white;
+					.sansSerif-light();
+					font-size: 12px;
+					color: @color-light-blue;
+					text-decoration: none;
 					cursor: default;
 					&:hover { text-decoration: none; };
 				}

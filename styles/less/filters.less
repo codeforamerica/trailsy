@@ -26,7 +26,7 @@
 		input {
 		  display: block;
 		  border: 1px solid;
-		  border-color: @color-light-gray;
+		  border-color: @color-light-orange;
 		}
 		input[type="search"] {
 			width: 100%;
@@ -72,13 +72,13 @@
 		background-color: @color-light-blue;
 		.panel-title {
 			margin: 0;
-			padding: 0 .25em 0 .25em;
+			padding: .5em .25em .25em 1em;
 			/* Let's abstract this transition so we can keep it consistent across animations*/
 			-webkit-transition: .1s all ease-in-out;
 			-moz-transition: .1s all ease-in-out;
 			-o-transition: .1s all ease-in-out;
 			transition: .1s all ease-in-out;
-			background: @color-light-blue;
+			background: @color-white;
 			text-color: @color-medium-gray;
 		}
 		.accordion-innerwrap {
@@ -90,10 +90,14 @@
 .panel-container {
 	@media @mobile {}
 	@media @desktop {
-		margin: .25em 0;
+		margin: 0;
+		#trigger1 {
+			padding: 0;
+		}
 		h4 {
 			.sansSerif-light();
-			color: @color-white;
+			color: @color-light-gray;
+			right: 1em;
 		}
 	}
 }
@@ -103,14 +107,6 @@
 	@media @desktop {
 		list-style-type: none;
 		margin: 0;
-		li {
-			border-bottom: 1px dotted #AAA;
-			padding: .25em;
-			:last-child {
-				border-bottom: none;
-				padding-bottom: none;
-			}
-		}
 	}
 }
 
@@ -244,7 +240,7 @@
 				div {
 					background-color: @color-light-orange;
 					width: 100%;
-					height: 100%;
+					height: 2em;
 					cursor: pointer;
 					p {
 						.sansSerif-light();
@@ -306,6 +302,44 @@
 			content: "";
 			display: inline-block;
 			width: 100%;
+		}
+		.trailSelection {
+			height: 4em;
+			width: 100%;
+			background: @color-white;
+			padding: 0em 1em 2em 1em;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_4 {
+				display: inline-block;
+				width: 9.8em;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				input[type=checkbox] {
+					display: none;
+					&:checked + div {
+						background-color: @color-dark-orange;
+					}
+				}
+				div {
+					background-color: @color-light-orange;
+					width: 100%;
+					height: 2em;
+					cursor: pointer;
+					p {
+						.sansSerif-light();
+						color: @color-white;
+						text-align: center;
+						vertical-align: middle;
+						line-height: 2em;
+					}
+					&:hover {
+						background-color: @color-dark-orange;
+					}
+				}
+			}
 		}
 	}
 }
