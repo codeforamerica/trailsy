@@ -10,36 +10,50 @@
 		padding: 0;
 		border: 0;
 		clip: rect(1px, 1px, 1px, 1px);
-		input[type=search] {
-			width: 100%;
-			padding: 1em;
-			padding-right: 7em;
-			position: relative;
-			top: 0;
-			display: block;
-			border: 1px solid #000;
-		}
-		input[type=submit] {
-			position: absolute;
-			right: .75em;
-			top: .5em;
-			bottom: .5em;
-			z-index: 1;
-			width: 6em;
-			padding: 0;
-			cursor: pointer;
-			display: block;
-			border: 1px solid #000;
-		}
 	}
 }
 
-.pattern {
+.searchbar {
 	@media @mobile {}
 	@media @desktop {
 		background-color: @color-white;
-		padding: .5em 0 .5em 0;
 		line-height: 1;
+		form {
+			padding-left: 1em;
+			padding-top: 1em;
+			padding-right: 3em;
+		}
+		input {
+		  display: block;
+		  border: 1px solid;
+		  border-color: @color-light-gray;
+		}
+		input[type="search"] {
+			width: 100%;
+			padding-left: 1em;
+			padding-right: 0;
+			padding-top: .5em;
+			padding-bottom: .5em;
+			position: relative;
+			top: 0;
+			&:focus {
+				outline: none;
+			}
+		}
+		input[type="submit"] {
+			position: absolute;
+			right: 1em;
+			top: 1em;
+			bottom: 0em;
+			z-index: 1;
+			width: 2.5em;
+			padding: 0;
+			cursor: pointer;
+			background-color: @color-light-orange;
+			&:hover {
+				background-color: @color-dark-orange;
+			}
+		}
 	}
 }
 
@@ -47,6 +61,7 @@
 	@media @mobile {}
 	@media @desktop {
 		position: relative;
+		.sansSerif-light();
 	}
 }
 
