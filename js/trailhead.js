@@ -169,7 +169,7 @@ function startup() {
       if (currentFilters.activityFilter) {
         for (var i = 0; i < currentFilters.activityFilter.length; i++) {
           var activity = currentFilters.activityFilter[i];
-          if (trail.properties[activity].toLowerCase() !== "true") {
+          if (trail.properties[activity] && trail.properties[activity].toLowerCase() !== "true") {
             delete filteredTrailData[trail_id];
           }
         }
@@ -178,7 +178,7 @@ function startup() {
         var include = false;
         for (var j = 0; j < currentFilters.difficultyFilter.length; j++) {
           var difficulty = currentFilters.difficultyFilter[j];
-          if (trail.properties.difficulty.toLowerCase() == difficulty.toLowerCase()) {
+          if (trail.properties.difficulty && trail.properties.difficulty.toLowerCase() == difficulty.toLowerCase()) {
             include = true;
             break;
           }
