@@ -288,6 +288,9 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
   }
+  .panel-container:focus {
+    outline: none;
+  }
   .panel-container #trigger1 {
     padding: 0;
   }
@@ -297,7 +300,11 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #bcbec0;
-    right: 1em;
+    width: 100%;
+    text-align: right;
+  }
+  .panel-container li:focus {
+    outline: none;
   }
 }
 @media only screen and (max-width: 529px) {
@@ -520,7 +527,7 @@ At some point, update mediaqueries to be in EMS
   }
   .trailFilters .trailSelection .visuallyhidden_4 {
     display: inline-block;
-    width: 9.8em;
+    width: 8.5em;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -564,9 +571,9 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .trailListColumn {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 33%;
+    top: 1em;
+    left: 2em;
+    width: 20em;
     height: auto;
     padding: 0;
     background: #bcbec0;

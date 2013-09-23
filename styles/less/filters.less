@@ -91,13 +91,20 @@
 	@media @mobile {}
 	@media @desktop {
 		margin: 0;
+		&:focus {
+			outline: none;
+		}
 		#trigger1 {
 			padding: 0;
 		}
 		h4 {
 			.sansSerif-light();
 			color: @color-light-gray;
-			right: 1em;
+			width: 100%;
+			text-align: right;
+		}
+		li:focus {
+			outline: none;
 		}
 	}
 }
@@ -313,7 +320,7 @@
     		text-justify: distribute-all-lines;
 			.visuallyhidden_4 {
 				display: inline-block;
-				width: 9.8em;
+				width: 8.5em;
 				height: 100%;
 				margin: 0;
 				padding: 0;

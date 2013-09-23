@@ -39,5 +39,6 @@ $(document).ready(function() {
     accordion('#trigger1');
     //call to widget trigger2
     accordion('#trigger2');
+    accordion('#trigger3');
 
 });//end document.ready()

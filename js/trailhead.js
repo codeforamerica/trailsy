@@ -431,11 +431,11 @@ function startup() {
     allSegmentLayer = L.geoJson(trailSegments, {
       style: function() {
         return {
-          color: '#060',
-          weight: 2,
-          opacity: 0.5,
+          color: '#EFB589',
+          weight: 3,
+          opacity: 1,
           clickable: true,
-          dashArray: "5,5"
+          // dashArray: "5,5"
         };
       },
       onEachFeature: function(feature, layer) {
