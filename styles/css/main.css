@@ -71,20 +71,20 @@ At some point, update mediaqueries to be in EMS
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
 /* Variables used: color, typography */
 @media only screen and (max-width: 529px) {
-  .top-ui {
+  .title-row {
     width: 100%;
     height: auto;
     top: 0;
     margin: 0;
   }
-  .top-ui header {
+  .title-row header {
     position: fixed;
     width: 100%;
     margin: 0;
     padding: 0;
     z-index: 2;
   }
-  .top-ui header .navbar-inner {
+  .title-row header .navbar-inner {
     position: relative;
     background-color: #5e4534;
     border: none;
@@ -92,7 +92,7 @@ At some point, update mediaqueries to be in EMS
     text-align: justify;
     padding: 1em 0em 1em 1em;
   }
-  .top-ui header .navbar-inner .hamburger {
+  .title-row header .navbar-inner .hamburger {
     cursor: pointer;
     display: inline-block;
     height: 25px;
@@ -103,7 +103,7 @@ At some point, update mediaqueries to be in EMS
     /* The white stripes in the hamburger button */
   
   }
-  .top-ui header .navbar-inner .hamburger div {
+  .title-row header .navbar-inner .hamburger div {
     background-color: #ffffff;
     border: 1px solid #ffffff;
     border-radius: 2px 2px 2px 2px;
@@ -111,13 +111,13 @@ At some point, update mediaqueries to be in EMS
     margin-top: 3px;
     width: 90%;
   }
-  .top-ui header .navbar-inner .brand {
+  .title-row header .navbar-inner .brand {
     display: inline-block;
     font-size: 12px;
     color: #ffffff;
   }
   @sans Serif-bold;
-  .top-ui header .navbar-inner .subBrand {
+  .title-row header .navbar-inner .subBrand {
     text-decoration: none;
     display: inline-block;
     font-size: 8px;
@@ -126,31 +126,31 @@ At some point, update mediaqueries to be in EMS
   @sans Serif-light;
 }
 @media only screen and (min-width: 950px) {
-  .top-ui {
+  .title-row {
     position: relative;
     width: 100%;
     top: 0;
     margin: 0;
   }
-  .top-ui header {
+  .title-row header {
     position: relative;
     width: 100%;
     margin-bottom: 0;
     padding: 0;
   }
-  .top-ui header .navbar-inner {
+  .title-row header .navbar-inner {
     position: relative;
     background-color: #5e4534;
     border: none;
     box-shadow: none;
     text-align: justify;
-    padding: .5em .25em .25em 1em;
+    padding: 1em .25em .25em 1em;
   }
-  .top-ui header .navbar-inner:after {
+  .title-row header .navbar-inner:after {
     content: '';
     display: inline-block;
   }
-  .top-ui header .navbar-inner .brand {
+  .title-row header .navbar-inner .brand {
     font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -161,13 +161,13 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     color: #ffffff;
   }
-  .top-ui header .navbar-inner .brand:hover {
+  .title-row header .navbar-inner .brand:hover {
     text-decoration: none;
   }
-  .top-ui header .navbar-inner .brand:focus {
+  .title-row header .navbar-inner .brand:focus {
     text-decoration: none;
   }
-  .top-ui header .navbar-inner .subBrand {
+  .title-row header .navbar-inner .subBrand {
     margin-left: .5em;
     display: inline-block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -179,10 +179,10 @@ At some point, update mediaqueries to be in EMS
     text-decoration: none;
     cursor: default;
   }
-  .top-ui header .navbar-inner .subBrand:hover {
+  .title-row header .navbar-inner .subBrand:hover {
     text-decoration: none;
   }
-  .top-ui header .navbar-inner .hamburger {
+  .title-row header .navbar-inner .hamburger {
     display: none;
   }
 }
@@ -263,6 +263,8 @@ At some point, update mediaqueries to be in EMS
 }
 @media only screen and (min-width: 950px) {
   .accordion {
+    /*		display: none;*/
+  
     background-color: #76bcc4;
   }
   .accordion .panel-title {
@@ -573,19 +575,11 @@ At some point, update mediaqueries to be in EMS
     position: absolute;
     top: 1em;
     left: 2em;
-    width: 20em;
+    width: 24em;
     height: auto;
     padding: 0;
     background: #bcbec0;
     z-index: 999;
-    /*		a {
-  			.sansSerif-light();
-  			display: inline-block;
-  			position: relative;
-  			padding: 4px 0 2px 14px;
-  			font-size: 12px;
-  		}*/
-  
   }
 }
 /* This border should become a variable */
@@ -678,16 +672,22 @@ At some point, update mediaqueries to be in EMS
     border-width: 1px;
     border-color: #bcbec0;
     cursor: pointer;
-    /* Font replacement */
-  
-    /* Font replacement */
-  
   }
   .trail-box:hover {
     border-bottom: 2px solid #c45f37;
     -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+  }
+  .trail-box .trailLength {
+    position: absolute;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #61a7aa;
+    top: 10px;
+    right: 10px;
   }
   .trail-box .trailheadName {
     position: absolute;
@@ -885,104 +885,132 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
+/* For reference, here is the parent trailListColumn attributes:
+
+.trailListColumn {
+	@media @mobile {
+		display: none;	
+		a {
+			display: none;
+		}
+	}
+	@media @desktop {
+		position: absolute;
+		top: 1em;
+		left: 2em;
+		width: 20em;
+		height: auto;
+		padding: 0;
+		background: @color-light-gray;
+		z-index: 999;
+*/
+/* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
+.detailPanelColumn {
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+		display: none;
+		position: relative;
+		height: 500px;
+		padding: 0;
+		webkit-transition: width 0.3s ease, margin 0.3s ease;
+		transition: width 0.3s ease, margin 0.3s ease;
+	}
+}
+}
+*/
 @media only screen and (max-width: 529px) {
-  .detailPanelColumn {
+  .detailPanel {
+    display: none;
+  }
+  .detailPanel .detailPanelTitle {
+    display: none;
+  }
+  .detailPanel .detailTrailheadName {
+    display: none;
+  }
+  .detailPanel .detailLength {
+    display: none;
+  }
+  .detailPanel .detailDirections {
+    display: none;
+  }
+  .detailPanel .detailDifficulty {
+    display: none;
+  }
+  .detailPanel .detailTrailheadDistance {
+    display: none;
+  }
+  .detailPanel .detailPanelHeader {
+    display: none;
+  }
+  .detailPanel .detailPanelPicture {
+    display: none;
+  }
+  .detailPanel .detailDescription {
+    display: none;
+  }
+  .detailPanel .detailPrintMap {
+    display: none;
+  }
+  .detailPanel .social-icon {
+    display: none;
+  }
+  .detailPanel .detailPanelBody {
+    display: none;
+  }
+  .detailPanel .detailTopRow {
+    display: none;
+  }
+  .detailPanel .detailMiddleRow {
+    display: none;
+  }
+  .detailPanel .detailBottomRow {
+    display: none;
+  }
+  .detailPanel .detailFooter {
     display: none;
   }
 }
 @media only screen and (min-width: 950px) {
-  .detailPanelColumn {
-    display: none;
+  .detailPanel {
+    visibility: hidden;
     position: relative;
-    height: 500px;
-    padding: 0;
-    webkit-transition: width 0.3s ease, margin 0.3s ease;
-    transition: width 0.3s ease, margin 0.3s ease;
-  }
-}
-@media only screen and (max-width: 529px) {
-  .detail-panel {
     display: none;
-  }
-  .detail-panel .detailPanelTitle {
-    display: none;
-  }
-  .detail-panel .detailTrailheadName {
-    display: none;
-  }
-  .detail-panel .detailLength {
-    display: none;
-  }
-  .detail-panel .detailDirections {
-    display: none;
-  }
-  .detail-panel .detailDifficulty {
-    display: none;
-  }
-  .detail-panel .detailTrailheadDistance {
-    display: none;
-  }
-  .detail-panel .detailPanelHeader {
-    display: none;
-  }
-  .detail-panel .detailPanelPicture {
-    display: none;
-  }
-  .detail-panel .detailDescription {
-    display: none;
-  }
-  .detail-panel .detailPrintMap {
-    display: none;
-  }
-  .detail-panel .social-icon {
-    display: none;
-  }
-  .detail-panel .detailPanelBody {
-    display: none;
-  }
-  .detail-panel .detailTopRow {
-    display: none;
-  }
-  .detail-panel .detailMiddleRow {
-    display: none;
-  }
-  .detail-panel .detailBottomRow {
-    display: none;
-  }
-  .detail-panel .detailFooter {
-    display: none;
-  }
-}
-@media only screen and (min-width: 950px) {
-  .detail-panel {
-    position: absolute;
     width: 100%;
-    height: 500px;
+    height: 400px;
     background-color: #ffffff;
-    overflow: scroll;
+    overflow: hidden;
     border-bottom: 1px solid #bcbec0;
   }
-  .detail-panel .detailPanelTitle {
+  .detailPanel .detailPanelBanner {
     position: relative;
-    bottom: -1;
-    background-color: #c45f37;
-    display: inline-block;
     width: 100%;
-    height: 40px;
-    padding: 10px 10px 0 10px;
-    font-family: 'Oswald', sans-serif;
-    font-weight: lighter;
-    letter-spacing: 1px;
-    font-size: 20px;
+    background-color: #c45f37;
+    padding: .5em .25em .5em 1em;
   }
-  .detail-panel .detailTrailheadName {
+  .detailPanel .detailPanelBanner .trailName {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+  }
+  .detailPanel .detailPanelBody {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    overflow: scroll;
+  }
+  .detailPanel .detailPanelBody .detailTrailheadName {
     position: relative;
     margin-left: 20px;
     font-weight: 300;
     font-size: 12px;
   }
   @sans Serif-light;
-  .detail-panel .detailLength {
+  .detailPanel .detailPanelBody .detailLength {
     position: relative;
     float: left;
     top: 2%;
@@ -991,7 +1019,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
   }
   @sans Serif-light;
-  .detail-panel .detailDirections {
+  .detailPanel .detailPanelBody .detailDirections {
     position: relative;
     font-weight: 300;
     font-size: 12px;
@@ -999,7 +1027,7 @@ At some point, update mediaqueries to be in EMS
     margin-top: 6px;
   }
   @sans Serif-light;
-  .detail-panel .detailDifficulty {
+  .detailPanel .detailPanelBody .detailDifficulty {
     position: relative;
     margin-left: 2%;
     width: 100%;
@@ -1007,44 +1035,39 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
   }
   @san Serif-light;
-  .detail-panel .detailTrailheadDistance {
+  .detailPanel .detailPanelBody .detailTrailheadDistance {
     position: relative;
     font-weight: 300;
     font-size: 12px;
   }
   @san Serif-light;
-  .detail-panel .detailPanelHeader {
+  .detailPanel .detailPanelBody .detailPanelHeader {
     font-weight: 300;
     font-size: 12px;
   }
   @sans Serif-light;
-  .detail-panel .detailPanelPicture {
+  .detailPanel .detailPanelBody .detailPanelPicture {
     border-bottom: 1px solid #bcbec0;
     width: 100%;
   }
-  .detail-panel .detailDescription {
+  .detailPanel .detailPanelBody .detailDescription {
     display: inline-block;
     margin-top: 15px;
     font-weight: 300;
     font-size: 12px;
   }
   @sans Serif-light;
-  .detail-panel .detailPrintMap {
+  .detailPanel .detailPanelBody .detailPrintMap {
     float: left;
     margin-top: 6px;
   }
-  .detail-panel .social-icon {
+  .detailPanel .detailPanelBody .social-icon {
     position: relative;
     float: left;
     margin-left: 5px;
     width: 30px;
   }
-  .detail-panel .detailPanelBody {
-    position: absolute;
-    height: auto;
-    width: 100%;
-  }
-  .detail-panel .detailTopRow#left {
+  .detailPanel .detailPanelBody .detailTopRow#left {
     position: relative;
     float: left;
     display: inline-block;
@@ -1054,16 +1077,16 @@ At some point, update mediaqueries to be in EMS
     border-width: 1px;
     border-color: #bcbec0;
   }
-  .detail-panel .detailTopRow#right {
+  .detailPanel .detailPanelBody .detailTopRow#right {
     position: relative;
     float: left;
     width: 75%;
     height: 40px;
   }
-  .detail-panel .detailTopRowspan {
+  .detailPanel .detailPanelBody .detailTopRowspan {
     margin-left: 10px;
   }
-  .detail-panel .detailTopRow .icon {
+  .detailPanel .detailPanelBody .detailTopRow .icon {
     position: relative;
     float: left;
     height: 40px;
@@ -1076,7 +1099,7 @@ At some point, update mediaqueries to be in EMS
     border-color: #bcbec0;
   }
   @san Serif-light;
-  .detail-panel .detailMiddleRow {
+  .detailPanel .detailPanelBody .detailMiddleRow {
     position: relative;
     display: inline-block;
     height: auto;
@@ -1086,7 +1109,7 @@ At some point, update mediaqueries to be in EMS
     border-width: 1px;
     border-color: #bcbec0;
   }
-  .detail-panel .detailBottomRow {
+  .detailPanel .detailPanelBody .detailBottomRow {
     position: relative;
     display: inline-block;
     height: auto;
@@ -1096,10 +1119,10 @@ At some point, update mediaqueries to be in EMS
     border-width: 1px;
     border-color: #bcbec0;
   }
-  .detail-panel .detailBottomRowa {
+  .detailPanel .detailPanelBody .detailBottomRowa {
     margin-right: 2px;
   }
-  .detail-panel .detailFooter {
+  .detailPanel .detailPanelBody .detailFooter {
     position: relative;
     display: inline-block;
     height: auto;
@@ -1109,7 +1132,7 @@ At some point, update mediaqueries to be in EMS
     border-width: 1px;
     border-color: #bcbec0;
   }
-  .detail-panel .detailFooter span {
+  .detailPanel .detailPanelBody .detailFooter span {
     color: #c45f37;
     font-size: 14px;
     line-height: 15px;
@@ -1118,18 +1141,18 @@ At some point, update mediaqueries to be in EMS
     top: 20px;
   }
   @sans Serif-bold;
-  .detail-panel .detailFooter .icon-large {
+  .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 25%;
     float: left;
     position: relative;
     bottom: 0;
   }
-  .detail-panel .detailFooter .detailSource {
+  .detailPanel .detailPanelBody .detailFooter .detailSource {
     position: absolute;
     left: 30%;
     top: 40px;
   }
-  .detail-panel .detailFooter .detailSourceTelephone {
+  .detailPanel .detailPanelBody .detailFooter .detailSourceTelephone {
     position: absolute;
     left: 60%;
     top: 40px;
@@ -1170,18 +1193,6 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
   }
   @sans Serif-light;
-}
-@media only screen and (max-width: 529px) {
-  .trailName {
-    display: none;
-  }
-}
-@media only screen and (min-width: 950px) {
-  .trailName {
-    font-family: 'Oswald', sans-serif;
-    margin: 0;
-    color: #FFF;
-  }
 }
 @media only screen and (max-width: 529px) {
   .activity-icons {

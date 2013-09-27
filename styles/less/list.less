@@ -11,18 +11,11 @@
 		position: absolute;
 		top: 1em;
 		left: 2em;
-		width: 20em;
+		width: 24em;
 		height: auto;
 		padding: 0;
 		background: @color-light-gray;
 		z-index: 999;
-/*		a {
-			.sansSerif-light();
-			display: inline-block;
-			position: relative;
-			padding: 4px 0 2px 14px;
-			font-size: 12px;
-		}*/
 	}
 }
 
@@ -113,7 +106,13 @@
 			-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 			box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 		};
-		/* Font replacement */
+		.trailLength {
+			position: absolute;
+			.sansSerif-light();
+			color: @color-dark-blue;
+			top: 10px;
+			right: 10px;
+		}
 		.trailheadName {
 			position: absolute;
 		   	.sansSerif-light();
@@ -122,7 +121,6 @@
 			top: 45px;
 			left: 14px;
 		}
-		/* Font replacement */
 		.trailheadDistance {
 			position: absolute;
 		 	.sansSerif-light();

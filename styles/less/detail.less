@@ -1,3 +1,24 @@
+/* For reference, here is the parent trailListColumn attributes:
+
+.trailListColumn {
+	@media @mobile {
+		display: none;	
+		a {
+			display: none;
+		}
+	}
+	@media @desktop {
+		position: absolute;
+		top: 1em;
+		left: 2em;
+		width: 20em;
+		height: auto;
+		padding: 0;
+		background: @color-light-gray;
+		z-index: 999;
+*/
+
+/* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
 .detailPanelColumn {
 	@media @mobile {
 		display: none;	
@@ -11,8 +32,9 @@
 		transition: width 0.3s ease, margin 0.3s ease;
 	}
 }
-
-.detail-panel {
+}
+*/
+.detailPanel {
 	@media @mobile {
 		display: none;	
 		.detailPanelTitle {
@@ -65,184 +87,184 @@
 		}
 	}
 	@media @desktop {
-		position: absolute;
+		visibility: hidden;
+		position: relative;
+		display: none;
 		width: 100%;
-		height: 500px;
+		height: 400px;
 		background-color: @color-white;
-		overflow: scroll;
+		overflow: hidden;
 		border-bottom: 1px solid @color-light-gray;
-		.detailPanelTitle {
+		.detailPanelBanner {
 			position: relative;
-			bottom: -1;
+			width: 100%;
 			background-color: @color-dark-orange;
-			display: inline-block;
-			width: 100%;
-			height: 40px;
-			padding: 10px 10px 0 10px;
-			font-family: 'Oswald', sans-serif;
-			font-weight: lighter;
-			letter-spacing: 1px;
-			font-size: 20px;
-		}
-		.detailTrailheadName {
-			position: relative;
-			@sansSerif-light;
-		  	margin-left: 20px;
-		   	font-weight: 300;
-		   	font-size: 12px;
-		}
-		.detailLength {
-			position: relative;
-			float: left;
-			top: 2%;
-			margin-left: 2%;
-			@sansSerif-light;
-		  	font-weight: 300;
-		  	font-size: 12px;
-		}
-		.detailDirections {
-			position: relative;
-		  	@sansSerif-light;
-		  	font-weight: 300;
-		  	font-size: 12px;
-		  	float: left;
-			margin-top: 6px;
-		}
-		.detailDifficulty {
-			position: relative;
-		  	margin-left: 2%;
-			width: 100%;
-			@sanSerif-light;
-		 	font-weight: 300;
-		   	font-size: 12px;
-		}
-		.detailTrailheadDistance {
-			position: relative;
-			@sanSerif-light;
-		 	font-weight: 300;
-		   	font-size: 12px;
-		}
-		.detailPanelHeader {
-		  	@sansSerif-light;
-		 	font-weight: 300;
-		   	font-size: 12px;
-		}
-		.detailPanelPicture {
-			border-bottom: 1px solid @color-light-gray;
-			width: 100%;
-		}
-		.detailDescription {
-			display: inline-block;
-		  	margin-top: 15px;
-		  	@sansSerif-light;
-		  	font-weight: 300;
-		  	font-size: 12px;
-		}
-		.detailPrintMap {
-			float: left;
-			margin-top: 6px;
-		}
-		.social-icon {
-			position: relative;
-			float: left;
-			margin-left: 5px;
-			width: 30px;
+			padding: .5em .25em .5em 1em;
+			.trailName {
+				.sansSerif-light;
+				color: @color-white;
+			}
 		}
 		.detailPanelBody {
 			position: absolute;
 			height: auto;
 			width: 100%;
-		}
-		.detailTopRow {
-			&#left {
+			overflow: scroll;
+			.detailTrailheadName {
+				position: relative;
+				@sansSerif-light;
+			  	margin-left: 20px;
+			   	font-weight: 300;
+			   	font-size: 12px;
+			}
+			.detailLength {
 				position: relative;
 				float: left;
-				display: inline-block;
-				height: 40px;
-				width: 25%;
-				border-right-style: dotted;
-				border-width: 1px;
-				border-color: @color-light-gray;
-			}
-			&#right {
-				position: relative;
-				float: left;
-				width: 75%;
-				height: 40px;
-			}
-			&span {
-				margin-left: 10px;
-			}
-			.icon {
-				position: relative;
-				float: left;
-				height: 40px;
-				width: 20%;
-				padding-left: 10px;
-				@sanSerif-light;
+				top: 2%;
+				margin-left: 2%;
+				@sansSerif-light;
 			  	font-weight: 300;
 			  	font-size: 12px;
-				border-right-style: dotted;
+			}
+			.detailDirections {
+				position: relative;
+			  	@sansSerif-light;
+			  	font-weight: 300;
+			  	font-size: 12px;
+			  	float: left;
+				margin-top: 6px;
+			}
+			.detailDifficulty {
+				position: relative;
+			  	margin-left: 2%;
+				width: 100%;
+				@sanSerif-light;
+			 	font-weight: 300;
+			   	font-size: 12px;
+			}
+			.detailTrailheadDistance {
+				position: relative;
+				@sanSerif-light;
+			 	font-weight: 300;
+			   	font-size: 12px;
+			}
+			.detailPanelHeader {
+			  	@sansSerif-light;
+			 	font-weight: 300;
+			   	font-size: 12px;
+			}
+			.detailPanelPicture {
+				border-bottom: 1px solid @color-light-gray;
+				width: 100%;
+			}
+			.detailDescription {
+				display: inline-block;
+			  	margin-top: 15px;
+			  	@sansSerif-light;
+			  	font-weight: 300;
+			  	font-size: 12px;
+			}
+			.detailPrintMap {
+				float: left;
+				margin-top: 6px;
+			}
+			.social-icon {
+				position: relative;
+				float: left;
+				margin-left: 5px;
+				width: 30px;
+			}
+			.detailTopRow {
+				&#left {
+					position: relative;
+					float: left;
+					display: inline-block;
+					height: 40px;
+					width: 25%;
+					border-right-style: dotted;
+					border-width: 1px;
+					border-color: @color-light-gray;
+				}
+				&#right {
+					position: relative;
+					float: left;
+					width: 75%;
+					height: 40px;
+				}
+				&span {
+					margin-left: 10px;
+				}
+				.icon {
+					position: relative;
+					float: left;
+					height: 40px;
+					width: 20%;
+					padding-left: 10px;
+					@sanSerif-light;
+				  	font-weight: 300;
+				  	font-size: 12px;
+					border-right-style: dotted;
+					border-width: 1px;
+					border-color: @color-light-gray;
+				}
+			}
+			.detailMiddleRow {
+				position: relative;
+				display: inline-block;
+				height: auto;
+				width: 100%;
+				padding: 10px;
+				border-top-style: dotted;
 				border-width: 1px;
 				border-color: @color-light-gray;
 			}
-		}
-		.detailMiddleRow {
-			position: relative;
-			display: inline-block;
-			height: auto;
-			width: 100%;
-			padding: 10px;
-			border-top-style: dotted;
-			border-width: 1px;
-			border-color: @color-light-gray;
-		}
-		.detailBottomRow {
-			position: relative;
-			display: inline-block;
-			height: auto;
-			width: 100%;
-			padding: 10px;
-			border-top-style: dotted;
-			border-width: 1px;
-			border-color: @color-light-gray;
-			&a {
-				margin-right: 2px;
-			}
-		}
-		.detailFooter {
-			position: relative;
-			display: inline-block;
-			height: auto;
-			width: 100%;
-			padding: 10px;
-			border-top-style: dotted;
-			border-width: 1px;
-			border-color: @color-light-gray;
-			& span {
-				@sansSerif-bold;
-				color: @color-dark-orange;
-				font-size: 14px;
-				line-height: 15px;
-				position: absolute;
-				left: 30%;
-				top: 20px;
-			}
-			.icon-large {
-				width: 25%;
-				float: left;
+			.detailBottomRow {
 				position: relative;
-				bottom: 0;
+				display: inline-block;
+				height: auto;
+				width: 100%;
+				padding: 10px;
+				border-top-style: dotted;
+				border-width: 1px;
+				border-color: @color-light-gray;
+				&a {
+					margin-right: 2px;
+				}
 			}
-			.detailSource {
-				position: absolute;
-				left: 30%;
-				top: 40px;
-			}
-			.detailSourceTelephone {
-				position: absolute;
-				left: 60%;
-				top: 40px;
+			.detailFooter {
+				position: relative;
+				display: inline-block;
+				height: auto;
+				width: 100%;
+				padding: 10px;
+				border-top-style: dotted;
+				border-width: 1px;
+				border-color: @color-light-gray;
+				& span {
+					@sansSerif-bold;
+					color: @color-dark-orange;
+					font-size: 14px;
+					line-height: 15px;
+					position: absolute;
+					left: 30%;
+					top: 20px;
+				}
+				.icon-large {
+					width: 25%;
+					float: left;
+					position: relative;
+					bottom: 0;
+				}
+				.detailSource {
+					position: absolute;
+					left: 30%;
+					top: 40px;
+				}
+				.detailSourceTelephone {
+					position: absolute;
+					left: 60%;
+					top: 40px;
+				}
 			}
 		}
 	}
@@ -279,17 +301,6 @@
 		font-weight: 300;
 	   	font-size: 12px;
 	   }
-	}
-}
-
-.trailName {
-	@media @mobile {
-		display: none;	
-	}
-	@media @desktop {
-		font-family: 'Oswald', sans-serif;
-		margin: 0;
-		color: #FFF;
 	}
 }
 
