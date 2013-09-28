@@ -1,3 +1,4 @@
+console.log("start");
 $(document).ready(startup);
 
 /* The Big Nested Function
@@ -569,13 +570,22 @@ function makeTrailheadPopups(trailheads) {
     for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
       var trail = trailData[trailhead.trails[trailsIndex]];
       var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
-        .attr("data-trailname", trail.properties.name)
-        .attr("data-trailid", trail.properties.id)
-        .attr("data-trailheadname", trailhead.properties.name)
-        .attr("data-trailheadid", trailhead.properties.id)
-        .attr("data-index", trailsIndex)
-        .append("<a href='#'>").html(trail.properties.name)
-        .appendTo($popupTrailheadDiv);
+      .attr("data-trailname", trail.properties.name)
+      .attr("data-trailid", trail.properties.id)
+      .attr("data-trailheadname", trailhead.properties.name)
+      .attr("data-trailheadid", trailhead.properties.id)
+      .attr("data-index", trailsIndex);
+      console.log(trail.properties.status);
+      var status = "";
+      if (trail.properties.status == 1) {
+        $popupTrailDiv.append($("<div>").addClass("status").append("1"));
+      }
+      if (trail.properties.status == 2) {
+        $popupTrailDiv.append($("<div>").addClass("status").append("2"));
+      }
+      $popupTrailDiv.append("<a href='#'>")
+      .append(trail.properties.name)
+      .appendTo($popupTrailheadDiv);
     }
     trailhead.popupContent = $popupContentMainDiv.outerHTML();
   }
@@ -708,16 +718,18 @@ function closeDetailPanel() {
 }
 
 function decorateDetailPanel(trail, trailhead) {
+  //  Taking cues from the construction of the List Items / Trail Divs above
+  // var $detailPanelBody;
   // $detailPanelBody = $("<div>").addClass("detailPanelBody");
   // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
   // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
+  // $("<div class='detailT")
 
   $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
   $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
   $('.detailPanel .detailSource').html(trailhead.properties.source);
   $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
   $('.detailPanel .detailLength').html(trail.properties.length);
-  $("<div class='trailLength' >" + trailLength +  " miles long" + "</div>").appendTo($trailDiv);
   // $('.detailPanel .detailDogs').html(trail.properties.dogs);
   // $('.detailPanel .detailBikes').html(trail.properties.bikes);
   $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);

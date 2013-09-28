@@ -975,13 +975,11 @@ At some point, update mediaqueries to be in EMS
 }
 @media only screen and (min-width: 950px) {
   .detailPanel {
-    visibility: hidden;
     position: relative;
     display: none;
     width: 100%;
     height: 400px;
     background-color: #ffffff;
-    overflow: hidden;
     border-bottom: 1px solid #bcbec0;
   }
   .detailPanel .detailPanelBanner {
