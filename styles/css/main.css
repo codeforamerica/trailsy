@@ -948,25 +948,26 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
-/* For reference, here is the parent trailListColumn attributes:
-
-.trailListColumn {
-	@media @mobile {
-		display: none;	
-		a {
-			display: none;
-		}
-	}
-	@media @desktop {
-		position: absolute;
-		top: 1em;
-		left: 2em;
-		width: 20em;
-		height: auto;
-		padding: 0;
-		background: @color-light-gray;
-		z-index: 999;
-*/
+@media only screen and (max-width: 529px) {
+  .trailListColumn {
+    display: none;
+  }
+  .trailListColumn a {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailListColumn {
+    position: absolute;
+    top: 1em;
+    left: 2em;
+    width: 24em;
+    height: auto;
+    padding: 0;
+    background: #ffffff;
+    z-index: 999;
+  }
+}
 /* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
 .detailPanelColumn {
 	@media @mobile {
@@ -1043,7 +1044,6 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     height: 400px;
     background-color: #ffffff;
-    border-bottom: 1px solid #bcbec0;
   }
   .detailPanel .detailPanelBanner {
     position: relative;
@@ -1064,124 +1064,187 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     overflow: scroll;
   }
-  .detailPanel .detailPanelBody .detailTrailheadName {
-    position: relative;
-    margin-left: 20px;
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @sans Serif-light;
-  .detailPanel .detailPanelBody .detailLength {
-    position: relative;
-    float: left;
-    top: 2%;
-    margin-left: 2%;
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @sans Serif-light;
-  .detailPanel .detailPanelBody .detailDirections {
-    position: relative;
-    font-weight: 300;
-    font-size: 12px;
-    float: left;
-    margin-top: 6px;
-  }
-  @sans Serif-light;
-  .detailPanel .detailPanelBody .detailDifficulty {
-    position: relative;
-    margin-left: 2%;
-    width: 100%;
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @san Serif-light;
-  .detailPanel .detailPanelBody .detailTrailheadDistance {
-    position: relative;
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @san Serif-light;
-  .detailPanel .detailPanelBody .detailPanelHeader {
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @sans Serif-light;
   .detailPanel .detailPanelBody .detailPanelPicture {
-    border-bottom: 1px solid #bcbec0;
     width: 100%;
-  }
-  .detailPanel .detailPanelBody .detailDescription {
-    display: inline-block;
-    margin-top: 15px;
-    font-weight: 300;
-    font-size: 12px;
-  }
-  @sans Serif-light;
-  .detailPanel .detailPanelBody .detailPrintMap {
-    float: left;
-    margin-top: 6px;
-  }
-  .detailPanel .detailPanelBody .social-icon {
-    position: relative;
-    float: left;
-    margin-left: 5px;
-    width: 30px;
   }
   .detailPanel .detailPanelBody .detailTopRow#left {
     position: relative;
-    float: left;
     display: inline-block;
-    height: 40px;
-    width: 25%;
-    border-right-style: dotted;
-    border-width: 1px;
-    border-color: #bcbec0;
+    height: 2em;
+    width: auto;
+    padding: .5em 0em 0em .5em;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
+    position: relative;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #76bcc4;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#left .detailLengthHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bcbec0;
+    font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailTopRow#right {
     position: relative;
-    float: left;
-    width: 75%;
-    height: 40px;
+    display: inline-block;
+    height: 2em;
+    width: auto;
   }
-  .detailPanel .detailPanelBody .detailTopRowspan {
-    margin-left: 10px;
-  }
-  .detailPanel .detailPanelBody .detailTopRow .icon {
-    position: relative;
-    float: left;
-    height: 40px;
-    width: 20%;
-    padding-left: 10px;
-    font-weight: 300;
+  .detailPanel .detailPanelBody .detailTopRow#right .detailActivityHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bcbec0;
     font-size: 12px;
-    border-right-style: dotted;
-    border-width: 1px;
-    border-color: #bcbec0;
   }
-  @san Serif-light;
+  .detailPanel .detailPanelBody .detailTopRow#right .icon {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right .icon .activity-icons {
+    height: 100%;
+    width: auto;
+    position: relative;
+    display: inline-block;
+  }
   .detailPanel .detailPanelBody .detailMiddleRow {
     position: relative;
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 10px;
-    border-top-style: dotted;
-    border-width: 1px;
-    border-color: #bcbec0;
+    padding: .5em 0em 0em .5em;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bcbec0;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
   }
   .detailPanel .detailPanelBody .detailBottomRow {
     position: relative;
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 10px;
-    border-top-style: dotted;
-    border-width: 1px;
-    border-color: #bcbec0;
+    padding: .5em 0em 0em .5em;
   }
-  .detailPanel .detailPanelBody .detailBottomRowa {
-    margin-right: 2px;
+  .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bcbec0;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo {
+    width: 50%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadName {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadPark {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCounty {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    height: auto;
+    float: right;
+    padding: 0em .5em 0em 0em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
+    width: 100%;
+    height: 2em;
+    position: relative;
+    display: inline-block;
+    background-color: #efb589;
+    margin: 0em 0em .5em 0em;
+    text-align: center;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections a {
+    width: 100%;
+    vertical-align: middle;
+    text-decoration: none;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    line-height: 2em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
+    width: 100%;
+    height: 2em;
+    position: relative;
+    display: inline-block;
+    background-color: #efb589;
+    margin: 0em 0em 0em 0em;
+    text-align: center;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap a {
+    width: 100%;
+    vertical-align: middle;
+    text-decoration: none;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    line-height: 2em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon {
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    width: 30px;
   }
   .detailPanel .detailPanelBody .detailFooter {
     position: relative;
@@ -1189,9 +1252,6 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     width: 100%;
     padding: 10px;
-    border-top-style: dotted;
-    border-width: 1px;
-    border-color: #bcbec0;
   }
   .detailPanel .detailPanelBody .detailFooter span {
     color: #c45f37;
@@ -1254,22 +1314,6 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
   }
   @sans Serif-light;
-}
-@media only screen and (max-width: 529px) {
-  .activity-icons {
-    display: none;
-  }
-}
-@media only screen and (min-width: 950px) {
-  .activity-icons {
-    width: 36px;
-    height: 36px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-left: -18px;
-    margin-top: -18px;
-  }
 }
 /* Map Overrides */
 /*@import "leaflet-overrides.less";*/

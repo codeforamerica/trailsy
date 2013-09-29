@@ -735,8 +735,8 @@ function decorateDetailPanel(trail, trailhead) {
   $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
   $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
   $('.detailPanel .detailSource').html(trailhead.properties.source);
-  $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance));
-  $('.detailPanel .detailLength').html(trail.properties.length);
+  $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
+  $('.detailPanel .detailLength').html(trail.properties.length + " miles");
   // $('.detailPanel .detailDogs').html(trail.properties.dogs);
   // $('.detailPanel .detailBikes').html(trail.properties.bikes);
   $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);

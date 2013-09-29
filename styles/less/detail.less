@@ -1,5 +1,3 @@
-/* For reference, here is the parent trailListColumn attributes:
-
 .trailListColumn {
 	@media @mobile {
 		display: none;	
@@ -11,12 +9,13 @@
 		position: absolute;
 		top: 1em;
 		left: 2em;
-		width: 20em;
+		width: 24em;
 		height: auto;
 		padding: 0;
-		background: @color-light-gray;
+		background: @color-white;
 		z-index: 999;
-*/
+	}
+}
 
 /* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
 .detailPanelColumn {
@@ -92,7 +91,6 @@
 		width: 100%;
 		height: 400px;
 		background-color: @color-white;
-		border-bottom: 1px solid @color-light-gray;
 		.detailPanelBanner {
 			position: relative;
 			width: 100%;
@@ -108,102 +106,49 @@
 			height: auto;
 			width: 100%;
 			overflow: scroll;
-			.detailTrailheadName {
-				position: relative;
-				@sansSerif-light;
-			  	margin-left: 20px;
-			   	font-weight: 300;
-			   	font-size: 12px;
-			}
-			.detailLength {
-				position: relative;
-				float: left;
-				top: 2%;
-				margin-left: 2%;
-				@sansSerif-light;
-			  	font-weight: 300;
-			  	font-size: 12px;
-			}
-			.detailDirections {
-				position: relative;
-			  	@sansSerif-light;
-			  	font-weight: 300;
-			  	font-size: 12px;
-			  	float: left;
-				margin-top: 6px;
-			}
-			.detailDifficulty {
-				position: relative;
-			  	margin-left: 2%;
-				width: 100%;
-				@sanSerif-light;
-			 	font-weight: 300;
-			   	font-size: 12px;
-			}
-			.detailTrailheadDistance {
-				position: relative;
-				@sanSerif-light;
-			 	font-weight: 300;
-			   	font-size: 12px;
-			}
-			.detailPanelHeader {
-			  	@sansSerif-light;
-			 	font-weight: 300;
-			   	font-size: 12px;
-			}
 			.detailPanelPicture {
-				border-bottom: 1px solid @color-light-gray;
 				width: 100%;
-			}
-			.detailDescription {
-				display: inline-block;
-			  	margin-top: 15px;
-			  	@sansSerif-light;
-			  	font-weight: 300;
-			  	font-size: 12px;
-			}
-			.detailPrintMap {
-				float: left;
-				margin-top: 6px;
-			}
-			.social-icon {
-				position: relative;
-				float: left;
-				margin-left: 5px;
-				width: 30px;
 			}
 			.detailTopRow {
 				&#left {
 					position: relative;
-					float: left;
 					display: inline-block;
-					height: 40px;
-					width: 25%;
-					border-right-style: dotted;
-					border-width: 1px;
-					border-color: @color-light-gray;
+					height: 2em;
+					width: auto;
+					padding: .5em 0em 0em .5em;
+					.detailLength {
+						position: relative;
+						.sansSerif-light;
+						color: @color-light-blue;
+					}
+					.detailLengthHeader {
+						.sansSerif-light;
+						color: @color-light-gray;
+						font-size: 12px;
+					}
 				}
 				&#right {
 					position: relative;
-					float: left;
-					width: 75%;
-					height: 40px;
-				}
-				&span {
-					margin-left: 10px;
-				}
-				.icon {
-					position: relative;
-					float: left;
-					height: 40px;
-					width: 20%;
-					padding-left: 10px;
-					@sanSerif-light;
-				  	font-weight: 300;
-				  	font-size: 12px;
-					border-right-style: dotted;
-					border-width: 1px;
-					border-color: @color-light-gray;
+					display: inline-block;
+					height: 2em;
+					width: auto;
+					.detailActivityHeader {
+						.sansSerif-light;
+						color: @color-light-gray;
+						font-size: 12px;
+					}
+					.icon {
+						position: relative;
+						display: inline-block;
+						height: 2em;
+						width: auto;
+						.activity-icons {
+							height: 100%;
+							width: auto;
+							position: relative;
+							display: inline-block;
+						}
+					}
 				}
 			}
 			.detailMiddleRow {
@@ -211,22 +156,102 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 10px;
-				border-top-style: dotted;
-				border-width: 1px;
-				border-color: @color-light-gray;
+				padding: .5em 0em 0em .5em;
+				.detailPanelHeader {
+					.sansSerif-light;
+					color: @color-light-gray;
+					font-size: 12px;
+				}
+				.detailDescription {
+					.sansSerif-light;
+					color: @color-dark-gray;
+				}
 			}
 			.detailBottomRow {
 				position: relative;
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 10px;
-				border-top-style: dotted;
-				border-width: 1px;
-				border-color: @color-light-gray;
-				&a {
-					margin-right: 2px;
+				padding: .5em 0em 0em .5em;
+				.detailPanelHeader {
+					.sansSerif-light;
+					color: @color-light-gray;
+					font-size: 12px;
+				}
+				.detailTrailheadInfo {
+					width: 50%;
+					height: auto;
+					position: relative;
+					display: inline-block;
+					.detailTrailheadDistance {
+						.sansSerif-light;
+						color: @color-dark-gray;
+					}
+					.detailTrailheadName {
+						.sansSerif-light;
+						color: @color-dark-gray;
+					}
+					.detailTrailheadPark {
+						.sansSerif-light;
+						color: @color-dark-gray;
+					}
+					.detailTrailheadCounty {
+						.sansSerif-light;
+						color: @color-dark-gray;
+					}
+				}
+				.detailLinksToMore {
+					position: relative;
+					display: inline-block;
+					width: 40%;
+					height: auto;
+					float: right;
+					padding: 0em .5em 0em 0em;
+					.detailDirections {
+						width: 100%;
+						height: 2em;
+						position: relative;
+						display: inline-block;
+						background-color: @color-light-orange;
+						margin: 0em 0em .5em 0em;
+						text-align: center;
+						a {
+							width: 100%;
+							vertical-align: middle;
+							text-decoration: none;
+						  	.sansSerif-light;
+						  	color: @color-white;
+							line-height: 2em;
+						}
+					}
+					.detailPrintMap {
+						width: 100%;
+						height: 2em;
+						position: relative;
+						display: inline-block;
+						background-color: @color-light-orange;
+						margin: 0em 0em 0em 0em;
+						text-align: center;
+						a {
+							width: 100%;
+							vertical-align: middle;
+							text-decoration: none;
+						  	.sansSerif-light;
+						  	color: @color-white;
+							line-height: 2em;
+						}
+					}
+				}
+				.detailLinksToSocial {
+					position: relative;
+					display: inline-block;
+					width: 100%;
+					.social-icon {
+						position: relative;
+						float: left;
+						margin-left: 5px;
+						width: 30px;
+					}
 				}
 			}
 			.detailFooter {
@@ -235,9 +260,6 @@
 				height: auto;
 				width: 100%;
 				padding: 10px;
-				border-top-style: dotted;
-				border-width: 1px;
-				border-color: @color-light-gray;
 				& span {
 					@sansSerif-bold;
 					color: @color-dark-orange;
@@ -299,20 +321,5 @@
 		font-weight: 300;
 	   	font-size: 12px;
 	   }
-	}
-}
-
-.activity-icons {
-	@media @mobile {
-		display: none;	
-	}
-	@media @desktop {
-	   width: 36px;
-	   height: 36px;
-	   position: absolute;
-	   left: 50%;
-	   top: 50%; 
-	   margin-left: -18px;
-	   margin-top: -18px;
 	}
 }
