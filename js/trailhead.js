@@ -566,7 +566,7 @@ function makeTrailheadPopups(trailheads) {
   for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
     var trailhead = trailheads[trailheadIndex];
     var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-    var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html(trailhead.properties.name).appendTo($popupContentMainDiv);
+    var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html($("<div>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
     for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
       var trail = trailData[trailhead.trails[trailsIndex]];
       var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
@@ -578,13 +578,20 @@ function makeTrailheadPopups(trailheads) {
       console.log(trail.properties.status);
       var status = "";
       if (trail.properties.status == 1) {
-        $popupTrailDiv.append($("<div>").addClass("status").append("1"));
+        $popupTrailDiv.append($("<img>").addClass("status").attr({
+          src: "img/icon_alert_yellow.png",
+          title: "alert"})
+        );
       }
       if (trail.properties.status == 2) {
-        $popupTrailDiv.append($("<div>").addClass("status").append("2"));
+        $popupTrailDiv.append($("<img>").addClass("status").attr({
+          src: "img/icon_alert_yellow.png",
+          title: "alert"})
+        );
       }
-      $popupTrailDiv.append("<a href='#'>")
-      .append(trail.properties.name)
+      $popupTrailDiv.append("<div>" + "<a href='#'>" + trail.properties.name + "</a>" + "</div>");
+      $popupTrailDiv.append("<b>")
+      // .append(trail.properties.name)
       .appendTo($popupTrailheadDiv);
     }
     trailhead.popupContent = $popupContentMainDiv.outerHTML();

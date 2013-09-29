@@ -193,7 +193,8 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .is-vishidden {
     position: absolute;
-    overflow: hidden;
+    /*		overflow: hidden;
+  */
     width: 1px;
     height: 1px;
     padding: 0;
@@ -768,6 +769,86 @@ At some point, update mediaqueries to be in EMS
 }
 /* Map Elements
 ============================== */
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .leaflet-popup-content-wrapper {
+    border-radius: 0px;
+    min-width: 12em;
+    height: auto;
+    padding: 0;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content {
+    min-width: 10em;
+    width: auto;
+    height: auto;
+    margin: 0;
+    line-height: 1em;
+    position: relative;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup {
+    color: black;
+    width: 100%;
+    position: relative;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name {
+    width: 100%;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name div {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 1.5em;
+    padding: .25em 0em .25em .5em;
+    font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname {
+    padding: 0;
+    position: relative;
+    display: inline-block;
+    height: auto;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname .status {
+    position: relative;
+    display: none;
+    /*display: inline-block;*/
+  
+    height: 1em;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname div {
+    position: relative;
+    height: auto;
+    width: auto;
+    margin: 0;
+    display: inline-block;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname div a {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #231f20;
+    text-decoration: none;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname:hover {
+    background-color: #c45f37;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-name .trailhead-trailname b {
+    position: absolute;
+    right: .5em;
+    top: 30%;
+    border-bottom: .4em solid transparent;
+    border-top: .4em solid transparent;
+    border-left: 0.4em solid #231f20;
+    display: inline-block;
+    height: 0;
+  }
+}
 .trail-popup {
   color: #000;
 }
@@ -845,24 +926,6 @@ At some point, update mediaqueries to be in EMS
     font-size: 18px;
     color: #000;
   }
-}
-.trail1 {
-  background-color: #9B1818;
-}
-.trail1:hover {
-  background-color: #4e4c4c;
-}
-.trail2 {
-  background-color: #873030;
-}
-.trail2:hover {
-  background-color: #4e4c4c;
-}
-.trail3 {
-  background-color: #713E3E;
-}
-.trail3:hover {
-  background-color: #4e4c4c;
 }
 @media only screen and (max-width: 529px) {
   #crosshair {
@@ -1208,6 +1271,8 @@ At some point, update mediaqueries to be in EMS
     margin-top: -18px;
   }
 }
+/* Map Overrides */
+/*@import "leaflet-overrides.less";*/
 /*			Bootstrap-Select
 *********************************/
 /*@import "bootstrap-select.less";*/
