@@ -270,7 +270,7 @@ At some point, update mediaqueries to be in EMS
   }
   .accordion .panel-title {
     margin: 0;
-    padding: .5em .25em .25em 1em;
+    padding: .5em 1em .25em 1em;
     /* Let's abstract this transition so we can keep it consistent across animations*/
   
     -webkit-transition: 0.1s all ease-in-out;
@@ -563,26 +563,6 @@ At some point, update mediaqueries to be in EMS
 }
 /*@import "search.less";*/
 /* List Module */
-@media only screen and (max-width: 529px) {
-  .trailListColumn {
-    display: none;
-  }
-  .trailListColumn a {
-    display: none;
-  }
-}
-@media only screen and (min-width: 950px) {
-  .trailListColumn {
-    position: absolute;
-    top: 1em;
-    left: 2em;
-    width: 24em;
-    height: auto;
-    padding: 0;
-    background: #bcbec0;
-    z-index: 999;
-  }
-}
 /* This border should become a variable */
 @media only screen and (max-width: 529px) {
   #trailList {
@@ -592,14 +572,10 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   #trailList {
     width: 100%;
-    max-height: 400px;
+    max-height: 22em;
     position: relative;
     overflow: scroll;
     background-color: #ffffff;
-    border-radius: 2px;
-    border-left: 1px solid #bcbec0;
-    border-right: 1px solid #bcbec0;
-    border-bottom: 1px solid #bcbec0;
   }
 }
 @media only screen and (max-width: 529px) {
@@ -850,7 +826,17 @@ At some point, update mediaqueries to be in EMS
   }
 }
 .trail-popup {
-  color: #000;
+  position: relative;
+  min-width: 10em;
+  height: auto;
+  line-height: 1em;
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  color: #bcbec0;
+  text-decoration: none;
+  padding: .25em 0em .25em .5em;
 }
 .trailhead-popup {
   color: black;
@@ -962,6 +948,8 @@ At some point, update mediaqueries to be in EMS
     top: 1em;
     left: 2em;
     width: 24em;
+    max-height: 90%;
+    min-height: 16em;
     padding: 0;
     background: #ffffff;
     z-index: 999;

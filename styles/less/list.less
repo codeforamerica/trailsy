@@ -1,24 +1,5 @@
 /* List Module */
 
-.trailListColumn {
-	@media @mobile {
-		display: none;	
-		a {
-			display: none;
-		}
-	}
-	@media @desktop {
-		position: absolute;
-		top: 1em;
-		left: 2em;
-		width: 24em;
-		height: auto;
-		padding: 0;
-		background: @color-light-gray;
-		z-index: 999;
-	}
-}
-
 /* This border should become a variable */
 #trailList {
 	@media @mobile {
@@ -26,14 +7,10 @@
 	}
 	@media @desktop {
 		width: 100%;
-		max-height: 400px;
+		max-height: 22em;
 		position: relative;
 		overflow: scroll;
 		background-color: @color-white;
-		border-radius: 2px;
-		border-left: 1px solid @color-light-gray;
-		border-right: 1px solid @color-light-gray;
-		border-bottom: 1px solid @color-light-gray;
 	}
 }
 
