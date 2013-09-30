@@ -962,7 +962,6 @@ At some point, update mediaqueries to be in EMS
     top: 1em;
     left: 2em;
     width: 24em;
-    height: auto;
     padding: 0;
     background: #ffffff;
     z-index: 999;
@@ -1042,7 +1041,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: none;
     width: 100%;
-    height: 400px;
+    height: 26.5em;
     background-color: #ffffff;
   }
   .detailPanel .detailPanelBanner {
@@ -1059,9 +1058,9 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
   }
   .detailPanel .detailPanelBody {
-    position: absolute;
-    height: auto;
-    width: 100%;
+    position: relative;
+    height: 24em;
+    width: 24em;
     overflow: scroll;
   }
   .detailPanel .detailPanelBody .detailPanelPicture {
@@ -1073,6 +1072,7 @@ At some point, update mediaqueries to be in EMS
     height: 2em;
     width: auto;
     padding: .5em 0em 0em .5em;
+    float: left;
   }
   .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
     position: relative;
@@ -1121,7 +1121,8 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 0em 0em .5em;
+    padding: .5em .5em 0em .5em;
+    margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1143,7 +1144,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 0em 0em .5em;
+    padding: .5em .5em 0em .5em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1153,11 +1154,19 @@ At some point, update mediaqueries to be in EMS
     color: #bcbec0;
     font-size: 12px;
   }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadDistance {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #76bcc4;
+  }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo {
     width: 50%;
     height: auto;
     position: relative;
     display: inline-block;
+    margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1193,7 +1202,8 @@ At some point, update mediaqueries to be in EMS
     width: 40%;
     height: auto;
     float: right;
-    padding: 0em .5em 0em 0em;
+    margin-bottom: 1em;
+    padding: 0em 0em 0em 0em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
     width: 100%;
@@ -1235,48 +1245,61 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     line-height: 2em;
   }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities {
+    position: relative;
+    width: 100%;
+    height: 2em;
+    margin-top: 1em;
+  }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial {
     position: relative;
     display: inline-block;
+    height: auto;
     width: 100%;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon {
     position: relative;
-    float: left;
-    margin-left: 5px;
-    width: 30px;
+    display: inline-block;
+    width: 3em;
+    height: 2em;
+    background-color: #bcbec0;
+    float: right;
+    margin: 0em 0em 0em .5em;
   }
   .detailPanel .detailPanelBody .detailFooter {
     position: relative;
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 10px;
+    padding: 0em .5em 0em 0em;
+    border-top: 1px solid #bcbec0;
+    margin-top: .25em;
   }
   .detailPanel .detailPanelBody .detailFooter span {
-    color: #c45f37;
-    font-size: 14px;
-    line-height: 15px;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bcbec0;
     position: absolute;
-    left: 30%;
-    top: 20px;
+    left: 7em;
+    top: .5em;
   }
-  @sans Serif-bold;
   .detailPanel .detailPanelBody .detailFooter .icon-large {
-    width: 25%;
+    width: 5em;
     float: left;
     position: relative;
-    bottom: 0;
+    display: inline-block;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSource {
     position: absolute;
-    left: 30%;
-    top: 40px;
+    left: 7em;
+    top: 2em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSourceTelephone {
     position: absolute;
-    left: 60%;
-    top: 40px;
+    left: 7em;
+    top: 3.5em;
   }
 }
 @media only screen and (max-width: 529px) {

@@ -10,7 +10,6 @@
 		top: 1em;
 		left: 2em;
 		width: 24em;
-		height: auto;
 		padding: 0;
 		background: @color-white;
 		z-index: 999;
@@ -89,7 +88,7 @@
 		position: relative;
 		display: none;
 		width: 100%;
-		height: 400px;
+		height: 26.5em;
 		background-color: @color-white;
 		.detailPanelBanner {
 			position: relative;
@@ -102,9 +101,9 @@
 			}
 		}
 		.detailPanelBody {
-			position: absolute;
-			height: auto;
-			width: 100%;
+			position: relative;
+			height: 24em;
+			width: 24em;
 			overflow: scroll;
 			.detailPanelPicture {
 				width: 100%;
@@ -116,6 +115,7 @@
 					height: 2em;
 					width: auto;
 					padding: .5em 0em 0em .5em;
+					float: left;
 					.detailLength {
 						position: relative;
 						.sansSerif-light;
@@ -156,7 +156,8 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: .5em 0em 0em .5em;
+				padding: .5em .5em 0em .5em;
+				margin-bottom: 1em;
 				.detailPanelHeader {
 					.sansSerif-light;
 					color: @color-light-gray;
@@ -172,17 +173,22 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: .5em 0em 0em .5em;
+				padding: .5em .5em 0em .5em;
 				.detailPanelHeader {
 					.sansSerif-light;
 					color: @color-light-gray;
 					font-size: 12px;
+				}
+				.detailTrailheadDistance {
+					.sansSerif-light;
+					color: @color-light-blue;
 				}
 				.detailTrailheadInfo {
 					width: 50%;
 					height: auto;
 					position: relative;
 					display: inline-block;
+					margin-bottom: 1em;
 					.detailTrailheadDistance {
 						.sansSerif-light;
 						color: @color-dark-gray;
@@ -206,7 +212,8 @@
 					width: 40%;
 					height: auto;
 					float: right;
-					padding: 0em .5em 0em 0em;
+					margin-bottom: 1em;
+					padding: 0em 0em 0em 0em;
 					.detailDirections {
 						width: 100%;
 						height: 2em;
@@ -242,15 +249,25 @@
 						}
 					}
 				}
+				.detailTrailheadAmenities {
+					position: relative;
+					width: 100%;
+					height: 2em;
+					margin-top: 1em;
+				}
 				.detailLinksToSocial {
 					position: relative;
 					display: inline-block;
+					height: auto;
 					width: 100%;
 					.social-icon {
 						position: relative;
-						float: left;
-						margin-left: 5px;
-						width: 30px;
+						display: inline-block;
+						width: 3em;
+						height: 2em;
+						background-color: @color-light-gray;
+						float: right;
+						margin: 0em 0em 0em .5em;
 					}
 				}
 			}
@@ -259,31 +276,31 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 10px;
+				padding: 0em .5em 0em 0em;
+				border-top: 1px solid @color-light-gray;
+				margin-top: .25em;
 				& span {
-					@sansSerif-bold;
-					color: @color-dark-orange;
-					font-size: 14px;
-					line-height: 15px;
+					.sansSerif-light;
+					color: @color-light-gray;
 					position: absolute;
-					left: 30%;
-					top: 20px;
+					left: 7em;
+					top: .5em;
 				}
 				.icon-large {
-					width: 25%;
+					width: 5em;
 					float: left;
 					position: relative;
-					bottom: 0;
+					display: inline-block;
 				}
 				.detailSource {
 					position: absolute;
-					left: 30%;
-					top: 40px;
+					left: 7em;
+					top: 2em;
 				}
 				.detailSourceTelephone {
 					position: absolute;
-					left: 60%;
-					top: 40px;
+					left: 7em;
+					top: 3.5em;
 				}
 			}
 		}
