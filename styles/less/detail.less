@@ -7,14 +7,15 @@
 	}
 	@media @desktop {
 		position: absolute;
-		top: 1em;
-		left: 2em;
+		top: 2em;
+		left: 3em;
 		width: 24em;
 		max-height: 90%;
-		min-height: 16em;
+		min-height: 14em;
 		padding: 0;
 		background: @color-white;
 		z-index: 999;
+		overflow: visible;
 	}
 }
 
@@ -100,6 +101,43 @@
 			.trailName {
 				.sansSerif-light;
 				color: @color-white;
+			}
+			.detailPanelControls {
+				display: none;
+				width: 2em;
+				height: 150%;
+				position: absolute;
+				background-color: @color-dark-orange;
+				z-index: 999;
+				cursor: pointer ;
+				&.controlLeft {
+					top: 0;
+					left: -2em;
+					border-radius: 5em 0 0 5em;
+					b {
+						position: relative;
+						margin: 1em 0em 1em 1em;
+					    border-bottom: .8em solid transparent;
+					    border-top: .8em solid transparent;
+					    border-right: .8em solid @color-white;
+					    display: inline-block;
+					    height: 0;
+					}
+				}
+				&.controlRight {
+					top: 0;
+					right: -2em;
+					border-radius: 0 5em 5em 0;
+					b {
+						position: relative;
+						margin: 1em 1em 1em .5em;
+					    border-bottom: .8em solid transparent;
+					    border-top: .8em solid transparent;
+					    border-left: .8em solid @color-white;
+					    display: inline-block;
+					    height: 0;
+					}
+				}
 			}
 		}
 		.detailPanelBody {

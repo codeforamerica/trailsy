@@ -36,6 +36,24 @@
 /* alert icon*/
 /* alert */
 /* Deprecated <REMOVE> */
+/* New Colors */
+/*@color-very-light-blue: #D9F0FC;
+@color-light-blue: #96DAF8;
+@color-medium-blue: 
+@color-dark-blue:
+
+@color-light-green:
+@color-medium-green:
+@color-dark-green:
+
+@color-light-brown:
+@color-medium-brown:
+@color-dark-brown:
+
+@color-light-gray:
+@color-medium-gray:
+@color-black:
+@color-white:*/
 /* Typography */
 @font-face {
   font-family: 'mission_gothicbold';
@@ -241,6 +259,7 @@ At some point, update mediaqueries to be in EMS
     width: 2.5em;
     padding: 0;
     cursor: pointer;
+    background: url(img/icon_search.png);
     background-color: #efb589;
   }
   .searchbar input[type="submit"]:hover {
@@ -266,11 +285,13 @@ At some point, update mediaqueries to be in EMS
   .accordion {
     /*		display: none;*/
   
-    background-color: #76bcc4;
+    background-color: transparent;
   }
   .accordion .panel-title {
     margin: 0;
-    padding: .5em 1em .25em 1em;
+    padding: 0em 1em .0em 1em;
+    position: relative;
+    display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
   
     -webkit-transition: 0.1s all ease-in-out;
@@ -291,11 +312,20 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
   }
+  .panel-container #MoreFilters {
+    height: 100%;
+  }
   .panel-container:focus {
     outline: none;
   }
   .panel-container #trigger1 {
     padding: 0;
+  }
+  .panel-container #trigger2 {
+    padding: .5em 1em 0em .5em;
+  }
+  .panel-container #trigger3 {
+    padding: .5em 1em 0em .5em;
   }
   .panel-container h4 {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -433,10 +463,11 @@ At some point, update mediaqueries to be in EMS
     height: auto;
   }
   .trailFilters .trailLength {
-    height: 4em;
+    height: 2em;
     width: 100%;
     background: #ffffff;
-    padding: 0em 1em 2em 1em;
+    padding: 0em 1em 0em 1em;
+    margin: .25em 0 1em 0;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
@@ -477,9 +508,9 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
   }
   .trailFilters .trailUse {
-    height: 4em;
+    height: 2em;
     width: 100%;
-    padding: 0em 1em 1em 1em;
+    padding: 0em 1em 0em 1em;
     background: #ffffff;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
@@ -520,10 +551,10 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
   }
   .trailFilters .trailSelection {
-    height: 4em;
+    height: 3em;
     width: 100%;
     background: #ffffff;
-    padding: 0em 1em 2em 1em;
+    padding: 0em 1em 0em 1em;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
@@ -845,7 +876,6 @@ At some point, update mediaqueries to be in EMS
   font-weight: bold;
 }
 .trailhead-trailname {
-  color: white;
   cursor: pointer;
 }
 .trailMapContainer {
@@ -945,14 +975,15 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .trailListColumn {
     position: absolute;
-    top: 1em;
-    left: 2em;
+    top: 2em;
+    left: 3em;
     width: 24em;
     max-height: 90%;
-    min-height: 16em;
+    min-height: 14em;
     padding: 0;
     background: #ffffff;
     z-index: 999;
+    overflow: visible;
   }
 }
 /* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
@@ -1044,6 +1075,43 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls {
+    display: none;
+    width: 2em;
+    height: 150%;
+    position: absolute;
+    background-color: #c45f37;
+    z-index: 999;
+    cursor: pointer ;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
+    top: 0;
+    left: -2em;
+    border-radius: 5em 0 0 5em;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft b {
+    position: relative;
+    margin: 1em 0em 1em 1em;
+    border-bottom: .8em solid transparent;
+    border-top: .8em solid transparent;
+    border-right: 0.8em solid #ffffff;
+    display: inline-block;
+    height: 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight {
+    top: 0;
+    right: -2em;
+    border-radius: 0 5em 5em 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight b {
+    position: relative;
+    margin: 1em 1em 1em .5em;
+    border-bottom: .8em solid transparent;
+    border-top: .8em solid transparent;
+    border-left: 0.8em solid #ffffff;
+    display: inline-block;
+    height: 0;
   }
   .detailPanel .detailPanelBody {
     position: relative;

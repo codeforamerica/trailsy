@@ -53,7 +53,7 @@
                 <div></div>
                 <div></div>
               </a>
-              <a class="brand" href="#">Trailsy</a>
+              <a class="brand" href="#">To The Trails!</a>
               <a class="subBrand" href="#">SUMMIT</a>
             </div>
           </header>
@@ -69,7 +69,9 @@
                     <form action="#" method="post" class="f">
                       <label class="is-vishidden">Search the site</label>
                       <input type="search" placeholder="Search"/>
-                      <input type="submit" class="btn search-submit"/>
+                      <input type="submit" class="btn search-submit">
+<!--                         <img src="img/icon_search.png" class="search-icon"/> -->
+                      </input>
                     </form>
                   </div>
                   <div class="trailLength-title">
@@ -116,7 +118,7 @@
               </li>
             </ul>
             <!-- Second Accordion Panel (More Options) -->
-            <ul class="panel-container list-reset" tabindex="2">
+            <ul class="panel-container list-reset" tabindex="2" id="MoreFilters">
               <li><h4 id='trigger2' class="panel-title" aria-hidden="true">More Options</h4>
                 <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
                   <div class="trailFilters">
@@ -212,6 +214,10 @@
           <div class="detailPanelBanner">
             <span class="trailName"></span>
             <img class="closeDetail" src="img/close-btn-orange.png">
+            <div class="detailPanelControls controlLeft">
+            </div>
+            <div class="detailPanelControls controlRight">
+            </div>
           </div>
           <!-- Close Button -->
           <!-- Photo -->
@@ -275,12 +281,12 @@
                 <img src="">
               </div>
             </div>
-            <div class="detailFooter">
-              <img class="icon-large" src="img/mpssc.jpg">
-              <span>Managed by:</span>
-              <span class="detailSource"></span>
-              <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>
-            </div>
+          </div>
+          <div class="detailFooter">
+            <img class="icon-large" src="img/mpssc.jpg">
+            <span>Managed by:</span>
+            <span class="detailSource"></span>
+            <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>
           </div>
         </div>
       </section> <!-- trailListColumn -->

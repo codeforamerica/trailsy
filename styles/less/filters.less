@@ -49,6 +49,7 @@
 			width: 2.5em;
 			padding: 0;
 			cursor: pointer;
+			background: url(img/icon_search.png);
 			background-color: @color-light-orange;
 			&:hover {
 				background-color: @color-dark-orange;
@@ -70,10 +71,12 @@
 	@media @mobile {}
 	@media @desktop {
 /*		display: none;*/
-		background-color: @color-light-blue;
+		background-color: transparent;
 		.panel-title {
 			margin: 0;
-			padding: .5em 1em .25em 1em;
+			padding: 0em 1em .0em 1em;
+			position: relative;
+			display: inline-block;
 			/* Let's abstract this transition so we can keep it consistent across animations*/
 			-webkit-transition: .1s all ease-in-out;
 			-moz-transition: .1s all ease-in-out;
@@ -92,11 +95,20 @@
 	@media @mobile {}
 	@media @desktop {
 		margin: 0;
+		#MoreFilters {
+			height: 100%;
+		}
 		&:focus {
 			outline: none;
 		}
 		#trigger1 {
 			padding: 0;
+		}
+		#trigger2 {
+			padding: .5em 1em 0em .5em;
+		}
+		#trigger3 {
+			padding: .5em 1em 0em .5em;
 		}
 		h4 {
 			.sansSerif-light();
@@ -228,10 +240,11 @@
 	@media @desktop {
 		height: auto;
 		.trailLength {
-			height: 4em;
+			height: 2em;
 			width: 100%;
 			background: @color-white;
-			padding: 0em 1em 2em 1em;
+			padding: 0em 1em 0em 1em;
+			margin: .25em 0 1em 0;
     		text-align: justify;
     		-ms-text-justify: distribute-all-lines;
     		text-justify: distribute-all-lines;
@@ -269,9 +282,9 @@
 			width: 100%;
 		}
 		.trailUse {
-			height: 4em;
+			height: 2em;
 			width: 100%;
-			padding: 0em 1em 1em 1em;
+			padding: 0em 1em 0em 1em;
 			background: @color-white;
     		text-align: justify;
     		-ms-text-justify: distribute-all-lines;
@@ -312,10 +325,10 @@
 			width: 100%;
 		}
 		.trailSelection {
-			height: 4em;
+			height: 3em;
 			width: 100%;
 			background: @color-white;
-			padding: 0em 1em 2em 1em;
+			padding: 0em 1em 0em 1em;
     		text-align: justify;
     		-ms-text-justify: distribute-all-lines;
     		text-justify: distribute-all-lines;

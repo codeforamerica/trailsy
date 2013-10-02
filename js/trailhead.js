@@ -68,8 +68,6 @@ function startup() {
   //   }[, ...}]
   // ]
   var trailSegments = [];
-
-
   var currentMultiTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
   var currentTrailLayers = [];
   var currentHighlightedTrailLayer = {};
@@ -78,10 +76,28 @@ function startup() {
     lengthFilter: [],
     activityFilter: []
   };
+  var orderedTrails = [];
   var currentDetailTrail = null;
+  var currentDetailTrailhead = null;
   var userMarker = null;
   var allSegmentLayer = null;
 
+  // Trailhead Variables
+  // Not sure if these should be global, but hey whatev
+  var trailheadIcon = L.Icon.extend({
+    options: {
+      iconSize: [20, 25],
+      iconAnchor: [20, 40],
+      popupAnchor: [-3, -75]
+    }
+  });
+
+  var trailheadIcon1 = new trailheadIcon({
+    iconUrl: 'img/icon_trailhead_1.png'
+  }),
+    trailheadIcon2 = new trailheadIcon({
+      iconUrl: 'img/icon_trailhead_2.png'
+    });
 
   // comment these/uncomment the next set to switch between tables
   var TRAILHEADS_TABLE = "summit_trailheads";
@@ -96,8 +112,9 @@ function startup() {
   // UI events to react to
 
   $("#redoSearch").click(reorderTrailsWithNewLocation);
-  $(document).on('click', '.trailhead-trailname', trailnameClick);  // Open the detail panel!
+  $(document).on('click', '.trailhead-trailname', trailnameClick); // Open the detail panel!
   $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
+  $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $("#showAllTrailSegments").click(function() {
     getAllTrailPaths(drawMultiTrailLayer);
   });
@@ -105,6 +122,8 @@ function startup() {
     getAllTrailPaths(filterKnownTrails);
   });
   $(document).on('change', '.filter', filterChangeHandler);
+
+  $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
@@ -252,848 +271,209 @@ function startup() {
     applyFilterChange(currentFilters, trailData);
   }
 
-// =====================================================================//
-// these two set currentLocation, then mapping ensues
+  // =====================================================================//
+  // these two set currentLocation, then mapping ensues
 
-function setCurrentLocationFromMap() {
-  currentLocation = map.getCenter();
-}
+  function setCurrentLocationFromMap() {
+    currentLocation = map.getCenter();
+  }
 
-function setCurrentLocation() {
-  // for now, just returns Akron
-  // should use browser geolocation,
-  // and only return Akron if we're far from home base
-  currentLocation = AKRON;
-}
+  function setCurrentLocation() {
+    // for now, just returns Akron
+    // should use browser geolocation,
+    // and only return Akron if we're far from home base
+    currentLocation = AKRON;
+  }
 
-// display the map based on currentLocation
+  // display the map based on currentLocation
 
-function displayInitialMap() {
-  console.log("displayInitialMap");
-  console.log(currentLocation);
-  map = L.map('trailMap', {
-    zoomControl: false
-  }).addControl(L.control.zoom({
-    position: 'topright'
-  })).setView([currentLocation.lat, currentLocation.lng], 11);
+  function displayInitialMap() {
+    console.log("displayInitialMap");
+    console.log(currentLocation);
+    map = L.map('trailMap', {
+      zoomControl: false
+    }).addControl(L.control.zoom({
+      position: 'topright'
+    })).setView([currentLocation.lat, currentLocation.lng], 11);
 
-  // Switch between MapBox and other providers by commenting/uncommenting these
-  L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
-  // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
-  map.on("locationfound", function(location) {
-    if (!userMarker)
-      userMarker = L.userMarker(location.latlng, {
-        smallIcon: true,
-        pulsing: true,
-        accuracy: 0
-      }).addTo(map);
-    console.log(location.latlng);
-    userMarker.setLatLng(location.latlng);
-  });
-  map.locate({
-    watch: true,
-    setView: false,
-    enableHighAccuracy: true
-  });
-  map.on("zoomend", function(e) {
-    console.log("zoomend");
-    if (SHOW_ALL_TRAILS && allSegmentLayer) {
-      if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-        map.addLayer(allSegmentLayer);
-      }
-      if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
-        map.removeLayer(allSegmentLayer);
-      }
-    }
-  });
-  map.on("locationerror", function(errorEvent) {
-    console.log("Location Error:");
-    console.log(errorEvent.message);
-    console.log(errorEvent.code);
-  });
-}
-
-// =====================================================================//
-// Getting trailhead data
-
-function getOrderedTrailheads(location, callback) {
-  console.log("getOrderedTrailheads");
-  var callData = {
-    loc: location.lat + "," + location.lng,
-    type: "GET",
-    path: "/trailheads.json?loc=" + location.lat + "," + location.lng
-  };
-  makeAPICall(callData, function(response) {
-    populateTrailheadArray(response);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-// get all trailhead info, in order of distance from "location"
-
-function getOrderedTrailheadsOld(location, callback) {
-  console.log("getOrderedTrailheads");
-  var nearest_trailhead_query = "select trailheads.*, " +
-    "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
-    "from " + TRAILHEADS_TABLE + " as trailheads " +
-    "ORDER BY distance " + "";
-
-  makeSQLQuery(nearest_trailhead_query, function(response) {
-    populateTrailheadArray(response);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-
-// given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
-// populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
-// and a place to put the trails for that trailhead.
-
-function populateTrailheadArray(trailheadsGeoJSON) {
-  console.log("populateTrailheadArray");
-  console.log(trailheadsGeoJSON);
-  trailheads = [];
-  for (var i = 0; i < trailheadsGeoJSON.features.length; i++) {
-    var currentFeature = trailheadsGeoJSON.features[i];
-    currentFeatureLatLng = new L.LatLng(currentFeature.geometry.coordinates[1], currentFeature.geometry.coordinates[0]);
-    var newMarker = L.circleMarker(currentFeatureLatLng, {
-      title: 'test',
-      radius: 4
+    // Switch between MapBox and other providers by commenting/uncommenting these
+    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
+    map.on("locationfound", function(location) {
+      if (!userMarker)
+        userMarker = L.userMarker(location.latlng, {
+          smallIcon: true,
+          pulsing: true,
+          accuracy: 0
+        }).addTo(map);
+      console.log(location.latlng);
+      userMarker.setLatLng(location.latlng);
     });
-
-    // adding closure to call trailheadMarkerClick with trailheadID on marker click
-    newMarker.on("click", function(trailheadID) {
-      return function() {
-        trailheadMarkerClick(trailheadID);
-      };
-    }(currentFeature.properties.id));
-
-    var trailhead = {
-      properties: currentFeature.properties,
-      marker: newMarker,
-      trails: [],
-      popupContent: ""
-    };
-    trailheads.push(trailhead);
-  }
-}
-
-// on trailhead marker click, this is invoked with the id of the trailhead
-// not used for anything but logging at the moment
-
-function trailheadMarkerClick(id) {
-  console.log("trailheadMarkerClick");
-  highlightTrailhead(id, 0);
-}
-
-// get the trailData from the API
-
-function getTrailData(callback) {
-  console.log("getTrailData");
-  var callData = {
-    type: "GET",
-    path: "/trails.json"
-  };
-  makeAPICall(callData, function(response) {
-    populateTrailData(response);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-// get the trailData from the DB
-
-function getTrailDataOld(callback) {
-  console.log("getTrailData");
-  var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
-  // Another AJAX call, for the trails
-  makeSQLQuery(trail_list_query, function(response) {
-    populateTrailData(response);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-function populateTrailData(trailDataGeoJSON) {
-  for (var i = 0; i < trailDataGeoJSON.features.length; i++) {
-    trailData[trailDataGeoJSON.features[i].properties.id] = trailDataGeoJSON.features[i];
-  }
-}
-
-function getTrailSegments(callback) {
-  console.log("getTrailSegments");
-  var callData = {
-    type: "GET",
-    path: "/trailsegments.json"
-  };
-  makeAPICall(callData, function(response) {
-    trailSegments = response;
-    allSegmentLayer = makeAllSegmentLayer(response);
-    if (typeof callback == "function") {
-      callback();
-    }
-  });
-}
-
-function makeAllSegmentLayer(response) {
-  allSegmentLayer = L.geoJson(trailSegments, {
-    style: function() {
-      return {
-        color: '#EFB589',
-        weight: 3,
-        opacity: 1,
-        clickable: true,
-        // dashArray: "5,5"
-      };
-    },
-    onEachFeature: function(feature, layer) {
-      var popupHTML = "<div class='trail-popup'>";
-      if (feature.properties.trail1) {
-        popupHTML = popupHTML + feature.properties.trail1;
-      }
-      if (feature.properties.trail2) {
-        popupHTML = popupHTML + "<br>" + feature.properties.trail2;
-      }
-      if (feature.properties.trail3) {
-        popupHTML = popupHTML + "<br>" + feature.properties.trail3;
-      }
-      if (feature.properties.trail4) {
-        popupHTML = popupHTML + "<br>" + feature.properties.trail4;
-      }
-      if (feature.properties.trail5) {
-        popupHTML = popupHTML + "<br>" + feature.properties.trail5;
-      }
-      if (feature.properties.trail6) {
-        popupHTML = popupHTML + "<br>" + feature.properties.trail6;
-      }
-      popupHTML = popupHTML + "</div>";
-      layer.bindPopup(popupHTML);
-    }
-  });
-  return allSegmentLayer;
-}
-
-// given trailData,
-// populate trailheads[x].trails with all of the trails in trailData
-// that match each trailhead's named trails from the trailhead table.
-// Also add links to the trails within each trailhead popup 
-
-function addTrailDataToTrailheads(myTrailData) {
-  console.log("addTrailDataToTrailheads");
-  console.log(trailData);
-  for (var j = 0; j < trailheads.length; j++) {
-    var trailhead = trailheads[j];
-    trailhead.trails = [];
-    // for each original trailhead trail name
-    for (var trailNum = 1; trailNum <= 3; trailNum++) {
-      var trailWithNum = "trail" + trailNum;
-      if (trailhead.properties[trailWithNum] === "") {
-        continue;
-      }
-      var trailheadTrailName = trailhead.properties[trailWithNum];
-      // TODO: add a test for the case of duplicate trail names.
-      // Right now this
-      // loop through all of the trailData objects, looking for trail names that match
-      // the trailhead trailname.
-      // this works great, except for things like "Ledges Trail," which get added twice,
-      // one for the CVNP instance and one for the MPSSC instance.
-      // we should test for duplicate names and only use the nearest one.
-      // to do that, we'll need to either query the DB for the trail segment info,
-      // or check distance against the (yet-to-be) pre-loaded trail segment info
-      $.each(myTrailData, function(trailID, trail) {
-        if (trailhead.properties[trailWithNum] == trail.properties.name) {
-          trailhead.trails.push(trailID);
+    map.locate({
+      watch: true,
+      setView: false,
+      enableHighAccuracy: true
+    });
+    map.on("zoomend", function(e) {
+      console.log("zoomend");
+      if (SHOW_ALL_TRAILS && allSegmentLayer) {
+        if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+          map.addLayer(allSegmentLayer);
         }
-      });
-    }
-  }
-  fixDuplicateTrailNames(trailheads);
-  makeTrailheadPopups(trailheads);
-  mapActiveTrailheads(trailheads);
-  makeTrailDivs(trailheads);
-}
-
-
-// this is so very wrong and terrible and makes me want to never write anything again.
-// alas, it works for now.
-// for each trailhead, if two or more of the matched trails from addTrailDataToTrailheads() have the same name,
-// remove any trails that don't match the trailhead source
-
-function fixDuplicateTrailNames(trailheads) {
-  console.log("fixDuplicateTrailNames");
-  for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
-    var trailhead = trailheads[trailheadIndex];
-    var trailheadTrailNames = {};
-    for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
-      var trailName = trailData[trailhead.trails[trailsIndex]].properties.name;
-      trailheadTrailNames[trailName] = trailheadTrailNames[trailName] || [];
-      var sourceAndTrailID = {
-        source: trailData[trailhead.trails[trailsIndex]].properties.source,
-        trailID: trailData[trailhead.trails[trailsIndex]].properties.id
-      };
-      trailheadTrailNames[trailName].push(sourceAndTrailID);
-    }
-    for (var trailheadTrailName in trailheadTrailNames) {
-      if (trailheadTrailNames.hasOwnProperty(trailheadTrailName)) {
-        if (trailheadTrailNames[trailheadTrailName].length > 1) {
-          // remove the ID from the trailhead trails array if the source doesn't match
-          for (var i = 0; i < trailheadTrailNames[trailheadTrailName].length; i++) {
-            var mySourceAndTrailID = trailheadTrailNames[trailheadTrailName][i];
-            if (mySourceAndTrailID.source != trailhead.properties.source) {
-              var idToRemove = mySourceAndTrailID.trailID;
-              var removeIndex = $.inArray(idToRemove.toString(), trailhead.trails);
-              trailhead.trails.splice(removeIndex, 1);
-            }
-          }
+        if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
+          map.removeLayer(allSegmentLayer);
         }
       }
-    }
+    });
+    map.on("locationerror", function(errorEvent) {
+      console.log("Location Error:");
+      console.log(errorEvent.message);
+      console.log(errorEvent.code);
+    });
   }
-}
 
-// given the trailheads,
-// make the popup menu for each one, including each trail present
-// and add it to the trailhead object
+  // =====================================================================//
+  // Getting trailhead data
 
-//  This is really only used in the desktop version 
-function makeTrailheadPopups(trailheads) {
-  for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
-    var trailhead = trailheads[trailheadIndex];
-    var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-    var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html($("<div>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
-    for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
-      var trail = trailData[trailhead.trails[trailsIndex]];
-      var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
-      .attr("data-trailname", trail.properties.name)
-      .attr("data-trailid", trail.properties.id)
-      .attr("data-trailheadname", trailhead.properties.name)
-      .attr("data-trailheadid", trailhead.properties.id)
-      .attr("data-index", trailsIndex);
-      console.log(trail.properties.status);
-      var status = "";
-      if (trail.properties.status == 1) {
-        $popupTrailDiv.append($("<img>").addClass("status").attr({
-          src: "img/icon_alert_yellow.png",
-          title: "alert"})
-        );
-      }
-      if (trail.properties.status == 2) {
-        $popupTrailDiv.append($("<img>").addClass("status").attr({
-          src: "img/icon_alert_yellow.png",
-          title: "alert"})
-        );
-      }
-      $popupTrailDiv.append("<div>" + "<a href='#'>" + trail.properties.name + "</a>" + "</div>");
-      $popupTrailDiv.append("<b>")
-      // .append(trail.properties.name)
-      .appendTo($popupTrailheadDiv);
-    }
-    trailhead.popupContent = $popupContentMainDiv.outerHTML();
-  }
-}
-
-// given trailheads, add all of the markers to the map in a single Leaflet layer group
-// except for trailheads with no matched trails
-
-function mapActiveTrailheads(trailheads) {
-  console.log("mapActiveTrailheads");
-  var currentTrailheadMarkerArray = [];
-  for (var i = 0; i < trailheads.length; i++) {
-    if (trailheads[i].trails.length) {
-      currentTrailheadMarkerArray.push(trailheads[i].marker);
-    } else {
-      // console.log(["trailhead not displayed: ", trailheads[i].properties.name]);
-    }
-  }
-  var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
-  map.addLayer(currentTrailheadLayerGroup);
-}
-
-// given trailheads, now populated with matching trail names,
-// fill out the left trail(head) pane,
-// noting if a particular trailhead has no trails associated with it
-
-function makeTrailDivs(trailheads) {
-  console.log("makeTrailDivs");
-  $("#trailList").html("");
-  $.each(trailheads, function(index, trailhead) {
-    var trailheadName = trailhead.properties.name;
-    var trailheadID = trailhead.properties.id;
-    var trailheadTrailIDs = trailhead.trails;
-    if (trailheadTrailIDs.length === 0) {
-      return true; // next $.each
-    }
-    var trailheadSource = trailhead.properties.source;
-    var trailheadDistance = metersToMiles(trailhead.properties.distance);
-    var $trailDiv;
-
-    // Making a new div for text / each trail 
-
-    for (var i = 0; i < trailheadTrailIDs.length; i++) {
-
-      var trailID = trailheadTrailIDs[i];
-      var trail = trailData[trailID];
-      var trailName = trailData[trailID].properties.name;
-      var trailLength = trailData[trailID].properties.length;
-      $trailDiv = $("<div>").addClass('trail-box')
-        .attr("data-source", "list")
-        .attr("data-trailid", trailID)
-        .attr("data-trailname", trailName)
-        .attr("data-trail-length", trailLength)
-        .attr("data-trailheadName", trailheadName)
-        .attr("data-trailheadid", trailheadID)
-        .attr("data-index", i)
-        .appendTo("#trailList")
-        .click(populateTrailsForTrailheadDiv)
-
-//  AJW will in the near future comment this out for now. We want to change action.
-//  Current: init showTrailDetails Funciton (Detail Panel)
-//  Future: init map centering and callout
-
-        .click(function(trail, trailhead) {
-          return function(e) {
-            showTrailDetails(trail, trailhead);
-          };
-        }(trail, trailhead));
-
-      $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
-
-      // Making a new div for Detail Panel
-
-      $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
-      $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv);
-      $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailDiv);
-      $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
-      $("<div class='trailLength' >" + trailLength +  " miles long" + "</div>").appendTo($trailDiv);
-    }
-
-    // diagnostic div to show trailheads with no trail matches
-    // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
-    if (trailheadTrailIDs.length === 0) {
-      $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-      $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS (" +
-        [val.properties.trail1, val.properties.trail2, val.properties.trail3].join(", ") + ")</span>").appendTo($trailDiv);
-      $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
-    }
-  });
-}
-
-function metersToMiles(i) {
-  return (i * METERSTOMILESFACTOR).toFixed(1);
-}
-
-function showTrailDetails(trail, trailhead) {
-  console.log("showTrailDetails");
-  if ($('.detailPanel').is(':hidden')) {
-    decorateDetailPanel(trail, trailhead);
-    openDetailPanel();
-    currentDetailTrail = trail;
-    currentDetailTrailhead = trailhead;
-  } else {
-    if (currentDetailTrail == trail && currentDetailTrailhead == trailhead) {
-      currentDetailTrail = null;
-      currentDetailTrailhead = null;
-      closeDetailPanel();
-    } else {
-      decorateDetailPanel(trail, trailhead);
-      currentDetailTrail = trail;
-      currentDetailTrailhead = trailhead;
-    }
-  }
-}
-
-//  Helper functions for ShowTrailDetails
-
-function openDetailPanel() {
-  console.log("openDetailPanel");
-  $('.detailPanel').show();
-  $('.accordion').hide();
-  map.invalidateSize();
-}
-
-function closeDetailPanel() {
-  console.log("closeDetailPanel");
-  $('.detailPanel').hide();
-  $('.accordion').show();
-  map.invalidateSize();
-}
-
-function decorateDetailPanel(trail, trailhead) {
-  //  Taking cues from the construction of the List Items / Trail Divs above
-  // var $detailPanelBody;
-  // $detailPanelBody = $("<div>").addClass("detailPanelBody");
-  // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
-  // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
-  // $("<div class='detailT")
-
-  $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
-  $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
-  $('.detailPanel .detailSource').html(trailhead.properties.source);
-  $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
-  $('.detailPanel .detailLength').html(trail.properties.length + " miles");
-  // $('.detailPanel .detailDogs').html(trail.properties.dogs);
-  // $('.detailPanel .detailBikes').html(trail.properties.bikes);
-  $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
-  // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
-  // $('.detailPanel .detailHorses').html(trail.properties.horses);
-  $('.detailPanel .detailDescription').html(trail.properties.description);
-}
-
-// event handler for click of a trail name in a trailhead popup
-
-//  Going to change the function of this trailnameClick function
-//  But currently, it is not logging trailnameClick.
-//  Current: init populateTrailsforTrailheadName(e)
-//  Future: init showTrailDetails
-
-function trailnameClick(e) {
-  console.log("trailnameClick");
-  populateTrailsForTrailheadTrailName(e);
-}
-
-// given jquery
-
-function parseTrailElementData($element) {
-  var trailheadID = $element.data("trailheadid");
-  var highlightedTrailIndex = $element.data("index") || 0;
-  var trailID = $element.data("trailid");
-  results = {
-    trailheadID: trailheadID,
-    highlightedTrailIndex: highlightedTrailIndex,
-    trailID: trailID
-  };
-  return results;
-}
-
-// two event handlers for click of trailDiv and trail in trailhead popup:
-// get the trailName and trailHead that they clicked on
-// highlight the trailhead (showing all of the trails there) and highlight the trail path
-
-function populateTrailsForTrailheadDiv(e) {
-  console.log("populateTrailsForTrailheadDiv");
-  var $myTarget;
-
-  // this makes trailname click do the same thing as general div click
-  // (almost certainly a better solution exists)
-  if (e.target !== this) {
-    $myTarget = $(this);
-  } else {
-    $myTarget = $(e.target);
-  }
-  var parsed = parseTrailElementData($myTarget);
-  highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
-}
-
-function populateTrailsForTrailheadTrailName(e) {
-  var parsed = parseTrailElementData($(e.target));
-  for (var i = 0; i < trailheads.length; i++) {
-    if (trailheads[i].properties.id == parsed.trailheadID) {
-      trailhead = trailheads[i];
-    }
-  }
-  // decorateDetailPanel(trailData[parsed.trailID], trailhead);
-  highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
-  var trail = trailData[parsed.trailID];
-  showTrailDetails(trail, trailhead);
-}
-
-// given a trailheadID and a trail index within that trailhead
-// display the trailhead marker and popup,
-// then call highlightTrailheadDivs() and getAllTrailPathsForTrailhead()
-// with the trailhead record
-
-var currentTrailheadMarker;
-
-function highlightTrailhead(trailheadID, highlightedTrailIndex) {
-  console.log("highlightTrailhead");
-  for (var i = 0; i < trailheads.length; i++) {
-    if (trailheads[i].properties.id == trailheadID) {
-      currentTrailhead = trailheads[i];
-    }
-  }
-  if (currentTrailheadMarker) {
-    map.removeLayer(currentTrailheadMarker);
-  }
-  // make a default marker, add it to the map with the trailhead's pre-computed popupContent
-  currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
-  currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent);
-  // highlightTrailheadDivs(currentTrailhead);
-  getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
-  currentTrailheadMarker.openPopup();
-}
-
-// given a trailhead, and a trail index within that trailhead
-// find the matching trailDivs, highlight them, and move them onscreen
-
-// function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
-//   console.log("highlightTrailheadDivs");
-//   // deselect all of the trailDivs
-//   $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
-//   $(".trailIndicatorLight").hide();
-//   for (var i = 0; i < currentTrailhead.trails.length; i++) {
-//     var trailID = currentTrailhead.trails[i];
-//     var trailName = trailData[trailID].properties.name;
-//     var trailheadName = currentTrailhead.properties.name;
-//     var trailheadID = currentTrailhead.properties.id;
-//     // add class for highlighting
-//     var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
-//     var color = getClassBackgroundColor("trail" + (i + 1));
-//     $trailbox.find($(".trailIndicatorLight")).css("border-color", color).show();
-//     // if this is the first trail for the trailhead, animate it to the top of the trailList
-//     // TODO: This should probably not animate until we activate the indicator lights
-//     if (i === 0) {
-//       $('#trailList').animate({
-//         scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top - $("#trailList").offset().top + $("#trailList").scrollTop()
-//       }, 500);
-//     }
-//   }
-// }
-
-function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
-  console.log("getAllTrailPathsForTrailhead");
-  if (trailSegments.type == "FeatureCollection" && USE_LOCAL) {
-    getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex);
-  } else {
-    getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex);
-  }
-}
-
-// given a trailhead and a trail index within that trailhead
-// get the paths for any associated trails,
-// then call drawMultiTrailLayer() and setCurrentTrail()
-
-function getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex) {
-  console.log("getAllTrailPathsForTrailheadRemote");
-  var responses = [];
-  var queryTaskArray = [];
-  // got trailhead.trails, now get the segment collection for all of them
-  // get segment collection for each
-  for (var i = 0; i < trailhead.trails.length; i++) {
-    var trailID = trailhead.trails[i];
-    var trailName = trailData[trailID].properties.name;
-    var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
-      "(segments.trail1 = '" + trailName + "' or " +
-      "segments.trail2 = '" + trailName + "' or " +
-      "segments.trail3 = '" + trailName + "' or " +
-      "segments.trail4 = '" + trailName + "' or " +
-      "segments.trail5 = '" + trailName + "' or " +
-      "segments.trail6 = '" + trailName + "' or " +
-      "segments.trail1 = '" + trailName + " Trail' or " +
-      "segments.trail2 = '" + trailName + " Trail' or " +
-      "segments.trail3 = '" + trailName + " Trail' or " +
-      "segments.trail4 = '" + trailName + " Trail' or " +
-      "segments.trail5 = '" + trailName + " Trail' or " +
-      "segments.trail6 = '" + trailName + " Trail') and " +
-      "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
-    var queryTask = function(trail_query, index) {
-      return function(callback) {
-        // makeSQLQuery(trail_query, function(response) {
-        //   responses[index] = response;
-        //   callback(null, trailID);
-        // });
-        var callData = {
-          type: "GET",
-          path: "/trailsegments.json"
-        };
-        makeAPICall(callData, function(response) {
-          responses[index] = response;
-          callback(null, trailID);
-        });
-      };
-    }(trail_query, i);
-    queryTaskArray.push(queryTask);
-  }
-  async.parallel(queryTaskArray, function(err, results) {
-    responses = mergeResponses(responses);
-    drawMultiTrailLayer(responses);
-    setCurrentTrail(highlightedTrailIndex);
-  });
-}
-
-// LOCAL EDITION:
-// given a trailhead and a trail index within that trailhead
-// get the paths for any associated trails,
-// then call drawMultiTrailLayer() and setCurrentTrail()
-// (it's a little convoluted because it's trying to return identical GeoJSON to what
-// CartoDB would return)
-
-function getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex) {
-  console.log("getAllTrailPathsForTrailheadLocal");
-  var responses = [];
-  var trailFeatureArray = [];
-  // got trailhead.trails, now get the segment collection for all of them
-  // get segment collection for each
-  for (var i = 0; i < trailhead.trails.length; i++) {
-    var trailID = trailhead.trails[i];
-    var trail = trailData[trailID];
-    var trailSource = trail.properties.source;
-    var trailName = trail.properties.name;
-    var trailFeatureCollection = {
-      type: "FeatureCollection",
-      features: [{
-        geometry: {
-          geometries: [],
-          type: "GeometryCollection"
-        },
-        type: "Feature"
-      }]
+  function getOrderedTrailheads(location, callback) {
+    console.log("getOrderedTrailheads");
+    var callData = {
+      loc: location.lat + "," + location.lng,
+      type: "GET",
+      path: "/trailheads.json?loc=" + location.lat + "," + location.lng
     };
-    var valid = 0;
-    for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
-      var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
-      if ((segment.properties.trail1 == trailName ||
-          segment.properties.trail1 + " Trail" == trailName ||
-          segment.properties.trail2 == trailName ||
-          segment.properties.trail2 + " Trail" == trailName ||
-          segment.properties.trail3 == trailName ||
-          segment.properties.trail3 + " Trail" == trailName ||
-          segment.properties.trail4 == trailName ||
-          segment.properties.trail4 + " Trail" == trailName ||
-          segment.properties.trail5 == trailName ||
-          segment.properties.trail5 + " Trail" == trailName ||
-          segment.properties.trail6 == trailName ||
-          segment.properties.trail6 + " Trail" == trailName) &&
-        (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
-        // 1) {
-        trailFeatureCollection.features[0].properties = {
-          trailname: trailName
-        };
-        valid = 1;
-        // console.log("match");
-        trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
-      } else {
-        // console.log("invalid!");
+    makeAPICall(callData, function(response) {
+      populateTrailheadArray(response);
+      if (typeof callback == "function") {
+        callback();
       }
-    }
-    if (valid) {
-      trailFeatureArray.push(trailFeatureCollection);
-    }
-  }
-  console.log(trailFeatureArray);
-  responses = mergeResponses(trailFeatureArray);
-  drawMultiTrailLayer(responses);
-  setCurrentTrail(highlightedTrailIndex);
-}
-
-
-// merge multiple geoJSON trail features into one geoJSON FeatureCollection
-
-function mergeResponses(responses) {
-
-  console.log("mergeResponses");
-  // console.log(responses);
-
-  // var combined = { type: "FeatureCollection", features: [] };
-  // for (var i = 0; i < responses.length; i++) {
-  //   console.log("xxxx");
-  //   console.log(responses[i]);
-  //   // responses[i].properties.order = i;
-  //   combined.features.push(responses[i]);
-  // }
-
-
-  var combined = $.extend(true, {}, responses[0]);
-  combined.features[0].properties.order = 0;
-  for (var i = 1; i < responses.length; i++) {
-    combined.features = combined.features.concat(responses[i].features);
-    combined.features[i].properties.order = i;
+    });
   }
 
-  // console.log("----");
-  // console.log(combined);
-  return combined;
-}
+  // get all trailhead info, in order of distance from "location"
 
-// get all trail segment paths
-// (for diagnostics)
+  function getOrderedTrailheadsOld(location, callback) {
+    console.log("getOrderedTrailheads");
+    var nearest_trailhead_query = "select trailheads.*, " +
+      "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
+      "from " + TRAILHEADS_TABLE + " as trailheads " +
+      "ORDER BY distance " + "";
 
-function getAllTrailPaths(callback) {
-  var trail_query = "select the_geom, name1, name2, name3 from " + TRAILSEGMENTS_TABLE + " where 1=1";
-  makeSQLQuery(trail_query, callback);
-}
-
-// given a GeoJSON collection of segments paths, 
-// filter out the ones in known trails,
-// then call drawMultiTrailLayer to draw 'em
-// (for diagnostics)
-
-function filterKnownTrails(response) {
-  console.log(response);
-  var filteredResponse = {
-    type: "FeatureCollection",
-    features: []
-  };
-  // spin through response, removing any segments that aren't part of a known trail
-  filteredResponse.features = response.features.filter(function(element, index, array) {
-    // for (i = 0; i < trailData.length; i++) {
-    if (element.properties.trail1 in trailData ||
-      element.properties.trail2 in trailData ||
-      element.properties.trail3 in trailData) {
-      return false;
-    }
-    // }
-    //  should there be an else here?
-    return true;
-  });
-  console.log(filteredResponse);
-  drawMultiTrailLayer(filteredResponse);
-}
-
-// given a geoJSON set of linestring features,
-// draw them all on the map (in a single layer we can remove later)
-
-function drawMultiTrailLayer(response) {
-  console.log("drawMultiTrailLayer");
-  if (currentMultiTrailLayer) {
-    map.removeLayer(currentMultiTrailLayer);
-    currentTrailLayers = [];
-  }
-  if (response.features[0].geometry === null) {
-    alert("No trail segment data found.");
-  }
-  currentMultiTrailLayer = L.geoJson(response, {
-    style: function(feature) {
-      var color;
-      if (feature.properties.order === 0 || !feature.properties.order) {
-        color = getClassBackgroundColor("trail1");
-        return {
-          weight: 3,
-          color: color,
-          opacity: 0.75
-        };
-      } else if (feature.properties.order === 1) {
-        color = getClassBackgroundColor("trail2");
-        return {
-          weight: 3,
-          color: color,
-          opacity: 0.75
-        };
-      } else if (feature.properties.order === 2) {
-        color = getClassBackgroundColor("trail3");
-        return {
-          weight: 3,
-          color: color,
-          opacity: 0.75
-        };
+    makeSQLQuery(nearest_trailhead_query, function(response) {
+      populateTrailheadArray(response);
+      if (typeof callback == "function") {
+        callback();
       }
-    },
+    });
+  }
 
-    onEachFeature: function(feature, layer) {
-      var popupHTML = "<div class='trail-popup'>";
-      // if we have a named trail, show its name
-      if (feature.properties.trailname) {
-        popupHTML = popupHTML + feature.properties.trailname;
+
+  // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
+  // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
+  // and a place to put the trails for that trailhead.
+
+  function populateTrailheadArray(trailheadsGeoJSON) {
+    console.log("populateTrailheadArray");
+    console.log(trailheadsGeoJSON);
+    trailheads = [];
+    for (var i = 0; i < trailheadsGeoJSON.features.length; i++) {
+      var currentFeature = trailheadsGeoJSON.features[i];
+      var currentFeatureLatLng = new L.LatLng(currentFeature.geometry.coordinates[1], currentFeature.geometry.coordinates[0]);
+      var newMarker = L.marker(currentFeatureLatLng, ({
+        icon: trailheadIcon1
+      }));
+
+      // adding closure to call trailheadMarkerClick with trailheadID on marker click
+      newMarker.on("click", function(trailheadID) {
+        return function() {
+          trailheadMarkerClick(trailheadID);
+        };
+      }(currentFeature.properties.id));
+
+      var trailhead = {
+        properties: currentFeature.properties,
+        marker: newMarker,
+        trails: [],
+        popupContent: ""
+      };
+      trailheads.push(trailhead);
+    }
+  }
+
+  // on trailhead marker click, this is invoked with the id of the trailhead
+  // not used for anything but logging at the moment
+
+  function trailheadMarkerClick(id) {
+    console.log("trailheadMarkerClick");
+    highlightTrailhead(id, 0);
+  }
+
+  // get the trailData from the API
+
+  function getTrailData(callback) {
+    console.log("getTrailData");
+    var callData = {
+      type: "GET",
+      path: "/trails.json"
+    };
+    makeAPICall(callData, function(response) {
+      populateTrailData(response);
+      if (typeof callback == "function") {
+        callback();
       }
-      // else we have an unused trail segment--list all of the names associated with it
-      else {
+    });
+  }
+
+  // get the trailData from the DB
+
+  function getTrailDataOld(callback) {
+    console.log("getTrailData");
+    var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
+    // Another AJAX call, for the trails
+    makeSQLQuery(trail_list_query, function(response) {
+      populateTrailData(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  function populateTrailData(trailDataGeoJSON) {
+    for (var i = 0; i < trailDataGeoJSON.features.length; i++) {
+      trailData[trailDataGeoJSON.features[i].properties.id] = trailDataGeoJSON.features[i];
+    }
+  }
+
+  function getTrailSegments(callback) {
+    console.log("getTrailSegments");
+    var callData = {
+      type: "GET",
+      path: "/trailsegments.json"
+    };
+    makeAPICall(callData, function(response) {
+      trailSegments = response;
+      allSegmentLayer = makeAllSegmentLayer(response);
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
+  }
+
+  function makeAllSegmentLayer(response) {
+    allSegmentLayer = L.geoJson(trailSegments, {
+      style: function() {
+        return {
+          color: '#CC8464',
+          weight: 3,
+          opacity: 1,
+          clickable: true,
+          // dashArray: "5,5"
+        };
+      },
+      onEachFeature: function(feature, layer) {
+        var popupHTML = "<div class='trail-popup'>";
         if (feature.properties.trail1) {
-          popupHTML = popupHTML + "<br>" + feature.properties.trail1;
+          popupHTML = popupHTML + feature.properties.trail1;
         }
         if (feature.properties.trail2) {
           popupHTML = popupHTML + "<br>" + feature.properties.trail2;
@@ -1110,122 +490,826 @@ function drawMultiTrailLayer(response) {
         if (feature.properties.trail6) {
           popupHTML = popupHTML + "<br>" + feature.properties.trail6;
         }
+        popupHTML = popupHTML + "</div>";
+        layer.bindPopup(popupHTML);
       }
-      popupHTML = popupHTML + "</div>";
-      layer.bindPopup(popupHTML);
-      currentTrailLayers.push(layer);
+    });
+    return allSegmentLayer;
+  }
+
+  // given trailData,
+  // populate trailheads[x].trails with all of the trails in trailData
+  // that match each trailhead's named trails from the trailhead table.
+  // Also add links to the trails within each trailhead popup 
+
+  function addTrailDataToTrailheads(myTrailData) {
+    console.log("addTrailDataToTrailheads");
+    console.log(trailData);
+    for (var j = 0; j < trailheads.length; j++) {
+      var trailhead = trailheads[j];
+      trailhead.trails = [];
+      // for each original trailhead trail name
+      for (var trailNum = 1; trailNum <= 3; trailNum++) {
+        var trailWithNum = "trail" + trailNum;
+        if (trailhead.properties[trailWithNum] === "") {
+          continue;
+        }
+        var trailheadTrailName = trailhead.properties[trailWithNum];
+        // TODO: add a test for the case of duplicate trail names.
+        // Right now this
+        // loop through all of the trailData objects, looking for trail names that match
+        // the trailhead trailname.
+        // this works great, except for things like "Ledges Trail," which get added twice,
+        // one for the CVNP instance and one for the MPSSC instance.
+        // we should test for duplicate names and only use the nearest one.
+        // to do that, we'll need to either query the DB for the trail segment info,
+        // or check distance against the (yet-to-be) pre-loaded trail segment info
+        $.each(myTrailData, function(trailID, trail) {
+          if (trailhead.properties[trailWithNum] == trail.properties.name) {
+            trailhead.trails.push(trailID);
+          }
+        });
+      }
     }
-  }).addTo(map).bringToBack();
-  //zoomToLayer(currentMultiTrailLayer);
-}
+    fixDuplicateTrailNames(trailheads);
+    makeTrailheadPopups(trailheads);
+    mapActiveTrailheads(trailheads);
+    makeTrailDivs(trailheads);
+  }
 
 
-// return the calculated CSS background-color for the class given
-// This may need to be changed since AJW changed it to "border-color" above
+  // this is so very wrong and terrible and makes me want to never write anything again.
+  // alas, it works for now.
+  // for each trailhead, if two or more of the matched trails from addTrailDataToTrailheads() have the same name,
+  // remove any trails that don't match the trailhead source
 
-function getClassBackgroundColor(className) {
-  var $t = $("<div class='" + className + "'>").hide().appendTo("body");
-  var c = $t.css("background-color");
-  $t.remove();
-  return c;
-}
+  function fixDuplicateTrailNames(trailheads) {
+    console.log("fixDuplicateTrailNames");
+    for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
+      var trailhead = trailheads[trailheadIndex];
+      var trailheadTrailNames = {};
+      for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
+        var trailName = trailData[trailhead.trails[trailsIndex]].properties.name;
+        trailheadTrailNames[trailName] = trailheadTrailNames[trailName] || [];
+        var sourceAndTrailID = {
+          source: trailData[trailhead.trails[trailsIndex]].properties.source,
+          trailID: trailData[trailhead.trails[trailsIndex]].properties.id
+        };
+        trailheadTrailNames[trailName].push(sourceAndTrailID);
+      }
+      for (var trailheadTrailName in trailheadTrailNames) {
+        if (trailheadTrailNames.hasOwnProperty(trailheadTrailName)) {
+          if (trailheadTrailNames[trailheadTrailName].length > 1) {
+            // remove the ID from the trailhead trails array if the source doesn't match
+            for (var i = 0; i < trailheadTrailNames[trailheadTrailName].length; i++) {
+              var mySourceAndTrailID = trailheadTrailNames[trailheadTrailName][i];
+              if (mySourceAndTrailID.source != trailhead.properties.source) {
+                var idToRemove = mySourceAndTrailID.trailID;
+                var removeIndex = $.inArray(idToRemove.toString(), trailhead.trails);
+                trailhead.trails.splice(removeIndex, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-// given the index of a trail within a trailhead,
-// highlight that trail on the map, and call zoomToLayer with it
+  // given the trailheads,
+  // make the popup menu for each one, including each trail present
+  // and add it to the trailhead object
 
-function setCurrentTrail(index) {
-  console.log("setCurrentTrail");
-  if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
-    currentHighlightedTrailLayer.setStyle({
-      weight: 2
+  //  This is really only used in the desktop version 
+
+  function makeTrailheadPopups(trailheads) {
+    for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
+      var trailhead = trailheads[trailheadIndex];
+      var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
+      var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html($("<div>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
+      for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
+        var trail = trailData[trailhead.trails[trailsIndex]];
+        var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
+          .attr("data-trailname", trail.properties.name)
+          .attr("data-trailid", trail.properties.id)
+          .attr("data-trailheadname", trailhead.properties.name)
+          .attr("data-trailheadid", trailhead.properties.id)
+          .attr("data-index", trailsIndex);
+        console.log(trail.properties.status);
+        var status = "";
+        if (trail.properties.status == 1) {
+          $popupTrailDiv.append($("<img>").addClass("status").attr({
+            src: "img/icon_alert_yellow.png",
+            title: "alert"
+          }));
+        }
+        if (trail.properties.status == 2) {
+          $popupTrailDiv.append($("<img>").addClass("status").attr({
+            src: "img/icon_alert_yellow.png",
+            title: "alert"
+          }));
+        }
+        $popupTrailDiv.append("<div>" + trail.properties.name + "</div>");
+        $popupTrailDiv.append("<b>")
+        // .append(trail.properties.name)
+        .appendTo($popupTrailheadDiv);
+      }
+      trailhead.popupContent = $popupContentMainDiv.outerHTML();
+    }
+  }
+
+  // given trailheads, add all of the markers to the map in a single Leaflet layer group
+  // except for trailheads with no matched trails
+
+  function mapActiveTrailheads(trailheads) {
+    console.log("mapActiveTrailheads");
+    var currentTrailheadMarkerArray = [];
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].trails.length) {
+        currentTrailheadMarkerArray.push(trailheads[i].marker);
+      } else {
+        // console.log(["trailhead not displayed: ", trailheads[i].properties.name]);
+      }
+    }
+    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
+    map.addLayer(currentTrailheadLayerGroup);
+  }
+
+  // given trailheads, now populated with matching trail names,
+  // fill out the left trail(head) pane,
+  // noting if a particular trailhead has no trails associated with it
+
+  function makeTrailDivs(trailheads) {
+    console.log("makeTrailDivs");
+    $("#trailList").html("");
+    $.each(trailheads, function(index, trailhead) {
+      var trailheadName = trailhead.properties.name;
+      var trailheadID = trailhead.properties.id;
+      var trailheadTrailIDs = trailhead.trails;
+      if (trailheadTrailIDs.length === 0) {
+        return true; // next $.each
+      }
+      var trailheadSource = trailhead.properties.source;
+      var trailheadDistance = metersToMiles(trailhead.properties.distance);
+      var $trailDiv;
+
+      // Making a new div for text / each trail 
+
+      for (var i = 0; i < trailheadTrailIDs.length; i++) {
+
+        var trailID = trailheadTrailIDs[i];
+        var trail = trailData[trailID];
+        var trailName = trailData[trailID].properties.name;
+        var trailLength = trailData[trailID].properties.length;
+        $trailDiv = $("<div>").addClass('trail-box')
+          .attr("data-source", "list")
+          .attr("data-trailid", trailID)
+          .attr("data-trailname", trailName)
+          .attr("data-trail-length", trailLength)
+          .attr("data-trailheadName", trailheadName)
+          .attr("data-trailheadid", trailheadID)
+          .attr("data-index", i)
+          .appendTo("#trailList")
+          .click(populateTrailsForTrailheadDiv)
+          .click(function(trail, trailhead) {
+            return function(e) {
+              showTrailDetails(trail, trailhead);
+            };
+          }(trail, trailhead));
+
+        $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
+
+        // Making a new div for Detail Panel
+
+        $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
+        $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv);
+        $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailDiv);
+        $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
+        $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailDiv);
+
+        var trailInfoObject = {
+          trailID: trailID,
+          trailheadID: trailheadID,
+          index: i
+        };
+        orderedTrails.push(trailInfoObject);
+      }
+
+      // diagnostic div to show trailheads with no trail matches
+      // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
+      if (trailheadTrailIDs.length === 0) {
+        $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
+        $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS (" +
+          [val.properties.trail1, val.properties.trail2, val.properties.trail3].join(", ") + ")</span>").appendTo($trailDiv);
+        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
+      }
+    });
+    console.log(orderedTrails);
+  }
+
+  function metersToMiles(i) {
+    return (i * METERSTOMILESFACTOR).toFixed(1);
+  }
+
+  function showTrailDetails(trail, trailhead) {
+    console.log("showTrailDetails");
+    if ($('.detailPanel').is(':hidden')) {
+      decorateDetailPanel(trail, trailhead);
+      openDetailPanel();
+      currentDetailTrail = trail;
+      currentDetailTrailhead = trailhead;
+    } else {
+      if (currentDetailTrail == trail && currentDetailTrailhead == trailhead) {
+        currentDetailTrail = null;
+        currentDetailTrailhead = null;
+        closeDetailPanel();
+      } else {
+        decorateDetailPanel(trail, trailhead);
+        currentDetailTrail = trail;
+        currentDetailTrailhead = trailhead;
+      }
+    }
+  }
+
+  //  Helper functions for ShowTrailDetails
+
+  function openDetailPanel() {
+    console.log("openDetailPanel");
+    $('.detailPanel').show();
+    $('.accordion').hide();
+    map.invalidateSize();
+  }
+
+  function closeDetailPanel() {
+    console.log("closeDetailPanel");
+    $('.detailPanel').hide();
+    $('.accordion').show();
+    map.invalidateSize();
+  }
+
+  function toggleDetailPanelControls() {
+    console.log("toggleDetailPanelControls");
+    $('.detailPanelControls').toggle();
+  }
+
+  function changeDetailPanel(e) {
+    console.log("changeDetailPanel");
+    var trailheadID = currentDetailTrailhead.properties.id;
+    var trailID = String(currentDetailTrail.properties.id);
+    console.log(trailID);
+    var trailhead;
+    var orderedTrailIndex;
+    for (var i = 0; i < orderedTrails.length; i++) {
+      if (orderedTrails[i]["trailID"] == trailID && orderedTrails[i]["trailheadID"] == trailheadID) {
+        orderedTrailIndex = i;
+      }
+    }
+    console.log(["orderedTrailIndex", orderedTrailIndex]);
+    if ($(e.target).hasClass("controlRight")) {
+      orderedTrailIndex = orderedTrailIndex + 1;
+      console.log(["++orderedTrailIndex", orderedTrailIndex]);
+    }
+    if ($(e.target).hasClass("controlLeft")) {
+      orderedTrailIndex = orderedTrailIndex - 1;
+      console.log(["--orderedTrailIndex", orderedTrailIndex]);
+    }
+    var orderedTrail = orderedTrails[orderedTrailIndex];
+    console.log(orderedTrail);
+    var trailheadID = orderedTrail["trailheadID"];
+    console.log(["trailheadID", trailheadID]);
+    var trailIndex = orderedTrail["index"];
+    console.log(["trailIndex", trailIndex]);
+    for (j = 0; j < trailheads.length; j++) {
+      if (trailheads[j].properties.id == trailheadID) {
+        trailhead = trailheads[j];
+      }
+    }
+    highlightTrailhead(trailheadID, trailIndex);
+    showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
+
+
+
+    // if "right" control clicked, then
+    // then increment the index of the active "trail", defined above as "CurrentDetailTrail" trail in array
+    // This increment is only through the current "trailhead", defined above as CurrentDetailTrailhead.
+    // If the increment reaches the end of the array for the current trailhead, move to the next trailhead in the 
+    // larger array...which is..."trailheads"?
+    // if the increment reaches the end of the larger array, then 
+
+    //  we should create a helper function that calculates / shows the number of trails that have in the current big object
+    //  and shows which position in that object we current are showing information for
+  }
+
+  function decorateDetailPanel(trail, trailhead) {
+    //  Taking cues from the construction of the List Items / Trail Divs above
+    // var $detailPanelBody;
+    // $detailPanelBody = $("<div>").addClass("detailPanelBody");
+    // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
+    // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
+    // $("<div class='detailT")
+
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detailPanel .detailSource').html(trailhead.properties.source);
+    $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
+    $('.detailPanel .detailLength').html(trail.properties.length + " miles");
+    // $('.detailPanel .detailDogs').html(trail.properties.dogs);
+    // $('.detailPanel .detailBikes').html(trail.properties.bikes);
+    $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
+    // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
+    // $('.detailPanel .detailHorses').html(trail.properties.horses);
+    $('.detailPanel .detailDescription').html(trail.properties.description);
+  }
+
+  // event handler for click of a trail name in a trailhead popup
+
+  //  Going to change the function of this trailnameClick function
+  //  But currently, it is not logging trailnameClick.
+  //  Current: init populateTrailsforTrailheadName(e)
+  //  Future: init showTrailDetails
+
+  function trailnameClick(e) {
+    console.log("trailnameClick");
+    populateTrailsForTrailheadTrailName(e);
+  }
+
+  // given jquery
+
+  function parseTrailElementData($element) {
+    console.log($element);
+    var trailheadID = $element.data("trailheadid");
+    var highlightedTrailIndex = $element.data("index") || 0;
+    var trailID = $element.data("trailid");
+    results = {
+      trailheadID: trailheadID,
+      highlightedTrailIndex: highlightedTrailIndex,
+      trailID: trailID
+    };
+    return results;
+  }
+
+  // two event handlers for click of trailDiv and trail in trailhead popup:
+  // get the trailName and trailHead that they clicked on
+  // highlight the trailhead (showing all of the trails there) and highlight the trail path
+
+  function populateTrailsForTrailheadDiv(e) {
+    console.log("populateTrailsForTrailheadDiv");
+    var $myTarget;
+
+    // this makes trailname click do the same thing as general div click
+    // (almost certainly a better solution exists)
+    if (e.target !== this) {
+      $myTarget = $(this);
+    } else {
+      $myTarget = $(e.target);
+    }
+    var parsed = parseTrailElementData($myTarget);
+    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
+  }
+
+  function populateTrailsForTrailheadTrailName(e) {
+    console.log($(e.target).data("trailheadid"));
+    var $myTarget;
+    if ($(e.target).data("trailheadid")) {
+      $myTarget = $(e.target);
+    } else {
+      $myTarget = $(e.target.parentNode);
+    }
+    var parsed = parseTrailElementData($myTarget);
+    console.log(parsed);
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].properties.id == parsed.trailheadID) {
+        trailhead = trailheads[i];
+      }
+    }
+    // decorateDetailPanel(trailData[parsed.trailID], trailhead);
+    highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
+    var trail = trailData[parsed.trailID];
+    showTrailDetails(trail, trailhead);
+  }
+
+  // given a trailheadID and a trail index within that trailhead
+  // display the trailhead marker and popup,
+  // then call highlightTrailheadDivs() and getAllTrailPathsForTrailhead()
+  // with the trailhead record
+
+  var currentTrailheadMarker;
+
+  function highlightTrailhead(trailheadID, highlightedTrailIndex) {
+    console.log("highlightTrailhead");
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].properties.id == trailheadID) {
+        currentTrailhead = trailheads[i];
+      }
+    }
+    if (currentTrailheadMarker) {
+      map.removeLayer(currentTrailheadMarker);
+    }
+    // make a default marker, add it to the map with the trailhead's pre-computed popupContent
+    currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
+    currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent);
+    // highlightTrailheadDivs(currentTrailhead);
+    getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
+    currentTrailheadMarker.openPopup();
+  }
+
+  // given a trailhead, and a trail index within that trailhead
+  // find the matching trailDivs, highlight them, and move them onscreen
+
+  // function highlightTrailheadDivs(trailhead, highlightedTrailIndex) {
+  //   console.log("highlightTrailheadDivs");
+  //   // deselect all of the trailDivs
+  //   $(".trail-box").removeClass("trail1").removeClass("trail2").removeClass("trail3");
+  //   $(".trailIndicatorLight").hide();
+  //   for (var i = 0; i < currentTrailhead.trails.length; i++) {
+  //     var trailID = currentTrailhead.trails[i];
+  //     var trailName = trailData[trailID].properties.name;
+  //     var trailheadName = currentTrailhead.properties.name;
+  //     var trailheadID = currentTrailhead.properties.id;
+  //     // add class for highlighting
+  //     var $trailbox = $('.trail-box[data-trailid="' + trailID + '"][data-trailheadid="' + trailheadID + '"]');
+  //     var color = getClassBackgroundColor("trail" + (i + 1));
+  //     $trailbox.find($(".trailIndicatorLight")).css("border-color", color).show();
+  //     // if this is the first trail for the trailhead, animate it to the top of the trailList
+  //     // TODO: This should probably not animate until we activate the indicator lights
+  //     if (i === 0) {
+  //       $('#trailList').animate({
+  //         scrollTop: $('.trail-box[data-trailheadid="' + trailheadID + '"][data-index="0"]').offset().top - $("#trailList").offset().top + $("#trailList").scrollTop()
+  //       }, 500);
+  //     }
+  //   }
+  // }
+
+  function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailhead");
+    if (trailSegments.type == "FeatureCollection" && USE_LOCAL) {
+      getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex);
+    } else {
+      getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex);
+    }
+  }
+
+  // given a trailhead and a trail index within that trailhead
+  // get the paths for any associated trails,
+  // then call drawMultiTrailLayer() and setCurrentTrail()
+
+  function getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailheadRemote");
+    var responses = [];
+    var queryTaskArray = [];
+    // got trailhead.trails, now get the segment collection for all of them
+    // get segment collection for each
+    for (var i = 0; i < trailhead.trails.length; i++) {
+      var trailID = trailhead.trails[i];
+      var trailName = trailData[trailID].properties.name;
+      var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
+        "(segments.trail1 = '" + trailName + "' or " +
+        "segments.trail2 = '" + trailName + "' or " +
+        "segments.trail3 = '" + trailName + "' or " +
+        "segments.trail4 = '" + trailName + "' or " +
+        "segments.trail5 = '" + trailName + "' or " +
+        "segments.trail6 = '" + trailName + "' or " +
+        "segments.trail1 = '" + trailName + " Trail' or " +
+        "segments.trail2 = '" + trailName + " Trail' or " +
+        "segments.trail3 = '" + trailName + " Trail' or " +
+        "segments.trail4 = '" + trailName + " Trail' or " +
+        "segments.trail5 = '" + trailName + " Trail' or " +
+        "segments.trail6 = '" + trailName + " Trail') and " +
+        "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
+      var queryTask = function(trail_query, index) {
+        return function(callback) {
+          // makeSQLQuery(trail_query, function(response) {
+          //   responses[index] = response;
+          //   callback(null, trailID);
+          // });
+          var callData = {
+            type: "GET",
+            path: "/trailsegments.json"
+          };
+          makeAPICall(callData, function(response) {
+            responses[index] = response;
+            callback(null, trailID);
+          });
+        };
+      }(trail_query, i);
+      queryTaskArray.push(queryTask);
+    }
+    async.parallel(queryTaskArray, function(err, results) {
+      responses = mergeResponses(responses);
+      drawMultiTrailLayer(responses);
+      setCurrentTrail(highlightedTrailIndex);
     });
   }
-  currentHighlightedTrailLayer = currentTrailLayers[index];
-  currentHighlightedTrailLayer.setStyle({
-    weight: 10
-  });
-  zoomToLayer(currentHighlightedTrailLayer);
-  map.invalidateSize();
-}
 
-// given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
-// in and MIN_ZOOM out (commented out for now)
+  // LOCAL EDITION:
+  // given a trailhead and a trail index within that trailhead
+  // get the paths for any associated trails,
+  // then call drawMultiTrailLayer() and setCurrentTrail()
+  // (it's a little convoluted because it's trying to return identical GeoJSON to what
+  // CartoDB would return)
 
-function zoomToLayer(layer) {
-  console.log("zoomToLayer");
-  // figure out what zoom is required to display the entire trail layer
-  var curZoom = map.getBoundsZoom(layer.getBounds());
-  // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
-  var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
-  newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
-  // set the view to that zoom, and the center of the trail's bounding box 
-  map.setView(layer.getBounds().getCenter(), newZoom, {
-    pan: {
-      animate: true,
-      duration: 4.0,
-      easeLinearity: 0.05
-    },
-    zoom: {
-      animate: true
+  function getAllTrailPathsForTrailheadLocal(trailhead, highlightedTrailIndex) {
+    console.log("getAllTrailPathsForTrailheadLocal");
+    var responses = [];
+    var trailFeatureArray = [];
+    // got trailhead.trails, now get the segment collection for all of them
+    // get segment collection for each
+    for (var i = 0; i < trailhead.trails.length; i++) {
+      var trailID = trailhead.trails[i];
+      var trail = trailData[trailID];
+      var trailSource = trail.properties.source;
+      var trailName = trail.properties.name;
+      var trailFeatureCollection = {
+        type: "FeatureCollection",
+        features: [{
+          geometry: {
+            geometries: [],
+            type: "GeometryCollection"
+          },
+          type: "Feature"
+        }]
+      };
+      var valid = 0;
+      for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
+        var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+        if ((segment.properties.trail1 == trailName ||
+            segment.properties.trail1 + " Trail" == trailName ||
+            segment.properties.trail2 == trailName ||
+            segment.properties.trail2 + " Trail" == trailName ||
+            segment.properties.trail3 == trailName ||
+            segment.properties.trail3 + " Trail" == trailName ||
+            segment.properties.trail4 == trailName ||
+            segment.properties.trail4 + " Trail" == trailName ||
+            segment.properties.trail5 == trailName ||
+            segment.properties.trail5 + " Trail" == trailName ||
+            segment.properties.trail6 == trailName ||
+            segment.properties.trail6 + " Trail" == trailName) &&
+          (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
+          // 1) {
+          trailFeatureCollection.features[0].properties = {
+            trailname: trailName
+          };
+          valid = 1;
+          // console.log("match");
+          trailFeatureCollection.features[0].geometry.geometries.push(segment.geometry);
+        } else {
+          // console.log("invalid!");
+        }
+      }
+      if (valid) {
+        trailFeatureArray.push(trailFeatureCollection);
+      }
     }
-  });
-}
-
-function makeAPICall(callData, doneCallback) {
-  console.log('makeAPICall');
-  if (!($.isEmptyObject(callData.data))) {
-    callData.data = JSON.stringify(callData.data);
+    console.log(trailFeatureArray);
+    responses = mergeResponses(trailFeatureArray);
+    drawMultiTrailLayer(responses);
+    setCurrentTrail(highlightedTrailIndex);
   }
-  var url = API_HOST + callData.path;
-  var request = $.ajax({
-    type: callData.type,
-    url: url,
-    dataType: "json",
-    contentType: "application/json; charset=utf-8",
-    //beforeSend: function(xhr) {
-    //  xhr.setRequestHeader("Accept", "application/json")
-    //},
-    data: callData.data
-  }).fail(function(jqXHR, textStatus, errorThrown) {
-    $("#results").text("error: " + JSON.stringify(errorThrown));
-  }).done(function(response, textStatus, jqXHR) {
-    if (typeof doneCallback === 'function') {
-      doneCallback.call(this, response);
+
+
+  // merge multiple geoJSON trail features into one geoJSON FeatureCollection
+
+  function mergeResponses(responses) {
+
+    console.log("mergeResponses");
+    // console.log(responses);
+
+    // var combined = { type: "FeatureCollection", features: [] };
+    // for (var i = 0; i < responses.length; i++) {
+    //   console.log("xxxx");
+    //   console.log(responses[i]);
+    //   // responses[i].properties.order = i;
+    //   combined.features.push(responses[i]);
+    // }
+
+
+    var combined = $.extend(true, {}, responses[0]);
+    combined.features[0].properties.order = 0;
+    for (var i = 1; i < responses.length; i++) {
+      combined.features = combined.features.concat(responses[i].features);
+      combined.features[i].properties.order = i;
     }
-    $("#results").text(JSON.stringify(response));
-  });
-}
 
-// given a SQL query, and done/error callbacks,
-// make the query
+    // console.log("----");
+    // console.log(combined);
+    return combined;
+  }
 
-function makeSQLQuery(query, done, error) {
-  console.log("makeSQLQuery");
-  var callData = {
-    q: query,
-    // api_key: api_key,
-    format: "geoJSON"
+  // get all trail segment paths
+  // (for diagnostics)
+
+  function getAllTrailPaths(callback) {
+    var trail_query = "select the_geom, name1, name2, name3 from " + TRAILSEGMENTS_TABLE + " where 1=1";
+    makeSQLQuery(trail_query, callback);
+  }
+
+  // given a GeoJSON collection of segments paths, 
+  // filter out the ones in known trails,
+  // then call drawMultiTrailLayer to draw 'em
+  // (for diagnostics)
+
+  function filterKnownTrails(response) {
+    console.log(response);
+    var filteredResponse = {
+      type: "FeatureCollection",
+      features: []
+    };
+    // spin through response, removing any segments that aren't part of a known trail
+    filteredResponse.features = response.features.filter(function(element, index, array) {
+      // for (i = 0; i < trailData.length; i++) {
+      if (element.properties.trail1 in trailData ||
+        element.properties.trail2 in trailData ||
+        element.properties.trail3 in trailData) {
+        return false;
+      }
+      // }
+      //  should there be an else here?
+      return true;
+    });
+    console.log(filteredResponse);
+    drawMultiTrailLayer(filteredResponse);
+  }
+
+  // given a geoJSON set of linestring features,
+  // draw them all on the map (in a single layer we can remove later)
+
+  function drawMultiTrailLayer(response) {
+    console.log("drawMultiTrailLayer");
+    if (currentMultiTrailLayer) {
+      map.removeLayer(currentMultiTrailLayer);
+      currentTrailLayers = [];
+    }
+    if (response.features[0].geometry === null) {
+      alert("No trail segment data found.");
+    }
+    currentMultiTrailLayer = L.geoJson(response, {
+      style: function(feature) {
+        var color;
+        if (feature.properties.order === 0 || !feature.properties.order) {
+          color = getClassBackgroundColor("trail1");
+          return {
+            weight: 3,
+            color: color,
+            opacity: 0.75
+          };
+        } else if (feature.properties.order === 1) {
+          color = getClassBackgroundColor("trail2");
+          return {
+            weight: 3,
+            color: color,
+            opacity: 0.75
+          };
+        } else if (feature.properties.order === 2) {
+          color = getClassBackgroundColor("trail3");
+          return {
+            weight: 3,
+            color: color,
+            opacity: 0.75
+          };
+        }
+      },
+
+      onEachFeature: function(feature, layer) {
+        var popupHTML = "<div class='trail-popup'>";
+        // if we have a named trail, show its name
+        if (feature.properties.trailname) {
+          popupHTML = popupHTML + feature.properties.trailname;
+        }
+        // else we have an unused trail segment--list all of the names associated with it
+        else {
+          if (feature.properties.trail1) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail1;
+          }
+          if (feature.properties.trail2) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail2;
+          }
+          if (feature.properties.trail3) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail3;
+          }
+          if (feature.properties.trail4) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail4;
+          }
+          if (feature.properties.trail5) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail5;
+          }
+          if (feature.properties.trail6) {
+            popupHTML = popupHTML + "<br>" + feature.properties.trail6;
+          }
+        }
+        popupHTML = popupHTML + "</div>";
+        layer.bindPopup(popupHTML);
+        currentTrailLayers.push(layer);
+      }
+    }).addTo(map).bringToBack();
+    //zoomToLayer(currentMultiTrailLayer);
+  }
+
+
+  // return the calculated CSS background-color for the class given
+  // This may need to be changed since AJW changed it to "border-color" above
+
+  function getClassBackgroundColor(className) {
+    var $t = $("<div class='" + className + "'>").hide().appendTo("body");
+    var c = $t.css("background-color");
+    $t.remove();
+    return c;
+  }
+
+  // given the index of a trail within a trailhead,
+  // highlight that trail on the map, and call zoomToLayer with it
+
+  function setCurrentTrail(index) {
+    console.log("setCurrentTrail");
+    if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
+      currentHighlightedTrailLayer.setStyle({
+        weight: 2
+      });
+    }
+    currentHighlightedTrailLayer = currentTrailLayers[index];
+    currentHighlightedTrailLayer.setStyle({
+      weight: 10
+    });
+    zoomToLayer(currentHighlightedTrailLayer);
+    map.invalidateSize();
+  }
+
+  // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
+  // in and MIN_ZOOM out (commented out for now)
+
+  function zoomToLayer(layer) {
+    console.log("zoomToLayer");
+    // figure out what zoom is required to display the entire trail layer
+    var curZoom = map.getBoundsZoom(layer.getBounds());
+    // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
+    var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
+    newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
+    // set the view to that zoom, and the center of the trail's bounding box 
+    map.setView(layer.getBounds().getCenter(), newZoom, {
+      pan: {
+        animate: true,
+        duration: 4.0,
+        easeLinearity: 0.05
+      },
+      zoom: {
+        animate: true
+      }
+    });
+  }
+
+  function makeAPICall(callData, doneCallback) {
+    console.log('makeAPICall');
+    if (!($.isEmptyObject(callData.data))) {
+      callData.data = JSON.stringify(callData.data);
+    }
+    var url = API_HOST + callData.path;
+    var request = $.ajax({
+      type: callData.type,
+      url: url,
+      dataType: "json",
+      contentType: "application/json; charset=utf-8",
+      //beforeSend: function(xhr) {
+      //  xhr.setRequestHeader("Accept", "application/json")
+      //},
+      data: callData.data
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      $("#results").text("error: " + JSON.stringify(errorThrown));
+    }).done(function(response, textStatus, jqXHR) {
+      if (typeof doneCallback === 'function') {
+        doneCallback.call(this, response);
+      }
+      $("#results").text(JSON.stringify(response));
+    });
+  }
+
+  // given a SQL query, and done/error callbacks,
+  // make the query
+
+  function makeSQLQuery(query, done, error) {
+    console.log("makeSQLQuery");
+    var callData = {
+      q: query,
+      // api_key: api_key,
+      format: "geoJSON"
+    };
+    var request = $.ajax({
+      dataType: "json",
+      url: endpoint,
+      data: callData
+    }).done(function(response, textStatus, errorThrown) {
+      done(response);
+    }).error(function(response, textStatus, errorThrown) {
+      if (typeof(error) === "function") {
+        error(response);
+      } else {
+        console.log("ERROR:");
+        console.log(query);
+        console.log(errorThrown);
+      }
+    });
+  }
+
+  // get the outerHTML for a jQuery element
+
+  jQuery.fn.outerHTML = function(s) {
+    return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
-  var request = $.ajax({
-    dataType: "json",
-    url: endpoint,
-    data: callData
-  }).done(function(response, textStatus, errorThrown) {
-    done(response);
-  }).error(function(response, textStatus, errorThrown) {
-    if (typeof(error) === "function") {
-      error(response);
-    } else {
-      console.log("ERROR:");
-      console.log(query);
-      console.log(errorThrown);
-    }
-  });
-}
-
-// get the outerHTML for a jQuery element
-
-jQuery.fn.outerHTML = function(s) {
-  return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
-};
 }
