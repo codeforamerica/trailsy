@@ -72,9 +72,11 @@ function startup() {
   var currentTrailLayers = [];
   var currentHighlightedTrailLayer = {};
   var currentLocation = {};
+  var currentTrailheadLayerGroup;
   var currentFilters = {
     lengthFilter: [],
-    activityFilter: []
+    activityFilter: [],
+    searchFilter: []
   };
   var orderedTrails = [];
   var currentDetailTrail = null;
@@ -123,6 +125,17 @@ function startup() {
   });
   $(document).on('change', '.filter', filterChangeHandler);
 
+  //  Search UI events
+  $(".search-key").keyup(function(e) {
+    // if (e.which == 13) {
+    //   console.log($('.search-key').val());
+      processSearch(e);
+    // }
+  });
+
+  $(".search-submit").click(processSearch);
+
+  //  Detail Panel Navigation UI event
   $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -201,6 +214,9 @@ function startup() {
       }
       if (currentFilters.lengthFilter) {
         var distInclude = false;
+        if (currentFilters.lengthFilter.length === 0) {
+          distInclude = true;
+        }
         for (var j = 0; j < currentFilters.lengthFilter.length; j++) {
           var distance = currentFilters.lengthFilter[j];
           var trailDist = trail.properties["length"];
@@ -216,17 +232,48 @@ function startup() {
           delete filteredTrailData[trail_id];
         }
       }
+      if (currentFilters.searchFilter) {
+        var index = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+        if (index == -1) {
+          delete filteredTrailData[trail_id];
+        }
+      }
     });
     addTrailDataToTrailheads(filteredTrailData);
   }
 
   function filterChangeHandler(e) {
     var $currentTarget = $(e.currentTarget);
-    console.log($currentTarget);
     var filterType = $currentTarget.attr("data-filter");
     var currentUIFilterState = $currentTarget.val();
     console.log(currentUIFilterState);
     updateFilterObject(filterType, currentUIFilterState);
+  }
+
+  function processSearch(e) {
+    var $currentTarget = $(e.currentTarget);
+    var filterType = "searchFilter";
+    var currentUIFilterState = ($currentTarget.val());
+    console.log($currentTarget);
+    console.log(currentUIFilterState);
+    if (($currentTarget).hasClass('search-key')) {
+      console.log("search key");
+      updateFilterObject(filterType, currentUIFilterState);
+    }
+    if (($currentTarget).hasClass('search-submit')) {
+      if ($currentTarget.val() !== "") {
+        console.log("search submit");
+        updateFilterObject(filterType, currentUIFilterState);
+      }
+    }
+    // if the event target has a class search-key
+    // see if it is keycode 13
+    //  if true, call updatefilterobject
+    //  with filtertype=searchFilter
+    //  contents/value of searchbox which we get via jquery
+    //  if the event target has a class search-button
+    //  check to see if the value does not equal empty string
+    //  if it does not equal empty string, call updatefilterobject with filtertype=search filter & contents of box.
   }
 
   function updateFilterObject(filterType, currentUIFilterState) {
@@ -265,6 +312,11 @@ function startup() {
       if (matched === 0) {
         currentFilters.lengthFilter.push(currentUIFilterState);
       }
+    }
+
+    if (filterType == "searchFilter") {
+      console.log("searchFilter");
+      currentFilters.searchFilter = currentUIFilterState;
     }
     // currentFilters[filterType] = currentUIFilterState;
     console.log(currentFilters);
@@ -630,7 +682,12 @@ function startup() {
         // console.log(["trailhead not displayed: ", trailheads[i].properties.name]);
       }
     }
-    var currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
+    if (currentTrailheadLayerGroup) {
+      console.log("remove");
+      map.removeLayer(currentTrailheadLayerGroup);
+    }
+    currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
+
     map.addLayer(currentTrailheadLayerGroup);
   }
 
@@ -640,6 +697,7 @@ function startup() {
 
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
+    orderedTrails = [];
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;

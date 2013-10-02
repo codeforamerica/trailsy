@@ -66,13 +66,10 @@
               <li><h4 id="trigger1" class="panel-title active" aria-hidden="true"> </h4>
                 <ul class="panel content list-reset" aria-expanded="false">
                   <div class="searchbar">
-                    <form action="#" method="post" class="f">
-                      <label class="is-vishidden">Search the site</label>
-                      <input type="search" placeholder="Search"/>
-                      <input type="submit" class="btn search-submit">
-<!--                         <img src="img/icon_search.png" class="search-icon"/> -->
-                      </input>
-                    </form>
+<!--                     <label class="is-vishidden">Search the site</label> -->
+                    <input data-filter="searchFilter" placeholder="Search" class="search-key">
+                      <button data-filter="searchFilter" class="btn search-submit"></button>
+                    </input>
                   </div>
                   <div class="trailLength-title">
                     <h2>Length (in miles)</h2>

@@ -36,24 +36,31 @@
 /* alert icon*/
 /* alert */
 /* Deprecated <REMOVE> */
-/* New Colors */
-/*@color-very-light-blue: #D9F0FC;
-@color-light-blue: #96DAF8;
-@color-medium-blue: 
-@color-dark-blue:
-
-@color-light-green:
-@color-medium-green:
-@color-dark-green:
-
-@color-light-brown:
-@color-medium-brown:
-@color-dark-brown:
-
-@color-light-gray:
-@color-medium-gray:
-@color-black:
-@color-white:*/
+/* Blues / Buttons */
+/*===============================*/
+/* default */
+/* pressed/hover */
+/* pressed/hover */
+/* active map markers */
+/* Green / Text Emphasis & Icons */
+/*===============================*/
+/* "unused yet" */
+/* pressed / hover */
+/* headers / icons / announcements */
+/* Greens for Parks */
+/*===============================*/
+/* hover */
+/* park area */
+/* park name text */
+/* Browns / Trail Lines */
+/*===============================*/
+/* Normal Trail Lines */
+/* Hover on Normal Trail Line */
+/* Hover on Active Trail*/
+/* Header / Active Trail */
+/* Text and Trail Lines / Grays */
+/*===============================*/
+/* Yellows/Reds For Alerts */
 /* Typography */
 @font-face {
   font-family: 'mission_gothicbold';
@@ -104,7 +111,7 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner {
     position: relative;
-    background-color: #5e4534;
+    background-color: #523d32;
     border: none;
     box-shadow: none;
     text-align: justify;
@@ -117,7 +124,7 @@ At some point, update mediaqueries to be in EMS
     padding: 8px 4px 8px;
     position: relative;
     width: 25px;
-    background: #5e4534;
+    background: #523d32;
     /* The white stripes in the hamburger button */
   
   }
@@ -139,7 +146,7 @@ At some point, update mediaqueries to be in EMS
     text-decoration: none;
     display: inline-block;
     font-size: 8px;
-    color: #76bcc4;
+    color: #d9f0fc;
   }
   @sans Serif-light;
 }
@@ -158,7 +165,7 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner {
     position: relative;
-    background-color: #5e4534;
+    background-color: #523d32;
     border: none;
     box-shadow: none;
     text-align: justify;
@@ -193,7 +200,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
-    color: #76bcc4;
+    color: #d9f0fc;
     text-decoration: none;
     cursor: default;
   }
@@ -227,34 +234,36 @@ At some point, update mediaqueries to be in EMS
   .searchbar {
     background-color: #ffffff;
     line-height: 1;
+    padding: 0 1em 0 1em;
   }
-  .searchbar form {
-    padding-left: 1em;
-    padding-top: 1em;
-    padding-right: 3em;
-  }
-  .searchbar input {
+  .searchbar .search-key {
     display: block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    width: 100%;
+    height: 2em;
     border: 1px solid;
     border-color: #efb589;
-  }
-  .searchbar input[type="search"] {
-    width: 100%;
-    padding-left: 1em;
+    padding-left: 5%;
     padding-right: 0;
     padding-top: .5em;
     padding-bottom: .5em;
     position: relative;
     top: 0;
+    line-height: 1.5em;
   }
-  .searchbar input[type="search"]:focus {
+  .searchbar .search-key:focus {
     outline: none;
   }
-  .searchbar input[type="submit"] {
+  .searchbar .search-submit {
+    display: inline-block;
     position: absolute;
+    border: none;
+    height: 2em;
+    top: 4em;
     right: 1em;
-    top: 1em;
-    bottom: 0em;
     z-index: 1;
     width: 2.5em;
     padding: 0;
@@ -262,22 +271,18 @@ At some point, update mediaqueries to be in EMS
     background: url(img/icon_search.png);
     background-color: #efb589;
   }
-  .searchbar input[type="submit"]:hover {
+  .searchbar .search-submit:hover {
     background-color: #c45f37;
   }
 }
-@media only screen and (max-width: 529px) {
-  
+/*.f {
+	@media @mobile {}
+	@media @desktop {
+		position: relative;
+		.sansSerif-light();
+	}
 }
-@media only screen and (min-width: 950px) {
-  .f {
-    position: relative;
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-  }
-}
+*/
 @media only screen and (max-width: 529px) {
   
 }
@@ -332,7 +337,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     width: 100%;
     text-align: right;
   }
@@ -432,14 +437,14 @@ At some point, update mediaqueries to be in EMS
   height: 1em;
   width: 100%;
   background-color: #ffffff;
+  padding: 0 0 0 1em;
 }
 .trailLength-title h2 {
   font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
   font-weight: 100;
   font-size: 16px;
   line-height: 20px;
-  color: #76bcc4;
-  padding-left: 1em;
+  color: #d9f0fc;
 }
 .trailUse-title {
   height: 2em;
@@ -451,7 +456,7 @@ At some point, update mediaqueries to be in EMS
   font-weight: 100;
   font-size: 16px;
   line-height: 20px;
-  color: #76bcc4;
+  color: #d9f0fc;
   padding-left: 1em;
   padding-bottom: 1em;
 }
@@ -466,7 +471,7 @@ At some point, update mediaqueries to be in EMS
     height: 2em;
     width: 100%;
     background: #ffffff;
-    padding: 0em 1em 0em 1em;
+    padding: 0 1em 0 1em;
     margin: .25em 0 1em 0;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
@@ -644,7 +649,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     position: absolute;
     top: 0;
-    background-color: #5e4534;
+    background-color: #523d32;
   }
   .trailList-title p {
     display: inline-block;
@@ -678,7 +683,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
     border-top-style: dotted;
     border-width: 1px;
-    border-color: #bcbec0;
+    border-color: #e3e3e1;
     cursor: pointer;
   }
   .trail-box:hover {
@@ -693,7 +698,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #61a7aa;
+    color: #00adef;
     top: 10px;
     right: 10px;
   }
@@ -771,7 +776,7 @@ At some point, update mediaqueries to be in EMS
     background: #ffffff;
     border-style: dotted;
     border-width: 1px;
-    border-color: #bcbec0;
+    border-color: #e3e3e1;
   }
 }
 /* Map Elements
@@ -865,7 +870,7 @@ At some point, update mediaqueries to be in EMS
   font-weight: 100;
   font-size: 16px;
   line-height: 20px;
-  color: #bcbec0;
+  color: #e3e3e1;
   text-decoration: none;
   padding: .25em 0em .25em .5em;
 }
@@ -1136,14 +1141,14 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #76bcc4;
+    color: #d9f0fc;
   }
   .detailPanel .detailPanelBody .detailTopRow#left .detailLengthHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailTopRow#right {
@@ -1157,7 +1162,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailTopRow#right .icon {
@@ -1185,7 +1190,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
@@ -1207,7 +1212,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadDistance {
@@ -1215,7 +1220,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #76bcc4;
+    color: #d9f0fc;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo {
     width: 50%;
@@ -1318,7 +1323,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 3em;
     height: 2em;
-    background-color: #bcbec0;
+    background-color: #e3e3e1;
     float: right;
     margin: 0em 0em 0em .5em;
   }
@@ -1328,7 +1333,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     width: 100%;
     padding: 0em .5em 0em 0em;
-    border-top: 1px solid #bcbec0;
+    border-top: 1px solid #e3e3e1;
     margin-top: .25em;
   }
   .detailPanel .detailPanelBody .detailFooter span {
@@ -1336,7 +1341,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bcbec0;
+    color: #e3e3e1;
     position: absolute;
     left: 7em;
     top: .5em;
