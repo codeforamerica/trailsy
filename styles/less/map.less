@@ -47,14 +47,18 @@
 							width: auto;
 							margin: 0;
 							display: inline-block;
-							a {
-								.sansSerif-light;
-								color: @color-mid-gray;
-								text-decoration: none;
-							}
+							.sansSerif-light;
+							color: @color-mid-gray;
+							text-decoration: none;
 						}
 						&:hover {
-							background-color: @color-dark-orange;
+							background-color: @color-dark-blue;
+						}
+						&:hover div {
+								color: @color-white;
+						}
+						&:hover b {
+							border-left: .4em solid @color-white;
 						}
 						b {
 							position: absolute;
