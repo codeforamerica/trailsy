@@ -718,6 +718,7 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
+        //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
           .attr("data-trailid", trailID)
@@ -735,14 +736,20 @@ function startup() {
           }(trail, trailhead));
 
         $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
+        $trailInfo = $("<div>").addClass("trailInfo").appendTo($trailDiv);
+        $trailheadInfo = $("<div>").addClass("trailheadInfo").appendTo($trailDiv);
 
         // Making a new div for Detail Panel
-
-        $("<div class='trail' >" + trailName + "</div>").appendTo($trailDiv);
-        $("<div class='trailheadName' >" + trailheadName + "</div>").appendTo($trailDiv);
-        $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailDiv);
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
-        $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailDiv);
+
+        $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
+        $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailInfo);
+        $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
+        //  Here we generate icons for each activity filter that is true..?
+
+        $("<img class='trailheadIcon' src='img/icon_trailhead_1.png'/>" ).appendTo($trailheadInfo);
+        $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
+        $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
 
         var trailInfoObject = {
           trailID: trailID,
@@ -867,6 +874,10 @@ function startup() {
 
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    if (trail.properties.medium_photo_url) {
+      console.log("fffffound!");
+      $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
+    }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
     $('.detailPanel .detailLength').html(trail.properties.length + " miles");
