@@ -1,0 +1,1941 @@
+/********************************/
+/*			Imports				*/
+/********************************/
+/*			Less
+*********************************/
+/*			Full Document		*/
+/*@import "crossbrowser.less";*/
+/*@import "less/mediaqueries.less";*/
+/*			Tools				*/
+/*========*/
+/* Colors */
+/*========*/
+/* Oranges*/
+/* normal states */
+/* pressed, hover states */
+/* active states, headers */
+/* Blues / Buttons */
+/*===============================*/
+/* default */
+/* pressed/hover */
+/* pressed/hover */
+/*@color-mid-dark-blue: #00C2EF;*/
+/* active map markers */
+/* Green / Text Emphasis & Icons */
+/*===============================*/
+/* "unused yet" */
+/* pressed / hover */
+/* Normal Trail Lines */
+/* headers / icons / announcements */
+/* Greens for Parks */
+/*===============================*/
+/* hover */
+/* park area */
+/* park name text */
+/* Browns / Trail Lines */
+/*===============================*/
+/* Normal Trail Lines */
+/* Hover on Normal Trail Line */
+/* Hover on Active Trail*/
+/* Header / Active Trail */
+/* Text and Trail Lines / Grays */
+/*===============================*/
+/**/
+/* Most Text */
+/* Yellows/Reds For Alerts */
+/* Typography */
+@font-face {
+  font-family: 'mission_gothicbold';
+  src: url('fonts/missiongothic/mission_gothic_bold-webfont.eot');
+  src: url('fonts/missiongothic/mission_gothic_bold-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/missiongothic/mission_gothic_bold-webfont.woff') format('woff'), url('fonts/missiongothic/mission_gothic_bold-webfont.ttf') format('truetype'), url('fonts/missiongothic/mission_gothic_bold-webfont.svg#/mission_gothicbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'mission_gothiclight';
+  src: url('fonts/missiongothic/mission_gothic_light-webfont.eot');
+  src: url('fonts/missiongothic/mission_gothic_light-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/missiongothic/mission_gothic_light-webfont.woff') format('woff'), url('fonts/missiongothic/mission_gothic_light-webfont.ttf') format('truetype'), url('fonts/missiongothic/mission_gothic_light-webfont.svg#/mission_gothiclight') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: '/mission_gothicregular';
+  src: local('fonts/missiongothic/mission_gothic_regular-webfont.eot');
+  src: url('fonts/missiongothic/mission_gothic_regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/missiongothic/mission_gothic_regular-webfont.woff') format('woff'), url('fonts/missiongothic/mission_gothic_regular-webfont.ttf') format('truetype'), url('fonts/missiongothic/mission_gothic_regular-webfont.svg#/mission_gothicregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/*@desktop-xl:  ~"only screen and (min-width: 1129px)";*/
+/* Note the 529px breakpoint. Most mobile sites are more like 240 wide.
+Need to make sure everything is responsive within that breakpoint. 
+
+At some point, update mediaqueries to be in EMS
+33.125 EMS = 530 divided by 16px (default font size *
+59.375 EMS = 950 divided by 16px
+70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
+/*			Modules				*/
+/* Look into justification for overriding styles*/
+/* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
+/* Variables used: color, typography */
+@media only screen and (max-width: 529px) {
+  .title-row {
+    width: 100%;
+    height: auto;
+    top: 0;
+    margin: 0;
+  }
+  .title-row header {
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    z-index: 2;
+  }
+  .title-row header .navbar-inner {
+    position: relative;
+    background-color: #523d32;
+    border: none;
+    box-shadow: none;
+    text-align: justify;
+    padding: 1em 0em 1em 1em;
+  }
+  .title-row header .navbar-inner .hamburger {
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    padding: 8px 4px 8px;
+    position: relative;
+    width: 25px;
+    background: #523d32;
+    /* The white stripes in the hamburger button */
+  
+  }
+  .title-row header .navbar-inner .hamburger div {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 2px 2px 2px 2px;
+    height: 2px;
+    margin-top: 3px;
+    width: 90%;
+  }
+  .title-row header .navbar-inner .brand {
+    display: inline-block;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  @sans Serif-bold;
+  .title-row header .navbar-inner .subBrand {
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+    color: #d9f0fc;
+  }
+  @sans Serif-light;
+}
+@media only screen and (min-width: 950px) {
+  .title-row {
+    position: relative;
+    width: 100%;
+    top: 0;
+    margin: 0;
+  }
+  .title-row header {
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .title-row header .navbar-inner {
+    position: relative;
+    background-color: #523d32;
+    border: none;
+    box-shadow: none;
+    text-align: justify;
+    padding: 1em .25em .25em 1em;
+  }
+  .title-row header .navbar-inner:after {
+    content: '';
+    display: inline-block;
+  }
+  .title-row header .navbar-inner .brand {
+    font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 24px;
+    line-height: 1em;
+    text-decoration: none;
+    display: inline-block;
+    color: #ffffff;
+  }
+  .title-row header .navbar-inner .brand:hover {
+    text-decoration: none;
+  }
+  .title-row header .navbar-inner .brand:focus {
+    text-decoration: none;
+  }
+  .title-row header .navbar-inner .subBrand {
+    margin-left: .5em;
+    display: inline-block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    text-decoration: none;
+    cursor: default;
+  }
+  .title-row header .navbar-inner .subBrand:hover {
+    text-decoration: none;
+  }
+  .title-row header .navbar-inner .about {
+    position: relative;
+    margin-left: 11em;
+    display: inline-block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    text-decoration: none;
+    color: #d9f0fc;
+  }
+  .title-row header .navbar-inner .about:hover {
+    color: #96daf8;
+  }
+  .title-row header .navbar-inner .hamburger {
+    display: none;
+  }
+}
+/* Filter Module */
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .is-vishidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .searchbar {
+    background-color: #ffffff;
+    line-height: 1;
+    padding: 0 1em 0 1em;
+  }
+  .searchbar .search-key {
+    display: block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-color: #bbbdbf;
+    width: 100%;
+    height: 2em;
+    border: 1px solid;
+    border-color: #bbbdbf;
+    padding-left: .25em;
+    padding-right: 0;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    position: relative;
+    top: 0;
+    line-height: 1.5em;
+    border-collapse: separate;
+    border-spacing: 2px;
+  }
+  .searchbar .search-key:focus {
+    outline: none;
+  }
+  .searchbar .search-submit {
+    display: none;
+    /*			display: inline-block;*/
+  
+    position: absolute;
+    border: none;
+    height: 2em;
+    top: 4em;
+    right: 1em;
+    z-index: 1;
+    width: 2.5em;
+    padding: 0;
+    cursor: pointer;
+    background-color: #d9f0fc;
+  }
+  .searchbar .search-submit:hover {
+    background-color: #d9f0fc;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .accordion {
+    /*		display: none;*/
+  
+    background-color: transparent;
+  }
+  .accordion .panel-title {
+    margin: 0;
+    padding: 0em 1em .0em 1em;
+    position: relative;
+    display: inline-block;
+    /* Let's abstract this transition so we can keep it consistent across animations*/
+  
+    -webkit-transition: 0.1s all ease-in-out;
+    -moz-transition: 0.1s all ease-in-out;
+    -o-transition: 0.1s all ease-in-out;
+    transition: 0.1s all ease-in-out;
+    background: #ffffff;
+    font-color: #bbbdbf;
+  }
+  .accordion .accordion-innerwrap {
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .panel-container {
+    margin: 0;
+  }
+  .panel-container #MoreFilters {
+    height: 100%;
+  }
+  .panel-container:focus {
+    outline: none;
+  }
+  .panel-container #trigger1 {
+    padding: 0;
+  }
+  .panel-container #trigger2 {
+    padding: .5em 1em 0em .5em;
+  }
+  .panel-container #trigger3 {
+    padding: .5em 1em 0em .5em;
+  }
+  .panel-container h4 {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+    width: 100%;
+    text-align: right;
+  }
+  .panel-container h4:hover {
+    text-decoration: underline;
+  }
+  .panel-container li:focus {
+    outline: none;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .panel-content {
+    list-style-type: none;
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .js .visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  .js .visuallyhidden .focusable {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .no-js .visuallyhidden {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+  .no-js .visuallyhidden .focusable:active {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: 0;
+  }
+  .no-js .visuallyhidden .focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .clearfix {
+    *zoom: 1;
+  }
+  .clearfix:before {
+    content: "";
+    display: table;
+  }
+  .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .list-reset {
+    padding: 0;
+    list-style: none;
+    background-color: #ffffff;
+  }
+}
+.trailLength-title {
+  height: 1em;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0 0 0 1em;
+}
+.trailLength-title h2 {
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #bbbdbf;
+}
+.trailUse-title {
+  height: 2em;
+  width: 100%;
+  background-color: #ffffff;
+}
+.trailUse-title h2 {
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  font-size: 12px;
+  color: #bbbdbf;
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .trailFilters {
+    height: auto;
+  }
+  .trailFilters .trailLength {
+    height: 2em;
+    width: 100%;
+    background: #ffffff;
+    padding: 0 1em 0 1em;
+    margin: .25em 0 1em 0;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox] {
+    display: none;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
+    background-color: #00adef;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div p {
+    color: #ffffff;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div {
+    background-color: #d9f0fc;
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div p {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #00adef;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div:hover {
+    background-color: #96daf8;
+  }
+  .trailFilters ul:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+  .trailFilters .trailUse {
+    height: 2em;
+    width: 100%;
+    padding: 0em 1em 0em 1em;
+    background: #ffffff;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 {
+    position: relative;
+    display: inline-block;
+    width: 2.5em;
+    height: 2em;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox] {
+    display: none;
+    background-color: #d9f0fc;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox]:checked + div {
+    background-color: #96daf8;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div {
+    background-color: #d9f0fc;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div:hover {
+    background-color: #96daf8;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 .filter-icons {
+    position: absolute;
+    width: 2.5em;
+    height: 2em;
+  }
+  .trailFilters ul:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+  .trailFilters .trailSelection {
+    height: 3em;
+    width: 100%;
+    background: #ffffff;
+    padding: 0em 1em 0em 1em;
+    text-align: justify;
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 {
+    display: inline-block;
+    width: 8.5em;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 input[type=checkbox] {
+    display: none;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 input[type=checkbox]:checked + div {
+    background-color: #d9f0fc;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 div {
+    background-color: #d9f0fc;
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 div p {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #00adef;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+  }
+  .trailFilters .trailSelection .visuallyhidden_4 div:hover {
+    background-color: #96daf8;
+  }
+}
+/*@import "search.less";*/
+/* List Module */
+/* This border should become a variable */
+@media only screen and (max-width: 529px) {
+  #trailList {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #trailList {
+    width: 100%;
+    max-height: 22em;
+    position: relative;
+    overflow: scroll;
+    background-color: #ffffff;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .trail {
+    display: none;
+  }
+}
+/*	@media @desktop {
+		position: absolute;
+		height: auto;
+		.sansSerif-light();
+		line-height: 20px;
+		color: @color-dark-blue;
+		top: 10px;
+		left: 14px;
+		cursor: pointer;
+	}
+}
+*/
+@media only screen and (max-width: 529px) {
+  .trailList-title {
+    display: none;
+  }
+  .trailList-title p {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailList-title {
+    width: 100%;
+    height: 40px;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: #523d32;
+  }
+  .trailList-title p {
+    display: inline-block;
+    position: relative;
+    padding: 10px 0 0 16px;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    line-height: 20px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 16px;
+    color: #FFF;
+  }
+}
+/* Border should be replaced*/
+@media only screen and (max-width: 529px) {
+  .trail-box {
+    display: none;
+  }
+  .trail-box .trailheadName {
+    display: none;
+  }
+  .trail-box .trailheadDistance {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trail-box {
+    position: relative;
+    height: auto;
+    background-color: #ffffff;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #e3e3e1;
+    cursor: pointer;
+  }
+  .trail-box:hover {
+    background-color: #e3e3e1;
+  }
+  .trail-box .trailInfo {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+  .trail-box .trailInfo .trail {
+    position: relative;
+    display: inline-block;
+    margin: 1em 0 0 1em;
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #00adef;
+    cursor: pointer;
+  }
+  .trail-box .trailInfo .trailLength {
+    position: relative;
+    margin: 1.33em 1.33em 0 0em;
+    float: right;
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    display: inline-block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    line-height: 24px;
+    color: #91c73d;
+    cursor: pointer;
+  }
+  .trail-box .trailInfo .parkName {
+    position: relative;
+    display: inline-block;
+    padding: 0em 0 0 1.33em;
+    width: 100%;
+    height: 1em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #58595b;
+  }
+  .trail-box .trailheadInfo {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+  .trail-box .trailheadInfo .trailheadIcon {
+    position: relative;
+    display: inline-block;
+    margin: 0em 0 0 1.33em;
+    height: 1em;
+    width: auto;
+  }
+  .trail-box .trailheadInfo .trailheadName {
+    position: relative;
+    display: inline-block;
+    margin: 1em 0 0 0em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #58595b;
+  }
+  .trail-box .trailheadInfo .trailheadDistance {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin: 1em 1.33em 0 0em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: right;
+    color: #58595b;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .trailSource {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailSource {
+    display: none;
+    position: absolute;
+    top: 16px;
+    right: 10px;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    color: #58595b;
+    text-align: right;
+  }
+  @sans Serif-light;
+}
+@media only screen and (max-width: 529px) {
+  #redoSearch {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #redoSearch {
+    position: absolute;
+    top: 40px;
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    background: #ffffff;
+    border-style: dotted;
+    border-width: 1px;
+    border-color: #e3e3e1;
+  }
+}
+/* Map Elements
+============================== */
+@media only screen and (max-width: 529px) {
+  
+}
+@media only screen and (min-width: 950px) {
+  .leaflet-popup-content-wrapper {
+    border-radius: 0px;
+    width: auto;
+    min-width: 12em;
+    height: auto;
+    padding: 0;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content {
+    min-width: 10em;
+    width: auto;
+    height: auto;
+    margin: 0;
+    line-height: 1em;
+    position: relative;
+    background-color: #ffffff;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .leaflet-popup-close-button {
+    color: #bbbdbf;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup {
+    width: auto;
+    min-width: 12em;
+    position: relative;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
+    width: auto;
+    position: relative;
+    display: inline-block;
+    height: auto;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .popupTrailheadNames {
+    position: relative;
+    display: inline-block;
+    background-color: #ffffff;
+    height: auto;
+    width: 90%;
+    min-width: 12em;
+    padding: .25em 0em .25em .5em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .calloutTrailheadIcon {
+    position: absolute;
+    height: 1.5em;
+    top: .5em;
+    right: -0.5em;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
+    min-width: 12em;
+    width: 100%;
+    padding: .5em 0em .25em .5em;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
+    height: 100%;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
+    position: relative;
+    height: auto;
+    width: auto;
+    margin: 0;
+    display: inline-block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    text-decoration: none;
+    line-height: 1em;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover {
+    background-color: #00adef;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover div {
+    color: #ffffff;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover b {
+    /*							border-left: .6em solid @color-white;
+  */
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box b {
+    position: relative;
+    padding: 0 0 0 .2em;
+    float: right;
+    border-bottom: .6em solid transparent;
+    border-top: .6em solid transparent;
+    border-left: 0.6em solid #d9f0fc;
+    display: inline-block;
+    height: 0;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail2 {
+    border-top: 1px solid #e3e3e1;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail3 {
+    border-top: 1px solid #bbbdbf;
+  }
+}
+.trail-popup {
+  position: relative;
+  min-width: 10em;
+  height: auto;
+  line-height: 1em;
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  color: #e3e3e1;
+  text-decoration: none;
+  padding: .25em 0em .25em .5em;
+}
+.trailhead-popup {
+  color: black;
+}
+.trailhead-name {
+  font-weight: bold;
+}
+.trailhead-trailname {
+  cursor: pointer;
+}
+.trailMapContainer {
+  /* Desktop */
+
+}
+@media only screen and (max-width: 529px) {
+  .trailMapContainer {
+    height: 100%;
+    min-height: 600px;
+    /* Need to figure out how to make this device-height-ish...*/
+  
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailMapContainer {
+    height: 100%;
+    min-height: 600px;
+    padding: 0;
+    z-index: 1;
+  }
+}
+@media only screen and (max-width: 529px) {
+  #trailMap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #trailMap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .leaflet-left {
+    display: none;
+  }
+}
+@media mobile {
+  
+}
+@media desktop {
+  .leaflet-clickable {
+    stroke-width: 6px;
+  }
+  .leaflet-clickable:hover {
+    stroke: #8A7360;
+    stroke-width: 5px;
+  }
+}
+/* Not sure that we have a trail map title currently*/
+@media only screen and (max-width: 529px) {
+  .trailMap-title {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailMap-title {
+    margin-top: -10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 40px;
+    background-color: #F2F4E9;
+  }
+  .trailMap-title p {
+    padding-top: 10px;
+    padding-left: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: #000;
+  }
+}
+@media only screen and (max-width: 529px) {
+  #crosshair {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #crosshair {
+    position: absolute;
+    top: 250px;
+    height: 20px;
+    width: 20px;
+    left: 50%;
+    /*margin-left: -8px;*/
+  
+    display: block;
+    background: url(../../img/crosshair.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .trailListColumn {
+    display: none;
+  }
+  .trailListColumn a {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .trailListColumn {
+    position: absolute;
+    top: 2em;
+    left: 3em;
+    width: 24em;
+    max-height: 90%;
+    min-height: 14em;
+    padding: 0;
+    background: #ffffff;
+    z-index: 999;
+    overflow: visible;
+  }
+}
+/* Deprecated detailPanelColumn (No longer necessary due to new arrangement)
+.detailPanelColumn {
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+		display: none;
+		position: relative;
+		height: 500px;
+		padding: 0;
+		webkit-transition: width 0.3s ease, margin 0.3s ease;
+		transition: width 0.3s ease, margin 0.3s ease;
+	}
+}
+}
+*/
+@media only screen and (max-width: 529px) {
+  .detailPanel {
+    display: none;
+  }
+  .detailPanel .detailPanelTitle {
+    display: none;
+  }
+  .detailPanel .detailTrailheadName {
+    display: none;
+  }
+  .detailPanel .detailLength {
+    display: none;
+  }
+  .detailPanel .detailDirections {
+    display: none;
+  }
+  .detailPanel .detailDifficulty {
+    display: none;
+  }
+  .detailPanel .detailTrailheadDistance {
+    display: none;
+  }
+  .detailPanel .detailPanelHeader {
+    display: none;
+  }
+  .detailPanel .detailPanelPicture {
+    display: none;
+  }
+  .detailPanel .detailDescription {
+    display: none;
+  }
+  .detailPanel .detailPrintMap {
+    display: none;
+  }
+  .detailPanel .social-icon {
+    display: none;
+  }
+  .detailPanel .detailPanelBody {
+    display: none;
+  }
+  .detailPanel .detailTopRow {
+    display: none;
+  }
+  .detailPanel .detailMiddleRow {
+    display: none;
+  }
+  .detailPanel .detailBottomRow {
+    display: none;
+  }
+  .detailPanel .detailFooter {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .detailPanel {
+    position: relative;
+    display: none;
+    width: 100%;
+    height: 26.5em;
+    background-color: #ffffff;
+  }
+  .detailPanel .detailPanelBanner {
+    position: relative;
+    width: 100%;
+    background-color: #00adef;
+    padding: .5em .25em .5em 1em;
+  }
+  .detailPanel .detailPanelBanner .trailName {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls {
+    display: none;
+    width: 2em;
+    height: 150%;
+    position: absolute;
+    background-color: #00adef;
+    z-index: 999;
+    cursor: pointer ;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
+    top: 0;
+    left: -2em;
+    border-radius: 5em 0 0 5em;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft b {
+    position: relative;
+    margin: 1em 0em 1em 1em;
+    border-bottom: .8em solid transparent;
+    border-top: .8em solid transparent;
+    border-right: 0.8em solid #ffffff;
+    display: inline-block;
+    height: 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight {
+    top: 0;
+    right: -2em;
+    border-radius: 0 5em 5em 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight b {
+    position: relative;
+    margin: 1em 1em 1em .5em;
+    border-bottom: .8em solid transparent;
+    border-top: .8em solid transparent;
+    border-left: 0.8em solid #ffffff;
+    display: inline-block;
+    height: 0;
+  }
+  .detailPanel .detailPanelBody {
+    position: relative;
+    height: 24em;
+    width: 24em;
+    overflow: scroll;
+  }
+  .detailPanel .detailPanelBody .detailPanelPicture {
+    width: 100%;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#left {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+    padding: .5em 0em 0em .5em;
+    float: left;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
+    position: relative;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #91c73d;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#left .detailLengthHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right .detailActivityHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right .icon {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right .icon .activity-icons {
+    height: 100%;
+    width: auto;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: .5em .5em 0em .5em;
+    margin-bottom: 1em;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: .5em .5em 0em .5em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadDistance {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #91c73d;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo {
+    width: 50%;
+    height: auto;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadName {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadPark {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCounty {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    height: auto;
+    float: right;
+    margin-bottom: 1em;
+    padding: 0em 0em 0em 0em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
+    width: 100%;
+    height: 2em;
+    position: relative;
+    display: inline-block;
+    background-color: #d9f0fc;
+    margin: 0em 0em .5em 0em;
+    text-align: center;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections a {
+    width: 100%;
+    vertical-align: middle;
+    text-decoration: none;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    line-height: 2.667em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
+    width: 100%;
+    height: 2em;
+    position: relative;
+    display: inline-block;
+    background-color: #d9f0fc;
+    margin: 0em 0em 0em 0em;
+    text-align: center;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap a {
+    width: 100%;
+    vertical-align: middle;
+    text-decoration: none;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    line-height: 2.667em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities {
+    position: relative;
+    width: 100%;
+    height: 2em;
+    margin-top: 1em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon {
+    position: relative;
+    display: inline-block;
+    width: 6em;
+    height: 1.5em;
+    background-color: #bbbdbf;
+    float: right;
+    margin: 0em 0em .25em .5em;
+    padding: 0 .5em 0 0em;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#facebook {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: right;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#tweet {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: right;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#email {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+    text-align: right;
+  }
+  .detailPanel .detailPanelBody .detailFooter {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: 0em .5em 0em 0em;
+    border-top: 1px solid #bbbdbf;
+  }
+  .detailPanel .detailPanelBody .detailFooter .detailPanelHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    position: absolute;
+    font-size: 12px;
+    left: 8em;
+    top: .5em;
+  }
+  .detailPanel .detailPanelBody .detailFooter .icon-large {
+    width: 5em;
+    float: left;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailFooter .detailSource {
+    position: absolute;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    left: 6em;
+    top: 2em;
+  }
+  .detailPanel .detailPanelBody .detailFooter .detailSourceTelephone {
+    position: absolute;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    left: 6em;
+    top: 3.5em;
+  }
+}
+@media only screen and (max-width: 529px) {
+  .closeDetail {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .closeDetail {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: 25px;
+    /* IE 8 */
+  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 5-7 */
+  
+    filter: alpha(opacity=80);
+    /* Netscape */
+  
+    -moz-opacity: 0.8;
+    /* Safari 1.x */
+  
+    -khtml-opacity: 0.8;
+    /* Good browsers */
+  
+    opacity: 0.8;
+  }
+  .closeDetail p {
+    display: inline-block;
+    text-align: center;
+    color: #58595b;
+    font-weight: 300;
+    font-size: 12px;
+  }
+  @sans Serif-light;
+}
+/* Map Overrides */
+/*@import "leaflet-overrides.less";*/
+/*			Bootstrap-Select
+*********************************/
+/*@import "bootstrap-select.less";*/
+/*			Bootstrap
+*********************************/
+/*@import "bootstrap3.less";*/
+/*			Leaflet
+*********************************/
+/*@import "leaflet.usermarker.less";*/
+/*			Reset
+*********************************/
+/*! normalize.css v2.1.0 | MIT License | git.io/normalize */
+/* ==========================================================================
+   HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined in IE 8/9.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+/**
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+/**
+ * Address styling not present in IE 8/9.
+ */
+[hidden] {
+  display: none;
+}
+/* ==========================================================================
+   Base
+   ========================================================================== */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+
+}
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0;
+}
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/**
+ * Address `outline` inconsistency between Chrome and other browsers.
+ */
+a:focus {
+  outline: thin dotted;
+}
+/**
+ * Improve readability when focused and also mouse hovered in all browsers.
+ */
+a:active,
+a:hover {
+  outline: 0;
+}
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari 5, and Chrome.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+/**
+ * Address styling not present in IE 8/9, Safari 5, and Chrome.
+ */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari 5, and Chrome.
+ */
+b,
+strong {
+  font-weight: bold;
+}
+/**
+ * Address styling not present in Safari 5 and Chrome.
+ */
+dfn {
+  font-style: italic;
+}
+/**
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000;
+}
+/**
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em;
+}
+/**
+ * Improve readability of pre-formatted text in all browsers.
+ */
+pre {
+  white-space: pre-wrap;
+}
+/**
+ * Set consistent quote types.
+ */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%;
+}
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sup {
+  top: -0.5em;
+}
+sub {
+  bottom: -0.25em;
+}
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9.
+ */
+img {
+  border: 0;
+}
+/**
+ * Correct overflow displayed oddly in IE 9.
+ */
+svg:not(:root) {
+  overflow: hidden;
+}
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+figure {
+  margin: 0;
+}
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/**
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+/**
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+
+  padding: 0;
+  /* 2 */
+
+}
+/**
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
+ */
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  /* 1 */
+
+  font-size: 100%;
+  /* 2 */
+
+  margin: 0;
+  /* 3 */
+
+}
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+button,
+input {
+  line-height: normal;
+}
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
+ * Correct `select` style inheritance in Firefox 4+ and Opera.
+ */
+button,
+select {
+  text-transform: none;
+}
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+
+  cursor: pointer;
+  /* 3 */
+
+}
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9.
+ * 2. Remove excess padding in IE 8/9.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+
+  padding: 0;
+  /* 2 */
+
+}
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
+ *    (include `-moz` to future-proof).
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  /* 2 */
+
+  box-sizing: content-box;
+}
+/**
+ * Remove inner padding and search cancel button in Safari 5 and Chrome
+ * on OS X.
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+textarea {
+  overflow: auto;
+  /* 1 */
+
+  vertical-align: top;
+  /* 2 */
+
+}
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* Other Universal */
+html {
+  overflow-y: scroll;
+  height: 100%;
+}
+/* Background color */
+@media mobile {
+  body {
+    background-color: #ffffff;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+@media desktop {
+  body {
+    background-color: #ffffff;
+  }
+}
+[data-role*="page"] {
+  height: 100%;
+}
+section {
+  overflow: auto;
+}
+/* Responsive container */
+@media mobile {
+  .container {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+@media only screen and (max-width: 529px) {
+  #main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+}
+@media only screen and (min-width: 950px) {
+  #main {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+}

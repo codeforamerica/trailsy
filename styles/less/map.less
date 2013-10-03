@@ -1,0 +1,215 @@
+/* Map Elements
+============================== */
+
+.leaflet-popup-content-wrapper {
+	@media @mobile {}
+	@media @desktop {
+		border-radius: 0px;
+		width: auto;
+		min-width: 12em;
+		height: auto;
+		padding: 0;
+		.leaflet-popup-content {
+			min-width: 10em;
+			width: auto;
+			height: auto;
+			margin: 0;
+			line-height: 1em;
+			position: relative;
+			background-color: @color-white;
+			.leaflet-popup-close-button {
+				color: @color-light-mid-gray;
+			}
+			.trailhead-popup {
+				width: auto;
+				min-width: 12em;
+				position: relative;
+				.trailhead-box {
+					width: auto;
+					position: relative;
+					display: inline-block;
+					height: auto;
+					.popupTrailheadNames {
+						position: relative;
+						display: inline-block;
+						background-color: @color-white;
+						height: auto;
+						width: 90%;
+						min-width: 12em;
+						padding: .25em 0em .25em .5em;
+						.sansSerif-light;
+						color: @color-mid-gray;
+						text-decoration: none;
+						border-bottom: 1px solid gray;
+					}
+					.calloutTrailheadIcon {
+						position: absolute;
+						height: 1.5em;
+						top: .5em;
+						right: -.5em;
+					}
+					.trailhead-trailname {
+						min-width: 12em;
+						width: 100%;
+						padding: .5em 0em .25em .5em;
+						.status {
+							height: 100%;
+						}
+						.popupTrailNames {
+							position: relative;
+							height: auto;
+							width: auto;
+							margin: 0;
+							display: inline-block;
+							.sansSerif-light;
+							color: @color-light-mid-gray;
+							text-decoration: none;
+							line-height: 1em;
+						}
+						&:hover {
+							background-color: @color-dark-blue;
+						}
+						&:hover div {
+							color: @color-white;
+						}
+						&:hover b {
+/*							border-left: .6em solid @color-white;
+*/						}
+					}
+					b {
+						position: relative;
+						padding: 0 0 0 .2em;
+						float: right;
+					    border-bottom: .6em solid transparent;
+					    border-top: .6em solid transparent;
+					    border-left: .6em solid @color-light-blue;
+					    display: inline-block;
+					    height: 0;
+					}
+					+ .trail1 {
+						&:hover {}
+					}
+					+ .trail2 {
+						border-top: 1px solid @color-light-gray;
+						&:hover {}
+					}
+					+ .trail3 {
+						border-top: 1px solid @color-light-mid-gray;
+						&:hover {}
+					}
+				}
+			}
+		}
+	}
+}
+
+.trail-popup {
+	position: relative;
+	min-width: 10em;
+	height: auto;
+	line-height: 1em;
+	.sansSerif-light;
+	color: @color-light-gray;
+	text-decoration: none;
+	padding: .25em 0em .25em .5em;
+}
+
+.trailhead-popup {
+  color: black;
+}
+
+.trailhead-name {
+  font-weight: bold;
+}
+
+.trailhead-trailname {
+  cursor: pointer;
+}
+
+.trailMapContainer {
+	@media @mobile {
+		height: 100%;
+		min-height: 600px;
+		/* Need to figure out how to make this device-height-ish...*/
+	}
+	/* Desktop */
+	@media @desktop {
+		height: 100%;
+		min-height: 600px;
+		padding: 0;
+		z-index: 1;
+	}
+}
+
+#trailMap {
+	@media @mobile {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+	@media @desktop {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+	}
+}
+
+
+.leaflet-left {
+	@media @mobile {
+		display: none;
+	}
+}
+
+.leaflet-clickable {
+	@media mobile {}
+	@media desktop {
+		stroke-width: 6px;
+		&:hover {
+			stroke: #8A7360;
+			stroke-width: 5px;
+		}
+	}
+}
+
+/* Not sure that we have a trail map title currently*/
+.trailMap-title {
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+		margin-top: -10px;
+		margin-left: 10px;
+		margin-right: 10px;
+		height: 40px;
+		background-color: #F2F4E9;
+		p {
+			padding-top: 10px;
+			padding-left: 10px;
+			font-family: 'Oswald', sans-serif; font-weight: 100; letter-spacing: 1px;
+			font-size: 18px;
+			color: #000;
+		}
+	}
+}
+
+#crosshair {
+	@media @mobile {
+		display: none;	
+	}
+	@media @desktop {
+	    position: absolute;
+	    top: 250px;
+	    height: 20px;
+	    width: 20px;
+	    left: 50%;
+	    /*margin-left: -8px;*/
+	    display: block;
+	    background: url(../../img/crosshair.gif);
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    z-index: 1;
+	}
+}

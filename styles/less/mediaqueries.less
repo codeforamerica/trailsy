@@ -1,0 +1,18 @@
+// Breakpoints
+@highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+              ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
+              ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
+              ~"only screen and (min-device-pixel-ratio: 1.5)";
+@mobile:      ~"only screen and (max-width: 529px)";
+@tablet:      ~"only screen and (min-width: 530px) and (max-width: 949px)";
+@desktop:     ~"only screen and (min-width: 950px)";
+/*@desktop-xl:  ~"only screen and (min-width: 1129px)";*/
+
+
+/* Note the 529px breakpoint. Most mobile sites are more like 240 wide.
+Need to make sure everything is responsive within that breakpoint. 
+
+At some point, update mediaqueries to be in EMS
+33.125 EMS = 530 divided by 16px (default font size *
+59.375 EMS = 950 divided by 16px
+70.5 EMS = 1128 divided by 16px */

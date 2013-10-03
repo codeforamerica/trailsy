@@ -1,0 +1,370 @@
+/* Filter Module */
+
+.is-vishidden{
+	@media @mobile {}
+	@media @desktop {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		border: 0;
+		clip: rect(1px, 1px, 1px, 1px);
+	}
+}
+
+.searchbar {
+	@media @mobile {}
+	@media @desktop {
+		background-color: @color-white;
+		line-height: 1;
+		padding: 0 1em 0 1em;
+		.search-key {
+			display: block;
+			.sansSerif-light;
+			font-color: @color-light-mid-gray;
+			width: 100%;
+			height: 2em;
+		  	border: 1px solid;
+		  	border-color: @color-light-mid-gray;
+			padding-left: .25em;
+			padding-right: 0;
+			padding-top: .5em;
+			padding-bottom: .5em;
+			position: relative;
+			top: 0;
+			line-height: 1.5em;
+			border-collapse: separate;
+			border-spacing: 2px;
+			&:focus {
+				outline: none;
+			}
+		}
+		.search-submit {
+			display: none;
+/*			display: inline-block;*/
+			position: absolute;
+			border: none;
+			height: 2em;
+			top: 4em;
+			right: 1em;
+			z-index: 1;
+			width: 2.5em;
+			padding: 0;
+			cursor: pointer;
+			background-color: @color-light-blue;
+			&:hover {
+				background-color: @color-light-blue;
+			}
+		}
+	}
+}
+
+.accordion {
+	@media @mobile {}
+	@media @desktop {
+/*		display: none;*/
+		background-color: transparent;
+		.panel-title {
+			margin: 0;
+			padding: 0em 1em .0em 1em;
+			position: relative;
+			display: inline-block;
+			/* Let's abstract this transition so we can keep it consistent across animations*/
+			-webkit-transition: .1s all ease-in-out;
+			-moz-transition: .1s all ease-in-out;
+			-o-transition: .1s all ease-in-out;
+			transition: .1s all ease-in-out;
+			background: @color-white;
+			font-color: @color-light-mid-gray;
+		}
+		.accordion-innerwrap {
+			margin: 0;
+		}
+	}
+}
+
+.panel-container {
+	@media @mobile {}
+	@media @desktop {
+		margin: 0;
+		#MoreFilters {
+			height: 100%;
+		}
+		&:focus {
+			outline: none;
+		}
+		#trigger1 {
+			padding: 0;
+		}
+		#trigger2 {
+			padding: .5em 1em 0em .5em;
+		}
+		#trigger3 {
+			padding: .5em 1em 0em .5em;
+		}
+		h4 {
+			.sansSerif-light();
+			color: @color-light-mid-gray;
+			font-size: 12px;
+			width: 100%;
+			text-align: right;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		li:focus {
+			outline: none;
+		}
+	}
+}
+
+.panel-content {
+	@media @mobile {}
+	@media @desktop {
+		list-style-type: none;
+		margin: 0;
+	}
+}
+
+.js {
+	@media @mobile {}
+	@media @desktop {
+		.visuallyhidden {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+			.focusable {
+				clip: auto;
+				height: auto;
+				margin: 0;
+				overflow: visible;
+				position: static;
+				width: auto;
+			}
+		}
+	}
+}
+
+.no-js {
+	@media @mobile {}
+	@media @desktop {
+		.visuallyhidden {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+			.focusable {
+				&:active {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+				&:focus {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+			}
+		}
+	}
+}
+
+.clearfix {
+	@media @mobile {}
+	@media @desktop {
+		*zoom: 1;
+		&:before {
+			content: "";
+			display: table;
+		}
+		&:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	}
+}
+
+.list-reset {
+	@media @mobile {}
+	@media @desktop {
+		padding: 0;
+		list-style: none;
+		background-color: @color-white;
+	}
+}
+
+
+.trailLength-title {
+	height: 1em;
+	width: 100%;
+	background-color: @color-white;
+	padding: 0 0 0 1em;
+	h2 {
+		.sansSerif-light();
+		font-size: 12px;
+		color: @color-light-mid-gray;
+	}
+}
+
+.trailUse-title {
+	height: 2em;
+	width: 100%;
+	background-color: @color-white;
+	h2 {
+		.sansSerif-light();
+		font-size: 12px;
+		color: @color-light-mid-gray;
+		padding-left: 1em;
+		padding-bottom: 1em;
+	}
+}
+
+.trailFilters {
+	@media @mobile {}
+	@media @desktop {
+		height: auto;
+		.trailLength {
+			height: 2em;
+			width: 100%;
+			background: @color-white;
+			padding: 0 1em 0 1em;
+			margin: .25em 0 1em 0;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_2 {
+				display: inline-block;
+				width: 20%;
+				height: 100%;
+				input[type=checkbox] {
+					display: none;
+					&:checked + div {
+						background-color: @color-dark-blue;
+						p {
+							color: @color-white;
+						}
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 2em;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					p {
+						.sansSerif-light();
+						color: @color-dark-blue;
+						text-align: center;
+						vertical-align: middle;
+						line-height: 2em;
+					}
+					&:hover {
+						background-color: @color-mid-blue;
+					}
+				}
+			}
+		}
+		ul:after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+		}
+		.trailUse {
+			height: 2em;
+			width: 100%;
+			padding: 0em 1em 0em 1em;
+			background: @color-white;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_3 {
+				position: relative;
+				display: inline-block;
+				width: 2.5em;
+				height: 2em;
+				input[type=checkbox] {
+					display: none;
+					background-color: @color-light-blue;
+					width: 2em;
+					height: auto;
+					&:checked + div {
+						background-color: @color-mid-blue;
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background-color: @color-mid-blue;
+					}
+				}
+				.filter-icons {
+					position: absolute;
+					width: 2.5em;
+					height: 2em;
+				}
+	 		}
+		}
+		ul:after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+		}
+		.trailSelection {
+			height: 3em;
+			width: 100%;
+			background: @color-white;
+			padding: 0em 1em 0em 1em;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_4 {
+				display: inline-block;
+				width: 8.5em;
+				height: 100%;
+				margin: 0;
+				padding: 0;
+				input[type=checkbox] {
+					display: none;
+					&:checked + div {
+						background-color: @color-light-blue;
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 2em;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					p {
+						.sansSerif-light();
+						color: @color-dark-blue;
+						text-align: center;
+						vertical-align: middle;
+						line-height: 2em;
+					}
+					&:hover {
+						background-color: @color-mid-blue;
+					}
+				}
+			}
+		}
+	}
+}
