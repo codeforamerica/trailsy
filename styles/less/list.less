@@ -78,14 +78,13 @@
 		border-color: @color-light-gray;
 		cursor: pointer;
 		&:hover {
-			border-bottom: 2px solid @color-mid-green;
+			background-color: @color-light-gray;
 		}
 		.trailInfo {
 			position: relative;
 			display: inline-block;
 			width: 100%;
 			height: auto;
-			background-color: @color-white;
 			.trail {
 				position: relative;
 				display: inline-block;
@@ -172,21 +171,6 @@
 		line-height: 20px;
 		color: @color-mid-gray;
 		text-align: right;
-	}
-}
-
-.trailIndicatorLight {
-	@media @mobile {
-		display: none;	
-	}
-	@media @desktop {
-		display: none;
-		position: absolute;
-		right: 0;
-		width: 5px; 
-		height: 5px; 
-		border-top: 40px solid transparent; 
-		border-right: 8px;
 	}
 }
 

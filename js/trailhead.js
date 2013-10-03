@@ -515,7 +515,7 @@ function startup() {
     allSegmentLayer = L.geoJson(trailSegments, {
       style: function() {
         return {
-          color: '#CC8464',
+          color: '#B79E8A',
           weight: 3,
           opacity: 1,
           clickable: true,
@@ -544,6 +544,11 @@ function startup() {
         }
         popupHTML = popupHTML + "</div>";
         layer.bindPopup(popupHTML);
+
+        // add hover event to layer
+        // with an event handler that calls showPopup
+        // and sets a timeout to remove the same popup
+        // layer.showPopup(popupHTML);
       }
     });
     return allSegmentLayer;
@@ -637,7 +642,10 @@ function startup() {
     for (var trailheadIndex = 0; trailheadIndex < trailheads.length; trailheadIndex++) {
       var trailhead = trailheads[trailheadIndex];
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-      var $popupTrailheadDiv = $("<div>").addClass("trailhead-name").html($("<div>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
+      var $popupTrailheadDiv = $("<div>").addClass("trailhead-box").html($("<div class='popupTrailheadNames'>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
+      $popupTrailheadDiv.append($("<img>").addClass("calloutTrailheadIcon").attr({
+        src: "img/icon_trailhead_1.png"
+      }));
       for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
         var trail = trailData[trailhead.trails[trailsIndex]];
         var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
@@ -660,7 +668,7 @@ function startup() {
             title: "alert"
           }));
         }
-        $popupTrailDiv.append("<div>" + trail.properties.name + "</div>");
+        $popupTrailDiv.append("<div class='popupTrailNames'>" + trail.properties.name + "</div>");
         $popupTrailDiv.append("<b>")
         // .append(trail.properties.name)
         .appendTo($popupTrailheadDiv);
@@ -735,7 +743,6 @@ function startup() {
             };
           }(trail, trailhead));
 
-        $trailIndicator = $("<div>").addClass("trailIndicatorLight").appendTo($trailDiv);
         $trailInfo = $("<div>").addClass("trailInfo").appendTo($trailDiv);
         $trailheadInfo = $("<div>").addClass("trailheadInfo").appendTo($trailDiv);
 

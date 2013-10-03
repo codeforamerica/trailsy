@@ -5,6 +5,7 @@
 	@media @mobile {}
 	@media @desktop {
 		border-radius: 0px;
+		width: auto;
 		min-width: 12em;
 		height: auto;
 		padding: 0;
@@ -15,69 +16,85 @@
 			margin: 0;
 			line-height: 1em;
 			position: relative;
+			background-color: @color-white;
+			.leaflet-popup-close-button {
+				color: @color-light-mid-gray;
+			}
 			.trailhead-popup {
-				color: black;
-				width: 100%;
+				width: auto;
+				min-width: 12em;
 				position: relative;
-				.trailhead-name {
-					width: 100%;
-					div {
+				.trailhead-box {
+					width: auto;
+					position: relative;
+					display: inline-block;
+					height: auto;
+					.popupTrailheadNames {
 						position: relative;
 						display: inline-block;
-						width: 100%;
-						height: 1.5em;
+						background-color: @color-white;
+						height: auto;
+						width: 90%;
+						min-width: 12em;
 						padding: .25em 0em .25em .5em;
-						.sansSerif-bold;
+						.sansSerif-light;
 						color: @color-mid-gray;
+						text-decoration: none;
+						border-bottom: 1px solid gray;
+					}
+					.calloutTrailheadIcon {
+						position: absolute;
+						height: 1.5em;
+						top: .5em;
+						right: -.5em;
 					}
 					.trailhead-trailname {
-						padding: 0;
-						position: relative;
-						display: inline-block;
-						height: auto;
+						min-width: 12em;
+						width: 100%;
+						padding: .5em 0em .25em .5em;
 						.status {
-							position: relative;
-							display: none;
-							/*display: inline-block;*/
-							height: 1em;
+							height: 100%;
 						}
-						div {
+						.popupTrailNames {
 							position: relative;
 							height: auto;
 							width: auto;
 							margin: 0;
 							display: inline-block;
 							.sansSerif-light;
-							color: @color-mid-gray;
+							color: @color-light-mid-gray;
 							text-decoration: none;
+							line-height: 1em;
 						}
 						&:hover {
 							background-color: @color-dark-blue;
 						}
 						&:hover div {
-								color: @color-white;
+							color: @color-white;
 						}
 						&:hover b {
-							border-left: .4em solid @color-white;
-						}
-						b {
-							position: absolute;
-							right: .5em;
-							top: 30%;
-						    border-bottom: .4em solid transparent;
-						    border-top: .4em solid transparent;
-						    border-left: .4em solid @color-mid-gray;
-						    display: inline-block;
-						    height: 0;
-						}
+/*							border-left: .6em solid @color-white;
+*/						}
 					}
-					.trail1 {
+					b {
+						position: relative;
+						padding: 0 0 0 .2em;
+						float: right;
+					    border-bottom: .6em solid transparent;
+					    border-top: .6em solid transparent;
+					    border-left: .6em solid @color-light-blue;
+					    display: inline-block;
+					    height: 0;
+					}
+					+ .trail1 {
 						&:hover {}
 					}
-					.trail2 {
+					+ .trail2 {
+						border-top: 1px solid @color-light-gray;
 						&:hover {}
 					}
-					.trail3 {
+					+ .trail3 {
+						border-top: 1px solid @color-light-mid-gray;
 						&:hover {}
 					}
 				}
@@ -146,7 +163,16 @@
 	}
 }
 
-.leaflet-clickable {}
+.leaflet-clickable {
+	@media mobile {}
+	@media desktop {
+		stroke-width: 6px;
+		&:hover {
+			stroke: #8A7360;
+			stroke-width: 5px;
+		}
+	}
+}
 
 /* Not sure that we have a trail map title currently*/
 .trailMap-title {
