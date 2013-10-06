@@ -92,9 +92,9 @@ function startup() {
   // Not sure if these should be global, but hey whatev
   var trailheadIcon = L.Icon.extend({
     options: {
-      iconSize: [20, 25],
-      iconAnchor: [20, 40],
-      popupAnchor: [-3, -75]
+      iconSize: [25, 20],
+      iconAnchor: [11, 20],
+      popupAnchor: [0, -22]
     }
   });
 
@@ -748,6 +748,7 @@ function startup() {
         .appendTo($popupTrailheadDiv);
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
+      // trailhead.marker.bindPopup(trailhead.popupContent);
     }
   }
 
@@ -1049,17 +1050,16 @@ function startup() {
     for (var i = 0; i < trailheads.length; i++) {
       if (trailheads[i].properties.id == trailheadID) {
         currentTrailhead = trailheads[i];
+        break;
       }
     }
-    if (currentTrailheadMarker) {
-      map.removeLayer(currentTrailheadMarker);
-    }
-    // make a default marker, add it to the map with the trailhead's pre-computed popupContent
-    currentTrailheadMarker = new L.Marker([currentTrailhead.marker.getLatLng().lat, currentTrailhead.marker.getLatLng().lng]);
-    currentTrailheadMarker.addTo(map).bindPopup(currentTrailhead.popupContent);
-    // highlightTrailheadDivs(currentTrailhead);
     getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
-    currentTrailheadMarker.openPopup();
+    var popup = new L.Popup({
+      offset: [0, -12]
+    })
+      .setContent(currentTrailhead.popupContent)
+      .setLatLng(currentTrailhead.marker.getLatLng())
+      .openOn(map);
   }
 
 
