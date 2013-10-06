@@ -125,11 +125,13 @@ function startup() {
   $(document).on('mouseover', '.leaflet-popup', function() {
     // console.log("popup mouseover");
     currentHighlightedLayer.fireEvent('mouseover');
-  })
+  });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
-    currentHighlightedLayer.fireEvent('mouseout');
-  })
+    if (currentHighlightedLayer) {
+      currentHighlightedLayer.fireEvent('mouseout');
+    }
+  });
   $(".search-key").keyup(function(e) {
     // if (e.which == 13) {
     //   console.log($('.search-key').val());
@@ -378,7 +380,9 @@ function startup() {
           map.addLayer(allSegmentLayer);
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
-          map.removeLayer(currentTrailPopup);
+          if (currentTrailPopup) {
+            map.removeLayer(currentTrailPopup);
+          }
           map.removeLayer(allSegmentLayer);
         }
       }
@@ -585,7 +589,7 @@ function startup() {
           e.target.setStyle({
             weight: 6
           });
-          if (e.target != currentWeightedTrail && currentWeightedTrail ) {
+          if (e.target != currentWeightedTrail && currentWeightedTrail) {
             currentWeightedTrail.setStyle({
               weight: 3
             });
@@ -610,7 +614,7 @@ function startup() {
           // newTrailFeatureGroup.removeLayer(popup);
           if (closeTimeout) {
             clearTimeout(closeTimeout);
-          };
+          }
 
 
           closeTimeout = setTimeout(function(e) {
@@ -618,9 +622,9 @@ function startup() {
               e.target.setStyle({
                 weight: 3
               });
-            }
+            };
           }(e), 2000);
-        }
+        };
       }(newTrailFeatureGroup, currentInvisSegment));
       // allInvisibleSegmentsArray[i].feature.properties.visibleLayer = allVisibleSegmentsArray[i];
       allSegmentLayer.addLayer(newTrailFeatureGroup);
