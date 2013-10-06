@@ -29,7 +29,7 @@ function startup() {
 
   //  Near-Global Variables
   var METERSTOMILESFACTOR = 0.00062137;
-  var MAX_ZOOM = 14;
+  var MAX_ZOOM = 17;
   var MIN_ZOOM = 12;
   var SECONDARY_TRAIL_ZOOM = 13;
   var SHORT_MAX_DISTANCE = 2.0;
@@ -1249,52 +1249,25 @@ function startup() {
           color = getClassBackgroundColor("trail2");
           return {
             weight: 3,
-            color: color,
+            color: "#FF0000",
             opacity: 0.75
           };
         } else if (feature.properties.order === 2) {
           color = getClassBackgroundColor("trail3");
           return {
             weight: 3,
-            color: color,
+            color: "#FF0000",
             opacity: 0.75
           };
         }
       },
 
       onEachFeature: function(feature, layer) {
-        var popupHTML = "<div class='trail-popup'>";
-        // if we have a named trail, show its name
-        if (feature.properties.trailname) {
-          popupHTML = popupHTML + feature.properties.trailname;
-        }
-        // else we have an unused trail segment--list all of the names associated with it
-        else {
-          if (feature.properties.trail1) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail1;
-          }
-          if (feature.properties.trail2) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail2;
-          }
-          if (feature.properties.trail3) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail3;
-          }
-          if (feature.properties.trail4) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail4;
-          }
-          if (feature.properties.trail5) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail5;
-          }
-          if (feature.properties.trail6) {
-            popupHTML = popupHTML + "<br>" + feature.properties.trail6;
-          }
-        }
-        popupHTML = popupHTML + "</div>";
-        layer.bindPopup(popupHTML);
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToBack();
-    //zoomToLayer(currentMultiTrailLayer);
+    zoomToLayer(currentMultiTrailLayer);
+    map.invalidateSize();
   }
 
 
@@ -1323,8 +1296,8 @@ function startup() {
     currentHighlightedTrailLayer.setStyle({
       weight: 10
     });
-    zoomToLayer(currentHighlightedTrailLayer);
-    map.invalidateSize();
+    // zoomToLayer(currentHighlightedTrailLayer);
+    // map.invalidateSize();
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
