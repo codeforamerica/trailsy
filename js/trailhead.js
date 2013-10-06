@@ -86,6 +86,7 @@ function startup() {
   var closeTimeout = null;
   var currentHighlightedLayer = null;
   var currentWeightedTrail = null;
+  var currentTrailPopup = null;
 
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
@@ -377,6 +378,7 @@ function startup() {
           map.addLayer(allSegmentLayer);
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
+          map.removeLayer(currentTrailPopup);
           map.removeLayer(allSegmentLayer);
         }
       }
@@ -570,7 +572,7 @@ function startup() {
 
       var popup = new L.Popup().setContent(currentInvisSegment.feature.properties.popupHTML);
       // newTrailFeatureGroup.addLayer(popup);
-      newTrailFeatureGroup.bindPopup(popup);
+      // newTrailFeatureGroup.bindPopup(popup);
 
       newTrailFeatureGroup.addEventListener("mouseover", function(newTrailFeatureGroup, currentInvisSegment) {
         return function(e) {
@@ -591,8 +593,9 @@ function startup() {
           if (newTrailFeatureGroup != currentHighlightedLayer) {
             var popup = currentInvisSegment.feature.properties.popup;
             popup.setLatLng(e.latlng);
-            newTrailFeatureGroup.addLayer(popup);
+            // newTrailFeatureGroup.addLayer(popup);
             popup.openOn(map);
+            currentTrailPopup = popup;
             currentHighlightedLayer = newTrailFeatureGroup;
             currentWeightedTrail = e.target;
             // newTrailFeatureGroup.bringToFront();
