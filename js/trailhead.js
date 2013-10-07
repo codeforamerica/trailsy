@@ -1057,9 +1057,11 @@ function startup() {
         break;
       }
     }
+    currentDetailTrailhead = currentTrailhead;
     getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
     var popup = new L.Popup({
-      offset: [0, -12]
+      offset: [0, -12],
+      autoPanPadding: [100, 100]
     })
       .setContent(currentTrailhead.popupContent)
       .setLatLng(currentTrailhead.marker.getLatLng())
@@ -1296,8 +1298,6 @@ function startup() {
     currentHighlightedTrailLayer.setStyle({
       weight: 10
     });
-    // zoomToLayer(currentHighlightedTrailLayer);
-    // map.invalidateSize();
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
@@ -1311,16 +1311,20 @@ function startup() {
     var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
     newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
     // set the view to that zoom, and the center of the trail's bounding box 
-    map.setView(layer.getBounds().getCenter(), newZoom, {
-      pan: {
-        animate: true,
-        duration: 4.0,
-        easeLinearity: 0.05
-      },
-      zoom: {
-        animate: true
-      }
-    });
+    // map.setView(layer.getBounds().getCenter(), newZoom, {
+    //   pan: {
+    //     animate: true,
+    //     duration: 4.0,
+    //     easeLinearity: 0.05
+    //   },
+    //   zoom: {
+    //     animate: true
+    //   }
+    // });
+    map.fitBounds(layer.getBounds(), { paddingTopLeft: [450, 0] } );
+    map.invalidateSize();
+    map.setZoomAround(layer.getBounds().getCenter(), newZoom);
+    map.invalidateSize();
   }
 
   function makeAPICall(callData, doneCallback) {
