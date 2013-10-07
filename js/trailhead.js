@@ -10,7 +10,7 @@ function startup() {
   console.log("trailhead.js");
 
   // Map generated in CfA Account
-  var MAPBOX_MAP_ID = "codeforamerica.map-4urpxezk";
+  var MAPBOX_MAP_ID = "codeforamerica.map-j35lxf9d";
   var AKRON = {
     lat: 41.1,
     lng: -81.5
