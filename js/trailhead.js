@@ -353,6 +353,9 @@ function startup() {
     }).addControl(L.control.zoom({
       position: 'topright'
     })).setView([currentLocation.lat, currentLocation.lng], 11);
+    map.fitBounds(map.getBounds(), {
+      paddingTopLeft: [450, 100]
+    });
 
     // Switch between MapBox and other providers by commenting/uncommenting these
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
