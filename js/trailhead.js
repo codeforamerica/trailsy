@@ -30,7 +30,7 @@ function startup() {
   //  Near-Global Variables
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 17;
-  var MIN_ZOOM = 12;
+  var MIN_ZOOM = 14;
   var SECONDARY_TRAIL_ZOOM = 13;
   var SHORT_MAX_DISTANCE = 2.0;
   var MEDIUM_MAX_DISTANCE = 5.0;
@@ -1057,7 +1057,7 @@ function startup() {
         break;
       }
     }
-    currentDetailTrailhead = currentTrailhead;
+    // currentDetailTrailhead = currentTrailhead;
     getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
     var popup = new L.Popup({
       offset: [0, -12],
@@ -1279,7 +1279,6 @@ function startup() {
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");
     var c = $t.css("background-color");
-    console.log(c)
     $t.remove();
     return c;
   }
@@ -1323,7 +1322,7 @@ function startup() {
     // });
     map.fitBounds(layer.getBounds(), { paddingTopLeft: [450, 0] } );
     map.invalidateSize();
-    map.setZoomAround(layer.getBounds().getCenter(), newZoom);
+    map.setZoomAround(layer.getBounds().getCenter(), newZoom, { animate: true });
     map.invalidateSize();
   }
 
