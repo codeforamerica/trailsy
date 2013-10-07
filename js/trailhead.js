@@ -516,7 +516,7 @@ function startup() {
       style: function() {
         return {
           color: '#B79E8A',
-          weight: 3,
+          weight: 5,
           opacity: 1,
           clickable: true,
           // dashArray: "5,5"
