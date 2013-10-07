@@ -188,7 +188,10 @@ function startup() {
     });
     if (USE_LOCAL) {
       getTrailSegments(function() {
-        //console.log(trailSegments);
+        // if we haven't added the segment layer yet, add it.
+        if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+          map.addLayer(allSegmentLayer);
+        }
       });
     }
 
@@ -1323,9 +1326,13 @@ function startup() {
     //     animate: true
     //   }
     // });
-    map.fitBounds(layer.getBounds(), { paddingTopLeft: [450, 0] } );
+    map.fitBounds(layer.getBounds(), {
+      paddingTopLeft: [450, 0]
+    });
     map.invalidateSize();
-    map.setZoomAround(layer.getBounds().getCenter(), newZoom, { animate: true });
+    map.setZoomAround(layer.getBounds().getCenter(), newZoom, {
+      animate: true
+    });
     map.invalidateSize();
   }
 
