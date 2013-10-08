@@ -1147,6 +1147,17 @@ function startup() {
         break;
       }
     }
+
+    // add selected class to selected trail in trailhead popup, and remove it from others
+    var $trailheadPopupContent = $(trailhead.popupContent);
+    var trailID = trailhead.trails[highlightedTrailIndex];
+    $trailheadPopupContent.find(".trailhead-trailname").removeClass("selected");
+    var selector = '[data-trailid="' + trailID + '"]';
+    var $trailnameItem = $trailheadPopupContent.find(selector);
+    $trailnameItem.addClass("selected");
+    trailhead.popupContent = $trailheadPopupContent.outerHTML();
+    
+
     currentTrailhead = trailhead;
     getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex);
     var popup = new L.Popup({

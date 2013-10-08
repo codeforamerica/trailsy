@@ -43,6 +43,7 @@
 /**/
 /* Most Text */
 /* Yellows/Reds For Alerts */
+/* 808184 */
 /* Typography */
 @font-face {
   font-family: 'mission_gothicbold';
@@ -872,13 +873,26 @@ At some point, update mediaqueries to be in EMS
     top: .5em;
     right: -0.5em;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected {
+    background: #00adef;
+    color: #ffffff;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected:hover {
+    background: #00adef;
+    color: #ffffff;
+  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
     padding: .5em 0em .25em .5em;
+    color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     height: 100%;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover {
+    background: rgba(227, 227, 225, 0.2);
+    color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
@@ -890,15 +904,8 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #bbbdbf;
     text-decoration: none;
     line-height: 1em;
-  }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover {
-    background-color: #00adef;
-  }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover div {
-    color: #ffffff;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover b {
     /*							border-left: .6em solid @color-white;
@@ -978,6 +985,18 @@ At some point, update mediaqueries to be in EMS
     height: 100%;
     padding: 0;
   }
+}
+.trailDefault {
+  color: #b79e8a;
+}
+.trailHover {
+  color: #ba7360;
+}
+.trailActive {
+  color: #523d32;
+}
+.trailHoverOnActive {
+  color: #6d544b;
 }
 @media only screen and (max-width: 529px) {
   .leaflet-left {

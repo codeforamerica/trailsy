@@ -48,6 +48,15 @@
 						top: .5em;
 						right: -.5em;
 					}
+					.selected {
+							background: @color-dark-blue;
+							color: @color-white;
+							&:hover {
+								// background-color: @color-light-gray;
+								background: @color-dark-blue;
+								color: @color-white;
+							}	
+					}
 					.trailhead-trailname {
 						min-width: 12em;
 						width: 100%;
@@ -55,6 +64,14 @@
 						.status {
 							height: 100%;
 						}
+						color: @color-mid-gray;
+						
+						&:hover {
+							// background-color: @color-light-gray;
+							background: fade(@color-light-gray, 20%);
+							color: @color-mid-gray;
+						}
+					
 						.popupTrailNames {
 							position: relative;
 							height: auto;
@@ -62,15 +79,14 @@
 							margin: 0;
 							display: inline-block;
 							.sansSerif-light;
-							color: @color-light-mid-gray;
+							// color: @color-light-mid-gray;
 							text-decoration: none;
 							line-height: 1em;
 						}
-						&:hover {
-							background-color: @color-dark-blue;
-						}
+						
+						
 						&:hover div {
-							color: @color-white;
+							// color: @color-white;
 						}
 						&:hover b {
 /*							border-left: .6em solid @color-white;
