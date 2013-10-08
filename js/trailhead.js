@@ -716,8 +716,16 @@ function startup() {
         nearestDistance = distance;
       }
     }
+    // find the index of the clicked trail
+    var trailIndex = 0;
+    for (var k = 0; k < nearestTrailhead.trails.length; k++) {
+      var trailheadTrailID = nearestTrailhead.trails[k];
+      if (trailData[trailheadTrailID].properties.name == trailname) {
+        trailIndex = k;
+      }
+    }
     // highlight it
-    highlightTrailhead(nearestTrailhead.properties.id, 0);
+    highlightTrailhead(nearestTrailhead.properties.id, trailIndex);
   }
 
   // given trailData,
@@ -1013,7 +1021,7 @@ function startup() {
     }
     var orderedTrail = orderedTrails[orderedTrailIndex];
     console.log(orderedTrail);
-    var trailheadID = orderedTrail["trailheadID"];
+    trailheadID = orderedTrail["trailheadID"];
     console.log(["trailheadID", trailheadID]);
     var trailIndex = orderedTrail["index"];
     console.log(["trailIndex", trailIndex]);
