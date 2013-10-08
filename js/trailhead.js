@@ -89,6 +89,7 @@ function startup() {
   var currentTrailFeatureGroup = null;
   var currentWeightedTrail = null;
   var currentTrailPopup = null;
+  var currentTrailhead = null;
 
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
@@ -964,14 +965,14 @@ function startup() {
     console.log("openDetailPanel");
     $('.detailPanel').show();
     $('.accordion').hide();
-    map.invalidateSize();
+    // map.invalidateSize();
   }
 
   function closeDetailPanel() {
     console.log("closeDetailPanel");
     $('.detailPanel').hide();
     $('.accordion').show();
-    map.invalidateSize();
+    // map.invalidateSize();
   }
 
   function toggleDetailPanelControls() {
@@ -1071,7 +1072,7 @@ function startup() {
     var trailheadID = $element.data("trailheadid");
     var highlightedTrailIndex = $element.data("index") || 0;
     var trailID = $element.data("trailid");
-    results = {
+    var results = {
       trailheadID: trailheadID,
       highlightedTrailIndex: highlightedTrailIndex,
       trailID: trailID
@@ -1129,20 +1130,21 @@ function startup() {
 
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
+    var trailhead = null;
     for (var i = 0; i < trailheads.length; i++) {
       if (trailheads[i].properties.id == trailheadID) {
-        currentTrailhead = trailheads[i];
+        trailhead = trailheads[i];
         break;
       }
     }
-    // currentDetailTrailhead = currentTrailhead;
-    getAllTrailPathsForTrailhead(currentTrailhead, highlightedTrailIndex);
+    currentTrailhead = trailhead;
+    getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex);
     var popup = new L.Popup({
       offset: [0, -12],
       autoPanPadding: [100, 100]
     })
-      .setContent(currentTrailhead.popupContent)
-      .setLatLng(currentTrailhead.marker.getLatLng())
+      .setContent(trailhead.popupContent)
+      .setLatLng(trailhead.marker.getLatLng())
       .openOn(map);
   }
 
@@ -1348,9 +1350,8 @@ function startup() {
       onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
       }
-    }).addTo(map).bringToBack();
+    }).addTo(map).bringToFront();
     zoomToLayer(currentMultiTrailLayer);
-    map.invalidateSize();
   }
 
 
@@ -1390,29 +1391,28 @@ function startup() {
   function zoomToLayer(layer) {
     console.log("zoomToLayer");
     // figure out what zoom is required to display the entire trail layer
-    var curZoom = map.getBoundsZoom(layer.getBounds());
-    // zoom out to MAX_ZOOM if that's more than MAX_ZOOM
-    var newZoom = curZoom > MAX_ZOOM ? MAX_ZOOM : curZoom;
-    newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
-    // set the view to that zoom, and the center of the trail's bounding box 
-    // map.setView(layer.getBounds().getCenter(), newZoom, {
-    //   pan: {
-    //     animate: true,
-    //     duration: 4.0,
-    //     easeLinearity: 0.05
-    //   },
-    //   zoom: {
-    //     animate: true
-    //   }
-    // });
-    map.fitBounds(layer.getBounds(), {
-      paddingTopLeft: [450, 0]
-    });
-    map.invalidateSize();
-    map.setZoomAround(layer.getBounds().getCenter(), newZoom, {
-      animate: true
-    });
-    map.invalidateSize();
+    var layerBoundsZoom = map.getBoundsZoom(layer.getBounds());
+    console.log(layer.getLayers().length);
+
+    // var layerBoundsZoom = map.getZoom();
+    console.log(["layerBoundsZoom:", layerBoundsZoom]);
+
+    // if the entire trail layer will fit in a reasonable zoom full-screen, 
+    // use fitBounds to place the entire layer onscreen
+    if (layerBoundsZoom <= MAX_ZOOM && layerBoundsZoom >= MIN_ZOOM) {
+      map.fitBounds(layer.getBounds(), {
+        paddingTopLeft: [450, 0]
+      });
+    }
+
+    // otherwise, center on trailhead, with offset, and use MAX_ZOOM or MIN_ZOOM
+    // with setView
+    else {
+      var newZoom = layerBoundsZoom > MAX_ZOOM ? MAX_ZOOM : layerBoundsZoom;
+      newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
+      map.setView(currentTrailhead.marker.getLatLng(), newZoom);
+    }
+    
   }
 
   function makeAPICall(callData, doneCallback) {
