@@ -19,8 +19,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy") {
@@ -1025,13 +1025,6 @@ function startup() {
   }
 
   function decorateDetailPanel(trail, trailhead) {
-    //  Taking cues from the construction of the List Items / Trail Divs above
-    // var $detailPanelBody;
-    // $detailPanelBody = $("<div>").addClass("detailPanelBody");
-    // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
-    // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
-    // $("<div class='detailT")
-
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
@@ -1047,6 +1040,9 @@ function startup() {
     // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
     // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
+    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname);
+    $('.detailPanel .detailFooter .detailSource').attr("href", trail.properties.steward_url);
+    $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
   // event handler for click of a trail name in a trailhead popup

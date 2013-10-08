@@ -293,9 +293,18 @@
 				}
 				.detailTrailheadAmenities {
 					position: relative;
+					display: inline-block;
 					width: 100%;
 					height: 2em;
 					margin-top: 1em;
+					.detailPanelHeader {}
+					.detailTrailheadIcons {
+						position: relative;
+						display: inline-block;
+						height: 2em;
+						width: 100%;
+						background-color: @color-light-mid-gray;
+					}
 				}
 				.detailLinksToSocial {
 					position: relative;
@@ -339,33 +348,45 @@
 				width: 100%;
 				padding: 0em .5em 0em 0em;
 				border-top: 1px solid @color-light-mid-gray;
-				.detailPanelHeader {
-					.sansSerif-light;
-					color: @color-light-mid-gray;
-					position: absolute;
-					font-size: 12px;
-					left: 8em;
-					top: .5em;
-				}
 				.icon-large {
 					width: 5em;
+					height: 100%;
 					float: left;
 					position: relative;
 					display: inline-block;
 				}
-				.detailSource {
-					position: absolute;
-					.sansSerif-light;
-					color: @color-mid-gray;
-					left: 6em;
-					top: 2em;
+				.detailStewardInfo {
+					position: relative;
+					display: inline-block;
+					height: auto;
+					width: auto;
+					margin-left: 1em;
 				}
-				.detailSourceTelephone {
-					position: absolute;
+				.detailPanelHeader {
+					position: relative;
+					display: inline-block;
+					.sansSerif-light;
+					color: @color-light-mid-gray;
+					position: relative;
+					font-size: 12px;
+					width: auto;
+				}
+				.detailSource {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					left: 6em;
-					top: 3.5em;
+					font-size: 12px;
+					width: 100%;
+					cursor: pointer;
+				}
+				.detailSourcePhone {
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
+				}
+				.detailSourceURL {
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
 				}
 			}
 		}
