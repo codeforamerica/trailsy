@@ -86,8 +86,8 @@ function startup() {
   var allSegmentLayer = null;
   var closeTimeout = null;
   var openTimeout = null;
-  var currentTrailFeatureGroup = null;
-  var currentWeightedTrail = null;
+  var currentSegmentFeatureGroup = null;
+  var currentWeightedSegment = null;
   var currentTrailPopup = null;
   var currentTrailhead = null;
 
@@ -127,14 +127,14 @@ function startup() {
   $(document).on('change', '.filter', filterChangeHandler);
   $(document).on('mouseover', '.leaflet-popup', function() {
     // console.log("popup mouseover");
-    if (currentTrailFeatureGroup) {
-      currentTrailFeatureGroup.fireEvent('mouseover');
+    if (currentSegmentFeatureGroup) {
+      currentSegmentFeatureGroup.fireEvent('mouseover');
     }
   });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
-    if (currentTrailFeatureGroup) {
-      currentTrailFeatureGroup.fireEvent('mouseout');
+    if (currentSegmentFeatureGroup) {
+      currentSegmentFeatureGroup.fireEvent('mouseout');
     }
   });
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
@@ -390,12 +390,14 @@ function startup() {
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
+          console.log("adding-- zoomLevel: ", map.getZoom());
           map.addLayer(allSegmentLayer);
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
           if (currentTrailPopup) {
             map.removeLayer(currentTrailPopup);
           }
+          console.log("removing-- zoomLevel: ", map.getZoom());
           map.removeLayer(allSegmentLayer);
         }
       }
@@ -556,7 +558,7 @@ function startup() {
       style: function() {
         return {
           color: '#B79E8A',
-          weight: 5,
+          weight: 3,
           opacity: 1,
           clickable: false,
           // dashArray: "5,5"
@@ -612,7 +614,7 @@ function startup() {
       // newTrailFeatureGroup.addLayer(popup);
       // newTrailFeatureGroup.bindPopup(popup);
 
-      newTrailFeatureGroup.addEventListener("mouseover", function(trailFeatureGroup, currentInvisSegment) {
+      newTrailFeatureGroup.addEventListener("mouseover", function(segmentFeatureGroup, currentInvisSegment) {
         return function(e) {
           // console.log("new mouseover");
           if (closeTimeout) {
@@ -626,17 +628,20 @@ function startup() {
           openTimeout = setTimeout(function(target) {
             return function() {
               target.setStyle({
-                weight: 6
+                weight: 3,
+                color: "#BA7360"
               });
-              if (target != currentWeightedTrail && currentWeightedTrail) {
-                currentWeightedTrail.setStyle({
-                  weight: 3
+              // set currentWeightedSegment back to normal
+              if (target != currentWeightedSegment && currentWeightedSegment) {
+                currentWeightedSegment.setStyle({
+                  weight: 3,
+                  color: "#B79E8A"
                 });
               }
-              currentWeightedTrail = target;
-              if (trailFeatureGroup != currentTrailFeatureGroup) {
+              currentWeightedSegment = target;
+              if (segmentFeatureGroup != currentSegmentFeatureGroup) {
                 currentTrailPopup = currentInvisSegment.feature.properties.popup.setLatLng(e.latlng).openOn(map);
-                currentTrailFeatureGroup = trailFeatureGroup;
+                currentSegmentFeatureGroup = segmentFeatureGroup;
               }
             };
           }(e.target), 250);
@@ -1324,25 +1329,28 @@ function startup() {
       style: function(feature) {
         var color;
         if (feature.properties.order === 0 || !feature.properties.order) {
-          color = getClassBackgroundColor("trail1");
+          color = getClassBackgroundColor("trailActive");
           return {
             weight: 3,
-            color: "#FF0000",
-            opacity: 0.75
+            color: "#523D32",
+            opacity: 0.75,
+            clickable: false
           };
         } else if (feature.properties.order === 1) {
-          color = getClassBackgroundColor("trail2");
+          color = getClassBackgroundColor("trailActive");
           return {
             weight: 3,
-            color: "#FF0000",
-            opacity: 0.75
+            color: "#523D32",
+            opacity: 0.75,
+            clickable: false
           };
         } else if (feature.properties.order === 2) {
-          color = getClassBackgroundColor("trail3");
+          color = getClassBackgroundColor("trailActive");
           return {
             weight: 3,
-            color: "#FF0000",
-            opacity: 0.75
+            color: "#523D32",
+            opacity: 0.75,
+            clickable: false
           };
         }
       },
@@ -1351,6 +1359,7 @@ function startup() {
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToFront();
+    //.bringToFront();
     zoomToLayer(currentMultiTrailLayer);
   }
 
@@ -1361,6 +1370,7 @@ function startup() {
   function getClassBackgroundColor(className) {
     var $t = $("<div class='" + className + "'>").hide().appendTo("body");
     var c = $t.css("background-color");
+    console.log(c);
     $t.remove();
     return c;
   }
@@ -1372,7 +1382,8 @@ function startup() {
     console.log("setCurrentTrail");
     if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
       currentHighlightedTrailLayer.setStyle({
-        weight: 2
+        weight: 3,
+        color: "#523D32"
       });
     }
     if (currentTrailLayers[index]) {
@@ -1381,7 +1392,8 @@ function startup() {
       console.log("ERROR: trail layer missing");
     }
     currentHighlightedTrailLayer.setStyle({
-      weight: 10
+      weight: 3,
+      color: "#6D544B"
     });
   }
 
@@ -1410,6 +1422,8 @@ function startup() {
     else {
       var newZoom = layerBoundsZoom > MAX_ZOOM ? MAX_ZOOM : layerBoundsZoom;
       newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
+      console.log("setview newZoom:");
+      console.log(newZoom);
       map.setView(currentTrailhead.marker.getLatLng(), newZoom);
     }
     
