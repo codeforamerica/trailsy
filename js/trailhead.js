@@ -38,6 +38,12 @@ function startup() {
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
+  var NORMAL_SEGMENT_COLOR = "#678729";
+  var NORMAL_SEGMENT_WEIGHT = 3;
+  var HOVER_SEGMENT_COLOR = "#678729";
+  var HOVER_SEGMENT_WEIGHT = 6;
+  var ACTIVE_TRAIL_COLOR = "#445617";
+  var ACTIVE_TRAIL_WEIGHT = 6;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -557,8 +563,8 @@ function startup() {
     var visibleAllTrailLayer = L.geoJson(response, {
       style: function() {
         return {
-          color: '#B79E8A',
-          weight: 3,
+          color: NORMAL_SEGMENT_COLOR,
+          weight: NORMAL_SEGMENT_WEIGHT,
           opacity: 1,
           clickable: false,
           // dashArray: "5,5"
@@ -575,8 +581,7 @@ function startup() {
         return {
           opacity: 0,
           weight: 20,
-          clickable: true,
-          color: '#FFFFFF'
+          clickable: true
         };
       },
       onEachFeature: function(feature, layer) {
@@ -628,14 +633,14 @@ function startup() {
           openTimeout = setTimeout(function(target) {
             return function() {
               target.setStyle({
-                weight: 3,
-                color: "#BA7360"
+                weight: HOVER_SEGMENT_WEIGHT,
+                color: HOVER_SEGMENT_COLOR
               });
               // set currentWeightedSegment back to normal
               if (target != currentWeightedSegment && currentWeightedSegment) {
                 currentWeightedSegment.setStyle({
-                  weight: 3,
-                  color: "#B79E8A"
+                  weight: NORMAL_SEGMENT_WEIGHT,
+                  color: NORMAL_SEGMENT_COLOR
                 });
               }
               currentWeightedSegment = target;
@@ -1331,25 +1336,25 @@ function startup() {
         if (feature.properties.order === 0 || !feature.properties.order) {
           color = getClassBackgroundColor("trailActive");
           return {
-            weight: 3,
-            color: "#523D32",
-            opacity: 0.75,
+            weight: NORMAL_SEGMENT_WEIGHT,
+            color: NORMAL_SEGMENT_COLOR,
+            opacity: 1,
             clickable: false
           };
         } else if (feature.properties.order === 1) {
           color = getClassBackgroundColor("trailActive");
           return {
-            weight: 3,
-            color: "#523D32",
-            opacity: 0.75,
+            weight: NORMAL_SEGMENT_WEIGHT,
+            color: NORMAL_SEGMENT_COLOR,
+            opacity: 1,
             clickable: false
           };
         } else if (feature.properties.order === 2) {
           color = getClassBackgroundColor("trailActive");
           return {
-            weight: 3,
-            color: "#523D32",
-            opacity: 0.75,
+            weight: NORMAL_SEGMENT_WEIGHT,
+            color: NORMAL_SEGMENT_COLOR,
+            opacity: 1,
             clickable: false
           };
         }
@@ -1382,8 +1387,8 @@ function startup() {
     console.log("setCurrentTrail");
     if (currentHighlightedTrailLayer && typeof currentHighlightedTrailLayer.setStyle == "Function") {
       currentHighlightedTrailLayer.setStyle({
-        weight: 3,
-        color: "#523D32"
+        weight: NORMAL_SEGMENT_WEIGHT,
+        color: NORMAL_SEGMENT_COLOR
       });
     }
     if (currentTrailLayers[index]) {
@@ -1392,8 +1397,8 @@ function startup() {
       console.log("ERROR: trail layer missing");
     }
     currentHighlightedTrailLayer.setStyle({
-      weight: 3,
-      color: "#6D544B"
+      weight: ACTIVE_TRAIL_WEIGHT,
+      color: ACTIVE_TRAIL_COLOR
     });
   }
 
