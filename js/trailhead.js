@@ -7,6 +7,7 @@ $(document).ready(startup);
 // Print to ensure file is loaded
 
 function startup() {
+  "use strict";
   console.log("trailhead.js");
 
   // Map generated in CfA Account
@@ -125,7 +126,9 @@ function startup() {
   $(document).on('change', '.filter', filterChangeHandler);
   $(document).on('mouseover', '.leaflet-popup', function() {
     // console.log("popup mouseover");
-    currentTrailFeatureGroup.fireEvent('mouseover');
+    if (currentTrailFeatureGroup) {
+      currentTrailFeatureGroup.fireEvent('mouseover');
+    }
   });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
@@ -545,9 +548,9 @@ function startup() {
 
   function makeAllSegmentLayer(response) {
     // make visible layers
-    allVisibleSegmentsArray = [];
-    allInvisibleSegmentsArray = [];
-    allSegmentLayer = new L.FeatureGroup();
+    var allVisibleSegmentsArray = [];
+    var allInvisibleSegmentsArray = [];
+    var allSegmentLayer = new L.FeatureGroup();
     var visibleAllTrailLayer = L.geoJson(response, {
       style: function() {
         return {
@@ -576,7 +579,7 @@ function startup() {
       onEachFeature: function(feature, layer) {
         allInvisibleSegmentsArray.push(layer);
         var $popupHTML = $("<div class='trail-popup'>");
-        for (i = 1; i <= 6; i++) {
+        for (var i = 1; i <= 6; i++) {
           var trailField = "trail" + i;
           if (feature.properties[trailField]) {
             var $trailPopupLineDiv;
@@ -584,9 +587,9 @@ function startup() {
               console.log("clickable");
               // NOTE: color should be in the css, not here
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
-              .attr("data-steward", feature.properties.steward).attr("data-source", feature.properties.source)
-              .attr("data-trailname", feature.properties[trailField])
-              .html(feature.properties[trailField]).css("color", "black");
+                .attr("data-steward", feature.properties.steward).attr("data-source", feature.properties.source)
+                .attr("data-trailname", feature.properties[trailField])
+                .html(feature.properties[trailField]).css("color", "black");
             } else {
               console.log("not clickable");
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(feature.properties[trailField]);
@@ -600,7 +603,7 @@ function startup() {
       }
     });
 
-    for (i = 0; i < allInvisibleSegmentsArray.length; i++) {
+    for (var i = 0; i < allInvisibleSegmentsArray.length; i++) {
       var currentInvisSegment = allInvisibleSegmentsArray[i];
       var newTrailFeatureGroup = new L.FeatureGroup([allInvisibleSegmentsArray[i], allVisibleSegmentsArray[i]]);
 
@@ -896,8 +899,8 @@ function startup() {
             };
           }(trail, trailhead));
 
-        $trailInfo = $("<div>").addClass("trailInfo").appendTo($trailDiv);
-        $trailheadInfo = $("<div>").addClass("trailheadInfo").appendTo($trailDiv);
+        var $trailInfo = $("<div>").addClass("trailInfo").appendTo($trailDiv);
+        var $trailheadInfo = $("<div>").addClass("trailheadInfo").appendTo($trailDiv);
 
         // Making a new div for Detail Panel
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
@@ -1003,7 +1006,7 @@ function startup() {
     console.log(["trailheadID", trailheadID]);
     var trailIndex = orderedTrail["index"];
     console.log(["trailIndex", trailIndex]);
-    for (j = 0; j < trailheads.length; j++) {
+    for (var j = 0; j < trailheads.length; j++) {
       if (trailheads[j].properties.id == trailheadID) {
         trailhead = trailheads[j];
       }
@@ -1105,6 +1108,7 @@ function startup() {
     }
     var parsed = parseTrailElementData($myTarget);
     console.log(parsed);
+    var trailhead;
     for (var i = 0; i < trailheads.length; i++) {
       if (trailheads[i].properties.id == parsed.trailheadID) {
         trailhead = trailheads[i];
