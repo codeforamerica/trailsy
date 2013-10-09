@@ -44,6 +44,8 @@ function startup() {
   var HOVER_SEGMENT_WEIGHT = 6;
   var ACTIVE_TRAIL_COLOR = "#445617";
   var ACTIVE_TRAIL_WEIGHT = 6;
+  var NOTRAIL_SEGMENT_COLOR = "#FF0000";
+  var NOTRAIL_SEGMENT_WEIGHT = 3;
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -544,7 +546,7 @@ function startup() {
 
   // returns true if trailname is in trailData
   function trailnameInListOfTrails(trailname) {
-    console.log("trailnameInListOfTrails");
+    // console.log("trailnameInListOfTrails");
     var result = false;
     $.each(trailData, function(key, value) {
       if (trailData[key].properties.name == trailname) {
@@ -553,6 +555,18 @@ function startup() {
       }
     });
     return result;
+  }
+
+  function segmentHasTrailWithMetadata(feature) {
+    for (var i = 0; i <= 6; i++) {
+      var trailFieldname = "trail" + i;
+      if (trailnameInListOfTrails(feature.properties[trailFieldname])) {
+        console.log("segment match");
+        return true;
+      }
+    }
+    console.log("segment non-match");
+    return false;
   }
 
   function makeAllSegmentLayer(response) {
@@ -592,7 +606,6 @@ function startup() {
           if (feature.properties[trailField]) {
             var $trailPopupLineDiv;
             if (trailnameInListOfTrails(feature.properties[trailField])) {
-              console.log("clickable");
               // NOTE: color should be in the css, not here
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
                 .attr("data-steward", feature.properties.steward).attr("data-source", feature.properties.source)
@@ -600,6 +613,7 @@ function startup() {
                 .html(feature.properties[trailField]).css("color", "black");
             } else {
               console.log("not clickable");
+              console.log(feature.properties[trailField]);
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(feature.properties[trailField]);
             }
             $popupHTML.append($trailPopupLineDiv);

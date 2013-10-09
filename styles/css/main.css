@@ -866,6 +866,7 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
     text-decoration: none;
     border-bottom: 1px solid gray;
+    text-transform: capitalize;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .calloutTrailheadIcon {
     position: absolute;
@@ -876,6 +877,7 @@ At some point, update mediaqueries to be in EMS
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected {
     background: #00adef;
     color: #ffffff;
+    text-transform: uppercase;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected:hover {
     background: #00adef;
@@ -946,6 +948,9 @@ At some point, update mediaqueries to be in EMS
 }
 .trailhead-name {
   font-weight: bold;
+}
+.trail-popup-line-named {
+  cursor: pointer;
 }
 .trailhead-trailname {
   cursor: pointer;

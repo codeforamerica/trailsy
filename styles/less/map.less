@@ -41,6 +41,7 @@
 						color: @color-mid-gray;
 						text-decoration: none;
 						border-bottom: 1px solid gray;
+						text-transform: capitalize;
 					}
 					.calloutTrailheadIcon {
 						position: absolute;
@@ -51,6 +52,7 @@
 					.selected {
 							background: @color-dark-blue;
 							color: @color-white;
+							text-transform: uppercase;
 							&:hover {
 								// background-color: @color-light-gray;
 								background: @color-dark-blue;
@@ -136,6 +138,10 @@
 
 .trailhead-name {
   font-weight: bold;
+}
+
+.trail-popup-line-named {
+	cursor: pointer;
 }
 
 .trailhead-trailname {
