@@ -1028,8 +1028,11 @@ function startup() {
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
-      console.log("fffffound!");
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
+    }
+    if (trail.properties.hike) {
+      console.log("hike")
+      $('.detailPanel .detailTopRow #right .icon').append("<img src=" + "/>")
     }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
@@ -1040,8 +1043,10 @@ function startup() {
     // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
     // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
-    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname);
-    $('.detailPanel .detailFooter .detailSource').attr("href", trail.properties.steward_url);
+
+    // 
+    $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons')
+    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
