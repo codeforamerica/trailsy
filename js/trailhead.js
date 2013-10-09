@@ -1077,9 +1077,25 @@ function startup() {
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
     }
-    if (trail.properties.hike) {
-      console.log("hike")
-      $('.detailPanel .detailTopRow #right .icon').append("<img src=" + "/>")
+    if (trail.properties.hike == 'y') {
+      console.log("hike icon replaced")
+      $('.detailPanel .detailTopRow#right #hike').html("<img class='activity-icons' src='img/icon_hike_green.png'>");
+    }
+    if (trail.properties.roadbike == 'y') {
+      console.log("cycle icon replaced")
+      $('.detailPanel .detailTopRow#right #cycle').html("<img class='activity-icons' src='img/icon_cycle_green.png'>");
+    }
+    if (trail.properties.accessible == 'y') {
+      console.log("handicap icon replaced")
+      $('.detailPanel .detailTopRow#right #handicap').html("<img class='activity-icons' src='img/icon_handicap_green.png'>");
+    }
+    if (trail.properties.equestrian == 'y') {
+      console.log("horse icon replaced")
+      $('.detailPanel .detailTopRow#right #horse').html("<img class='activity-icons' src='img/icon_horse_green.png'>");
+    }
+    if (trail.properties.xcntryski == 'y') {
+      console.log("xcntryski icon replaced")
+      $('.detailPanel .detailTopRow#right #xcountryski').html("<img class='activity-icons' src='img/icon_xcountryski_green.png'>");
     }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
