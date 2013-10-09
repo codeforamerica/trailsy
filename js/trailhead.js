@@ -46,6 +46,7 @@ function startup() {
   var ACTIVE_TRAIL_WEIGHT = 9;
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
+  var SHOW_LOCATION_THRESHOLD = 100; // km to Akron
 
   var map = {};
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -104,8 +105,8 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26*0.60, 33*0.60],
-    iconAnchor: [13*0.60, 33*.60],
+    iconSize: [26 * 0.60, 33 * 0.60],
+    iconAnchor: [13 * 0.60, 33 * .60],
     popupAnchor: [0, -3]
   };
 
@@ -195,23 +196,23 @@ function startup() {
 
   function initialSetup() {
     console.log("initialSetup");
-    setCurrentLocation();
-    displayInitialMap();
-    getOrderedTrailheads(currentLocation, function() {
-      getTrailData(function() {
-        addTrailDataToTrailheads(trailData);
-        if (USE_LOCAL) {
-          getTrailSegments(function() {
-            // if we haven't added the segment layer yet, add it.
-            if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-              map.addLayer(allSegmentLayer);
+    getInitialLocation(function() {
+      displayInitialMap(function() {
+        getOrderedTrailheads(currentLocation, function() {
+          getTrailData(function() {
+            addTrailDataToTrailheads(trailData);
+            if (USE_LOCAL) {
+              getTrailSegments(function() {
+                // if we haven't added the segment layer yet, add it.
+                if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+                  map.addLayer(allSegmentLayer);
+                }
+              });
             }
           });
-        }
+        });
       });
     });
-
-
   }
 
   // set currentLocation to the center of the currently viewed map
@@ -356,23 +357,64 @@ function startup() {
     currentLocation = map.getCenter();
   }
 
-  function setCurrentLocation() {
-    // for now, just returns Akron
-    // should use browser geolocation,
-    // and only return Akron if we're far from home base
+  function getInitialLocation(callback) {
+    console.log("getInitialLocation");
+    map = new L.Map('trailMap', {
+      zoomControl: false
+    });
+    map.addControl(L.control.zoom({
+      position: 'topright'
+    }));
     currentLocation = AKRON;
+
+    map.locate();
+    map.once("locationfound", function(location) {
+      processInitialPosition(location, callback);
+      map.stopLocate();
+    });
+    map.once("locationerror", function(error) {
+      processInitialPositionError(error, callback);
+      map.stopLocate();
+    });
   }
 
+  function processInitialPosition(position, callback) {
+    console.log("processInitialPosition");
+    console.log(position);
+    // var location = new L.LatLng(position.coords.latitude, position.coords.longitude);
+    var location = position.latlng;
+    console.log(location);
+    var distanceToAkron = location.distanceTo(AKRON) / 1000;
+    console.log("first distance to Akron");
+    console.log(distanceToAkron);
+    if (distanceToAkron < SHOW_LOCATION_THRESHOLD) {
+      console.log("initial distance within threshold");
+      currentLocation = location;
+    } else {
+      currentLocation = AKRON;
+    }
+    console.log("end processInitialPosition");
+    if (typeof callback == "function") {
+      callback();
+    }
+  }
+
+  function processInitialPositionError(error, callback) {
+    console.log("processInitialPositionError");
+    currentLocation = AKRON;
+    if (typeof callback == "function") {
+      callback();
+    }
+  }
   // display the map based on currentLocation
 
-  function displayInitialMap() {
+  function displayInitialMap(callback) {
     console.log("displayInitialMap");
     console.log(currentLocation);
-    map = L.map('trailMap', {
-      zoomControl: false
-    }).addControl(L.control.zoom({
-      position: 'topright'
-    })).setView([currentLocation.lat, currentLocation.lng], 11);
+    // map = L.map('trailMap', {
+    //   // zoomControl: false
+    // })
+    map.setView([currentLocation.lat, currentLocation.lng], 11);
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: [450, 100]
     });
@@ -380,7 +422,15 @@ function startup() {
     // Switch between MapBox and other providers by commenting/uncommenting these
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
+    setTimeout(function() {
+      map.locate({
+        watch: true,
+        setView: false,
+        enableHighAccuracy: false
+      });
+    }, 500);
     map.on("locationfound", function(location) {
+      console.log("locationfound");
       if (!userMarker)
         userMarker = L.userMarker(location.latlng, {
           smallIcon: true,
@@ -390,11 +440,7 @@ function startup() {
       console.log(location.latlng);
       userMarker.setLatLng(location.latlng);
     });
-    map.locate({
-      watch: true,
-      setView: false,
-      enableHighAccuracy: true
-    });
+
     map.on("zoomend", function(e) {
       console.log("zoomend");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
@@ -415,6 +461,9 @@ function startup() {
       console.log(errorEvent.message);
       console.log(errorEvent.code);
     });
+    if (typeof callback == "function") {
+      callback();
+    }
   }
 
   // =====================================================================//
@@ -1080,7 +1129,7 @@ function startup() {
         orderedTrailIndex = i;
       }
     }
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)") ;
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
