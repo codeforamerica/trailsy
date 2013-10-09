@@ -835,7 +835,7 @@ At some point, update mediaqueries to be in EMS
     position: absolute;
     height: 1.5em;
     top: .5em;
-    right: -0.5em;
+    right: 0em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
