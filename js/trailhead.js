@@ -493,6 +493,8 @@ function startup() {
   function trailheadMarkerClick(id) {
     console.log("trailheadMarkerClick");
     highlightTrailhead(id, 0);
+    var trailhead = getTrailheadById(id);
+    showTrailDetails(trailData[trailhead.trails[0]], trailhead);
   }
 
   // get the trailData from the API
@@ -736,14 +738,17 @@ function startup() {
     }
     // find the index of the clicked trail
     var trailIndex = 0;
+    var trail = null;
     for (var k = 0; k < nearestTrailhead.trails.length; k++) {
       var trailheadTrailID = nearestTrailhead.trails[k];
       if (trailData[trailheadTrailID].properties.name == trailname) {
+        trail = trailData[trailheadTrailID];
         trailIndex = k;
       }
     }
     // highlight it
     highlightTrailhead(nearestTrailhead.properties.id, trailIndex);
+    showTrailDetails(trail, nearestTrailhead);
   }
 
   // given trailData,
@@ -1147,16 +1152,27 @@ function startup() {
     }
     var parsed = parseTrailElementData($myTarget);
     console.log(parsed);
-    var trailhead;
-    for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.id == parsed.trailheadID) {
-        trailhead = trailheads[i];
-      }
-    }
+    var trailhead = getTrailheadById(parsed.trailheadID);
+    // for (var i = 0; i < trailheads.length; i++) {
+    //   if (trailheads[i].properties.id == parsed.trailheadID) {
+    //     trailhead = trailheads[i];
+    //   }
+    // }
     // decorateDetailPanel(trailData[parsed.trailID], trailhead);
     highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
     var trail = trailData[parsed.trailID];
     showTrailDetails(trail, trailhead);
+  }
+
+  function getTrailheadById(trailheadID) {
+    var trailhead;
+    for (var i = 0; i < trailheads.length; i++) {
+      if (trailheads[i].properties.id == trailheadID) {
+        trailhead = trailheads[i];
+        break;
+      }
+    }
+    return trailhead;
   }
 
   // given a trailheadID and a trail index within that trailhead
@@ -1168,13 +1184,15 @@ function startup() {
 
   function highlightTrailhead(trailheadID, highlightedTrailIndex) {
     console.log("highlightTrailhead");
+    highlightedTrailIndex = highlightedTrailIndex || 0;
     var trailhead = null;
-    for (var i = 0; i < trailheads.length; i++) {
-      if (trailheads[i].properties.id == trailheadID) {
-        trailhead = trailheads[i];
-        break;
-      }
-    }
+    trailhead = getTrailheadById(trailheadID);
+    // for (var i = 0; i < trailheads.length; i++) {
+    //   if (trailheads[i].properties.id == trailheadID) {
+    //     trailhead = trailheads[i];
+    //     break;
+    //   }
+    // }
 
     if ($('.detailPanel').is(":visible")) {
       $('.trailhead-trailname.selected').removeClass("detail-open");
