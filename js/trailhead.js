@@ -109,11 +109,11 @@ function startup() {
   };
 
   var trailheadIcon1Options = $.extend(trailheadIconOptions, {
-    iconUrl: 'img/icon_trailhead_1.png'
+    iconUrl: 'img/icon_trailhead_active.png'
   });
   var trailheadIcon1 = L.icon(trailheadIcon1Options);
   var trailheadIcon2Options = $.extend(trailheadIconOptions, {
-    iconUrl: 'img/icon_trailhead_2.png'
+    iconUrl: 'img/icon_trailhead_active.png'
   });
   var trailheadIcon2 = L.icon(trailheadIcon2Options);
 
@@ -841,7 +841,7 @@ function startup() {
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-box").html($("<div class='popupTrailheadNames'>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
       $popupTrailheadDiv.append($("<img>").addClass("calloutTrailheadIcon").attr({
-        src: "img/icon_trailhead_1.png"
+        src: "img/icon_trailhead_active.png"
       }));
       for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
         var trail = trailData[trailhead.trails[trailsIndex]];
@@ -952,7 +952,7 @@ function startup() {
         $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
-        $("<img class='trailheadIcon' src='img/icon_trailhead_1.png'/>").appendTo($trailheadInfo);
+        $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
 
