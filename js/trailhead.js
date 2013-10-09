@@ -85,7 +85,7 @@ function startup() {
   var currentFilters = {
     lengthFilter: [],
     activityFilter: [],
-    searchFilter: []
+    searchFilter: ""
   };
   var orderedTrails = [];
   var currentDetailTrail = null;
@@ -259,6 +259,7 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
+        console.log(searchFilter);
         var index = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         if (index == -1) {
           delete filteredTrailData[trail_id];
@@ -307,7 +308,7 @@ function startup() {
     var matched = 0;
     if (filterType == "activityFilter") {
       var filterlength = currentFilters.activityFilter.length;
-      for (i = 0; i < currentFilters.activityFilter.length; i++) {
+      for (var i = 0; i < currentFilters.activityFilter.length; i++) {
         var activity = currentFilters.activityFilter[i];
         if (activity === currentUIFilterState) {
           currentFilters.activityFilter.splice(i, 1);
@@ -324,7 +325,7 @@ function startup() {
       console.log("length");
       console.log(currentFilters.lengthFilter.length);
       var filterlength = currentFilters.lengthFilter.length;
-      for (j = 0; j < filterlength; j++) {
+      for (var j = 0; j < filterlength; j++) {
         console.log("j");
         console.log(j);
         var lengthRange = currentFilters.lengthFilter[j];
