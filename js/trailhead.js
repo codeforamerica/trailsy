@@ -43,7 +43,7 @@ function startup() {
   var HOVER_SEGMENT_COLOR = "#678729";
   var HOVER_SEGMENT_WEIGHT = 6;
   var ACTIVE_TRAIL_COLOR = "#445617";
-  var ACTIVE_TRAIL_WEIGHT = 6;
+  var ACTIVE_TRAIL_WEIGHT = 9;
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
 
@@ -98,6 +98,7 @@ function startup() {
   var currentWeightedSegment = null;
   var currentTrailPopup = null;
   var currentTrailhead = null;
+  var orderedTrailIndex;
 
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
@@ -468,7 +469,8 @@ function startup() {
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
         color: "#00adef",
-        fillOpacity: 1.0
+        fillOpacity: .5,
+        opacity: .8
       }).setRadius(4);
       // adding closure to call trailheadMarkerClick with trailheadID on marker click
       newMarker.on("click", function(trailheadID) {
@@ -1029,7 +1031,7 @@ function startup() {
     var trailID = String(currentDetailTrail.properties.id);
     console.log(trailID);
     var trailhead;
-    var orderedTrailIndex;
+
     for (var i = 0; i < orderedTrails.length; i++) {
       if (orderedTrails[i]["trailID"] == trailID && orderedTrails[i]["trailheadID"] == trailheadID) {
         orderedTrailIndex = i;
@@ -1078,8 +1080,13 @@ function startup() {
     // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
     // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
     // $("<div class='detailT")
-
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+    console.log(orderedTrailIndex);
+    for (var i = 0; i < orderedTrails.length; i++) {
+      if (orderedTrails[i]["trailID"] == trail.properties.id && orderedTrails[i]["trailheadID"] == trailhead.properties.id) {
+        orderedTrailIndex = i;
+      }
+    }
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)") ;
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
       console.log("fffffound!");

@@ -887,7 +887,7 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
-    background: rgba(227, 227, 225, 0.2);
+    background: rgba(227, 227, 225, 0.4);
     color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected {
@@ -954,9 +954,10 @@ At some point, update mediaqueries to be in EMS
 }
 .trail-popup-line-named {
   cursor: pointer;
+  color: #58595b;
 }
 .trail-popup-line-named:hover {
-  background: rgba(227, 227, 225, 0.2);
+  background: rgba(227, 227, 225, 0.4);
 }
 .trailhead-trailname {
   cursor: pointer;
