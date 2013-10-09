@@ -884,7 +884,7 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
-    color: #00adef;
+    color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
     background: rgba(227, 227, 225, 0.2);
@@ -897,7 +897,7 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected:hover {
     color: #ffffff;
-    background: #00adef;
+    background: #96daf8;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected.detail-open {
     color: #ffffff;
@@ -954,6 +954,9 @@ At some point, update mediaqueries to be in EMS
 }
 .trail-popup-line-named {
   cursor: pointer;
+}
+.trail-popup-line-named:hover {
+  background: rgba(227, 227, 225, 0.2);
 }
 .trailhead-trailname {
   cursor: pointer;
