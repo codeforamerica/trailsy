@@ -119,19 +119,10 @@ At some point, update mediaqueries to be in EMS
     margin-top: 3px;
     width: 90%;
   }
-  .title-row header .navbar-inner .brand {
-    display: inline-block;
-    font-size: 12px;
-    color: #ffffff;
+  .title-row header .navbar-inner .logo {
+    height: 100%;
+    width: 4em;
   }
-  @sans Serif-bold;
-  .title-row header .navbar-inner .subBrand {
-    text-decoration: none;
-    display: inline-block;
-    font-size: 8px;
-    color: #d9f0fc;
-  }
-  @sans Serif-light;
 }
 @media only screen and (min-width: 950px) {
   .title-row {
@@ -152,43 +143,15 @@ At some point, update mediaqueries to be in EMS
     border: none;
     box-shadow: none;
     text-align: justify;
-    padding: 1em .25em .25em 1em;
+    padding: .5em .25em .25em 1em;
   }
   .title-row header .navbar-inner:after {
     content: '';
     display: inline-block;
   }
-  .title-row header .navbar-inner .brand {
-    font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    font-size: 24px;
-    line-height: 1em;
-    text-decoration: none;
-    display: inline-block;
-    color: #ffffff;
-  }
-  .title-row header .navbar-inner .brand:hover {
-    text-decoration: none;
-  }
-  .title-row header .navbar-inner .brand:focus {
-    text-decoration: none;
-  }
-  .title-row header .navbar-inner .subBrand {
-    margin-left: .5em;
-    display: inline-block;
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    font-size: 12px;
-    color: #00adef;
-    text-decoration: none;
-    cursor: default;
-  }
-  .title-row header .navbar-inner .subBrand:hover {
-    text-decoration: none;
+  .title-row header .navbar-inner .logo {
+    height: 100%;
+    width: 18em;
   }
   .title-row header .navbar-inner .about {
     position: relative;
