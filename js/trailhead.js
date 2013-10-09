@@ -1242,7 +1242,8 @@ function startup() {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
         color: "#00adef",
-        fillOpacity: 1.0,
+        fillOpacity: .5,
+        opacity: .8,
         zIndexOffset: 100
       }).setRadius(4).addTo(map);
       currentTrailhead.marker.on("click", function(trailheadID) {
