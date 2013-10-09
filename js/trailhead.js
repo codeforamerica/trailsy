@@ -259,7 +259,6 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
-        console.log(searchFilter);
         var index = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         if (index == -1) {
           delete filteredTrailData[trail_id];
