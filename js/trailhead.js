@@ -399,14 +399,12 @@ function startup() {
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
-          console.log("adding-- zoomLevel: ", map.getZoom());
           map.addLayer(allSegmentLayer);
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
           if (currentTrailPopup) {
             map.removeLayer(currentTrailPopup);
           }
-          console.log("removing-- zoomLevel: ", map.getZoom());
           map.removeLayer(allSegmentLayer);
         }
       }
@@ -617,8 +615,8 @@ function startup() {
                 .attr("data-trailname", feature.properties[trailField])
                 .html(feature.properties[trailField]).css("color", "black");
             } else {
-              console.log("not clickable");
-              console.log(feature.properties[trailField]);
+              // console.log("not clickable");
+              // console.log(feature.properties[trailField]);
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(feature.properties[trailField]);
             }
             $popupHTML.append($trailPopupLineDiv);
@@ -1206,11 +1204,7 @@ function startup() {
       }(currentTrailhead.properties.id));
     }
     if ($('.detailPanel').is(":visible")) {
-      console.log("detail is open");
-      console.log($('.trailhead-trailname.selected'));
       $('.trailhead-trailname.selected').addClass("detail-open");
-    } else {
-      console.log("detail closed");
     }
     currentTrailhead = trailhead;
 
@@ -1233,7 +1227,7 @@ function startup() {
       .setContent(trailhead.popupContent)
       .setLatLng(trailhead.marker.getLatLng())
       .openOn(map);
-      
+
     if ($('.detailPanel').is(":visible")) {
       console.log("detail is open");
       console.log($('.trailhead-trailname.selected'));
