@@ -104,9 +104,9 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [25, 20],
-    iconAnchor: [11, 20],
-    popupAnchor: [0, -22]
+    iconSize: [26*0.60, 33*0.60],
+    iconAnchor: [13*0.60, 33*.60],
+    popupAnchor: [0, -3]
   };
 
   var trailheadIcon1Options = $.extend(trailheadIconOptions, {
@@ -1258,8 +1258,7 @@ function startup() {
 
     map.removeLayer(currentTrailhead.marker);
     currentTrailhead.marker = new L.Marker(currentTrailhead.marker.getLatLng(), {
-      icon: trailheadIcon1,
-      zIndexOffset: 100
+      icon: trailheadIcon1
     }).addTo(map);
     currentTrailhead.marker.on("click", function(trailheadID) {
       return function() {
