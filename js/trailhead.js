@@ -1097,6 +1097,10 @@ function startup() {
       console.log("xcntryski icon replaced")
       $('.detailPanel .detailTopRow#right #xcountryski').html("<img class='activity-icons' src='img/icon_xcountryski_green.png'>");
     }
+    if (trailhead.properties.parking == 'yes') {
+      console.log("parking icon added")
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
+    }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
     $('.detailPanel .detailLength').html(trail.properties.length + " miles");

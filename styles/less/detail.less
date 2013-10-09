@@ -116,7 +116,7 @@
 					border-radius: 5em 0 0 5em;
 					b {
 						position: relative;
-						margin: 1em 0em 1em 1em;
+						margin: 1em 2em 1em 1em;
 					    border-bottom: .8em solid transparent;
 					    border-top: .8em solid transparent;
 					    border-right: .8em solid @color-white;
@@ -303,7 +303,12 @@
 						display: inline-block;
 						height: 2em;
 						width: 100%;
-						background-color: @color-light-mid-gray;
+						.amenity-icons {
+							height: 100%;
+							width: auto;
+							position: relative;
+							display: inline-block;
+						}
 					}
 				}
 				.detailLinksToSocial {

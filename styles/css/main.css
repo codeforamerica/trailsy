@@ -1199,7 +1199,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft b {
     position: relative;
-    margin: 1em 0em 1em 1em;
+    margin: 1em 2em 1em 1em;
     border-bottom: .8em solid transparent;
     border-top: .8em solid transparent;
     border-right: 0.8em solid #ffffff;
@@ -1422,7 +1422,12 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: 2em;
     width: 100%;
-    background-color: #bbbdbf;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .amenity-icons {
+    height: 100%;
+    width: auto;
+    position: relative;
+    display: inline-block;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial {
     position: relative;
