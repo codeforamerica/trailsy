@@ -41,6 +41,7 @@
 						color: @color-mid-gray;
 						text-decoration: none;
 						border-bottom: 1px solid gray;
+						text-transform: capitalize;
 					}
 					.calloutTrailheadIcon {
 						position: absolute;
@@ -48,12 +49,34 @@
 						top: .5em;
 						right: -.5em;
 					}
+					
 					.trailhead-trailname {
 						min-width: 12em;
 						width: 100%;
 						padding: .5em 0em .25em .5em;
 						.status {
 							height: 100%;
+						}
+						&.not-selected {
+							background: @color-white;
+							color: @color-mid-gray;
+							&:hover {
+								background: fade(@color-light-gray, 20%);
+								color: @color-mid-gray;
+							}
+						}
+						&.selected {
+							background: @color-white;
+							color: @color-dark-blue;
+							text-transform: uppercase;
+							&:hover {
+								color: @color-white;
+								background: @color-mid-blue;
+							}
+							&.detail-open {
+								color: @color-white;
+								background: @color-dark-blue;
+							}
 						}
 						.popupTrailNames {
 							position: relative;
@@ -62,45 +85,44 @@
 							margin: 0;
 							display: inline-block;
 							.sansSerif-light;
-							color: @color-light-mid-gray;
+							// color: @color-light-mid-gray;
 							text-decoration: none;
 							line-height: 1em;
 						}
-						&:hover {
-							background-color: @color-dark-blue;
-						}
+						
+						
 						&:hover div {
-							color: @color-white;
+							// color: @color-white;
 						}
 						&:hover b {
-/*							border-left: .6em solid @color-white;
-*/						}
-					}
-					b {
-						position: relative;
-						padding: 0 0 0 .2em;
-						float: right;
-					    border-bottom: .6em solid transparent;
-					    border-top: .6em solid transparent;
-					    border-left: .6em solid @color-light-blue;
-					    display: inline-block;
-					    height: 0;
-					}
-					+ .trail1 {
-						&:hover {}
-					}
-					+ .trail2 {
-						border-top: 1px solid @color-light-gray;
-						&:hover {}
-					}
-					+ .trail3 {
-						border-top: 1px solid @color-light-mid-gray;
-						&:hover {}
-					}
-				}
-			}
-		}
-	}
+  						//	border-left: .6em solid @color-white;
+  					}
+  				}
+  				b {
+  					position: relative;
+  					padding: 0 0 0 .2em;
+  					float: right;
+  					border-bottom: .6em solid transparent;
+  					border-top: .6em solid transparent;
+  					border-left: .6em solid @color-light-blue;
+  					display: inline-block;
+  					height: 0;
+  				}
+  				+ .trail1 {
+  					&:hover {}
+  				}
+  				+ .trail2 {
+  					border-top: 1px solid @color-light-gray;
+  					&:hover {}
+  				}
+  				+ .trail3 {
+  					border-top: 1px solid @color-light-mid-gray;
+  					&:hover {}
+  				}
+  			}
+  		}
+  	}
+  }
 }
 
 .trail-popup {
@@ -115,15 +137,22 @@
 }
 
 .trailhead-popup {
-  color: black;
+	color: black;
 }
 
 .trailhead-name {
-  font-weight: bold;
+	font-weight: bold;
+}
+
+.trail-popup-line-named {
+	cursor: pointer;
+	&:hover {
+		background: fade(@color-light-gray, 20%);
+	}
 }
 
 .trailhead-trailname {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .trailMapContainer {
@@ -212,16 +241,16 @@
 		display: none;	
 	}
 	@media @desktop {
-	    position: absolute;
-	    top: 250px;
-	    height: 20px;
-	    width: 20px;
-	    left: 50%;
-	    /*margin-left: -8px;*/
-	    display: block;
-	    background: url(../../img/crosshair.gif);
-	    background-position: center center;
-	    background-repeat: no-repeat;
-	    z-index: 1;
+		position: absolute;
+		top: 250px;
+		height: 20px;
+		width: 20px;
+		left: 50%;
+		/*margin-left: -8px;*/
+		display: block;
+		background: url(../../img/crosshair.gif);
+		background-position: center center;
+		background-repeat: no-repeat;
+		z-index: 1;
 	}
 }
