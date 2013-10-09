@@ -14,6 +14,11 @@ $(document).ready(function() {
 
 	var $nav = document.getElementsByClassName("title-row");
 
+	//  These are copied and pasted, but ultimately these are the exact objects I want to use
+
+	var trail = trailData[parsed.trailID];
+	var trailhead = 
+
 // UI Events & Event Handlers 
 // ----------------------------------//
 
@@ -45,9 +50,10 @@ $(document).ready(function() {
 		$nav.appendTo(".trailMapContainer");
 	};
 
-	function createActiveTrailDiv() {
-		
-	};
+	//  can I just pass in this arguments?
+	function createActiveTrailDiv(trail, trailhead) {
+		$('.activeTrail').html(trailhead.properties.source);
+		};
 
 
 

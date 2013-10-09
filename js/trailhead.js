@@ -20,8 +20,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy") {
@@ -110,11 +110,11 @@ function startup() {
   };
 
   var trailheadIcon1Options = $.extend(trailheadIconOptions, {
-    iconUrl: 'img/icon_trailhead_1.png'
+    iconUrl: 'img/icon_trailhead_active.png'
   });
   var trailheadIcon1 = L.icon(trailheadIcon1Options);
   var trailheadIcon2Options = $.extend(trailheadIconOptions, {
-    iconUrl: 'img/icon_trailhead_2.png'
+    iconUrl: 'img/icon_trailhead_active.png'
   });
   var trailheadIcon2 = L.icon(trailheadIcon2Options);
 
@@ -843,7 +843,7 @@ function startup() {
       var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
       var $popupTrailheadDiv = $("<div>").addClass("trailhead-box").html($("<div class='popupTrailheadNames'>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
       $popupTrailheadDiv.append($("<img>").addClass("calloutTrailheadIcon").attr({
-        src: "img/icon_trailhead_1.png"
+        src: "img/icon_trailhead_active.png"
       }));
       for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
         var trail = trailData[trailhead.trails[trailsIndex]];
@@ -954,7 +954,7 @@ function startup() {
         $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
-        $("<img class='trailheadIcon' src='img/icon_trailhead_1.png'/>").appendTo($trailheadInfo);
+        $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
 
@@ -1074,12 +1074,6 @@ function startup() {
   }
 
   function decorateDetailPanel(trail, trailhead) {
-    //  Taking cues from the construction of the List Items / Trail Divs above
-    // var $detailPanelBody;
-    // $detailPanelBody = $("<div>").addClass("detailPanelBody");
-    // $("<div class='detailTopRow' id='left'>" + + "</div>").appendTo($detailPanelBody);
-    // $("<div class='detailTopRow' id='right'>" + + "</div>").appendTo($detailPanelBody);
-    // $("<div class='detailT")
     console.log(orderedTrailIndex);
     for (var i = 0; i < orderedTrails.length; i++) {
       if (orderedTrails[i]["trailID"] == trail.properties.id && orderedTrails[i]["trailheadID"] == trailhead.properties.id) {
@@ -1087,10 +1081,34 @@ function startup() {
       }
     }
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)") ;
+
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
-      console.log("fffffound!");
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
+    }
+    if (trail.properties.hike == 'y') {
+      console.log("hike icon replaced")
+      $('.detailPanel .detailTopRow#right #hike').html("<img class='activity-icons' src='img/icon_hike_green.png'>");
+    }
+    if (trail.properties.roadbike == 'y') {
+      console.log("cycle icon replaced")
+      $('.detailPanel .detailTopRow#right #cycle').html("<img class='activity-icons' src='img/icon_cycle_green.png'>");
+    }
+    if (trail.properties.accessible == 'y') {
+      console.log("handicap icon replaced")
+      $('.detailPanel .detailTopRow#right #handicap').html("<img class='activity-icons' src='img/icon_handicap_green.png'>");
+    }
+    if (trail.properties.equestrian == 'y') {
+      console.log("horse icon replaced")
+      $('.detailPanel .detailTopRow#right #horse').html("<img class='activity-icons' src='img/icon_horse_green.png'>");
+    }
+    if (trail.properties.xcntryski == 'y') {
+      console.log("xcntryski icon replaced")
+      $('.detailPanel .detailTopRow#right #xcountryski').html("<img class='activity-icons' src='img/icon_xcountryski_green.png'>");
+    }
+    if (trailhead.properties.parking == 'yes') {
+      console.log("parking icon added")
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
     }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
@@ -1101,6 +1119,11 @@ function startup() {
     // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
     // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
+
+    // 
+    $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons')
+    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
+    $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
   // event handler for click of a trail name in a trailhead popup

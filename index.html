@@ -23,7 +23,7 @@
      <script src="js/modernizr.js"></script>
      <script src="js/leaflet.js"></script>
      <script src="js/wicket.js"></script>
-     <script src="js/wicket-leaflet.js"></script>
+<!-- <script src="js/wicket-leaflet.js"></script> -->
      <script src="js/leaflet-providers.js"></script>
      <script src="js/async.js"></script>
      <script src="js/leaflet.usermarker.js"></script>
@@ -53,9 +53,7 @@
                 <div></div>
                 <div></div>
               </a>
-              <a class="brand" href="#">To The Trails!</a>
-              <a class="subBrand" href="#">SUMMIT</a>
-              <a class="about" href="#">about</a>
+              <img class="logo" src="img/logo.png"></img>
             </div>
           </header>
         </div>
@@ -211,10 +209,12 @@
         <div class="detailPanel">
           <div class="detailPanelBanner">
             <span class="trailName"></span>
-            <img class="closeDetail" src="img/close-btn-orange.png">
+            <img class="closeDetail" src="img/close-btn.png">
             <div class="detailPanelControls controlLeft">
+              <b></b>
             </div>
             <div class="detailPanelControls controlRight">
+              <b></b>
             </div>
           </div>
           <!-- Close Button -->
@@ -233,19 +233,19 @@
                 <img class="activity-icons" src="img/icon_hike_white.png">
               </div>
               <div class="icon" id="hike">
-                <img class="activity-icons" src="img/icon_hike_green.png">
+                <img class="activity-icons" src="img/icon_hike_gray.png">
               </div>
               <div class="icon" id="cycle">
-                <img class="activity-icons" src="img/icon_cycle_green.png">
+                <img class="activity-icons" src="img/icon_cycle_gray.png">
               </div>
               <div class="icon" id="handicap">
-                <img class="activity-icons" src="img/icon_handicap_green.png">
+                <img class="activity-icons" src="img/icon_handicap_gray.png">
               </div>
               <div class="icon" id="horse">
-                <img class="activity-icons" src="img/icon_horse_green.png">
+                <img class="activity-icons" src="img/icon_horse_gray.png">
               </div>
               <div class="icon" id="xcountryski">
-                <img class="activity-icons" src="img/icon_xcountryski_green.png">
+                <img class="activity-icons" src="img/icon_xcountryski_gray.png">
               </div>
             </div>
             <div class="detailMiddleRow">
@@ -256,39 +256,47 @@
           </br>
             <div class="detailBottomRow">
               <span class="detailPanelHeader">CLOSEST ENTRACE </span><span class="detailTrailheadDistance"></span><br/>
-            <div class="detailTrailheadInfo">
-              <span class="detailTrailheadName"></span><br/>
-              <span class="detailTrailheadPark">Park Name Variable</span><br/>
-              <span class="detailTrailheadCounty">Summit County, OH</span><br/>
-            </div>
-            <div class="detailLinksToMore">
-              <div class="detailDirections"><a href="#">Get Directions</a></div>
-              <div class="detailPrintMap"><a href="#">Official Trail Map</a></div>
-            </div>
-            <div class="detailTrailheadAmenities">
-              <span class="detailPanelHeader">TRAILHEAD AMENITIES</span>
-            </div>
-            <div class="detailLinksToSocial">
-              <div class="social-icon" id="facebook">
-                <img src="">
-                facebook
+              <div class="detailTrailheadInfo">
+                <span class="detailTrailheadName"></span><br/>
+                <span class="detailTrailheadPark">Park Name Variable</span><br/>
+                <span class="detailTrailheadCounty">Summit County, OH</span><br/>
               </div>
-              <div class="social-icon" id="tweet">
-                <img src="">
-                tweet
+              <div class="detailLinksToMore">
+                <div class="detailDirections"><a href="#">Get Directions</a></div>
+                <div class="detailPrintMap"><a href="#">Official Trail Map</a></div>
               </div>
-              <div class="social-icon" id="email">
-                <img src="">
-                email
+              <div class="detailTrailheadAmenities">
+                <span class="detailPanelHeader">TRAILHEAD AMENITIES</span>
+                <div class="detailTrailheadIcons"></div>
+              </div>
+              <div class="detailLinksToSocial">
+                <div class="social-icon" id="facebook">
+                  <img src="">
+                  facebook
+                </div>
+                <div class="social-icon" id="tweet">
+                  <img src="">
+                  tweet
+                </div>
+                <div class="social-icon" id="email">
+                  <img src="">
+                  email
+                </div>
               </div>
             </div>
-          </div>
-          <div class="detailFooter">
-            <img class="icon-large" src="img/mpssc.jpg">
-            <span class="detailPanelHeader">MANAGED BY:</span>
-            <span class="detailSource"></span>
-            <span class="detailSourceTelephone" href="#">XXX-XXX-XXX</span>
-          </div>
+            <div class="detailFooter">
+              <img class="icon-large" src="img/mpssc.jpg"/>
+              <div class="detailStewardInfo">
+                <span class="detailPanelHeader">MANAGED BY:</span>
+                </br>
+                <a class="detailSource" href=""></a>
+              </div>
+              <div class="detailStewardInfo">
+                <span class="detailPanelHeader">FOR ASSISTANCE CALL:</span>
+                </br>
+                <span class="detailSourcePhone" href="#">XXX-XXX-XXX</span>
+              </div>
+            </div>
         </div>
       </section> <!-- trailListColumn -->
     </div>
