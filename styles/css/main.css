@@ -874,27 +874,34 @@ At some point, update mediaqueries to be in EMS
     top: .5em;
     right: -0.5em;
   }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected {
-    background: #00adef;
-    color: #ffffff;
-    text-transform: uppercase;
-  }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .selected:hover {
-    background: #00adef;
-    color: #ffffff;
-  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
     padding: .5em 0em .25em .5em;
-    color: #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     height: 100%;
   }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover {
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
+    background: #ffffff;
+    color: #00adef;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
     background: rgba(227, 227, 225, 0.2);
     color: #58595b;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected {
+    background: #ffffff;
+    color: #00adef;
+    text-transform: uppercase;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected:hover {
+    color: #ffffff;
+    background: #00adef;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected.detail-open {
+    color: #ffffff;
+    background: #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
@@ -908,10 +915,6 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     text-decoration: none;
     line-height: 1em;
-  }
-  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname:hover b {
-    /*							border-left: .6em solid @color-white;
-  */
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box b {
     position: relative;

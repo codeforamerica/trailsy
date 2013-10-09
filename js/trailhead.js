@@ -997,6 +997,7 @@ function startup() {
     console.log("openDetailPanel");
     $('.detailPanel').show();
     $('.accordion').hide();
+    $('.trailhead-trailname.selected').addClass("detail-open");
     // map.invalidateSize();
   }
 
@@ -1004,6 +1005,7 @@ function startup() {
     console.log("closeDetailPanel");
     $('.detailPanel').hide();
     $('.accordion').show();
+    $('.trailhead-trailname.selected').removeClass("detail-open");
     // map.invalidateSize();
   }
 
@@ -1173,10 +1175,10 @@ function startup() {
     // add selected class to selected trail in trailhead popup, and remove it from others
     var $trailheadPopupContent = $(trailhead.popupContent);
     var trailID = trailhead.trails[highlightedTrailIndex];
-    $trailheadPopupContent.find(".trailhead-trailname").removeClass("selected");
+    $trailheadPopupContent.find(".trailhead-trailname").removeClass("selected").addClass("not-selected");
     var selector = '[data-trailid="' + trailID + '"]';
     var $trailnameItem = $trailheadPopupContent.find(selector);
-    $trailnameItem.addClass("selected");
+    $trailnameItem.addClass("selected").removeClass("not-selected");
     trailhead.popupContent = $trailheadPopupContent.outerHTML();
     
 
