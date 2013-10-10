@@ -102,6 +102,7 @@ function startup() {
   var currentTrailhead = null;
   var orderedTrailIndex;
   var geoWatchId = null;
+  var currentTrailheadHover = null;
 
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
@@ -143,11 +144,17 @@ function startup() {
     if (currentSegmentFeatureGroup) {
       currentSegmentFeatureGroup.fireEvent('mouseover');
     }
+    if (currentTrailheadHover) {
+      currentTrailheadHover.marker.fireEvent('mouseover');
+    }
   });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
     if (currentSegmentFeatureGroup) {
       currentSegmentFeatureGroup.fireEvent('mouseout');
+    }
+    if (currentTrailheadHover) {
+      currentTrailheadHover.marker.fireEvent('mouseout');
     }
   });
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
@@ -455,6 +462,7 @@ function startup() {
         }
       }
     });
+    map.on('popupclose', popupCloseHandler);
     return map;
   }
 
@@ -515,39 +523,43 @@ function startup() {
         fillOpacity: 0.5,
         opacity: 0.8
       }).setRadius(4);
-      // adding closure to call trailheadMarkerClick with trailheadID on marker click
-      newMarker.on("click", function(trailheadID) {
-        return function() {
-          trailheadMarkerClick(trailheadID);
-        };
-      }(currentFeature.properties.id));
-
       var trailhead = {
         properties: currentFeature.properties,
         marker: newMarker,
         trails: [],
         popupContent: ""
       };
-      newMarker.on("mouseover", function(trailhead) {
-        return function() {
-          console.log(trailhead);
-          var popup = new L.Popup({
-            offset: [0, -12],
-            autoPanPadding: [100, 100]
-          }).setContent(trailhead.popupContent)
-            .setLatLng(trailhead.marker.getLatLng())
-            .openOn(map);
-        };
-      }(trailhead));
-      newMarker.on("mouseout", function(trailhead) {
-        return function() {
-          map.closePopup();
-        };
-      }(trailhead));
+      setTrailheadEventHandlers(trailhead);
       trailheads.push(trailhead);
     }
   }
 
+  function setTrailheadEventHandlers(trailhead) {
+    trailhead.marker.on("mouseover", function(trailhead) {
+      return function() {
+        console.log("mouseover");
+        var popup = new L.Popup({
+          offset: [0, 0],
+          autoPanPadding: [100, 100]
+        }).setContent(trailhead.popupContent)
+          .setLatLng(trailhead.marker.getLatLng())
+          .openOn(map);
+        currentTrailheadHover = trailhead;
+      };
+    }(trailhead));
+    trailhead.marker.on("mouseout", function(trailhead) {
+      return function() {
+        console.log("mouseout");
+        map.closePopup();
+        // currentTrailheadHover = null;
+      };
+    }(trailhead));
+    trailhead.marker.on("click", function(trailheadID) {
+      return function() {
+        trailheadMarkerClick(trailheadID);
+      };
+    }(trailhead.properties.id));
+  }
   // on trailhead marker click, this is invoked with the id of the trailhead
   // not used for anything but logging at the moment
 
@@ -558,6 +570,13 @@ function startup() {
     showTrailDetails(trailData[trailhead.trails[0]], trailhead);
   }
 
+  function popupCloseHandler(e) {
+    console.log(e);
+    console.log("popupCloseHandler");
+    if (currentTrailheadHover) {
+      highlightTrailInPopup(currentTrailheadHover, -1);
+    }
+  }
   // get the trailData from the API
 
   function getTrailData(callback) {
@@ -751,6 +770,7 @@ function startup() {
               e.target.setStyle({
                 weight: 3
               });
+              currentSegmentFeatureGroup = null;
             };
           }(e), 1250);
         };
@@ -1264,6 +1284,27 @@ function startup() {
     return trailhead;
   }
 
+  function highlightTrailInPopup(trailhead, highlightedTrailIndex) {
+    // add selected class to selected trail in trailhead popup, and remove it from others,
+    // unless highlightedTrailIndex == -1, then just remove it everywhere
+    var $trailheadPopupContent = $(trailhead.popupContent);
+
+    $trailheadPopupContent.find(".trailhead-trailname").removeClass("selected").addClass("not-selected");
+    if (highlightedTrailIndex != -1) {
+      var trailID = trailhead.trails[highlightedTrailIndex];
+      var selector = '[data-trailid="' + trailID + '"]';
+      var $trailnameItem = $trailheadPopupContent.find(selector);
+      $trailnameItem.addClass("selected").removeClass("not-selected");
+    }
+    trailhead.popupContent = $trailheadPopupContent.outerHTML();
+
+    if ($('.detailPanel').is(":visible")) {
+      // console.log("detail is open");
+      // console.log($('.trailhead-trailname.selected'));
+      $('.trailhead-trailname.selected').addClass("detail-open");
+    }
+  }
+
   // given a trailheadID and a trail index within that trailhead
   // display the trailhead marker and popup,
   // then call highlightTrailheadDivs() and getAllTrailPathsForTrailhead()
@@ -1287,29 +1328,15 @@ function startup() {
       $('.trailhead-trailname.selected').removeClass("detail-open");
     }
 
-    // add selected class to selected trail in trailhead popup, and remove it from others
-    var $trailheadPopupContent = $(trailhead.popupContent);
-    var trailID = trailhead.trails[highlightedTrailIndex];
-    $trailheadPopupContent.find(".trailhead-trailname").removeClass("selected").addClass("not-selected");
-    var selector = '[data-trailid="' + trailID + '"]';
-    var $trailnameItem = $trailheadPopupContent.find(selector);
-    $trailnameItem.addClass("selected").removeClass("not-selected");
-    trailhead.popupContent = $trailheadPopupContent.outerHTML();
-
-
     if (currentTrailhead) {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
         color: "#00adef",
-        fillOpacity: .5,
-        opacity: .8,
+        fillOpacity: 0.5,
+        opacity: 0.8,
         zIndexOffset: 100
       }).setRadius(4).addTo(map);
-      currentTrailhead.marker.on("click", function(trailheadID) {
-        return function() {
-          trailheadMarkerClick(trailheadID);
-        };
-      }(currentTrailhead.properties.id));
+      setTrailheadEventHandlers(currentTrailhead);
     }
     if ($('.detailPanel').is(":visible")) {
       $('.trailhead-trailname.selected').addClass("detail-open");
@@ -1320,13 +1347,10 @@ function startup() {
     currentTrailhead.marker = new L.Marker(currentTrailhead.marker.getLatLng(), {
       icon: trailheadIcon1
     }).addTo(map);
-    currentTrailhead.marker.on("click", function(trailheadID) {
-      return function() {
-        trailheadMarkerClick(trailheadID);
-      };
-    }(currentTrailhead.properties.id));
+    setTrailheadEventHandlers(currentTrailhead);
 
     getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex);
+    highlightTrailInPopup(trailhead, highlightedTrailIndex);
     var popup = new L.Popup({
       offset: [0, -12],
       autoPanPadding: [100, 100]
@@ -1334,13 +1358,8 @@ function startup() {
       .setContent(trailhead.popupContent)
       .setLatLng(trailhead.marker.getLatLng())
       .openOn(map);
-
-    if ($('.detailPanel').is(":visible")) {
-      console.log("detail is open");
-      console.log($('.trailhead-trailname.selected'));
-      $('.trailhead-trailname.selected').addClass("detail-open");
-    }
   }
+
 
 
   function getAllTrailPathsForTrailhead(trailhead, highlightedTrailIndex) {
