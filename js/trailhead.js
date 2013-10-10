@@ -20,8 +20,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy") {
@@ -46,8 +46,9 @@ function startup() {
   var ACTIVE_TRAIL_WEIGHT = 9;
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
+  var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
 
-  var map = {};
+  var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // { *id*: { geometry: point(0,0), unused for now  
   //                  properties: { id: *uniqueID*,
@@ -80,7 +81,8 @@ function startup() {
   var currentMultiTrailLayer = {}; // We have to know if a trail layer is already being displayed, so we can remove it
   var currentTrailLayers = [];
   var currentHighlightedTrailLayer = {};
-  var currentLocation = {};
+  var currentUserLocation = {};
+  var anchorLocation = {};
   var currentTrailheadLayerGroup;
   var currentFilters = {
     lengthFilter: [],
@@ -99,13 +101,14 @@ function startup() {
   var currentTrailPopup = null;
   var currentTrailhead = null;
   var orderedTrailIndex;
+  var geoWatchId = null;
 
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26*0.60, 33*0.60],
-    iconAnchor: [13*0.60, 33*.60],
+    iconSize: [26 * 0.60, 33 * 0.60],
+    iconAnchor: [13 * 0.60, 33 * 0.60],
     popupAnchor: [0, -3]
   };
 
@@ -195,31 +198,29 @@ function startup() {
 
   function initialSetup() {
     console.log("initialSetup");
-    setCurrentLocation();
-    displayInitialMap();
-    getOrderedTrailheads(currentLocation, function() {
-      getTrailData(function() {
-        addTrailDataToTrailheads(trailData);
-        if (USE_LOCAL) {
-          getTrailSegments(function() {
-            // if we haven't added the segment layer yet, add it.
-            if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-              map.addLayer(allSegmentLayer);
-            }
-          });
-        }
+    setupGeolocation(function() {
+      getOrderedTrailheads(currentUserLocation, function() {
+        getTrailData(function() {
+          addTrailDataToTrailheads(trailData);
+          if (USE_LOCAL) {
+            getTrailSegments(function() {
+              // if we haven't added the segment layer yet, add it.
+              if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+                map.addLayer(allSegmentLayer);
+              }
+            });
+          }
+        });
       });
     });
-
-
   }
 
-  // set currentLocation to the center of the currently viewed map
+  // set currentUserLocation to the center of the currently viewed map
   // then get the ordered trailheads and add trailData to trailheads
 
   function reorderTrailsWithNewLocation() {
-    setCurrentLocationFromMap();
-    getOrderedTrailheads(currentLocation, function() {
+    setAnchorLocationFromMap();
+    getOrderedTrailheads(anchorLocation, function() {
       addTrailDataToTrailheads(trailData);
     });
   }
@@ -349,51 +350,94 @@ function startup() {
     applyFilterChange(currentFilters, trailData);
   }
 
-  // =====================================================================//
-  // these two set currentLocation, then mapping ensues
-
-  function setCurrentLocationFromMap() {
-    currentLocation = map.getCenter();
+  function setAnchorLocationFromMap() {
+    anchorLocation = map.getCenter();
   }
 
-  function setCurrentLocation() {
+  function setupGeolocation(callback) {
+    if (navigator.geolocation) {
+      // setup location monitoring
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 30000
+      };
+      geoWatchId = navigator.geolocation.watchPosition(
+        function(position) {
+          handleGeoSuccess(position, callback);
+        },
+        function(position) {
+          handleGeoError(position, callback);
+        },
+        options
+      );
+    }
     // for now, just returns Akron
     // should use browser geolocation,
     // and only return Akron if we're far from home base
-    currentLocation = AKRON;
+    currentUserLocation = AKRON;
   }
 
-  // display the map based on currentLocation
+  function handleGeoSuccess(position, callback) {
+    currentUserLocation = new L.LatLng(position.coords.latitude, position.coords.longitude);
+    var distanceToAkron = currentUserLocation.distanceTo(AKRON) / 1000;
+    // if no map, set it up
+    if (!map) {
+      var startingMapLocation;
+      var startingMapZoom;
+      // if we're close to Akron, start the map and the trailhead distances from 
+      // the current location, otherwise just use AKRON for both
+      if (distanceToAkron < LOCAL_LOCATION_THRESHOLD) {
+        anchorLocation = currentUserLocation;
+        startingMapLocation = currentUserLocation;
+        startingMapZoom = 12;
+      } else {
+        anchorLocation = AKRON;
+        startingMapLocation = AKRON;
+        startingMapZoom = 11;
+      }
+      map = createMap(startingMapLocation, startingMapZoom);
+    }
+    // always update the user marker, create if needed
+    if (!userMarker) {
+      userMarker = L.userMarker(currentUserLocation, {
+        smallIcon: true,
+        pulsing: true,
+        accuracy: 0
+      }).addTo(map);
+    }
+    console.log(currentUserLocation);
+    userMarker.setLatLng(currentUserLocation);
+    if (typeof callback == "function") {
+      callback();
+    }
+  }
 
-  function displayInitialMap() {
-    console.log("displayInitialMap");
-    console.log(currentLocation);
-    map = L.map('trailMap', {
+  function handleGeoError(error, callback) {
+    console.log("handleGeoError");
+    if (!map) {
+      console.log("making map anyway");
+      map = createMap(AKRON, 11);
+    }
+    if (map && userMarker && error.code === 3) {
+      map.removeLayer(userMarker);
+      userMarker = null;
+    }
+    if (typeof callback == "function") {
+      callback();
+    }
+  }
+
+  function createMap(startingMapLocation, startingMapZoom) {
+    var map = L.map('trailMap', {
       zoomControl: false
     }).addControl(L.control.zoom({
       position: 'topright'
-    })).setView([currentLocation.lat, currentLocation.lng], 11);
+    }));
+    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
+    map.setView(startingMapLocation, startingMapZoom);
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: [450, 100]
-    });
-
-    // Switch between MapBox and other providers by commenting/uncommenting these
-    L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
-    // L.tileLayer.provider('Thunderforest.Landscape').addTo(map);
-    map.on("locationfound", function(location) {
-      if (!userMarker)
-        userMarker = L.userMarker(location.latlng, {
-          smallIcon: true,
-          pulsing: true,
-          accuracy: 0
-        }).addTo(map);
-      console.log(location.latlng);
-      userMarker.setLatLng(location.latlng);
-    });
-    map.locate({
-      watch: true,
-      setView: false,
-      enableHighAccuracy: true
     });
     map.on("zoomend", function(e) {
       console.log("zoomend");
@@ -410,12 +454,10 @@ function startup() {
         }
       }
     });
-    map.on("locationerror", function(errorEvent) {
-      console.log("Location Error:");
-      console.log(errorEvent.message);
-      console.log(errorEvent.code);
-    });
+    return map;
   }
+
+
 
   // =====================================================================//
   // Getting trailhead data
@@ -1080,7 +1122,7 @@ function startup() {
         orderedTrailIndex = i;
       }
     }
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)") ;
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
