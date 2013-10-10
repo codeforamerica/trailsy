@@ -144,17 +144,11 @@ function startup() {
     if (currentSegmentFeatureGroup) {
       currentSegmentFeatureGroup.fireEvent('mouseover');
     }
-    if (currentTrailheadHover) {
-      currentTrailheadHover.marker.fireEvent('mouseover');
-    }
   });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
     if (currentSegmentFeatureGroup) {
       currentSegmentFeatureGroup.fireEvent('mouseout');
-    }
-    if (currentTrailheadHover) {
-      currentTrailheadHover.marker.fireEvent('mouseout');
     }
   });
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
@@ -535,30 +529,20 @@ function startup() {
   }
 
   function setTrailheadEventHandlers(trailhead) {
-    trailhead.marker.on("mouseover", function(trailhead) {
-      return function() {
-        console.log("mouseover");
-        var popup = new L.Popup({
-          offset: [0, 0],
-          autoPanPadding: [100, 100]
-        }).setContent(trailhead.popupContent)
-          .setLatLng(trailhead.marker.getLatLng())
-          .openOn(map);
-        currentTrailheadHover = trailhead;
-      };
-    }(trailhead));
-    trailhead.marker.on("mouseout", function(trailhead) {
-      return function() {
-        console.log("mouseout");
-        map.closePopup();
-        // currentTrailheadHover = null;
-      };
-    }(trailhead));
+
+   
     trailhead.marker.on("click", function(trailheadID) {
       return function() {
         trailheadMarkerClick(trailheadID);
       };
     }(trailhead.properties.id));
+
+    // placeholders for possible trailhead marker hover behavior
+    trailhead.marker.on("mouseover", function(trailhead) {
+    }(trailhead));
+
+    trailhead.marker.on("mouseout", function(trailhead) {
+    }(trailhead));
   }
   // on trailhead marker click, this is invoked with the id of the trailhead
   // not used for anything but logging at the moment
@@ -571,12 +555,9 @@ function startup() {
   }
 
   function popupCloseHandler(e) {
-    console.log(e);
-    console.log("popupCloseHandler");
-    if (currentTrailheadHover) {
-      highlightTrailInPopup(currentTrailheadHover, -1);
-    }
+    // placeholder for hover close behavior
   }
+
   // get the trailData from the API
 
   function getTrailData(callback) {
