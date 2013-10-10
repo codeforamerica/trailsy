@@ -445,6 +445,7 @@ function startup() {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
           map.addLayer(allSegmentLayer);
+          allSegmentLayer.bringToBack();
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
           if (currentTrailPopup) {
@@ -511,8 +512,8 @@ function startup() {
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
         color: "#00adef",
-        fillOpacity: .5,
-        opacity: .8
+        fillOpacity: 0.5,
+        opacity: 0.8
       }).setRadius(4);
       // adding closure to call trailheadMarkerClick with trailheadID on marker click
       newMarker.on("click", function(trailheadID) {
@@ -527,6 +528,22 @@ function startup() {
         trails: [],
         popupContent: ""
       };
+      newMarker.on("mouseover", function(trailhead) {
+        return function() {
+          console.log(trailhead);
+          var popup = new L.Popup({
+            offset: [0, -12],
+            autoPanPadding: [100, 100]
+          }).setContent(trailhead.popupContent)
+            .setLatLng(trailhead.marker.getLatLng())
+            .openOn(map);
+        };
+      }(trailhead));
+      newMarker.on("mouseout", function(trailhead) {
+        return function() {
+          map.closePopup();
+        };
+      }(trailhead));
       trailheads.push(trailhead);
     }
   }
