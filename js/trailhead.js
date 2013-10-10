@@ -538,11 +538,11 @@ function startup() {
     }(trailhead.properties.id));
 
     // placeholders for possible trailhead marker hover behavior
-    trailhead.marker.on("mouseover", function(trailhead) {
-    }(trailhead));
+    // trailhead.marker.on("mouseover", function(trailhead) {
+    // }(trailhead));
 
-    trailhead.marker.on("mouseout", function(trailhead) {
-    }(trailhead));
+    // trailhead.marker.on("mouseout", function(trailhead) {
+    // }(trailhead));
   }
   // on trailhead marker click, this is invoked with the id of the trailhead
   // not used for anything but logging at the moment
