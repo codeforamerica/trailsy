@@ -391,7 +391,7 @@ function startup() {
       if (distanceToAkron < LOCAL_LOCATION_THRESHOLD) {
         anchorLocation = currentUserLocation;
         startingMapLocation = currentUserLocation;
-        startingMapZoom = 12;
+        startingMapZoom = 13;
       } else {
         anchorLocation = AKRON;
         startingMapLocation = AKRON;
