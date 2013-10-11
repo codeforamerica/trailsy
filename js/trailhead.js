@@ -24,7 +24,7 @@ function startup() {
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev" || window.location.hostname == "www.tothetrails.com") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
-  } else if (window.location.hostname.split(".")[0] == "trailsy") {
+  } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
     API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
