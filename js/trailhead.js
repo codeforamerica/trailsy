@@ -22,7 +22,7 @@ function startup() {
   // and reassign API_HOST if necessary
   var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-  if (window.location.hostname.split(".")[0] == "trailsy-dev" || window.location.hostname == "www.tothetrails.com") {
+  if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
     API_HOST = "http://trailsyserver-prod.herokuapp.com";
