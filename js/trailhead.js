@@ -174,12 +174,12 @@ function startup() {
   $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
   $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $(document).on('change', '.filter', filterChangeHandler);
-  $(document).on('mouseover', '.leaflet-popup', function() {
-    // console.log("popup mouseover");
-    if (currentSegmentFeatureGroup) {
-      currentSegmentFeatureGroup.fireEvent('mouseover');
-    }
-  });
+  // $(document).on('mouseover', '.leaflet-popup', function() {
+  //   console.log("popup mouseover");
+  //   if (currentSegmentFeatureGroup) {
+  //     currentSegmentFeatureGroup.fireEvent('mouseover');
+  //   }
+  // });
   $(document).on('mouseout', '.leaflet-popup', function() {
     // console.log("popup mouseout");
     if (currentSegmentFeatureGroup) {
@@ -590,7 +590,7 @@ function startup() {
   }
 
   function popupCloseHandler(e) {
-    // placeholder for hover close behavior
+    currentTrailPopup = null;
   }
 
   // get the trailData from the API
@@ -731,8 +731,6 @@ function startup() {
       var newTrailFeatureGroup = new L.FeatureGroup([allInvisibleSegmentsArray[i], allVisibleSegmentsArray[i]]);
 
       var popup = new L.Popup().setContent(currentInvisSegment.feature.properties.popupHTML);
-      // newTrailFeatureGroup.addLayer(popup);
-      // newTrailFeatureGroup.bindPopup(popup);
 
       newTrailFeatureGroup.addEventListener("mouseover", function(segmentFeatureGroup, currentInvisSegment) {
         return function(e) {
@@ -745,7 +743,7 @@ function startup() {
             clearTimeout(openTimeout);
             openTimeout = null;
           }
-          openTimeout = setTimeout(function(target) {
+          openTimeout = setTimeout(function(originalEvent, target) {
             return function() {
               target.setStyle({
                 weight: HOVER_SEGMENT_WEIGHT,
@@ -759,12 +757,12 @@ function startup() {
                 });
               }
               currentWeightedSegment = target;
-              if (segmentFeatureGroup != currentSegmentFeatureGroup) {
-                currentTrailPopup = currentInvisSegment.feature.properties.popup.setLatLng(e.latlng).openOn(map);
+              if (segmentFeatureGroup != currentSegmentFeatureGroup || !currentTrailPopup) {
+                currentTrailPopup = currentInvisSegment.feature.properties.popup.setLatLng(originalEvent.latlng).openOn(map);
                 currentSegmentFeatureGroup = segmentFeatureGroup;
               }
             };
-          }(e.target), 250);
+          }(e, e.target), 250);
         };
       }(newTrailFeatureGroup, currentInvisSegment));
 
