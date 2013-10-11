@@ -50,30 +50,65 @@ function startup() {
 
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
+  // for yes/no features, check for first letter "y" or "n".
   // { *id*: { geometry: point(0,0), unused for now  
-  //                  properties: { id: *uniqueID*,
-  //                                length: *length of trail in meters*,
+  //                  properties: { id: *uniqueID* (same as key),
+  //                                accessible: *disabled access. yes/no*,
+  //                                dogs: *dog access. yes/no*,
+  //                                equestrian: *horse access. yes/no*,
+  //                                hike: *hiking access. yes/no*,
+  //                                mtnbike: *mountain bike access. yes/no*,
+  //                                roadbike: *street bike access. yes/no*,
+  //                                xcntryski: *cross-country skiing access. yes/no*
+  //                                conditions: *text field of qualifications to above access/use fields*,
+  //                                description: *text description of trail*,
+  //                                length: *length of trail in miles*,
+  //                                map_url: *URL of trail map*,
   //                                name: *name of trail*,
-  //                                source: *whose data this info came from*,
+  //                                source: *whose data this info came from (abbreviation)*,
+  //                                source_fullname: *full name of source org*,                
+  //                                source_phone: *phone for source org*,
+  //                                source_url: *URL of source org*,
+  //                                status: *trail status. 0=open; 1=notice/warning; 2=closed*,
+  //                                statustext: *trail status text. only displayed if status != 0
+  //                                steward: *org to contact for more information (abbrev)*,
+  //                                steward_fullname: *full name of steward org*,
+  //                                steward_phone: *phone for steward org*,
+  //                                steward_url: *URL of steward org*,
+  //                                trlsurface: *not currently used*
   //                              }
   //                }
   // }
 
   var trailheads = []; // all trailheads (from trailsegments)
-  // TODO: fix this--it's out of date!
+  // for yes/no features, check for first letter "y" or "n".
+  //
   // [ {  marker: *Leaflet marker*,
   //      trails: *[array of matched trail IDs],
   //      popupContent: *HTML of Leaflet popup*,
   //      properties: { id: *uniqueID*,
+  //                    drinkwater: *water available at this trailhead. yes/no*
   //                    distance: *from current location in meters*,
+  //                    kiosk: *presence of informational kiosk. yes/no*,
   //                    name: *name*,
-  //                    source: *whose data this info came from*,
+  //                    parking: *availability of parking. yes/no*,
+  //                    restrooms: *availability of restrooms. yes/no*,
+  //                    source: *whose data this info came from (abbreviation)*,
+  //                    source_fullname: *full name of source org*,
+  //                    source_phone: *phone number of source org*,
+  //                    source_url: *URL of source org*,
+  //                    steward: *org to contact for more information (abbrev)*,
+  //                    steward_fullname: *full name of steward org*,
+  //                    steward_phone: *phone number of steward org*,
+  //                    steward_url: *URL of steward org*,
   //                    trail1: *trail at this trailhead*,
   //                    trail2: *trail at this trailhead*,
   //                    trail3: *trail at this trailhead*,
+  //                    trail4: *trail at this trailhead*,
+  //                    trail5: *trail at this trailhead*,
+  //                    trail6: *trail at this trailhead*,                    
   //                    updated_at: *update time*,
-  //                    created_at: *creation time*,
-  //                    wkt: *original wkt for trailhead point*
+  //                    created_at: *creation time*
   //                  }, 
   //   }[, ...}]
   // ]
