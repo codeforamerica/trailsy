@@ -926,6 +926,8 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
+        var trailCurrentIndex = orderedTrailIndex + 1;
+
         //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
@@ -948,7 +950,7 @@ function startup() {
 
         // Making a new div for Detail Panel
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
-
+        $("<div class='trailCurrentIndex' >" + trailCurrentIndex + "</div>").appendTo($trailInfo);
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
         $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailInfo);
         $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
@@ -1080,8 +1082,8 @@ function startup() {
         orderedTrailIndex = i;
       }
     }
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)") ;
-
+    $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);

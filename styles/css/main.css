@@ -659,6 +659,16 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     height: auto;
   }
+  .trail-box .trailInfo .trailCurrentIndex {
+    position: relative;
+    display: inline-block;
+    margin: 1em 0 0 1em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+  }
   .trail-box .trailInfo .trail {
     position: relative;
     display: inline-block;
@@ -1138,7 +1148,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     width: 100%;
     background-color: #00adef;
-    padding: .5em .25em .5em 1em;
+    padding: .5em 1em .5em 1em;
   }
   .detailPanel .detailPanelBanner .trailName {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1146,6 +1156,16 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
+  }
+  .detailPanel .detailPanelBanner .trailIndex {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    font-size: 12px;
+    float: right;
+    margin-top: .33em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: none;
@@ -1198,7 +1218,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: 2em;
     width: auto;
-    padding: .5em 0em 0em .5em;
+    padding: .5em 0em 0em 1em;
     float: left;
   }
   .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
@@ -1248,7 +1268,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em .5em 0em .5em;
+    padding: .5em 1em 0em 1em;
     margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
@@ -1271,7 +1291,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em .5em 0em .5em;
+    padding: .5em .5em 0em 1em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
