@@ -12,7 +12,7 @@ $(document).ready(function() {
             //conditional check
             if ( ! visible ) {
                 $button.removeClass('active');
-                $('.panel-title .icon').html('&oplus;');
+                $(this).children('.icon').html('&nbsp;&#x25BC;');
 
                 $(this).parent().find('.panel-content').slideUp('fast',function() {
                     $(this).addClass('visuallyhidden').slideDown(0);
@@ -20,7 +20,7 @@ $(document).ready(function() {
                 });
             }else {
                 $button.addClass('active');
-                $('.panel-title.active .icon').html('&otimes;');
+                $(this).children('.icon').html('&nbsp;&#x25B2;');
 
                 $(this).parent().find('.panel-content').slideUp(0,function() {
                     $('.panel-content').attr( 'aria-expanded','true' );
