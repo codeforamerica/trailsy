@@ -1038,6 +1038,7 @@ At some point, update mediaqueries to be in EMS
   }
 }
 .offsetZoomControl {
+  cursor: pointer;
   position: absolute;
   top: 0.83em;
   right: 0.83em;
@@ -1049,9 +1050,9 @@ At some point, update mediaqueries to be in EMS
   font: bold 22px 'Lucida Console', Monaco, monospace;
   text-align: center;
   background-color: white;
+  color: #808285;
 }
 .offsetZoomControl .offsetZoomIn:hover {
-  color: #808285;
   background-color: #e3e3e1;
 }
 .offsetZoomControl .offsetZoomOut {
@@ -1061,9 +1062,9 @@ At some point, update mediaqueries to be in EMS
   font: bold 22px 'Lucida Console', Monaco, monospace;
   text-align: center;
   background-color: white;
+  color: #808285;
 }
 .offsetZoomControl .offsetZoomOut:hover {
-  color: #808285;
   background-color: #e3e3e1;
 }
 @media only screen and (max-width: 529px)  {
