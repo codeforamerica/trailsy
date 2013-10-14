@@ -47,6 +47,7 @@ function startup() {
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
+  var centerOffset = new L.Point(450, 0);
 
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -193,6 +194,7 @@ function startup() {
     processSearch(e);
     // }
   });
+  $(".offsetZoom").click(offsetZoomIn);
 
   $(".search-submit").click(processSearch);
 
@@ -260,6 +262,27 @@ function startup() {
       addTrailDataToTrailheads(trailData);
     });
   }
+
+  function offsetZoomIn(e) {
+    // get map center lat/lng
+    // convert to pixels
+    // add offset
+    // convert to lat/lng
+    // setZoomAround to there with currentzoom + 1
+    var centerLatLng = map.getCenter();
+    var centerPoint = map.latLngToContainerPoint(centerLatLng);
+    var offset = centerOffset;
+    var offsetCenterPoint = centerPoint.add(offset.divideBy(2));
+    var offsetLatLng = map.containerPointToLatLng(offsetCenterPoint);
+    if ($(e.target).hasClass("offsetZoomIn")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() + 1);
+    }
+    else if ($(e.target).hasClass("offsetZoomOut")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() - 1);
+    }
+  }
+
+
 
   // =====================================================================//
   //  Filter function + helper functions, triggered by UI events declared above.
@@ -473,7 +496,7 @@ function startup() {
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     map.setView(startingMapLocation, startingMapZoom);
     map.fitBounds(map.getBounds(), {
-      paddingTopLeft: [450, 100]
+      paddingTopLeft: centerOffset
     });
     map.on("zoomend", function(e) {
       console.log("zoomend");
@@ -1635,7 +1658,7 @@ function startup() {
     // use fitBounds to place the entire layer onscreen
     if (layerBoundsZoom <= MAX_ZOOM && layerBoundsZoom >= MIN_ZOOM) {
       map.fitBounds(layer.getBounds(), {
-        paddingTopLeft: [450, 0]
+        paddingTopLeft: centerOffset
       });
     }
 
