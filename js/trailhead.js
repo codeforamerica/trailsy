@@ -194,7 +194,7 @@ function startup() {
     processSearch(e);
     // }
   });
-  $(".offsetZoom").click(offsetZoomIn);
+  $(".offsetZoomControl").click(offsetZoomIn);
 
   $(".search-submit").click(processSearch);
 
@@ -474,6 +474,7 @@ function startup() {
 
   function handleGeoError(error, callback) {
     console.log("handleGeoError");
+    console.log(error);
     if (!map) {
       console.log("making map anyway");
       map = createMap(AKRON, 11);
@@ -490,9 +491,7 @@ function startup() {
   function createMap(startingMapLocation, startingMapZoom) {
     var map = L.map('trailMap', {
       zoomControl: false
-    }).addControl(L.control.zoom({
-      position: 'topright'
-    }));
+    });
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     map.setView(startingMapLocation, startingMapZoom);
     map.fitBounds(map.getBounds(), {

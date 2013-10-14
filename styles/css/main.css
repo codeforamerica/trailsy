@@ -1037,6 +1037,35 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
+.offsetZoomControl {
+  position: absolute;
+  top: 0.83em;
+  right: 0.83em;
+  display: block;
+}
+.offsetZoomControl .offsetZoomIn {
+  height: 35px;
+  width: 35px;
+  font: bold 22px 'Lucida Console', Monaco, monospace;
+  text-align: center;
+  background-color: white;
+}
+.offsetZoomControl .offsetZoomIn:hover {
+  color: #808285;
+  background-color: #e3e3e1;
+}
+.offsetZoomControl .offsetZoomOut {
+  height: 35px;
+  width: 35px;
+  margin-top: 38px;
+  font: bold 22px 'Lucida Console', Monaco, monospace;
+  text-align: center;
+  background-color: white;
+}
+.offsetZoomControl .offsetZoomOut:hover {
+  color: #808285;
+  background-color: #e3e3e1;
+}
 @media only screen and (max-width: 529px)  {
   .trailListColumn {
     display: none;
