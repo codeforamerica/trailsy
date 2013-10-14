@@ -120,7 +120,8 @@ At some point, update mediaqueries to be in EMS
     width: 90%;
   }
   .title-row header .navbar-inner .logo {
-    height: 100%;
+    /* height: 100%; * This causes Safari issues */
+  
     width: 4em;
   }
 }
@@ -150,7 +151,8 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
   }
   .title-row header .navbar-inner .logo {
-    height: 100%;
+    /* height: 100%; */
+  
     width: 18em;
   }
   .title-row header .navbar-inner .about {
