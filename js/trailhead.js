@@ -1012,6 +1012,10 @@ function startup() {
     currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
 
     map.addLayer(currentTrailheadLayerGroup);
+   
+    currentTrailheadLayerGroup.eachLayer(function (layer) {
+      layer.bringToBack();
+    });
   }
 
   // given trailheads, now populated with matching trail names,
