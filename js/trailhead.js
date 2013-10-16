@@ -490,7 +490,8 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     var map = L.map('trailMap', {
-      zoomControl: false
+      zoomControl: false,
+      scrollWheelZoom: false
     });
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     map.setView(startingMapLocation, startingMapZoom);
@@ -1015,6 +1016,7 @@ function startup() {
     map.addLayer(currentTrailheadLayerGroup);
    
     currentTrailheadLayerGroup.eachLayer(function (layer) {
+      console.log("bringToBack");
       layer.bringToBack();
     });
   }
@@ -1253,7 +1255,7 @@ function startup() {
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
-      $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
+      $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
     }
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
