@@ -576,6 +576,7 @@ function startup() {
       }).setRadius(4);
       var trailhead = {
         properties: currentFeature.properties,
+        geometry: currentFeature.geometry,
         marker: newMarker,
         trails: [],
         popupContent: ""
@@ -1240,13 +1241,15 @@ function startup() {
     $('.detailPanel .detailDescription').html(trail.properties.description);
 
     if (trail.properties.map_url) {
-      $('.detailPanel .detailPrintMap a').attr("href", trail.properties.map_url);
+      $('.detailPanel .detailPrintMap a').attr("href", trail.properties.map_url).attr("target", "_blank");
       $('.detailPanel .detailPrintMap').show();
     }
     else {
       $('.detailPanel .detailPrintMap').hide();
     }
-
+    var directionsUrl = "http://maps.google.com?saddr=" + currentUserLocation.lat + "," + currentUserLocation.lng + 
+    "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0]; 
+    $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
