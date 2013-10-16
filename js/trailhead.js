@@ -1239,6 +1239,14 @@ function startup() {
     // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
 
+    if (trail.properties.map_url) {
+      $('.detailPanel .detailPrintMap a').attr("href", trail.properties.map_url);
+      $('.detailPanel .detailPrintMap').show();
+    }
+    else {
+      $('.detailPanel .detailPrintMap').hide();
+    }
+
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
