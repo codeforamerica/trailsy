@@ -21,6 +21,7 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
@@ -427,9 +428,8 @@ function startup() {
           handleGeoSuccess(position, callback);
         },
         function(position) {
-          handleGeoError(position, callback);
-        },
-        options
+          handleGeoError(error, callback);
+        }
       );
     }
     else {
@@ -437,9 +437,7 @@ function startup() {
     // should use browser geolocation,
     // and only return Akron if we're far from home base
       currentUserLocation = AKRON;
-      if (typeof callback == "function") {
-        callback();
-      }
+      handleGeoError("no geolocation",callback);
     }
   }
 
@@ -495,6 +493,7 @@ function startup() {
   }
 
   function createMap(startingMapLocation, startingMapZoom) {
+    console.log("createMap");
     var map = L.map('trailMap', {
       zoomControl: false,
       scrollWheelZoom: false
@@ -1705,6 +1704,7 @@ function startup() {
       callData.data = JSON.stringify(callData.data);
     }
     var url = API_HOST + callData.path;
+    console.log(url);
     var request = $.ajax({
       type: callData.type,
       url: url,
@@ -1715,9 +1715,12 @@ function startup() {
       //},
       data: callData.data
     }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log("error! " + errorThrown + " " + textStatus);
+      console.log(jqXHR.status);
       $("#results").text("error: " + JSON.stringify(errorThrown));
     }).done(function(response, textStatus, jqXHR) {
       if (typeof doneCallback === 'function') {
+        console.log("calling doneCallback");
         doneCallback.call(this, response);
       }
       console.log(response);
