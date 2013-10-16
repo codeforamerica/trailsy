@@ -414,11 +414,12 @@ function startup() {
   }
 
   function setupGeolocation(callback) {
+    console.log("setupGeolocation");
     if (navigator.geolocation) {
       // setup location monitoring
       var options = {
         enableHighAccuracy: true,
-        timeout: 10000,
+        timeout: 5000,
         maximumAge: 30000
       };
       geoWatchId = navigator.geolocation.watchPosition(
@@ -431,10 +432,15 @@ function startup() {
         options
       );
     }
+    else {
     // for now, just returns Akron
     // should use browser geolocation,
     // and only return Akron if we're far from home base
-    currentUserLocation = AKRON;
+      currentUserLocation = AKRON;
+      if (typeof callback == "function") {
+        callback();
+      }
+    }
   }
 
   function handleGeoSuccess(position, callback) {
@@ -705,7 +711,7 @@ function startup() {
           color: NORMAL_SEGMENT_COLOR,
           weight: NORMAL_SEGMENT_WEIGHT,
           opacity: 1,
-          clickable: false,
+          clickable: false
           // dashArray: "5,5"
         };
       },
