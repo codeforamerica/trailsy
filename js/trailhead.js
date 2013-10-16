@@ -1252,7 +1252,7 @@ function startup() {
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
-    if (trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
+    if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
       $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
     }
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
