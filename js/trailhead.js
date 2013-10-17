@@ -1598,7 +1598,7 @@ function startup() {
       style: function(feature) {
         var color;
         if (feature.properties.order === 0 || !feature.properties.order) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
@@ -1606,7 +1606,7 @@ function startup() {
             clickable: false
           };
         } else if (feature.properties.order === 1) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
@@ -1614,7 +1614,7 @@ function startup() {
             clickable: false
           };
         } else if (feature.properties.order === 2) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
