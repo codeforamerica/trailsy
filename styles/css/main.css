@@ -1192,7 +1192,6 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .detailPanelBanner .detailPanelControls.disabled {
     cursor: auto;
     background-color: #58595b;
-    color: #58595b;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     top: 0;
