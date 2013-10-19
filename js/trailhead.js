@@ -1077,7 +1077,10 @@ function startup() {
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
 
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
-        $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailInfo);
+        
+        var mileString = trailLength == 1 ? "mile" : "miles";
+        $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
+
         $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
@@ -1263,7 +1266,10 @@ function startup() {
     }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
-    $('.detailPanel .detailLength').html(trail.properties.length + " miles");
+ 
+    var mileString = trail.properties.length == "1" ? "mile" : "miles";
+    $('.detailPanel .detailLength').html(trail.properties.length + " " + mileString);
+
     // $('.detailPanel .detailDogs').html(trail.properties.dogs);
     // $('.detailPanel .detailBikes').html(trail.properties.bikes);
     $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
