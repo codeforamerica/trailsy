@@ -3,36 +3,27 @@
 <head>
   <title>To The Trails: Summit County</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-
-  <script src="js/jquery-1.10.2.min.js"></script>
-  <!-- <script src="js/bootstrap3.js"></script> -->
-  <script src="js/trailhead.js"></script>
-
-  <!--   <link rel="stylesheet" href="styles/main.css"/> -->
-  <!-- <link rel="stylesheet" href="styles/bootstrap-select.css"> -->
-  <!--   <link rel="stylesheet" href="styles/bootstrap3.css"> -->
-<!--[if lte IE 8]>
-     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-     <![endif]-->
-
-     <!--   // <script src="js/less-1.4.1.min.js"></script> -->
      <link rel="stylesheet" href="styles/css/leaflet.css"/>
+     <!--[if lte IE 8]>
+     <link rel="stylesheet" href="styles/css/leaflet.ie.css" />
+     <![endif]-->
      <link rel="stylesheet" href="styles/leaflet.usermarker.css"/>
      <link rel="stylesheet" type="text/css" href="styles/css/main.css"/>
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.js"></script>
+  <![endif]-->
+    <script src="js/modernizr.js"></script>
+  <script>
+    if (window.location.hostname == "www.tothetrails.com") {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-     <script src="js/modernizr.js"></script>
-     <script src="js/leaflet.js"></script>
-     <script src="js/wicket.js"></script>
-<!-- <script src="js/wicket-leaflet.js"></script> -->
-     <script src="js/leaflet-providers.js"></script>
-     <script src="js/async.js"></script>
-     <script src="js/leaflet.usermarker.js"></script>
-     <script src="js/xdr.js"></script>
-     <script src="js/respond.min.js"></script>
-     <script src="js/accordion.js"></script>
-
-  <!--//   <script type="text/javascript" src="js/jquery.slidedrawer.min.js"></script>
-  // -->
+      ga('create', 'UA-42870551-1', 'tothetrails.com');
+      ga('send', 'pageview');
+    }
+  </script>
 
 </head>
 <body>
@@ -40,8 +31,12 @@
     <div id="main" class="row">
       <!-- Map -->
       <section class="trailMapContainer">
-        <div id="crosshair"></div>
+        <!-- <div id="crosshair"></div> -->
         <div id="trailMap"></div>
+        <div class="offsetZoomControl">
+          <a class="offsetZoomControl offsetZoomIn">+</a>
+          <a class="offsetZoomControl offsetZoomOut">&mdash;</a>
+        </div>
       </section>
       <!-- UI Column to be renamed. -->
       <section class="trailListColumn">
@@ -53,7 +48,7 @@
                 <div></div>
                 <div></div>
               </a>
-              <img class="logo" src="img/logo.png"></img>
+              <img class="logo" src="img/logo.png">
             </div>
           </header>
         </div>
@@ -68,7 +63,7 @@
 <!--                     <label class="is-vishidden">Search the site</label> -->
                     <input data-filter="searchFilter" placeholder="Search" class="search-key">
                       <button data-filter="searchFilter" class="btn search-submit"></button>
-                    </input>
+                    
                   </div>
                   <div class="trailLength-title">
                     <h2>LENGTH (IN MILES)</h2>
@@ -115,7 +110,7 @@
             </ul>
             <!-- Second Accordion Panel (More Options) -->
             <ul class="panel-container list-reset" tabindex="2" id="MoreFilters">
-              <li><h4 id='trigger2' class="panel-title" aria-hidden="true">MORE OPTIONS</h4>
+              <li>
                 <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
                   <div class="trailFilters">
                     <!-- Header -->
@@ -193,11 +188,12 @@
                     </ul>
                   </div>  <!-- trailFilter -->
                 </div> <!--panel-content-->
+                <h4 id='trigger2' class="panel-title" aria-hidden="true">MORE OPTIONS<span class="icon">&nbsp;&#x25BC;</span></h4>
               </li> <!--trigger2 -->
             </ul> <!-- panel-container  -->
             <!-- Third Accordion Panel / The List -->
             <ul class="panel-container list-reset" tabindex="3">
-              <li><h4 id='trigger3' class="panel-title" aria-hidden="true">TRAILS NEAR YOU</h4>
+              <li><h4 id='trigger3' class="panel-title trails-count" aria-hidden="true">TRAILS NEAR YOU</h4>
                 <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
                   <div id="trailList"></div>
                 </div>
@@ -245,16 +241,23 @@
             </div>
             <div class="detailMiddleRow">
               <span class="detailPanelHeader">OVERVIEW</span>
-            </br>
+            
               <div class="detailDescription"></div>
             </div>
-          </br>
+          
             <div class="detailBottomRow">
+<<<<<<< HEAD
               <img src="img/icon_trailhead_active.png">
               <span class="detailPanelHeader">CLOSEST ENTRANCE </span><span class="detailTrailheadDistance"></span><br/>
               <div class="detailTrailheadInfo">
                 <span class="detailTrailheadName"></span><br/>
 <!--                 <span class="detailTrailheadPark">Park Name Variable</span><br/> -->
+=======
+              <span class="detailPanelHeader">CLOSEST ENTRANCE </span><span class="detailTrailheadDistance"></span><br/>
+              <div class="detailTrailheadInfo">
+                <span class="detailTrailheadName"></span><br/>
+                <!-- <span class="detailTrailheadPark">Park Name Variable</span><br/> -->
+>>>>>>> master
                 <span class="detailTrailheadCounty">Summit County, OH</span><br/>
               </div>
               <div class="detailLinksToMore">
@@ -267,36 +270,47 @@
               </div>
               <div class="detailLinksToSocial">
                 <div class="social-icon" id="facebook">
-                  <img src="">
+                  <img>
                   facebook
                 </div>
                 <div class="social-icon" id="tweet">
-                  <img src="">
+                  <img>
                   tweet
                 </div>
                 <div class="social-icon" id="email">
-                  <img src="">
+                  <img>
                   email
                 </div>
               </div>
             </div>
             <div class="detailFooter">
-              <img class="icon-large" src="img/mpssc.jpg"/>
+              <img class="detailStewardLogo icon-large" src="img/mpssc.jpg"/>
               <div class="detailStewardInfo">
                 <span class="detailPanelHeader">MANAGED BY:</span>
-                </br>
+                
                 <a class="detailSource" href=""></a>
               </div>
               <div class="detailStewardInfo">
                 <span class="detailPanelHeader">FOR ASSISTANCE CALL:</span>
-                </br>
-                <span class="detailSourcePhone" href="#">XXX-XXX-XXX</span>
+                
+                <span class="detailSourcePhone">XXX-XXX-XXX</span>
               </div>
             </div>
         </div>
       </section> <!-- trailListColumn -->
     </div>
   </div>
+  <script src="js/jquery-1.10.2.min.js"></script>
+  <script src="js/trailhead.js"></script>
+
+  <script src="js/leaflet.js"></script>
+  <script src="js/wicket.js"></script>
+  <script src="js/leaflet-providers.js"></script>
+  <script src="js/async.js"></script>
+  <script src="js/leaflet.usermarker.js"></script>
+  <script src="js/xdr.js"></script>
+  <script src="js/respond.min.js"></script>
+  <script src="js/accordion.js"></script>
 </body>
 </html>
 

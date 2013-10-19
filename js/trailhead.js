@@ -20,8 +20,14 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
+<<<<<<< HEAD
   // var API_HOST = "http://127.0.0.1:3000";
   var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+=======
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+>>>>>>> master
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
@@ -47,6 +53,7 @@ function startup() {
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
+  var centerOffset = new L.Point(450, 0);
 
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
@@ -193,6 +200,7 @@ function startup() {
     processSearch(e);
     // }
   });
+  $(".offsetZoomControl").click(offsetZoomIn);
 
   $(".search-submit").click(processSearch);
 
@@ -260,6 +268,27 @@ function startup() {
       addTrailDataToTrailheads(trailData);
     });
   }
+
+  function offsetZoomIn(e) {
+    // get map center lat/lng
+    // convert to pixels
+    // add offset
+    // convert to lat/lng
+    // setZoomAround to there with currentzoom + 1
+    var centerLatLng = map.getCenter();
+    var centerPoint = map.latLngToContainerPoint(centerLatLng);
+    var offset = centerOffset;
+    var offsetCenterPoint = centerPoint.add(offset.divideBy(2));
+    var offsetLatLng = map.containerPointToLatLng(offsetCenterPoint);
+    if ($(e.target).hasClass("offsetZoomIn")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() + 1);
+    }
+    else if ($(e.target).hasClass("offsetZoomOut")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() - 1);
+    }
+  }
+
+
 
   // =====================================================================//
   //  Filter function + helper functions, triggered by UI events declared above.
@@ -391,11 +420,12 @@ function startup() {
   }
 
   function setupGeolocation(callback) {
+    console.log("setupGeolocation");
     if (navigator.geolocation) {
       // setup location monitoring
       var options = {
         enableHighAccuracy: true,
-        timeout: 10000,
+        timeout: 5000,
         maximumAge: 30000
       };
       geoWatchId = navigator.geolocation.watchPosition(
@@ -403,15 +433,17 @@ function startup() {
           handleGeoSuccess(position, callback);
         },
         function(position) {
-          handleGeoError(position, callback);
-        },
-        options
+          handleGeoError(error, callback);
+        }
       );
     }
+    else {
     // for now, just returns Akron
     // should use browser geolocation,
     // and only return Akron if we're far from home base
-    currentUserLocation = AKRON;
+      currentUserLocation = AKRON;
+      handleGeoError("no geolocation",callback);
+    }
   }
 
   function handleGeoSuccess(position, callback) {
@@ -451,6 +483,7 @@ function startup() {
 
   function handleGeoError(error, callback) {
     console.log("handleGeoError");
+    console.log(error);
     if (!map) {
       console.log("making map anyway");
       map = createMap(AKRON, 11);
@@ -465,15 +498,15 @@ function startup() {
   }
 
   function createMap(startingMapLocation, startingMapZoom) {
+    console.log("createMap");
     var map = L.map('trailMap', {
-      zoomControl: false
-    }).addControl(L.control.zoom({
-      position: 'topright'
-    }));
+      zoomControl: false,
+      scrollWheelZoom: false
+    });
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     map.setView(startingMapLocation, startingMapZoom);
     map.fitBounds(map.getBounds(), {
-      paddingTopLeft: [450, 100]
+      paddingTopLeft: centerOffset
     });
     map.on("zoomend", function(e) {
       console.log("zoomend");
@@ -554,6 +587,7 @@ function startup() {
       }).setRadius(4);
       var trailhead = {
         properties: currentFeature.properties,
+        geometry: currentFeature.geometry,
         marker: newMarker,
         trails: [],
         popupContent: ""
@@ -681,7 +715,7 @@ function startup() {
           color: NORMAL_SEGMENT_COLOR,
           weight: NORMAL_SEGMENT_WEIGHT,
           opacity: 1,
-          clickable: false,
+          clickable: false
           // dashArray: "5,5"
         };
       },
@@ -990,6 +1024,11 @@ function startup() {
     currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
 
     map.addLayer(currentTrailheadLayerGroup);
+   
+    currentTrailheadLayerGroup.eachLayer(function (layer) {
+      console.log("bringToBack");
+      layer.bringToBack();
+    });
   }
 
   // given trailheads, now populated with matching trail names,
@@ -1045,7 +1084,10 @@ function startup() {
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
         $("<div class='trailCurrentIndex' >" + trailCurrentIndex + "</div>").appendTo($trailInfo);
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
-        $("<div class='trailLength' >" + trailLength + " miles long" + "</div>").appendTo($trailInfo);
+        
+        var mileString = trailLength == 1 ? "mile" : "miles";
+        $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
+
         $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
@@ -1128,33 +1170,35 @@ function startup() {
     var trailhead;
 
     for (var i = 0; i < orderedTrails.length; i++) {
-      if (orderedTrails[i]["trailID"] == trailID && orderedTrails[i]["trailheadID"] == trailheadID) {
+      if (orderedTrails[i].trailID == trailID && orderedTrails[i].trailheadID == trailheadID) {
         orderedTrailIndex = i;
       }
     }
-    console.log(["orderedTrailIndex", orderedTrailIndex]);
+    var trailChanged = false;
     if ($(e.target).hasClass("controlRight")) {
       orderedTrailIndex = orderedTrailIndex + 1;
-      console.log(["++orderedTrailIndex", orderedTrailIndex]);
+      trailChanged = true;
     }
-    if ($(e.target).hasClass("controlLeft")) {
+    if ($(e.target).hasClass("controlLeft") && orderedTrailIndex > 0 ) {
       orderedTrailIndex = orderedTrailIndex - 1;
-      console.log(["--orderedTrailIndex", orderedTrailIndex]);
+      trailChanged = true;
     }
-    var orderedTrail = orderedTrails[orderedTrailIndex];
-    console.log(orderedTrail);
-    trailheadID = orderedTrail["trailheadID"];
-    console.log(["trailheadID", trailheadID]);
-    var trailIndex = orderedTrail["index"];
-    console.log(["trailIndex", trailIndex]);
-    for (var j = 0; j < trailheads.length; j++) {
-      if (trailheads[j].properties.id == trailheadID) {
-        trailhead = trailheads[j];
+    if (trailChanged) {
+      var orderedTrail = orderedTrails[orderedTrailIndex];
+      // console.log(orderedTrail);
+      trailheadID = orderedTrail.trailheadID;
+      // console.log(["trailheadID", trailheadID]);
+      var trailIndex = orderedTrail.index;
+      // console.log(["trailIndex", trailIndex]);
+      for (var j = 0; j < trailheads.length; j++) {
+        if (trailheads[j].properties.id == trailheadID) {
+          trailhead = trailheads[j];
+        }
       }
+      enableTrailControls();
+      highlightTrailhead(trailheadID, trailIndex);
+      showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
     }
-    highlightTrailhead(trailheadID, trailIndex);
-    showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
-
 
 
     // if "right" control clicked, then
@@ -1168,13 +1212,39 @@ function startup() {
     //  and shows which position in that object we current are showing information for
   }
 
+  function enableTrailControls() {
+    
+    if (orderedTrailIndex == 0) {
+      $(".controlLeft").removeClass("enabled").addClass("disabled");
+    }
+    else {
+      $(".controlLeft").removeClass("disabled").addClass("enabled");
+    }
+
+    if (orderedTrailIndex == orderedTrails.length - 1) {
+      $(".controlRight").removeClass("enabled").addClass("disabled");
+    }
+    else {
+      $(".controlRight").removeClass("disabled").addClass("enabled");
+    }
+    return orderedTrailIndex;
+  }
+
   function decorateDetailPanel(trail, trailhead) {
     console.log(orderedTrailIndex);
+
     for (var i = 0; i < orderedTrails.length; i++) {
-      if (orderedTrails[i]["trailID"] == trail.properties.id && orderedTrails[i]["trailheadID"] == trailhead.properties.id) {
+      if (orderedTrails[i].trailID == trail.properties.id && orderedTrails[i].trailheadID == trailhead.properties.id) {
         orderedTrailIndex = i;
       }
     }
+<<<<<<< HEAD
+=======
+
+    enableTrailControls();
+
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
+>>>>>>> master
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
@@ -1208,7 +1278,10 @@ function startup() {
     }
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
-    $('.detailPanel .detailLength').html(trail.properties.length + " miles");
+ 
+    var mileString = trail.properties.length == "1" ? "mile" : "miles";
+    $('.detailPanel .detailLength').html(trail.properties.length + " " + mileString);
+
     // $('.detailPanel .detailDogs').html(trail.properties.dogs);
     // $('.detailPanel .detailBikes').html(trail.properties.bikes);
     $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
@@ -1216,8 +1289,21 @@ function startup() {
     // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
 
+    if (trail.properties.map_url) {
+      $('.detailPanel .detailPrintMap a').attr("href", trail.properties.map_url).attr("target", "_blank");
+      $('.detailPanel .detailPrintMap').show();
+    }
+    else {
+      $('.detailPanel .detailPrintMap').hide();
+    }
+    var directionsUrl = "http://maps.google.com?saddr=" + currentUserLocation.lat + "," + currentUserLocation.lng + 
+    "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0]; 
+    $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
-    $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons')
+    $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
+    if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
+      $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
+    }
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
@@ -1554,7 +1640,7 @@ function startup() {
       style: function(feature) {
         var color;
         if (feature.properties.order === 0 || !feature.properties.order) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
@@ -1562,7 +1648,7 @@ function startup() {
             clickable: false
           };
         } else if (feature.properties.order === 1) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
@@ -1570,7 +1656,7 @@ function startup() {
             clickable: false
           };
         } else if (feature.properties.order === 2) {
-          color = getClassBackgroundColor("trailActive");
+          // color = getClassBackgroundColor("trailActive");
           return {
             weight: NORMAL_SEGMENT_WEIGHT,
             color: NORMAL_SEGMENT_COLOR,
@@ -1638,7 +1724,7 @@ function startup() {
     // use fitBounds to place the entire layer onscreen
     if (layerBoundsZoom <= MAX_ZOOM && layerBoundsZoom >= MIN_ZOOM) {
       map.fitBounds(layer.getBounds(), {
-        paddingTopLeft: [450, 0]
+        paddingTopLeft: centerOffset
       });
     }
 
@@ -1660,6 +1746,7 @@ function startup() {
       callData.data = JSON.stringify(callData.data);
     }
     var url = API_HOST + callData.path;
+    console.log(url);
     var request = $.ajax({
       type: callData.type,
       url: url,
@@ -1670,9 +1757,12 @@ function startup() {
       //},
       data: callData.data
     }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log("error! " + errorThrown + " " + textStatus);
+      console.log(jqXHR.status);
       $("#results").text("error: " + JSON.stringify(errorThrown));
     }).done(function(response, textStatus, jqXHR) {
       if (typeof doneCallback === 'function') {
+        console.log("calling doneCallback");
         doneCallback.call(this, response);
       }
       console.log(response);

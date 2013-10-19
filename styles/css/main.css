@@ -120,7 +120,8 @@ At some point, update mediaqueries to be in EMS
     width: 90%;
   }
   .title-row header .navbar-inner .logo {
-    height: 100%;
+    /* height: 100%; * This causes Safari issues */
+  
     width: 4em;
   }
 }
@@ -150,7 +151,8 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
   }
   .title-row header .navbar-inner .logo {
-    height: 100%;
+    /* height: 100%; */
+  
     width: 18em;
   }
   .title-row header .navbar-inner .about {
@@ -1045,6 +1047,37 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
+.offsetZoomControl {
+  cursor: pointer;
+  position: absolute;
+  top: 0.83em;
+  right: 0.83em;
+  display: block;
+  z-index: 1000;
+}
+.offsetZoomControl .offsetZoomIn {
+  height: 35px;
+  width: 35px;
+  font: bold 22px 'Lucida Console', Monaco, monospace;
+  text-align: center;
+  background-color: white;
+  color: #808285;
+}
+.offsetZoomControl .offsetZoomIn:hover {
+  background-color: #e3e3e1;
+}
+.offsetZoomControl .offsetZoomOut {
+  height: 35px;
+  width: 35px;
+  margin-top: 38px;
+  font: bold 22px 'Lucida Console', Monaco, monospace;
+  text-align: center;
+  background-color: white;
+  color: #808285;
+}
+.offsetZoomControl .offsetZoomOut:hover {
+  background-color: #e3e3e1;
+}
 @media only screen and (max-width: 529px)  {
   .trailListColumn {
     display: none;
@@ -1175,6 +1208,10 @@ At some point, update mediaqueries to be in EMS
     background-color: #00adef;
     z-index: 999;
     cursor: pointer ;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.disabled {
+    cursor: auto;
+    background-color: #58595b;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     top: 0;
@@ -1510,7 +1547,6 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
-    height: 100%;
     float: left;
     position: relative;
     display: inline-block;
@@ -1569,6 +1605,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .closeDetail {
     position: absolute;
+    cursor: pointer;
     top: 5px;
     right: 10px;
     width: 25px;

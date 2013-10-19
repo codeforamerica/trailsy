@@ -255,3 +255,36 @@
 		z-index: 1;
 	}
 }
+
+.offsetZoomControl {
+	cursor: pointer;
+	position: absolute;
+	top: 0.83em;
+	right: 0.83em;
+	display: block;
+	z-index: 1000;
+	.offsetZoomIn {
+		height: 35px;
+		width: 35px;
+		font: bold 22px 'Lucida Console', Monaco, monospace;
+		text-align: center;
+		background-color: white;
+		color: #808285;
+		&:hover {
+
+			background-color: @color-light-gray;
+		}
+	}
+	.offsetZoomOut {
+		height: 35px;
+		width: 35px;
+		margin-top: 38px;
+		font: bold 22px 'Lucida Console', Monaco, monospace;
+		text-align: center;
+		background-color: white;
+		color: #808285;
+		&:hover {
+			background-color: @color-light-gray;
+		}
+	}
+}

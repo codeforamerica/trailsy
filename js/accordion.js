@@ -12,18 +12,17 @@ $(document).ready(function() {
             //conditional check
             if ( ! visible ) {
                 $button.removeClass('active');
-                $('.panel-title .icon').html('&oplus;');
+                $(this).children('.icon').html('&nbsp;&#x25BC;');
 
-
-                $(this).next().slideUp('fast',function() {
+                $(this).parent().find('.panel-content').slideUp('fast',function() {
                     $(this).addClass('visuallyhidden').slideDown(0);
                     $('.panel-content').attr( 'aria-expanded','false' );
                 });
             }else {
                 $button.addClass('active');
-                $('.panel-title.active .icon').html('&otimes;');
+                $(this).children('.icon').html('&nbsp;&#x25B2;');
 
-                $(this).next().slideUp(0,function() {
+                $(this).parent().find('.panel-content').slideUp(0,function() {
                     $('.panel-content').attr( 'aria-expanded','true' );
                     $(this).removeClass('visuallyhidden').slideDown('fast');
                 });
