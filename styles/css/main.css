@@ -1043,6 +1043,7 @@ At some point, update mediaqueries to be in EMS
   top: 0.83em;
   right: 0.83em;
   display: block;
+  z-index: 1000;
 }
 .offsetZoomControl .offsetZoomIn {
   height: 35px;
@@ -1187,6 +1188,11 @@ At some point, update mediaqueries to be in EMS
     background-color: #00adef;
     z-index: 999;
     cursor: pointer ;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.disabled {
+    cursor: auto;
+    background-color: #58595b;
+    color: #58595b;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     top: 0;

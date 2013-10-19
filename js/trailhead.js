@@ -1160,33 +1160,35 @@ function startup() {
     var trailhead;
 
     for (var i = 0; i < orderedTrails.length; i++) {
-      if (orderedTrails[i]["trailID"] == trailID && orderedTrails[i]["trailheadID"] == trailheadID) {
+      if (orderedTrails[i].trailID == trailID && orderedTrails[i].trailheadID == trailheadID) {
         orderedTrailIndex = i;
       }
     }
-    console.log(["orderedTrailIndex", orderedTrailIndex]);
+    var trailChanged = false;
     if ($(e.target).hasClass("controlRight")) {
       orderedTrailIndex = orderedTrailIndex + 1;
-      console.log(["++orderedTrailIndex", orderedTrailIndex]);
+      trailChanged = true;
     }
-    if ($(e.target).hasClass("controlLeft")) {
+    if ($(e.target).hasClass("controlLeft") && orderedTrailIndex > 0 ) {
       orderedTrailIndex = orderedTrailIndex - 1;
-      console.log(["--orderedTrailIndex", orderedTrailIndex]);
+      trailChanged = true;
     }
-    var orderedTrail = orderedTrails[orderedTrailIndex];
-    console.log(orderedTrail);
-    trailheadID = orderedTrail["trailheadID"];
-    console.log(["trailheadID", trailheadID]);
-    var trailIndex = orderedTrail["index"];
-    console.log(["trailIndex", trailIndex]);
-    for (var j = 0; j < trailheads.length; j++) {
-      if (trailheads[j].properties.id == trailheadID) {
-        trailhead = trailheads[j];
+    if (trailChanged) {
+      var orderedTrail = orderedTrails[orderedTrailIndex];
+      // console.log(orderedTrail);
+      trailheadID = orderedTrail.trailheadID;
+      // console.log(["trailheadID", trailheadID]);
+      var trailIndex = orderedTrail.index;
+      // console.log(["trailIndex", trailIndex]);
+      for (var j = 0; j < trailheads.length; j++) {
+        if (trailheads[j].properties.id == trailheadID) {
+          trailhead = trailheads[j];
+        }
       }
+      enableTrailControls();
+      highlightTrailhead(trailheadID, trailIndex);
+      showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
     }
-    highlightTrailhead(trailheadID, trailIndex);
-    showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
-
 
 
     // if "right" control clicked, then
@@ -1200,13 +1202,35 @@ function startup() {
     //  and shows which position in that object we current are showing information for
   }
 
+  function enableTrailControls() {
+    
+    if (orderedTrailIndex == 0) {
+      $(".controlLeft").removeClass("enabled").addClass("disabled");
+    }
+    else {
+      $(".controlLeft").removeClass("disabled").addClass("enabled");
+    }
+
+    if (orderedTrailIndex == orderedTrails.length - 1) {
+      $(".controlRight").removeClass("enabled").addClass("disabled");
+    }
+    else {
+      $(".controlRight").removeClass("disabled").addClass("enabled");
+    }
+    return orderedTrailIndex;
+  }
+
   function decorateDetailPanel(trail, trailhead) {
     console.log(orderedTrailIndex);
+
     for (var i = 0; i < orderedTrails.length; i++) {
-      if (orderedTrails[i]["trailID"] == trail.properties.id && orderedTrails[i]["trailheadID"] == trailhead.properties.id) {
+      if (orderedTrails[i].trailID == trail.properties.id && orderedTrails[i].trailheadID == trailhead.properties.id) {
         orderedTrailIndex = i;
       }
     }
+
+    enableTrailControls();
+
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
