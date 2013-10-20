@@ -20,14 +20,11 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-<<<<<<< HEAD
   // var API_HOST = "http://127.0.0.1:3000";
   var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-=======
-  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
->>>>>>> master
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
@@ -432,7 +429,7 @@ function startup() {
         function(position) {
           handleGeoSuccess(position, callback);
         },
-        function(position) {
+        function(error) {
           handleGeoError(error, callback);
         }
       );
@@ -1088,7 +1085,7 @@ function startup() {
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
 
-        $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
+        // $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
@@ -1238,13 +1235,9 @@ function startup() {
         orderedTrailIndex = i;
       }
     }
-<<<<<<< HEAD
-=======
-
     enableTrailControls();
 
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
->>>>>>> master
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);

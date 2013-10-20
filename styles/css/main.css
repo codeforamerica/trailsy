@@ -664,17 +664,22 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailInfo .trailCurrentIndex {
     position: relative;
     display: inline-block;
-    margin: 1em 0 0 1em;
+    vertical-align: top;
+    margin: 0em 0 0 0em;
+    height: 2em;
+    width: 1.667em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
+    color: #b0d576;
+    background-color: #ebf4df;
   }
   .trail-box .trailInfo .trail {
     position: relative;
     display: inline-block;
-    margin: 1em 0 0 1em;
+    margin: 0em 0 0 .5em;
     height: auto;
     width: auto;
     max-width: 50%;
@@ -682,12 +687,13 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
+    line-height: 2.25em;
     color: #00adef;
     cursor: pointer;
   }
   .trail-box .trailInfo .trailLength {
     position: relative;
-    margin: 1.33em 1.33em 0 0em;
+    margin: .25em 1.5em 0 0em;
     float: right;
     height: auto;
     width: auto;
@@ -698,7 +704,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
-    line-height: 24px;
+    line-height: 2.667em;
     color: #91c73d;
     cursor: pointer;
   }
@@ -724,14 +730,14 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailheadInfo .trailheadIcon {
     position: relative;
     display: inline-block;
-    margin: 0em 0 0 1.33em;
+    margin: 0em 0 0 .375em;
     height: 1em;
     width: auto;
   }
   .trail-box .trailheadInfo .trailheadName {
     position: relative;
     display: inline-block;
-    margin: 1em 0 0 0em;
+    margin: .5em 0 0 .75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -743,7 +749,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     float: right;
-    margin: 1em 1.33em 0 0em;
+    margin: .5em 1.5em 0 0em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
