@@ -1033,6 +1033,7 @@ function startup() {
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
     orderedTrails = [];
+    var divCount = 0;
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
@@ -1053,6 +1054,7 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
+        divCount++;
         //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
@@ -1088,6 +1090,7 @@ function startup() {
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
 
+        $("<div class='trailIndex' >" + divCount + "</div>").appendTo($trailheadInfo);
         var trailInfoObject = {
           trailID: trailID,
           trailheadID: trailheadID,
