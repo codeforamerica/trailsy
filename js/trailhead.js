@@ -439,7 +439,7 @@ function startup() {
     // should use browser geolocation,
     // and only return Akron if we're far from home base
       currentUserLocation = AKRON;
-      handleGeoError("no geolocation",callback);
+      handleGeoError("no geolocation", callback);
     }
   }
 
@@ -596,7 +596,6 @@ function startup() {
 
   function setTrailheadEventHandlers(trailhead) {
 
-   
     trailhead.marker.on("click", function(trailheadID) {
       return function() {
         trailheadMarkerClick(trailheadID);
@@ -1055,7 +1054,7 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
-        var trailCurrentIndex = orderedTrailIndex + 1;
+        var trailCurrentIndex = orderedTrailIndex;
 
         //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
