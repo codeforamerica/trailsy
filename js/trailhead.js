@@ -29,6 +29,14 @@ function startup() {
     API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
+  // make this real
+  // if we're on iOS,
+  // USE_LOCAL = false
+  // else 
+  // USE_LOCAL = true
+
+
+
   //  Near-Global Variables
   var METERSTOMILESFACTOR = 0.00062137;
   var MAX_ZOOM = 17;
@@ -38,7 +46,7 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 5.0;
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
-  var USE_LOCAL = 1; // Set this to a true value to preload/use a local trail segment cache
+  var USE_LOCAL = true; // Set this to a true value to preload/use a local trail segment cache
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
   var HOVER_SEGMENT_COLOR = "#678729";
@@ -200,19 +208,6 @@ function startup() {
 
   initialSetup();
 
-  // -----------------------------------
-
-  //  Length Filtering
-  //  Helper functions
-
-  function filterTrailList() {
-    // defining the function, not calling it
-    // click events / activation of checkboxes
-    // change currentFilters object
-    // apply current Filters to trailData
-    // initialSetup performs the mapping
-  }
-
 
   // The next three functions perform trailhead/trail mapping
   // on a) initial startup, b) requested re-sort of trailheads based on the map, 
@@ -251,24 +246,6 @@ function startup() {
     getOrderedTrailheads(anchorLocation, function() {
       addTrailDataToTrailheads(trailData);
     });
-  }
-
-  function offsetZoomIn(e) {
-    // get map center lat/lng
-    // convert to pixels
-    // add offset
-    // convert to lat/lng
-    // setZoomAround to there with currentzoom + 1
-    var centerLatLng = map.getCenter();
-    var centerPoint = map.latLngToContainerPoint(centerLatLng);
-    var offset = centerOffset;
-    var offsetCenterPoint = centerPoint.add(offset.divideBy(2));
-    var offsetLatLng = map.containerPointToLatLng(offsetCenterPoint);
-    if ($(e.target).hasClass("offsetZoomIn")) {
-      map.setZoomAround(offsetLatLng, map.getZoom() + 1);
-    } else if ($(e.target).hasClass("offsetZoomOut")) {
-      map.setZoomAround(offsetLatLng, map.getZoom() - 1);
-    }
   }
 
 
@@ -398,6 +375,27 @@ function startup() {
     applyFilterChange(currentFilters, trailData);
   }
 
+  // ======================================
+  // map generation & geolocation updates
+
+  function offsetZoomIn(e) {
+    // get map center lat/lng
+    // convert to pixels
+    // add offset
+    // convert to lat/lng
+    // setZoomAround to there with currentzoom + 1
+    var centerLatLng = map.getCenter();
+    var centerPoint = map.latLngToContainerPoint(centerLatLng);
+    var offset = centerOffset;
+    var offsetCenterPoint = centerPoint.add(offset.divideBy(2));
+    var offsetLatLng = map.containerPointToLatLng(offsetCenterPoint);
+    if ($(e.target).hasClass("offsetZoomIn")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() + 1);
+    } else if ($(e.target).hasClass("offsetZoomOut")) {
+      map.setZoomAround(offsetLatLng, map.getZoom() - 1);
+    }
+  }
+
   function setAnchorLocationFromMap() {
     anchorLocation = map.getCenter();
   }
@@ -523,6 +521,8 @@ function startup() {
   // =====================================================================//
   // Getting trailhead data
 
+  // get all trailhead info, in order of distance from "location"
+
   function getOrderedTrailheads(location, callback) {
     console.log("getOrderedTrailheads");
     var callData = {
@@ -538,23 +538,7 @@ function startup() {
     });
   }
 
-  // get all trailhead info, in order of distance from "location"
-
-  function getOrderedTrailheadsOld(location, callback) {
-    console.log("getOrderedTrailheads");
-    var nearest_trailhead_query = "select trailheads.*, " +
-      "ST_Distance_Sphere(ST_WKTToSQL('POINT(" + location.lng + " " + location.lat + ")'), the_geom) distance " +
-      "from " + TRAILHEADS_TABLE + " as trailheads " +
-      "ORDER BY distance " + "";
-
-    makeSQLQuery(nearest_trailhead_query, function(response) {
-      populateTrailheadArray(response);
-      if (typeof callback == "function") {
-        callback();
-      }
-    });
-  }
-
+  
 
   // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
@@ -626,20 +610,6 @@ function startup() {
       path: "/trails.json"
     };
     makeAPICall(callData, function(response) {
-      populateTrailData(response);
-      if (typeof callback == "function") {
-        callback();
-      }
-    });
-  }
-
-  // get the trailData from the DB
-
-  function getTrailDataOld(callback) {
-    console.log("getTrailData");
-    var trail_list_query = "select * from " + TRAILDATA_TABLE + " order by name";
-    // Another AJAX call, for the trails
-    makeSQLQuery(trail_list_query, function(response) {
       populateTrailData(response);
       if (typeof callback == "function") {
         callback();
@@ -1200,22 +1170,11 @@ function startup() {
       highlightTrailhead(trailheadID, trailIndex);
       showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
     }
-
-
-    // if "right" control clicked, then
-    // then increment the index of the active "trail", defined above as "CurrentDetailTrail" trail in array
-    // This increment is only through the current "trailhead", defined above as CurrentDetailTrailhead.
-    // If the increment reaches the end of the array for the current trailhead, move to the next trailhead in the 
-    // larger array...which is..."trailheads"?
-    // if the increment reaches the end of the larger array, then 
-
-    //  we should create a helper function that calculates / shows the number of trails that have in the current big object
-    //  and shows which position in that object we current are showing information for
   }
 
   function enableTrailControls() {
 
-    if (orderedTrailIndex == 0) {
+    if (orderedTrailIndex === 0) {
       $(".controlLeft").removeClass("enabled").addClass("disabled");
     } else {
       $(".controlLeft").removeClass("disabled").addClass("enabled");
@@ -1496,10 +1455,6 @@ function startup() {
         "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trail_query, index) {
         return function(callback) {
-          // makeSQLQuery(trail_query, function(response) {
-          //   responses[index] = response;
-          //   callback(null, trailID);
-          // });
           var callData = {
             type: "GET",
             path: "/trailsegments.json"
@@ -1739,7 +1694,6 @@ function startup() {
       callData.data = JSON.stringify(callData.data);
     }
     var url = API_HOST + callData.path;
-    console.log(url);
     var request = $.ajax({
       type: callData.type,
       url: url,
@@ -1755,37 +1709,8 @@ function startup() {
       $("#results").text("error: " + JSON.stringify(errorThrown));
     }).done(function(response, textStatus, jqXHR) {
       if (typeof doneCallback === 'function') {
-        console.log("calling doneCallback");
+        // console.log("calling doneCallback");
         doneCallback.call(this, response);
-      }
-      console.log(response);
-      // $("#results").text(JSON.stringify(response));
-    });
-  }
-
-  // given a SQL query, and done/error callbacks,
-  // make the query
-
-  function makeSQLQuery(query, done, error) {
-    console.log("makeSQLQuery");
-    var callData = {
-      q: query,
-      // api_key: api_key,
-      format: "geoJSON"
-    };
-    var request = $.ajax({
-      dataType: "json",
-      url: endpoint,
-      data: callData
-    }).done(function(response, textStatus, errorThrown) {
-      done(response);
-    }).error(function(response, textStatus, errorThrown) {
-      if (typeof(error) === "function") {
-        error(response);
-      } else {
-        console.log("ERROR:");
-        console.log(query);
-        console.log(errorThrown);
       }
     });
   }
