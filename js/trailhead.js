@@ -701,7 +701,7 @@ function startup() {
     allVisibleSegmentsArray = [];
     allInvisibleSegmentsArray = [];
     var allSegmentLayer = new L.FeatureGroup();
-    console.log("visibleAllTrailLayer start");
+    // console.log("visibleAllTrailLayer start");
     // make a normal visible layer for the segments, and add each of those layers to the allVisibleSegmentsArray
     var visibleAllTrailLayer = L.geoJson(response, {
       style: function visibleStyle() {
@@ -714,7 +714,7 @@ function startup() {
         };
       },
       onEachFeature: function visibleOnEachFeature(feature, layer) {
-        console.log("visibleAllTrailLayer onEachFeature");
+        // console.log("visibleAllTrailLayer onEachFeature");
         allVisibleSegmentsArray.push(layer);
       }
     });
@@ -732,15 +732,15 @@ function startup() {
         };
       },
       onEachFeature: function invisibleOnEachFeature(feature, layer) {
-        console.log("invisibleAllTrailLayer onEachFeature");
+        // console.log("invisibleAllTrailLayer onEachFeature");
         allInvisibleSegmentsArray.push(layer);
       }
     });
-    console.log("invisibleAllTrailLayer end");
+    // console.log("invisibleAllTrailLayer end");
 
     var numSegments = allInvisibleSegmentsArray.length;
     for (var i = 0; i < numSegments; i++) {
-      console.log("numSegments loop");
+      // console.log("numSegments loop");
       var invisLayer = allInvisibleSegmentsArray[i];
       // make a FeatureGroup including both visible and invisible components
       // var newTrailFeatureGroup = new L.FeatureGroup([allVisibleSegmentsArray[i]]);
@@ -766,7 +766,6 @@ function startup() {
       }
 
       invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
-      console.log(newTrailFeatureGroup);
       newTrailFeatureGroup.addEventListener("mouseover", function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
           console.log("new mouseover");
