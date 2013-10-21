@@ -425,19 +425,30 @@ function startup() {
       };
       geoWatchId = navigator.geolocation.watchPosition(
         function(position) {
-          handleGeoSuccess(position, callback);
+          if (trailheads.length == 0) {
+            console.log("firing callback");
+            handleGeoSuccess(position, callback);
+          } else {
+            console.log("no callback");
+            handleGeoSuccess(position);
+          }
         },
-        function(position) {
-          handleGeoError(error, callback);
+        function(error) {
+          if (trailheads.length == 0) {
+            console.log("firing error callback");
+            handleGeoError(error, callback);
+          } else {
+            console.log("no error callback");
+            handleGeoError(error);
+          }
         }
       );
-    }
-    else {
-    // for now, just returns Akron
-    // should use browser geolocation,
-    // and only return Akron if we're far from home base
+    } else {
+      // for now, just returns Akron
+      // should use browser geolocation,
+      // and only return Akron if we're far from home base
       currentUserLocation = AKRON;
-      handleGeoError("no geolocation",callback);
+      handleGeoError("no geolocation", callback);
     }
   }
 
