@@ -996,8 +996,9 @@ function startup() {
     map.addLayer(currentTrailheadLayerGroup);
 
     currentTrailheadLayerGroup.eachLayer(function(layer) {
-      console.log("bringToBack");
-      layer.bringToBack();
+      if (typeof layer.bringToBack == "function") {
+        layer.bringToBack();
+      }
     });
   }
 
