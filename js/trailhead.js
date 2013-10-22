@@ -20,7 +20,9 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -573,7 +575,6 @@ function startup() {
 
   function setTrailheadEventHandlers(trailhead) {
 
-
     trailhead.marker.on("click", function(trailheadID) {
       return function() {
         trailheadMarkerClick(trailheadID);
@@ -960,7 +961,7 @@ function startup() {
         }
         if (trail.properties.status == 2) {
           $popupTrailDiv.append($("<img>").addClass("status").attr({
-            src: "img/icon_alert_yellow.png",
+            src: "img/icon_alert_red.png",
             title: "alert"
           }));
         }
@@ -1009,7 +1010,7 @@ function startup() {
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
     orderedTrails = [];
-    var divCount = 0;
+    var divCount = 1;
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
@@ -1030,7 +1031,8 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
-        divCount++;
+        var trailCurrentIndex = divCount++;
+
         //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
           .attr("data-source", "list")
@@ -1053,20 +1055,19 @@ function startup() {
 
         // Making a new div for Detail Panel
         $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
-
+        $("<div class='trailCurrentIndex' >" + trailCurrentIndex + "</div>").appendTo($trailInfo);
         $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
 
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
 
-        $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
+        // $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
-
-        $("<div class='trailIndex' >" + divCount + "</div>").appendTo($trailheadInfo);
+        
         var trailInfoObject = {
           trailID: trailID,
           trailheadID: trailheadID,
@@ -1197,14 +1198,26 @@ function startup() {
         orderedTrailIndex = i;
       }
     }
-
     enableTrailControls();
 
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
+    $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
+    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
+      $('.detailPanel .detailPanelPictureCredits').remove();
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
+    }
+    $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
+    if (trail.properties.status == 1) {
+      $('.detailPanel .detailPanelPictureCredits').remove();
+       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+    }
+    if (trail.properties.status == 2) {
+      $('.detailPanel .detailPanelPictureCredits').remove();
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.hike == 'y') {
       console.log("hike icon replaced")

@@ -97,10 +97,17 @@
 			position: relative;
 			width: 100%;
 			background-color: @color-dark-blue;
-			padding: .5em .25em .5em 1em;
+			padding: .5em 1em .5em 1em;
 			.trailName {
 				.sansSerif-light;
 				color: @color-white;
+			}
+			.trailIndex {
+				.sansSerif-light;
+				color: @color-white;
+				font-size: 12px;
+				float: right;
+				margin-right: 3em;
 			}
 			.detailPanelControls {
 				display: none;
@@ -149,8 +156,52 @@
 			height: 24em;
 			width: 24em;
 			overflow: scroll;
-			.detailPanelPicture {
-				width: 100%;
+			.detailPanelPictureContainer {
+				height: auto;
+				.detailPanelPicture {
+					width: 100%;
+				}
+				.statusMessage {
+					position: relative;
+					bottom: 1em;
+					height: auto;
+					width: 100%;
+					z-index: 999;
+					.sansSerif-light;
+					font-size: 12px;
+					color: @color-white;
+					&#yellow {
+						background-color: @color-yellow;
+					}
+					&#red {
+						background-color: @color-red;
+					}
+					img {
+						height: auto;
+						width: 10%;
+						vertical-align: top;
+						position: relative;
+						display: inline-block;
+					}
+					span {
+						height: auto;
+						width: 90%;
+						position: relative;
+						display: inline-block;
+						padding: 1em 1.33em 1em 0em;
+					}
+				}
+				.detailPanelPictureCredits {
+					position: relative;
+					left: 0;
+					height: auto;
+					width: auto;
+					margin: .08em 1.6em .08em 1.6em;
+					.sansSerif-light;
+					font-size: 10px;
+					font-style: italic;
+					color: @color-light-mid-gray;
+				}
 			}
 			.detailTopRow {
 				&#left {
@@ -158,7 +209,7 @@
 					display: inline-block;
 					height: 2em;
 					width: auto;
-					padding: .5em 0em 0em .5em;
+					padding: .5em 0em 0em 1em;
 					float: left;
 					.detailLength {
 						position: relative;
@@ -169,6 +220,7 @@
 						.sansSerif-light;
 						color: @color-light-mid-gray;
 						font-size: 12px;
+						margin-right: 1em;
 					}
 				}
 				&#right {
@@ -176,17 +228,29 @@
 					display: inline-block;
 					height: 2em;
 					width: auto;
+					margin: 0 1em 0 0;
+					float: right;
 					.detailActivityHeader {
 						.sansSerif-light;
-						color: @color-mid-gray;
+						color: @color-light-mid-gray;
 						font-size: 12px;
+						margin-left: 1em;
+						line-height: 38px;
+					}
+					.activity-icon-row {
+						height: 100%;
+						width: auto;
+						position: relative;
+						display: inline-block;
 					}
 					.icon {
 						position: relative;
 						display: inline-block;
 						height: 2em;
 						width: auto;
+						vertical-align: middle;
 						.activity-icons {
+							vertical-align: middle;
 							height: 100%;
 							width: auto;
 							position: relative;
@@ -200,7 +264,7 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: .5em .5em 0em .5em;
+				padding: .5em 1em 0em 1em;
 				margin-bottom: 1em;
 				.detailPanelHeader {
 					.sansSerif-light;
@@ -208,6 +272,7 @@
 					font-size: 12px;
 				}
 				.detailDescription {
+					margin-top: .75em;
 					.sansSerif-light;
 					color: @color-mid-gray;
 				}
@@ -217,15 +282,19 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: .5em .5em 0em .5em;
+				padding: .5em 1em 0em 1em;
 				.detailPanelHeader {
 					.sansSerif-light;
 					color: @color-light-mid-gray;
 					font-size: 12px;
 				}
+				img {
+					height: 1em;
+				}
 				.detailTrailheadDistance {
 					.sansSerif-light;
 					color: @color-mid-green;
+					float: right;
 				}
 				.detailTrailheadInfo {
 					width: 50%;
@@ -233,6 +302,7 @@
 					position: relative;
 					display: inline-block;
 					margin-bottom: 1em;
+					margin-top: .75em;
 					.detailTrailheadDistance {
 						.sansSerif-light;
 						color: @color-mid-gray;
@@ -257,6 +327,7 @@
 					height: auto;
 					float: right;
 					margin-bottom: 1em;
+					margin-top: .75em;
 					padding: 0em 0em 0em 0em;
 					.detailDirections {
 						width: 100%;
@@ -266,6 +337,8 @@
 						background-color: @color-light-blue;
 						margin: 0em 0em .5em 0em;
 						text-align: center;
+						cursor: pointer;
+						transition: all 0.25s ease;
 						a {
 							width: 100%;
 							vertical-align: middle;
@@ -274,6 +347,12 @@
 						  	font-size: 12px;
 						  	color: @color-dark-blue;
 							line-height: 2.667em;
+						}
+						&:hover {
+							background-color: @color-dark-blue;
+						}
+						&:hover > a {
+							color: @color-white;
 						}
 					}
 					.detailPrintMap {
@@ -284,6 +363,8 @@
 						background-color: @color-light-blue;
 						margin: 0em 0em 0em 0em;
 						text-align: center;
+						cursor: pointer;
+						transition: all 0.25s ease;
 						a {
 							width: 100%;
 							vertical-align: middle;
@@ -292,6 +373,12 @@
 						  	font-size: 12px;
 						  	color: @color-dark-blue;
 							line-height: 2.667em;
+						}
+						&:hover {
+							background-color: @color-dark-blue;
+						}
+						&:hover > a {
+							color: @color-white;
 						}
 					}
 				}
@@ -306,7 +393,9 @@
 						position: relative;
 						display: inline-block;
 						height: 2em;
-						width: 100%;
+						width: auto;
+						vertical-align: middle;
+						margin: 0em 0em 0em .5em;
 						.amenity-icons {
 							height: 100%;
 							width: auto;
@@ -320,6 +409,7 @@
 					display: inline-block;
 					height: auto;
 					width: 100%;
+					margin-top: 1.5em;
 					.social-icon {
 						position: relative;
 						display: inline-block;
@@ -329,6 +419,11 @@
 						float: right;
 						margin: 0em 0em .25em .5em;
 						padding: 0 .5em 0 0em;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background-color: @color-mid-gray;
+						}
 						&#facebook {
 							.sansSerif-light;
 							font-size: 12px;
@@ -370,6 +465,7 @@
 					height: auto;
 					width: auto;
 					margin-left: 1em;
+					margin-top: .25em;
 				}
 				.detailPanelHeader {
 					position: relative;
