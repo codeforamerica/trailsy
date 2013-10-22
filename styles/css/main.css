@@ -829,7 +829,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
-    width: auto;
+    width: 100%;
     position: relative;
     display: inline-block;
     height: auto;
@@ -839,7 +839,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     background-color: #ffffff;
     height: auto;
-    width: 90%;
+    width: 100%;
     min-width: 12em;
     padding: .25em 0em .25em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -855,15 +855,16 @@ At some point, update mediaqueries to be in EMS
     position: absolute;
     height: 1.5em;
     top: .5em;
-    right: 0em;
+    right: .5em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
-    padding: .5em 0em .25em .5em;
+    /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
-    height: 100%;
+    width: 3em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
@@ -890,18 +891,20 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     height: auto;
     width: auto;
-    margin: 0;
+    vertical-align: top;
+    padding: .5em 1em .25em .5em;
     display: inline-block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
+    color: #bbbdbf;
     text-decoration: none;
-    line-height: 1em;
+    line-height: 1.5em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box b {
     position: relative;
-    padding: 0 0 0 .2em;
+    margin: 1em .5em 0 .25em;
     float: right;
     border-bottom: .6em solid transparent;
     border-top: .6em solid transparent;

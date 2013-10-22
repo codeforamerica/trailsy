@@ -25,7 +25,7 @@
 				min-width: 12em;
 				position: relative;
 				.trailhead-box {
-					width: auto;
+					width: 100%;
 					position: relative;
 					display: inline-block;
 					height: auto;
@@ -34,7 +34,7 @@
 						display: inline-block;
 						background-color: @color-white;
 						height: auto;
-						width: 90%;
+						width: 100%;
 						min-width: 12em;
 						padding: .25em 0em .25em .5em;
 						.sansSerif-light;
@@ -47,15 +47,14 @@
 						position: absolute;
 						height: 1.5em;
 						top: .5em;
-						right: -0em;
+						right: .5em;
 					}
-					
 					.trailhead-trailname {
 						min-width: 12em;
 						width: 100%;
-						padding: .5em 0em .25em .5em;
+/*						padding: .5em 0em .25em .5em;*/
 						.status {
-							height: 100%;
+							width: 3em;
 						}
 						&.not-selected {
 							background: @color-white;
@@ -82,12 +81,13 @@
 							position: relative;
 							height: auto;
 							width: auto;
-							margin: 0;
+							vertical-align: top;
+							padding: .5em 1em .25em .5em;
 							display: inline-block;
 							.sansSerif-light;
-							// color: @color-light-mid-gray;
+							color: @color-light-mid-gray;
 							text-decoration: none;
-							line-height: 1em;
+							line-height: 1.5em;
 						}
 						
 						
@@ -100,7 +100,7 @@
   				}
   				b {
   					position: relative;
-  					padding: 0 0 0 .2em;
+  					margin: 1em .5em 0 .25em;
   					float: right;
   					border-bottom: .6em solid transparent;
   					border-top: .6em solid transparent;

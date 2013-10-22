@@ -1250,7 +1250,7 @@ function startup() {
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     if (trail.properties.status == 1) {
       $('.detailPanel .detailPanelPictureCredits').remove();
-      $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.status == 2) {
       $('.detailPanel .detailPanelPictureCredits').remove();
