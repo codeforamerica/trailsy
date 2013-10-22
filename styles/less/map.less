@@ -35,12 +35,13 @@
 						background-color: @color-white;
 						height: auto;
 						width: 100%;
+						max-width: 200px;
+						overflow-y: hidden;
 						min-width: 12em;
 						padding: .25em 0em .25em .5em;
 						.sansSerif-light;
 						color: @color-mid-gray;
 						text-decoration: none;
-						border-bottom: 1px solid gray;
 						text-transform: capitalize;
 					}
 					.calloutTrailheadIcon {
@@ -52,6 +53,7 @@
 					.trailhead-trailname {
 						min-width: 12em;
 						width: 100%;
+						border-top: 1px gray solid;
 /*						padding: .5em 0em .25em .5em;*/
 						.status {
 							width: 3em;
@@ -81,6 +83,8 @@
 							position: relative;
 							height: auto;
 							width: auto;
+							max-width: 200px;
+							overflow-y: hidden;
 							vertical-align: top;
 							padding: .5em 1em .25em .5em;
 							display: inline-block;
@@ -89,8 +93,7 @@
 							text-decoration: none;
 							line-height: 1.5em;
 						}
-						
-						
+
 						&:hover div {
 							// color: @color-white;
 						}
@@ -99,16 +102,17 @@
   					}
   				}
   				b {
-  					position: relative;
+  					position: absolute;
   					margin: 1em .5em 0 .25em;
-  					float: right;
+  					right: .3em;
   					border-bottom: .6em solid transparent;
   					border-top: .6em solid transparent;
   					border-left: .6em solid @color-light-blue;
   					display: inline-block;
   					height: 0;
   				}
-  				+ .trail1 {
+  				&.trail1 {
+  					border-top: 1px solid gray;
   					&:hover {}
   				}
   				+ .trail2 {
