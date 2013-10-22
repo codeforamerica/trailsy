@@ -156,8 +156,38 @@
 			height: 24em;
 			width: 24em;
 			overflow: scroll;
-			.detailPanelPicture {
-				width: 100%;
+			.detailPanelPictureContainer {
+				.detailPanelPicture {
+					width: 100%;
+				}
+				.statusMessage {
+					position: relative;
+					left: 0;
+					bottom: 40px;
+					height: auto;
+					width: 100%;
+					z-index: 999;
+					.sansSerif-light;
+					font-size: 12px;
+					color: @color-white;
+					&#yellow {
+						background-color: @color-yellow;
+					}
+					&#red {
+						background-color: @color-red;
+					}
+				}
+				.detailPanelPictureCredits {
+					position: relative;
+					left: 0;
+					height: auto;
+					width: auto;
+					margin: .08em 1.6em .08em 1.6em;
+					.sansSerif-light;
+					font-size: 10px;
+					font-style: italic;
+					color: @color-light-mid-gray;
+				}
 			}
 			.detailTopRow {
 				&#left {

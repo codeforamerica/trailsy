@@ -674,6 +674,8 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     font-size: 12px;
     color: #b0d576;
+    text-align: center;
+    line-height: 2em;
     background-color: #ebf4df;
   }
   .trail-box .trailInfo .trail {
@@ -1253,8 +1255,42 @@ At some point, update mediaqueries to be in EMS
     width: 24em;
     overflow: scroll;
   }
-  .detailPanel .detailPanelBody .detailPanelPicture {
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPicture {
     width: 100%;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage {
+    position: relative;
+    left: 0;
+    bottom: 40px;
+    height: auto;
+    width: 100%;
+    z-index: 999;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#yellow {
+    background-color: #f3ca64;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#red {
+    background-color: #9c2d23;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPictureCredits {
+    position: relative;
+    left: 0;
+    height: auto;
+    width: auto;
+    margin: .08em 1.6em .08em 1.6em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 10px;
+    font-style: italic;
+    color: #bbbdbf;
   }
   .detailPanel .detailPanelBody .detailTopRow#left {
     position: relative;

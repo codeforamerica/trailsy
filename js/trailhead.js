@@ -986,7 +986,7 @@ function startup() {
         }
         if (trail.properties.status == 2) {
           $popupTrailDiv.append($("<img>").addClass("status").attr({
-            src: "img/icon_alert_yellow.png",
+            src: "img/icon_alert_red.png",
             title: "alert"
           }));
         }
@@ -1034,7 +1034,7 @@ function startup() {
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
     orderedTrails = [];
-    var divCount = 0;
+    var divCount = 1;
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
@@ -1055,8 +1055,7 @@ function startup() {
         var trail = trailData[trailID];
         var trailName = trailData[trailID].properties.name;
         var trailLength = trailData[trailID].properties.length;
-        var trailCurrentIndex = orderedTrailIndex;
-        divCount++;
+        var trailCurrentIndex = divCount++;
 
         //  Add park name var when it makes it into the database
         $trailDiv = $("<div>").addClass('trail-box')
@@ -1092,8 +1091,7 @@ function startup() {
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
-
-        $("<div class='trailIndex' >" + divCount + "</div>").appendTo($trailheadInfo);
+        
         var trailInfoObject = {
           trailID: trailID,
           trailheadID: trailheadID,
@@ -1246,6 +1244,14 @@ function startup() {
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
+      $('.detailPanel .detailPanelPictureCredits').append("Photo courtesy of " + trail.properties.photo_credit);
+    }
+    $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
+    if (trail.properties.status == 1) {
+        $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+    }
+    if (trail.properties.status == 2) {
+        $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.hike == 'y') {
       console.log("hike icon replaced")
