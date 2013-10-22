@@ -1255,13 +1255,15 @@ At some point, update mediaqueries to be in EMS
     width: 24em;
     overflow: scroll;
   }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer {
+    height: auto;
+  }
   .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPicture {
     width: 100%;
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage {
     position: relative;
-    left: 0;
-    bottom: 40px;
+    bottom: 1em;
     height: auto;
     width: 100%;
     z-index: 999;
@@ -1277,6 +1279,20 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#red {
     background-color: #9c2d23;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage img {
+    height: auto;
+    width: 10%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage span {
+    height: auto;
+    width: 90%;
+    position: relative;
+    display: inline-block;
+    padding: 1em 1.33em 1em 0em;
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPictureCredits {
     position: relative;

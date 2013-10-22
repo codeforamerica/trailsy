@@ -157,13 +157,13 @@
 			width: 24em;
 			overflow: scroll;
 			.detailPanelPictureContainer {
+				height: auto;
 				.detailPanelPicture {
 					width: 100%;
 				}
 				.statusMessage {
 					position: relative;
-					left: 0;
-					bottom: 40px;
+					bottom: 1em;
 					height: auto;
 					width: 100%;
 					z-index: 999;
@@ -175,6 +175,20 @@
 					}
 					&#red {
 						background-color: @color-red;
+					}
+					img {
+						height: auto;
+						width: 10%;
+						vertical-align: top;
+						position: relative;
+						display: inline-block;
+					}
+					span {
+						height: auto;
+						width: 90%;
+						position: relative;
+						display: inline-block;
+						padding: 1em 1.33em 1em 0em;
 					}
 				}
 				.detailPanelPictureCredits {
