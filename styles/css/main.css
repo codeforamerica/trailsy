@@ -1216,7 +1216,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     font-size: 12px;
     float: right;
-    margin-top: .33em;
+    margin-right: 3em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: none;
