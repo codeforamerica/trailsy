@@ -661,10 +661,27 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     height: auto;
   }
+  .trail-box .trailInfo .trailCurrentIndex {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0em 0 0 0em;
+    height: 2em;
+    width: 1.667em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #b0d576;
+    text-align: center;
+    line-height: 2em;
+    background-color: #ebf4df;
+  }
   .trail-box .trailInfo .trail {
     position: relative;
     display: inline-block;
-    margin: 1em 0 0 1em;
+    margin: 0em 0 0 .5em;
     height: auto;
     width: auto;
     max-width: 50%;
@@ -672,12 +689,13 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
+    line-height: 2.25em;
     color: #00adef;
     cursor: pointer;
   }
   .trail-box .trailInfo .trailLength {
     position: relative;
-    margin: 1.33em 1.33em 0 0em;
+    margin: .25em 1.5em 0 0em;
     float: right;
     height: auto;
     width: auto;
@@ -688,7 +706,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
-    line-height: 24px;
+    line-height: 2.667em;
     color: #91c73d;
     cursor: pointer;
   }
@@ -714,14 +732,14 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailheadInfo .trailheadIcon {
     position: relative;
     display: inline-block;
-    margin: 0em 0 0 1.33em;
+    margin: 0em 0 0 .375em;
     height: 1em;
     width: auto;
   }
   .trail-box .trailheadInfo .trailheadName {
     position: relative;
     display: inline-block;
-    margin: 1em 0 0 0em;
+    margin: .5em 0 0 .75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -733,7 +751,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     float: right;
-    margin: 1em 1.33em 0 0em;
+    margin: .5em 1.5em 0 0em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -811,7 +829,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
-    width: auto;
+    width: 100%;
     position: relative;
     display: inline-block;
     height: auto;
@@ -821,7 +839,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     background-color: #ffffff;
     height: auto;
-    width: 90%;
+    width: 100%;
     min-width: 12em;
     padding: .25em 0em .25em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -837,15 +855,16 @@ At some point, update mediaqueries to be in EMS
     position: absolute;
     height: 1.5em;
     top: .5em;
-    right: 0em;
+    right: .5em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
-    padding: .5em 0em .25em .5em;
+    /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
-    height: 100%;
+    width: 3em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
@@ -872,18 +891,20 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     height: auto;
     width: auto;
-    margin: 0;
+    vertical-align: top;
+    padding: .5em 1em .25em .5em;
     display: inline-block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
+    color: #bbbdbf;
     text-decoration: none;
-    line-height: 1em;
+    line-height: 1.5em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box b {
     position: relative;
-    padding: 0 0 0 .2em;
+    margin: 1em .5em 0 .25em;
     float: right;
     border-bottom: .6em solid transparent;
     border-top: .6em solid transparent;
@@ -1171,7 +1192,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     width: 100%;
     background-color: #00adef;
-    padding: .5em .25em .5em 1em;
+    padding: .5em 1em .5em 1em;
   }
   .detailPanel .detailPanelBanner .trailName {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1179,6 +1200,16 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
+  }
+  .detailPanel .detailPanelBanner .trailIndex {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    font-size: 12px;
+    float: right;
+    margin-top: .33em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: none;
@@ -1227,15 +1258,65 @@ At some point, update mediaqueries to be in EMS
     width: 24em;
     overflow: scroll;
   }
-  .detailPanel .detailPanelBody .detailPanelPicture {
+  .detailPanel .detailPanelBody .detailPanelPictureContainer {
+    height: auto;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPicture {
     width: 100%;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage {
+    position: relative;
+    bottom: 1em;
+    height: auto;
+    width: 100%;
+    z-index: 999;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#yellow {
+    background-color: #f3ca64;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#red {
+    background-color: #9c2d23;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage img {
+    height: auto;
+    width: 10%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage span {
+    height: auto;
+    width: 90%;
+    position: relative;
+    display: inline-block;
+    padding: 1em 1.33em 1em 0em;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .detailPanelPictureCredits {
+    position: relative;
+    left: 0;
+    height: auto;
+    width: auto;
+    margin: .08em 1.6em .08em 1.6em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 10px;
+    font-style: italic;
+    color: #bbbdbf;
   }
   .detailPanel .detailPanelBody .detailTopRow#left {
     position: relative;
     display: inline-block;
     height: 2em;
     width: auto;
-    padding: .5em 0em 0em .5em;
+    padding: .5em 0em 0em 1em;
     float: left;
   }
   .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
@@ -1253,28 +1334,41 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-right: 1em;
   }
   .detailPanel .detailPanelBody .detailTopRow#right {
     position: relative;
     display: inline-block;
     height: 2em;
     width: auto;
+    margin: 0 1em 0 0;
+    float: right;
   }
   .detailPanel .detailPanelBody .detailTopRow#right .detailActivityHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    color: #58595b;
+    color: #bbbdbf;
     font-size: 12px;
+    margin-left: 1em;
+    line-height: 38px;
+  }
+  .detailPanel .detailPanelBody .detailTopRow#right .activity-icon-row {
+    height: 100%;
+    width: auto;
+    position: relative;
+    display: inline-block;
   }
   .detailPanel .detailPanelBody .detailTopRow#right .icon {
     position: relative;
     display: inline-block;
     height: 2em;
     width: auto;
+    vertical-align: middle;
   }
   .detailPanel .detailPanelBody .detailTopRow#right .icon .activity-icons {
+    vertical-align: middle;
     height: 100%;
     width: auto;
     position: relative;
@@ -1285,7 +1379,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em .5em 0em .5em;
+    padding: .5em 1em 0em 1em;
     margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
@@ -1297,6 +1391,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
+    margin-top: .75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1308,7 +1403,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em .5em 0em .5em;
+    padding: .5em 1em 0em 1em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1318,12 +1413,16 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
     font-size: 12px;
   }
+  .detailPanel .detailPanelBody .detailBottomRow img {
+    height: 1em;
+  }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #91c73d;
+    float: right;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo {
     width: 50%;
@@ -1331,6 +1430,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     margin-bottom: 1em;
+    margin-top: .75em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1367,6 +1467,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     float: right;
     margin-bottom: 1em;
+    margin-top: .75em;
     padding: 0em 0em 0em 0em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
@@ -1377,6 +1478,8 @@ At some point, update mediaqueries to be in EMS
     background-color: #d9f0fc;
     margin: 0em 0em .5em 0em;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections a {
     width: 100%;
@@ -1390,6 +1493,12 @@ At some point, update mediaqueries to be in EMS
     color: #00adef;
     line-height: 2.667em;
   }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections:hover {
+    background-color: #00adef;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections:hover > a {
+    color: #ffffff;
+  }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
     width: 100%;
     height: 2em;
@@ -1398,6 +1507,8 @@ At some point, update mediaqueries to be in EMS
     background-color: #d9f0fc;
     margin: 0em 0em 0em 0em;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap a {
     width: 100%;
@@ -1411,6 +1522,12 @@ At some point, update mediaqueries to be in EMS
     color: #00adef;
     line-height: 2.667em;
   }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap:hover {
+    background-color: #00adef;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap:hover > a {
+    color: #ffffff;
+  }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities {
     position: relative;
     display: inline-block;
@@ -1422,7 +1539,9 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     height: 2em;
-    width: 100%;
+    width: auto;
+    vertical-align: middle;
+    margin: 0em 0em 0em .5em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .amenity-icons {
     height: 100%;
@@ -1435,6 +1554,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
+    margin-top: 1.5em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon {
     position: relative;
@@ -1445,6 +1565,11 @@ At some point, update mediaqueries to be in EMS
     float: right;
     margin: 0em 0em .25em .5em;
     padding: 0 .5em 0 0em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon:hover {
+    background-color: #58595b;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#facebook {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1493,6 +1618,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     width: auto;
     margin-left: 1em;
+    margin-top: .25em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailPanelHeader {
     display: inline-block;
