@@ -646,9 +646,9 @@ function startup() {
       type: "GET",
       path: "/trailsegments.json"
     };
-    if (SMALL) {
-      callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
-    }
+    // if (SMALL) {
+    //   callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
+    // }
     makeAPICall(callData, function(response) {
       trailSegments = response;
       if (USE_ALL_SEGMENT_LAYER) {
