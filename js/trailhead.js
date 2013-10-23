@@ -1,4 +1,5 @@
 console.log("start");
+
 $(document).ready(startup);
 
 /* The Big Nested Function
@@ -10,6 +11,13 @@ function startup() {
   "use strict";
   console.log("trailhead.js");
 
+  var SMALL;
+  if (Modernizr.mq("only screen and (max-width: 529px)")) {
+    SMALL = true;
+  } else if (Modernizr.mq("only screen and (min-width: 530px)")) {
+    SMALL = false;
+  }
+  alert(SMALL);
   // Map generated in CfA Account
   var MAPBOX_MAP_ID = "codeforamerica.map-j35lxf9d";
   var AKRON = {
@@ -49,6 +57,7 @@ function startup() {
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = true; // Set this to a true value to preload/use a local trail segment cache
+  var USE_ALL_SEGMENT_LAYER = SMALL ? true : true;
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
   var HOVER_SEGMENT_COLOR = "#678729";
@@ -58,8 +67,8 @@ function startup() {
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
-  var centerOffset = new L.Point(450, 0);
-
+  var centerOffset = SMALL ? new L.point(0, 0) : new L.Point(450, 0);
+  var MARKER_RADIUS = SMALL ? 15 : 4;
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -149,6 +158,7 @@ function startup() {
   var orderedTrailIndex;
   var geoWatchId = null;
   var currentTrailheadHover = null;
+  var geoSetupDone = false;
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -224,6 +234,9 @@ function startup() {
   function initialSetup() {
     console.log("initialSetup");
     setupGeolocation(function() {
+      if (geoSetupDone) {
+        return;
+      }
       getOrderedTrailheads(currentUserLocation, function() {
         getTrailData(function() {
           addTrailDataToTrailheads(trailData);
@@ -415,6 +428,7 @@ function startup() {
         function(position) {
           if (trailheads.length === 0) {
             handleGeoSuccess(position, callback);
+            geoSetupDone = true;
           } else {
             handleGeoSuccess(position);
           }
@@ -422,6 +436,7 @@ function startup() {
         function(error) {
           if (trailheads.length === 0) {
             handleGeoError(error, callback);
+            geoSetupDone = true;
           } else {
             handleGeoError(error);
           }
@@ -540,7 +555,7 @@ function startup() {
     });
   }
 
-  
+
 
   // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
@@ -560,7 +575,7 @@ function startup() {
         color: "#00adef",
         fillOpacity: 0.5,
         opacity: 0.8
-      }).setRadius(4);
+      }).setRadius(MARKER_RADIUS);
       var trailhead = {
         properties: currentFeature.properties,
         geometry: currentFeature.geometry,
@@ -632,7 +647,9 @@ function startup() {
     };
     makeAPICall(callData, function(response) {
       trailSegments = response;
-      allSegmentLayer = makeAllSegmentLayer(response);
+      if (USE_ALL_SEGMENT_LAYER) {
+        allSegmentLayer = makeAllSegmentLayer(response);
+      }
       if (typeof callback == "function") {
         callback();
       }
@@ -667,6 +684,9 @@ function startup() {
 
 
   function makeAllSegmentLayer(response) {
+    if (allSegmentLayer !== undefined) {
+      return allSegmentLayer;
+    }
     console.log("makeAllSegmentLayer");
     // make visible layers
     allVisibleSegmentsArray = [];
@@ -1067,7 +1087,7 @@ function startup() {
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
-        
+
         var trailInfoObject = {
           trailID: trailID,
           trailheadID: trailheadID,
@@ -1213,7 +1233,7 @@ function startup() {
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     if (trail.properties.status == 1) {
       $('.detailPanel .detailPanelPictureCredits').remove();
-       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.status == 2) {
       $('.detailPanel .detailPanelPictureCredits').remove();
@@ -1404,7 +1424,7 @@ function startup() {
         fillOpacity: 0.5,
         opacity: 0.8,
         zIndexOffset: 100
-      }).setRadius(4).addTo(map);
+      }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
     }
     if ($('.detailPanel').is(":visible")) {
