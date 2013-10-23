@@ -17,7 +17,8 @@ function startup() {
   } else if (Modernizr.mq("only screen and (min-width: 530px)")) {
     SMALL = false;
   }
-  alert(SMALL);
+
+  var TOUCH = $('html').hasClass('touch');
   // Map generated in CfA Account
   var MAPBOX_MAP_ID = "codeforamerica.map-j35lxf9d";
   var AKRON = {
@@ -28,11 +29,10 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-  // var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
+  var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://10.0.1.102:3000";
+  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
@@ -68,7 +68,8 @@ function startup() {
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
   var centerOffset = SMALL ? new L.point(0, 0) : new L.Point(450, 0);
-  var MARKER_RADIUS = SMALL ? 15 : 4;
+  var MARKER_RADIUS = TOUCH ? 15 : 4;
+  var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -645,6 +646,9 @@ function startup() {
       type: "GET",
       path: "/trailsegments.json"
     };
+    if (SMALL) {
+      callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
+    }
     makeAPICall(callData, function(response) {
       trailSegments = response;
       if (USE_ALL_SEGMENT_LAYER) {
@@ -757,7 +761,15 @@ function startup() {
       }
 
       invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
-      newTrailFeatureGroup.addEventListener("mouseover", function featureGroupEventListener(invisLayer) {
+      var eventType;
+      // this should be a test for touch, not small
+      if (TOUCH) {
+        eventType = "click";
+      }
+      else { 
+        eventType = "mouseover";
+      }
+      newTrailFeatureGroup.addEventListener(eventType, function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
           console.log("new mouseover");
           if (closeTimeout) {
