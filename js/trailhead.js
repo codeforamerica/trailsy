@@ -71,6 +71,8 @@ function startup() {
   var MARKER_RADIUS = TOUCH ? 15 : 4;
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
+  var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
   // { *id*: { geometry: point(0,0), unused for now  
@@ -512,7 +514,7 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
-    var map = L.map('trailMap', {
+    var map = L.map(mapDivName, {
       zoomControl: false,
       scrollWheelZoom: false
     });
@@ -1239,6 +1241,7 @@ function startup() {
     }
     enableTrailControls();
 
+    $('.detailFooter').show();
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
@@ -1282,7 +1285,7 @@ function startup() {
       console.log("parking icon added")
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
     }
-    $('.detailPanel .detailSource').html(trailhead.properties.source);
+    // $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
 
     var mileString = trail.properties.length == "1" ? "mile" : "miles";
@@ -1306,11 +1309,17 @@ function startup() {
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
-    if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
-      $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
+    
+    if (trail.properties.steward) {
+      if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
+        $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
+      }
+      $('.detailPanel .detailFooter .detailSteward').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
+      $('.detailPanel .detailFooter .detailStewardPhone').html(trail.properties.steward_phone);
     }
-    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
-    $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
+    else {
+      $('.detailFooter').hide();
+    } 
   }
 
   // event handler for click of a trail name in a trailhead popup
