@@ -507,7 +507,7 @@ function startup() {
     console.log("createMap");
     var map = L.map('trailMap', {
       zoomControl: false,
-      scrollWheelZoom: false
+      scrollWheelZoom: true
     });
     L.tileLayer.provider('MapBox.' + MAPBOX_MAP_ID).addTo(map);
     map.setView(startingMapLocation, startingMapZoom);
