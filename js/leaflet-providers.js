@@ -134,7 +134,8 @@
 				attribution:
 					'Imagery from <a href="http://mapbox.com/about/maps/">MapBox</a> &mdash; ' +
 					'Map data {attribution.OpenStreetMap}',
-				subdomains: 'abcd'
+				subdomains: 'abcd',
+				detectRetina: true
 			}
 		},
 		Stamen: {

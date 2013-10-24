@@ -1,4 +1,5 @@
 console.log("start");
+
 $(document).ready(startup);
 
 /* The Big Nested Function
@@ -10,6 +11,14 @@ function startup() {
   "use strict";
   console.log("trailhead.js");
 
+  var SMALL;
+  if (Modernizr.mq("only screen and (max-width: 529px)")) {
+    SMALL = true;
+  } else if (Modernizr.mq("only screen and (min-width: 530px)")) {
+    SMALL = false;
+  }
+
+  var TOUCH = $('html').hasClass('touch');
   // Map generated in CfA Account
   var MAPBOX_MAP_ID = "codeforamerica.map-j35lxf9d";
   var AKRON = {
@@ -20,11 +29,10 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-  // var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
+  var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://10.0.1.102:3000";
+  // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
@@ -49,6 +57,7 @@ function startup() {
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = true; // Set this to a true value to preload/use a local trail segment cache
+  var USE_ALL_SEGMENT_LAYER = SMALL ? true : true;
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
   var HOVER_SEGMENT_COLOR = "#678729";
@@ -58,8 +67,9 @@ function startup() {
   var NOTRAIL_SEGMENT_COLOR = "#FF0000";
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
-  var centerOffset = new L.Point(450, 0);
-
+  var centerOffset = SMALL ? new L.point(0, 0) : new L.Point(450, 0);
+  var MARKER_RADIUS = TOUCH ? 15 : 4;
+  var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -149,6 +159,7 @@ function startup() {
   var orderedTrailIndex;
   var geoWatchId = null;
   var currentTrailheadHover = null;
+  var geoSetupDone = false;
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -225,6 +236,9 @@ function startup() {
   function initialSetup() {
     console.log("initialSetup");
     setupGeolocation(function() {
+      if (geoSetupDone) {
+        return;
+      }
       getOrderedTrailheads(currentUserLocation, function() {
         getTrailData(function() {
           addTrailDataToTrailheads(trailData);
@@ -288,8 +302,15 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
-        var index = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
-        if (index == -1) {
+        var nameIndex = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+        var descriptionIndex;
+        if (trail.properties.description === null) {
+          descriptionIndex = -1;
+        }
+        else {
+          descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+        }
+        if (nameIndex == -1 && descriptionIndex == -1) {
           delete filteredTrailData[trail_id];
         }
       }
@@ -416,6 +437,7 @@ function startup() {
         function(position) {
           if (trailheads.length === 0) {
             handleGeoSuccess(position, callback);
+            geoSetupDone = true;
           } else {
             handleGeoSuccess(position);
           }
@@ -423,6 +445,7 @@ function startup() {
         function(error) {
           if (trailheads.length === 0) {
             handleGeoError(error, callback);
+            geoSetupDone = true;
           } else {
             handleGeoError(error);
           }
@@ -541,7 +564,7 @@ function startup() {
     });
   }
 
-  
+
 
   // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
@@ -561,7 +584,7 @@ function startup() {
         color: "#00adef",
         fillOpacity: 0.5,
         opacity: 0.8
-      }).setRadius(4);
+      }).setRadius(MARKER_RADIUS);
       var trailhead = {
         properties: currentFeature.properties,
         geometry: currentFeature.geometry,
@@ -631,9 +654,14 @@ function startup() {
       type: "GET",
       path: "/trailsegments.json"
     };
+    // if (SMALL) {
+    //   callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
+    // }
     makeAPICall(callData, function(response) {
       trailSegments = response;
-      allSegmentLayer = makeAllSegmentLayer(response);
+      if (USE_ALL_SEGMENT_LAYER) {
+        allSegmentLayer = makeAllSegmentLayer(response);
+      }
       if (typeof callback == "function") {
         callback();
       }
@@ -668,6 +696,9 @@ function startup() {
 
 
   function makeAllSegmentLayer(response) {
+    if (allSegmentLayer !== undefined) {
+      return allSegmentLayer;
+    }
     console.log("makeAllSegmentLayer");
     // make visible layers
     allVisibleSegmentsArray = [];
@@ -738,7 +769,15 @@ function startup() {
       }
 
       invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
-      newTrailFeatureGroup.addEventListener("mouseover", function featureGroupEventListener(invisLayer) {
+      var eventType;
+      // this should be a test for touch, not small
+      if (TOUCH) {
+        eventType = "click";
+      }
+      else { 
+        eventType = "mouseover";
+      }
+      newTrailFeatureGroup.addEventListener(eventType, function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
           console.log("new mouseover");
           if (closeTimeout) {
@@ -787,7 +826,7 @@ function startup() {
             e.target.setStyle({
               weight: 3
             });
-            map.closePopup();
+            //map.closePopup();
           };
         }(e), 1250);
       });
@@ -1068,7 +1107,7 @@ function startup() {
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
         $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
         $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
-        
+
         var trailInfoObject = {
           trailID: trailID,
           trailheadID: trailheadID,
@@ -1214,7 +1253,7 @@ function startup() {
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     if (trail.properties.status == 1) {
       $('.detailPanel .detailPanelPictureCredits').remove();
-       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.status == 2) {
       $('.detailPanel .detailPanelPictureCredits').remove();
@@ -1271,7 +1310,7 @@ function startup() {
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
       $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
     }
-    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
+    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
@@ -1421,7 +1460,7 @@ function startup() {
         fillOpacity: 0.5,
         opacity: 0.8,
         zIndexOffset: 100
-      }).setRadius(4).addTo(map);
+      }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
     }
     if ($('.detailPanel').is(":visible")) {
