@@ -4,23 +4,24 @@
 
 .title-row {
 	@media @mobile {
+		position: relative;
 		width: 100%;
 		height: auto;
 		top: 0;
 		margin: 0;
 		header {
-			position: fixed;
 			width: 100%;
 			margin: 0;
 			padding: 0;
-			z-index: 2;
+			z-index: 999;
 			.navbar-inner {
 				position: relative;
+				width: 100%;
 				background-color: @color-dark-brown;
 				border: none;
 				box-shadow: none;
 				text-align: justify;
-				padding: 1em 0em 1em 1em;
+				padding: .5em 0em .5em 1em;
 				.hamburger {
 				    cursor: pointer;
 				    display: inline-block;

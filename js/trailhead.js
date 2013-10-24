@@ -198,7 +198,8 @@ function startup() {
 
   $(".search-submit").click(processSearch);
 
-  //  Detail Panel Navigation UI event
+  //  Detail Panel Navigation UI events
+  $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -1273,6 +1274,22 @@ function startup() {
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url);
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
+
+  function slideDetailPanel(e) {
+    console.log("slideDetailPanel");
+    if ($(e.target).parent().hasClass("expanded")) {
+        $('.detailPanel').addClass('contracted');
+        $('.detailPanel').removeClass('expanded');
+        $('.trailListColumn').css({overflow:'hidden'});
+    } 
+    else {
+        $('.detailPanel').addClass('expanded');
+        $('.detailPanel').removeClass('contracted');
+        $('.trailListColumn').css({overflow:'scroll'});
+    }
+  }
+
+//  Mobile-only function changing the position of the detailPanel
 
   // event handler for click of a trail name in a trailhead popup
 
