@@ -71,6 +71,8 @@ function startup() {
   var MARKER_RADIUS = TOUCH ? 15 : 4;
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
+  var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
   // { *id*: { geometry: point(0,0), unused for now  
@@ -512,7 +514,7 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
-    var map = L.map('trailMap', {
+    var map = L.map(mapDivName, {
       zoomControl: false,
       scrollWheelZoom: false
     });
