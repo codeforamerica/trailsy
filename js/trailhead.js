@@ -818,7 +818,7 @@ function startup() {
             e.target.setStyle({
               weight: 3
             });
-            map.closePopup();
+            //map.closePopup();
           };
         }(e), 1250);
       });
