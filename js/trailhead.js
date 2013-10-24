@@ -301,8 +301,15 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
-        var index = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
-        if (index == -1) {
+        var nameIndex = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+        var descriptionIndex;
+        if (trail.properties.description === null) {
+          descriptionIndex = -1;
+        }
+        else {
+          descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+        }
+        if (nameIndex == -1 && descriptionIndex == -1) {
           delete filteredTrailData[trail_id];
         }
       }
