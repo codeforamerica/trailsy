@@ -72,6 +72,7 @@ function startup() {
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+  alert(mapDivName);
 
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
