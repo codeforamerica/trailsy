@@ -1,0 +1,150 @@
+<head>
+	<title>To The Trails: Summit County</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="styles/css/leaflet.css">
+	<link rel="stylesheet" href="style/leaflet.usermarker.css">
+	<link rel="stylesheet" type="text/css" href="styles/css/main.css">
+	<script src="js/modernizr.js"></script>
+</head>
+<body>
+	<div class="title-row">
+		<header>
+			<div class="navbar-inner">
+				<a class="hamburger" href="#mypanel">
+					<div></div>
+					<div></div>
+					<div></div>
+				</a>
+				<!-- add class to logo for mobile? -->
+				<img class="logo" src="img/logo.png">
+			</div>
+		</header>
+	</div>
+
+	<section class="trailMapContainer">
+		<!-- Though leaflet adds classes, likely need manual additions as well -->
+		<div id="trailMap"></div>
+	</section>
+	<section class="trailListColumn">
+		<div class="detailPanel">
+			<div class="detailPanelBanner">
+				<span class="trailName">The Big Dummmy Trail, You Dummy</span>
+				<span class="trailIndex">100 of 100</span>
+				<div class="detailPanelControls controlTop">
+					<b class="controlTop"></b>
+				</div>
+				<div class="detailPanelControls controlLeft">
+					<b class="controlLeft"></b>
+				</div>
+				<div class="detailPanelControls controlRight">
+					<b class="controlRight"></b>
+				</div>
+			</div>
+			<div class="status"></div>
+			<!-- Here is where we duplicate the trial box for the active trail // we won't actually need the trail-box div here. -->
+			<div class="trail-box">
+				<div class="trailInfo">
+					<div class="trailCurrentIndex">12</div>
+					<div class="trail">Ohio & Erie Canal Towpath Trail</div>
+					<div class="trailLength">250 miles</div>
+				</div>
+				<div class="trailheadInfo">
+					<div class='parkName'>Park Name</div>
+					<img class="trailheadIcon" src="img/icon_trailhead_active.png">
+					<div class="trailheadName">Rockside Boarding Station Trailhead</div>
+					<div class="trailheadDistance">2168.3 miles away</div>
+				</div>
+				<div class="trailSource" id="CVNP">CVNP</div>
+			</div>
+			<div class="detailPanelBody">
+	<!-- Don't need to do left / right here. Create two seperate stacked rows -->
+				<div class="detailLengthRow">
+					<span class="detailLengthHeader">LENGTH</span>
+					<span class="detailLength">300 Miles</span>
+					<span class="detailSurfaceHeader">TRAIL SURFACE</span>
+					<span class="detailSurface"></span>
+				</div>
+				<div class="detailActivityRow">
+					<span class="detailActivityHeader">TRAIL USE</span>
+					<div class="activity-icon-row">
+						<div class="icon" id="hike">
+							<img class="activity-icons" src="img/icon_hike_blue.png">
+						</div>
+						<div class="icon" id="cycle">
+							<img class="activity-icons" src="img/icon_hike_blue.png">
+						</div>
+						<div class="icon" id="handicap">
+							<img class="activity-icons" src="img/icon_hike_blue.png">
+						</div>
+						<div class="icon" id="horse">
+							<img class="activity-icons" src="img/icon_hike_blue.png">
+						</div>
+						<div class="icon" id="xcountryski">
+							<img class="activity-icons" src="img/icon_hike_blue.png">
+						</div>
+					</div>
+				</div>
+				<div class="detailMiddleRow">
+					<span class="detailPanelHeader">OVERVIEW</span>
+					<div class="detailDescription">
+						All 34 miles of the Bike & Hike trail are paved. Some portions of the trail use neighborhood streets. Please follow the green biking signs until you rejoin the established trail. For your convenience, restrooms are located at the Brandywine Falls, SR 303, Springdale, Silver Springs and SR 91 lots.
+					</div>
+				</div>
+				<div class="detailPanelPictureContainer">
+					<img class="detailPanelPicture" src="img/falls.jpg">
+					<div class="detailPanelPictureCredits">
+					</div>
+				</div>
+				<div class="detailBottomRow">
+					<img src="img/icon_trailhead_active.png">
+	              	<span class="detailPanelHeader">CLOSEST ENTRANCE </span>
+	              	<span class="detailTrailheadDistance"></span><br/>
+	              	<div class="detailTrailheadInfo">
+	                	<span class="detailTrailheadName">Springfield Bog</span><br/>
+	                	<span class="detailTrailheadPark">Park Name</span><br/>
+	               	 	<span class="detailTrailheadCounty">Summit County, OH</span>
+	               	 	<br/>
+	             	 </div>
+	<!-- We will want to style these differently, to each sit aside each other -->
+					<div class="detailLinksToMore">
+						<div class="detailDirections">
+							<span class="linkHeader" href="#">Get Directions</span>
+						</div>
+						<div class="detailPrintMap">
+							<span class="linkHeader" href="#">Official Trail Map</span>
+						</div>
+					</div>
+					<div class="detailTrailheadAmenities">
+						<span class="detailPanelHeader">TRAILHEAD AMENITIES</span>
+						<div class="detailTrailheadIcons"></div>
+					</div>
+					<div class="detailLinksToSocial">
+						<div class="social-icon" id="facebook">
+							<img>
+							" facebook "
+						</div>
+						<div class="social-icon" id="tweet">
+							<img>
+							" tweet "
+						</div>
+						<div class="social-icon" id="email">
+							<img>
+							" email "
+						</div>
+					</div>
+				</div>
+				<div class="detailFooter">
+					<img class="detailStewardLogo icon-large" src="img/mpssc.jpg">
+					<div class="detailStewardInfo">
+						<span class="detailPanelHeader">MANAGED BY:</span>
+						<a class="detailSource" href></a>
+					</div>
+					<div class="detailStewardInfo">
+						<span class="detailPanelHeader">FOR ASSISTANCE CALL:</span>
+						<span class="detailSourcePhone">XXX-XXX-XXXX</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

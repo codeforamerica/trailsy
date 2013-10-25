@@ -71,6 +71,9 @@ function startup() {
   var MARKER_RADIUS = TOUCH ? 15 : 4;
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
+  var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+  alert(mapDivName);
+
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
   // { *id*: { geometry: point(0,0), unused for now  
@@ -209,7 +212,8 @@ function startup() {
 
   $(".search-submit").click(processSearch);
 
-  //  Detail Panel Navigation UI event
+  //  Detail Panel Navigation UI events
+  $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -512,7 +516,7 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
-    var map = L.map('trailMap', {
+    var map = L.map(mapDivName, {
       zoomControl: false,
       scrollWheelZoom: false
     });
@@ -1312,6 +1316,22 @@ function startup() {
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
+
+  function slideDetailPanel(e) {
+    console.log("slideDetailPanel");
+    if ($(e.target).parent().hasClass("expanded")) {
+        $('.detailPanel').addClass('contracted');
+        $('.detailPanel').removeClass('expanded');
+        $('.trailListColumn').css({overflow:'hidden'});
+    } 
+    else {
+        $('.detailPanel').addClass('expanded');
+        $('.detailPanel').removeClass('contracted');
+        $('.trailListColumn').css({overflow:'scroll'});
+    }
+  }
+
+//  Mobile-only function changing the position of the detailPanel
 
   // event handler for click of a trail name in a trailhead popup
 
