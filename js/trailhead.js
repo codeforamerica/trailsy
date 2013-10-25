@@ -29,8 +29,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -72,7 +72,6 @@ function startup() {
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
-  alert(mapDivName);
 
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -163,6 +162,7 @@ function startup() {
   var geoWatchId = null;
   var currentTrailheadHover = null;
   var geoSetupDone = false;
+  var segmentTrailnameCache = {};
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -244,9 +244,10 @@ function startup() {
       }
       getOrderedTrailheads(currentUserLocation, function() {
         getTrailData(function() {
-          addTrailDataToTrailheads(trailData);
           if (USE_LOCAL) {
             getTrailSegments(function() {
+              createSegmentTrailnameCache();
+              addTrailDataToTrailheads(trailData);
               // if we haven't added the segment layer yet, add it.
               if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
                 map.addLayer(allSegmentLayer);
@@ -309,8 +310,7 @@ function startup() {
         var descriptionIndex;
         if (trail.properties.description === null) {
           descriptionIndex = -1;
-        }
-        else {
+        } else {
           descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         }
         if (nameIndex == -1 && descriptionIndex == -1) {
@@ -526,7 +526,7 @@ function startup() {
       paddingTopLeft: centerOffset
     });
     map.on("zoomend", function(e) {
-      console.log("zoomend");
+      // console.log("zoomend");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
@@ -615,8 +615,6 @@ function startup() {
     // trailhead.marker.on("mouseout", function(trailhead) {
     // }(trailhead));
   }
-  // on trailhead marker click, this is invoked with the id of the trailhead
-  // not used for anything but logging at the moment
 
   function trailheadMarkerClick(id) {
     console.log("trailheadMarkerClick");
@@ -671,6 +669,18 @@ function startup() {
     });
   }
 
+  function createSegmentTrailnameCache() {
+    console.log("createSegmentTrailnameCache");
+    for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
+      var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+      for (var i = 0; i < 6; i++) {
+        var fieldName = "trail" + i;
+        if (segment.properties[fieldName]) {
+          segmentTrailnameCache[segment.properties[fieldName]] = true;
+        }
+      }
+    }
+  }
   // returns true if trailname is in trailData
 
   function trailnameInListOfTrails(trailname) {
@@ -689,11 +699,9 @@ function startup() {
     for (var i = 0; i <= 6; i++) {
       var trailFieldname = "trail" + i;
       if (trailnameInListOfTrails(feature.properties[trailFieldname])) {
-        console.log("segment match");
         return true;
       }
     }
-    console.log("segment non-match");
     return false;
   }
 
@@ -765,7 +773,11 @@ function startup() {
               .attr("data-trailname", invisLayer.feature.properties[trailField])
               .html(invisLayer.feature.properties[trailField]).css("color", "black");
           } else {
-            $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+            if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
+              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+            } else {
+              // console.log("skipping trail segment name because it has an underscore in it");
+            }
           }
           $popupHTML.append($trailPopupLineDiv);
         }
@@ -776,13 +788,12 @@ function startup() {
       // this should be a test for touch, not small
       if (TOUCH) {
         eventType = "click";
-      }
-      else { 
+      } else {
         eventType = "mouseover";
       }
       newTrailFeatureGroup.addEventListener(eventType, function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
-          console.log("new mouseover");
+          // console.log("new mouseover");
           if (closeTimeout) {
             clearTimeout(closeTimeout);
             closeTimeout = null;
@@ -807,7 +818,6 @@ function startup() {
                 }
               }
               var popupHTML = invisLayer.feature.properties.popupHTML;
-              console.log(popupHTML);
               currentTrailPopup = new L.Popup().setContent(popupHTML).setLatLng(originalEvent.latlng).openOn(map);
               currentWeightedSegment = target;
             };
@@ -923,7 +933,11 @@ function startup() {
         // or check distance against the (yet-to-be) pre-loaded trail segment info
         $.each(myTrailData, function(trailID, trail) {
           if (trailhead.properties[trailWithNum] == trail.properties.name) {
-            trailhead.trails.push(trailID);
+            if (checkSegmentsForTrailname(trail.properties.name, trail.properties.source)) {
+              trailhead.trails.push(trailID);
+            } else {
+              console.log("skipping " + trail.properties.name + "/" + trail.properties.source + ": no segment data");
+            }
           }
         });
       }
@@ -994,7 +1008,6 @@ function startup() {
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.id)
           .attr("data-index", trailsIndex);
-        console.log(trail.properties.status);
         var status = "";
         if (trail.properties.status == 1) {
           $popupTrailDiv.append($("<img>").addClass("status").attr({
@@ -1118,6 +1131,7 @@ function startup() {
         };
         orderedTrails.push(trailInfoObject);
       }
+      
 
       // diagnostic div to show trailheads with no trail matches
       // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
@@ -1128,7 +1142,8 @@ function startup() {
         $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
     });
-    console.log(orderedTrails);
+    $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
+    // console.log(orderedTrails);
   }
 
   function metersToMiles(i) {
@@ -1320,18 +1335,21 @@ function startup() {
   function slideDetailPanel(e) {
     console.log("slideDetailPanel");
     if ($(e.target).parent().hasClass("expanded")) {
-        $('.detailPanel').addClass('contracted');
-        $('.detailPanel').removeClass('expanded');
-        $('.trailListColumn').css({overflow:'hidden'});
-    } 
-    else {
-        $('.detailPanel').addClass('expanded');
-        $('.detailPanel').removeClass('contracted');
-        $('.trailListColumn').css({overflow:'scroll'});
+      $('.detailPanel').addClass('contracted');
+      $('.detailPanel').removeClass('expanded');
+      $('.trailListColumn').css({
+        overflow: 'hidden'
+      });
+    } else {
+      $('.detailPanel').addClass('expanded');
+      $('.detailPanel').removeClass('contracted');
+      $('.trailListColumn').css({
+        overflow: 'scroll'
+      });
     }
   }
 
-//  Mobile-only function changing the position of the detailPanel
+  //  Mobile-only function changing the position of the detailPanel
 
   // event handler for click of a trail name in a trailhead popup
 
@@ -1602,6 +1620,7 @@ function startup() {
           // console.log("invalid!");
         }
       }
+      console.log(valid);
       if (valid) {
         trailFeatureArray.push(trailFeatureCollection);
       }
@@ -1644,6 +1663,11 @@ function startup() {
     return combined;
   }
 
+  function checkSegmentsForTrailname(trailName, trailSource) {
+    var segmentsExist = false;
+    segmentsExist = trailName in segmentTrailnameCache || 'trailname + " Trail"' in segmentTrailnameCache;
+    return segmentsExist;
+  }
 
   // given a geoJSON set of linestring features,
   // draw them all on the map (in a single layer we can remove later)
@@ -1720,13 +1744,15 @@ function startup() {
     }
     if (currentTrailLayers[index]) {
       currentHighlightedTrailLayer = currentTrailLayers[index];
+      currentHighlightedTrailLayer.setStyle({
+        weight: ACTIVE_TRAIL_WEIGHT,
+        color: ACTIVE_TRAIL_COLOR
+      });
     } else {
       console.log("ERROR: trail layer missing");
+      console.log(currentTrailLayers);
+      console.log(index);
     }
-    currentHighlightedTrailLayer.setStyle({
-      weight: ACTIVE_TRAIL_WEIGHT,
-      color: ACTIVE_TRAIL_COLOR
-    });
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM

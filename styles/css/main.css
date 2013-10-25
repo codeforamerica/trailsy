@@ -80,12 +80,29 @@ At some point, update mediaqueries to be in EMS
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
 /* Variables used: color, typography */
 @media only screen and (max-width: 529px)  {
+  .desktopTitle {
+    display: none;
+  }
+}
+@media only screen and (min-width: 950px) {
+  
+}
+@media only screen and (max-width: 529px)  {
+  
+}
+@media only screen and (min-width: 950px) {
+  .mobileTitle {
+    display: none;
+  }
+}
+@media only screen and (max-width: 529px)  {
   .title-row {
     position: relative;
     width: 100%;
     height: auto;
     top: 0;
     margin: 0;
+    z-index: 8;
   }
   .title-row header {
     width: 100%;
@@ -202,7 +219,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    font-color: #bbbdbf;
+    color: #bbbdbf;
     width: 100%;
     height: 2em;
     border: 1px solid;
@@ -250,7 +267,7 @@ At some point, update mediaqueries to be in EMS
   }
   .accordion .panel-title {
     margin: 0;
-    padding: 0em 1em .0em 1em;
+    padding: 1em 2em 1em 1.33em;
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
@@ -258,7 +275,8 @@ At some point, update mediaqueries to be in EMS
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
-    background: #ffffff;
+    /*			background: @color-white;*/
+  
     font-color: #bbbdbf;
   }
   .accordion .accordion-innerwrap {
@@ -266,8 +284,26 @@ At some point, update mediaqueries to be in EMS
   }
 }
 @media only screen and (min-width: 950px) {
+  .searchHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+    cursor: default;
+  }
+}
+@media only screen and (max-width: 529px)  {
+  
+}
+@media only screen and (min-width: 950px) {
   .panel-container {
     margin: 0;
+    /* More Options */
+  
+    /* Container of Trail Results*/
+  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -275,16 +311,8 @@ At some point, update mediaqueries to be in EMS
   .panel-container:focus {
     outline: none;
   }
-  .panel-container #trigger1 {
-    padding: 0;
-  }
   .panel-container #trigger2 {
     padding: .5em 1em 0em .5em;
-  }
-  .panel-container #trigger3 {
-    padding: .5em 1em 0em .5em;
-  }
-  .panel-container h4 {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -294,12 +322,33 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     text-align: right;
   }
-  .panel-container h4:hover {
+  .panel-container #trigger2:hover {
     text-decoration: underline;
+  }
+  .panel-container .trails-count {
+    padding: .5em 1em 0em 1em;
+    width: auto;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    width: 100%;
+    background-color: none;
   }
   .panel-container li:focus {
     outline: none;
   }
+}
+@media only screen and (min-width: 950px) {
+  .trailsNearYouResults {
+    height: 2em;
+    width: 24em;
+    background-color: #b0d576;
+  }
+}
+@media only screen and (max-width: 529px)  {
+  
 }
 @media only screen and (min-width: 950px) {
   .panel-content {
@@ -1090,7 +1139,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     height: 100%;
     padding: 0;
-    background: #ffffff;
+    opacity: 100;
     z-index: 999;
   }
   .trailListColumn a {
@@ -2642,7 +2691,7 @@ html {
   height: 100%;
 }
 /* Background color */
-@media mobile {
+@media only screen and (max-width: 529px)  {
   body {
     background-color: #ffffff;
     height: 100%;
@@ -2662,13 +2711,13 @@ html {
 section {
   overflow: auto;
 }
-@media mobile {
-  .desktop {
+@media only screen and (max-width: 529px)  {
+  #desktop {
     display: none;
   }
 }
 @media only screen and (min-width: 950px) {
-  .desktop {
+  #desktop {
     position: absolute;
     left: 0;
     right: 0;
@@ -2676,9 +2725,8 @@ section {
     bottom: 0;
   }
 }
-@media mobile {
-  .mobile {
-    display: none;
+@media only screen and (max-width: 529px)  {
+  #mobile {
     position: relative;
     background: black;
     height: 100%;
@@ -2686,7 +2734,7 @@ section {
   }
 }
 @media only screen and (min-width: 950px) {
-  .mobile {
+  #mobile {
     display: none;
     position: relative;
     height: 100%;
@@ -2694,7 +2742,7 @@ section {
   }
 }
 /* Responsive container */
-@media mobile {
+@media only screen and (max-width: 529px)  {
   .container {
     display: none;
     position: relative;

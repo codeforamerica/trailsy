@@ -37,7 +37,7 @@
 
 </head>
 <body>
-  <div class="desktop">
+  <div id="desktop">
     <div class="container">
       <div id="main" class="row">
         <!-- Map -->
@@ -51,7 +51,7 @@
         </section>
         <!-- UI Column to be renamed. -->
         <section class="trailListColumn">
-          <div class="title-row">
+          <div class="title-row desktopTitle">
             <header>
               <div class="navbar-inner">
                 <a class="hamburger" href="#mypanel">
@@ -68,7 +68,7 @@
             <div class="accordion-innerwrap">
               <!-- First Accordion Panel (No Title) -->
               <ul class="panel-container list-reset" tabindex="1">
-                <li><h4 id="trigger1" class="panel-title active" aria-hidden="true"> </h4>
+                <li><h4 id="trigger1" class="searchHeader panel-title active" aria-hidden="true">FIND TRAILS NAME OR KEYWORD</h4>
                   <ul class="panel content list-reset" aria-expanded="false">
                     <div class="searchbar">
                       <!--                     <label class="is-vishidden">Search the site</label> -->
@@ -78,7 +78,11 @@
                       
                     </div>
                     <div class="trailLength-title">
+<<<<<<< HEAD
                       <h2>LENGTH</h2>
+=======
+                      <h2>FIND TRAILS BY LENGTH (IN MILES)</h2>
+>>>>>>> master
                     </div>
                     <div class="trailFilters">
                       <ul class="trailLength">
@@ -111,7 +115,7 @@
                           <label>
                             <input type="checkbox" value="verylong" data-filter="lengthFilter" class="filter"/>
                             <div>
-                              <p>10 + mi</p>
+                              <p>10+ mi</p>
                             </div>
                           </label>
                         </li>
@@ -200,12 +204,15 @@
                       </ul>
                     </div>  <!-- trailFilter -->
                   </div> <!--panel-content-->
-                  <h4 id='trigger2' class="panel-title" aria-hidden="true">MORE OPTIONS<span class="icon">&nbsp;&#x25BC;</span></h4>
+                  <h4 id='trigger2' class="panel-title" aria-hidden="true">FIND TRAILS FOR ACTIVITES<span class="icon">&nbsp;&#x25BC;</span></h4>
                 </li> <!--trigger2 -->
               </ul> <!-- panel-container  -->
               <!-- Third Accordion Panel / The List -->
               <ul class="panel-container list-reset" tabindex="3">
-                <li><h4 id='trigger3' class="panel-title trails-count" aria-hidden="true">TRAILS NEAR YOU</h4>
+                <li>
+                  <div class="trailsNearYouResults" id='trigger3'>
+                    <h4 class="panel-title trails-count" aria-hidden="true">TRAILS NEAR YOU</h4>
+                  </div>
                   <div class="panel-content visuallyhidden list-reset" aria-expanded="false">
                     <div id="trailList"></div>
                   </div>
@@ -218,7 +225,7 @@
             <div class="detailPanelBanner">
               <span class="trailName"></span>
               <span class="trailIndex"></span>
-              <!--             <img class="closeDetail" src="img/close-btn.png"> -->
+              <img class="closeDetail" src="img/close-btn.png">
               <div class="detailPanelControls controlLeft">
                 <b class="controlLeft"></b>
               </div>
@@ -310,8 +317,8 @@
       </div>
     </div>
   </div>
-  <div class="mobile">
-    <div class="title-row desktopTitle">
+  <div id="mobile">
+    <div class="title-row mobileTitle">
       <header>
         <div class="navbar-inner">
           <a class="hamburger" href="#mypanel">
@@ -333,7 +340,7 @@
           <b class="controlTop"></b>
         </div>
         <div class="detailPanelBanner">
-          <span class="trailName">The Big Dummmy Trail, You Dummy</span>
+          <span class="trailName">Trail Name</span>
           <span class="trailIndex">100 of 100</span>
           <div class="detailPanelControls controlLeft">
             <b class="controlLeft"></b>
@@ -438,11 +445,10 @@
           <div class="detailFooter">
             <img class="detailStewardLogo icon-large" src="img/mpssc.jpg">
             <div class="detailStewardInfo">
-              <span class="detailPanelHeader">MANAGED BY:</span>
+              <span class="detailPanelHeader">FOR MORE INFORMATION:</span>
               <a class="detailSource" href></a>
             </div>
             <div class="detailStewardInfo">
-              <span class="detailPanelHeader">FOR ASSISTANCE CALL:</span>
               <span class="detailSourcePhone">XXX-XXX-XXXX</span>
             </div>
           </div>
