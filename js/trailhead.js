@@ -1139,7 +1139,7 @@ function startup() {
         };
         orderedTrails.push(trailInfoObject);
       }
-      $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
+      
 
       // diagnostic div to show trailheads with no trail matches
       // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
@@ -1150,7 +1150,8 @@ function startup() {
         $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
     });
-    console.log(orderedTrails);
+    $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
+    // console.log(orderedTrails);
   }
 
   function metersToMiles(i) {
