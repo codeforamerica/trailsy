@@ -1307,7 +1307,7 @@ function startup() {
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
-      $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
+      $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
     }
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
