@@ -310,8 +310,7 @@ function startup() {
         var descriptionIndex;
         if (trail.properties.description === null) {
           descriptionIndex = -1;
-        }
-        else {
+        } else {
           descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         }
         if (nameIndex == -1 && descriptionIndex == -1) {
@@ -527,7 +526,7 @@ function startup() {
       paddingTopLeft: centerOffset
     });
     map.on("zoomend", function(e) {
-      console.log("zoomend");
+      // console.log("zoomend");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
@@ -616,8 +615,6 @@ function startup() {
     // trailhead.marker.on("mouseout", function(trailhead) {
     // }(trailhead));
   }
-  // on trailhead marker click, this is invoked with the id of the trailhead
-  // not used for anything but logging at the moment
 
   function trailheadMarkerClick(id) {
     console.log("trailheadMarkerClick");
@@ -772,15 +769,14 @@ function startup() {
           if (trailnameInListOfTrails(invisLayer.feature.properties[trailField])) {
             // NOTE: color should be in the css, not here
             $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
-            .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
-            .attr("data-trailname", invisLayer.feature.properties[trailField])
-            .html(invisLayer.feature.properties[trailField]).css("color", "black");
+              .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
+              .attr("data-trailname", invisLayer.feature.properties[trailField])
+              .html(invisLayer.feature.properties[trailField]).css("color", "black");
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
-            }
-            else {
-              console.log("skipping trail segment name because it has an underscore in it");
+            } else {
+              // console.log("skipping trail segment name because it has an underscore in it");
             }
           }
           $popupHTML.append($trailPopupLineDiv);
@@ -792,13 +788,12 @@ function startup() {
       // this should be a test for touch, not small
       if (TOUCH) {
         eventType = "click";
-      }
-      else { 
+      } else {
         eventType = "mouseover";
       }
       newTrailFeatureGroup.addEventListener(eventType, function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
-          console.log("new mouseover");
+          // console.log("new mouseover");
           if (closeTimeout) {
             clearTimeout(closeTimeout);
             closeTimeout = null;
@@ -823,7 +818,6 @@ function startup() {
                 }
               }
               var popupHTML = invisLayer.feature.properties.popupHTML;
-              console.log(popupHTML);
               currentTrailPopup = new L.Popup().setContent(popupHTML).setLatLng(originalEvent.latlng).openOn(map);
               currentWeightedSegment = target;
             };
@@ -941,8 +935,7 @@ function startup() {
           if (trailhead.properties[trailWithNum] == trail.properties.name) {
             if (checkSegmentsForTrailname(trail.properties.name, trail.properties.source)) {
               trailhead.trails.push(trailID);
-            }
-            else {
+            } else {
               console.log("skipping " + trail.properties.name + "/" + trail.properties.source + ": no segment data");
             }
           }
@@ -1015,7 +1008,6 @@ function startup() {
           .attr("data-trailheadname", trailhead.properties.name)
           .attr("data-trailheadid", trailhead.properties.id)
           .attr("data-index", trailsIndex);
-        console.log(trail.properties.status);
         var status = "";
         if (trail.properties.status == 1) {
           $popupTrailDiv.append($("<img>").addClass("status").attr({
@@ -1343,18 +1335,21 @@ function startup() {
   function slideDetailPanel(e) {
     console.log("slideDetailPanel");
     if ($(e.target).parent().hasClass("expanded")) {
-        $('.detailPanel').addClass('contracted');
-        $('.detailPanel').removeClass('expanded');
-        $('.trailListColumn').css({overflow:'hidden'});
-    } 
-    else {
-        $('.detailPanel').addClass('expanded');
-        $('.detailPanel').removeClass('contracted');
-        $('.trailListColumn').css({overflow:'scroll'});
+      $('.detailPanel').addClass('contracted');
+      $('.detailPanel').removeClass('expanded');
+      $('.trailListColumn').css({
+        overflow: 'hidden'
+      });
+    } else {
+      $('.detailPanel').addClass('expanded');
+      $('.detailPanel').removeClass('contracted');
+      $('.trailListColumn').css({
+        overflow: 'scroll'
+      });
     }
   }
 
-//  Mobile-only function changing the position of the detailPanel
+  //  Mobile-only function changing the position of the detailPanel
 
   // event handler for click of a trail name in a trailhead popup
 
@@ -1750,14 +1745,14 @@ function startup() {
     if (currentTrailLayers[index]) {
       currentHighlightedTrailLayer = currentTrailLayers[index];
       currentHighlightedTrailLayer.setStyle({
-      weight: ACTIVE_TRAIL_WEIGHT,
-      color: ACTIVE_TRAIL_COLOR
-    });
+        weight: ACTIVE_TRAIL_WEIGHT,
+        color: ACTIVE_TRAIL_COLOR
+      });
     } else {
       console.log("ERROR: trail layer missing");
       console.log(currentTrailLayers);
       console.log(index);
-    }  
+    }
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
