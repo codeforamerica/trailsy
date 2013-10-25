@@ -702,11 +702,9 @@ function startup() {
     for (var i = 0; i <= 6; i++) {
       var trailFieldname = "trail" + i;
       if (trailnameInListOfTrails(feature.properties[trailFieldname])) {
-        console.log("segment match");
         return true;
       }
     }
-    console.log("segment non-match");
     return false;
   }
 
@@ -774,11 +772,16 @@ function startup() {
           if (trailnameInListOfTrails(invisLayer.feature.properties[trailField])) {
             // NOTE: color should be in the css, not here
             $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
-              .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
-              .attr("data-trailname", invisLayer.feature.properties[trailField])
-              .html(invisLayer.feature.properties[trailField]).css("color", "black");
+            .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
+            .attr("data-trailname", invisLayer.feature.properties[trailField])
+            .html(invisLayer.feature.properties[trailField]).css("color", "black");
           } else {
-            $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+            if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
+              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+            }
+            else {
+              console.log("skipping trail segment name because it has an underscore in it");
+            }
           }
           $popupHTML.append($trailPopupLineDiv);
         }
