@@ -911,7 +911,6 @@ function startup() {
 
   function addTrailDataToTrailheads(myTrailData) {
     console.log("addTrailDataToTrailheads");
-    console.log(trailData);
     for (var j = 0; j < trailheads.length; j++) {
       var trailhead = trailheads[j];
       trailhead.trails = [];
@@ -1762,10 +1761,10 @@ function startup() {
     console.log("zoomToLayer");
     // figure out what zoom is required to display the entire trail layer
     var layerBoundsZoom = map.getBoundsZoom(layer.getBounds());
-    console.log(layer.getLayers().length);
+    // console.log(layer.getLayers().length);
 
     // var layerBoundsZoom = map.getZoom();
-    console.log(["layerBoundsZoom:", layerBoundsZoom]);
+    // console.log(["layerBoundsZoom:", layerBoundsZoom]);
 
     // if the entire trail layer will fit in a reasonable zoom full-screen, 
     // use fitBounds to place the entire layer onscreen
@@ -1780,8 +1779,6 @@ function startup() {
     else {
       var newZoom = layerBoundsZoom > MAX_ZOOM ? MAX_ZOOM : layerBoundsZoom;
       newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
-      console.log("setview newZoom:");
-      console.log(newZoom);
       map.setView(currentTrailhead.marker.getLatLng(), newZoom);
     }
 
