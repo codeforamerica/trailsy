@@ -85,12 +85,6 @@ At some point, update mediaqueries to be in EMS
   }
 }
 @media only screen and (min-width: 950px) {
-  
-}
-@media only screen and (max-width: 529px)  {
-  
-}
-@media only screen and (min-width: 950px) {
   .mobileTitle {
     display: none;
   }
@@ -276,8 +270,10 @@ At some point, update mediaqueries to be in EMS
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
-  
     font-color: #bbbdbf;
+  }
+  .accordion .icon {
+    color: #00adef;
   }
   .accordion .accordion-innerwrap {
     margin: 0;
@@ -294,16 +290,11 @@ At some point, update mediaqueries to be in EMS
     cursor: default;
   }
 }
-@media only screen and (max-width: 529px)  {
-  
-}
 @media only screen and (min-width: 950px) {
   .panel-container {
     margin: 0;
     /* More Options */
-  
     /* Container of Trail Results*/
-  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -346,9 +337,6 @@ At some point, update mediaqueries to be in EMS
     width: 24em;
     background-color: #b0d576;
   }
-}
-@media only screen and (max-width: 529px)  {
-  
 }
 @media only screen and (min-width: 950px) {
   .panel-content {
@@ -1509,6 +1497,7 @@ At some point, update mediaqueries to be in EMS
     height: 3em;
     width: auto;
     vertical-align: middle;
+    color: red;
   }
   .detailPanel .detailPanelBody .detailActivityRow .icon .activity-icons {
     vertical-align: middle;
