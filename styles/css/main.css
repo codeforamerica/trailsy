@@ -2282,7 +2282,7 @@ At some point, update mediaqueries to be in EMS
     border-top: 1px solid #bbbdbf;
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
-    width: 5em;
+    height: 5em;
     float: left;
     position: relative;
     display: inline-block;

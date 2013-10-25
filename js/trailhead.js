@@ -72,7 +72,6 @@ function startup() {
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
-  alert(mapDivName);
 
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -163,6 +162,7 @@ function startup() {
   var geoWatchId = null;
   var currentTrailheadHover = null;
   var geoSetupDone = false;
+  var segmentTrailnameCache = {};
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -244,9 +244,10 @@ function startup() {
       }
       getOrderedTrailheads(currentUserLocation, function() {
         getTrailData(function() {
-          addTrailDataToTrailheads(trailData);
           if (USE_LOCAL) {
             getTrailSegments(function() {
+              createSegmentTrailnameCache();
+              addTrailDataToTrailheads(trailData);
               // if we haven't added the segment layer yet, add it.
               if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
                 map.addLayer(allSegmentLayer);
@@ -671,6 +672,18 @@ function startup() {
     });
   }
 
+  function createSegmentTrailnameCache() {
+    console.log("createSegmentTrailnameCache");
+    for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
+      var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+      for (var i = 0; i < 6; i++) {
+        var fieldName = "trail" + i;
+        if (segment.properties[fieldName]) {
+          segmentTrailnameCache[segment.properties[fieldName]] = true;
+        }
+      }
+    }
+  }
   // returns true if trailname is in trailData
 
   function trailnameInListOfTrails(trailname) {
@@ -923,7 +936,12 @@ function startup() {
         // or check distance against the (yet-to-be) pre-loaded trail segment info
         $.each(myTrailData, function(trailID, trail) {
           if (trailhead.properties[trailWithNum] == trail.properties.name) {
-            trailhead.trails.push(trailID);
+            if (checkSegmentsForTrailname(trail.properties.name, trail.properties.source)) {
+              trailhead.trails.push(trailID);
+            }
+            else {
+              console.log("skipping " + trail.properties.name + "/" + trail.properties.source + ": no segment data");
+            }
           }
         });
       }
@@ -1312,7 +1330,7 @@ function startup() {
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
-      $('.detailPanel .detailStewardLogo').attr("src", API_HOST + trail.properties.steward_logo_url);
+      $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
     }
     $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
@@ -1603,6 +1621,7 @@ function startup() {
           // console.log("invalid!");
         }
       }
+      console.log(valid);
       if (valid) {
         trailFeatureArray.push(trailFeatureCollection);
       }
@@ -1645,6 +1664,11 @@ function startup() {
     return combined;
   }
 
+  function checkSegmentsForTrailname(trailName, trailSource) {
+    var segmentsExist = false;
+    segmentsExist = trailName in segmentTrailnameCache || 'trailname + " Trail"' in segmentTrailnameCache;
+    return segmentsExist;
+  }
 
   // given a geoJSON set of linestring features,
   // draw them all on the map (in a single layer we can remove later)
@@ -1721,13 +1745,15 @@ function startup() {
     }
     if (currentTrailLayers[index]) {
       currentHighlightedTrailLayer = currentTrailLayers[index];
-    } else {
-      console.log("ERROR: trail layer missing");
-    }
-    currentHighlightedTrailLayer.setStyle({
+      currentHighlightedTrailLayer.setStyle({
       weight: ACTIVE_TRAIL_WEIGHT,
       color: ACTIVE_TRAIL_COLOR
     });
+    } else {
+      console.log("ERROR: trail layer missing");
+      console.log(currentTrailLayers);
+      console.log(index);
+    }  
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
