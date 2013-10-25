@@ -2,6 +2,19 @@
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
 /* Variables used: color, typography */
 
+.desktopTitle {
+	@media @mobile {
+		display: none;
+	}
+	@media @desktop {}
+}
+
+.mobileTitle {
+	@media @mobile {}
+	@media @desktop {
+		display: none;
+	}
+}
 .title-row {
 	@media @mobile {
 		position: relative;
@@ -9,6 +22,7 @@
 		height: auto;
 		top: 0;
 		margin: 0;
+		z-index: 8;
 		header {
 			width: 100%;
 			margin: 0;

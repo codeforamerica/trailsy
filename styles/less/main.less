@@ -62,7 +62,7 @@ html {
 
 /* Background color */
 body {
-	@media mobile {
+	@media @mobile {
 	background-color: @color-white;
 	height: 100%;
 	padding: 0;
@@ -83,8 +83,8 @@ section {
 }
 
 
-.desktop {
-	@media mobile {
+#desktop {
+	@media @mobile {
 		display: none;
 	}
 	@media @desktop {
@@ -96,9 +96,8 @@ section {
 	}
 }
 
-.mobile {
-	@media mobile {
-		display: none;
+#mobile {
+	@media @mobile {
 		position: relative;
 		background: black;
 		height: 100%;
@@ -114,7 +113,7 @@ section {
 
 /* Responsive container */
 .container {
-	@media mobile {
+	@media @mobile {
 		display: none;
 		position: relative;
 		max-width: 100%;
