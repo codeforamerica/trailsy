@@ -3,7 +3,11 @@
 /* This border should become a variable */
 #trailList {
 	@media @mobile {
-		display: none;
+		width: 100%;
+		max-height: 22em;
+		position: relative;
+		overflow: scroll;
+		background-color: @color-white;
 	}
 	@media @desktop {
 		width: 100%;

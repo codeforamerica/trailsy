@@ -1,25 +1,30 @@
 $(document).ready(function() {
     // Collapsible Menu
-    function accordion(trigger) {
+    function accordion(e) {
         //variables
-        var $button = $(trigger), //trigger firing the event
+        var $trigger = $(e), //trigger firing the event
             visible = true; //flag for wayfinding
 
-            $button.hover().css({'cursor': 'pointer'});
+            $trigger.hover().css({'cursor': 'pointer'});
 
         //event
-        $button.click(function() {
+        $trigger.click(function() {
+            console.log("ACCORDION")
             //conditional check
             if ( ! visible ) {
-                $button.removeClass('active');
+                //  if visible is false...remove 'active' class
+                $trigger.removeClass('active');
+                //  ...and add the down triangle
+                //  ...to the child of 'this' which is....the trigger
                 $(this).children('.icon').html('&nbsp;&#x25BC;');
 
+                //  Find 'panel-content' as a parent of the h4
                 $(this).parent().find('.panel-content').slideUp('fast',function() {
                     $(this).addClass('visuallyhidden').slideDown(0);
                     $('.panel-content').attr( 'aria-expanded','false' );
                 });
-            }else {
-                $button.addClass('active');
+            } else {
+                $trigger.addClass('active');
                 $(this).children('.icon').html('&nbsp;&#x25B2;');
 
                 $(this).parent().find('.panel-content').slideUp(0,function() {
@@ -35,7 +40,7 @@ $(document).ready(function() {
     }
 
     //call to widget trigger1
-    accordion('#trigger1');
+    accordion('#trigger1'),
     //call to widget trigger2
     accordion('#trigger2');
     accordion('#trigger3');

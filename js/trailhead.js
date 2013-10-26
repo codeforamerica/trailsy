@@ -213,6 +213,7 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
+  $(document).on('click', '.hamburger', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
 
@@ -1056,6 +1057,7 @@ function startup() {
     var divCount = 1;
     $("#trailList").html("");
     $.each(trailheads, function(index, trailhead) {
+      console.log("AHOY");
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
       var trailheadTrailIDs = trailhead.trails;
@@ -1318,6 +1320,7 @@ function startup() {
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
+
   function slideDetailPanel(e) {
     console.log("slideDetailPanel");
     if ($(e.target).parent().hasClass("expanded")) {
@@ -1333,6 +1336,19 @@ function startup() {
   }
 
 //  Mobile-only function changing the position of the detailPanel
+
+  function moveSlideDrawer(e) {
+    if ($(".slideDrawer").hasClass("closedDrawer")) {
+      console.log("openSlideDrawer");
+      $('.slideDrawer').removeClass('closedDrawer');
+      $('.slideDrawer').addClass("openDrawer");
+    }
+    else {
+      console.log("closeSlideDrawer");
+      $('.slideDrawer').removeClass('openDrawer');
+      $('.slideDrawer').addClass('closedDrawer');
+    }
+  }
 
   // event handler for click of a trail name in a trailhead popup
 
