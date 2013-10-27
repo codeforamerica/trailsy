@@ -1073,7 +1073,7 @@ function startup() {
     console.log("makeTrailDivs");
     orderedTrails = [];
     var divCount = 1;
-    $("#trailList").html("");
+    $(".trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       console.log("AHOY");
       var trailheadName = trailhead.properties.name;
@@ -1105,7 +1105,7 @@ function startup() {
           .attr("data-trailheadName", trailheadName)
           .attr("data-trailheadid", trailheadID)
           .attr("data-index", i)
-          .appendTo("#trailList")
+          .appendTo(".trailList")
           .click(populateTrailsForTrailheadDiv)
           .click(function(trail, trailhead) {
             return function(e) {
