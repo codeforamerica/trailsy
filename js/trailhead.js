@@ -1186,12 +1186,12 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel");
-    $('.detailPanel').show();
     if (!SMALL) {
-      $('.accordion').hide();
-    }
-    $('.trailhead-trailname.selected').addClass("detail-open");
+      $('.detailPanel').show();
+      $('.accordion').hide()
+      $('.trailhead-trailname.selected').addClass("detail-open");
     // map.invalidateSize();
+    }
   }
 
   function closeDetailPanel() {
