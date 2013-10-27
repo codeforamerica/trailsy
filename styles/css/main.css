@@ -417,7 +417,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container:focus {
     outline: none;
   }
-  .panel-container #trigger1 {
+  .panel-container .trigger1 {
     padding: 1em 1.33em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
@@ -428,10 +428,10 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     text-align: left;
   }
-  .panel-container #trigger1:hover {
+  .panel-container .trigger1:hover {
     text-decoration: underline;
   }
-  .panel-container #trigger2 {
+  .panel-container .trigger2 {
     padding: .5em 1em 0em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
@@ -442,7 +442,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     text-align: right;
   }
-  .panel-container #trigger2:hover {
+  .panel-container .trigger2:hover {
     text-decoration: underline;
   }
   .panel-container .trails-count {
@@ -474,7 +474,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container:focus {
     outline: none;
   }
-  .panel-container #trigger2 {
+  .panel-container .trigger2 {
     padding: .5em 1em 0em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
@@ -485,7 +485,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     text-align: right;
   }
-  .panel-container #trigger2:hover {
+  .panel-container .trigger2:hover {
     text-decoration: underline;
   }
   .panel-container .trails-count {
@@ -940,7 +940,7 @@ At some point, update mediaqueries to be in EMS
 /* List Module */
 /* This border should become a variable */
 @media only screen and (max-width: 529px)  {
-  #trailList {
+  .trailList {
     width: 100%;
     max-height: 22em;
     position: relative;
@@ -949,7 +949,7 @@ At some point, update mediaqueries to be in EMS
   }
 }
 @media only screen and (min-width: 950px) {
-  #trailList {
+  .trailList {
     width: 100%;
     max-height: 22em;
     position: relative;

@@ -40,10 +40,10 @@ $(document).ready(function() {
     }
 
     //call to widget trigger1
-    accordion('#trigger1'),
+    accordion('.trigger1'),
     //call to widget trigger2
-    accordion('#trigger2');
-    accordion('#trigger3');
+    accordion('.trigger2');
+    accordion('.trigger3');
 
 });//end document.ready()
 

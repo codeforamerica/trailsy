@@ -1075,7 +1075,7 @@ function startup() {
     var divCount = 1;
     $(".trailList").html("");
     $.each(trailheads, function(index, trailhead) {
-      console.log("AHOY");
+      console.log("AHOI POLLOI");
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
       var trailheadTrailIDs = trailhead.trails;
