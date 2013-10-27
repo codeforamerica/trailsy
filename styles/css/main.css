@@ -335,6 +335,9 @@ At some point, update mediaqueries to be in EMS
   .trailsNearYouResults {
     height: 2em;
     width: 24em;
+    background-color: #91c73d;
+  }
+  .trailsNearYouResults:hover {
     background-color: #b0d576;
   }
 }
