@@ -1006,11 +1006,122 @@ At some point, update mediaqueries to be in EMS
 }
 /* Border should be replaced*/
 @media only screen and (max-width: 529px)  {
-  .trail-box .trailheadName {
-    display: none;
+  .trail-box {
+    position: relative;
+    height: auto;
+    background-color: #ffffff;
+    border-top-style: dotted;
+    border-width: 1px;
+    border-color: #e3e3e1;
+    cursor: pointer;
   }
-  .trail-box .trailheadDistance {
-    display: none;
+  .trail-box:hover {
+    background-color: #e3e3e1;
+  }
+  .trail-box .trailInfo {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+  .trail-box .trailInfo .trailCurrentIndex {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0em 0 0 0em;
+    height: 2em;
+    width: 1.667em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #b0d576;
+    text-align: center;
+    line-height: 2em;
+    background-color: #ebf4df;
+  }
+  .trail-box .trailInfo .trail {
+    position: relative;
+    display: inline-block;
+    margin: 0em 0 0 .5em;
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    line-height: 2.25em;
+    color: #00adef;
+    cursor: pointer;
+  }
+  .trail-box .trailInfo .trailLength {
+    position: relative;
+    margin: .25em 1.5em 0 0em;
+    float: right;
+    height: auto;
+    width: auto;
+    max-width: 50%;
+    display: inline-block;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    line-height: 2.667em;
+    color: #91c73d;
+    cursor: pointer;
+  }
+  .trail-box .trailInfo .parkName {
+    position: relative;
+    display: inline-block;
+    padding: 0em 0 0 1.33em;
+    width: 100%;
+    height: 1em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #58595b;
+  }
+  .trail-box .trailheadInfo {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+  }
+  .trail-box .trailheadInfo .trailheadIcon {
+    position: relative;
+    display: inline-block;
+    margin: 0em 0 0 .375em;
+    height: 1em;
+    width: auto;
+  }
+  .trail-box .trailheadInfo .trailheadName {
+    position: relative;
+    display: inline-block;
+    margin: .5em 0 0 .75em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #58595b;
+  }
+  .trail-box .trailheadInfo .trailheadDistance {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin: .5em 1.5em 0 0em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    text-align: right;
+    color: #58595b;
   }
 }
 @media only screen and (min-width: 950px) {
