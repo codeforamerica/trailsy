@@ -29,8 +29,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -215,7 +215,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $(document).on('click', '.hamburger', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
-  $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
+  $(".detailPanel").hover(toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
@@ -951,6 +951,10 @@ function startup() {
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
+    highlightTrailhead(orderedTrails[0].trailheadID, 0);
+    orderedTrailIndex = 0;
+    showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+
   }
 
 
@@ -1133,7 +1137,9 @@ function startup() {
 
         var trailInfoObject = {
           trailID: trailID,
+          trail: trail,
           trailheadID: trailheadID,
+          trailhead: trailhead,
           index: i
         };
         orderedTrails.push(trailInfoObject);
@@ -1181,7 +1187,9 @@ function startup() {
   function openDetailPanel() {
     console.log("openDetailPanel");
     $('.detailPanel').show();
-    $('.accordion').hide();
+    if (!SMALL) {
+      $('.accordion').hide();
+    }
     $('.trailhead-trailname.selected').addClass("detail-open");
     // map.invalidateSize();
   }
@@ -1196,7 +1204,9 @@ function startup() {
 
   function toggleDetailPanelControls() {
     console.log("toggleDetailPanelControls");
+    if (!SMALL) {
     $('.detailPanelControls').toggle();
+    }
   }
 
   function changeDetailPanel(e) {

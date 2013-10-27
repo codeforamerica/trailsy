@@ -508,13 +508,20 @@ At some point, update mediaqueries to be in EMS
     height: 2em;
     width: 100%;
     background-color: #b0d576;
+    transition: all 0.25s ease;
+  }
+  .trailsNearYouResults:hover {
+    background-color: #91c73d;
   }
 }
 @media only screen and (min-width: 950px) {
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
-    background-color: #b0d576;
+    transition: all 0.25s ease;
+  }
+  .trailsNearYouResults:hover {
+    background-color: #91c73d;
   }
 }
 @media only screen and (max-width: 529px)  {
@@ -1700,6 +1707,7 @@ At some point, update mediaqueries to be in EMS
     margin-right: 2em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
+    display: inline-block;
     height: 100%;
     position: absolute;
     background-color: #00adef;
@@ -1708,7 +1716,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBanner .detailPanelControls.disabled {
     cursor: auto;
-    background-color: #58595b;
+    display: none;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     width: 2em;
@@ -1977,6 +1985,30 @@ At some point, update mediaqueries to be in EMS
     width: auto;
     position: relative;
     display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: .5em 1em 0em 1em;
+    margin-bottom: 1em;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
+    margin-top: .75em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
   }
   .detailPanel .detailPanelBody .detailMiddleRow {
     position: relative;
@@ -2316,7 +2348,6 @@ At some point, update mediaqueries to be in EMS
     margin-right: 3em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
-    display: none;
     width: 2em;
     height: 150%;
     position: absolute;
@@ -2326,7 +2357,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBanner .detailPanelControls.disabled {
     cursor: auto;
-    background-color: #58595b;
+    display: none;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     top: 0;
@@ -2477,6 +2508,30 @@ At some point, update mediaqueries to be in EMS
     width: auto;
     position: relative;
     display: inline-block;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow {
+    position: relative;
+    display: inline-block;
+    height: auto;
+    width: 100%;
+    padding: .5em 1em 0em 1em;
+    margin-bottom: 1em;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
+    margin-top: .75em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
   }
   .detailPanel .detailPanelBody .detailMiddleRow {
     position: relative;
