@@ -1376,6 +1376,11 @@ function startup() {
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
+    $("#email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
+    $("#twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
+    $("#facebook a").attr("href", 
+     "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=Heading to " +
+     trail.properties.name + "!").attr("target", "_blank");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
       $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
