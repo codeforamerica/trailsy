@@ -74,6 +74,7 @@ function startup() {
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+  var CLOSED = false;
 
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -217,7 +218,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $(document).on('click', '.hamburger', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
-  $(".detailPanel").hover(toggleDetailPanelControls);
+  $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
@@ -236,18 +237,25 @@ function startup() {
 
   var overlayHTML = "Welcome to To The Trails!";
 
+  var closedOverlayHTML = "Come visit us soon!";
 
-  if ($("html").hasClass("lt-ie8")) {
-    $(".overlay-panel").html(overlayHTMLIE);
+  if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+    console.log("closed");
+    $(".overlay-panel").html(closedOverlayHTML);
+    $(".overlay").show();
   }
   else {
-    $(".overlay-panel").html(overlayHTML);
-  }
+    if ($("html").hasClass("lt-ie8")) {
+      $(".overlay-panel").html(overlayHTMLIE);
+    }
+    else {
+      $(".overlay-panel").html(overlayHTML);
+    }
     
-  $(".overlay-panel").click(function () {
-    $(".overlay").hide();
-  });
-  
+    $(".overlay-panel").click(function () {
+      $(".overlay").hide();
+    });
+  }
 
   $(".overlay").show();
   initialSetup();
@@ -973,10 +981,11 @@ function startup() {
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
-    highlightTrailhead(orderedTrails[0].trailheadID, 0);
-    orderedTrailIndex = 0;
-    showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
-
+    if (SMALL) {
+      highlightTrailhead(orderedTrails[0].trailheadID, 0);
+      orderedTrailIndex = 0;
+      showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+    }
   }
 
 
@@ -1228,11 +1237,13 @@ function startup() {
     // map.invalidateSize();
   }
 
-  function toggleDetailPanelControls() {
-    console.log("toggleDetailPanelControls");
-    if (!SMALL) {
-    $('.detailPanelControls').toggle();
-    }
+  function detailPanelHoverIn(e) {
+    enableTrailControls();
+  }
+
+  function detailPanelHoverOut(e) {
+    $(".controlRight").removeClass("enabled").addClass("disabled");
+    $(".controlLeft").removeClass("enabled").addClass("disabled");
   }
 
   function changeDetailPanel(e) {
@@ -1365,6 +1376,11 @@ function startup() {
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
+    $("#email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
+    $("#twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
+    $("#facebook a").attr("href", 
+     "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=Heading to " +
+     trail.properties.name + "!").attr("target", "_blank");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
     if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
       $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);

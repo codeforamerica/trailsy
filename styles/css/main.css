@@ -1733,6 +1733,7 @@ At some point, update mediaqueries to be in EMS
   font-weight: 100;
   font-size: 16px;
   line-height: 20px;
+  font-size: 22px;
 }
 .overlay-panel {
   margin: 10% auto 0 auto;
@@ -1857,6 +1858,10 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .detailPanelBanner .detailPanelControls.disabled {
     cursor: auto;
     display: none;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.enabled {
+    cursor: pointer;
+    display: inline-block;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     width: 2em;
@@ -2378,7 +2383,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     text-align: right;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#tweet {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#twitter {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2879,7 +2884,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     text-align: right;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#tweet {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#twitter {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
