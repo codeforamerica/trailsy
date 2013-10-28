@@ -226,7 +226,7 @@ function startup() {
   // =====================================================================//
   // Kick things off
 
-  var overlayHTMLIE = "Welcome to To The Trails!" + 
+  var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
       "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
       "<p>Please upgrade to the latest version of" +
       "<ul><li><a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a></li> " + 
