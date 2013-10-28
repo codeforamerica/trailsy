@@ -1,4 +1,6 @@
-var console=console||{"log":function(){}};
+var console = console || {
+  "log": function() {}
+};
 console.log("start");
 
 $(document).ready(startup);
@@ -227,13 +229,13 @@ function startup() {
   // =====================================================================//
   // Kick things off
 
-  var overlayHTMLIE = "Welcome to To The Trails!" + 
-      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
-      "<p>Please upgrade to the latest version of" +
-      "<ul><li><a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a></li> " + 
-      "<li><a href='http://google.com/chrome'>Google Chrome</a>, or</li>" +  
-      "<li><a href='http://getfirefox.com'>Mozilla Firefox</a>.</li></ul>" +
-      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
+  var overlayHTMLIE = "Welcome to To The Trails!" +
+    "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." +
+    "<p>Please upgrade to the latest version of" +
+    "<ul><li><a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a></li> " +
+    "<li><a href='http://google.com/chrome'>Google Chrome</a>, or</li>" +
+    "<li><a href='http://getfirefox.com'>Mozilla Firefox</a>.</li></ul>" +
+    "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
 
   var overlayHTML = "Welcome to To The Trails!";
 
@@ -243,16 +245,14 @@ function startup() {
     console.log("closed");
     $(".overlay-panel").html(closedOverlayHTML);
     $(".overlay").show();
-  }
-  else {
+  } else {
     if ($("html").hasClass("lt-ie8")) {
       $(".overlay-panel").html(overlayHTMLIE);
-    }
-    else {
+    } else {
       $(".overlay-panel").html(overlayHTML);
     }
-    
-    $(".overlay-panel").click(function () {
+
+    $(".overlay-panel").click(function() {
       $(".overlay").hide();
     });
   }
@@ -1157,7 +1157,7 @@ function startup() {
 
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
-        
+
         if (parkName) {
           console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
@@ -1178,7 +1178,7 @@ function startup() {
         };
         orderedTrails.push(trailInfoObject);
       }
-      
+
 
       // diagnostic div to show trailheads with no trail matches
       // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
@@ -1301,6 +1301,22 @@ function startup() {
     return orderedTrailIndex;
   }
 
+  function resetDetailPanel() {
+    $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
+    $('.detailPanel .detailPanelPictureCredits').remove();
+    $('.detailPanel .detailTrailheadName').html("");
+    $('.detailPanel .detailTrailheadPark').html("");
+    $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
+    $('.detailPanel .detailTopRow#right #hike').html("");
+    $('.detailPanel .detailTopRow#right #cycle').html("");
+    $('.detailPanel .detailTopRow#right #handicap').html("");
+    $('.detailPanel .detailTopRow#right #horse').html("");
+    $('.detailPanel .detailTopRow#right #xcountryski').html("");
+    $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("");
+    $('.detailPanel .detailDescription').html("");
+    $('.detailPanel .detailStewardLogo').attr("src", "/img/mpssc.jpg");
+  }
+
   function decorateDetailPanel(trail, trailhead) {
     console.log(orderedTrailIndex);
 
@@ -1311,59 +1327,61 @@ function startup() {
     }
     enableTrailControls();
 
+    resetDetailPanel();
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
-    $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
-    $('.detailPanel .detailPanelPictureCredits').remove();
+
     if (trail.properties.medium_photo_url) {
-      $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);    
+      $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
       $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
     }
-    $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
+
     if (trail.properties.status == 1) {
-      $('.detailPanel .detailPanelPictureCredits').remove();
       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
     if (trail.properties.status == 2) {
-      $('.detailPanel .detailPanelPictureCredits').remove();
       $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
     }
-    if (trail.properties.hike == 'y') {
-      console.log("hike icon replaced")
+
+    if (trail.properties.hike && trail.properties.hike.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailTopRow#right #hike').html("<img class='activity-icons' src='img/icon_hike_green.png'>");
     }
-    if (trail.properties.roadbike == 'y') {
-      console.log("cycle icon replaced")
+
+    if (trail.properties.roadbike && trail.properties.roadbike.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailTopRow#right #cycle').html("<img class='activity-icons' src='img/icon_cycle_green.png'>");
     }
-    if (trail.properties.accessible == 'y') {
-      console.log("handicap icon replaced")
+
+    if (trail.properties.accessible && trail.properties.accessible.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailTopRow#right #handicap').html("<img class='activity-icons' src='img/icon_handicap_green.png'>");
     }
-    if (trail.properties.equestrian == 'y') {
-      console.log("horse icon replaced")
+
+    if (trail.properties.equestrian && trail.properties.equestrian.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailTopRow#right #horse').html("<img class='activity-icons' src='img/icon_horse_green.png'>");
     }
-    if (trail.properties.xcntryski == 'y') {
-      console.log("xcntryski icon replaced")
+
+    if (trail.properties.xcntryski && trail.properties.xcntryski.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailTopRow#right #xcountryski').html("<img class='activity-icons' src='img/icon_xcountryski_green.png'>");
     }
-    if (trailhead.properties.parking == 'yes') {
-      console.log("parking icon added")
+
+    if (trailhead.properties.parking && trailhead.properties.parking.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
     }
+
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
 
-    var mileString = trail.properties.length == "1" ? "mile" : "miles";
-    $('.detailPanel .detailLength').html(trail.properties.length + " " + mileString);
+    if (trail.properties.length) {
+      var mileString = trail.properties.length == "1" ? "mile" : "miles";
+      $('.detailPanel .detailLength').html(trail.properties.length + " " + mileString);
+    } else {
+      $('.detailPanel .detailLength').html("--");
+    }
 
-
-    $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
     $('.detailPanel .detailDescription').html(trail.properties.description);
 
     if (trail.properties.map_url) {
@@ -1372,16 +1390,24 @@ function startup() {
     } else {
       $('.detailPanel .detailPrintMap').hide();
     }
+
     var directionsUrl = "http://maps.google.com?saddr=" + currentUserLocation.lat + "," + currentUserLocation.lng +
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
-    if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
-      $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url);
+
+    if (trail.properties.steward_fullname) {
+      $('.detailPanel .detailFooter').show();
+      if (trail.properties.steward_logo_url && trail.properties.steward_logo_url.indexOf("missing.png") == -1) {
+        $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url).show();   
+      }
+      $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
+      $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
+    } else {
+      $('.detailPanel .detailFooter').hide();
     }
-    $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
-    $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
+
   }
 
 
@@ -1409,8 +1435,7 @@ function startup() {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
       $('.slideDrawer').addClass("openDrawer");
-    }
-    else {
+    } else {
       console.log("closeSlideDrawer");
       $('.slideDrawer').removeClass('openDrawer');
       $('.slideDrawer').addClass('closedDrawer');
@@ -1886,7 +1911,7 @@ function startup() {
 
   function logger(message) {
     if (typeof console !== "undefined") {
-    console.log(message)
+      console.log(message)
     }
   }
 }
