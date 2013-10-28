@@ -1262,9 +1262,10 @@ function startup() {
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
+    $('.detailPanel .detailPanelPictureCredits').remove();
     if (trail.properties.medium_photo_url) {
-      $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
-      $('.detailPanel .detailPanelPictureCredits').remove();
+      $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);    
       $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
     }
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
