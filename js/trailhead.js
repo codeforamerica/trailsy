@@ -552,6 +552,7 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
+    console.log(mapDivName);
     var map = L.map(mapDivName, {
       zoomControl: false,
       scrollWheelZoom: false
@@ -1226,6 +1227,7 @@ function startup() {
       $('.accordion').hide();
     }
     $('.trailhead-trailname.selected').addClass("detail-open");
+    $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     // map.invalidateSize();
   }
 
@@ -1282,6 +1284,7 @@ function startup() {
       enableTrailControls();
       highlightTrailhead(trailheadID, trailIndex);
       showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
+      $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     }
   }
 
@@ -1333,7 +1336,8 @@ function startup() {
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
 
-    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
+
     $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
 
     if (trail.properties.medium_photo_url) {
@@ -1395,6 +1399,11 @@ function startup() {
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
+    $("#email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
+    $("#twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
+    $("#facebook a").attr("href", 
+     "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=Heading to " +
+     trail.properties.name + "!").attr("target", "_blank");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
 
     if (trail.properties.steward_fullname) {
