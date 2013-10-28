@@ -536,6 +536,7 @@ function startup() {
 
   function handleGeoError(error, callback) {
     console.log("handleGeoError");
+    currentUserLocation = AKRON;
     console.log(error);
     if (!map) {
       console.log("making map anyway");
