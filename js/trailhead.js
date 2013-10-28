@@ -1,3 +1,4 @@
+var console=console||{"log":function(){}};
 console.log("start");
 
 $(document).ready(startup);
@@ -9,6 +10,7 @@ $(document).ready(startup);
 
 function startup() {
   "use strict";
+
   console.log("trailhead.js");
 
   var SMALL;
@@ -224,7 +226,32 @@ function startup() {
   // =====================================================================//
   // Kick things off
 
+  var overlayHTMLIE = "Welcome to To The Trails!" + 
+      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
+      "<p>Please upgrade to the latest version of" +
+      "<ul><li><a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a></li> " + 
+      "<li><a href='http://google.com/chrome'>Google Chrome</a>, or</li>" +  
+      "<li><a href='http://getfirefox.com'>Mozilla Firefox</a>.</li></ul>" +
+      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
+
+  var overlayHTML = "Welcome to To The Trails!";
+
+
+  if ($("html").hasClass("lt-ie8")) {
+    $(".overlay-panel").html(overlayHTMLIE);
+  }
+  else {
+    $(".overlay-panel").html(overlayHTML);
+  }
+    
+  $(".overlay-panel").click(function () {
+    $(".overlay").hide();
+  });
+  
+
+  $(".overlay").show();
   initialSetup();
+
 
 
   // The next three functions perform trailhead/trail mapping
@@ -1845,4 +1872,10 @@ function startup() {
   jQuery.fn.outerHTML = function(s) {
     return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
+
+  function logger(message) {
+    if (typeof console !== "undefined") {
+    console.log(message)
+    }
+  }
 }
