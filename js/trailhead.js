@@ -74,6 +74,7 @@ function startup() {
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
+  var CLOSED = false;
 
   var trailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -236,18 +237,25 @@ function startup() {
 
   var overlayHTML = "Welcome to To The Trails!";
 
+  var closedOverlayHTML = "Come visit us soon!";
 
-  if ($("html").hasClass("lt-ie8")) {
-    $(".overlay-panel").html(overlayHTMLIE);
+  if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+    console.log("closed");
+    $(".overlay-panel").html(closedOverlayHTML);
+    $(".overlay").show();
   }
   else {
-    $(".overlay-panel").html(overlayHTML);
-  }
+    if ($("html").hasClass("lt-ie8")) {
+      $(".overlay-panel").html(overlayHTMLIE);
+    }
+    else {
+      $(".overlay-panel").html(overlayHTML);
+    }
     
-  $(".overlay-panel").click(function () {
-    $(".overlay").hide();
-  });
-  
+    $(".overlay-panel").click(function () {
+      $(".overlay").hide();
+    });
+  }
 
   $(".overlay").show();
   initialSetup();
