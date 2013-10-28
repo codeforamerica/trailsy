@@ -217,7 +217,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $(document).on('click', '.hamburger', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
-  $(".detailPanel").hover(toggleDetailPanelControls);
+  $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
@@ -1228,11 +1228,13 @@ function startup() {
     // map.invalidateSize();
   }
 
-  function toggleDetailPanelControls() {
-    console.log("toggleDetailPanelControls");
-    if (!SMALL) {
-    $('.detailPanelControls').toggle();
-    }
+  function detailPanelHoverIn(e) {
+    enableTrailControls();
+  }
+
+  function detailPanelHoverOut(e) {
+    $(".controlRight").removeClass("enabled").addClass("disabled");
+    $(".controlLeft").removeClass("enabled").addClass("disabled");
   }
 
   function changeDetailPanel(e) {
