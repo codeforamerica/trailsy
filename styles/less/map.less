@@ -446,16 +446,44 @@
 	background: url('/img/overlay.png') repeat 0 0;
 	display: none;
 	text-align: center;
+	.overlay-panel {
+		padding:1em 2em 1em 2em;
+	}
 	h1 {
 		color:@color-mid-green;
 		.sansSerif-bold;
 		font-size: 22px;
 	}
+	p {
+		color: @color-mid-gray;
+		.sansSerif-light;
+		text-align: left;
+	}
+	a {
+		color:@color-dark-blue;
+		text-decoration:none;
+		&:hover {
+			text-decoration:underline;
+		}
+	} 
+	.closeOverlay {
+		color: @color-light-mid-gray;
+		font-size: 22;
+		float:right;
+		vertical-align: text-top;
+		font-family:sans-serif;
+		margin-top: -.5em;
+		margin-right:-1em;
+		&:hover {
+			cursor:pointer;
+		}
+
+	}
 }
 
 .overlay-panel {
 	margin: 10% auto 0 auto;
-	width: 350px;
+	width: 420px;
 	background: #FFF;
 	border-radius: 10px;
 }
