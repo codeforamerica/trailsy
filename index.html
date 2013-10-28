@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+<!--[if lte IE 8 ]>
+  <html lang="en" class="lt-ie8">
+<![endif]-->
+<!--[if !lte IE 8 ]><!-->
 <html lang="en">
+<!--<![endif]-->
 <head>
   <title>To The Trails: Summit County</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   <link rel="stylesheet" href="styles/css/leaflet.css"/>
+  <script src="js/jquery-1.10.2.min.js"></script>
      <!--[if lte IE 8]>
      <link rel="stylesheet" href="styles/css/leaflet.ie.css" />
      <![endif]-->
@@ -248,14 +254,20 @@
                   <div class="detailTrailheadIcons"></div>
                 </div>
                 <div class="detailLinksToSocial">
-                  <div class="social-icon" id="facebook">
-                    <img>facebook
+                  <div class="social-icon facebook" id="facebook">
+                    <a>
+                      <img>facebook
+                    </a>
                   </div>
-                  <div class="social-icon" id="tweet">
-                    <img>tweet
+                  <div class="social-icon twitter" id="twitter">
+                    <a>
+                      <img>twitter
+                    </a>
                   </div>
-                  <div class="social-icon" id="email">
-                    <img>email
+                  <div class="social-icon email" id="email">
+                    <a>
+                      <img>email
+                    </a>
                   </div>
                 </div>
               </div>
@@ -519,7 +531,12 @@
       </div> <!-- accordion clearfix -->
     </section>
   </div>
-  <script src="js/jquery-1.10.2.min.js"></script>
+  <div class="overlay">
+    <div class="overlay-panel">  
+    </div>
+  </div>
+
+
   <script src="js/trailhead.js"></script>
   <!-- leaflet build from trailsyFix branch of github repo fork danavery/Leaflet -->
   <script src="js/leaflet-custom.js"></script>

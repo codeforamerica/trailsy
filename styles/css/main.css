@@ -1744,6 +1744,23 @@ At some point, update mediaqueries to be in EMS
 .offsetZoomControl .offsetZoomOut:hover {
   background-color: #e3e3e1;
 }
+.overlay {
+  width: 100%;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background: url('/img/overlay.png') repeat 0 0;
+  display: none;
+  text-align: center;
+}
+.overlay-panel {
+  margin: 10% auto 0 auto;
+  width: 350px;
+  background: #FFF;
+  border-radius: 10px;
+}
 @media only screen and (max-width: 529px)  {
   .trailListColumn {
     position: absolute;
@@ -1861,6 +1878,10 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .detailPanelBanner .detailPanelControls.disabled {
     cursor: auto;
     display: none;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.enabled {
+    cursor: pointer;
+    display: inline-block;
   }
   .detailPanel .detailPanelBanner .detailPanelControls.controlLeft {
     width: 2em;
@@ -2383,7 +2404,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     text-align: right;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#tweet {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#twitter {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2473,7 +2494,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     width: 100%;
     background-color: #00adef;
-    padding: .5em 1em .5em 1em;
+    padding: .5em 1.75em .5em 1.75em;
   }
   .detailPanel .detailPanelBanner .trailName {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2884,7 +2905,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     text-align: right;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#tweet {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToSocial .social-icon#twitter {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
