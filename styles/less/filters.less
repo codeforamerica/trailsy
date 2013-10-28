@@ -34,9 +34,9 @@
 			line-height: 1.5em;
 			border-collapse: separate;
 			border-spacing: 2px;
-			&:focus {
-				outline: none;
-			}
+			background-image: url(img/icon_search.png);
+			background-repeat: no-repeat;
+			background-position: 10px 10px;
 		}
 		.search-submit {
 			display: none;
@@ -227,7 +227,7 @@
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
-			width: 100%;
+			width: auto;
 			background-color: none;
 		}
 		li:focus {
@@ -279,6 +279,13 @@
 		&:hover {
 			background-color: @color-mid-green;
 		};
+		span {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
 	}
 	@media @desktop {
 		height: 2em;

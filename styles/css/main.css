@@ -27,6 +27,8 @@
 /* pressed / hover */
 /* Normal Trail Lines */
 /* headers / icons / announcements */
+/*@color-dark-green: #445617;
+*/
 /* Greens for Parks */
 /*===============================*/
 /* hover */
@@ -232,9 +234,9 @@ At some point, update mediaqueries to be in EMS
     line-height: 1.5em;
     border-collapse: separate;
     border-spacing: 2px;
-  }
-  .searchbar .search-key:focus {
-    outline: none;
+    background-image: url(img/icon_search.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
   }
   .searchbar .search-submit {
     display: none;
@@ -447,13 +449,12 @@ At some point, update mediaqueries to be in EMS
   }
   .panel-container .trails-count {
     padding: .5em 1em 0em 1em;
-    width: auto;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
-    width: 100%;
+    width: auto;
     background-color: none;
   }
   .panel-container li:focus {
@@ -512,6 +513,13 @@ At some point, update mediaqueries to be in EMS
   }
   .trailsNearYouResults:hover {
     background-color: #91c73d;
+  }
+  .trailsNearYouResults span {
+    font-size: 12px;
+    margin-left: -1em;
+    position: relative;
+    display: inline-block;
+    color: white;
   }
 }
 @media only screen and (min-width: 950px) {
@@ -1060,7 +1068,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    line-height: 2.25em;
+    line-height: 1.25em;
     color: #00adef;
     cursor: pointer;
   }
@@ -1179,7 +1187,7 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    line-height: 2.25em;
+    line-height: 1.25em;
     color: #00adef;
     cursor: pointer;
   }

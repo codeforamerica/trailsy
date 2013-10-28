@@ -1079,7 +1079,6 @@ function startup() {
     var divCount = 1;
     $(".trailList").html("");
     $.each(trailheads, function(index, trailhead) {
-      console.log("AHOI POLLOI");
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
       var trailheadTrailIDs = trailhead.trails;
@@ -1127,8 +1126,10 @@ function startup() {
 
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
-
-        // $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
+        if (trailhead.properties.park) {
+          console.log("has a park name");
+          $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
+        };
         //  Here we generate icons for each activity filter that is true..?
 
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
@@ -1186,12 +1187,12 @@ function startup() {
 
   function openDetailPanel() {
     console.log("openDetailPanel");
+    $('.detailPanel').show();
     if (!SMALL) {
-      $('.detailPanel').show();
-      $('.accordion').hide()
-      $('.trailhead-trailname.selected').addClass("detail-open");
-    // map.invalidateSize();
+      $('.accordion').hide();
     }
+    $('.trailhead-trailname.selected').addClass("detail-open");
+    // map.invalidateSize();
   }
 
   function closeDetailPanel() {
