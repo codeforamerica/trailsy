@@ -2444,7 +2444,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     width: 100%;
     background-color: #00adef;
-    padding: .5em 1em .5em 1em;
+    padding: .5em 1.75em .5em 1.75em;
   }
   .detailPanel .detailPanelBanner .trailName {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
