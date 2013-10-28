@@ -981,10 +981,11 @@ function startup() {
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
-    highlightTrailhead(orderedTrails[0].trailheadID, 0);
-    orderedTrailIndex = 0;
-    showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
-
+    if (SMALL) {
+      highlightTrailhead(orderedTrails[0].trailheadID, 0);
+      orderedTrailIndex = 0;
+      showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+    }
   }
 
 
