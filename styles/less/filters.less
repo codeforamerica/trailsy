@@ -14,9 +14,6 @@
 
 .searchbar {
 	@media @mobile {
-		display: none;
-	}
-	@media @desktop {
 		background-color: @color-white;
 		line-height: 1;
 		padding: 0 1em 0 1em;
@@ -29,6 +26,49 @@
 		  	border: 1px solid;
 		  	border-color: @color-light-mid-gray;
 			padding-left: .25em;
+			padding-right: 0;
+			padding-top: .5em;
+			padding-bottom: .5em;
+			position: relative;
+			top: 0;
+			line-height: 1.5em;
+			border-collapse: separate;
+			border-spacing: 2px;
+			background-image: url(img/icon_search.png);
+			background-repeat: no-repeat;
+			background-position: 10px 10px;
+		}
+		.search-submit {
+			display: none;
+/*			display: inline-block;*/
+			position: absolute;
+			border: none;
+			height: 2em;
+			top: 4em;
+			right: 1em;
+			z-index: 1;
+			width: 2.5em;
+			padding: 0;
+			cursor: pointer;
+			background-color: @color-light-blue;
+			&:hover {
+				background-color: @color-light-blue;
+			}
+		}
+	}
+	@media @desktop {
+		background-color: @color-white;
+		line-height: 1;
+		padding: 0 1.75em 0 1.75em;
+		.search-key {
+			display: block;
+			.sansSerif-light;
+			color: @color-light-mid-gray;
+			width: 100%;
+			height: 2em;
+		  	border: 1px solid;
+		  	border-color: @color-light-mid-gray;
+			padding-left: .5em;
 			padding-right: 0;
 			padding-top: .5em;
 			padding-bottom: .5em;
@@ -61,13 +101,45 @@
 	}
 }
 
-.accordion {
+.slideDrawer {
 	@media @mobile {
-		display: none;
+		position: absolute;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		list-style: none;
+		display: block;
+		float: left;
+		width: 100%;
+		max-width: 284px;
+		height: 100%;
+		z-index: 999999;
+		background-color: @color-white;
+		border: 1px solid @color-light-mid-gray;
+		-moz-transition: all 300ms;
+		-webkit-transition: all 300ms;
+		transition: all 300ms;
+		&.closedDrawer {
+			top: 5em;
+			left: -18em;
+		}
+		&.openDrawer {
+			top: 5em;
+			left: 0em;
+		}
 	}
 	@media @desktop {
-/*		display: none;*/
-		background-color: transparent;
+		display: none;
+	}
+}
+
+.accordion {
+	@media @mobile {
+		display: block;
+		lbackground-color: transparent;
+		-moz-transition: all 300ms;
+		-webkit-transition: all 300ms;
+		transition: all 300ms;
 		.panel-title {
 			margin: 0;
 			padding: 1em 2em 1em 1.33em;
@@ -85,21 +157,44 @@
 			margin: 0;
 		}
 	}
+	@media @desktop {
+/*		display: none;*/
+		background-color: transparent;
+		.panel-title {
+			margin: 0;
+			padding: 1em 2em 1em 1.75em;
+			position: relative;
+			display: inline-block;
+			/* Let's abstract this transition so we can keep it consistent across animations*/
+			-webkit-transition: .1s all ease-in-out;
+			-moz-transition: .1s all ease-in-out;
+			-o-transition: .1s all ease-in-out;
+			transition: .1s all ease-in-out;
+/*			background: @color-white;*/
+			font-color: @color-light-mid-gray;
+		}
+		.icon {
+			color:@color-dark-blue;
+		}
+		.accordion-innerwrap {
+			margin: 0;
+		}
+	}
 }
 
 .searchHeader {
 	@media @mobile {}
 	@media @desktop {
 		.sansSerif-light();
-		color: @color-light-mid-gray;
-		font-size: 12px;
+		color: @color-mid-gray;
 		cursor: default;
+		padding-left:2em;
+		padding-top:4em;
 	}
 }
 
 .panel-container {
-	@media @mobile {}
-	@media @desktop {
+	@media @mobile {
 		margin: 0;
 		#MoreFilters {
 			height: 100%;
@@ -107,9 +202,19 @@
 		&:focus {
 			outline: none;
 		}
-		#trigger1 {}
+		.trigger1 {
+			padding: 1em 1.33em;
+			.sansSerif-light();
+			color: @color-light-mid-gray;
+			font-size: 12px;
+			width: 100%;
+			text-align: left;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 		/* More Options */
-		#trigger2 {
+		.trigger2 {
 			padding: .5em 1em 0em .5em;
 			.sansSerif-light();
 			color: @color-light-mid-gray;
@@ -126,6 +231,40 @@
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
+			width: auto;
+			background-color: none;
+		}
+		li:focus {
+			outline: none;
+		}
+	}
+	@media @desktop {
+		margin: 0;
+		#MoreFilters {
+			height: 100%;
+		}
+		&:focus {
+			outline: none;
+		}
+		.trigger1 {}
+		/* More Options */
+		.trigger2 {
+			padding: .5em 2.1em .5em .5em;
+			.sansSerif-light();
+			color: @color-light-mid-gray;
+			font-size: 12px;
+			width: 100%;
+			text-align: right;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		/* Container of Trail Results*/
+		.trails-count {
+			padding: .5em 1em 0em 1.75em;
+			width: auto;
+			.sansSerif-light();
+			color: @color-white;
 			width: 100%;
 			background-color: none;
 		}
@@ -136,16 +275,38 @@
 }
 
 .trailsNearYouResults {
-	@media @mobile {}
+	@media @mobile {
+		height: 2em;
+		width: 100%;
+		background-color: @color-mid-light-green;
+		transition: all 0.25s ease;
+		&:hover {
+			background-color: @color-mid-green;
+		};
+		span {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
+	}
 	@media @desktop {
 		height: 2em;
-		width: 24em;
-		background-color: @color-mid-light-green;
+		width: 100%;
+		background-color: @color-mid-green;
+		transition: all 0.25s ease;
+		&:hover {
+			background-color: @color-mid-light-green;
+		};
 	}
 }
 
 .panel-content {
-	@media @mobile {}
+	@media @mobile {
+		list-style-type: none;
+		margin: 0;
+	}
 	@media @desktop {
 		list-style-type: none;
 		margin: 0;
@@ -153,7 +314,26 @@
 }
 
 .js {
-	@media @mobile {}
+	@media @mobile {
+		.visuallyhidden {
+			border: 0;
+			clip: rect(0 0 0 0);
+			height: 1px;
+			margin: -1px;
+			overflow: hidden;
+			padding: 0;
+			position: absolute;
+			width: 1px;
+			.focusable {
+				clip: auto;
+				height: auto;
+				margin: 0;
+				overflow: visible;
+				position: static;
+				width: auto;
+			}
+		}
+	}
 	@media @desktop {
 		.visuallyhidden {
 			border: 0;
@@ -177,7 +357,34 @@
 }
 
 .no-js {
-	@media @mobile {}
+	@media @mobile {
+		.visuallyhidden {
+			clip: auto;
+			height: auto;
+			margin: 0;
+			overflow: visible;
+			position: static;
+			width: auto;
+			.focusable {
+				&:active {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+				&:focus {
+					clip: auto;
+					height: auto;
+					margin: 0;
+					overflow: visible;
+					position: static;
+					width: 0;
+				}
+			}
+		}
+	}
 	@media @desktop {
 		.visuallyhidden {
 			clip: auto;
@@ -209,7 +416,18 @@
 }
 
 .clearfix {
-	@media @mobile {}
+	@media @mobile {
+		*zoom: 1;
+		&:before {
+			content: "";
+			display: table;
+		}
+		&:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+	}
 	@media @desktop {
 		*zoom: 1;
 		&:before {
@@ -225,7 +443,11 @@
 }
 
 .list-reset {
-	@media @mobile {}
+	@media @mobile {
+		padding: 0;
+		list-style: none;
+		background-color: @color-white;
+	}
 	@media @desktop {
 		padding: 0;
 		list-style: none;
@@ -238,7 +460,7 @@
 	height: 1em;
 	width: 100%;
 	background-color: @color-white;
-	padding: 0 0 0 1em;
+	padding: 0 0 0 1.75em;
 	margin-top:1.5em;
 	margin-bottom:-.5em;
 	h2 {
@@ -249,10 +471,10 @@
 }
 
 .trailUse-title {
-	height: 2em;
+	height: 1em;
 	width: 100%;
 	background-color: @color-white;
-	padding-left: 1em;
+	padding-left: 1.75em;
 	padding-bottom: 1em;
 	margin-bottom:-.5em;
 	margin-top:2.5em;
@@ -260,12 +482,126 @@
 		.sansSerif-light();
 		font-size: 12px;
 		color: @color-light-mid-gray;
+		padding-bottom: 1em;
 	}
 }
 
 .trailFilters {
 	@media @mobile {
-		display: none;
+		height: auto;
+		.trailLength {
+			height: 2em;
+			width: 100%;
+			background: @color-white;
+			padding: 0 1.75em 0 1.75em;
+			margin: 0em 0 1em 0;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_2 {
+				display: inline-block;
+				width: 20%;
+				height: 100%;
+				input[type=checkbox] {
+					display: none;
+					&:checked + div {
+						background-color: @color-dark-blue;
+						p {
+							color: @color-white;
+						}
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 2em;
+					vertical-align: middle;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					p {
+						.sansSerif-light();
+						font-size: 12px;
+						color: @color-dark-blue;
+						text-align: center;
+						vertical-align: middle;
+						line-height: 2.75em;
+					}
+					&:hover {
+						background-color: @color-mid-blue;
+					}
+				}
+			}
+		}
+		ul:after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+		}
+		.trailUse {
+			height: 2em;
+			width: 100%;
+			padding: 0em 1.75em 0em 1.75em;
+			background: @color-white;
+    		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
+			.visuallyhidden_3 {
+				position: relative;
+				display: inline-block;
+				width: 2em;
+				height: 2em;
+				input[type=checkbox] {
+					display: none;
+					background-color: @color-light-blue;
+					width: 2em;
+					height: auto;
+					&:checked + div {
+						background-color: @color-mid-blue;
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background-color: @color-mid-blue;
+					}
+				}
+				.filter-icons {
+					position: absolute;
+					top: 10%;
+					width: 2em;
+					height: auto;
+				}
+	 		}
+		}
+		ul:after {
+			content: "";
+			display: inline-block;
+			width: 100%;
+		}
+		.trailSelection {
+			height: 3em;
+			width: 100%;
+			background: @color-white;
+			padding: 0em 1em 0em 1em;
+			width: 100%;
+			height: 2em;
+			cursor: pointer;
+			text-align: center;
+			span {
+				.sansSerif-light();
+				color: @color-light-mid-gray;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 2em;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
 	}
 	@media @desktop {
 		height: auto;
@@ -273,8 +609,8 @@
 			height: 2em;
 			width: 100%;
 			background: @color-white;
-			padding: 0 1em 0 1em;
-			margin: 0em 0 1em 0;
+			padding: 0em 1.75em 0em 1.75em;
+			margin-top:-.5em;
     		text-align: justify;
     		-ms-text-justify: distribute-all-lines;
     		text-justify: distribute-all-lines;
@@ -318,7 +654,8 @@
 		.trailUse {
 			height: 2em;
 			width: 100%;
-			padding: 0em 1em 0em 1em;
+			padding: 0em 1.75em 0em 1.75em;
+
 			background: @color-white;
     		text-align: justify;
     		-ms-text-justify: distribute-all-lines;
@@ -364,37 +701,18 @@
 			width: 100%;
 			background: @color-white;
 			padding: 0em 1em 0em 1em;
-    		text-align: justify;
-    		-ms-text-justify: distribute-all-lines;
-    		text-justify: distribute-all-lines;
-			.visuallyhidden_4 {
-				display: inline-block;
-				width: 8.5em;
-				height: 100%;
-				margin: 0;
-				padding: 0;
-				input[type=checkbox] {
-					display: none;
-					&:checked + div {
-						background-color: @color-light-blue;
-					}
-				}
-				div {
-					background-color: @color-light-blue;
-					width: 100%;
-					height: 2em;
-					cursor: pointer;
-					transition: all 0.25s ease;
-					p {
-						.sansSerif-light();
-						color: @color-dark-blue;
-						text-align: center;
-						vertical-align: middle;
-						line-height: 2em;
-					}
-					&:hover {
-						background-color: @color-mid-blue;
-					}
+			width: 100%;
+			height: 2em;
+			cursor: pointer;
+			text-align: center;
+			span {
+				.sansSerif-light();
+				color: @color-dark-blue;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 2em;
+				&:hover {
+					text-decoration: underline;
 				}
 			}
 		}

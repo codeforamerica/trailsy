@@ -96,6 +96,7 @@
 				margin-right: 2em;
 			}
 			.detailPanelControls {
+				display: inline-block;
 				height: 100%;
 				position: absolute;
 				background-color: @color-dark-blue;
@@ -103,7 +104,11 @@
 				cursor: pointer ;
 				&.disabled {
 					cursor: auto;
-					background-color: @color-mid-gray;
+					display: none;
+				}
+				&.enabled {
+					cursor: pointer;
+					display: inline-block;
 				}
 				&.controlLeft {
 					width: 2em;
@@ -325,6 +330,7 @@
 					height: 3em;
 					width: auto;
 					vertical-align: middle;
+					color: red;
 					.activity-icons {
 						vertical-align: middle;
 						height: 100%;
@@ -332,6 +338,24 @@
 						position: relative;
 						display: inline-block;
 					}
+				}
+			}
+			.detailConditionsRow {
+				position: relative;
+				display: inline-block;
+				height: auto;
+				width: 100%;
+				padding: .5em 1em 0em 1em;
+				margin-bottom: 1em;
+				.detailConditionsHeader {
+					.sansSerif-light;
+					color: @color-light-mid-gray;
+					font-size: 12px;
+				}
+				.detailConditionsDescriptions {
+					margin-top: .75em;
+					.sansSerif-light;
+					color: @color-mid-gray;
 				}
 			}
 			.detailMiddleRow {
@@ -614,7 +638,6 @@
 				margin-right: 3em;
 			}
 			.detailPanelControls {
-				display: none;
 				width: 2em;
 				height: 150%;
 				position: absolute;
@@ -623,7 +646,7 @@
 				cursor: pointer ;
 				&.disabled {
 					cursor: auto;
-					background-color: @color-mid-gray;
+					display: none;
 				}
 				&.controlLeft {
 					top: 0;
@@ -761,6 +784,24 @@
 							display: inline-block;
 						}
 					}
+				}
+			}
+			.detailConditionsRow {
+				position: relative;
+				display: inline-block;
+				height: auto;
+				width: 100%;
+				padding: .5em 1em 0em 1em;
+				margin-bottom: 1em;
+				.detailConditionsHeader {
+					.sansSerif-light;
+					color: @color-light-mid-gray;
+					font-size: 12px;
+				}
+				.detailConditionsDescriptions {
+					margin-top: .75em;
+					.sansSerif-light;
+					color: @color-mid-gray;
 				}
 			}
 			.detailMiddleRow {
