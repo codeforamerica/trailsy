@@ -1226,6 +1226,7 @@ function startup() {
       $('.accordion').hide();
     }
     $('.trailhead-trailname.selected').addClass("detail-open");
+    $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     // map.invalidateSize();
   }
 
@@ -1282,6 +1283,7 @@ function startup() {
       enableTrailControls();
       highlightTrailhead(trailheadID, trailIndex);
       showTrailDetails(trailData[trailhead.trails[trailIndex]], trailhead);
+      $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     }
   }
 
