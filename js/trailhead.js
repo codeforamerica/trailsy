@@ -29,8 +29,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -213,8 +213,9 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
+  $(document).on('click', '.hamburger', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
-  $(".detailPanel").hover(toggleDetailPanelControls, toggleDetailPanelControls);
+  $(".detailPanel").hover(toggleDetailPanelControls);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
@@ -945,6 +946,10 @@ function startup() {
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
+    highlightTrailhead(orderedTrails[0].trailheadID, 0);
+    orderedTrailIndex = 0;
+    showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+
   }
 
 
@@ -1066,10 +1071,11 @@ function startup() {
     console.log("makeTrailDivs");
     orderedTrails = [];
     var divCount = 1;
-    $("#trailList").html("");
+    $(".trailList").html("");
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
+      var parkName = trailhead.properties.park;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
         return true; // next $.each
@@ -1097,7 +1103,7 @@ function startup() {
           .attr("data-trailheadName", trailheadName)
           .attr("data-trailheadid", trailheadID)
           .attr("data-index", i)
-          .appendTo("#trailList")
+          .appendTo(".trailList")
           .click(populateTrailsForTrailheadDiv)
           .click(function(trail, trailhead) {
             return function(e) {
@@ -1115,8 +1121,12 @@ function startup() {
 
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
+        
+        if (parkName) {
+          console.log("has a park name");
+          $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
+        };
 
-        // $("<div class='parkName' >" + " Park Name" + "</div>").appendTo($trailInfo);
         //  Here we generate icons for each activity filter that is true..?
 
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
@@ -1125,7 +1135,9 @@ function startup() {
 
         var trailInfoObject = {
           trailID: trailID,
+          trail: trail,
           trailheadID: trailheadID,
+          trailhead: trailhead,
           index: i
         };
         orderedTrails.push(trailInfoObject);
@@ -1174,7 +1186,9 @@ function startup() {
   function openDetailPanel() {
     console.log("openDetailPanel");
     $('.detailPanel').show();
-    $('.accordion').hide();
+    if (!SMALL) {
+      $('.accordion').hide();
+    }
     $('.trailhead-trailname.selected').addClass("detail-open");
     // map.invalidateSize();
   }
@@ -1189,7 +1203,9 @@ function startup() {
 
   function toggleDetailPanelControls() {
     console.log("toggleDetailPanelControls");
+    if (!SMALL) {
     $('.detailPanelControls').toggle();
+    }
   }
 
   function changeDetailPanel(e) {
@@ -1332,6 +1348,7 @@ function startup() {
     $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
   }
 
+
   function slideDetailPanel(e) {
     console.log("slideDetailPanel");
     if ($(e.target).parent().hasClass("expanded")) {
@@ -1350,6 +1367,19 @@ function startup() {
   }
 
   //  Mobile-only function changing the position of the detailPanel
+
+  function moveSlideDrawer(e) {
+    if ($(".slideDrawer").hasClass("closedDrawer")) {
+      console.log("openSlideDrawer");
+      $('.slideDrawer').removeClass('closedDrawer');
+      $('.slideDrawer').addClass("openDrawer");
+    }
+    else {
+      console.log("closeSlideDrawer");
+      $('.slideDrawer').removeClass('openDrawer');
+      $('.slideDrawer').addClass('closedDrawer');
+    }
+  }
 
   // event handler for click of a trail name in a trailhead popup
 

@@ -1,0 +1,13 @@
+/*Search*/
+/* Search element, overriding Bootstrap */
+.navbar-search .search-query {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+/* This may be a duplicate of some kind? */
+.searchform {
+  padding: 10px 0 0 7px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
