@@ -1278,6 +1278,7 @@ function startup() {
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
     $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
     $('.detailPanel .detailPanelPictureCredits').remove();
     if (trail.properties.medium_photo_url) {
@@ -1323,11 +1324,8 @@ function startup() {
     var mileString = trail.properties.length == "1" ? "mile" : "miles";
     $('.detailPanel .detailLength').html(trail.properties.length + " " + mileString);
 
-    // $('.detailPanel .detailDogs').html(trail.properties.dogs);
-    // $('.detailPanel .detailBikes').html(trail.properties.bikes);
+
     $('.detailPanel .detailDifficulty').html(trail.properties.difficulty);
-    // $('.detailPanel .detailAccessible').html(trail.properties.opdmd_access);
-    // $('.detailPanel .detailHorses').html(trail.properties.horses);
     $('.detailPanel .detailDescription').html(trail.properties.description);
 
     if (trail.properties.map_url) {
