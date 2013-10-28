@@ -1322,7 +1322,7 @@ function startup() {
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
     $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
-    $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
+    $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
     $('.detailPanel .detailPanelPictureCredits').remove();
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);    
