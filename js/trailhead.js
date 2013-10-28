@@ -1318,7 +1318,7 @@ function startup() {
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
-    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name);
+    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
     $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
     $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
     $('.detailPanel .detailPanelPictureCredits').remove();
