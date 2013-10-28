@@ -1081,6 +1081,7 @@ function startup() {
     $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
+      var parkName = trailhead.properties.park;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
         return true; // next $.each
@@ -1126,10 +1127,12 @@ function startup() {
 
         var mileString = trailLength == 1 ? "mile" : "miles";
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
-        if (trailhead.properties.park) {
+        
+        if (parkName) {
           console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
         };
+
         //  Here we generate icons for each activity filter that is true..?
 
         $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
