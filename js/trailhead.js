@@ -29,8 +29,8 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -517,6 +517,7 @@ function startup() {
 
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
+    console.log(mapDivName);
     var map = L.map(mapDivName, {
       zoomControl: false,
       scrollWheelZoom: false
