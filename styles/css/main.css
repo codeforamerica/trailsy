@@ -1934,15 +1934,10 @@ At some point, update mediaqueries to be in EMS
   .detailPanel.expanded {
     position: absolute;
     top: 3em;
-    overflow: scroll;
-  }
-  .detailPanel.contracted {
-    position: absolute;
-    top: 80%;
     overflow: visible;
   }
-  .detailPanel .detailPanelSlider {
-    height: 5%;
+  .detailPanel.expanded .detailPanelSlider {
+    height: 3%;
     width: 10%;
     top: -3%;
     left: 45%;
@@ -1951,12 +1946,38 @@ At some point, update mediaqueries to be in EMS
     z-index: 999;
     cursor: pointer ;
   }
-  .detailPanel .detailPanelSlider .controlTop {
+  .detailPanel.expanded .detailPanelSlider .controlTop {
+    border-radius: 0em 0em 0em 0em;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: .55em;
+    top: 25%;
+    border-left: .8em solid transparent;
+    border-right: .8em solid transparent;
+    border-top: 0.8em solid #ffffff;
+  }
+  .detailPanel.contracted {
+    position: absolute;
+    top: 80%;
+    overflow: visible;
+  }
+  .detailPanel.contracted .detailPanelSlider {
+    height: 3%;
+    width: 10%;
+    top: -3%;
+    left: 45%;
+    position: absolute;
+    background-color: #00adef;
+    z-index: 999;
+    cursor: pointer ;
+  }
+  .detailPanel.contracted .detailPanelSlider .controlTop {
     border-radius: 5em 5em 0em 0em;
     width: 0;
     height: 0;
     position: absolute;
-    left: 25%;
+    left: .55em;
     top: 25%;
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
