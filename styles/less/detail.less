@@ -52,32 +52,53 @@
 		&.expanded {
 			position: absolute;
 			top: 3em;
-			overflow: scroll;
+			overflow: visible;
+			.detailPanelSlider {
+				height: 3%;
+				width: 10%;
+				top: -3%;
+				left: 45%;
+				position: absolute;
+				background-color: @color-dark-blue;
+				z-index: 999;
+				cursor: pointer ;
+				.controlTop {
+					border-radius: 0em 0em 0em 0em;
+					width: 0; 
+					height: 0; 
+					position: absolute;
+					left: .55em;
+					top: 25%;
+					border-left: .8em solid transparent;
+					border-right: .8em solid transparent;
+					border-top: .8em solid @color-white;
+				}
+			}
 		}
 		&.contracted {
 			position: absolute;
 			top: 80%;
 			overflow: visible;
-		}
-		.detailPanelSlider {
-			height: 5%;
-			width: 10%;
-			top: -3%;
-			left: 45%;
-			position: absolute;
-			background-color: @color-dark-blue;
-			z-index: 999;
-			cursor: pointer ;
-			.controlTop {
-				border-radius: 5em 5em 0em 0em;
-				width: 0; 
-				height: 0; 
+				.detailPanelSlider {
+				height: 3%;
+				width: 10%;
+				top: -3%;
+				left: 45%;
 				position: absolute;
-				left: 25%;
-				top: 25%;
-				border-left: .8em solid transparent;
-				border-right: .8em solid transparent;
-				border-bottom: .8em solid @color-white;
+				background-color: @color-dark-blue;
+				z-index: 999;
+				cursor: pointer ;
+				.controlTop {
+					border-radius: 5em 5em 0em 0em;
+					width: 0; 
+					height: 0; 
+					position: absolute;
+					left: .55em;
+					top: 25%;
+					border-left: .8em solid transparent;
+					border-right: .8em solid transparent;
+					border-bottom: .8em solid @color-white;
+				}
 			}
 		}
 		.detailPanelBanner {
@@ -983,7 +1004,7 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 0em .5em 0em 0em;
+				padding: 1em 1em .75em 1em;
 				border-top: 1px solid @color-light-mid-gray;
 				.icon-large {
 					height: 5em;
