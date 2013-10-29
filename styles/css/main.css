@@ -2947,7 +2947,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 0em .5em 0em 0em;
+    padding: 1em 1em .75em 1em;
     border-top: 1px solid #bbbdbf;
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
