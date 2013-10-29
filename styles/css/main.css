@@ -1872,6 +1872,10 @@ At some point, update mediaqueries to be in EMS
 .overlay .closeOverlay:hover {
   cursor: pointer;
 }
+.overlay img {
+  width: 118%;
+  margin: 1em -2em -2em -2em;
+}
 .overlay-panel {
   margin: 10% auto 0 auto;
   width: 420px;

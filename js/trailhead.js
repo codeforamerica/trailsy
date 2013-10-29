@@ -235,7 +235,8 @@ function startup() {
       "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
       "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
       "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
-      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
+      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox." +
+      "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
@@ -244,7 +245,8 @@ function startup() {
     "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
-    "<p>We look forward to seeing you for our public launch.";
+    "<p>We look forward to seeing you for our public launch." +
+    "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
     console.log("closed");
@@ -1323,7 +1325,7 @@ function startup() {
     $('.detailPanel .detailTopRow#right #xcountryski').html("");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("");
     $('.detailPanel .detailDescription').html("");
-    $('.detailPanel .detailStewardLogo').attr("src", "/img/mpssc.jpg");
+    $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
   }
 
   function decorateDetailPanel(trail, trailhead) {
