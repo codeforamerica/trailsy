@@ -895,7 +895,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
   }
   .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter:checked + div.hikeFilter {
-    background: #00adef url(/img/icon_hike_white.png) no-repeat;
+    background: #00adef url(/img/icon_hike_white2.png) no-repeat;
     background-size: 100% 100%;
   }
   .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter {
