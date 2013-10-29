@@ -229,17 +229,22 @@ function startup() {
   // =====================================================================//
   // Kick things off
 
-  var overlayHTMLIE = "Welcome to To The Trails!" +
-    "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." +
-    "<p>Please upgrade to the latest version of" +
-    "<ul><li><a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a></li> " +
-    "<li><a href='http://google.com/chrome'>Google Chrome</a>, or</li>" +
-    "<li><a href='http://getfirefox.com'>Mozilla Firefox</a>.</li></ul>" +
-    "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
+  var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
+      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
+      "<p>Please upgrade to the latest version of " +
+      "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
+      "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
+      "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
+      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
 
-  var overlayHTML = "Welcome to To The Trails!";
+  var overlayHTML = "<span class='closeOverlay'>x</span>" +
+    "<h1>Welcome To The Trails!</h1>" +
+    "<p>To The Trails is currently in public beta, so it still a work in progress. We'd love to hear how this site is working for you, so we can make it even better." +
+    "<p>Send your feedback to " +
+    "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
 
-  var closedOverlayHTML = "Come visit us soon!";
+  var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
+    "<p>We look forward to seeing you for our public launch.";
 
   if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
     console.log("closed");
@@ -1306,7 +1311,7 @@ function startup() {
   }
 
   function resetDetailPanel() {
-    $('.detailPanel .detailPanelPicture').attr("src", "img/falls.JPG");
+    $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
     $('.detailPanel .detailPanelPictureCredits').remove();
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");

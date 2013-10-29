@@ -1760,9 +1760,47 @@ At some point, update mediaqueries to be in EMS
   display: none;
   text-align: center;
 }
+.overlay .overlay-panel {
+  padding: 1em 2em 1em 2em;
+}
+.overlay h1 {
+  color: #91c73d;
+  font-family: mission_gothicbold, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  font-size: 22px;
+}
+.overlay p {
+  color: #58595b;
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: left;
+}
+.overlay a {
+  color: #00adef;
+  text-decoration: none;
+}
+.overlay a:hover {
+  text-decoration: underline;
+}
+.overlay .closeOverlay {
+  color: #bbbdbf;
+  font-size: 22;
+  float: right;
+  vertical-align: text-top;
+  font-family: sans-serif;
+  margin-top: -0.5em;
+  margin-right: -1em;
+}
+.overlay .closeOverlay:hover {
+  cursor: pointer;
+}
 .overlay-panel {
   margin: 10% auto 0 auto;
-  width: 350px;
+  width: 420px;
   background: #FFF;
   border-radius: 10px;
 }
