@@ -999,54 +999,75 @@
 					}
 				}
 			}
+			.extraLine {
+				border-top: 1px solid @color-light-gray;
+				position:relative;
+				display:block;	
+				margin-bottom:.5em;
+			}
+			.extraLine2 {
+				border-bottom: 1px solid @color-light-gray;
+				position:relative;	
+				display:block;
+			}
 			.detailFooter {
 				position: relative;
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 1em 1em .75em 1em;
-				border-top: 1px solid @color-light-mid-gray;
+				padding: .5em 1em .75em 1em;
 				.icon-large {
 					height: 5em;
 					// height: 100%;
 					float: left;
 					position: relative;
 					display: inline-block;
+					margin-right:1em;
 				}
+
 				.detailStewardInfo {
 					position: relative;
-					display: inline-block;
+					display: inline;
 					height: auto;
 					width: auto;
 					margin-left: 1em;
 					margin-top: .25em;
 				}
+				.detailStewardInfo a {
+					text-decoration:none;
+					display:block;
+					color:@color-dark-blue;
+					&:hover {
+						text-decoration:underline;
+					}
+				}
 				.detailPanelHeader {
 					position: relative;
-					display: inline-block;
+					display: block;
 					.sansSerif-light;
 					color: @color-light-mid-gray;
 					position: relative;
 					font-size: 12px;
 					width: auto;
+					text-transform: uppercase;
 				}
 				.detailSource {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 					width: 100%;
 					cursor: pointer;
-				}
+				} 
 				.detailSourcePhone {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 				}
-				.detailSourceURL {
+				/* not needed? .detailSourceURL {
 					.sansSerif-light;
 					color: @color-mid-gray;
 					font-size: 12px;
-				}
+				}*/
 			}
 		}
 	}

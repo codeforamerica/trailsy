@@ -1192,7 +1192,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
-    color: #58595b;
+    color: #e3e3e1;
   }
   .trail-box .trailheadInfo {
     position: relative;
@@ -3040,30 +3040,54 @@ At some point, update mediaqueries to be in EMS
     text-decoration: none;
     margin-top: .5em;
   }
+  .detailPanel .detailPanelBody .extraLine {
+    border-top: 1px solid #e3e3e1;
+    position: relative;
+    display: block;
+    margin-bottom: .5em;
+  }
+  .detailPanel .detailPanelBody .extraLine2 {
+    border-bottom: 1px solid #e3e3e1;
+    position: relative;
+    display: block;
+  }
   .detailPanel .detailPanelBody .detailFooter {
     position: relative;
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 1em 1em .75em 1em;
-    border-top: 1px solid #bbbdbf;
+    padding: .5em 1em .75em 1em;
+    /* not needed? .detailSourceURL {
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
+				}*/
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     height: 5em;
     float: left;
     position: relative;
     display: inline-block;
+    margin-right: 1em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailStewardInfo {
     position: relative;
-    display: inline-block;
+    display: inline;
     height: auto;
     width: auto;
     margin-left: 1em;
     margin-top: .25em;
   }
+  .detailPanel .detailPanelBody .detailFooter .detailStewardInfo a {
+    text-decoration: none;
+    display: block;
+    color: #00adef;
+  }
+  .detailPanel .detailPanelBody .detailFooter .detailStewardInfo a:hover {
+    text-decoration: underline;
+  }
   .detailPanel .detailPanelBody .detailFooter .detailPanelHeader {
-    display: inline-block;
+    display: block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3072,32 +3096,23 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     font-size: 12px;
     width: auto;
+    text-transform: uppercase;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSource {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
     color: #58595b;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
     cursor: pointer;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSourcePhone {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
     color: #58595b;
-    font-size: 12px;
-  }
-  .detailPanel .detailPanelBody .detailFooter .detailSourceURL {
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
     font-size: 16px;
-    line-height: 20px;
-    color: #58595b;
-    font-size: 12px;
   }
 }
 @media only screen and (max-width: 529px)  {
