@@ -768,30 +768,132 @@ At some point, update mediaqueries to be in EMS
     width: 2em;
     height: 2em;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox] {
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter {
     display: none;
-    background-color: #d9f0fc;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox]:checked + div {
-    background-color: #00adef;
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter:checked + div.hikeFilter {
+    background: #00adef url(/img/icon_hike_white2.png) no-repeat;
+    background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div {
-    background-color: #d9f0fc;
+  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter {
+    background: #d9f0fc url(/img/icon_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div:hover {
-    background-color: #96daf8;
+  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter:hover {
+    background: #96daf8 url(/img/icon_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 .filter-icons {
-    position: absolute;
-    top: 10%;
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter {
+    display: none;
     width: 2em;
     height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter:checked + div.cycleFilter {
+    background: #00adef url(/img/icon_cycle_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter {
+    background: #d9f0fc url(/img/icon_cycle_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter:hover {
+    background: #96daf8 url(/img/icon_cycle_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter:checked + div.handicapFilter {
+    background: #00adef url(/img/icon_handicap_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter {
+    background: #d9f0fc url(/img/icon_handicap_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter:hover {
+    background: #96daf8 url(/img/icon_handicap_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter:checked + div.horseFilter {
+    background: #00adef url(/img/icon_horse_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter {
+    background: #d9f0fc url(/img/icon_horse_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter:hover {
+    background: #96daf8 url(/img/icon_horse_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter:checked + div.xcountryskiFilter {
+    background: #00adef url(/img/icon_xcountryski_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter {
+    background: #d9f0fc url(/img/icon_xcountryski_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter:hover {
+    background: #96daf8 url(/img/icon_xcountryski_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+    cursor: pointer;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter:checked + div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: text;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter:hover {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
   }
   .trailFilters ul:after {
     content: "";
