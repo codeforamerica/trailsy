@@ -206,6 +206,7 @@ function startup() {
   $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
   $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $(document).on('change', '.filter', filterChangeHandler);
+  $(".clearSelection").click(clearSelectionHandler);
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
   $(".search-key").keyup(function(e) {
     // if (e.which == 13) {
@@ -442,6 +443,19 @@ function startup() {
     }
     // currentFilters[filterType] = currentUIFilterState;
     console.log(currentFilters);
+    applyFilterChange(currentFilters, trailData);
+  }
+
+  function clearSelectionHandler(e) {
+    console.log("clearSelectionHandler");
+    $(".visuallyhidden_2 input").attr("checked", false);
+    $(".visuallyhidden_3 input").attr("checked", false);
+    $(".search-key").val("");
+    currentFilters = {
+      lengthFilter: [],
+      activityFilter: [],
+      searchFilter: ""
+    };
     applyFilterChange(currentFilters, trailData);
   }
 
