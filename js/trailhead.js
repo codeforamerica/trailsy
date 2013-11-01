@@ -1359,7 +1359,12 @@ function startup() {
     }
 
     if (trailhead.properties.city) {
-      $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city);
+      if (trailhead.properties.state) {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city + ", ");
+      }
+      else {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city);
+      }
     }
 
     if (trailhead.properties.state) {
