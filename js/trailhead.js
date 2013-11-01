@@ -1170,7 +1170,7 @@ function startup() {
         if (parkName) {
           console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
-        };
+        }
 
         //  Here we generate icons for each activity filter that is true..?
 
@@ -1317,6 +1317,10 @@ function startup() {
     $('.detailPanel .detailPanelPictureCredits').remove();
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");
+    $('.detailPanel .detailTrailheadAddress').html("");
+    $('.detailPanel .detailTrailheadCity').html("");
+    $('.detailPanel .detailTrailheadState').html("");
+    $('.detailPanel .detailTrailheadZip').html("");
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     $('.detailPanel .detailTopRow#right #hike').html("");
     $('.detailPanel .detailTopRow#right #cycle').html("");
@@ -1346,7 +1350,25 @@ function startup() {
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
-    $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    if (trailhead.properties.park) {
+      $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    }
+
+    if (trailhead.properties.address) {
+      $('.detailPanel .detailTrailheadAddress').html(trailhead.properties.address);
+    }
+
+    if (trailhead.properties.city) {
+      $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city);
+    }
+
+    if (trailhead.properties.state) {
+      $('.detailPanel .detailTrailheadState').html(trailhead.properties.state);
+    }
+
+    if (trailhead.properties.zip) {
+      $('.detailPanel .detailTrailheadZip').html(trailhead.properties.zip);
+    }
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
