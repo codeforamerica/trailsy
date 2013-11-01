@@ -1499,6 +1499,7 @@ function startup() {
   //  Mobile-only function changing the position of the detailPanel
 
   function moveSlideDrawer(e) {
+    console.log("moveSlideDrawer")
     if ($(".slideDrawer").hasClass("closedDrawer")) {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
