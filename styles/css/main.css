@@ -2410,6 +2410,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+    display: block;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadPark {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2417,8 +2418,31 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+    display: block;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCounty {
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadAddress {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    display: block;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCity {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadState {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadZip {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2900,6 +2924,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+    display: block;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadPark {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2907,8 +2932,31 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+    display: block;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCounty {
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadAddress {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    display: block;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadCity {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadState {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadZip {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
