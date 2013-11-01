@@ -235,7 +235,8 @@ function startup() {
       "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
       "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
       "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
-      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox.";
+      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox." +
+      "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
@@ -244,7 +245,8 @@ function startup() {
     "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
-    "<p>We look forward to seeing you for our public launch.";
+    "<p>We look forward to seeing you for our public launch." +
+    "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
     console.log("closed");
@@ -1168,7 +1170,7 @@ function startup() {
         if (parkName) {
           console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
-        };
+        }
 
         //  Here we generate icons for each activity filter that is true..?
 
@@ -1315,6 +1317,10 @@ function startup() {
     $('.detailPanel .detailPanelPictureCredits').remove();
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");
+    $('.detailPanel .detailTrailheadAddress').html("");
+    $('.detailPanel .detailTrailheadCity').html("");
+    $('.detailPanel .detailTrailheadState').html("");
+    $('.detailPanel .detailTrailheadZip').html("");
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     $('.detailPanel .detailTopRow#right #hike').html("");
     $('.detailPanel .detailTopRow#right #cycle').html("");
@@ -1323,7 +1329,7 @@ function startup() {
     $('.detailPanel .detailTopRow#right #xcountryski').html("");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("");
     $('.detailPanel .detailDescription').html("");
-    $('.detailPanel .detailStewardLogo').attr("src", "/img/mpssc.jpg");
+    $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
   }
 
   function decorateDetailPanel(trail, trailhead) {
@@ -1344,7 +1350,30 @@ function startup() {
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
-    $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    if (trailhead.properties.park) {
+      $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    }
+
+    if (trailhead.properties.address) {
+      $('.detailPanel .detailTrailheadAddress').html(trailhead.properties.address);
+    }
+
+    if (trailhead.properties.city) {
+      if (trailhead.properties.state) {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city + ", ");
+      }
+      else {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city);
+      }
+    }
+
+    if (trailhead.properties.state) {
+      $('.detailPanel .detailTrailheadState').html(trailhead.properties.state);
+    }
+
+    if (trailhead.properties.zip) {
+      $('.detailPanel .detailTrailheadZip').html(trailhead.properties.zip);
+    }
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);

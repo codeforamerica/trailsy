@@ -13,7 +13,7 @@
      <!--[if lte IE 8]>
      <link rel="stylesheet" href="styles/css/leaflet.ie.css" />
      <![endif]-->
-     <link rel="stylesheet" href="styles/leaflet.usermarker.css"/>
+     <link rel="stylesheet" href="styles/css/leaflet.usermarker.css"/>
      <link rel="stylesheet" type="text/css" href="styles/css/main.css"/>
   <!-- bookmark icons -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/AppIcons/AppIcons-Icon-144x144.png" />
@@ -128,49 +128,43 @@
                     <ul class="trailUse" id="activityFilter"> <!-- why an id? -->
                       <li class="visuallyhidden_3" data-listItemNumber="1">
                         <label>
-                          <input rel="0" type="checkbox" title="Good for hiking" value="hike" class="filter" data-filter="activityFilter"/>
-                          <div>
-                            <img src="img/icon_hike_blue.png" class="filter-icons"/>
-                          </div>
+                          <input rel="0" type="checkbox" title="Good for hiking" value="hike" class="filter hikeFilter" data-filter="activityFilter" />
+                          <div class="hikeFilter"></div>
+
                         </label>
                       </li>
                       <li class="visuallyhidden_3" data-listItemNumber="2">
                         <label>
-                          <input rel="1" type="checkbox" title="Good for cycling" value="roadbike" class="filter" data-filter="activityFilter"/>
-                          <div>
-                            <img src="img/icon_cycle_blue.png" class="filter-icons"/>
+                          <input rel="1" type="checkbox" title="Good for cycling" value="roadbike" class="filter cycleFilter" data-filter="activityFilter"/>
+                          <div class="cycleFilter">
                           </div>
                         </label>
                       </li>
                       <li class="visuallyhidden_3" data-listItemNumber="3">
                         <label>
-                          <input rel="3" type="checkbox" title="Wheelchair accessible" value="accessible" class="filter" data-filter="activityFilter"/>
-                          <div>
-                            <img src="img/icon_handicap_blue.png" class="filter-icons"/>
+                          <input rel="3" type="checkbox" title="Wheelchair accessible" value="accessible" class="filter handicapFilter" data-filter="activityFilter"/>
+                          <div class="handicapFilter">
                           </div>
                         </label>
                       </li>
                       <li class="visuallyhidden_3" data-listItemNumber="4">
                         <label>
-                          <input rel="4" type="checkbox" title="Equestrian or bridle trails" value="equestrian" class="filter" data-filter="activityFilter" />
-                          <div>
-                            <img src="img/icon_horse_blue.png" class="filter-icons"/>
+                          <input rel="4" type="checkbox" title="Equestrian or bridle trails" value="equestrian" class="filter horseFilter" data-filter="activityFilter" />
+                          <div class="horseFilter">
                           </div>
                         </label>
                       </li>
                       <li class="visuallyhidden_3" data-listItemNumber="5">
                         <label>
-                          <input rel="5" type="checkbox" title="Cross-country skiing trails" value="xcntryski" class="filter" data-filter="activityFilter"/>
-                          <div>
-                            <img src="img/icon_xcountryski_blue.png" class="filter-icons"/>
+                          <input rel="5" type="checkbox" title="Cross-country skiing trails" value="xcntryski" class="filter xcountryskiFilter" data-filter="activityFilter"/>
+                          <div class="xcountryskiFilter">
                           </div>
                         </label>
                       </li>
                       <li class="visuallyhidden_3" data-listItemNumber="6">
                         <label>
-                          <input rel="6" type="checkbox" title="Mountain bike tracks" value="mtnbike" class="filter" data-filter="activityFilter"/>
-                          <div>
-                            <img src="img/icon_xcountryski_blue.png" class="filter-icons"/>
+                          <input rel="6" type="checkbox" title="Mountain bike tracks" value="mtnbike" class="filter mtnbikeFilter" data-filter="activityFilter"/>
+                          <div class="mtnbikeFilter">
                           </div>
                         </label>
                       </li>
@@ -228,23 +222,26 @@
                   <div class="icon" id="xcountryski"></div>
                 </div>
               </div>
-              <div class="detailConditionsRow">
-                <span class="detailConditionsHeader">ADDITIONAL TRAIL CONDITIONS</span>
-                <div class="detailConditionsDescription"></div>
-              </div>
               <div class="detailMiddleRow">
               <span class="detailPanelHeader">OVERVIEW</span>
               <div class="detailDescription"></div>
+              </div>
+              <div class="detailConditionsRow">
+                <span class="detailConditionsHeader">ADDITIONAL TRAIL CONDITIONS</span>
+                <div class="detailConditionsDescription"></div>
               </div>
               <div class="detailBottomRow">
                 <img src="img/icon_trailhead_active.png">
                 <span class="detailPanelHeader">CLOSEST ENTRANCE </span>
                 <span class="detailTrailheadDistance"></span><br/>
                 <div class="detailTrailheadInfo">
-                  <span class="detailTrailheadName"></span><br/>
-                  <span class="detailTrailheadPark">Park Name Variable</span><br/>
-                  <span class="detailTrailheadCounty">Summit County, OH</span><br/>
-                </div>
+                  <span class="detailTrailheadName"></span>
+                  <span class="detailTrailheadPark">Park Name Variable</span>
+                  <span class="detailTrailheadAddress"></span>
+                  <span class="detailTrailheadCity"></span>
+                  <span class="detailTrailheadState"></span>
+                  <span class="detailTrailheadZip"></span>
+               </div>
                 <div class="detailLinksToMore">
                   <div class="detailDirections"><a href="#">Get Directions</a></div>
                   <div class="detailPrintMap"><a href="#">Official Trail Map</a></div>
@@ -271,14 +268,13 @@
                   </div>
                 </div>
               </div>
+              <div class="extraLine"></div>
+              <div class="extraLine2"></div>
               <div class="detailFooter">
                 <img class="detailStewardLogo icon-large" src="img/mpssc.jpg"/>
                 <div class="detailStewardInfo">
-                  <span class="detailPanelHeader">MORE INFORMATION:</span>
+                  <span class="detailPanelHeader">For MORE INFORMATION on this trail</span>
                   <a class="detailSource" href=""></a>
-                </div>
-                <div class="detailStewardInfo">
-                  <span class="detailPanelHeader">FOR ASSISTANCE CALL:</span>
                   <span class="detailSourcePhone">XXX-XXX-XXX</span>
                 </div>
               </div>
@@ -287,7 +283,7 @@
         </section> <!-- trailListColumn -->
       </div> <!-- main / row -->
     </div> <!-- container -->
-  </div> <!-- desktop -->
+  </div> <!-- end desktop -->
   <div id="mobile">
     <div class="title-row mobileTitle">
       <header>
@@ -326,7 +322,7 @@
             <div class="trailheadDistance">200 mi</div>
           </div>
         </div>
-<!-- TRAIL DIV -->
+<!-- TRAIL DIV mobile-->
         <div class="status"></div>
         <div class="detailPanelBody">
           <div class="detailLengthRow">
@@ -363,10 +359,15 @@
             <span class="detailPanelHeader">CLOSEST ENTRANCE </span>
             <span class="detailTrailheadDistance"></span><br/>
             <div class="detailTrailheadInfo">
-              <span class="detailTrailheadName">Springfield Bog</span><br/>
-              <span class="detailTrailheadPark">Park Name</span><br/>
-              <span class="detailTrailheadCounty">Summit County, OH</span>
-              <br/>
+              <span class="detailTrailheadName">Springfield Bog</span>
+
+              <span class="detailTrailheadPark">Park Name</span>
+              
+              <span class="detailTrailheadAddress">1238 address st</span>
+              
+              <span class="detailTrailheadCity">City</span>,
+              <span class="detailTrailheadState">OH</span>
+              <span class="detailTrailheadZip">1111111</span>
             </div>
             <div class="detailLinksToMore">
               <div class="detailDirections">
@@ -396,14 +397,11 @@
             </div>
           </div>
           <div class="detailFooter">
-            <img class="detailStewardLogo icon-large" src="img/mpssc.jpg">
+            <img class="detailStewardLogo icon-large" src="img/logoPlaceholder.jpg">
             <div class="detailStewardInfo">
               <span class="detailPanelHeader">FOR MORE INFORMATION:</span>
               <a class="detailSource" href></a>
-            </div>
-            <div class="detailStewardInfo">
               <span class="detailSourcePhone">XXX-XXX-XXXX</span>
-            </div>
           </div>
         </div>
       </div>
@@ -412,7 +410,7 @@
     <section class="slideDrawer closedDrawer">
       <div class="accordion clearfix">
         <div class="accordion-innerwrap">
-          <!-- First Accordion Panel (No Title) -->
+          <!-- First Accordion Panel (No Title) mobile-->
           <div class="panel-container list-reset" tabindex="1">
             <h4 class="trigger1 searchHeader panel-title active" aria-hidden="true">FIND TRAILS NAME OR KEYWORD</h4>
             <div class="panel content list-reset" aria-expanded="false">
@@ -453,7 +451,7 @@
                     <label>
                       <input type="checkbox" value="verylong" data-filter="lengthFilter" class="filter"/>
                       <div>
-                        <p>10 mi +</p>
+                        <p>10+ mi</p>
                       </div>
                     </label>
                   </li>
@@ -461,7 +459,7 @@
               </div> <!-- trailFilters -->
             </div> <!-- panel-content -->
           </div> <!-- panel-container -->
-          <!-- Second Accordion Panel (More Options) -->
+          <!-- Second Accordion Panel (More Options) mobile-->
           <div class="panel-container list-reset" tabindex="2" id="MoreFilters">
             <div class="panel-content list-reset" aria-expanded="true">
               <div class="trailFilters">
