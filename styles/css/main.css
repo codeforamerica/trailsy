@@ -2135,6 +2135,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     width: 100%;
     overflow: scroll;
+    background-color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailLengthRow {
     position: relative;
