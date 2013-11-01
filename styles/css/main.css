@@ -501,13 +501,12 @@ At some point, update mediaqueries to be in EMS
   }
   .panel-container .trails-count {
     padding: .5em 1em 0em 1.75em;
-    width: auto;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
-    width: 100%;
+    width: auto;
     background-color: none;
   }
   .panel-container li:focus {
@@ -524,7 +523,7 @@ At some point, update mediaqueries to be in EMS
   .trailsNearYouResults:hover {
     background-color: #91c73d;
   }
-  .trailsNearYouResults span {
+  .trailsNearYouResults .icon {
     font-size: 12px;
     margin-left: -1em;
     position: relative;
@@ -541,6 +540,13 @@ At some point, update mediaqueries to be in EMS
   }
   .trailsNearYouResults:hover {
     background-color: #b0d576;
+  }
+  .trailsNearYouResults .icon {
+    font-size: 12px;
+    margin-left: -1em;
+    position: relative;
+    display: inline-block;
+    color: white;
   }
 }
 @media only screen and (max-width: 529px)  {
