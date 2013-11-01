@@ -269,7 +269,7 @@
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
-			width: 100%;
+			width: auto;
 			background-color: none;
 		}
 		li:focus {
@@ -287,7 +287,7 @@
 		&:hover {
 			background-color: @color-mid-green;
 		};
-		span {
+		.icon {
 			font-size: 12px;
 			margin-left: -1em;
 			position: relative;
@@ -303,6 +303,13 @@
 		&:hover {
 			background-color: @color-mid-light-green;
 		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
 	}
 }
 
@@ -595,7 +602,7 @@
 			height: 2em;
 			cursor: pointer;
 			text-align: center;
-			span {
+			.clearSelection {
 				.sansSerif-light();
 				color: @color-light-mid-gray;
 				text-align: center;
@@ -811,7 +818,7 @@
 			height: 2em;
 			cursor: pointer;
 			text-align: center;
-			span {
+			.clearSelection {
 				.sansSerif-light();
 				color: @color-dark-blue;
 				text-align: center;
