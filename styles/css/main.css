@@ -2348,8 +2348,24 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
     font-size: 12px;
   }
-  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
-    margin-top: .75em;
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
+    margin: .25em 0 .5em 0;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurfaceHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
+    margin: .25em 0 .5em 0;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2882,8 +2898,24 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
     font-size: 12px;
   }
-  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
-    margin-top: .75em;
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
+    margin: .25em 0 .5em 0;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurfaceHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
+    margin: .25em 0 .5em 0;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;

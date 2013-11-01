@@ -1329,6 +1329,8 @@ function startup() {
   function resetDetailPanel() {
     $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
     $('.detailPanel .detailPanelPictureCredits').remove();
+    $('.detailPanel .detailConditionsDescription').html("");
+    $('.detailPanel .detailTrailSurface').html("");
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");
     $('.detailPanel .detailTrailheadAddress').html("");
@@ -1361,6 +1363,14 @@ function startup() {
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+
+    if (trail.properties.conditions) {
+      $('.detailPanel .detailConditionsDescription').html(trail.properties.conditions);
+    }
+
+    if (trail.properties.trlsurface) {
+      $('.detailPanel .detailTrailSurface').html(trail.properties.trlsurface);
+    }
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
