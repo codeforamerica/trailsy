@@ -1520,7 +1520,7 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup {
     width: auto;
-    min-width: 12em;
+    min-width: 14em;
     position: relative;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
@@ -1538,7 +1538,7 @@ At some point, update mediaqueries to be in EMS
     max-width: 200px;
     overflow-y: hidden;
     min-width: 12em;
-    padding: .25em 0em .25em .5em;
+    padding: .5em 0em .39em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1546,17 +1546,20 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
     text-decoration: none;
     text-transform: capitalize;
+    vertical-align: bottom;
+    border-bottom: 1px solid #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .calloutTrailheadIcon {
     position: absolute;
     height: 1.5em;
-    top: .5em;
-    right: .5em;
+    top: .399em;
+    left: .5em;
+    float: left;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
-    border-top: 1px gray solid;
+    border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
@@ -1564,16 +1567,18 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
-    color: #58595b;
+    color: #00adef;
+    padding-bottom: .3em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
     background: rgba(227, 227, 225, 0.4);
-    color: #58595b;
+    color: #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected {
     background: #ffffff;
     color: #00adef;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    padding-bottom: .2em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected:hover {
     color: #ffffff;
@@ -1582,6 +1587,7 @@ At some point, update mediaqueries to be in EMS
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected.detail-open {
     color: #ffffff;
     background: #00adef;
+    border: 1px solid #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
@@ -1605,7 +1611,7 @@ At some point, update mediaqueries to be in EMS
     right: .3em;
     border-bottom: .6em solid transparent;
     border-top: .6em solid transparent;
-    border-left: 0.6em solid #d9f0fc;
+    border-left: 0.6em solid #00adef;
     display: inline-block;
     height: 0;
   }

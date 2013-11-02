@@ -21,7 +21,7 @@
 			}
 			.trailhead-popup {
 				width: auto;
-				min-width: 12em;
+				min-width: 14em;
 				position: relative;
 				.trailhead-box {
 					width: 100%;
@@ -37,38 +37,43 @@
 						max-width: 200px;
 						overflow-y: hidden;
 						min-width: 12em;
-						padding: .25em 0em .25em .5em;
+						padding: .5em 0em .39em 1.75em;
 						.sansSerif-light;
 						color: @color-mid-gray;
 						text-decoration: none;
 						text-transform: capitalize;
+						vertical-align: bottom;
+						border-bottom: 1px solid @color-mid-gray;
 					}
 					.calloutTrailheadIcon {
 						position: absolute;
 						height: 1.5em;
-						top: .5em;
-						right: .5em;
+						top: .399em;
+						left: .5em;
+						float:left;
 					}
 					.trailhead-trailname {
 						min-width: 12em;
 						width: 100%;
-						border-top: 1px gray solid;
+						border-top: 1px solid @color-light-gray;
 /*						padding: .5em 0em .25em .5em;*/
 						.status {
 							width: 3em;
 						}
 						&.not-selected {
 							background: @color-white;
-							color: @color-mid-gray;
+							color: @color-dark-blue;
+							padding-bottom:.3em;
 							&:hover {
 								background: fade(@color-light-gray, 40%);
-								color: @color-mid-gray;
+								color: @color-dark-blue;
 							}
 						}
 						&.selected {
 							background: @color-white;
 							color: @color-dark-blue;
-							text-transform: uppercase;
+							text-transform: capitalize;
+							padding-bottom:.2em;
 							&:hover {
 								color: @color-white;
 								background: @color-mid-blue;
@@ -76,6 +81,7 @@
 							&.detail-open {
 								color: @color-white;
 								background: @color-dark-blue;
+								border: 1px solid @color-dark-blue;
 							}
 						}
 						.popupTrailNames {
@@ -106,7 +112,7 @@
   					right: .3em;
   					border-bottom: .6em solid transparent;
   					border-top: .6em solid transparent;
-  					border-left: .6em solid @color-light-blue;
+  					border-left: .6em solid @color-dark-blue;
   					display: inline-block;
   					height: 0;
   				}
@@ -125,6 +131,7 @@
   			}
   		}
 	}
+	
 	@media @desktop {
 		border-radius: 0px;
 		width: auto;
@@ -271,15 +278,15 @@
 	text-decoration: none;
 	margin: 0em 0em 0em 0em;
 }
-	.trail-popup-line-named {
-		cursor: pointer;
-		color: @color-dark-blue !important;
-		padding: .7em 25% .5em .5em;
-		border-top: 1px solid @color-light-gray;
-		&:hover {
-			background: fade(@color-light-gray, 40%);
-		}
+.trail-popup-line-named {
+	cursor: pointer;
+	color: @color-dark-blue !important;
+	padding: .7em 25% .5em .5em;
+	border-top: 1px solid @color-light-gray;
+	&:hover {
+		background: fade(@color-light-gray, 40%);
 	}
+}
 
 .trailhead-trailname {
 	cursor: pointer;
