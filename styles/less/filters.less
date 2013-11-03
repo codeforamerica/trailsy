@@ -120,11 +120,11 @@
 		-webkit-transition: all 300ms;
 		transition: all 300ms;
 		&.closedDrawer {
-			top: 5em;
+			top: 3em;
 			left: -18em;
 		}
 		&.openDrawer {
-			top: 5em;
+			top: 3em;
 			left: 0em;
 		}
 	}
@@ -505,8 +505,10 @@
 			width: 100%;
 			background: @color-white;
 			padding: 0 1.75em 0 1.75em;
-			margin: 0em 0 1em 0;
+			margin-top:-.5em;
     		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
     		-ms-text-justify: distribute-all-lines;
     		text-justify: distribute-all-lines;
 			.visuallyhidden_2 {
@@ -561,13 +563,131 @@
 				display: inline-block;
 				width: 2em;
 				height: 2em;
-				input[type=checkbox] {
+				input[type=checkbox].hikeFilter {
 					display: none;
-					background-color: @color-light-blue;
 					width: 2em;
 					height: auto;
-					&:checked + div {
-						background-color: @color-dark-blue;
+					&:checked + div.hikeFilter {
+						background: @color-dark-blue url(/img/icon_hike_white2.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				div.hikeFilter {
+					background: @color-light-blue url(/img/icon_hike_blue.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-mid-blue url(/img/icon_hike_blue.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				input[type=checkbox].cycleFilter {
+					display: none;
+					width: 2em;
+					height: auto;
+					&:checked + div.cycleFilter {
+						background: @color-dark-blue url(/img/icon_cycle_white.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				div.cycleFilter {
+					background: @color-light-blue url(/img/icon_cycle_blue.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-mid-blue url(/img/icon_cycle_blue.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				input[type=checkbox].handicapFilter {
+					display: none;
+					width: 2em;
+					height: auto;
+					&:checked + div.handicapFilter {
+						background: @color-dark-blue url(/img/icon_handicap_white.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				div.handicapFilter {
+					background: @color-light-blue url(/img/icon_handicap_blue.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-mid-blue url(/img/icon_handicap_blue.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				input[type=checkbox].horseFilter {
+					display: none;
+					width: 2em;
+					height: auto;
+					&:checked + div.horseFilter {
+						background: @color-dark-blue url(/img/icon_horse_white.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				div.horseFilter {
+					background: @color-light-blue url(/img/icon_horse_blue.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-mid-blue url(/img/icon_horse_blue.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				input[type=checkbox].xcountryskiFilter {
+					display: none;
+					width: 2em;
+					height: auto;
+					&:checked + div.xcountryskiFilter {
+						background: @color-dark-blue url(/img/icon_xcountryski_white.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				div.xcountryskiFilter {
+					background: @color-light-blue url(/img/icon_xcountryski_blue.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-mid-blue url(/img/icon_xcountryski_blue.png) no-repeat;
+						background-size: 100% 100%;
+					}
+				}
+				input[type=checkbox].mtnbikeFilter {
+					display: none;
+					width: 2em;
+					height: auto;
+					cursor: pointer;
+					&:checked + div.mtnbikeFilter {
+						background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
+						background-size: 100% 100%;
+					} 
+				}
+				div.mtnbikeFilter {
+					background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
+					background-size: 100% 100%;
+					width: 100%;
+					height: 100%;
+					cursor: text;
+					transition: all 0.25s ease;
+					&:hover {
+						background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
+						background-size: 100% 100%; 
 					}
 				}
 				div {
@@ -579,12 +699,6 @@
 					&:hover {
 						background-color: @color-mid-blue;
 					}
-				}
-				.filter-icons {
-					position: absolute;
-					top: 10%;
-					width: 2em;
-					height: auto;
 				}
 	 		}
 		}
@@ -636,23 +750,6 @@
 						p {
 							color: @color-white;
 						}
-					}
-				}
-				div {
-					background-color: @color-light-blue;
-					width: 100%;
-					height: 2em;
-					cursor: pointer;
-					transition: all 0.25s ease;
-					p {
-						.sansSerif-light();
-						color: @color-dark-blue;
-						text-align: center;
-						vertical-align: middle;
-						line-height: 2em;
-					}
-					&:hover {
-						background-color: @color-mid-blue;
 					}
 				}
 			}

@@ -103,13 +103,13 @@ At some point, update mediaqueries to be in EMS
     height: 3em;
     top: 0;
     margin: 0;
-    z-index: 8;
+    z-index: 9999;
   }
   .title-row header {
     width: 100%;
     margin: 0;
     padding: 0;
-    z-index: 8;
+    z-index: 9999;
   }
   .title-row header .navbar-inner {
     position: relative;
@@ -119,26 +119,27 @@ At some point, update mediaqueries to be in EMS
     border: none;
     box-shadow: none;
     text-align: justify;
-    padding: .5em 0em .5em 1em;
+    padding: .5em 0em .5em .5em;
   }
   .title-row header .navbar-inner .hamburger {
     cursor: pointer;
     display: inline-block;
-    height: 25px;
-    padding: 8px 4px 8px;
+    height: 100%;
+    padding: .2em .2em .2em .2em;
     position: relative;
-    width: 25px;
+    width: 3em;
     background: #523d32;
-    /* The white stripes in the hamburger button */
-  
   }
-  .title-row header .navbar-inner .hamburger div {
+  .title-row header .navbar-inner .hamburger .hamburgerLine {
     background-color: #ffffff;
     border: 1px solid #ffffff;
-    border-radius: 2px 2px 2px 2px;
-    height: 2px;
-    margin-top: 3px;
-    width: 90%;
+    border-radius: 1px;
+    height: .25em;
+    margin-top: .25em;
+    width: 75%;
+    padding-left: .25em;
+    padding-right: .25em;
+    cursor: pointer;
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
@@ -328,11 +329,11 @@ At some point, update mediaqueries to be in EMS
     transition: all 300ms;
   }
   .slideDrawer.closedDrawer {
-    top: 5em;
+    top: 3em;
     left: -18em;
   }
   .slideDrawer.openDrawer {
-    top: 5em;
+    top: 3em;
     left: 0em;
   }
 }
@@ -738,7 +739,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     background: #ffffff;
     padding: 0 1.75em 0 1.75em;
-    margin: 0em 0 1em 0;
+    margin-top: -0.5em;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
@@ -799,14 +800,132 @@ At some point, update mediaqueries to be in EMS
     width: 2em;
     height: 2em;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox] {
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter {
     display: none;
-    background-color: #d9f0fc;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox]:checked + div {
-    background-color: #00adef;
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter:checked + div.hikeFilter {
+    background: #00adef url(/img/icon_hike_white2.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter {
+    background: #d9f0fc url(/img/icon_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter:hover {
+    background: #96daf8 url(/img/icon_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter:checked + div.cycleFilter {
+    background: #00adef url(/img/icon_cycle_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter {
+    background: #d9f0fc url(/img/icon_cycle_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter:hover {
+    background: #96daf8 url(/img/icon_cycle_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter:checked + div.handicapFilter {
+    background: #00adef url(/img/icon_handicap_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter {
+    background: #d9f0fc url(/img/icon_handicap_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter:hover {
+    background: #96daf8 url(/img/icon_handicap_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter:checked + div.horseFilter {
+    background: #00adef url(/img/icon_horse_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter {
+    background: #d9f0fc url(/img/icon_horse_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter:hover {
+    background: #96daf8 url(/img/icon_horse_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter:checked + div.xcountryskiFilter {
+    background: #00adef url(/img/icon_xcountryski_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter {
+    background: #d9f0fc url(/img/icon_xcountryski_blue.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter:hover {
+    background: #96daf8 url(/img/icon_xcountryski_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+    cursor: pointer;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter:checked + div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    cursor: text;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter:hover {
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background-size: 100% 100%;
   }
   .trailFilters .trailUse .visuallyhidden_3 div {
     background-color: #d9f0fc;
@@ -817,12 +936,6 @@ At some point, update mediaqueries to be in EMS
   }
   .trailFilters .trailUse .visuallyhidden_3 div:hover {
     background-color: #96daf8;
-  }
-  .trailFilters .trailUse .visuallyhidden_3 .filter-icons {
-    position: absolute;
-    top: 10%;
-    width: 2em;
-    height: auto;
   }
   .trailFilters ul:after {
     content: "";
@@ -879,26 +992,6 @@ At some point, update mediaqueries to be in EMS
   }
   .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div p {
     color: #ffffff;
-  }
-  .trailFilters .trailLength .visuallyhidden_2 div {
-    background-color: #d9f0fc;
-    width: 100%;
-    height: 2em;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-  .trailFilters .trailLength .visuallyhidden_2 div p {
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    color: #00adef;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 2em;
-  }
-  .trailFilters .trailLength .visuallyhidden_2 div:hover {
-    background-color: #96daf8;
   }
   .trailFilters ul:after {
     content: "";

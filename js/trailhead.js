@@ -219,7 +219,8 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $(document).on('click', '.hamburger', moveSlideDrawer);
+  $('.hamburger').click(moveSlideDrawer);
+  $(document).on('click', '.hamburgerLine', moveSlideDrawer);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
