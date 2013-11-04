@@ -33,9 +33,10 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
+  var API_HOST = window.location.hostname;
   // var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
-  var API_HOST = "http://trailsyserver-prod.herokuapp.com";
+  // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -1362,7 +1363,6 @@ function startup() {
     enableTrailControls();
 
     resetDetailPanel();
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
