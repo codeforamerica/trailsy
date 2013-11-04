@@ -25,11 +25,11 @@ You can contact us all together through our team e-mail address at summitco@code
 
 ## Setup
 
-*(For quick step-by-step instructions for creating a new deploy of To The Trails/Trailsy, try the [new deploy instructions](https://github.com/codeforamerica/trailsy/wiki/Deploying-a-New-Instance) on the project [wiki](https://github.com/danavery/trailsy/wiki).)*
+*(For quick step-by-step instructions for creating a new deploy of To The Trails/Trailsy, try the [new deploy instructions](https://github.com/codeforamerica/trailsy/wiki/Deploying-a-New-Instance) on the project [wiki](https://github.com/codeforamerica/trailsy/wiki).)*
 
-This front-end code is self-contained and can be used with any existing instance of [Trailsyserver](http://www.github.com/danavery/trailsyserver), which provides a REST-like API to trail data. Almost all of the Trailsy-specific code is in `js/trailhead.js`. Change `API_HOST` at the beginning of that file to point to a Trailsyserver instance, and serve up the app directory with the HTTP server of your choice.
+This front-end code is self-contained and can be used with any existing instance of [Trailsyserver](http://www.github.com/codeforamerica/trailsyserver), which provides a REST-like API to trail data. Almost all of the Trailsy-specific code is in `js/trailhead.js`. Change `API_HOST` at the beginning of that file to point to a Trailsyserver instance, and serve up the app directory with the HTTP server of your choice.
 
-This repository is included as a submodule of Trailsyserver in its `/public` directory, but can be hosted separately, and should be during development unless you're well acquainted with the subtleties of git submodules.  See the [docs on deploying new versions](https://github.com/danavery/trailsy/wiki/Pushing-New-Versions-To-Heroku) for information on keeping the submodule code up to date.
+This repository is included as a submodule of Trailsyserver in its `/public` directory, but can be hosted separately, and should be during development unless you're well acquainted with the subtleties of git submodules.  See the [docs on deploying new versions](https://github.com/codeforamerica/trailsy/wiki/Pushing-New-Versions-To-Heroku) for information on keeping the submodule code up to date.
 
 The app is lightly customized for use in Summit County, but can be repurposed for other areas with minimal effort. There is a constant named AKRON in trailhead.js that can be changed to whatever default location you desire.
 
@@ -53,7 +53,7 @@ Here are some ways *you* can contribute:
 * by reviewing patches
 * [financially][]
 
-[issues]: https://github.com/codeforamerica/danavery/trailsy/issues
+[issues]: https://github.com/codeforamerica/codeforamerica/trailsy/issues
 [financially]: https://secure.codeforamerica.org/page/contribute
 
 ## Submitting an Issue
