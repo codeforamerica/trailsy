@@ -2118,9 +2118,9 @@ At some point, update mediaqueries to be in EMS
   .detailPanel.expanded .detailPanelSlider {
     border-top-left-radius: 3em;
     border-top-right-radius: 3em;
-    height: 4%;
-    width: 12%;
-    top: -3%;
+    height: 1.5em;
+    width: 3em;
+    top: -1.5em;
     left: 45%;
     position: absolute;
     background-color: #00adef;
@@ -2132,8 +2132,8 @@ At some point, update mediaqueries to be in EMS
     width: 0;
     height: 0;
     position: absolute;
-    left: 25%;
-    top: 25%;
+    left: .75em;
+    top: .6em;
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
     border-top: 0.8em solid #ffffff;
@@ -2146,9 +2146,9 @@ At some point, update mediaqueries to be in EMS
   .detailPanel.contracted .detailPanelSlider {
     border-top-left-radius: 3em;
     border-top-right-radius: 3em;
-    height: 4%;
-    width: 12%;
-    top: -3%;
+    height: 1.5em;
+    width: 3em;
+    top: -1.5em;
     left: 45%;
     position: absolute;
     background-color: #00adef;
@@ -2160,8 +2160,8 @@ At some point, update mediaqueries to be in EMS
     width: 0;
     height: 0;
     position: absolute;
-    left: 25%;
-    top: 25%;
+    left: .75em;
+    top: .6em;
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
     border-bottom: 0.8em solid #ffffff;
