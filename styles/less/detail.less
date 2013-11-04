@@ -53,9 +53,11 @@
 			top: 3em;
 			overflow: visible;
 			.detailPanelSlider {
-				height: 3%;
-				width: 10%;
-				top: -3%;
+				border-top-left-radius:3em;
+				border-top-right-radius:3em;
+				height: 1.5em;
+				width: 3em;
+				top: -1.5em;
 				left: 45%;
 				position: absolute;
 				background-color: @color-dark-blue;
@@ -66,7 +68,8 @@
 					width: 0; 
 					height: 0; 
 					position: absolute;
-					left: .525em;
+					left: .75em;
+					top: .6em;
 					border-left: .8em solid transparent;
 					border-right: .8em solid transparent;
 					border-top: .8em solid @color-white;
@@ -78,9 +81,11 @@
 			top: calc(~'100% - 84px');
 			overflow: visible;
 			.detailPanelSlider {
-				height: 3%;
-				width: 10%;
-				top: -3%;
+				border-top-left-radius:3em;
+				border-top-right-radius:3em;
+				height: 1.5em;
+				width: 3em;
+				top: -1.5em;
 				left: 45%;
 				position: absolute;
 				background-color: @color-dark-blue;
@@ -91,8 +96,8 @@
 					width: 0; 
 					height: 0; 
 					position: absolute;
-					left: .55em;
-					top: 25%;
+					left: .75em;
+					top:.6em;
 					border-left: .8em solid transparent;
 					border-right: .8em solid transparent;
 					border-bottom: .8em solid @color-white;
@@ -577,30 +582,26 @@
 					height: auto;
 					width: 100%;
 					margin-top: 1.5em;
-					.social-icon {
+					.social-icon a {
 						position: relative;
 						display: inline-block;
-						width: 5em;
-						height: 1.25em;
+						width: 6.5em;
 						background-color: @color-light-mid-gray;
+						color:white;
 						float: right;
-						margin: 0em 0em .25em .5em;
-						padding: 0 .5em 0 0em;
+						margin: 0em 0em .25em 1.25em;
+						padding: 0 .5em 0em 0em;
 						cursor: pointer;
 						transition: all 0.25s ease;
 						text-align: right;
 						vertical-align: middle;
+						.sansSerif-light;
+						font-size: 12px;
+						color: @color-white;
+						text-align: right;
+						text-decoration: none;
 						&:hover {
 							background-color: @color-mid-gray;
-						}
-						a {
-							.sansSerif-light;
-							font-size: 12px;
-							color: @color-white;
-							text-align: right;
-							vertical-align: middle;
-							text-decoration: none;
-							margin-top: .5em;
 						}
 					}
 				}
@@ -1049,7 +1050,7 @@
 						height: 1.25em;
 						background-color: @color-light-mid-gray;
 						float: right;
-						margin: 0em 0em .25em .5em;
+						margin: 0em 0em .25em 1em;
 						padding: 0 .5em 0 0em;
 						cursor: pointer;
 						transition: all 0.25s ease;
