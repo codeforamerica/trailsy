@@ -476,13 +476,12 @@ At some point, update mediaqueries to be in EMS
   }
   .panel-container .trails-count {
     padding: .5em 1em 0em 1.75em;
-    width: auto;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
-    width: 100%;
+    width: auto;
     background-color: none;
   }
   .panel-container li:focus {
@@ -499,7 +498,7 @@ At some point, update mediaqueries to be in EMS
   .trailsNearYouResults:hover {
     background-color: #91c73d;
   }
-  .trailsNearYouResults span {
+  .trailsNearYouResults .icon {
     font-size: 12px;
     margin-left: -1em;
     position: relative;
@@ -516,6 +515,13 @@ At some point, update mediaqueries to be in EMS
   }
   .trailsNearYouResults:hover {
     background-color: #b0d576;
+  }
+  .trailsNearYouResults .icon {
+    font-size: 12px;
+    margin-left: -1em;
+    position: relative;
+    display: inline-block;
+    color: white;
   }
 }
 @media only screen and (max-width: 529px)  {
@@ -909,7 +915,7 @@ At some point, update mediaqueries to be in EMS
     cursor: pointer;
     text-align: center;
   }
-  .trailFilters .trailSelection span {
+  .trailFilters .trailSelection .clearSelection {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -919,7 +925,7 @@ At some point, update mediaqueries to be in EMS
     vertical-align: middle;
     line-height: 2em;
   }
-  .trailFilters .trailSelection span:hover {
+  .trailFilters .trailSelection .clearSelection:hover {
     text-decoration: underline;
   }
 }
@@ -1132,7 +1138,7 @@ At some point, update mediaqueries to be in EMS
     cursor: pointer;
     text-align: center;
   }
-  .trailFilters .trailSelection span {
+  .trailFilters .trailSelection .clearSelection {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1142,7 +1148,7 @@ At some point, update mediaqueries to be in EMS
     vertical-align: middle;
     line-height: 2em;
   }
-  .trailFilters .trailSelection span:hover {
+  .trailFilters .trailSelection .clearSelection:hover {
     text-decoration: underline;
   }
 }
@@ -2432,8 +2438,24 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
     font-size: 12px;
   }
-  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
-    margin-top: .75em;
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
+    margin: .25em 0 .5em 0;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurfaceHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
+    margin: .25em 0 .5em 0;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2981,8 +3003,24 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
     font-size: 12px;
   }
-  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescriptions {
-    margin-top: .75em;
+  .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
+    margin: .25em 0 .5em 0;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurfaceHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #bbbdbf;
+    font-size: 12px;
+  }
+  .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
+    margin: .25em 0 .5em 0;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
