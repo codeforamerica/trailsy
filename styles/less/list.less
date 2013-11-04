@@ -173,13 +173,14 @@
 		border-color: @color-light-gray;
 		cursor: pointer;
 		&:hover {
-			background-color: @color-light-gray;
+			background-color: @color-hover-gray;
 		}
 		.trailInfo {
 			position: relative;
 			display: inline-block;
 			width: 100%;
 			height: auto;
+			opacity: 1.0;
 			.trailCurrentIndex {
 				position: relative;
 				display: inline-block;
@@ -225,6 +226,7 @@
 				position: relative;
 				display: inline-block;
 				padding: 0em 0 0 1.33em;
+				margin-left:1em;
 				width: 100%;
 				height: 1em;
 			   	.sansSerif-light();
@@ -264,7 +266,7 @@
 			 	.sansSerif-light();
 			   	font-size: 12px;
 				text-align: right;
-				color: @color-mid-gray;
+				color: @color-light-mid-gray;
 			}
 		}
 	}
