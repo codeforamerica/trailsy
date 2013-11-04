@@ -2767,10 +2767,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				} */
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				} */
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
