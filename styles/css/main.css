@@ -261,23 +261,23 @@ At some point, update mediaqueries to be in EMS
   .searchbar {
     background-color: #ffffff;
     line-height: 1;
-    padding: 0 1.75em 0 1.75em;
   }
   .searchbar .search-key {
-    display: block;
+    display: inline-block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #bbbdbf;
-    width: 100%;
+    width: 73%;
     height: 2em;
     border: 1px solid;
     border-color: #bbbdbf;
     padding-left: .5em;
-    padding-right: 0;
+    padding-right: 0em;
     padding-top: .5em;
     padding-bottom: .5em;
+    margin-left: 1.75em;
     position: relative;
     top: 0;
     line-height: 1.5em;
@@ -288,22 +288,25 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
   .searchbar .search-submit {
-    display: none;
-    /*			display: inline-block;*/
-  
-    position: absolute;
+    float: right;
+    display: inline-block;
     border: none;
     height: 2em;
-    top: 4em;
-    right: 1em;
+    /*top: 4em; */
+  
+    /*right: 1em;*/
+  
     z-index: 1;
     width: 2.5em;
-    padding: 0;
+    margin-left: -1em;
+    margin-right: 1.75em;
     cursor: pointer;
-    background-color: #d9f0fc;
+    background: #d9f0fc url(/img/icon_mag_blue.png) no-repeat;
+    background-size: 100% 100%;
   }
   .searchbar .search-submit:hover {
-    background-color: #d9f0fc;
+    background: #96daf8 url(/img/icon_mag_blue.png) no-repeat;
+    background-size: 100% 100%;
   }
 }
 @media only screen and (max-width: 529px)  {
