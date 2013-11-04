@@ -2161,14 +2161,13 @@ At some point, update mediaqueries to be in EMS
     height: 0;
     position: absolute;
     left: .525em;
-    top: 25%;
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
     border-top: 0.8em solid #ffffff;
   }
   .detailPanel.contracted {
     position: absolute;
-    top: 80%;
+    top: calc(100% - 84px);
     overflow: visible;
   }
   .detailPanel.contracted .detailPanelSlider {
