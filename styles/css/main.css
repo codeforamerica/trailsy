@@ -75,7 +75,8 @@ Need to make sure everything is responsive within that breakpoint.
 At some point, update mediaqueries to be in EMS
 33.125 EMS = 530 divided by 16px (default font size *
 59.375 EMS = 950 divided by 16px
-70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
+70.5 EMS = 1128 divided by 16px */
+/*@import "mixins.less";*/
 /*			Modules				*/
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
@@ -84,12 +85,6 @@ At some point, update mediaqueries to be in EMS
   .desktopTitle {
     display: none;
   }
-}
-@media only screen and (min-width: 950px) {
-  
-}
-@media only screen and (max-width: 529px)  {
-  
 }
 @media only screen and (min-width: 950px) {
   .mobileTitle {
@@ -130,7 +125,6 @@ At some point, update mediaqueries to be in EMS
     width: 25px;
     background: #523d32;
     /* The white stripes in the hamburger button */
-  
   }
   .title-row header .navbar-inner .hamburger div {
     background-color: #ffffff;
@@ -142,7 +136,6 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
-  
     width: 16em;
   }
 }
@@ -173,7 +166,6 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; */
-  
     width: 18em;
     margin-left: -1em;
   }
@@ -197,9 +189,6 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Filter Module */
-@media only screen and (max-width: 529px)  {
-  
-}
 @media only screen and (min-width: 950px) {
   .is-vishidden {
     position: absolute;
@@ -243,7 +232,6 @@ At some point, update mediaqueries to be in EMS
   .searchbar .search-submit {
     display: none;
     /*			display: inline-block;*/
-  
     position: absolute;
     border: none;
     height: 2em;
@@ -263,23 +251,23 @@ At some point, update mediaqueries to be in EMS
   .searchbar {
     background-color: #ffffff;
     line-height: 1;
-    padding: 0 1.75em 0 1.75em;
   }
   .searchbar .search-key {
-    display: block;
+    display: inline-block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     color: #bbbdbf;
-    width: 100%;
+    width: 73%;
     height: 2em;
     border: 1px solid;
     border-color: #bbbdbf;
     padding-left: .5em;
-    padding-right: 0;
+    padding-right: 0em;
     padding-top: .5em;
     padding-bottom: .5em;
+    margin-left: 1.75em;
     position: relative;
     top: 0;
     line-height: 1.5em;
@@ -290,22 +278,23 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
   .searchbar .search-submit {
-    display: none;
-    /*			display: inline-block;*/
-  
-    position: absolute;
+    float: right;
+    display: inline-block;
     border: none;
     height: 2em;
-    top: 4em;
-    right: 1em;
+    /*top: 4em; */
+    /*right: 1em;*/
     z-index: 1;
     width: 2.5em;
-    padding: 0;
+    margin-left: -1em;
+    margin-right: 1.75em;
     cursor: pointer;
-    background-color: #d9f0fc;
+    background: #d9f0fc url(/img/icon_mag_blue.png) no-repeat;
+    background-size: 100% 100%;
   }
   .searchbar .search-submit:hover {
-    background-color: #d9f0fc;
+    background: #96daf8 url(/img/icon_mag_blue.png) no-repeat;
+    background-size: 100% 100%;
   }
 }
 @media only screen and (max-width: 529px)  {
@@ -357,13 +346,11 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
-  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
-  
     font-color: #bbbdbf;
   }
   .accordion .accordion-innerwrap {
@@ -373,7 +360,6 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .accordion {
     /*		display: none;*/
-  
     background-color: transparent;
     max-height: 35em;
     overflow: scroll;
@@ -384,13 +370,11 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
-  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
-  
     font-color: #bbbdbf;
   }
   .accordion .icon {
@@ -399,9 +383,6 @@ At some point, update mediaqueries to be in EMS
   .accordion .accordion-innerwrap {
     margin: 0;
   }
-}
-@media only screen and (max-width: 529px)  {
-  
 }
 @media only screen and (min-width: 950px) {
   .searchHeader {
@@ -419,9 +400,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
     /* More Options */
-  
     /* Container of Trail Results*/
-  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -475,9 +454,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
     /* More Options */
-  
     /* Container of Trail Results*/
-  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -1592,7 +1569,6 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
-  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1721,7 +1697,6 @@ At some point, update mediaqueries to be in EMS
     padding-right: 25%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
-  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1820,7 +1795,6 @@ At some point, update mediaqueries to be in EMS
 }
 .trailMapContainer {
   /* Desktop */
-
 }
 @media only screen and (max-width: 529px)  {
   .trailMapContainer {
@@ -1939,7 +1913,6 @@ At some point, update mediaqueries to be in EMS
     width: 20px;
     left: 50%;
     /*margin-left: -8px;*/
-  
     display: block;
     background: url(../../img/crosshair.gif);
     background-position: center center;
@@ -2321,7 +2294,6 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Magic Number! */
-  
     padding: 0em 0 0 2.7em;
     width: 100%;
     height: 1em;
@@ -3310,11 +3282,10 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-  					.sansSerif-light;
-  					color: @color-mid-gray;
-  					font-size: 12px;
-  				}*/
-  
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
+				}*/
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     height: 5em;
@@ -3381,19 +3352,14 @@ At some point, update mediaqueries to be in EMS
     right: 10px;
     width: 25px;
     /* IE 8 */
-  
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     /* IE 5-7 */
-  
     filter: alpha(opacity=80);
     /* Netscape */
-  
     -moz-opacity: 0.8;
     /* Safari 1.x */
-  
     -khtml-opacity: 0.8;
     /* Good browsers */
-  
     opacity: 0.8;
   }
   .closeDetail p {
@@ -3472,13 +3438,10 @@ audio:not([controls]) {
 html {
   font-family: sans-serif;
   /* 1 */
-
   -webkit-text-size-adjust: 100%;
   /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
-
 }
 /**
  * Remove default margin.
@@ -3633,10 +3596,8 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
-
   padding: 0;
   /* 2 */
-
 }
 /**
  * 1. Correct font family not being inherited in all browsers.
@@ -3649,13 +3610,10 @@ select,
 textarea {
   font-family: inherit;
   /* 1 */
-
   font-size: 100%;
   /* 2 */
-
   margin: 0;
   /* 3 */
-
 }
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
@@ -3688,10 +3646,8 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
-
   cursor: pointer;
   /* 3 */
-
 }
 /**
  * Re-set default cursor for disabled elements.
@@ -3708,10 +3664,8 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
-
   padding: 0;
   /* 2 */
-
 }
 /**
  * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
@@ -3721,11 +3675,9 @@ input[type="radio"] {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
-
   box-sizing: content-box;
 }
 /**
@@ -3751,10 +3703,8 @@ input::-moz-focus-inner {
 textarea {
   overflow: auto;
   /* 1 */
-
   vertical-align: top;
   /* 2 */
-
 }
 /* ==========================================================================
    Tables
