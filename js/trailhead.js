@@ -33,8 +33,9 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -219,7 +220,8 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $(document).on('click', '.hamburger', moveSlideDrawer);
+  $('.hamburgerLine').click(moveSlideDrawer);
+  // $(document).on('click', closeSlideDrawerOnly);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
@@ -830,10 +832,11 @@ function startup() {
             $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
               .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
               .attr("data-trailname", invisLayer.feature.properties[trailField])
-              .html(invisLayer.feature.properties[trailField]).css("color", "black");
+              .html(invisLayer.feature.properties[trailField]);
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
-              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField])
+              $trailPopupLineDiv.append("<b>");
             } else {
               // console.log("skipping trail segment name because it has an underscore in it");
             }
@@ -1510,6 +1513,19 @@ function startup() {
       $('.slideDrawer').addClass('closedDrawer');
     }
   }
+
+  // function closeSlideDrawerOnly(e) {
+  //   console.log("closeSlideDrawerOnly")
+  //   var container = $(".slideDrawer");
+
+  //   if (!container.is(e.target)
+  //     && container.has(e.target).length == 0
+  //     && container.hasClass('openDrawer') {
+  //     container.addClass('closedDrawer');
+  //     container.removeClass('openDrawer');
+  //   }
+  // }
+
 
   // event handler for click of a trail name in a trailhead popup
 

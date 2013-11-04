@@ -22,12 +22,11 @@
 		height: 3em;
 		top: 0;
 		margin: 0;
-		z-index: 8;
+		z-index: 9000;
 		header {
 			width: 100%;
 			margin: 0;
 			padding: 0;
-			z-index: 8;
 			.navbar-inner {
 				position: relative;
 				width: 100%;
@@ -36,23 +35,24 @@
 				border: none;
 				box-shadow: none;
 				text-align: justify;
-				padding: .5em 0em .5em 1em;
-				.hamburger {
+				padding: .5em 0em .5em .5em;
+				.hamburgerBox {
 				    cursor: pointer;
 				    display: inline-block;
-				    height: 25px;
-				    padding: 8px 4px 8px;
+				    height: 100%;
+				    padding: .2em .2em .2em .2em;
 				    position: relative;
-				    width: 25px;
+				    width: 2em;
 				    background: @color-dark-brown;
-		/* The white stripes in the hamburger button */
-					div {
+					.hamburgerLine {
 					    background-color: @color-white;
 					    border: 1px solid @color-white;
-					    border-radius: 2px 2px 2px 2px;
-					    height: 2px;
-					    margin-top: 3px;
-					    width: 90%;
+					    height: .25em;
+					    margin-top: .25em;
+					    width: 100%;
+					    padding-left: .25em;
+					    padding-right: .25em;
+					    cursor: pointer;
 					}
 				}
 				.logo {
