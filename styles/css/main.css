@@ -2132,12 +2132,8 @@ At some point, update mediaqueries to be in EMS
     width: 0;
     height: 0;
     position: absolute;
-<<<<<<< HEAD
     left: .75em;
     top: .6em;
-=======
-    left: .525em;
->>>>>>> master
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
     border-top: 0.8em solid #ffffff;
