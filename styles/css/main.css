@@ -933,21 +933,20 @@ At some point, update mediaqueries to be in EMS
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
-    cursor: pointer;
+    cursor: text;
     transition: all 0.25s ease;
   }
   .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter:hover {
-    background: #96daf8 url(/img/icon_xcountryski_blue.png) no-repeat;
+    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
     background-size: 100% 100%;
   }
   .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter {
     display: none;
     width: 2em;
     height: auto;
-    cursor: pointer;
   }
   .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter:checked + div.mtnbikeFilter {
-    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+    background: #96daf8 url(/img/icon_handicap_blue.png) no-repeat;
     background-size: 100% 100%;
   }
   .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter {
@@ -1425,13 +1424,14 @@ At some point, update mediaqueries to be in EMS
     cursor: pointer;
   }
   .trail-box:hover {
-    background-color: #e3e3e1;
+    background-color: #efefef;
   }
   .trail-box .trailInfo {
     position: relative;
     display: inline-block;
     width: 100%;
     height: auto;
+    opacity: 1.0;
   }
   .trail-box .trailInfo .trailCurrentIndex {
     position: relative;
@@ -1486,6 +1486,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     padding: 0em 0 0 1.33em;
+    margin-left: 1em;
     width: 100%;
     height: 1em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1534,7 +1535,7 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     font-size: 12px;
     text-align: right;
-    color: #58595b;
+    color: #bbbdbf;
   }
 }
 @media only screen and (max-width: 529px)  {
@@ -1598,7 +1599,7 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup {
     width: auto;
-    min-width: 12em;
+    min-width: 14em;
     position: relative;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
@@ -1616,7 +1617,7 @@ At some point, update mediaqueries to be in EMS
     max-width: 200px;
     overflow-y: hidden;
     min-width: 12em;
-    padding: .25em 0em .25em .5em;
+    padding: .5em 0em .39em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1624,17 +1625,20 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
     text-decoration: none;
     text-transform: capitalize;
+    vertical-align: bottom;
+    border-bottom: 1px solid #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .calloutTrailheadIcon {
     position: absolute;
     height: 1.5em;
-    top: .5em;
-    right: .5em;
+    top: .399em;
+    left: .5em;
+    float: left;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
-    border-top: 1px gray solid;
+    border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
   
   }
@@ -1643,16 +1647,18 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
-    color: #58595b;
+    color: #00adef;
+    padding-bottom: .3em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
     background: rgba(227, 227, 225, 0.4);
-    color: #58595b;
+    color: #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected {
     background: #ffffff;
     color: #00adef;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    padding-bottom: .2em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected:hover {
     color: #ffffff;
@@ -1661,6 +1667,7 @@ At some point, update mediaqueries to be in EMS
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected.detail-open {
     color: #ffffff;
     background: #00adef;
+    border: 1px solid #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
@@ -1684,7 +1691,7 @@ At some point, update mediaqueries to be in EMS
     right: .3em;
     border-bottom: .6em solid transparent;
     border-top: .6em solid transparent;
-    border-left: 0.6em solid #d9f0fc;
+    border-left: 0.6em solid #00adef;
     display: inline-block;
     height: 0;
   }
@@ -1702,7 +1709,7 @@ At some point, update mediaqueries to be in EMS
   .leaflet-popup-content-wrapper {
     border-radius: 0px;
     width: auto;
-    min-width: 12em;
+    min-width: 14em;
     height: auto;
     padding: 0;
   }
@@ -1720,7 +1727,7 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup {
     width: auto;
-    min-width: 12em;
+    min-width: 14em;
     position: relative;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box {
@@ -1738,7 +1745,7 @@ At some point, update mediaqueries to be in EMS
     max-width: 200px;
     overflow-y: hidden;
     min-width: 12em;
-    padding: .25em 0em .25em .5em;
+    padding: .5em 0em .39em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1746,17 +1753,21 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
     text-decoration: none;
     text-transform: capitalize;
+    vertical-align: bottom;
+    border-bottom: 1px solid #58595b;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .calloutTrailheadIcon {
     position: absolute;
     height: 1.5em;
-    top: .5em;
-    right: .5em;
+    top: .399em;
+    left: .5em;
+    float: left;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname {
     min-width: 12em;
     width: 100%;
-    border-top: 1px gray solid;
+    padding-right: 25%;
+    border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
   
   }
@@ -1765,16 +1776,18 @@ At some point, update mediaqueries to be in EMS
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected {
     background: #ffffff;
-    color: #58595b;
+    color: #00adef;
+    padding-bottom: .3em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.not-selected:hover {
     background: rgba(227, 227, 225, 0.4);
-    color: #58595b;
+    color: #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected {
     background: #ffffff;
     color: #00adef;
-    text-transform: uppercase;
+    text-transform: capitalize;
+    padding-bottom: .2em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected:hover {
     color: #ffffff;
@@ -1783,6 +1796,7 @@ At some point, update mediaqueries to be in EMS
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected.detail-open {
     color: #ffffff;
     background: #00adef;
+    border: 1px solid #00adef;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
@@ -1797,7 +1811,6 @@ At some point, update mediaqueries to be in EMS
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
-    text-decoration: none;
     line-height: 1.5em;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box b {
@@ -1806,42 +1819,46 @@ At some point, update mediaqueries to be in EMS
     right: .3em;
     border-bottom: .6em solid transparent;
     border-top: .6em solid transparent;
-    border-left: 0.6em solid #d9f0fc;
+    border-left: 0.6em solid #00adef;
     display: inline-block;
     height: 0;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box.trail1 {
     border-top: 1px solid gray;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box.trail1:hover {
+    text-decoration: underline;
+  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail2 {
     border-top: 1px solid #e3e3e1;
+  }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail2:hover {
+    text-decoration: underline;
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail3 {
     border-top: 1px solid #bbbdbf;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box + .trail3:hover {
+    text-decoration: underline;
+  }
 }
 .trail-popup {
   position: relative;
-  min-width: 10em;
+  min-width: 14em;
   height: auto;
   line-height: 1em;
   font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
   font-weight: 100;
   font-size: 16px;
   line-height: 20px;
-  color: #e3e3e1;
   text-decoration: none;
-  padding: .25em 0em .25em .5em;
-}
-.trailhead-popup {
-  color: black;
-}
-.trailhead-name {
-  font-weight: bold;
+  margin: 0em 0em 0em 0em;
 }
 .trail-popup-line-named {
   cursor: pointer;
-  color: #58595b;
+  color: #00adef !important;
+  padding: .7em 25% .5em .5em;
+  border-top: 1px solid #e3e3e1;
 }
 .trail-popup-line-named:hover {
   background: rgba(227, 227, 225, 0.4);
@@ -2779,30 +2796,55 @@ At some point, update mediaqueries to be in EMS
     text-decoration: none;
     margin-top: .5em;
   }
+  .detailPanel .detailPanelBody .extraLine {
+    border-top: 1px solid #e3e3e1;
+    position: relative;
+    display: block;
+    margin-bottom: .5em;
+  }
+  .detailPanel .detailPanelBody .extraLine2 {
+    border-bottom: 1px solid #e3e3e1;
+    position: relative;
+    display: block;
+  }
   .detailPanel .detailPanelBody .detailFooter {
     position: relative;
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: 0em .5em 0em 0em;
-    border-top: 1px solid #bbbdbf;
+    padding: .5em 1em .75em 1em;
+    /* not needed? .detailSourceURL {
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				} */
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
     float: left;
     position: relative;
     display: inline-block;
+    margin-right: 1em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailStewardInfo {
     position: relative;
-    display: inline-block;
+    display: inline;
     height: auto;
     width: auto;
     margin-left: 1em;
     margin-top: .25em;
   }
+  .detailPanel .detailPanelBody .detailFooter .detailStewardInfo a {
+    text-decoration: none;
+    display: block;
+    color: #00adef;
+  }
+  .detailPanel .detailPanelBody .detailFooter .detailStewardInfo a:hover {
+    text-decoration: underline;
+  }
   .detailPanel .detailPanelBody .detailFooter .detailPanelHeader {
-    display: inline-block;
+    display: block;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2811,32 +2853,23 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     font-size: 12px;
     width: auto;
+    text-transform: uppercase;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSource {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
     color: #58595b;
-    font-size: 12px;
+    font-size: 16px;
     width: 100%;
     cursor: pointer;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSourcePhone {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
     color: #58595b;
-    font-size: 12px;
-  }
-  .detailPanel .detailPanelBody .detailFooter .detailSourceURL {
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
     font-size: 16px;
-    line-height: 20px;
-    color: #58595b;
-    font-size: 12px;
   }
 }
 @media only screen and (min-width: 950px) {
