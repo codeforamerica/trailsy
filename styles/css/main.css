@@ -2097,6 +2097,7 @@ At some point, update mediaqueries to be in EMS
     right: 0;
     padding: 0;
     opacity: 100;
+    overflow: hidden;
   }
   .trailListColumn a {
     display: none;
