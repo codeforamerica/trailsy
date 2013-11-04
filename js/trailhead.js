@@ -36,6 +36,7 @@ function startup() {
   var API_HOST = window.location.hostname;
   // var API_HOST = "http://127.0.0.1:3000";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
@@ -220,7 +221,8 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $(document).on('click', '.hamburger', moveSlideDrawer);
+  $('.hamburgerLine').click(moveSlideDrawer);
+  // $(document).on('click', closeSlideDrawerOnly);
   $(document).on('click', '.detailPanelSlider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
@@ -1512,6 +1514,19 @@ function startup() {
       $('.slideDrawer').addClass('closedDrawer');
     }
   }
+
+  // function closeSlideDrawerOnly(e) {
+  //   console.log("closeSlideDrawerOnly")
+  //   var container = $(".slideDrawer");
+
+  //   if (!container.is(e.target)
+  //     && container.has(e.target).length == 0
+  //     && container.hasClass('openDrawer') {
+  //     container.addClass('closedDrawer');
+  //     container.removeClass('openDrawer');
+  //   }
+  // }
+
 
   // event handler for click of a trail name in a trailhead popup
 

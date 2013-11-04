@@ -14,9 +14,8 @@
 
 .searchbar {
 	@media @mobile {
-		background-color: @color-white;
 		line-height: 1;
-		padding: 0 1em 0 1em;
+		padding: 0 1.75em 0 1.75em;
 		.search-key {
 			display: block;
 			.sansSerif-light;
@@ -25,7 +24,7 @@
 			height: 2em;
 		  	border: 1px solid;
 		  	border-color: @color-light-mid-gray;
-			padding-left: .25em;
+			padding-left: .5em;
 			padding-right: 0;
 			padding-top: .5em;
 			padding-bottom: .5em;
@@ -59,7 +58,6 @@
 	@media @desktop {
 		background-color: @color-white;
 		line-height: 1;
-		
 		.search-key {
 			display:inline-block;
 			.sansSerif-light;
@@ -83,7 +81,6 @@
 			}
 		}
 		.search-submit {
-		
 			float:right;
 			display:inline-block;
 			border: none;
@@ -124,11 +121,11 @@
 		-webkit-transition: all 300ms;
 		transition: all 300ms;
 		&.closedDrawer {
-			top: 5em;
+			top: 3em;
 			left: -18em;
 		}
 		&.openDrawer {
-			top: 5em;
+			top: 3em;
 			left: 0em;
 		}
 	}
@@ -140,7 +137,7 @@
 .accordion {
 	@media @mobile {
 		display: block;
-		max-height: 35em;
+		max-height: 50em;
 		overflow: scroll;
 		lbackground-color: transparent;
 		-moz-transition: all 300ms;
@@ -211,19 +208,21 @@
 			outline: none;
 		}
 		.trigger1 {
-			padding: 1em 1.33em;
+			padding: 1em 0 0 2.33em;
 			.sansSerif-light();
 			color: @color-light-mid-gray;
 			font-size: 12px;
 			width: 100%;
 			text-align: left;
-			&:hover {
+			cursor: text;
+			margin-bottom: .5em;
+/*			&:hover {
 				text-decoration: underline;
-			}
+			}*/
 		}
 		/* More Options */
 		.trigger2 {
-			padding: .5em 1em 0em .5em;
+			padding: .5em 2.33em 0em .5em;
 			.sansSerif-light();
 			color: @color-light-mid-gray;
 			font-size: 12px;
@@ -235,7 +234,7 @@
 		}
 		/* Container of Trail Results*/
 		.trails-count {
-			padding: .5em 1em 0em 1em;
+			padding: .5em 1em 0em 1.75em;
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
@@ -462,6 +461,7 @@
 		padding: 0;
 		list-style: none;
 		background-color: @color-white;
+		height: 100%;
 	}
 	@media @desktop {
 		padding: 0;
@@ -472,45 +472,72 @@
 
 
 .trailLength-title {
-	height: 1em;
-	width: 100%;
-	background-color: @color-white;
-	padding: 0 0 0 1.75em;
-	margin-top:1.5em;
-	margin-bottom:-.5em;
-	h2 {
-		.sansSerif-light();
-		font-size: 12px;
-		color: @color-light-mid-gray;
+	@media @mobile {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-bottom: -1em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
+	}
+	@media @desktop {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-bottom: .5em;
+		margin-top: 1.5em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
 	}
 }
 
 .trailUse-title {
-	height: 1em;
-	width: 100%;
-	background-color: @color-white;
-	padding-left: 1.75em;
-	padding-bottom: 1em;
-	margin-bottom:-.5em;
-	margin-top:2.5em;
-	h2 {
-		.sansSerif-light();
-		font-size: 12px;
-		color: @color-light-mid-gray;
-		padding-bottom: 1em;
+	@media @mobile {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-bottom: -.25em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
+	}
+	@media @desktop {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-top: 2.5em;
+		margin-bottom: -.25em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
 	}
 }
 
 .trailFilters {
 	@media @mobile {
-		height: auto;
+		height: 100%;
 		.trailLength {
 			height: 2em;
 			width: 100%;
 			background: @color-white;
 			padding: 0 1.75em 0 1.75em;
-			margin: 0em 0 1em 0;
     		text-align: justify;
+    		-ms-text-justify: distribute-all-lines;
+    		text-justify: distribute-all-lines;
     		-ms-text-justify: distribute-all-lines;
     		text-justify: distribute-all-lines;
 			.visuallyhidden_2 {
@@ -529,7 +556,6 @@
 				div {
 					background-color: @color-light-blue;
 					width: 100%;
-					height: 2em;
 					vertical-align: middle;
 					cursor: pointer;
 					transition: all 0.25s ease;
@@ -663,22 +689,21 @@
 					background-size: 100% 100%;
 					width: 100%;
 					height: 100%;
-					cursor: pointer;
+					cursor: text;
 					transition: all 0.25s ease;
 					&:hover {
-						background: @color-mid-blue url(/img/icon_xcountryski_blue.png) no-repeat;
-						background-size: 100% 100%;
+						background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
+						background-size: 100% 100%; 
 					}
 				}
 				input[type=checkbox].mtnbikeFilter {
 					display: none;
 					width: 2em;
 					height: auto;
-					cursor: pointer;
 					&:checked + div.mtnbikeFilter {
-						background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
+						background: @color-mid-blue url(/img/icon_handicap_blue.png) no-repeat;
 						background-size: 100% 100%;
-					} 
+					}
 				}
 				div.mtnbikeFilter {
 					background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
@@ -690,6 +715,16 @@
 					&:hover {
 						background: @color-light-gray url(/img/icon_mtnbike_gray.png) no-repeat;
 						background-size: 100% 100%; 
+					}
+				}
+				div {
+					background-color: @color-light-blue;
+					width: 100%;
+					height: 100%;
+					cursor: pointer;
+					transition: all 0.25s ease;
+					&:hover {
+						background-color: @color-mid-blue;
 					}
 				}
 	 		}
@@ -747,15 +782,16 @@
 				div {
 					background-color: @color-light-blue;
 					width: 100%;
-					height: 2em;
+					vertical-align: middle;
 					cursor: pointer;
 					transition: all 0.25s ease;
 					p {
 						.sansSerif-light();
+						font-size: 12px;
 						color: @color-dark-blue;
 						text-align: center;
 						vertical-align: middle;
-						line-height: 2em;
+						line-height: 2.75em;
 					}
 					&:hover {
 						background-color: @color-mid-blue;
