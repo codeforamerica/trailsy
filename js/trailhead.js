@@ -206,6 +206,7 @@ function startup() {
   $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
   $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $(document).on('change', '.filter', filterChangeHandler);
+  $(".clearSelection").click(clearSelectionHandler);
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
   $(".search-key").keyup(function(e) {
     // if (e.which == 13) {
@@ -442,6 +443,19 @@ function startup() {
     }
     // currentFilters[filterType] = currentUIFilterState;
     console.log(currentFilters);
+    applyFilterChange(currentFilters, trailData);
+  }
+
+  function clearSelectionHandler(e) {
+    console.log("clearSelectionHandler");
+    $(".visuallyhidden_2 input").attr("checked", false);
+    $(".visuallyhidden_3 input").attr("checked", false);
+    $(".search-key").val("");
+    currentFilters = {
+      lengthFilter: [],
+      activityFilter: [],
+      searchFilter: ""
+    };
     applyFilterChange(currentFilters, trailData);
   }
 
@@ -1315,6 +1329,8 @@ function startup() {
   function resetDetailPanel() {
     $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
     $('.detailPanel .detailPanelPictureCredits').remove();
+    $('.detailPanel .detailConditionsDescription').html("");
+    $('.detailPanel .detailTrailSurface').html("");
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");
     $('.detailPanel .detailTrailheadAddress').html("");
@@ -1347,6 +1363,14 @@ function startup() {
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+
+    if (trail.properties.conditions) {
+      $('.detailPanel .detailConditionsDescription').html(trail.properties.conditions);
+    }
+
+    if (trail.properties.trlsurface) {
+      $('.detailPanel .detailTrailSurface').html(trail.properties.trlsurface);
+    }
 
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
@@ -1475,6 +1499,7 @@ function startup() {
   //  Mobile-only function changing the position of the detailPanel
 
   function moveSlideDrawer(e) {
+    console.log("moveSlideDrawer")
     if ($(".slideDrawer").hasClass("closedDrawer")) {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
