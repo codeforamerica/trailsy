@@ -121,22 +121,21 @@ At some point, update mediaqueries to be in EMS
     text-align: justify;
     padding: .5em 0em .5em .5em;
   }
-  .title-row header .navbar-inner .hamburger {
+  .title-row header .navbar-inner .hamburgerBox {
     cursor: pointer;
     display: inline-block;
     height: 100%;
     padding: .2em .2em .2em .2em;
     position: relative;
-    width: 3em;
+    width: 2em;
     background: #523d32;
   }
-  .title-row header .navbar-inner .hamburger .hamburgerLine {
+  .title-row header .navbar-inner .hamburgerBox .hamburgerLine {
     background-color: #ffffff;
     border: 1px solid #ffffff;
-    border-radius: 1px;
     height: .25em;
     margin-top: .25em;
-    width: 75%;
+    width: 100%;
     padding-left: .25em;
     padding-right: .25em;
     cursor: pointer;
@@ -213,9 +212,8 @@ At some point, update mediaqueries to be in EMS
 }
 @media only screen and (max-width: 529px)  {
   .searchbar {
-    background-color: #ffffff;
     line-height: 1;
-    padding: 0 1em 0 1em;
+    padding: 0 1.75em 0 1.75em;
   }
   .searchbar .search-key {
     display: block;
@@ -228,7 +226,7 @@ At some point, update mediaqueries to be in EMS
     height: 2em;
     border: 1px solid;
     border-color: #bbbdbf;
-    padding-left: .25em;
+    padding-left: .5em;
     padding-right: 0;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -345,7 +343,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   .accordion {
     display: block;
-    max-height: 35em;
+    max-height: 50em;
     overflow: scroll;
     lbackground-color: transparent;
     -moz-transition: all 300ms;
@@ -431,7 +429,7 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
   .panel-container .trigger1 {
-    padding: 1em 1.33em;
+    padding: 1em 0 0 2.33em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -440,12 +438,15 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
     width: 100%;
     text-align: left;
-  }
-  .panel-container .trigger1:hover {
-    text-decoration: underline;
+    cursor: text;
+    margin-bottom: .5em;
+    /*			&:hover {
+  				text-decoration: underline;
+  			}*/
+  
   }
   .panel-container .trigger2 {
-    padding: .5em 1em 0em .5em;
+    padding: .5em 2.33em 0em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -459,7 +460,7 @@ At some point, update mediaqueries to be in EMS
     text-decoration: underline;
   }
   .panel-container .trails-count {
-    padding: .5em 1em 0em 1em;
+    padding: .5em 1em 0em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -687,6 +688,7 @@ At some point, update mediaqueries to be in EMS
     padding: 0;
     list-style: none;
     background-color: #ffffff;
+    height: 100%;
   }
 }
 @media only screen and (min-width: 950px) {
@@ -696,50 +698,85 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
   }
 }
-.trailLength-title {
-  height: 1em;
-  width: 100%;
-  background-color: #ffffff;
-  padding: 0 0 0 1.75em;
-  margin-top: 1.5em;
-  margin-bottom: -0.5em;
+@media only screen and (max-width: 529px)  {
+  .trailLength-title {
+    height: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 0 1.75em;
+    margin-bottom: -1em;
+  }
+  .trailLength-title h2 {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #bbbdbf;
+  }
 }
-.trailLength-title h2 {
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
-  font-size: 12px;
-  color: #bbbdbf;
+@media only screen and (min-width: 950px) {
+  .trailLength-title {
+    height: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 0 1.75em;
+    margin-bottom: .5em;
+    margin-top: 1.5em;
+  }
+  .trailLength-title h2 {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #bbbdbf;
+  }
 }
-.trailUse-title {
-  height: 1em;
-  width: 100%;
-  background-color: #ffffff;
-  padding-left: 1.75em;
-  padding-bottom: 1em;
-  margin-bottom: -0.5em;
-  margin-top: 2.5em;
+@media only screen and (max-width: 529px)  {
+  .trailUse-title {
+    height: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 0 1.75em;
+    margin-bottom: -0.25em;
+  }
+  .trailUse-title h2 {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #bbbdbf;
+  }
 }
-.trailUse-title h2 {
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
-  font-size: 12px;
-  color: #bbbdbf;
-  padding-bottom: 1em;
+@media only screen and (min-width: 950px) {
+  .trailUse-title {
+    height: 1em;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0 0 0 1.75em;
+    margin-top: 2.5em;
+    margin-bottom: -0.25em;
+  }
+  .trailUse-title h2 {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #bbbdbf;
+  }
 }
 @media only screen and (max-width: 529px)  {
   .trailFilters {
-    height: auto;
+    height: 100%;
   }
   .trailFilters .trailLength {
     height: 2em;
     width: 100%;
     background: #ffffff;
     padding: 0 1.75em 0 1.75em;
-    margin-top: -0.5em;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
@@ -761,7 +798,6 @@ At some point, update mediaqueries to be in EMS
   .trailFilters .trailLength .visuallyhidden_2 div {
     background-color: #d9f0fc;
     width: 100%;
-    height: 2em;
     vertical-align: middle;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -993,6 +1029,27 @@ At some point, update mediaqueries to be in EMS
   .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div p {
     color: #ffffff;
   }
+  .trailFilters .trailLength .visuallyhidden_2 div {
+    background-color: #d9f0fc;
+    width: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div p {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2.75em;
+  }
+  .trailFilters .trailLength .visuallyhidden_2 div:hover {
+    background-color: #96daf8;
+  }
   .trailFilters ul:after {
     content: "";
     display: inline-block;
@@ -1174,7 +1231,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   .trailList {
     width: 100%;
-    max-height: 17em;
+    max-height: 25em;
     position: relative;
     overflow: scroll;
     background-color: #ffffff;
@@ -1276,7 +1333,7 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailInfo .trail {
     position: relative;
     display: inline-block;
-    margin: 0em 0 0 .5em;
+    margin: .5em 0 0 .5em;
     height: auto;
     width: auto;
     max-width: 50%;
@@ -1290,7 +1347,7 @@ At some point, update mediaqueries to be in EMS
   }
   .trail-box .trailInfo .trailLength {
     position: relative;
-    margin: .25em 1.5em 0 0em;
+    margin: .25em 2.33em 0 0em;
     float: right;
     height: auto;
     width: auto;
@@ -1308,7 +1365,7 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailInfo .parkName {
     position: relative;
     display: inline-block;
-    padding: 0em 0 0 1.33em;
+    padding: 0em 0 0 2.33em;
     width: 100%;
     height: 1em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1323,6 +1380,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 100%;
     height: auto;
+    margin-top: .25em;
   }
   .trail-box .trailheadInfo .trailheadIcon {
     position: relative;
@@ -1334,19 +1392,20 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailheadInfo .trailheadName {
     position: relative;
     display: inline-block;
-    margin: .5em 0 0 .75em;
+    margin: 0em 0 0 .75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
     color: #58595b;
+    max-width: 45%;
   }
   .trail-box .trailheadInfo .trailheadDistance {
     position: relative;
     display: inline-block;
     float: right;
-    margin: .5em 1.5em 0 0em;
+    margin: .2em 2.33em 0 0em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -1463,7 +1522,7 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     font-size: 12px;
     color: #58595b;
-    max-width: 54%;
+    max-width: 50%;
   }
   .trail-box .trailheadInfo .trailheadDistance {
     position: relative;
@@ -2083,7 +2142,7 @@ At some point, update mediaqueries to be in EMS
     width: 0;
     height: 0;
     position: absolute;
-    left: .55em;
+    left: .525em;
     top: 25%;
     border-left: .8em solid transparent;
     border-right: .8em solid transparent;
@@ -2327,7 +2386,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     float: right;
-    margin: .5em 1.5em 0 0em;
+    margin: .5em 3.5em 0 0em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
