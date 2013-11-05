@@ -352,6 +352,9 @@ At some point, update mediaqueries to be in EMS
     /*			background: @color-white;*/
     font-color: #bbbdbf;
   }
+  .accordion .icon {
+    color: #00adef;
+  }
   .accordion .accordion-innerwrap {
     margin: 0;
   }
@@ -410,7 +413,7 @@ At some point, update mediaqueries to be in EMS
 }
 @media only screen and (max-width: 529px)  {
   .panel-container {
-    margin: 0;
+    margin-top: 1em;
     /* More Options */
     /* Container of Trail Results*/
   }
