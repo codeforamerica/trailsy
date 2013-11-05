@@ -1252,6 +1252,15 @@ function startup() {
     if (!SMALL) {
       $('.accordion').hide();
     }
+    if (SMALL) {
+      if ($(".slideDrawer").hasClass("openDrawer")) {
+        console.log("slide drawer is open");
+        $(".slideDrawer").removeClass("openDrawer");
+        $(".slideDrawer").addClass("closedDrawer");
+        $(".detailPanel").removeClass("hidden");
+        $(".detailPanel").addClass("contracted");
+      }
+    }
     $('.trailhead-trailname.selected').addClass("detail-open");
     $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     // map.invalidateSize();
