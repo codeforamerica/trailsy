@@ -223,7 +223,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $('.hamburgerLine').click(moveSlideDrawer);
   // $(document).on('click', closeSlideDrawerOnly);
-  $(document).on('click', '.detailPanelSlider', slideDetailPanel);
+  $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -1508,10 +1508,20 @@ function startup() {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
       $('.slideDrawer').addClass("openDrawer");
+      // and move the Detail Panel all the way down
+      if ($(".detailPanel").hasClass("expanded")) {
+        $(".detailPanel").removeClass("expanded");
+        $(".detailPanel").addClass("hidden");
+      } else { 
+        $(".detailPanel").removeClass("contracted");
+        $(".detailPanel").addClass("hidden");
+
+      }
     } else {
       console.log("closeSlideDrawer");
       $('.slideDrawer').removeClass('openDrawer');
       $('.slideDrawer').addClass('closedDrawer');
+
     }
   }
 
