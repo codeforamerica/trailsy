@@ -42,7 +42,7 @@ function startup() {
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
   } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
-    API_HOST = window.location.hostname;
+    API_HOST = window.location.href;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
     API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
