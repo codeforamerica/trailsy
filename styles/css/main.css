@@ -383,6 +383,19 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
+@media only screen and (max-width: 529px)  {
+  .searchHeader {
+    margin-left: .42em !important;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    line-height: 20px;
+    color: #58595b;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: .5em;
+  }
+}
 @media only screen and (min-width: 950px) {
   .searchHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -408,17 +421,6 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
   .panel-container .trigger1 {
-    padding: 1em 0 0 2.33em;
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    color: #bbbdbf;
-    font-size: 12px;
-    width: 100%;
-    text-align: left;
-    cursor: text;
-    margin-bottom: .5em;
     /*			&:hover {
 				text-decoration: underline;
 			}*/

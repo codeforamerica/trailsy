@@ -188,7 +188,16 @@
 }
 
 .searchHeader {
-	@media @mobile {}
+	@media @mobile {
+		margin-left:.42em !important;
+		.sansSerif-light();
+		color: @color-mid-gray;
+		font-size: 16px;
+		width: 100%;
+		text-align: left;
+		margin-bottom: .5em;
+	}
+
 	@media @desktop {
 		.sansSerif-light();
 		color: @color-mid-gray;
@@ -208,14 +217,6 @@
 			outline: none;
 		}
 		.trigger1 {
-			padding: 1em 0 0 2.33em;
-			.sansSerif-light();
-			color: @color-light-mid-gray;
-			font-size: 12px;
-			width: 100%;
-			text-align: left;
-			cursor: text;
-			margin-bottom: .5em;
 /*			&:hover {
 				text-decoration: underline;
 			}*/
