@@ -45,7 +45,8 @@ function startup() {
   } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
     API_HOST = window.location.href;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = "http://trailsyserver-prod.herokuapp.com";
+    API_HOST = window.location.href;
+    // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
   // make this real
