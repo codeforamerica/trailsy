@@ -1514,13 +1514,14 @@ function startup() {
       } else { 
         $(".detailPanel").removeClass("contracted");
         $(".detailPanel").addClass("hidden");
-
       }
     } else {
       console.log("closeSlideDrawer");
       $('.slideDrawer').removeClass('openDrawer');
       $('.slideDrawer').addClass('closedDrawer');
-
+      // and restore the Detail Panel to contracted
+      $('.detailPanel').removeClass("hidden");
+      $('.detailPanel').addClass("contracted");
     }
   }
 
