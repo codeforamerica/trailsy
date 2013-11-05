@@ -2650,32 +2650,28 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 100%;
     height: auto;
-    float: right;
     margin-bottom: 1em;
     margin-top: .75em;
     padding: 0em 0em 0em 0em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
-    width: auto;
-    height: 2em;
+    width: 48%;
     position: relative;
     display: inline-block;
     background-color: #d9f0fc;
-    padding: 0 3em 0 3em;
-    margin: 0em 1em .5em 0em;
+    margin: 0em 0em .5em 0em;
     text-align: center;
     cursor: pointer;
+    float: left;
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections .linkHeader {
-    width: 100%;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #00adef;
     line-height: 2.667em;
   }
@@ -2686,26 +2682,23 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
-    width: auto;
-    height: 2em;
+    width: 48%;
+    float: right;
     position: relative;
     display: inline-block;
     background-color: #d9f0fc;
-    padding: 0 3em 0 3em;
     margin: 0em 0em 0em 0em;
     text-align: center;
     cursor: pointer;
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap .linkHeader {
-    width: 100%;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #00adef;
     line-height: 2.667em;
   }
