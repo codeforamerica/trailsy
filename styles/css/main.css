@@ -2026,7 +2026,7 @@ At some point, update mediaqueries to be in EMS
   text-align: center;
 }
 .overlay .overlay-panel {
-  padding: 1em 2em 1em 2em;
+  padding: 1em 1.5em 1em 1.5em;
 }
 .overlay h1 {
   color: #91c73d;
@@ -2064,12 +2064,13 @@ At some point, update mediaqueries to be in EMS
   cursor: pointer;
 }
 .overlay img {
-  width: 118%;
-  margin: 1em -2em -2em -2em;
+  width: 119.5%;
+  height: auto;
+  margin: 1em 0em -2em -1.5em;
 }
 .overlay-panel {
   margin: 10% auto 0 auto;
-  width: 420px;
+  width: 300px;
   background: #FFF;
   border-radius: 10px;
 }
