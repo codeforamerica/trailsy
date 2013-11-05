@@ -426,43 +426,49 @@
                 </input>
               </div>
               <div class="trailLength-title">
-                <h2>FIND TRAILS BY LENGTH (IN MILES)</h2>
+                <h2>FIND TRAILS BY LENGTH</h2>
               </div>
               <div class="trailFilters">
-                <ul class="trailLength">
-                  <li class="visuallyhidden_2" data-listItemNumber="1">
-                    <label>
-                      <input type="checkbox" value="short" data-filter="lengthFilter" class="filter"/>
-                      <div>
-                        <p>0 - 2 mi</p>
-                      </div>
-                    </label>
-                  </li>
-                  <li class="visuallyhidden_2" data-listItemNumber="2">
-                    <label>
-                      <input type="checkbox" value="medium" data-filter="lengthFilter" class="filter"/>
-                      <div>
-                        <p>2 - 5 mi</p>
-                      </div>
-                    </label>
-                  </li>
-                  <li class="visuallyhidden_2" data-listItemNumber="3">
-                    <label>
-                      <input type="checkbox" value="long" data-filter="lengthFilter" class="filter"/>
-                      <div>
-                        <p>5 - 10 mi</p>
-                      </div>
-                    </label>
-                  </li>
-                  <li class="visuallyhidden_2" data-listItemNumber="4">
-                    <label>
-                      <input type="checkbox" value="verylong" data-filter="lengthFilter" class="filter"/>
-                      <div>
-                        <p>10+ mi</p>
-                      </div>
-                    </label>
-                  </li>
-                </ul>
+                <div class="lengthRow">
+                  <ul class="trailLength">
+                    <li class="visuallyhidden_2" data-listItemNumber="1">
+                      <label>
+                        <input type="checkbox" value="short" data-filter="lengthFilter" class="filter"/>
+                        <div>
+                          <p>0 - 2 mi</p>
+                        </div>
+                      </label>
+                    </li>
+                    <li class="visuallyhidden_2" data-listItemNumber="2">
+                      <label>
+                        <input type="checkbox" value="medium" data-filter="lengthFilter" class="filter"/>
+                        <div>
+                          <p>2 - 5 mi</p>
+                        </div>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="lengthRow">
+                  <ul class="trailLength">
+                    <li class="visuallyhidden_2" data-listItemNumber="3">
+                      <label>
+                        <input type="checkbox" value="long" data-filter="lengthFilter" class="filter"/>
+                        <div>
+                          <p>5 - 10 mi</p>
+                        </div>
+                      </label>
+                    </li>
+                    <li class="visuallyhidden_2" data-listItemNumber="4">
+                      <label>
+                        <input type="checkbox" value="verylong" data-filter="lengthFilter" class="filter"/>
+                        <div>
+                          <p>10+ mi</p>
+                        </div>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
               </div> <!-- trailFilters -->
             </div> <!-- panel-content -->
           </div> <!-- panel-container -->
@@ -471,6 +477,8 @@
             <div class="panel-content list-reset" aria-expanded="true">
               <div class="trailFilters">
                 <div class="trailUse-title"><h2>POPULAR TRAIL TYPES</h2></div>
+                  
+                <div class="activityRow">
                   <ul class="trailUse" id="activityFilter"> <!-- why an id? -->
                     <li class="visuallyhidden_3" data-listItemNumber="1">
                       <label>
@@ -493,6 +501,12 @@
                         </div>
                       </label>
                     </li>
+
+                  </ul>
+                </div>
+
+                <div class="activityRow">
+                  <ul class="trailUse" id="activityFilter"> 
                     <li class="visuallyhidden_3" data-listItemNumber="4">
                       <label>
                         <input rel="4" type="checkbox" title="Equestrian or bridle trails" value="equestrian" class="filter horseFilter" data-filter="activityFilter" />
@@ -515,6 +529,8 @@
                       </label>
                     </li>
                   </ul>
+                </div>
+                
                   <!-- Select All & Clear Selection -->
                 <div class="trailSelection">
                   <span class="clearSelection">Clear Selection</span>
