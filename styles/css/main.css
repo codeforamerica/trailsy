@@ -75,7 +75,8 @@ Need to make sure everything is responsive within that breakpoint.
 At some point, update mediaqueries to be in EMS
 33.125 EMS = 530 divided by 16px (default font size *
 59.375 EMS = 950 divided by 16px
-70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
+70.5 EMS = 1128 divided by 16px */
+/*@import "mixins.less";*/
 /*			Modules				*/
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
@@ -84,12 +85,6 @@ At some point, update mediaqueries to be in EMS
   .desktopTitle {
     display: none;
   }
-}
-@media only screen and (min-width: 950px) {
-  
-}
-@media only screen and (max-width: 529px)  {
-  
 }
 @media only screen and (min-width: 950px) {
   .mobileTitle {
@@ -141,7 +136,6 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
-  
     width: 16em;
   }
 }
@@ -172,7 +166,6 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; */
-  
     width: 18em;
     margin-left: -1em;
   }
@@ -196,9 +189,6 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Filter Module */
-@media only screen and (max-width: 529px)  {
-  
-}
 @media only screen and (min-width: 950px) {
   .is-vishidden {
     position: absolute;
@@ -241,7 +231,6 @@ At some point, update mediaqueries to be in EMS
   .searchbar .search-submit {
     display: none;
     /*			display: inline-block;*/
-  
     position: absolute;
     border: none;
     height: 2em;
@@ -293,9 +282,7 @@ At some point, update mediaqueries to be in EMS
     border: none;
     height: 2em;
     /*top: 4em; */
-  
     /*right: 1em;*/
-  
     z-index: 1;
     width: 2.5em;
     margin-left: -1em;
@@ -358,13 +345,11 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
-  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
-  
     font-color: #bbbdbf;
   }
   .accordion .accordion-innerwrap {
@@ -374,7 +359,6 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 950px) {
   .accordion {
     /*		display: none;*/
-  
     background-color: transparent;
     max-height: 35em;
     overflow: scroll;
@@ -385,13 +369,11 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
-  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
-  
     font-color: #bbbdbf;
   }
   .accordion .icon {
@@ -400,9 +382,6 @@ At some point, update mediaqueries to be in EMS
   .accordion .accordion-innerwrap {
     margin: 0;
   }
-}
-@media only screen and (max-width: 529px)  {
-  
 }
 @media only screen and (min-width: 950px) {
   .searchHeader {
@@ -420,9 +399,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
     /* More Options */
-  
     /* Container of Trail Results*/
-  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -443,9 +420,8 @@ At some point, update mediaqueries to be in EMS
     cursor: text;
     margin-bottom: .5em;
     /*			&:hover {
-  				text-decoration: underline;
-  			}*/
-  
+				text-decoration: underline;
+			}*/
   }
   .panel-container .trigger2 {
     padding: .5em 2.33em 0em .5em;
@@ -479,9 +455,7 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
     /* More Options */
-  
     /* Container of Trail Results*/
-  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -706,7 +680,8 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     background-color: #ffffff;
     padding: 0 0 0 1.75em;
-    margin-bottom: -1em;
+    margin-top: 1.5em;
+    margin-bottom: -1.5em;
   }
   .trailLength-title h2 {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -741,7 +716,8 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     background-color: #ffffff;
     padding: 0 0 0 1.75em;
-    margin-bottom: -0.25em;
+    margin-top: 1em;
+    margin-bottom: -0.5em;
   }
   .trailUse-title h2 {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -771,51 +747,51 @@ At some point, update mediaqueries to be in EMS
   }
 }
 @media only screen and (max-width: 529px)  {
-  .trailFilters {
-    height: 100%;
+  .trailFilters .lengthRow {
+    display: block;
+    margin-right: 1.75em;
+    margin-left: -0.75em;
+    margin-top: -0.5em;
   }
-  .trailFilters .trailLength {
-    height: 2em;
+  .trailFilters .lengthRow .trailLength {
+    height: 2.3em;
     width: 100%;
     background: #ffffff;
-    padding: 0 1.75em 0 1.75em;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
   }
-  .trailFilters .trailLength .visuallyhidden_2 {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 {
     display: inline-block;
-    width: 20%;
-    height: 100%;
+    width: 47%;
   }
-  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox] {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 input[type=checkbox] {
     display: none;
   }
-  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
     background-color: #00adef;
+    /*p {
+								color: @color-white;
+							} */
   }
-  .trailFilters .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div p {
-    color: #ffffff;
-  }
-  .trailFilters .trailLength .visuallyhidden_2 div {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 div {
     background-color: #d9f0fc;
     width: 100%;
     vertical-align: middle;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailLength .visuallyhidden_2 div p {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 div p {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #00adef;
     text-align: center;
     vertical-align: middle;
-    line-height: 2.75em;
+    line-height: 2em;
   }
-  .trailFilters .trailLength .visuallyhidden_2 div:hover {
+  .trailFilters .lengthRow .trailLength .visuallyhidden_2 div:hover {
     background-color: #96daf8;
   }
   .trailFilters ul:after {
@@ -823,155 +799,162 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 100%;
   }
-  .trailFilters .trailUse {
-    height: 2em;
+  .trailFilters .activityRow {
+    display: block;
+    margin-right: 1.75em;
+    margin-left: -0.75em;
+    margin-top: -0.5em;
+  }
+  .trailFilters .activityRow .trailUse {
+    height: 2.4em;
     width: 100%;
-    padding: 0em 1.75em 0em 1.75em;
+    /*padding: 0em 1.75em 0em 1.75em;*/
     background: #ffffff;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
     text-justify: distribute-all-lines;
   }
-  .trailFilters .trailUse .visuallyhidden_3 {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 {
     position: relative;
     display: inline-block;
-    width: 2em;
+    width: 29%;
     height: 2em;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter {
     display: none;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter:checked + div.hikeFilter {
-    background: #00adef url(/img/icon_hike_white2.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].hikeFilter:checked + div.hikeFilter {
+    background: #00adef url(/img/mobile_hike_white.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter {
-    background: #d9f0fc url(/img/icon_hike_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.hikeFilter {
+    background: #d9f0fc url(/img/mobile_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.hikeFilter:hover {
+    background: #96daf8 url(/img/mobile_hike_blue.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter {
+    display: none;
+    width: 2em;
+    height: auto;
+  }
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter:checked + div.cycleFilter {
+    background: #00adef url(/img/mobile_cycle_white.png) no-repeat;
+    background-size: 100% 100%;
+  }
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.cycleFilter {
+    background: #d9f0fc url(/img/mobile_cycle_blue.png) no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.hikeFilter:hover {
-    background: #96daf8 url(/img/icon_hike_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.cycleFilter:hover {
+    background: #96daf8 url(/img/mobile_cycle_blue.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter {
     display: none;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].cycleFilter:checked + div.cycleFilter {
-    background: #00adef url(/img/icon_cycle_white.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter:checked + div.handicapFilter {
+    background: #00adef url(/img/mobile_handicap_white.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter {
-    background: #d9f0fc url(/img/icon_cycle_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.handicapFilter {
+    background: #d9f0fc url(/img/mobile_handicap_blue.png) no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.cycleFilter:hover {
-    background: #96daf8 url(/img/icon_cycle_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.handicapFilter:hover {
+    background: #96daf8 url(/img/mobile_handicap_blue.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter {
     display: none;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].handicapFilter:checked + div.handicapFilter {
-    background: #00adef url(/img/icon_handicap_white.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter:checked + div.horseFilter {
+    background: #00adef url(/img/mobile_horse_white.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter {
-    background: #d9f0fc url(/img/icon_handicap_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.horseFilter {
+    background: #d9f0fc url(/img/mobile_horse_blue.png) no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.handicapFilter:hover {
-    background: #96daf8 url(/img/icon_handicap_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.horseFilter:hover {
+    background: #96daf8 url(/img/mobile_horse_blue.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter {
     display: none;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].horseFilter:checked + div.horseFilter {
-    background: #00adef url(/img/icon_horse_white.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter:checked + div.xcountryskiFilter {
+    background: #00adef url(/img/mobile_xcountryski_white.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter {
-    background: #d9f0fc url(/img/icon_horse_blue.png) no-repeat;
-    background-size: 100% 100%;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-  .trailFilters .trailUse .visuallyhidden_3 div.horseFilter:hover {
-    background: #96daf8 url(/img/icon_horse_blue.png) no-repeat;
-    background-size: 100% 100%;
-  }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter {
-    display: none;
-    width: 2em;
-    height: auto;
-  }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].xcountryskiFilter:checked + div.xcountryskiFilter {
-    background: #00adef url(/img/icon_xcountryski_white.png) no-repeat;
-    background-size: 100% 100%;
-  }
-  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter {
-    background: #d9f0fc url(/img/icon_xcountryski_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.xcountryskiFilter {
+    background: #d9f0fc url(/img/mobile_xcountryski_blue.png) no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: text;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.xcountryskiFilter:hover {
-    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.xcountryskiFilter:hover {
+    background: #96daf8 url(/img/mobile_xcountryski_blue.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter {
     display: none;
     width: 2em;
     height: auto;
   }
-  .trailFilters .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter:checked + div.mtnbikeFilter {
-    background: #96daf8 url(/img/icon_handicap_blue.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 input[type=checkbox].mtnbikeFilter:checked + div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/mobile_mtnbike_gray.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter {
-    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.mtnbikeFilter {
+    background: #e3e3e1 url(/img/mobile_mtnbike_gray.png) no-repeat;
     background-size: 100% 100%;
     width: 100%;
     height: 100%;
     cursor: text;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div.mtnbikeFilter:hover {
-    background: #e3e3e1 url(/img/icon_mtnbike_gray.png) no-repeat;
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div.mtnbikeFilter:hover {
+    background: #e3e3e1 url(/img/mobile_mtnbike_gray.png) no-repeat;
     background-size: 100% 100%;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div {
     background-color: #d9f0fc;
     width: 100%;
     height: 100%;
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .trailFilters .trailUse .visuallyhidden_3 div:hover {
+  .trailFilters .activityRow .trailUse .visuallyhidden_3 div:hover {
     background-color: #96daf8;
   }
   .trailFilters ul:after {
@@ -1306,7 +1289,7 @@ At some point, update mediaqueries to be in EMS
     cursor: pointer;
   }
   .trail-box:hover {
-    background-color: #e3e3e1;
+    background-color: #efefef;
   }
   .trail-box .trailInfo {
     position: relative;
@@ -1366,7 +1349,7 @@ At some point, update mediaqueries to be in EMS
   .trail-box .trailInfo .parkName {
     position: relative;
     display: inline-block;
-    padding: 0em 0 0 2.33em;
+    padding: 0em 0 0 2.4em;
     width: 100%;
     height: 1em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -1374,7 +1357,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     font-size: 12px;
-    color: #e3e3e1;
+    color: #58595b;
   }
   .trail-box .trailheadInfo {
     position: relative;
@@ -1389,6 +1372,7 @@ At some point, update mediaqueries to be in EMS
     margin: 0em 0 0 .375em;
     height: 1em;
     width: auto;
+    vertical-align: top;
   }
   .trail-box .trailheadInfo .trailheadName {
     position: relative;
@@ -1413,7 +1397,7 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     font-size: 12px;
     text-align: right;
-    color: #58595b;
+    color: #bbbdbf;
   }
 }
 @media only screen and (min-width: 950px) {
@@ -1643,7 +1627,6 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
-  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1772,7 +1755,6 @@ At some point, update mediaqueries to be in EMS
     padding-right: 25%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
-  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1871,7 +1853,6 @@ At some point, update mediaqueries to be in EMS
 }
 .trailMapContainer {
   /* Desktop */
-
 }
 @media only screen and (max-width: 529px)  {
   .trailMapContainer {
@@ -1990,7 +1971,6 @@ At some point, update mediaqueries to be in EMS
     width: 20px;
     left: 50%;
     /*margin-left: -8px;*/
-  
     display: block;
     background: url(../../img/crosshair.gif);
     background-position: center center;
@@ -2376,7 +2356,6 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Magic Number! */
-  
     padding: 0em 0 0 2.7em;
     width: 100%;
     height: 1em;
@@ -2682,32 +2661,28 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 100%;
     height: auto;
-    float: right;
     margin-bottom: 1em;
     margin-top: .75em;
     padding: 0em 0em 0em 0em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
-    width: auto;
-    height: 2em;
+    width: 48%;
     position: relative;
     display: inline-block;
     background-color: #d9f0fc;
-    padding: 0 3em 0 3em;
-    margin: 0em 1em .5em 0em;
+    margin: 0em 0em .5em 0em;
     text-align: center;
     cursor: pointer;
+    float: left;
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections .linkHeader {
-    width: 100%;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #00adef;
     line-height: 2.667em;
   }
@@ -2718,26 +2693,23 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
-    width: auto;
-    height: 2em;
+    width: 48%;
+    float: right;
     position: relative;
     display: inline-block;
     background-color: #d9f0fc;
-    padding: 0 3em 0 3em;
     margin: 0em 0em 0em 0em;
     text-align: center;
     cursor: pointer;
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap .linkHeader {
-    width: 100%;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #00adef;
     line-height: 2.667em;
   }
@@ -2817,11 +2789,10 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-  					.sansSerif-light;
-  					color: @color-mid-gray;
-  					font-size: 12px;
-  				} */
-  
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
+				} */
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
@@ -3361,11 +3332,10 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-  					.sansSerif-light;
-  					color: @color-mid-gray;
-  					font-size: 12px;
-  				}*/
-  
+					.sansSerif-light;
+					color: @color-mid-gray;
+					font-size: 12px;
+				}*/
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     height: 5em;
@@ -3432,19 +3402,14 @@ At some point, update mediaqueries to be in EMS
     right: 10px;
     width: 25px;
     /* IE 8 */
-  
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     /* IE 5-7 */
-  
     filter: alpha(opacity=80);
     /* Netscape */
-  
     -moz-opacity: 0.8;
     /* Safari 1.x */
-  
     -khtml-opacity: 0.8;
     /* Good browsers */
-  
     opacity: 0.8;
   }
   .closeDetail p {
@@ -3523,13 +3488,10 @@ audio:not([controls]) {
 html {
   font-family: sans-serif;
   /* 1 */
-
   -webkit-text-size-adjust: 100%;
   /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
-
 }
 /**
  * Remove default margin.
@@ -3684,10 +3646,8 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
-
   padding: 0;
   /* 2 */
-
 }
 /**
  * 1. Correct font family not being inherited in all browsers.
@@ -3700,13 +3660,10 @@ select,
 textarea {
   font-family: inherit;
   /* 1 */
-
   font-size: 100%;
   /* 2 */
-
   margin: 0;
   /* 3 */
-
 }
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
@@ -3739,10 +3696,8 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
-
   cursor: pointer;
   /* 3 */
-
 }
 /**
  * Re-set default cursor for disabled elements.
@@ -3759,10 +3714,8 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
-
   padding: 0;
   /* 2 */
-
 }
 /**
  * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
@@ -3772,11 +3725,9 @@ input[type="radio"] {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
-
   box-sizing: content-box;
 }
 /**
@@ -3802,10 +3753,8 @@ input::-moz-focus-inner {
 textarea {
   overflow: auto;
   /* 1 */
-
   vertical-align: top;
   /* 2 */
-
 }
 /* ==========================================================================
    Tables
