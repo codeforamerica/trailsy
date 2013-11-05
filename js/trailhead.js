@@ -41,6 +41,8 @@ function startup() {
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
+    API_HOST = window.location.hostname;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
     API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
