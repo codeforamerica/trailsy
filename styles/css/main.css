@@ -113,22 +113,21 @@ At some point, update mediaqueries to be in EMS
     border: none;
     box-shadow: none;
     text-align: justify;
-    padding: .5em 0em .5em .5em;
+    /*padding: .5em 0em .5em .5em;*/
   }
   .title-row header .navbar-inner .hamburgerBox {
     cursor: pointer;
     display: inline-block;
     height: 100%;
-    padding: .2em .2em .2em .2em;
+    padding: .85em .75em .75em .75em;
     position: relative;
-    width: 2em;
-    background: #523d32;
+    width: 3em;
   }
   .title-row header .navbar-inner .hamburgerBox .hamburgerLine {
     background-color: #ffffff;
     border: 1px solid #ffffff;
-    height: .25em;
-    margin-top: .25em;
+    height: .1em;
+    margin-top: 20%;
     width: 100%;
     padding-left: .25em;
     padding-right: .25em;
@@ -136,7 +135,10 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
-    width: 16em;
+    width: 18em;
+    margin-bottom: .5em;
+    margin-left: -3.25em;
+    display: inline-block;
   }
 }
 @media only screen and (min-width: 950px) {
