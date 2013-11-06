@@ -409,7 +409,7 @@ At some point, update mediaqueries to be in EMS
 }
 @media only screen and (max-width: 529px)  {
   .panel-container {
-    margin-top: 1em;
+    margin-bottom: .1em;
     /* More Options */
   
     /* Container of Trail Results*/
