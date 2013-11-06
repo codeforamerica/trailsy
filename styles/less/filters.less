@@ -15,7 +15,7 @@
 .searchbar {
 	@media @mobile {
 		line-height: 1;
-		padding: 0 1.75em 0 1.75em;
+		padding: 1em 1.75em 0 1.75em;
 		.search-key {
 			display: block;
 			.sansSerif-light;
@@ -190,40 +190,17 @@
 	}
 }
 
-.searchHeader {
-	@media @mobile {
-		margin-left:.42em !important;
-		.sansSerif-light();
-		color: @color-mid-gray;
-		font-size: 16px;
-		width: 100%;
-		text-align: left;
-		margin-bottom: .5em;
-	}
-
-	@media @desktop {
-		.sansSerif-light();
-		color: @color-mid-gray;
-		cursor: default;
-		padding-left:2em;
-		padding-top:4em;
-	}
-}
-
 .panel-container {
 	@media @mobile {
-		margin-top: 1em;
+		margin-bottom: .1em;
 		#MoreFilters {
 			height: 100%;
 		}
 		&:focus {
 			outline: none;
 		}
-		.trigger1 {
-/*			&:hover {
-				text-decoration: underline;
-			}*/
-		}
+		.triggerAbout {}
+		.trigger1 {}
 		/* More Options */
 		.trigger2 {
 			padding: .5em 2.33em 0em .5em;
@@ -257,7 +234,13 @@
 		&:focus {
 			outline: none;
 		}
-		.trigger1 {}
+		.trigger1 {
+			margin: 0;
+			padding: 1em 2em 1em 1.75em;
+			.sansSerif-light();
+			position: relative;
+			display: inline-block;
+		}
 		/* More Options */
 		.trigger2 {
 			padding: .5em 2.1em .5em .5em;
@@ -283,6 +266,78 @@
 			outline: none;
 		}
 	}
+}
+
+.searchSection {
+	@media @mobile {
+/*		margin-left:.42em !important;*/
+		height: 2em;
+		width: 100%;
+		background-color: @color-mid-light-green;
+		transition: all 0.25s ease;
+		border-bottom: .1em white solid;
+		&:hover {
+			background-color: @color-mid-green;
+		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
+		.searchHeader {
+			padding: .5em 1em 0em 1.75em;
+			width: auto;
+			.sansSerif-light();
+			color: @color-white;
+			width: auto;
+			background-color: none;
+		}
+	}
+	@media @desktop {
+		.sansSerif-light();
+		color: @color-mid-gray;
+		cursor: default;
+		padding-left:2em;
+		padding-top:4em;
+	}
+}
+
+.aboutSection {
+	@media @mobile {
+		height: 2em;
+		width: 100%;
+		border-bottom: .1em white solid;
+		background-color: @color-mid-light-green;
+		transition: all 0.25s ease;
+		&:hover {
+			background-color: @color-mid-green;
+		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
+		.aboutHeader {
+			padding: .5em 1em 0em 1.75em;
+			width: auto;
+			.sansSerif-light();
+			color: @color-white;
+			width: auto;
+			background-color: none;
+		}
+	}
+	@media @desktop {
+	}
+}
+
+.aboutCopy {
+	margin: .25em 1.5em .5em 1.5em;
+	.sansSerif-light;
+	color: @color-mid-gray;
 }
 
 .trailsNearYouResults {
@@ -552,8 +607,6 @@
 				.visuallyhidden_2 {
 					display: inline-block;
 					width: 47%;
-					
-
 					input[type=checkbox] {
 						display: none;
 						&:checked + div {

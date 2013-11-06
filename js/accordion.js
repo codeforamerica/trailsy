@@ -44,6 +44,7 @@ $(document).ready(function() {
     //call to widget trigger2
     accordion('.trigger2');
     accordion('.trigger3');
+    accordion('.triggerAbout');
 
 });//end document.ready()
 
