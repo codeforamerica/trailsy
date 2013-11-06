@@ -1404,7 +1404,7 @@ function startup() {
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
-      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + trail.properties.photo_credit + "</div>");
     }
 
     if (trail.properties.status == 1) {
