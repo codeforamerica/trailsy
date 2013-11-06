@@ -35,7 +35,7 @@ function startup() {
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
   // // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsy-dev.herokuapp.com";
+  var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -1453,6 +1453,15 @@ function startup() {
     if (trailhead.properties.parking && trailhead.properties.parking.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
     }
+    if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_water_green.png'>");
+    }
+    if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_restrooms_green.png'>");
+    }
+    if (trailhead.properties.kiosk && trailhead.properties.kiosk.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_kiosk_green.png'>");
+    }
 
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
@@ -2009,7 +2018,7 @@ function startup() {
       $("#results").text("error: " + JSON.stringify(errorThrown));
     }).done(function(response, textStatus, jqXHR) {
       if (typeof doneCallback === 'function') {
-        // console.log("calling doneCallback");
+        console.log("calling doneCallback");
         doneCallback.call(this, response);
       }
     });
