@@ -332,7 +332,8 @@ function startup() {
       if (currentFilters.activityFilter) {
         for (var i = 0; i < currentFilters.activityFilter.length; i++) {
           var activity = currentFilters.activityFilter[i];
-          if (trail.properties[activity] && trail.properties[activity].toLowerCase().charAt(0) !== "y") {
+          var trailActivity = trail.properties[activity];
+          if (!trailActivity || trailActivity.toLowerCase().charAt(0) !== "y") {
             delete filteredTrailData[trail_id];
           }
         }
@@ -365,6 +366,7 @@ function startup() {
         } else {
           descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         }
+
         if (nameIndex == -1 && descriptionIndex == -1) {
           delete filteredTrailData[trail_id];
         }
@@ -983,7 +985,7 @@ function startup() {
       var trailhead = trailheads[j];
       trailhead.trails = [];
       // for each original trailhead trail name
-      for (var trailNum = 1; trailNum <= 3; trailNum++) {
+      for (var trailNum = 1; trailNum <= 6; trailNum++) {
         var trailWithNum = "trail" + trailNum;
         if (trailhead.properties[trailWithNum] === "") {
           continue;
