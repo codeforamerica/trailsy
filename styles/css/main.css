@@ -75,8 +75,7 @@ Need to make sure everything is responsive within that breakpoint.
 At some point, update mediaqueries to be in EMS
 33.125 EMS = 530 divided by 16px (default font size *
 59.375 EMS = 950 divided by 16px
-70.5 EMS = 1128 divided by 16px */
-/*@import "mixins.less";*/
+70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
 /*			Modules				*/
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
@@ -86,7 +85,13 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
+  
+}
+@media only screen and (max-width: 529px)  {
+  
+}
+@media only screen and (min-width: 530px) {
   .mobileTitle {
     display: none;
   }
@@ -136,10 +141,11 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
+  
     width: 16em;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .title-row {
     position: relative;
     width: 100%;
@@ -166,6 +172,7 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; */
+  
     width: 18em;
     margin-left: -1em;
   }
@@ -189,7 +196,10 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Filter Module */
-@media only screen and (min-width: 950px) {
+@media only screen and (max-width: 529px)  {
+  
+}
+@media only screen and (min-width: 530px) {
   .is-vishidden {
     position: absolute;
     width: 1px;
@@ -202,7 +212,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   .searchbar {
     line-height: 1;
-    padding: 0 1.75em 0 1.75em;
+    padding: 1em 1.75em 0 1.75em;
   }
   .searchbar .search-key {
     display: block;
@@ -231,6 +241,7 @@ At some point, update mediaqueries to be in EMS
   .searchbar .search-submit {
     display: none;
     /*			display: inline-block;*/
+  
     position: absolute;
     border: none;
     height: 2em;
@@ -246,7 +257,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #d9f0fc;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .searchbar {
     background-color: #ffffff;
     line-height: 1;
@@ -282,7 +293,9 @@ At some point, update mediaqueries to be in EMS
     border: none;
     height: 2em;
     /*top: 4em; */
+  
     /*right: 1em;*/
+  
     z-index: 1;
     width: 2.5em;
     margin-left: -1em;
@@ -324,7 +337,7 @@ At some point, update mediaqueries to be in EMS
     left: 0em;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .slideDrawer {
     display: none;
   }
@@ -345,20 +358,23 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
+  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
+  
     font-color: #bbbdbf;
   }
   .accordion .accordion-innerwrap {
     margin: 0;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .accordion {
     /*		display: none;*/
+  
     background-color: transparent;
     max-height: 35em;
     overflow: scroll;
@@ -369,11 +385,13 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
+  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
+  
     font-color: #bbbdbf;
   }
   .accordion .icon {
@@ -383,45 +401,19 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
-@media only screen and (min-width: 950px) {
-  .searchHeader {
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    color: #58595b;
-    cursor: default;
-    padding-left: 2em;
-    padding-top: 4em;
-  }
-}
 @media only screen and (max-width: 529px)  {
   .panel-container {
     margin: 0;
     /* More Options */
+  
     /* Container of Trail Results*/
+  
   }
   .panel-container #MoreFilters {
     height: 100%;
   }
   .panel-container:focus {
     outline: none;
-  }
-  .panel-container .trigger1 {
-    padding: 1em 0 0 2.33em;
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    color: #bbbdbf;
-    font-size: 12px;
-    width: 100%;
-    text-align: left;
-    cursor: text;
-    margin-bottom: .5em;
-    /*			&:hover {
-				text-decoration: underline;
-			}*/
   }
   .panel-container .trigger2 {
     padding: .5em 2.33em 0em .5em;
@@ -451,11 +443,13 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .panel-container {
     margin: 0;
     /* More Options */
+  
     /* Container of Trail Results*/
+  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -492,6 +486,87 @@ At some point, update mediaqueries to be in EMS
   }
 }
 @media only screen and (max-width: 529px)  {
+  .searchSection {
+    height: 2em;
+    width: 100%;
+    background-color: #b0d576;
+    transition: all 0.25s ease;
+    border-bottom: .1em white solid;
+  }
+  .searchSection:hover {
+    background-color: #91c73d;
+  }
+  .searchSection .icon {
+    font-size: 12px;
+    margin-left: -1em;
+    position: relative;
+    display: inline-block;
+    color: white;
+  }
+  .searchSection .searchHeader {
+    padding: .5em 1em 0em 1.75em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    width: auto;
+    background-color: none;
+  }
+}
+@media only screen and (min-width: 530px) {
+  .searchSection {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    cursor: default;
+    padding-left: 2em;
+    padding-top: 4em;
+  }
+}
+@media only screen and (max-width: 529px)  {
+  .aboutSection {
+    height: 2em;
+    width: 100%;
+    border-bottom: .1em white solid;
+    background-color: #b0d576;
+    transition: all 0.25s ease;
+  }
+  .aboutSection:hover {
+    background-color: #91c73d;
+  }
+  .aboutSection .icon {
+    font-size: 12px;
+    margin-left: -1em;
+    position: relative;
+    display: inline-block;
+    color: white;
+  }
+  .aboutSection .aboutHeader {
+    padding: .5em 1em 0em 1.75em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+    width: auto;
+    background-color: none;
+  }
+}
+@media only screen and (min-width: 530px) {
+  
+}
+.aboutCopy {
+  margin: .25em 1.5em .5em 1.5em;
+  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 20px;
+  color: #58595b;
+}
+@media only screen and (max-width: 529px)  {
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
@@ -509,7 +584,7 @@ At some point, update mediaqueries to be in EMS
     color: white;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
@@ -533,7 +608,7 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .panel-content {
     list-style-type: none;
     margin: 0;
@@ -559,7 +634,7 @@ At some point, update mediaqueries to be in EMS
     width: auto;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .js .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -605,7 +680,7 @@ At some point, update mediaqueries to be in EMS
     width: 0;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .no-js .visuallyhidden {
     clip: auto;
     height: auto;
@@ -645,7 +720,7 @@ At some point, update mediaqueries to be in EMS
     clear: both;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .clearfix {
     *zoom: 1;
   }
@@ -667,7 +742,7 @@ At some point, update mediaqueries to be in EMS
     height: 100%;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .list-reset {
     padding: 0;
     list-style: none;
@@ -692,7 +767,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailLength-title {
     height: 1em;
     width: 100%;
@@ -728,7 +803,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailUse-title {
     height: 1em;
     width: 100%;
@@ -771,8 +846,9 @@ At some point, update mediaqueries to be in EMS
   .trailFilters .lengthRow .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
     background-color: #00adef;
     /*p {
-								color: @color-white;
-							} */
+  								color: @color-white;
+  							} */
+  
   }
   .trailFilters .lengthRow .trailLength .visuallyhidden_2 div {
     background-color: #d9f0fc;
@@ -809,6 +885,7 @@ At some point, update mediaqueries to be in EMS
     height: 2.4em;
     width: 100%;
     /*padding: 0em 1.75em 0em 1.75em;*/
+  
     background: #ffffff;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
@@ -985,7 +1062,7 @@ At some point, update mediaqueries to be in EMS
     text-decoration: underline;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailFilters {
     height: auto;
   }
@@ -1221,12 +1298,13 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailList {
     width: 100%;
     max-height: 22em;
     position: relative;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     background-color: #ffffff;
   }
 }
@@ -1255,7 +1333,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailList-title {
     width: 100%;
     height: 40px;
@@ -1400,7 +1478,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trail-box {
     position: relative;
     height: auto;
@@ -1530,7 +1608,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailSource {
     display: none;
     position: absolute;
@@ -1549,7 +1627,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #redoSearch {
     position: absolute;
     top: 40px;
@@ -1627,6 +1705,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1691,7 +1770,7 @@ At some point, update mediaqueries to be in EMS
     border-top: 1px solid #bbbdbf;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .leaflet-popup-content-wrapper {
     border-radius: 0px;
     width: auto;
@@ -1755,6 +1834,7 @@ At some point, update mediaqueries to be in EMS
     padding-right: 25%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1853,6 +1933,7 @@ At some point, update mediaqueries to be in EMS
 }
 .trailMapContainer {
   /* Desktop */
+
 }
 @media only screen and (max-width: 529px)  {
   .trailMapContainer {
@@ -1864,7 +1945,7 @@ At some point, update mediaqueries to be in EMS
     z-index: 8000;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailMapContainer {
     height: 100%;
     min-height: 600px;
@@ -1881,7 +1962,7 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #trailMapSmall {
     display: none;
   }
@@ -1891,7 +1972,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #trailMapLarge {
     position: absolute;
     width: 100%;
@@ -1940,7 +2021,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailMap-title {
     margin-top: -10px;
     margin-left: 10px;
@@ -1963,7 +2044,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #crosshair {
     position: absolute;
     top: 250px;
@@ -1971,6 +2052,7 @@ At some point, update mediaqueries to be in EMS
     width: 20px;
     left: 50%;
     /*margin-left: -8px;*/
+  
     display: block;
     background: url(../../img/crosshair.gif);
     background-position: center center;
@@ -2083,7 +2165,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .trailListColumn {
     position: absolute;
     top: 2em;
@@ -2356,6 +2438,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Magic Number! */
+  
     padding: 0em 0 0 2.7em;
     width: 100%;
     height: 1em;
@@ -2789,10 +2872,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				} */
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				} */
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
@@ -2846,7 +2930,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .detailPanel {
     position: relative;
     display: none;
@@ -3332,10 +3416,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				}*/
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				}*/
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     height: 5em;
@@ -3394,7 +3479,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .closeDetail {
     position: absolute;
     cursor: pointer;
@@ -3402,14 +3487,19 @@ At some point, update mediaqueries to be in EMS
     right: 10px;
     width: 25px;
     /* IE 8 */
+  
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     /* IE 5-7 */
+  
     filter: alpha(opacity=80);
     /* Netscape */
+  
     -moz-opacity: 0.8;
     /* Safari 1.x */
+  
     -khtml-opacity: 0.8;
     /* Good browsers */
+  
     opacity: 0.8;
   }
   .closeDetail p {
@@ -3488,10 +3578,13 @@ audio:not([controls]) {
 html {
   font-family: sans-serif;
   /* 1 */
+
   -webkit-text-size-adjust: 100%;
   /* 2 */
+
   -ms-text-size-adjust: 100%;
   /* 2 */
+
 }
 /**
  * Remove default margin.
@@ -3646,8 +3739,10 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
+
   padding: 0;
   /* 2 */
+
 }
 /**
  * 1. Correct font family not being inherited in all browsers.
@@ -3660,10 +3755,13 @@ select,
 textarea {
   font-family: inherit;
   /* 1 */
+
   font-size: 100%;
   /* 2 */
+
   margin: 0;
   /* 3 */
+
 }
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
@@ -3696,8 +3794,10 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
+
   cursor: pointer;
   /* 3 */
+
 }
 /**
  * Re-set default cursor for disabled elements.
@@ -3714,8 +3814,10 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
+
   padding: 0;
   /* 2 */
+
 }
 /**
  * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
@@ -3725,9 +3827,11 @@ input[type="radio"] {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
+
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
+
   box-sizing: content-box;
 }
 /**
@@ -3753,8 +3857,10 @@ input::-moz-focus-inner {
 textarea {
   overflow: auto;
   /* 1 */
+
   vertical-align: top;
   /* 2 */
+
 }
 /* ==========================================================================
    Tables
@@ -3804,7 +3910,7 @@ section {
     display: none;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #desktop {
     position: absolute;
     left: 0;
@@ -3821,7 +3927,7 @@ section {
     z-index: 1;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #mobile {
     display: none;
     position: relative;
@@ -3839,7 +3945,7 @@ section {
     margin: 0;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   .container {
     position: absolute;
     top: 0;
@@ -3857,7 +3963,7 @@ section {
     overflow: hidden;
   }
 }
-@media only screen and (min-width: 950px) {
+@media only screen and (min-width: 530px) {
   #main {
     position: relative;
     height: 100%;

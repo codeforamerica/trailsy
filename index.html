@@ -418,9 +418,27 @@
       <div class="accordion clearfix">
         <div class="accordion-innerwrap">
           <!-- First Accordion Panel (No Title) mobile-->
+          <div class="panel-container list-reset" tabindex="">
+            <div class="aboutSection triggerAbout">
+              <h4 class="panel-title aboutHeader" aria-hidden="true">ABOUT</h4><span class="icon">&nbsp;&#x25BC;</span>
+            </div>
+            <div class="panel-content list-reset visuallyhidden" aria-expanded="false">
+              <div class="aboutCopy">
+                Welcome ToTheTrails!
+
+                ToTheTrails helps people find and navigate trails in their area. We make it easy to pick the right trail experience, find your way, and keep your bearings---even if your travel spans hundreds of miles and multiple jurisdictions. ToTheTrails is currently in Alpha, serving Summit County, Ohio.
+
+                ToTheTrails was created because hikers, cyclists and other trail-goers deserve the kind of useful and universal web map that drivers take for granted. A long time ago, transportation agencies across all levels of government made standardized data about our nation's road network available to the public. We believe we can do the same for the trail networks that support recreation and non-motorized transportation.
+
+                Trails aren't roads though. Outdoor and wilderness trails can be primitive, subject to significant changes, and require visitors to maintain a much greater awareness of their surroundings. As a result, ToTheTrails is more than just a trail map---it's a place for Park Rangers and the countless public servants dedicated to stewarding our country's parks and trails to communicate with trail-goers and park visitors.
+              </div>
+            </div>
+          </div>
           <div class="panel-container list-reset" tabindex="1">
-            <h4 class="trigger1 searchHeader panel-title active" aria-hidden="true">FIND TRAILS NAME OR KEYWORD</h4>
-            <div class="panel content list-reset" aria-expanded="false">
+            <div class="trigger1 searchSection">
+              <h4 class="panel-title searchHeader active" aria-hidden="true">FIND TRAILS</h4><span class="icon">&nbsp;&#x25BC;</span>
+            </div>
+            <div class="panel-content list-reset" aria-expanded="true">
               <div class="searchbar">
                 <input data-filter="searchFilter" placeholder="Search" class="search-key">
                 </input>
@@ -469,12 +487,7 @@
                     </li>
                   </ul>
                 </div>
-              </div> <!-- trailFilters -->
-            </div> <!-- panel-content -->
-          </div> <!-- panel-container -->
-          <!-- Second Accordion Panel (More Options) mobile-->
-          <div class="panel-container list-reset" tabindex="2" id="MoreFilters">
-            <div class="panel-content list-reset" aria-expanded="true">
+              </div> <!-- trailFilters Length-->
               <div class="trailFilters">
                 <div class="trailUse-title"><h2>POPULAR TRAIL TYPES</h2></div>
                   
@@ -537,9 +550,6 @@
                 </div>
               </div> <!-- trailFilters -->
             </div> <!--panel-content-->
-            <h4 class="trigger2 panel-title" aria-hidden="true">FIND TRAILS FOR ACTIVITIES
-              <span class="icon">&nbsp;&#x25BC;</span>
-            </h4>
           </div> <!--panel-container-->
           <!-- Third Accordion Panel / The List -->
           <div class="panel-container list-reset" tabindex="3">
