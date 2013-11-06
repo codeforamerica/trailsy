@@ -179,7 +179,7 @@ function startup() {
   var trailheadIconOptions = {
     iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
-    popupAnchor: [5, -3]
+    popupAnchor: [0, -3]
   };
 
   var trailheadIcon1Options = $.extend(trailheadIconOptions, {
