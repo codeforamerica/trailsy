@@ -1451,6 +1451,15 @@ function startup() {
     if (trailhead.properties.parking && trailhead.properties.parking.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_parking_green.png'>");
     }
+    if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_water_green.png'>");
+    }
+    if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_restrooms_green.png'>");
+    }
+    if (trailhead.properties.kiosk && trailhead.properties.kiosk.toLowerCase().indexOf('y') === 0) {
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons').html("<img class='amenity-icons' src='img/icon_kiosk_green.png'>");
+    }
 
     $('.detailPanel .detailSource').html(trailhead.properties.source);
     $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
