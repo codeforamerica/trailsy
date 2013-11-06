@@ -7,6 +7,7 @@
 		right: 0;
 		padding: 0;
 		opacity: 100;
+		overflow: hidden;
 		a {
 			display: none;
 		}
@@ -47,6 +48,7 @@
 		height: 100%;
 		background-color: @color-white;
 		transition: all 0.25s ease;
+		-webkit-transition: all 0.25s;
 		z-index: 9000;
 		&.expanded {
 			position: absolute;
@@ -79,6 +81,7 @@
 		&.contracted {
 			position: absolute;
 			top: calc(~'100% - 84px');
+			top: -webkit-calc(~'100% - 84px');
 			overflow: visible;
 			.detailPanelSlider {
 				border-top-left-radius:3em;

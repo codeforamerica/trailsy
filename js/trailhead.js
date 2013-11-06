@@ -34,7 +34,8 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
-  var API_HOST = "http://127.0.0.1:3000";
+  // // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsy-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -78,7 +79,7 @@ function startup() {
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
   var centerOffset = SMALL ? new L.point(0, 0) : new L.Point(450, 0);
-  var MARKER_RADIUS = TOUCH ? 15 : 4;
+  var MARKER_RADIUS = TOUCH ? 12 : 4;
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
@@ -181,7 +182,7 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26 * 0.60, 33 * 0.60],
+    iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
     popupAnchor: [0, -3]
   };
@@ -227,7 +228,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $('.hamburgerLine').click(moveSlideDrawer);
   // $(document).on('click', closeSlideDrawerOnly);
-  $(document).on('click', '.detailPanelSlider', slideDetailPanel);
+  $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -650,7 +651,7 @@ function startup() {
       //   icon: trailheadIcon1
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
         opacity: 0.8
       }).setRadius(MARKER_RADIUS);
@@ -1256,6 +1257,15 @@ function startup() {
     if (!SMALL) {
       $('.accordion').hide();
     }
+    if (SMALL) {
+      if ($(".slideDrawer").hasClass("openDrawer")) {
+        console.log("slide drawer is open");
+        $(".slideDrawer").removeClass("openDrawer");
+        $(".slideDrawer").addClass("closedDrawer");
+        $(".detailPanel").removeClass("hidden");
+        $(".detailPanel").addClass("contracted");
+      }
+    }
     $('.trailhead-trailname.selected').addClass("detail-open");
     $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
     // map.invalidateSize();
@@ -1408,7 +1418,7 @@ function startup() {
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
-      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + trail.properties.photo_credit + "</div>");
     }
 
     if (trail.properties.status == 1) {
@@ -1511,10 +1521,21 @@ function startup() {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
       $('.slideDrawer').addClass("openDrawer");
+      // and move the Detail Panel all the way down
+      if ($(".detailPanel").hasClass("expanded")) {
+        $(".detailPanel").removeClass("expanded");
+        $(".detailPanel").addClass("hidden");
+      } else { 
+        $(".detailPanel").removeClass("contracted");
+        $(".detailPanel").addClass("hidden");
+      }
     } else {
       console.log("closeSlideDrawer");
       $('.slideDrawer').removeClass('openDrawer');
       $('.slideDrawer').addClass('closedDrawer');
+      // and restore the Detail Panel to contracted
+      $('.detailPanel').removeClass("hidden");
+      $('.detailPanel').addClass("contracted");
     }
   }
 
@@ -1657,9 +1678,9 @@ function startup() {
     if (currentTrailhead) {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
-        opacity: 0.8,
+        opacity: 0.6,
         zIndexOffset: 100
       }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
