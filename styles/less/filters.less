@@ -234,7 +234,13 @@
 		&:focus {
 			outline: none;
 		}
-		.trigger1 {}
+		.trigger1 {
+			margin: 0;
+			padding: 1em 2em 1em 1.75em;
+			.sansSerif-light();
+			position: relative;
+			display: inline-block;
+		}
 		/* More Options */
 		.trigger2 {
 			padding: .5em 2.1em .5em .5em;
@@ -264,7 +270,7 @@
 
 .searchSection {
 	@media @mobile {
-		margin-left:.42em !important;
+/*		margin-left:.42em !important;*/
 		height: 2em;
 		width: 100%;
 		background-color: @color-mid-light-green;
