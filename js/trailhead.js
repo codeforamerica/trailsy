@@ -177,9 +177,9 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26 * 0.60, 33 * 0.60],
+    iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
-    popupAnchor: [0, -3]
+    popupAnchor: [5, -3]
   };
 
   var trailheadIcon1Options = $.extend(trailheadIconOptions, {
