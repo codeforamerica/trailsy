@@ -149,15 +149,10 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
-  
-<<<<<<< HEAD
-    width: 16em;
-=======
     width: 18em;
     margin-bottom: .5em;
     margin-left: -3.25em;
     display: inline-block;
->>>>>>> master
   }
 }
 @media only screen and (min-width: 530px) {
