@@ -646,7 +646,7 @@ function startup() {
       //   icon: trailheadIcon1
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
         opacity: 0.8
       }).setRadius(MARKER_RADIUS);
@@ -1653,9 +1653,9 @@ function startup() {
     if (currentTrailhead) {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
-        opacity: 0.8,
+        opacity: 0.6,
         zIndexOffset: 100
       }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
