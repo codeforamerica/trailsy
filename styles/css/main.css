@@ -758,6 +758,7 @@ At some point, update mediaqueries to be in EMS
     list-style: none;
     background-color: #ffffff;
     height: 100%;
+    overflow: scroll;
   }
 }
 @media only screen and (min-width: 530px) {
@@ -2220,7 +2221,8 @@ At some point, update mediaqueries to be in EMS
     height: 100%;
     background-color: #ffffff;
     transition: all 0.25s ease;
-    -webkit-transition: all 0.25s;
+    /*		-webkit-transition: all 0.25s;*/
+  
     z-index: 9000;
   }
   .detailPanel.expanded {
