@@ -85,13 +85,21 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
+<<<<<<< HEAD
 @media only screen and (min-width: 530px) {
+=======
+@media only screen and (min-width: 950px) {
+>>>>>>> master
   
 }
 @media only screen and (max-width: 529px)  {
   
 }
+<<<<<<< HEAD
 @media only screen and (min-width: 530px) {
+=======
+@media only screen and (min-width: 950px) {
+>>>>>>> master
   .mobileTitle {
     display: none;
   }
@@ -118,22 +126,22 @@ At some point, update mediaqueries to be in EMS
     border: none;
     box-shadow: none;
     text-align: justify;
-    padding: .5em 0em .5em .5em;
+    /*padding: .5em 0em .5em .5em;*/
+  
   }
   .title-row header .navbar-inner .hamburgerBox {
     cursor: pointer;
     display: inline-block;
     height: 100%;
-    padding: .2em .2em .2em .2em;
+    padding: .85em .75em .75em .75em;
     position: relative;
-    width: 2em;
-    background: #523d32;
+    width: 3em;
   }
   .title-row header .navbar-inner .hamburgerBox .hamburgerLine {
     background-color: #ffffff;
     border: 1px solid #ffffff;
-    height: .25em;
-    margin-top: .25em;
+    height: .1em;
+    margin-top: 20%;
     width: 100%;
     padding-left: .25em;
     padding-right: .25em;
@@ -142,7 +150,14 @@ At some point, update mediaqueries to be in EMS
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
   
+<<<<<<< HEAD
     width: 16em;
+=======
+    width: 18em;
+    margin-bottom: .5em;
+    margin-left: -3.25em;
+    display: inline-block;
+>>>>>>> master
   }
 }
 @media only screen and (min-width: 530px) {
@@ -199,7 +214,11 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   
 }
+<<<<<<< HEAD
 @media only screen and (min-width: 530px) {
+=======
+@media only screen and (min-width: 950px) {
+>>>>>>> master
   .is-vishidden {
     position: absolute;
     width: 1px;
@@ -367,6 +386,9 @@ At some point, update mediaqueries to be in EMS
   
     font-color: #bbbdbf;
   }
+  .accordion .icon {
+    color: #00adef;
+  }
   .accordion .accordion-innerwrap {
     margin: 0;
   }
@@ -401,9 +423,37 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
+<<<<<<< HEAD
+=======
+@media only screen and (max-width: 529px)  {
+  .searchHeader {
+    margin-left: .42em !important;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    line-height: 20px;
+    color: #58595b;
+    font-size: 16px;
+    width: 100%;
+    text-align: left;
+    margin-bottom: .5em;
+  }
+}
+@media only screen and (min-width: 950px) {
+  .searchHeader {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    cursor: default;
+    padding-left: 2em;
+    padding-top: 4em;
+  }
+}
+>>>>>>> master
 @media only screen and (max-width: 529px)  {
   .panel-container {
-    margin: 0;
+    margin-top: 1em;
     /* More Options */
   
     /* Container of Trail Results*/
@@ -415,6 +465,15 @@ At some point, update mediaqueries to be in EMS
   .panel-container:focus {
     outline: none;
   }
+<<<<<<< HEAD
+=======
+  .panel-container .trigger1 {
+    /*			&:hover {
+  				text-decoration: underline;
+  			}*/
+  
+  }
+>>>>>>> master
   .panel-container .trigger2 {
     padding: .5em 2.33em 0em .5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2103,7 +2162,7 @@ At some point, update mediaqueries to be in EMS
   text-align: center;
 }
 .overlay .overlay-panel {
-  padding: 1em 2em 1em 2em;
+  padding: 1em 1.5em 1em 1.5em;
 }
 .overlay h1 {
   color: #91c73d;
@@ -2141,12 +2200,13 @@ At some point, update mediaqueries to be in EMS
   cursor: pointer;
 }
 .overlay img {
-  width: 118%;
-  margin: 1em -2em -2em -2em;
+  width: 119.5%;
+  height: auto;
+  margin: 1em 0em -2em -1.5em;
 }
 .overlay-panel {
   margin: 10% auto 0 auto;
-  width: 420px;
+  width: 300px;
   background: #FFF;
   border-radius: 10px;
 }

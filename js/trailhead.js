@@ -40,9 +40,13 @@ function startup() {
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
-    API_HOST = "http://trailsyserver-dev.herokuapp.com";
+    // API_HOST = "http://trailsyserver-dev.herokuapp.com";
+    API_HOST = window.location.href;
+  } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
+    API_HOST = window.location.href;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = "http://trailsyserver-prod.herokuapp.com";
+    API_HOST = window.location.href;
+    // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
   // make this real
@@ -234,18 +238,18 @@ function startup() {
   // Kick things off
 
   var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
-      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
+      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier versions of that web browser." + 
       "<p>Please upgrade to the latest version of " +
       "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
       "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
       "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
-      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox." +
+      "<p>If you are currently using Windows XP, you'll need to download and use Chrome or Firefox." +
       "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
     "<p>To The Trails is currently in public beta, so it still a work in progress. We'd love to hear how this site is working for you, so we can make it even better." +
-    "<p>Send your feedback to " +
+    "<p>Send feedback and report bugs to " +
     "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
