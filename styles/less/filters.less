@@ -14,9 +14,8 @@
 
 .searchbar {
 	@media @mobile {
-		background-color: @color-white;
 		line-height: 1;
-		padding: 0 1em 0 1em;
+		padding: 1em 1.75em 0 1.75em;
 		.search-key {
 			display: block;
 			.sansSerif-light;
@@ -25,7 +24,7 @@
 			height: 2em;
 		  	border: 1px solid;
 		  	border-color: @color-light-mid-gray;
-			padding-left: .25em;
+			padding-left: .5em;
 			padding-right: 0;
 			padding-top: .5em;
 			padding-bottom: .5em;
@@ -59,19 +58,19 @@
 	@media @desktop {
 		background-color: @color-white;
 		line-height: 1;
-		padding: 0 1.75em 0 1.75em;
 		.search-key {
-			display: block;
+			display:inline-block;
 			.sansSerif-light;
 			color: @color-light-mid-gray;
-			width: 100%;
+			width: 73%;
 			height: 2em;
 		  	border: 1px solid;
 		  	border-color: @color-light-mid-gray;
 			padding-left: .5em;
-			padding-right: 0;
+			padding-right: 0em;
 			padding-top: .5em;
 			padding-bottom: .5em;
+			margin-left:1.75em;
 			position: relative;
 			top: 0;
 			line-height: 1.5em;
@@ -82,20 +81,22 @@
 			}
 		}
 		.search-submit {
-			display: none;
-/*			display: inline-block;*/
-			position: absolute;
+			float:right;
+			display:inline-block;
 			border: none;
 			height: 2em;
-			top: 4em;
-			right: 1em;
+			/*top: 4em; */
+			/*right: 1em;*/
 			z-index: 1;
 			width: 2.5em;
-			padding: 0;
+			margin-left:-1em;
+			margin-right:1.75em;
 			cursor: pointer;
-			background-color: @color-light-blue;
+			background: @color-light-blue url(/img/icon_mag_blue.png) no-repeat;
+				background-size: 100% 100%;
 			&:hover {
-				background-color: @color-light-blue;
+				background: @color-mid-blue url(/img/icon_mag_blue.png) no-repeat;
+				background-size: 100% 100%;
 			}
 		}
 	}
@@ -120,11 +121,11 @@
 		-webkit-transition: all 300ms;
 		transition: all 300ms;
 		&.closedDrawer {
-			top: 5em;
+			top: 3em;
 			left: -18em;
 		}
 		&.openDrawer {
-			top: 5em;
+			top: 3em;
 			left: 0em;
 		}
 	}
@@ -136,7 +137,7 @@
 .accordion {
 	@media @mobile {
 		display: block;
-		max-height: 35em;
+		max-height: 50em;
 		overflow: scroll;
 		lbackground-color: transparent;
 		-moz-transition: all 300ms;
@@ -154,6 +155,9 @@
 			transition: .1s all ease-in-out;
 /*			background: @color-white;*/
 			font-color: @color-light-mid-gray;
+		}
+		.icon {
+			color:@color-dark-blue;
 		}
 		.accordion-innerwrap {
 			margin: 0;
@@ -186,40 +190,20 @@
 	}
 }
 
-.searchHeader {
-	@media @mobile {}
-	@media @desktop {
-		.sansSerif-light();
-		color: @color-mid-gray;
-		cursor: default;
-		padding-left:2em;
-		padding-top:4em;
-	}
-}
-
 .panel-container {
 	@media @mobile {
-		margin: 0;
+		margin-bottom: .1em;
 		#MoreFilters {
 			height: 100%;
 		}
 		&:focus {
 			outline: none;
 		}
-		.trigger1 {
-			padding: 1em 1.33em;
-			.sansSerif-light();
-			color: @color-light-mid-gray;
-			font-size: 12px;
-			width: 100%;
-			text-align: left;
-			&:hover {
-				text-decoration: underline;
-			}
-		}
+		.triggerAbout {}
+		.trigger1 {}
 		/* More Options */
 		.trigger2 {
-			padding: .5em 1em 0em .5em;
+			padding: .5em 2.33em 0em .5em;
 			.sansSerif-light();
 			color: @color-light-mid-gray;
 			font-size: 12px;
@@ -231,7 +215,7 @@
 		}
 		/* Container of Trail Results*/
 		.trails-count {
-			padding: .5em 1em 0em 1em;
+			padding: .5em 1em 0em 1.75em;
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
@@ -250,7 +234,13 @@
 		&:focus {
 			outline: none;
 		}
-		.trigger1 {}
+		.trigger1 {
+			margin: 0;
+			padding: 1em 2em 1em 1.75em;
+			.sansSerif-light();
+			position: relative;
+			display: inline-block;
+		}
 		/* More Options */
 		.trigger2 {
 			padding: .5em 2.1em .5em .5em;
@@ -269,13 +259,85 @@
 			width: auto;
 			.sansSerif-light();
 			color: @color-white;
-			width: 100%;
+			width: auto;
 			background-color: none;
 		}
 		li:focus {
 			outline: none;
 		}
 	}
+}
+
+.searchSection {
+	@media @mobile {
+/*		margin-left:.42em !important;*/
+		height: 2em;
+		width: 100%;
+		background-color: @color-mid-light-green;
+		transition: all 0.25s ease;
+		border-bottom: .1em white solid;
+		&:hover {
+			background-color: @color-mid-green;
+		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
+		.searchHeader {
+			padding: .5em 1em 0em 1.75em;
+			width: auto;
+			.sansSerif-light();
+			color: @color-white;
+			width: auto;
+			background-color: none;
+		}
+	}
+	@media @desktop {
+		.sansSerif-light();
+		color: @color-mid-gray;
+		cursor: default;
+		padding-left:2em;
+		padding-top:4em;
+	}
+}
+
+.aboutSection {
+	@media @mobile {
+		height: 2em;
+		width: 100%;
+		border-bottom: .1em white solid;
+		background-color: @color-mid-light-green;
+		transition: all 0.25s ease;
+		&:hover {
+			background-color: @color-mid-green;
+		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
+		.aboutHeader {
+			padding: .5em 1em 0em 1.75em;
+			width: auto;
+			.sansSerif-light();
+			color: @color-white;
+			width: auto;
+			background-color: none;
+		}
+	}
+	@media @desktop {
+	}
+}
+
+.aboutCopy {
+	margin: .25em 1.5em .5em 1.5em;
+	.sansSerif-light;
+	color: @color-mid-gray;
 }
 
 .trailsNearYouResults {
@@ -287,7 +349,7 @@
 		&:hover {
 			background-color: @color-mid-green;
 		};
-		span {
+		.icon {
 			font-size: 12px;
 			margin-left: -1em;
 			position: relative;
@@ -303,6 +365,13 @@
 		&:hover {
 			background-color: @color-mid-light-green;
 		};
+		.icon {
+			font-size: 12px;
+			margin-left: -1em;
+			position: relative;
+			display: inline-block;
+			color: white;
+		}
 	}
 }
 
@@ -451,6 +520,7 @@
 		padding: 0;
 		list-style: none;
 		background-color: @color-white;
+		height: 100%;
 	}
 	@media @desktop {
 		padding: 0;
@@ -461,77 +531,108 @@
 
 
 .trailLength-title {
-	height: 1em;
-	width: 100%;
-	background-color: @color-white;
-	padding: 0 0 0 1.75em;
-	margin-top:1.5em;
-	margin-bottom:-.5em;
-	h2 {
-		.sansSerif-light();
-		font-size: 12px;
-		color: @color-light-mid-gray;
+	@media @mobile {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-top:1.5em;
+		margin-bottom: -1.5em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
+	}
+	@media @desktop {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-bottom: .5em;
+		margin-top: 1.5em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
 	}
 }
 
 .trailUse-title {
-	height: 1em;
-	width: 100%;
-	background-color: @color-white;
-	padding-left: 1.75em;
-	padding-bottom: 1em;
-	margin-bottom:-.5em;
-	margin-top:2.5em;
-	h2 {
-		.sansSerif-light();
-		font-size: 12px;
-		color: @color-light-mid-gray;
-		padding-bottom: 1em;
+	@media @mobile {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-top:1em;
+		margin-bottom: -.5em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
+	}
+	@media @desktop {
+		height: 1em;
+		width: 100%;
+		background-color: @color-white;
+		padding: 0 0 0 1.75em;
+		margin-top: 2.5em;
+		margin-bottom: -.25em;
+		h2 {
+			.sansSerif-light();
+			font-size: 12px;
+			color: @color-light-mid-gray;
+		}
 	}
 }
 
 .trailFilters {
 	@media @mobile {
-		height: auto;
-		.trailLength {
-			height: 2em;
-			width: 100%;
-			background: @color-white;
-			padding: 0 1.75em 0 1.75em;
-			margin: 0em 0 1em 0;
-    		text-align: justify;
-    		-ms-text-justify: distribute-all-lines;
-    		text-justify: distribute-all-lines;
-			.visuallyhidden_2 {
-				display: inline-block;
-				width: 20%;
-				height: 100%;
-				input[type=checkbox] {
-					display: none;
-					&:checked + div {
-						background-color: @color-dark-blue;
-						p {
-							color: @color-white;
+		.lengthRow {
+			display:block;
+			margin-right:1.75em;
+			margin-left:-.75em;
+			margin-top:-.5em;
+			.trailLength {
+				height: 2.3em;
+				width: 100%;
+				background: @color-white;
+	    		text-align: justify;
+	    		-ms-text-justify: distribute-all-lines;
+	    		text-justify: distribute-all-lines;
+	    		-ms-text-justify: distribute-all-lines;
+	    		text-justify: distribute-all-lines;
+				.visuallyhidden_2 {
+					display: inline-block;
+					width: 47%;
+					input[type=checkbox] {
+						display: none;
+						&:checked + div {
+							background-color: @color-dark-blue;
+							/*p {
+								color: @color-white;
+							} */
 						}
 					}
-				}
-				div {
-					background-color: @color-light-blue;
-					width: 100%;
-					height: 2em;
-					vertical-align: middle;
-					cursor: pointer;
-					transition: all 0.25s ease;
-					p {
-						.sansSerif-light();
-						font-size: 12px;
-						color: @color-dark-blue;
-						text-align: center;
+					div {
+						background-color: @color-light-blue;
+						width: 100%;
 						vertical-align: middle;
-						line-height: 2.75em;
-					}
-					&:hover {
-						background-color: @color-mid-blue;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						p {
+							.sansSerif-light();
+							font-size: 16px;
+							color: @color-dark-blue;
+							text-align: center;
+							vertical-align: middle;
+							line-height: 2em;
+						}
+						&:hover {
+							background-color: @color-mid-blue;
+						}
 					}
 				}
 			}
@@ -541,45 +642,164 @@
 			display: inline-block;
 			width: 100%;
 		}
-		.trailUse {
-			height: 2em;
-			width: 100%;
-			padding: 0em 1.75em 0em 1.75em;
-			background: @color-white;
-    		text-align: justify;
-    		-ms-text-justify: distribute-all-lines;
-    		text-justify: distribute-all-lines;
-			.visuallyhidden_3 {
-				position: relative;
-				display: inline-block;
-				width: 2em;
-				height: 2em;
-				input[type=checkbox] {
-					display: none;
-					background-color: @color-light-blue;
-					width: 2em;
-					height: auto;
-					&:checked + div {
-						background-color: @color-dark-blue;
+		.activityRow {
+			display:block;
+			margin-right:1.75em;
+			margin-left:-.75em;
+			margin-top:-.5em;
+			.trailUse {
+				height: 2.4em;
+				width: 100%;
+				/*padding: 0em 1.75em 0em 1.75em;*/
+				background: @color-white;
+	    		text-align: justify;
+	    		-ms-text-justify: distribute-all-lines;
+	    		text-justify: distribute-all-lines;
+				.visuallyhidden_3 {
+					position: relative;
+					display: inline-block;
+					width: 29%;
+					height: 2em;
+					input[type=checkbox].hikeFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+
+						&:checked + div.hikeFilter {
+							background: @color-dark-blue url(/img/mobile_hike_white.png) no-repeat;
+							background-size: 100% 100%;
+						}
 					}
-				}
-				div {
-					background-color: @color-light-blue;
-					width: 100%;
-					height: 100%;
-					cursor: pointer;
-					transition: all 0.25s ease;
-					&:hover {
-						background-color: @color-mid-blue;
+					div.hikeFilter {
+						background: @color-light-blue url(/img/mobile_hike_blue.png) no-repeat;
+						background-size: 100% 100%;
+						text-align:center;
+						width: 100%;
+						height: 100%;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background: @color-mid-blue url(/img/mobile_hike_blue.png) no-repeat;
+							background-size: 100% 100%;
+						}
 					}
-				}
-				.filter-icons {
-					position: absolute;
-					top: 10%;
-					width: 2em;
-					height: auto;
-				}
-	 		}
+					input[type=checkbox].cycleFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+						&:checked + div.cycleFilter {
+							background: @color-dark-blue url(/img/mobile_cycle_white.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					div.cycleFilter {
+						background: @color-light-blue url(/img/mobile_cycle_blue.png) no-repeat;
+						background-size: 100% 100%;
+						width: 100%;
+						height: 100%;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background: @color-mid-blue url(/img/mobile_cycle_blue.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					input[type=checkbox].handicapFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+						&:checked + div.handicapFilter {
+							background: @color-dark-blue url(/img/mobile_handicap_white.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					div.handicapFilter {
+						background: @color-light-blue url(/img/mobile_handicap_blue.png) no-repeat;
+						background-size: 100% 100%;
+						width: 100%;
+						height: 100%;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background: @color-mid-blue url(/img/mobile_handicap_blue.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					input[type=checkbox].horseFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+						&:checked + div.horseFilter {
+							background: @color-dark-blue url(/img/mobile_horse_white.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					div.horseFilter {
+						background: @color-light-blue url(/img/mobile_horse_blue.png) no-repeat;
+						background-size: 100% 100%;
+						width: 100%;
+						height: 100%;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background: @color-mid-blue url(/img/mobile_horse_blue.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					input[type=checkbox].xcountryskiFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+						&:checked + div.xcountryskiFilter {
+							background: @color-dark-blue url(/img/mobile_xcountryski_white.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					div.xcountryskiFilter {
+						background: @color-light-blue url(/img/mobile_xcountryski_blue.png) no-repeat;
+						background-size: 100% 100%;
+						width: 100%;
+						height: 100%;
+						cursor: text;
+						transition: all 0.25s ease;
+						&:hover {
+							background:@color-mid-blue url(/img/mobile_xcountryski_blue.png) no-repeat;
+							background-size: 100% 100%; 
+						}
+					}
+					input[type=checkbox].mtnbikeFilter {
+						display: none;
+						width: 2em;
+						height: auto;
+						&:checked + div.mtnbikeFilter {
+							background: @color-light-gray url(/img/mobile_mtnbike_gray.png) no-repeat;
+							background-size: 100% 100%;
+						}
+					}
+					div.mtnbikeFilter {
+						background: @color-light-gray url(/img/mobile_mtnbike_gray.png) no-repeat;
+						background-size: 100% 100%;
+						width: 100%;
+						height: 100%;
+						cursor: text;
+						transition: all 0.25s ease;
+						&:hover {
+							background: @color-light-gray url(/img/mobile_mtnbike_gray.png) no-repeat;
+							background-size: 100% 100%; 
+						}
+					}
+					div {
+						background-color: @color-light-blue;
+						width: 100%;
+						height: 100%;
+						cursor: pointer;
+						transition: all 0.25s ease;
+						&:hover {
+							background-color: @color-mid-blue;
+						}
+					}
+		 		}
+			}
 		}
 		ul:after {
 			content: "";
@@ -595,9 +815,9 @@
 			height: 2em;
 			cursor: pointer;
 			text-align: center;
-			span {
+			.clearSelection {
 				.sansSerif-light();
-				color: @color-light-mid-gray;
+				color: @color-dark-blue;
 				text-align: center;
 				vertical-align: middle;
 				line-height: 2em;
@@ -634,15 +854,16 @@
 				div {
 					background-color: @color-light-blue;
 					width: 100%;
-					height: 2em;
+					vertical-align: middle;
 					cursor: pointer;
 					transition: all 0.25s ease;
 					p {
 						.sansSerif-light();
+						font-size: 12px;
 						color: @color-dark-blue;
 						text-align: center;
 						vertical-align: middle;
-						line-height: 2em;
+						line-height: 2.75em;
 					}
 					&:hover {
 						background-color: @color-mid-blue;
@@ -811,7 +1032,7 @@
 			height: 2em;
 			cursor: pointer;
 			text-align: center;
-			span {
+			.clearSelection {
 				.sansSerif-light();
 				color: @color-dark-blue;
 				text-align: center;

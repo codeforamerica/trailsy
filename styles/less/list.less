@@ -4,7 +4,7 @@
 .trailList {
 	@media @mobile {
 		width: 100%;
-		max-height: 17em;
+		max-height: 25em;
 		position: relative;
 		overflow: scroll;
 		background-color: @color-white;
@@ -13,7 +13,8 @@
 		width: 100%;
 		max-height: 22em;
 		position: relative;
-		overflow: scroll;
+		overflow-y: scroll;
+		overflow-x: hidden;
 		background-color: @color-white;
 	}
 }
@@ -73,7 +74,7 @@
 		border-color: @color-light-gray;
 		cursor: pointer;
 		&:hover {
-			background-color: @color-light-gray;
+			background-color: @color-hover-gray;
 		}
 		.trailInfo {
 			position: relative;
@@ -97,7 +98,7 @@
 			.trail {
 				position: relative;
 				display: inline-block;
-				margin: 0em 0 0 .5em;
+				margin: .5em 0 0 .5em;
 				height: auto;
 				width: auto;
 				max-width: 50%;
@@ -109,7 +110,7 @@
 			.trailLength {
 				position: relative;
 				display: inline-block;
-				margin: .25em 1.5em 0 0em;
+				margin: .25em 2.33em 0 0em;
 				float: right;
 				height: auto;
 				width: auto;
@@ -124,7 +125,7 @@
 			.parkName {
 				position: relative;
 				display: inline-block;
-				padding: 0em 0 0 1.33em;
+				padding: 0em 0 0 2.4em;
 				width: 100%;
 				height: 1em;
 			   	.sansSerif-light();
@@ -137,30 +138,33 @@
 			display: inline-block;
 			width: 100%;
 			height: auto;
+			margin-top: .25em;
 			.trailheadIcon {
 				position: relative;
 				display: inline-block;
 				margin: 0em 0 0 .375em;
 				height: 1em;
 				width: auto;
+				vertical-align:top;
 			}
 			.trailheadName {
 				position: relative;
 				display: inline-block;
-				margin: .5em 0 0 .75em;
+				margin: 0em 0 0 .75em;
 			   	.sansSerif-light();
 			   	font-size: 12px;
 				color: @color-mid-gray;
+				max-width: 45%;
 			}
 			.trailheadDistance {
 				position: relative;
 				display: inline-block;
 				float: right;
-				margin: .5em 1.5em 0 0em;
+				margin: .2em 2.33em 0 0em;
 			 	.sansSerif-light();
 			   	font-size: 12px;
 				text-align: right;
-				color: @color-mid-gray;
+				color: @color-light-mid-gray;
 			}
 		}
 	}
@@ -173,13 +177,14 @@
 		border-color: @color-light-gray;
 		cursor: pointer;
 		&:hover {
-			background-color: @color-light-gray;
+			background-color: @color-hover-gray;
 		}
 		.trailInfo {
 			position: relative;
 			display: inline-block;
 			width: 100%;
 			height: auto;
+			opacity: 1.0;
 			.trailCurrentIndex {
 				position: relative;
 				display: inline-block;
@@ -225,6 +230,7 @@
 				position: relative;
 				display: inline-block;
 				padding: 0em 0 0 1.33em;
+				margin-left:1em;
 				width: 100%;
 				height: 1em;
 			   	.sansSerif-light();
@@ -254,7 +260,7 @@
 			   	.sansSerif-light();
 			   	font-size: 12px;
 				color: @color-mid-gray;
-				max-width: 54%;
+				max-width: 50%;
 			}
 			.trailheadDistance {
 				position: relative;
@@ -264,7 +270,7 @@
 			 	.sansSerif-light();
 			   	font-size: 12px;
 				text-align: right;
-				color: @color-mid-gray;
+				color: @color-light-mid-gray;
 			}
 		}
 	}

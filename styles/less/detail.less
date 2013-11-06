@@ -7,7 +7,7 @@
 		right: 0;
 		padding: 0;
 		opacity: 100;
-		z-index: 999;
+		overflow: hidden;
 		a {
 			display: none;
 		}
@@ -47,16 +47,19 @@
 		width: 100%;
 		height: 100%;
 		background-color: @color-white;
-		z-index: 9999;
 		transition: all 0.25s ease;
+		-webkit-transition: all 0.25s;
+		z-index: 9000;
 		&.expanded {
 			position: absolute;
 			top: 3em;
 			overflow: visible;
 			.detailPanelSlider {
-				height: 3%;
-				width: 10%;
-				top: -3%;
+				border-top-left-radius:3em;
+				border-top-right-radius:3em;
+				height: 1.5em;
+				width: 3em;
+				top: -1.5em;
 				left: 45%;
 				position: absolute;
 				background-color: @color-dark-blue;
@@ -67,8 +70,8 @@
 					width: 0; 
 					height: 0; 
 					position: absolute;
-					left: .55em;
-					top: 25%;
+					left: .75em;
+					top: .6em;
 					border-left: .8em solid transparent;
 					border-right: .8em solid transparent;
 					border-top: .8em solid @color-white;
@@ -77,12 +80,15 @@
 		}
 		&.contracted {
 			position: absolute;
-			top: 80%;
+			top: calc(~'100% - 84px');
+			top: -webkit-calc(~'100% - 84px');
 			overflow: visible;
 			.detailPanelSlider {
-				height: 3%;
-				width: 10%;
-				top: -3%;
+				border-top-left-radius:3em;
+				border-top-right-radius:3em;
+				height: 1.5em;
+				width: 3em;
+				top: -1.5em;
 				left: 45%;
 				position: absolute;
 				background-color: @color-dark-blue;
@@ -93,8 +99,8 @@
 					width: 0; 
 					height: 0; 
 					position: absolute;
-					left: .55em;
-					top: 25%;
+					left: .75em;
+					top:.6em;
 					border-left: .8em solid transparent;
 					border-right: .8em solid transparent;
 					border-bottom: .8em solid @color-white;
@@ -286,7 +292,7 @@
 					position: relative;
 					display: inline-block;
 					float: right;
-					margin: .5em 1.5em 0 0em;
+					margin: .5em 3.5em 0 0em;
 				 	.sansSerif-light();
 				   	font-size: 12px;
 					text-align: right;
@@ -299,6 +305,7 @@
 			height: auto;
 			width: 100%;
 			overflow: scroll;
+			background-color: @color-white;
 			.detailLengthRow {
 				position: relative;
 				display: inline-block;
@@ -375,8 +382,19 @@
 					color: @color-light-mid-gray;
 					font-size: 12px;
 				}
-				.detailConditionsDescriptions {
-					margin-top: .75em;
+				.detailConditionsDescription {
+					margin: .25em 0 .5em 0;
+					.sansSerif-light;
+					color: @color-mid-gray;
+
+				}
+				.detailTrailSurfaceHeader {
+					.sansSerif-light;
+					color: @color-light-mid-gray;
+					font-size: 12px;
+				}
+				.detailTrailSurface {
+					margin: .25em 0 .5em 0;
 					.sansSerif-light;
 					color: @color-mid-gray;
 				}
@@ -450,14 +468,29 @@
 					.detailTrailheadName {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
 					}
 					.detailTrailheadPark {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
 					}
-					.detailTrailheadCounty {
+					.detailTrailheadAddress {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
+					}
+					.detailTrailheadCity {
+						.sansSerif-light;
+						color: @color-mid-gray;
+					}
+					.detailTrailheadState {
+						.sansSerif-light;
+						color: @color-mid-gray;
+					}
+					.detailTrailheadZip {
+						.sansSerif-light;
+						color: @color-mid-gray;	
 					}
 				}
 				.detailLinksToMore {
@@ -465,27 +498,24 @@
 					display: inline-block;
 					width: 100%;
 					height: auto;
-					float: right;
 					margin-bottom: 1em;
 					margin-top: .75em;
 					padding: 0em 0em 0em 0em;
 					.detailDirections {
-						width: auto;
-						height: 2em;
+						width:48%;
 						position: relative;
 						display: inline-block;
-						background-color: @color-light-blue;
-						padding: 0 3em 0 3em;
-						margin: 0em 1em .5em 0em;
+						background-color: @color-light-blue;						
+						margin: 0em 0em .5em 0em;
 						text-align: center;
 						cursor: pointer;
+						float:left;
 						transition: all 0.25s ease;
-						.linkHeader {
-							width: 100%;
+						.linkHeader {							
 							vertical-align: middle;
 							text-decoration: none;
 						  	.sansSerif-light;
-						  	font-size: 12px;
+						  	font-size: 16px;
 						  	color: @color-dark-blue;
 							line-height: 2.667em;
 						}
@@ -497,22 +527,20 @@
 						}
 					}
 					.detailPrintMap {
-						width: auto;
-						height: 2em;
+						width: 48%;
+						float:right;
 						position: relative;
 						display: inline-block;
 						background-color: @color-light-blue;
-						padding: 0 3em 0 3em;
 						margin: 0em 0em 0em 0em;
 						text-align: center;
 						cursor: pointer;
 						transition: all 0.25s ease;
 						.linkHeader {
-							width: 100%;
 							vertical-align: middle;
 							text-decoration: none;
 						  	.sansSerif-light;
-						  	font-size: 12px;
+						  	font-size: 16px;
 						  	color: @color-dark-blue;
 							line-height: 2.667em;
 						}
@@ -552,82 +580,98 @@
 					height: auto;
 					width: 100%;
 					margin-top: 1.5em;
-					.social-icon {
+					.social-icon a {
 						position: relative;
 						display: inline-block;
-						width: 5em;
-						height: 1.25em;
+						width: 6.5em;
 						background-color: @color-light-mid-gray;
+						color:white;
 						float: right;
-						margin: 0em 0em .25em .5em;
-						padding: 0 .5em 0 0em;
+						margin: 0em 0em .25em 1.25em;
+						padding: 0 .5em 0em 0em;
 						cursor: pointer;
 						transition: all 0.25s ease;
 						text-align: right;
 						vertical-align: middle;
+						.sansSerif-light;
+						font-size: 12px;
+						color: @color-white;
+						text-align: right;
+						text-decoration: none;
 						&:hover {
 							background-color: @color-mid-gray;
 						}
-						a {
-							.sansSerif-light;
-							font-size: 12px;
-							color: @color-white;
-							text-align: right;
-							vertical-align: middle;
-							text-decoration: none;
-							margin-top: .5em;
-						}
 					}
 				}
+			}
+			.extraLine {
+				border-top: 1px solid @color-light-gray;
+				position:relative;
+				display:block;	
+				margin-bottom:.5em;
+			}
+			.extraLine2 {
+				border-bottom: 1px solid @color-light-gray;
+				position:relative;	
+				display:block;
 			}
 			.detailFooter {
 				position: relative;
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 0em .5em 0em 0em;
-				border-top: 1px solid @color-light-mid-gray;
+				padding: .5em 1em .75em 1em;
 				.icon-large {
 					width: 5em;
 					// height: 100%;
 					float: left;
 					position: relative;
 					display: inline-block;
+					margin-right:1em;
 				}
 				.detailStewardInfo {
 					position: relative;
-					display: inline-block;
+					display: inline;
 					height: auto;
 					width: auto;
 					margin-left: 1em;
 					margin-top: .25em;
 				}
+				.detailStewardInfo a {
+					text-decoration:none;
+					display:block;
+					color:@color-dark-blue;
+					&:hover {
+						text-decoration:underline;
+					}
+				}
 				.detailPanelHeader {
 					position: relative;
-					display: inline-block;
+					display: block;
 					.sansSerif-light;
 					color: @color-light-mid-gray;
 					position: relative;
 					font-size: 12px;
 					width: auto;
+					text-transform: uppercase;
 				}
 				.detailSource {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 					width: 100%;
 					cursor: pointer;
 				}
 				.detailSourcePhone {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 				}
-				.detailSourceURL {
+				/* not needed? .detailSourceURL {
 					.sansSerif-light;
 					color: @color-mid-gray;
 					font-size: 12px;
-				}
+				} */
 			}
 		}
 	}
@@ -814,8 +858,19 @@
 					color: @color-light-mid-gray;
 					font-size: 12px;
 				}
-				.detailConditionsDescriptions {
-					margin-top: .75em;
+				.detailConditionsDescription {
+					margin: .25em 0 .5em 0;
+					.sansSerif-light;
+					color: @color-mid-gray;
+
+				}
+				.detailTrailSurfaceHeader {
+					.sansSerif-light;
+					color: @color-light-mid-gray;
+					font-size: 12px;
+				}
+				.detailTrailSurface {
+					margin: .25em 0 .5em 0;
 					.sansSerif-light;
 					color: @color-mid-gray;
 				}
@@ -871,14 +926,29 @@
 					.detailTrailheadName {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
 					}
 					.detailTrailheadPark {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
 					}
-					.detailTrailheadCounty {
+					.detailTrailheadAddress {
 						.sansSerif-light;
 						color: @color-mid-gray;
+						display:block;
+					}
+					.detailTrailheadCity {
+						.sansSerif-light;
+						color: @color-mid-gray;
+					}
+					.detailTrailheadState {
+						.sansSerif-light;
+						color: @color-mid-gray;
+					}
+					.detailTrailheadZip {
+						.sansSerif-light;
+						color: @color-mid-gray;	
 					}
 				}
 				.detailLinksToMore {
@@ -978,7 +1048,7 @@
 						height: 1.25em;
 						background-color: @color-light-mid-gray;
 						float: right;
-						margin: 0em 0em .25em .5em;
+						margin: 0em 0em .25em 1em;
 						padding: 0 .5em 0 0em;
 						cursor: pointer;
 						transition: all 0.25s ease;
@@ -999,54 +1069,75 @@
 					}
 				}
 			}
+			.extraLine {
+				border-top: 1px solid @color-light-gray;
+				position:relative;
+				display:block;	
+				margin-bottom:.5em;
+			}
+			.extraLine2 {
+				border-bottom: 1px solid @color-light-gray;
+				position:relative;	
+				display:block;
+			}
 			.detailFooter {
 				position: relative;
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 1em 1em .75em 1em;
-				border-top: 1px solid @color-light-mid-gray;
+				padding: .5em 1em .75em 1em;
 				.icon-large {
 					height: 5em;
 					// height: 100%;
 					float: left;
 					position: relative;
 					display: inline-block;
+					margin-right:1em;
 				}
+
 				.detailStewardInfo {
 					position: relative;
-					display: inline-block;
+					display: inline;
 					height: auto;
 					width: auto;
 					margin-left: 1em;
 					margin-top: .25em;
 				}
+				.detailStewardInfo a {
+					text-decoration:none;
+					display:block;
+					color:@color-dark-blue;
+					&:hover {
+						text-decoration:underline;
+					}
+				}
 				.detailPanelHeader {
 					position: relative;
-					display: inline-block;
+					display: block;
 					.sansSerif-light;
 					color: @color-light-mid-gray;
 					position: relative;
 					font-size: 12px;
 					width: auto;
+					text-transform: uppercase;
 				}
 				.detailSource {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 					width: 100%;
 					cursor: pointer;
-				}
+				} 
 				.detailSourcePhone {
 					.sansSerif-light;
 					color: @color-mid-gray;
-					font-size: 12px;
+					font-size: 16px;
 				}
-				.detailSourceURL {
+				/* not needed? .detailSourceURL {
 					.sansSerif-light;
 					color: @color-mid-gray;
 					font-size: 12px;
-				}
+				}*/
 			}
 		}
 	}

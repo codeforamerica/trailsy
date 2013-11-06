@@ -33,14 +33,21 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = window.location.hostname;
+  // // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsy-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
+  // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
-    API_HOST = "http://trailsyserver-dev.herokuapp.com";
+    // API_HOST = "http://trailsyserver-dev.herokuapp.com";
+    API_HOST = window.location.href;
+  } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
+    API_HOST = window.location.href;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = "http://trailsyserver-prod.herokuapp.com";
+    API_HOST = window.location.href;
+    // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
   // make this real
@@ -72,7 +79,7 @@ function startup() {
   var NOTRAIL_SEGMENT_WEIGHT = 3;
   var LOCAL_LOCATION_THRESHOLD = 100; // distance in km. less than this, use actual location for map/userLocation 
   var centerOffset = SMALL ? new L.point(0, 0) : new L.Point(450, 0);
-  var MARKER_RADIUS = TOUCH ? 15 : 4;
+  var MARKER_RADIUS = TOUCH ? 12 : 4;
   var ALL_SEGMENT_LAYER_SIMPLIFY = 5;
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
@@ -175,7 +182,7 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26 * 0.60, 33 * 0.60],
+    iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
     popupAnchor: [0, -3]
   };
@@ -206,6 +213,7 @@ function startup() {
   $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
   $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $(document).on('change', '.filter', filterChangeHandler);
+  $(".clearSelection").click(clearSelectionHandler);
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
   $(".search-key").keyup(function(e) {
     // if (e.which == 13) {
@@ -218,8 +226,9 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $(document).on('click', '.hamburger', moveSlideDrawer);
-  $(document).on('click', '.detailPanelSlider', slideDetailPanel);
+  $('.hamburgerLine').click(moveSlideDrawer);
+  // $(document).on('click', closeSlideDrawerOnly);
+  $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
@@ -230,18 +239,18 @@ function startup() {
   // Kick things off
 
   var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
-      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier." + 
+      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier versions of that web browser." + 
       "<p>Please upgrade to the latest version of " +
       "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
       "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
       "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
-      "<p>If you are currently running Windows XP, you'll need to upgrade to Chrome or Firefox." +
+      "<p>If you are currently using Windows XP, you'll need to download and use Chrome or Firefox." +
       "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
     "<p>To The Trails is currently in public beta, so it still a work in progress. We'd love to hear how this site is working for you, so we can make it even better." +
-    "<p>Send your feedback to " +
+    "<p>Send feedback and report bugs to " +
     "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
@@ -447,6 +456,19 @@ function startup() {
     applyFilterChange(currentFilters, trailData);
   }
 
+  function clearSelectionHandler(e) {
+    console.log("clearSelectionHandler");
+    $(".visuallyhidden_2 input").attr("checked", false);
+    $(".visuallyhidden_3 input").attr("checked", false);
+    $(".search-key").val("");
+    currentFilters = {
+      lengthFilter: [],
+      activityFilter: [],
+      searchFilter: ""
+    };
+    applyFilterChange(currentFilters, trailData);
+  }
+
   // ======================================
   // map generation & geolocation updates
 
@@ -631,7 +653,7 @@ function startup() {
       //   icon: trailheadIcon1
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
         opacity: 0.8
       }).setRadius(MARKER_RADIUS);
@@ -818,10 +840,11 @@ function startup() {
             $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
               .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
               .attr("data-trailname", invisLayer.feature.properties[trailField])
-              .html(invisLayer.feature.properties[trailField]).css("color", "black");
+              .html(invisLayer.feature.properties[trailField]);
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
-              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField])
+              $trailPopupLineDiv.append("<b>");
             } else {
               // console.log("skipping trail segment name because it has an underscore in it");
             }
@@ -1172,7 +1195,7 @@ function startup() {
         if (parkName) {
           console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
-        };
+        }
 
         //  Here we generate icons for each activity filter that is true..?
 
@@ -1235,6 +1258,15 @@ function startup() {
     $('.detailPanel').show();
     if (!SMALL) {
       $('.accordion').hide();
+    }
+    if (SMALL) {
+      if ($(".slideDrawer").hasClass("openDrawer")) {
+        console.log("slide drawer is open");
+        $(".slideDrawer").removeClass("openDrawer");
+        $(".slideDrawer").addClass("closedDrawer");
+        $(".detailPanel").removeClass("hidden");
+        $(".detailPanel").addClass("contracted");
+      }
     }
     $('.trailhead-trailname.selected').addClass("detail-open");
     $(".detailPanel .detailPanelPicture")[0].scrollIntoView();
@@ -1317,8 +1349,14 @@ function startup() {
   function resetDetailPanel() {
     $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
     $('.detailPanel .detailPanelPictureCredits').remove();
+    $('.detailPanel .detailConditionsDescription').html("");
+    $('.detailPanel .detailTrailSurface').html("");
     $('.detailPanel .detailTrailheadName').html("");
     $('.detailPanel .detailTrailheadPark').html("");
+    $('.detailPanel .detailTrailheadAddress').html("");
+    $('.detailPanel .detailTrailheadCity').html("");
+    $('.detailPanel .detailTrailheadState').html("");
+    $('.detailPanel .detailTrailheadZip').html("");
     $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
     $('.detailPanel .detailTopRow#right #hike').html("");
     $('.detailPanel .detailTopRow#right #cycle').html("");
@@ -1341,18 +1379,48 @@ function startup() {
     enableTrailControls();
 
     resetDetailPanel();
-    $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name + " (" + (orderedTrailIndex + 1) + " of " + orderedTrails.length + " trails)");
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
 
+    if (trail.properties.conditions) {
+      $('.detailPanel .detailConditionsDescription').html(trail.properties.conditions);
+    }
+
+    if (trail.properties.trlsurface) {
+      $('.detailPanel .detailTrailSurface').html(trail.properties.trlsurface);
+    }
+
     $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
-    $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    if (trailhead.properties.park) {
+      $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
+    }
+
+    if (trailhead.properties.address) {
+      $('.detailPanel .detailTrailheadAddress').html(trailhead.properties.address);
+    }
+
+    if (trailhead.properties.city) {
+      if (trailhead.properties.state) {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city + ", ");
+      }
+      else {
+        $('.detailPanel .detailTrailheadCity').html(trailhead.properties.city);
+      }
+    }
+
+    if (trailhead.properties.state) {
+      $('.detailPanel .detailTrailheadState').html(trailhead.properties.state);
+    }
+
+    if (trailhead.properties.zip) {
+      $('.detailPanel .detailTrailheadZip').html(trailhead.properties.zip);
+    }
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
-      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + trail.properties.photo_credit + "</div>");
     }
 
     if (trail.properties.status == 1) {
@@ -1450,16 +1518,41 @@ function startup() {
   //  Mobile-only function changing the position of the detailPanel
 
   function moveSlideDrawer(e) {
+    console.log("moveSlideDrawer")
     if ($(".slideDrawer").hasClass("closedDrawer")) {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
       $('.slideDrawer').addClass("openDrawer");
+      // and move the Detail Panel all the way down
+      if ($(".detailPanel").hasClass("expanded")) {
+        $(".detailPanel").removeClass("expanded");
+        $(".detailPanel").addClass("hidden");
+      } else { 
+        $(".detailPanel").removeClass("contracted");
+        $(".detailPanel").addClass("hidden");
+      }
     } else {
       console.log("closeSlideDrawer");
       $('.slideDrawer').removeClass('openDrawer');
       $('.slideDrawer').addClass('closedDrawer');
+      // and restore the Detail Panel to contracted
+      $('.detailPanel').removeClass("hidden");
+      $('.detailPanel').addClass("contracted");
     }
   }
+
+  // function closeSlideDrawerOnly(e) {
+  //   console.log("closeSlideDrawerOnly")
+  //   var container = $(".slideDrawer");
+
+  //   if (!container.is(e.target)
+  //     && container.has(e.target).length == 0
+  //     && container.hasClass('openDrawer') {
+  //     container.addClass('closedDrawer');
+  //     container.removeClass('openDrawer');
+  //   }
+  // }
+
 
   // event handler for click of a trail name in a trailhead popup
 
@@ -1587,9 +1680,9 @@ function startup() {
     if (currentTrailhead) {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
-        opacity: 0.8,
+        opacity: 0.6,
         zIndexOffset: 100
       }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
