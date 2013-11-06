@@ -2220,6 +2220,7 @@ At some point, update mediaqueries to be in EMS
     height: 100%;
     background-color: #ffffff;
     transition: all 0.25s ease;
+    -webkit-transition: all 0.25s;
     z-index: 9000;
   }
   .detailPanel.expanded {
@@ -2253,6 +2254,7 @@ At some point, update mediaqueries to be in EMS
   .detailPanel.contracted {
     position: absolute;
     top: calc(100% - 84px);
+    top: -webkit-calc(100% - 84px);
     overflow: visible;
   }
   .detailPanel.contracted .detailPanelSlider {
