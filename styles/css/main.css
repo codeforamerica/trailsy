@@ -2262,7 +2262,7 @@ At some point, update mediaqueries to be in EMS
 }
 .overlay .closeOverlay {
   color: #bbbdbf;
-  font-size: 22;
+  font-size: 30;
   float: right;
   vertical-align: text-top;
   font-family: sans-serif;
