@@ -1371,11 +1371,28 @@ function startup() {
       $('.detailPanel .detailDescription').html("");
       $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
     } else {
+      $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
+      $('.detailPanel .detailPanelPictureCredits').remove();
+      $('.detailPanel .detailConditionsDescription').html("");
+      $('.detailPanel .detailTrailSurface').html("");
+      $('.detailPanel .detailTrailheadName').html("");
+      $('.detailPanel .detailTrailheadPark').html("");
+      $('.detailPanel .detailTrailheadAddress').html("");
+      $('.detailPanel .detailTrailheadCity').html("");
+      $('.detailPanel .detailTrailheadState').html("");
+      $('.detailPanel .detailTrailheadZip').html("");
+      $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
       $('.detailPanel .detailActivityRow .hike').html("");
       $('.detailPanel .detailActivityRow .cycle').html("");
       $('.detailPanel .detailActivityRow .handicap').html("");
       $('.detailPanel .detailActivityRow .horse').html("");
       $('.detailPanel .detailActivityRow .xcountryski').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
+      $('.detailPanel .detailDescription').html("");
+      $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
     }
   }
 
