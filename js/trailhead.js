@@ -1151,7 +1151,6 @@ function startup() {
 
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
-    console.log(trailheads);
     orderedTrails = [];
     var divCount = 1;
     $(".trailList").html("");
@@ -1241,7 +1240,6 @@ function startup() {
     }
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
     console.log("end makeTrailDivs");
-    console.log(orderedTrails);
   }
 
   function metersToMiles(i) {
@@ -1986,35 +1984,14 @@ function startup() {
     }
     currentMultiTrailLayer = L.geoJson(response, {
       style: function(feature) {
-        var color;
-        if (feature.properties.order === 0 || !feature.properties.order) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        } else if (feature.properties.order === 1) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        } else if (feature.properties.order === 2) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        }
+        return {
+          weight: NORMAL_SEGMENT_WEIGHT,
+          color: NORMAL_SEGMENT_COLOR,
+          opacity: 1,
+          clickable: false
+        };
       },
-
-      onEachFeature: function(feature, layer) {
+     onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToFront();
