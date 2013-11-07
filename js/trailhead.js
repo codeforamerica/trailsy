@@ -252,8 +252,9 @@ function startup() {
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
     "<p>ToTheTrails.com helps you find and navigate the trails of Summit County, Ohio." +
-    "<p>Pick trails, find your way, and keep your bearings---anywhere in the Cuyahoga Valley National Park or the parks and trails of Metro Parks, Serving Summit County." +
-    "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you, so we can make it even better." +
+    "<p>Pick trails, find your way, and keep your bearings as you move between trails and parks in Cuyahoga Valley National Park and Metro Parks, Serving Summit County and beyond." +
+    "<p>For easy access from a mobile device, bookmark ToTheTrails.com." +
+    "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you." +
     "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
@@ -1531,7 +1532,7 @@ function startup() {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
     }
     if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter tempatures.' src='img/icon_water_green.png'>");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
     }
     if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");
