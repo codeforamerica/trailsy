@@ -2323,7 +2323,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     font-size: 12px;
     float: right;
-    margin-right: 2em;
+    margin-right: 1.5em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: inline-block;
@@ -2494,14 +2494,14 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .trail-box .trailheadInfo .trailheadIcon {
     position: relative;
     display: inline-block;
-    margin: 0em 0 0 .375em;
+    margin: .29em 0 0 .75em;
     height: 1em;
     width: auto;
   }
   .detailPanel .trail-box .trailheadInfo .trailheadName {
     position: relative;
     display: inline-block;
-    margin: .5em 0 0 .75em;
+    margin: .5em 0 0 .2em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2513,7 +2513,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     float: right;
-    margin: .5em 3.5em 0 0em;
+    margin: .5em 2.8em 0 0em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2626,9 +2626,10 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
-    margin: .25em 0 .5em 0;
+    margin-bottom: 1.5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2642,9 +2643,10 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
+    margin-top: 1em;
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
-    margin: .25em 0 .5em 0;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2666,9 +2668,9 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
-    margin-top: .75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -2712,6 +2714,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailBottomRow img {
     height: 1em;
+    margin-left: -0.27em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2727,7 +2730,6 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     margin-bottom: 1em;
-    margin-top: .75em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2887,7 +2889,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #bbbdbf;
     color: white;
     float: right;
-    margin: 0em 0em .25em 1.25em;
+    margin: 0em 0em -0.25em 1.25em;
     padding: 0 .5em 0em 0em;
     cursor: pointer;
     transition: all 0.25s ease;
