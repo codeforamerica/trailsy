@@ -182,7 +182,7 @@ function startup() {
   // Not sure if these should be global, but hey whatev
 
   var trailheadIconOptions = {
-    iconSize: [26 * 0.60, 33 * 0.60],
+    iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
     popupAnchor: [0, -3]
   };
@@ -332,7 +332,8 @@ function startup() {
       if (currentFilters.activityFilter) {
         for (var i = 0; i < currentFilters.activityFilter.length; i++) {
           var activity = currentFilters.activityFilter[i];
-          if (trail.properties[activity] && trail.properties[activity].toLowerCase().charAt(0) !== "y") {
+          var trailActivity = trail.properties[activity];
+          if (!trailActivity || trailActivity.toLowerCase().charAt(0) !== "y") {
             delete filteredTrailData[trail_id];
           }
         }
@@ -365,6 +366,7 @@ function startup() {
         } else {
           descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
         }
+
         if (nameIndex == -1 && descriptionIndex == -1) {
           delete filteredTrailData[trail_id];
         }
@@ -651,7 +653,7 @@ function startup() {
       //   icon: trailheadIcon1
       // }));
       var newMarker = new L.CircleMarker(currentFeatureLatLng, {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
         opacity: 0.8
       }).setRadius(MARKER_RADIUS);
@@ -983,7 +985,7 @@ function startup() {
       var trailhead = trailheads[j];
       trailhead.trails = [];
       // for each original trailhead trail name
-      for (var trailNum = 1; trailNum <= 3; trailNum++) {
+      for (var trailNum = 1; trailNum <= 6; trailNum++) {
         var trailWithNum = "trail" + trailNum;
         if (trailhead.properties[trailWithNum] === "") {
           continue;
@@ -1439,7 +1441,7 @@ function startup() {
 
     if (trail.properties.medium_photo_url) {
       $('.detailPanel .detailPanelPicture').attr("src", trail.properties.medium_photo_url);
-      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + "Photo courtesy of " + trail.properties.photo_credit + "</div>");
+      $('.detailPanel .detailPanelPictureContainer').append("<div class='detailPanelPictureCredits'>" + trail.properties.photo_credit + "</div>");
     }
 
     if (trail.properties.status == 1) {
@@ -1728,9 +1730,9 @@ function startup() {
     if (currentTrailhead) {
       map.removeLayer(currentTrailhead.marker);
       currentTrailhead.marker = new L.CircleMarker(currentTrailhead.marker.getLatLng(), {
-        color: "#00adef",
+        color: "#D86930",
         fillOpacity: 0.5,
-        opacity: 0.8,
+        opacity: 0.6,
         zIndexOffset: 100
       }).setRadius(MARKER_RADIUS).addTo(map);
       setTrailheadEventHandlers(currentTrailhead);
