@@ -390,10 +390,18 @@ function startup() {
   function processSearch(e) {
     var $currentTarget = $(e.currentTarget);
     var filterType = "searchFilter";
-    var currentUIFilterState = ($('#desktop .search-key').val() || $('#mobile .search-key').val());
+
+    var currentUIFilterState;
+    if (SMALL) {
+      currentUIFilterState = $('#mobile .search-key').val();
+    }
+    else {
+      currentUIFilterState = $('#desktop .search-key').val(); 
+    }
     if (($currentTarget).hasClass('search-key')) {
       if (SMALL) {
         if (e.keyCode === 13) {
+          alert("starting search");
           updateFilterObject(filterType, currentUIFilterState);
         }
       }
@@ -401,7 +409,7 @@ function startup() {
         updateFilterObject(filterType, currentUIFilterState);
       }
     }
-    if (($currentTarget).hasClass('search-submit')) {
+    else if (($currentTarget).hasClass('search-submit')) {
       updateFilterObject(filterType, currentUIFilterState);
     }
     // if the event target has a class search-key
@@ -441,7 +449,7 @@ function startup() {
         console.log(j);
         var lengthRange = currentFilters.lengthFilter[j];
         if (lengthRange == currentUIFilterState) {
-          console.log("match");
+          // console.log("match");
           currentFilters.lengthFilter.splice(j, 1);
           matched = 1;
           break;
@@ -453,7 +461,7 @@ function startup() {
     }
 
     if (filterType == "searchFilter") {
-      console.log("searchFilter");
+      // console.log("searchFilter");
       currentFilters.searchFilter = currentUIFilterState;
     }
     // currentFilters[filterType] = currentUIFilterState;
