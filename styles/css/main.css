@@ -583,6 +583,8 @@ At some point, update mediaqueries to be in EMS
   font-size: 16px;
   line-height: 20px;
   color: #58595b;
+  max-height: 15em;
+  overflow: scroll;
 }
 .aboutCopy .aboutHeadline {
   color: #91c73d;
@@ -2857,7 +2859,15 @@ At some point, update mediaqueries to be in EMS
     vertical-align: middle;
     margin: 0em 0em 0em .5em;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .amenity-icons {
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .icon {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+    vertical-align: middle;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .icon .amenity-icons {
+    vertical-align: middle;
     height: 100%;
     width: auto;
     position: relative;
@@ -3405,7 +3415,15 @@ At some point, update mediaqueries to be in EMS
     vertical-align: middle;
     margin: 0em 0em 0em .5em;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .amenity-icons {
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .icon {
+    position: relative;
+    display: inline-block;
+    height: 2em;
+    width: auto;
+    vertical-align: middle;
+  }
+  .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .icon .amenity-icons {
+    vertical-align: middle;
     height: 100%;
     width: auto;
     position: relative;
