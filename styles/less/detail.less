@@ -180,11 +180,33 @@
 			.sansSerif-light;
 			font-size: 12px;
 			color: @color-white;
+			
+		/*trying to get linked used in admin interface to show up in status. the a { display:none;} is blocking this.
+			&#red a {
+				color:@color-yellow;
+				text-decoration: none;
+				display:inline !important;
+				&:hover {
+					text-decoration:underline;
+					display:inline !important;
+					}
+				}
+			&#yellow a {
+				color:black;
+				text-decoration: none;
+				display:inline !important;
+				&:hover {
+					text-decoration:underline;
+					display:inline !important;
+				}
+			} */
 			&#yellow {
 				background-color: @color-yellow;
+
 			}
 			&#red {
 				background-color: @color-red;
+
 			}
 			img {
 				height: auto;
@@ -398,8 +420,7 @@
 					margin-bottom:-.5em;
 					margin-top: 1em;
 				}
-				.detailTrailSurface {
-					
+				.detailTrailSurface {	
 					.sansSerif-light;
 					color: @color-mid-gray;
 				}
@@ -417,10 +438,18 @@
 					font-size: 12px;
 					margin-bottom:-.5em;
 				}
-				.detailDescription {
-					
+				.detailDescription {	
 					.sansSerif-light;
 					color: @color-mid-gray;
+					a {
+						color:@color-dark-blue;
+						text-decoration: none;
+						display:inline !important;
+						&:hover{
+							text-decoration:underline;
+							display:inline !important;
+						}
+					}
 				}
 			}
 			.detailPanelPictureContainer {
@@ -772,8 +801,22 @@
 					width: 100%;
 					z-index: 999;
 					.sansSerif-light;
-					font-size: 12px;
+					font-size: 16px;
 					color: @color-white;
+					&#red a {
+						color:@color-yellow;
+						text-decoration: none;
+						&:hover {
+							text-decoration:underline;
+						}
+					}
+					&#yellow a {
+						color:black;
+						text-decoration: none;
+						&:hover {
+							text-decoration:underline;
+						}
+					}
 					&#yellow {
 						background-color: @color-yellow;
 					}
@@ -914,6 +957,13 @@
 					/*margin-top: .75em; */
 					.sansSerif-light;
 					color: @color-mid-gray;
+					a {
+						color:@color-dark-blue;
+						text-decoration: none;
+						&:hover{
+							text-decoration:underline;
+						}
+					}
 				}
 			}
 			.detailBottomRow {
