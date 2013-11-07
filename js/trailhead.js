@@ -1391,6 +1391,8 @@ function startup() {
 
     $('.detailPanel .detailPanelBanner .trailIndex').html((orderedTrailIndex + 1) + " of " + orderedTrails.length);
     $('.detailPanel .detailPanelBanner .trailName').html(trail.properties.name);
+    $('.detailPanel .trailheadName').html(trailhead.properties.name + " Trailhead");
+    $('.detailPanel .trailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
 
     if (trail.properties.conditions) {
       $('.detailPanel .detailConditionsDescription').html(trail.properties.conditions);
@@ -1409,8 +1411,6 @@ function startup() {
       $('.detailPanel .detailTrailSurface').hide();
       $('.detailPanel .detailTrailSurfaceHeader').hide();
     }
-
-    $('.detailPanel .detailTrailheadName').html(trailhead.properties.name + " Trailhead");
 
     if (trailhead.properties.park) {
       $('.detailPanel .detailTrailheadPark').html(trailhead.properties.park);
@@ -1503,7 +1503,6 @@ function startup() {
     }
 
     $('.detailPanel .detailSource').html(trailhead.properties.source);
-    $('.detailPanel .detailTrailheadDistance').html(metersToMiles(trailhead.properties.distance) + " miles away");
 
     if (trail.properties.length) {
       var mileString = trail.properties.length == "1" ? "mile" : "miles";
