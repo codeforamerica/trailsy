@@ -36,6 +36,7 @@ function startup() {
   // var API_HOST = window.location.hostname;
   //var API_HOST = "http://127.0.0.1:3000";
   var API_HOST = "http://trailsy.herokuapp.com";
+
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -50,13 +51,6 @@ function startup() {
     // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
-  // make this real
-  // if we're on iOS,
-  // USE_LOCAL = false
-  // else 
-  // USE_LOCAL = true
-
-
 
   //  Near-Global Variables
   var METERSTOMILESFACTOR = 0.00062137;
@@ -67,8 +61,8 @@ function startup() {
   var MEDIUM_MAX_DISTANCE = 5.0;
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
-  var USE_LOCAL = true; // Set this to a true value to preload/use a local trail segment cache
-  var USE_ALL_SEGMENT_LAYER = SMALL ? true : true;
+  var USE_LOCAL = SMALL ? false : true; // Set this to a true value to preload/use a local trail segment cache
+  var USE_ALL_SEGMENT_LAYER = SMALL ? false : true;
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
   var HOVER_SEGMENT_COLOR = "#678729";
@@ -231,6 +225,8 @@ function startup() {
   $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
+  $(".aboutLink").click(openAboutPage);
+  $(".closeAbout").click(closeAboutPage);
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
 
@@ -249,9 +245,11 @@ function startup() {
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
-    "<p>To The Trails is currently in public beta, so it still a work in progress. We'd love to hear how this site is working for you, so we can make it even better." +
-    "<p>Send feedback and report bugs to " +
-    "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
+    "<p>ToTheTrails.com helps you find and navigate the trails of Summit County, Ohio." +
+    "<p>Pick trails, find your way, and keep your bearings as you move between trails and parks in Cuyahoga Valley National Park and Metro Parks, Serving Summit County and beyond." +
+    "<p>For easy access from a mobile device, bookmark ToTheTrails.com." +
+    "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you." +
+    "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
     "<p>We look forward to seeing you for our public launch." +
@@ -305,6 +303,13 @@ function startup() {
                 map.addLayer(allSegmentLayer);
               }
             });
+          }
+          else {
+            // console.log("no USE_LOCAL");
+            addTrailDataToTrailheads(trailData);
+            highlightTrailhead(orderedTrails[0].trailheadID, 0);
+            orderedTrailIndex = 0;
+            showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
           }
         });
       });
@@ -386,18 +391,26 @@ function startup() {
   function processSearch(e) {
     var $currentTarget = $(e.currentTarget);
     var filterType = "searchFilter";
-    var currentUIFilterState = ($currentTarget.val());
-    console.log($currentTarget);
-    console.log(currentUIFilterState);
-    if (($currentTarget).hasClass('search-key')) {
-      console.log("search key");
-      updateFilterObject(filterType, currentUIFilterState);
+
+    var currentUIFilterState;
+    if (SMALL) {
+      currentUIFilterState = $('#mobile .search-key').val();
     }
-    if (($currentTarget).hasClass('search-submit')) {
-      if ($currentTarget.val() !== "") {
-        console.log("search submit");
+    else {
+      currentUIFilterState = $('#desktop .search-key').val(); 
+    }
+    if (($currentTarget).hasClass('search-key')) {
+      if (SMALL) {
+        if (e.keyCode === 13) {
+          updateFilterObject(filterType, currentUIFilterState);
+        }
+      }
+      else {
         updateFilterObject(filterType, currentUIFilterState);
       }
+    }
+    else if (($currentTarget).hasClass('search-submit')) {
+      updateFilterObject(filterType, currentUIFilterState);
     }
     // if the event target has a class search-key
     // see if it is keycode 13
@@ -436,7 +449,7 @@ function startup() {
         console.log(j);
         var lengthRange = currentFilters.lengthFilter[j];
         if (lengthRange == currentUIFilterState) {
-          console.log("match");
+          // console.log("match");
           currentFilters.lengthFilter.splice(j, 1);
           matched = 1;
           break;
@@ -448,7 +461,7 @@ function startup() {
     }
 
     if (filterType == "searchFilter") {
-      console.log("searchFilter");
+      // console.log("searchFilter");
       currentFilters.searchFilter = currentUIFilterState;
     }
     // currentFilters[filterType] = currentUIFilterState;
@@ -1002,7 +1015,7 @@ function startup() {
         // or check distance against the (yet-to-be) pre-loaded trail segment info
         $.each(myTrailData, function(trailID, trail) {
           if (trailhead.properties[trailWithNum] == trail.properties.name) {
-            if (checkSegmentsForTrailname(trail.properties.name, trail.properties.source)) {
+            if (checkSegmentsForTrailname(trail.properties.name, trail.properties.source) || !USE_LOCAL) {
               trailhead.trails.push(trailID);
             } else {
               console.log("skipping " + trail.properties.name + "/" + trail.properties.source + ": no segment data");
@@ -1015,7 +1028,7 @@ function startup() {
     makeTrailheadPopups(trailheads);
     mapActiveTrailheads(trailheads);
     makeTrailDivs(trailheads);
-    if (SMALL) {
+    if (SMALL && USE_LOCAL) {
       highlightTrailhead(orderedTrails[0].trailheadID, 0);
       orderedTrailIndex = 0;
       showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
@@ -1139,23 +1152,26 @@ function startup() {
 
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
+    console.log(trailheads);
     orderedTrails = [];
     var divCount = 1;
     $(".trailList").html("");
-    $.each(trailheads, function(index, trailhead) {
+    for (var j = 0; j < trailheads.length; j++) {
+      var trailhead = trailheads[j];
+    // $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
       var parkName = trailhead.properties.park;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
-        return true; // next $.each
+        // return true; // next $.each
+        continue;
       }
       var trailheadSource = trailhead.properties.source;
       var trailheadDistance = metersToMiles(trailhead.properties.distance);
       var $trailDiv;
 
       // Making a new div for text / each trail 
-
       for (var i = 0; i < trailheadTrailIDs.length; i++) {
 
         var trailID = trailheadTrailIDs[i];
@@ -1193,7 +1209,7 @@ function startup() {
         $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
 
         if (parkName) {
-          console.log("has a park name");
+          // console.log("has a park name");
           $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
         }
 
@@ -1222,9 +1238,11 @@ function startup() {
           [val.properties.trail1, val.properties.trail2, val.properties.trail3].join(", ") + ")</span>").appendTo($trailDiv);
         $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
       }
-    });
+    // });
+    }
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
-    // console.log(orderedTrails);
+    console.log("end makeTrailDivs");
+    console.log(orderedTrails);
   }
 
   function metersToMiles(i) {
@@ -1249,6 +1267,22 @@ function startup() {
         currentDetailTrailhead = trailhead;
       }
     }
+  }
+
+  //  About page functions
+
+  function openAboutPage() {
+    console.log("openAboutPage");
+    $(".aboutPage").show();
+    if (!SMALL) {
+      $('.accordion').hide();
+    }
+  }
+
+  function closeAboutPage() {
+    console.log("closeAboutPage");
+    $('.aboutPage').hide();
+    $('.accordion').show();
   }
 
   //  Helper functions for ShowTrailDetails
@@ -1371,16 +1405,33 @@ function startup() {
       $('.detailPanel .detailDescription').html("");
       $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
     } else {
+      $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
+      $('.detailPanel .detailPanelPictureCredits').remove();
+      $('.detailPanel .detailConditionsDescription').html("");
+      $('.detailPanel .detailTrailSurface').html("");
+      $('.detailPanel .detailTrailheadName').html("");
+      $('.detailPanel .detailTrailheadPark').html("");
+      $('.detailPanel .detailTrailheadAddress').html("");
+      $('.detailPanel .detailTrailheadCity').html("");
+      $('.detailPanel .detailTrailheadState').html("");
+      $('.detailPanel .detailTrailheadZip').html("");
+      $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
       $('.detailPanel .detailActivityRow .hike').html("");
       $('.detailPanel .detailActivityRow .cycle').html("");
       $('.detailPanel .detailActivityRow .handicap').html("");
       $('.detailPanel .detailActivityRow .horse').html("");
       $('.detailPanel .detailActivityRow .xcountryski').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
+      $('.detailPanel .detailDescription').html("");
+      $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
     }
   }
 
   function decorateDetailPanel(trail, trailhead) {
-    console.log(orderedTrailIndex);
+    // console.log(orderedTrailIndex);
 
     for (var i = 0; i < orderedTrails.length; i++) {
       if (orderedTrails[i].trailID == trail.properties.id && orderedTrails[i].trailheadID == trailhead.properties.id) {
@@ -1495,7 +1546,7 @@ function startup() {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
     }
     if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter tempatures.' src='img/icon_water_green.png'>");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
     }
     if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
       $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");

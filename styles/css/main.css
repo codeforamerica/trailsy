@@ -75,8 +75,7 @@ Need to make sure everything is responsive within that breakpoint.
 At some point, update mediaqueries to be in EMS
 33.125 EMS = 530 divided by 16px (default font size *
 59.375 EMS = 950 divided by 16px
-70.5 EMS = 1128 divided by 16px */
-/*@import "mixins.less";*/
+70.5 EMS = 1128 divided by 16px *//*@import "mixins.less";*/
 /*			Modules				*/
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
@@ -85,6 +84,12 @@ At some point, update mediaqueries to be in EMS
   .desktopTitle {
     display: none;
   }
+}
+@media only screen and (min-width: 530px) {
+  
+}
+@media only screen and (max-width: 529px)  {
+  
 }
 @media only screen and (min-width: 530px) {
   .mobileTitle {
@@ -114,6 +119,7 @@ At some point, update mediaqueries to be in EMS
     box-shadow: none;
     text-align: justify;
     /*padding: .5em 0em .5em .5em;*/
+  
   }
   .title-row header .navbar-inner .hamburgerBox {
     cursor: pointer;
@@ -135,6 +141,7 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; * This causes Safari issues */
+  
     width: 18em;
     margin-bottom: .5em;
     margin-left: -3.25em;
@@ -168,6 +175,7 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .logo {
     /* height: 100%; */
+  
     width: 18em;
     margin-left: -1em;
   }
@@ -191,6 +199,9 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Filter Module */
+@media only screen and (max-width: 529px)  {
+  
+}
 @media only screen and (min-width: 530px) {
   .is-vishidden {
     position: absolute;
@@ -233,6 +244,7 @@ At some point, update mediaqueries to be in EMS
   .searchbar .search-submit {
     display: none;
     /*			display: inline-block;*/
+  
     position: absolute;
     border: none;
     height: 2em;
@@ -284,7 +296,9 @@ At some point, update mediaqueries to be in EMS
     border: none;
     height: 2em;
     /*top: 4em; */
+  
     /*right: 1em;*/
+  
     z-index: 1;
     width: 2.5em;
     margin-left: -1em;
@@ -347,11 +361,13 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
+  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
+  
     font-color: #bbbdbf;
   }
   .accordion .icon {
@@ -364,6 +380,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (min-width: 530px) {
   .accordion {
     /*		display: none;*/
+  
     background-color: transparent;
     max-height: 35em;
     overflow: scroll;
@@ -374,11 +391,13 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Let's abstract this transition so we can keep it consistent across animations*/
+  
     -webkit-transition: 0.1s all ease-in-out;
     -moz-transition: 0.1s all ease-in-out;
     -o-transition: 0.1s all ease-in-out;
     transition: 0.1s all ease-in-out;
     /*			background: @color-white;*/
+  
     font-color: #bbbdbf;
   }
   .accordion .icon {
@@ -392,7 +411,9 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin-bottom: .1em;
     /* More Options */
+  
     /* Container of Trail Results*/
+  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -432,7 +453,9 @@ At some point, update mediaqueries to be in EMS
   .panel-container {
     margin: 0;
     /* More Options */
+  
     /* Container of Trail Results*/
+  
   }
   .panel-container #MoreFilters {
     height: 100%;
@@ -442,7 +465,7 @@ At some point, update mediaqueries to be in EMS
   }
   .panel-container .trigger1 {
     margin: 0;
-    padding: 1em 2em 1em 1.75em;
+    padding: .5em 2em 1em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -481,6 +504,7 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   .searchSection {
     /*		margin-left:.42em !important;*/
+  
     height: 2em;
     width: 100%;
     background-color: #b0d576;
@@ -549,32 +573,129 @@ At some point, update mediaqueries to be in EMS
     background-color: none;
   }
 }
-.aboutCopy {
-  margin: .25em 1.5em .5em 1.5em;
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
-  color: #58595b;
-  max-height: 15em;
-  overflow: scroll;
+@media only screen and (max-width: 529px)  {
+  
 }
-.aboutCopy .aboutHeadline {
-  color: #91c73d;
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
+@media only screen and (min-width: 530px) {
+  .aboutPage {
+    position: relative;
+    display: none;
+    width: 100%;
+    height: 26.5em;
+    background-color: #ffffff;
+  }
+  .aboutPage .aboutPageBanner {
+    position: relative;
+    width: 100%;
+    background-color: #00adef;
+    padding: .5em 1.75em .5em 1.75em;
+  }
+  .aboutPage span {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+  }
+  .aboutPage .closeAbout {
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    right: 10px;
+    width: 25px;
+    /* IE 8 */
+  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 5-7 */
+  
+    filter: alpha(opacity=80);
+    /* Netscape */
+  
+    -moz-opacity: 0.8;
+    /* Safari 1.x */
+  
+    -khtml-opacity: 0.8;
+    /* Good browsers */
+  
+    opacity: 0.8;
+  }
 }
-.aboutCopy a {
-  color: #00adef;
-  text-decoration: none;
+@media only screen and (max-width: 529px)  {
+  
 }
-.aboutCopy a:hover {
-  text-decoration: underline;
+@media only screen and (min-width: 530px) {
+  .aboutLink {
+    margin: 0;
+    padding: 1em 2em 0em 2.66em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    position: relative;
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+  }
 }
-.aboutCopy ul {
-  margin-left: -1.5em;
+@media only screen and (max-width: 529px)  {
+  .aboutCopy {
+    margin: .25em 1.5em .5em 1.5em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    max-height: 15em;
+    overflow: scroll;
+  }
+  .aboutCopy .aboutHeadline {
+    color: #91c73d;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .aboutCopy a {
+    color: #00adef;
+    text-decoration: none;
+  }
+  .aboutCopy a:hover {
+    text-decoration: underline;
+  }
+  .aboutCopy ul {
+    margin-left: -1.5em;
+  }
+}
+@media only screen and (min-width: 530px) {
+  .aboutCopy {
+    padding: .25em 1.5em .5em 1.5em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    overflow: scroll;
+    max-height: 24em;
+  }
+  .aboutCopy .aboutHeadline {
+    color: #91c73d;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .aboutCopy a {
+    color: #00adef;
+    text-decoration: none;
+  }
+  .aboutCopy a:hover {
+    text-decoration: underline;
+  }
+  .aboutCopy ul {
+    margin-left: -1.5em;
+  }
 }
 @media only screen and (max-width: 529px)  {
   .trailsNearYouResults {
@@ -857,8 +978,9 @@ At some point, update mediaqueries to be in EMS
   .trailFilters .lengthRow .trailLength .visuallyhidden_2 input[type=checkbox]:checked + div {
     background-color: #00adef;
     /*p {
-								color: @color-white;
-							} */
+  								color: @color-white;
+  							} */
+  
   }
   .trailFilters .lengthRow .trailLength .visuallyhidden_2 div {
     background-color: #d9f0fc;
@@ -895,6 +1017,7 @@ At some point, update mediaqueries to be in EMS
     height: 2.4em;
     width: 100%;
     /*padding: 0em 1.75em 0em 1.75em;*/
+  
     background: #ffffff;
     text-align: justify;
     -ms-text-justify: distribute-all-lines;
@@ -1714,6 +1837,7 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1842,6 +1966,7 @@ At some point, update mediaqueries to be in EMS
     padding-right: 25%;
     border-top: 1px solid #e3e3e1;
     /*						padding: .5em 0em .25em .5em;*/
+  
   }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .status {
     width: 3em;
@@ -1940,6 +2065,7 @@ At some point, update mediaqueries to be in EMS
 }
 .trailMapContainer {
   /* Desktop */
+
 }
 @media only screen and (max-width: 529px)  {
   .trailMapContainer {
@@ -2058,6 +2184,7 @@ At some point, update mediaqueries to be in EMS
     width: 20px;
     left: 50%;
     /*margin-left: -8px;*/
+  
     display: block;
     background: url(../../img/crosshair.gif);
     background-position: center center;
@@ -2135,7 +2262,7 @@ At some point, update mediaqueries to be in EMS
 }
 .overlay .closeOverlay {
   color: #bbbdbf;
-  font-size: 22;
+  font-size: 30;
   float: right;
   vertical-align: text-top;
   font-family: sans-serif;
@@ -2208,6 +2335,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
     transition: all 0.25s ease;
     /*		-webkit-transition: all 0.25s;*/
+  
     z-index: 9000;
   }
   .detailPanel.expanded {
@@ -2394,8 +2522,9 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     background-color: #ffffff;
     /*border-bottom-style: dotted;
-			border-width: 1px;
-			border-color: @color-light-gray;*/
+  			border-width: 1px;
+  			border-color: @color-light-gray;*/
+  
     cursor: pointer;
   }
   .detailPanel .trail-box .trailInfo {
@@ -2465,6 +2594,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     /* Magic Number! */
+  
     padding: 0em 0 0 2.7em;
     width: 100%;
     height: 1em;
@@ -2918,10 +3048,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: .5em 1em .75em 1em;
     /* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				} */
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				} */
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     width: 5em;
@@ -3200,6 +3331,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
     /*margin: .25em 0 .5em 0; */
+  
     margin-bottom: 1.5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
@@ -3219,6 +3351,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
     /*margin: .25em 0 .5em 0; */
+  
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3244,6 +3377,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
     /*margin-top: .75em; */
+  
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3495,10 +3629,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     padding: 1em 1.75em 1em 1.75em;
     /* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				}*/
+  					.sansSerif-light;
+  					color: @color-mid-gray;
+  					font-size: 12px;
+  				}*/
+  
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
     height: 5em;
@@ -3565,14 +3700,19 @@ At some point, update mediaqueries to be in EMS
     right: 10px;
     width: 25px;
     /* IE 8 */
+  
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
     /* IE 5-7 */
+  
     filter: alpha(opacity=80);
     /* Netscape */
+  
     -moz-opacity: 0.8;
     /* Safari 1.x */
+  
     -khtml-opacity: 0.8;
     /* Good browsers */
+  
     opacity: 0.8;
   }
   .closeDetail p {
@@ -3651,10 +3791,13 @@ audio:not([controls]) {
 html {
   font-family: sans-serif;
   /* 1 */
+
   -webkit-text-size-adjust: 100%;
   /* 2 */
+
   -ms-text-size-adjust: 100%;
   /* 2 */
+
 }
 /**
  * Remove default margin.
@@ -3809,8 +3952,10 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
+
   padding: 0;
   /* 2 */
+
 }
 /**
  * 1. Correct font family not being inherited in all browsers.
@@ -3823,10 +3968,13 @@ select,
 textarea {
   font-family: inherit;
   /* 1 */
+
   font-size: 100%;
   /* 2 */
+
   margin: 0;
   /* 3 */
+
 }
 /**
  * Address Firefox 4+ setting `line-height` on `input` using `!important` in
@@ -3859,8 +4007,10 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
+
   cursor: pointer;
   /* 3 */
+
 }
 /**
  * Re-set default cursor for disabled elements.
@@ -3877,8 +4027,10 @@ input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   /* 1 */
+
   padding: 0;
   /* 2 */
+
 }
 /**
  * 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.
@@ -3888,9 +4040,11 @@ input[type="radio"] {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
+
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   /* 2 */
+
   box-sizing: content-box;
 }
 /**
@@ -3916,8 +4070,10 @@ input::-moz-focus-inner {
 textarea {
   overflow: auto;
   /* 1 */
+
   vertical-align: top;
   /* 2 */
+
 }
 /* ==========================================================================
    Tables
