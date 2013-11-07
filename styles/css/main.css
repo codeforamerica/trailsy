@@ -583,6 +583,8 @@ At some point, update mediaqueries to be in EMS
   font-size: 16px;
   line-height: 20px;
   color: #58595b;
+  max-height: 15em;
+  overflow: scroll;
 }
 @media only screen and (max-width: 529px)  {
   .trailsNearYouResults {
