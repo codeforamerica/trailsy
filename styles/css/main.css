@@ -465,7 +465,7 @@ At some point, update mediaqueries to be in EMS
   }
   .panel-container .trigger1 {
     margin: 0;
-    padding: 1em 2em 1em 1.75em;
+    padding: .5em 2em 1em 1.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -573,35 +573,129 @@ At some point, update mediaqueries to be in EMS
     background-color: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (max-width: 529px)  {
   
 }
-.aboutCopy {
-  margin: .25em 1.5em .5em 1.5em;
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
-  color: #58595b;
-  max-height: 15em;
-  overflow: scroll;
+@media only screen and (min-width: 530px) {
+  .aboutPage {
+    position: relative;
+    display: none;
+    width: 100%;
+    height: 26.5em;
+    background-color: #ffffff;
+  }
+  .aboutPage .aboutPageBanner {
+    position: relative;
+    width: 100%;
+    background-color: #00adef;
+    padding: .5em 1.75em .5em 1.75em;
+  }
+  .aboutPage span {
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #ffffff;
+  }
+  .aboutPage .closeAbout {
+    position: absolute;
+    cursor: pointer;
+    top: 5px;
+    right: 10px;
+    width: 25px;
+    /* IE 8 */
+  
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    /* IE 5-7 */
+  
+    filter: alpha(opacity=80);
+    /* Netscape */
+  
+    -moz-opacity: 0.8;
+    /* Safari 1.x */
+  
+    -khtml-opacity: 0.8;
+    /* Good browsers */
+  
+    opacity: 0.8;
+  }
 }
-.aboutCopy .aboutHeadline {
-  color: #91c73d;
-  font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-size: 16px;
-  line-height: 20px;
+@media only screen and (max-width: 529px)  {
+  
 }
-.aboutCopy a {
-  color: #00adef;
-  text-decoration: none;
+@media only screen and (min-width: 530px) {
+  .aboutLink {
+    margin: 0;
+    padding: 1em 2em 0em 2.66em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #00adef;
+    position: relative;
+    display: inline-block;
+    float: right;
+    text-decoration: none;
+  }
 }
-.aboutCopy a:hover {
-  text-decoration: underline;
+@media only screen and (max-width: 529px)  {
+  .aboutCopy {
+    margin: .25em 1.5em .5em 1.5em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    max-height: 15em;
+    overflow: scroll;
+  }
+  .aboutCopy .aboutHeadline {
+    color: #91c73d;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .aboutCopy a {
+    color: #00adef;
+    text-decoration: none;
+  }
+  .aboutCopy a:hover {
+    text-decoration: underline;
+  }
+  .aboutCopy ul {
+    margin-left: -1.5em;
+  }
 }
-.aboutCopy ul {
-  margin-left: -1.5em;
+@media only screen and (min-width: 530px) {
+  .aboutCopy {
+    padding: .25em 1.5em .5em 1.5em;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+    color: #58595b;
+    overflow: scroll;
+    max-height: 24em;
+  }
+  .aboutCopy .aboutHeadline {
+    color: #91c73d;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .aboutCopy a {
+    color: #00adef;
+    text-decoration: none;
+  }
+  .aboutCopy a:hover {
+    text-decoration: underline;
+  }
+  .aboutCopy ul {
+    margin-left: -1.5em;
+  }
 }
 @media only screen and (max-width: 529px)  {
   .trailsNearYouResults {

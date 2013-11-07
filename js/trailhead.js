@@ -231,6 +231,8 @@ function startup() {
   $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
+  $(".aboutLink").click(openAboutPage);
+  $(".closeAbout").click(closeAboutPage);
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
 
@@ -249,9 +251,10 @@ function startup() {
 
   var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
-    "<p>To The Trails is currently in public beta, so it still a work in progress. We'd love to hear how this site is working for you, so we can make it even better." +
-    "<p>Send feedback and report bugs to " +
-    "<a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>.";
+    "<p>ToTheTrails.com helps you find and navigate the trails of Summit County, Ohio." +
+    "<p>Pick trails, find your way, and keep your bearings---anywhere in the Cuyahoga Valley National Park or the parks and trails of Metro Parks, Serving Summit County." +
+    "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you, so we can make it even better." +
+    "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
   var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
     "<p>We look forward to seeing you for our public launch." +
@@ -1249,6 +1252,22 @@ function startup() {
         currentDetailTrailhead = trailhead;
       }
     }
+  }
+
+  //  About page functions
+
+  function openAboutPage() {
+    console.log("openAboutPage");
+    $(".aboutPage").show();
+    if (!SMALL) {
+      $('.accordion').hide();
+    }
+  }
+
+  function closeAboutPage() {
+    console.log("closeAboutPage");
+    $('.aboutPage').hide();
+    $('.accordion').show();
   }
 
   //  Helper functions for ShowTrailDetails
