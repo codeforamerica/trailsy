@@ -390,18 +390,19 @@ function startup() {
   function processSearch(e) {
     var $currentTarget = $(e.currentTarget);
     var filterType = "searchFilter";
-    var currentUIFilterState = ($currentTarget.val());
-    console.log($currentTarget);
-    console.log(currentUIFilterState);
+    var currentUIFilterState = ($('#desktop .search-key').val() || $('#mobile .search-key').val());
     if (($currentTarget).hasClass('search-key')) {
-      console.log("search key");
-      updateFilterObject(filterType, currentUIFilterState);
-    }
-    if (($currentTarget).hasClass('search-submit')) {
-      if ($currentTarget.val() !== "") {
-        console.log("search submit");
+      if (SMALL) {
+        if (e.keyCode === 13) {
+          updateFilterObject(filterType, currentUIFilterState);
+        }
+      }
+      else {
         updateFilterObject(filterType, currentUIFilterState);
       }
+    }
+    if (($currentTarget).hasClass('search-submit')) {
+      updateFilterObject(filterType, currentUIFilterState);
     }
     // if the event target has a class search-key
     // see if it is keycode 13
