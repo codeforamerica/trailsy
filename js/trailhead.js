@@ -401,7 +401,6 @@ function startup() {
     if (($currentTarget).hasClass('search-key')) {
       if (SMALL) {
         if (e.keyCode === 13) {
-          alert("starting search");
           updateFilterObject(filterType, currentUIFilterState);
         }
       }
