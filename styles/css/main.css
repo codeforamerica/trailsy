@@ -2459,7 +2459,7 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .trail-box .trailheadInfo .trailheadIcon {
     position: relative;
     display: inline-block;
-    margin: .05em 0 0 .75em;
+    margin: -0.07em 0 0 0.75em;
     height: 1em;
     width: auto;
   }
