@@ -2206,7 +2206,6 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
     transition: all 0.25s ease;
     /*		-webkit-transition: all 0.25s;*/
-  
     z-index: 9000;
   }
   .detailPanel.expanded {
@@ -2964,7 +2963,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     font-size: 12px;
     float: right;
-    margin-right: 3em;
+    margin-right: 1.75em;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     width: 2em;
@@ -3056,7 +3055,7 @@ At some point, update mediaqueries to be in EMS
     left: 0;
     height: auto;
     width: auto;
-    margin: .08em 1.6em .08em 1.6em;
+    margin: .08em 2.75em .08em 2.75em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3070,7 +3069,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: 2em;
     width: auto;
-    padding: .5em 0em 0em 1em;
+    padding: .5em 0em 0em 1.75em;
     float: left;
   }
   .detailPanel .detailPanelBody .detailTopRow#left .detailLength {
@@ -3133,7 +3132,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 1em 0em 1em;
+    padding: .5em 1.75em 0em 1.75em;
     margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsHeader {
@@ -3143,9 +3142,11 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailConditionsDescription {
-    margin: .25em 0 .5em 0;
+    /*margin: .25em 0 .5em 0; */
+    margin-bottom: 1.5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3159,9 +3160,11 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
+    margin-top: 1em;
   }
   .detailPanel .detailPanelBody .detailConditionsRow .detailTrailSurface {
-    margin: .25em 0 .5em 0;
+    /*margin: .25em 0 .5em 0; */
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3173,7 +3176,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 1em 0em 1em;
+    padding: .5em 1.75em 0em 1.75em;
     margin-bottom: 1em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailPanelHeader {
@@ -3183,9 +3186,10 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-bottom: -0.5em;
   }
   .detailPanel .detailPanelBody .detailMiddleRow .detailDescription {
-    margin-top: .75em;
+    /*margin-top: .75em; */
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3197,7 +3201,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 1em 0em 1em;
+    padding: 0em 1.75em 0em .5em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailPanelHeader {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -3206,6 +3210,7 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     color: #bbbdbf;
     font-size: 12px;
+    margin-left: .25em;
   }
   .detailPanel .detailPanelBody .detailBottomRow img {
     height: 1em;
@@ -3224,7 +3229,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     margin-bottom: 1em;
-    margin-top: .75em;
+    margin-left: 1.33em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadInfo .detailTrailheadDistance {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -3285,7 +3290,7 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     float: right;
     margin-bottom: 1em;
-    margin-top: .75em;
+    margin-top: .2em;
     padding: 0em 0em 0em 0em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections {
@@ -3351,7 +3356,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     width: 100%;
     height: 2em;
-    margin-top: 1em;
+    margin-left: 1.25em;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons {
     position: relative;
@@ -3419,7 +3424,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: auto;
     width: 100%;
-    padding: .5em 1em .75em 1em;
+    padding: 1em 1.75em 1em 1.75em;
     /* not needed? .detailSourceURL {
 					.sansSerif-light;
 					color: @color-mid-gray;
