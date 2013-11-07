@@ -2908,7 +2908,6 @@ At some point, update mediaqueries to be in EMS
     height: auto;
     width: auto;
     margin-left: 1em;
-    margin-top: .25em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailStewardInfo a {
     text-decoration: none;
@@ -2929,6 +2928,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
     width: auto;
     text-transform: uppercase;
+    margin-top: -1.5em;
   }
   .detailPanel .detailPanelBody .detailFooter .detailSource {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
