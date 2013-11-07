@@ -34,8 +34,9 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
-  // // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsy-dev.herokuapp.com";
+  //var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsy.herokuapp.com";
+
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -1151,7 +1152,6 @@ function startup() {
 
   function makeTrailDivs(trailheads) {
     console.log("makeTrailDivs");
-    console.log(trailheads);
     orderedTrails = [];
     var divCount = 1;
     $(".trailList").html("");
@@ -1241,7 +1241,6 @@ function startup() {
     }
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
     console.log("end makeTrailDivs");
-    console.log(orderedTrails);
   }
 
   function metersToMiles(i) {
@@ -1986,35 +1985,14 @@ function startup() {
     }
     currentMultiTrailLayer = L.geoJson(response, {
       style: function(feature) {
-        var color;
-        if (feature.properties.order === 0 || !feature.properties.order) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        } else if (feature.properties.order === 1) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        } else if (feature.properties.order === 2) {
-          // color = getClassBackgroundColor("trailActive");
-          return {
-            weight: NORMAL_SEGMENT_WEIGHT,
-            color: NORMAL_SEGMENT_COLOR,
-            opacity: 1,
-            clickable: false
-          };
-        }
+        return {
+          weight: NORMAL_SEGMENT_WEIGHT,
+          color: NORMAL_SEGMENT_COLOR,
+          opacity: 1,
+          clickable: false
+        };
       },
-
-      onEachFeature: function(feature, layer) {
+     onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
       }
     }).addTo(map).bringToFront();
