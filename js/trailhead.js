@@ -163,7 +163,7 @@ function startup() {
   var currentWeightedSegment = null;
   var currentTrailPopup = null;
   var currentTrailhead = null;
-  var orderedTrailIndex;
+  var orderedTrailIndex = 0;
   var geoWatchId = null;
   var currentTrailheadHover = null;
   var geoSetupDone = false;
@@ -297,11 +297,11 @@ function startup() {
             });
           }
           else {
-            // console.log("no USE_LOCAL");
             addTrailsToTrailheads(originalTrailData, originalTrailheads);
-            highlightTrailhead(orderedTrails[0].trailheadID, 0);
-            orderedTrailIndex = 0;
-            showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+            if (SMALL) {
+              highlightTrailhead(orderedTrails[0].trailheadID, 0);
+              showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+            }
           }
         });
       });
@@ -430,8 +430,8 @@ function startup() {
     console.log(currentUIFilterState);
     var matched = 0;
     if (filterType == "activityFilter") {
-      var filterlength = currentFilters.activityFilter.length;
-      for (var i = 0; i < currentFilters.activityFilter.length; i++) {
+      var activityFilterLength = currentFilters.activityFilter.length;
+      for (var i = 0; i < activityFilterLength; i++) {
         var activity = currentFilters.activityFilter[i];
         if (activity === currentUIFilterState) {
           currentFilters.activityFilter.splice(i, 1);
@@ -447,10 +447,8 @@ function startup() {
     if (filterType == "lengthFilter") {
       console.log("length");
       console.log(currentFilters.lengthFilter.length);
-      var filterlength = currentFilters.lengthFilter.length;
-      for (var j = 0; j < filterlength; j++) {
-        console.log("j");
-        console.log(j);
+      var lengthFilterLength = currentFilters.lengthFilter.length;
+      for (var j = 0; j < lengthFilterLength; j++) {
         var lengthRange = currentFilters.lengthFilter[j];
         if (lengthRange == currentUIFilterState) {
           // console.log("match");
@@ -862,7 +860,7 @@ function startup() {
               .html(invisLayer.feature.properties[trailField]);
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
-              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField])
+              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
               $trailPopupLineDiv.append("<b>");
             } else {
               // console.log("skipping trail segment name because it has an underscore in it");
