@@ -283,8 +283,8 @@ function startup() {
       if (geoSetupDone) {
         return;
       }
-      getOrderedTrailheads(currentUserLocation, function() {
-        getTrailData(function() {
+      fetchTrailheads(currentUserLocation, function() {
+        fetchTraildata(function() {
           if (USE_LOCAL) {
             getTrailSegments(function() {
               createSegmentTrailnameCache();
@@ -312,7 +312,7 @@ function startup() {
 
   // function reorderTrailsWithNewLocation() {
   //   setAnchorLocationFromMap();
-  //   getOrderedTrailheads(anchorLocation, function() {
+  //   fetchTrailheads(anchorLocation, function() {
   //     addTrailDataToTrailheads(trailData);
   //   });
   // }
@@ -625,29 +625,29 @@ function startup() {
 
   // get all trailhead info, in order of distance from "location"
 
-  function getOrderedTrailheads(location, callback) {
-    console.log("getOrderedTrailheads");
+  function fetchTrailheads(location, callback) {
+    console.log("fetchTrailheads");
     var callData = {
       loc: location.lat + "," + location.lng,
       type: "GET",
       path: "/trailheads.json?loc=" + location.lat + "," + location.lng
     };
     makeAPICall(callData, function(response) {
-      populateTrailheadArray(response);
+      populateOriginalTrailheads(response);
       if (typeof callback == "function") {
-        callback();
+        callback(response);
       }
     });
   }
 
 
 
-  // given the getOrderedTrailheads response, a geoJSON collection of trailheads ordered by distance,
+  // given the fetchTrailheads response, a geoJSON collection of trailheads ordered by distance,
   // populate trailheads[] with the each trailhead's stored properties, a Leaflet marker, 
   // and a place to put the trails for that trailhead.
 
-  function populateTrailheadArray(trailheadsGeoJSON) {
-    console.log("populateTrailheadArray");
+  function populateOriginalTrailheads(trailheadsGeoJSON) {
+    console.log("populateOriginalTrailheads");
     console.log(trailheadsGeoJSON);
     originalTrailheads = [];
     for (var i = 0; i < trailheadsGeoJSON.features.length; i++) {
@@ -702,8 +702,8 @@ function startup() {
 
   // get the trailData from the API
 
-  function getTrailData(callback) {
-    console.log("getTrailData");
+  function fetchTraildata(callback) {
+    console.log("fetchTraildata");
     var callData = {
       type: "GET",
       path: "/trails.json"
