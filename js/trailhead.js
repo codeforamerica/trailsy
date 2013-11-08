@@ -270,7 +270,7 @@ function startup() {
   // The next three functions perform trailhead/trail mapping
   // on a) initial startup, b) requested re-sort of trailheads based on the map, 
   // and c) a change in filter settings
-  // They all call addTrailDataToTrailheads() as their final action 
+  // They all call addTrailsToTrailheads() as their final action 
   // --------------------------------------------------------------
 
   // on startup, get location, display the map,
@@ -286,9 +286,9 @@ function startup() {
       fetchTrailheads(currentUserLocation, function() {
         fetchTraildata(function() {
           if (USE_LOCAL) {
-            getTrailSegments(function() {
+            fetchTrailsegments(function() {
               createSegmentTrailnameCache();
-              addTrailDataToTrailheads(trailData, originalTrailheads);
+              addTrailsToTrailheads(trailData, originalTrailheads);
               // if we haven't added the segment layer yet, add it.
               if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
                 map.addLayer(allSegmentLayer);
@@ -297,7 +297,7 @@ function startup() {
           }
           else {
             // console.log("no USE_LOCAL");
-            addTrailDataToTrailheads(trailData, originalTrailheads);
+            addTrailsToTrailheads(trailData, originalTrailheads);
             highlightTrailhead(orderedTrails[0].trailheadID, 0);
             orderedTrailIndex = 0;
             showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
@@ -313,7 +313,7 @@ function startup() {
   // function reorderTrailsWithNewLocation() {
   //   setAnchorLocationFromMap();
   //   fetchTrailheads(anchorLocation, function() {
-  //     addTrailDataToTrailheads(trailData);
+  //     addTrailsToTrailheads(trailData);
   //   });
   // }
 
@@ -368,7 +368,7 @@ function startup() {
         }
       }
     });
-    addTrailDataToTrailheads(filteredTrailData, originalTrailheads);
+    addTrailsToTrailheads(filteredTrailData, originalTrailheads);
   }
 
   function filterChangeHandler(e) {
@@ -722,8 +722,8 @@ function startup() {
     }
   }
 
-  function getTrailSegments(callback) {
-    console.log("getTrailSegments");
+  function fetchTrailsegments(callback) {
+    console.log("fetchTrailsegments");
     var callData = {
       type: "GET",
       path: "/trailsegments.json"
@@ -742,6 +742,7 @@ function startup() {
     });
   }
 
+  // this creates a lookup object so we can quickly look up if a trail has any segment data available
   function createSegmentTrailnameCache() {
     console.log("createSegmentTrailnameCache");
     for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
@@ -983,8 +984,8 @@ function startup() {
   // that match each trailhead's named trails from the trailhead table.
   // Also add links to the trails within each trailhead popup 
 
-  function addTrailDataToTrailheads(myTrailData, myTrailheads) {
-    console.log("addTrailDataToTrailheads");
+  function addTrailsToTrailheads(myTrailData, myTrailheads) {
+    console.log("addTrailsToTrailheads");
     for (var j = 0; j < myTrailheads.length; j++) {
       var trailhead = myTrailheads[j];
       trailhead.trails = [];
@@ -1015,7 +1016,7 @@ function startup() {
         });
       }
     }
-    fixDuplicateTrailNames(myTrailheads);
+    fixDuplicateTrailheadTrails(myTrailheads);
     makeTrailheadPopups(myTrailheads);
     mapActiveTrailheads(myTrailheads);
     makeTrailDivs(myTrailheads);
@@ -1029,11 +1030,11 @@ function startup() {
 
   // this is so very wrong and terrible and makes me want to never write anything again.
   // alas, it works for now.
-  // for each trailhead, if two or more of the matched trails from addTrailDataToTrailheads() have the same name,
+  // for each trailhead, if two or more of the matched trails from addTrailsToTrailheads() have the same name,
   // remove any trails that don't match the trailhead source
 
-  function fixDuplicateTrailNames(myTrailheads) {
-    console.log("fixDuplicateTrailNames");
+  function fixDuplicateTrailheadTrails(myTrailheads) {
+    console.log("fixDuplicateTrailheadTrails");
     for (var trailheadIndex = 0; trailheadIndex < myTrailheads.length; trailheadIndex++) {
       var trailhead = myTrailheads[trailheadIndex];
       var trailheadTrailNames = {};
@@ -1065,10 +1066,8 @@ function startup() {
   }
 
   // given the trailheads,
-  // make the popup menu for each one, including each trail present
+  // make the popup menu content for each one, including each trail present
   // and add it to the trailhead object
-
-  //  This is really only used in the desktop version 
 
   function makeTrailheadPopups() {
     for (var trailheadIndex = 0; trailheadIndex < originalTrailheads.length; trailheadIndex++) {
@@ -1105,7 +1104,6 @@ function startup() {
         .appendTo($popupTrailheadDiv);
       }
       trailhead.popupContent = $popupContentMainDiv.outerHTML();
-      // trailhead.marker.bindPopup(trailhead.popupContent);
     }
   }
 
@@ -1123,22 +1121,14 @@ function startup() {
       }
     }
     if (currentTrailheadLayerGroup) {
-      console.log("remove");
       map.removeLayer(currentTrailheadLayerGroup);
     }
     currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
-
     map.addLayer(currentTrailheadLayerGroup);
-
-    currentTrailheadLayerGroup.eachLayer(function(layer) {
-      if (typeof layer.bringToBack == "function") {
-        layer.bringToBack();
-      }
-    });
   }
 
   // given trailheads, now populated with matching trail names,
-  // fill out the left trail(head) pane,
+  // make the trail/trailhead combination divs
   // noting if a particular trailhead has no trails associated with it
 
   function makeTrailDivs(myTrailheads) {
@@ -1238,6 +1228,9 @@ function startup() {
     return (i * METERSTOMILESFACTOR).toFixed(1);
   }
 
+
+  // detail panel section
+  //
   function showTrailDetails(trail, trailhead) {
     console.log("showTrailDetails");
     if ($('.detailPanel').is(':hidden')) {
@@ -1258,22 +1251,7 @@ function startup() {
     }
   }
 
-  //  About page functions
-
-  function openAboutPage() {
-    console.log("openAboutPage");
-    $(".aboutPage").show();
-    if (!SMALL) {
-      $('.accordion').hide();
-    }
-  }
-
-  function closeAboutPage() {
-    console.log("closeAboutPage");
-    $('.aboutPage').hide();
-    $('.accordion').show();
-  }
-
+  
   //  Helper functions for ShowTrailDetails
 
   function openDetailPanel() {
@@ -1642,6 +1620,22 @@ function startup() {
   //     container.removeClass('openDrawer');
   //   }
   // }
+
+  //  About page functions
+
+  function openAboutPage() {
+    console.log("openAboutPage");
+    $(".aboutPage").show();
+    if (!SMALL) {
+      $('.accordion').hide();
+    }
+  }
+
+  function closeAboutPage() {
+    console.log("closeAboutPage");
+    $('.aboutPage').hide();
+    $('.accordion').show();
+  }
 
 
   // event handler for click of a trail name in a trailhead popup
