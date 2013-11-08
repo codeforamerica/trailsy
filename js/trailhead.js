@@ -169,6 +169,7 @@ function startup() {
   var geoSetupDone = false;
   var segmentTrailnameCache = {};
   var currentTrailData;
+  var searchKeyTimeout = null;
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -336,54 +337,7 @@ function startup() {
           }
         }
       }
-      // if (currentFilters.lengthFilter) {
-      //   var distInclude = false;
-      //   if (currentFilters.lengthFilter.length === 0) {
-      //     distInclude = true;
-      //   }
-      //   for (var j = 0; j < currentFilters.lengthFilter.length; j++) {
-      //     var distance = currentFilters.lengthFilter[j];
-      //     var trailDist = trail.properties["length"];
-      //     if ((distance.toLowerCase() == "short" && trailDist <= SHORT_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "medium" && trailDist > SHORT_MAX_DISTANCE && trailDist <= MEDIUM_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "long" && trailDist > MEDIUM_MAX_DISTANCE && trailDist <= LONG_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "verylong" && trailDist > LONG_MAX_DISTANCE)) {
-      //       distInclude = true;
-      //       break;
-      //     }
-      //   }
-      //   if (!distInclude) {
-      //     delete currentTrailData[trail_id];
-      //   }
-      // }
-      // if (currentFilters.searchFilter) {
-      //   var normalizedTrailName = trail.properties.name.toLowerCase();
-      //   var normalizedSearchFilter = currentFilters.searchFilter.toLowerCase();
-      //   var equivalentWords = [
-      //     [" and ", " & "],
-      //     ["tow path", "towpath"]
-      //   ];
-      //   $.each(equivalentWords, function(i, el) {
-      //     var regexToken = "(" + el[0] + "|" + el[1] + ")";
-
-      //     normalizedSearchFilter = normalizedSearchFilter.replace(el[0], regexToken);
-      //     normalizedSearchFilter = normalizedSearchFilter.replace(el[1], regexToken);
-      //   });
-
-      //   var searchRegex = new RegExp(normalizedSearchFilter);
-      //   var nameMatched = !! normalizedTrailName.match(searchRegex);
-        // var descriptionMatched;
-        // if (trail.properties.description === null) {
-        //   descriptionMatched = false;
-        // } else {
-        //   var normalizedDescription = trail.properties.description.toLowerCase();
-        //   descriptionMatched = !! normalizedDescription.match(searchRegex);
-        // }
-
-    //     if (!nameMatched && !descriptionMatched) {
-    //       delete currentTrailData[trail_id];
-    //     }
-    //   }
+ 
     });
     addTrailsToTrailheads(currentTrailData, originalTrailheads);
   }
@@ -412,7 +366,10 @@ function startup() {
           updateFilterObject(filterType, currentUIFilterState);
         }
       } else {
-        updateFilterObject(filterType, currentUIFilterState);
+        clearTimeout(searchKeyTimeout);
+        searchKeyTimeout = setTimeout(function () {
+          updateFilterObject(filterType, currentUIFilterState);
+        }, 300);
       }
     } else if (($currentTarget).hasClass('search-submit')) {
       updateFilterObject(filterType, currentUIFilterState);
@@ -1119,7 +1076,7 @@ function startup() {
       wanted = true;
     }
     else {
-      console.log('no match');
+      // console.log('no match');
     }
     return wanted;
   }
