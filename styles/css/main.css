@@ -2478,24 +2478,25 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
     color: #ffffff;
     /*trying to get linked used in admin interface to show up in status. the a { display:none;} is blocking this.
-			&#red a {
-				color:@color-yellow;
-				text-decoration: none;
-				display:inline !important;
-				&:hover {
-					text-decoration:underline;
-					display:inline !important;
-					}
-				}
-			&#yellow a {
-				color:black;
-				text-decoration: none;
-				display:inline !important;
-				&:hover {
-					text-decoration:underline;
-					display:inline !important;
-				}
-			} */
+  			&#red a {
+  				color:@color-yellow;
+  				text-decoration: none;
+  				display:inline !important;
+  				&:hover {
+  					text-decoration:underline;
+  					display:inline !important;
+  					}
+  				}
+  			&#yellow a {
+  				color:black;
+  				text-decoration: none;
+  				display:inline !important;
+  				&:hover {
+  					text-decoration:underline;
+  					display:inline !important;
+  				}
+  			} */
+  
   }
   .detailPanel .status#yellow {
     background-color: #f3ca64;
@@ -4188,9 +4189,8 @@ section {
     overflow: hidden;
   }
 }
-
 /* noscript */
-noscript .noscript{
+noscript .noscript {
   position: absolute;
   font-size: 1.8em;
   top: 0;
