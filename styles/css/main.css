@@ -2466,57 +2466,6 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
     height: 0;
   }
-  .detailPanel .status {
-    position: relative;
-    height: auto;
-    width: 100%;
-    z-index: 999;
-    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 20px;
-    font-size: 12px;
-    color: #ffffff;
-    /*trying to get linked used in admin interface to show up in status. the a { display:none;} is blocking this.
-			&#red a {
-				color:@color-yellow;
-				text-decoration: none;
-				display:inline !important;
-				&:hover {
-					text-decoration:underline;
-					display:inline !important;
-					}
-				}
-			&#yellow a {
-				color:black;
-				text-decoration: none;
-				display:inline !important;
-				&:hover {
-					text-decoration:underline;
-					display:inline !important;
-				}
-			} */
-  }
-  .detailPanel .status#yellow {
-    background-color: #f3ca64;
-  }
-  .detailPanel .status#red {
-    background-color: #9c2d23;
-  }
-  .detailPanel .status img {
-    height: auto;
-    width: 10%;
-    vertical-align: top;
-    position: relative;
-    display: inline-block;
-  }
-  .detailPanel .status span {
-    height: auto;
-    width: 90%;
-    position: relative;
-    display: inline-block;
-    padding: 1em 1.33em 1em 0em;
-  }
   .detailPanel .trail-box {
     position: relative;
     height: auto;
@@ -2582,6 +2531,52 @@ At some point, update mediaqueries to be in EMS
     line-height: 2.667em;
     color: #91c73d;
     cursor: pointer;
+  }
+  .detailPanel .trail-box .statusMessage {
+    position: relative;
+    bottom: 1em;
+    height: auto;
+    width: 100%;
+    z-index: 999;
+    font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    line-height: 20px;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  .detailPanel .trail-box .statusMessage#red a {
+    color: #f3ca64;
+    text-decoration: none;
+  }
+  .detailPanel .trail-box .statusMessage#red a:hover {
+    text-decoration: underline;
+  }
+  .detailPanel .trail-box .statusMessage#yellow a {
+    color: black;
+    text-decoration: none;
+  }
+  .detailPanel .trail-box .statusMessage#yellow a:hover {
+    text-decoration: underline;
+  }
+  .detailPanel .trail-box .statusMessage#yellow {
+    background-color: #f3ca64;
+  }
+  .detailPanel .trail-box .statusMessage#red {
+    background-color: #9c2d23;
+  }
+  .detailPanel .trail-box .statusMessage img {
+    height: auto;
+    width: 10%;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+  }
+  .detailPanel .trail-box .statusMessage span {
+    height: auto;
+    width: 90%;
+    position: relative;
+    display: inline-block;
+    padding: 1em 1.33em 1em 0em;
   }
   .detailPanel .trail-box .trailheadInfo {
     position: relative;
