@@ -1381,6 +1381,7 @@ function startup() {
 
   function changeDetailPanel(e) {
     console.log("changeDetailPanel");
+    e.stopPropagation();
     var trailheadID = currentDetailTrailhead.properties.id;
     var trailID = String(currentDetailTrail.properties.id);
     console.log(trailID);
