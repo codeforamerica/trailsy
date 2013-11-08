@@ -817,7 +817,7 @@ function startup() {
             $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
               .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
               .attr("data-trailname", invisLayer.feature.properties[trailField])
-              .html(invisLayer.feature.properties[trailField]);
+              .html(invisLayer.feature.properties[trailField])
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
               $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
@@ -827,6 +827,7 @@ function startup() {
             }
           }
           $popupHTML.append($trailPopupLineDiv);
+          $popupHTML.append("<b>");
         }
       }
 
