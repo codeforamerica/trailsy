@@ -303,7 +303,7 @@ function startup() {
             addTrailsToTrailheads(originalTrailData, originalTrailheads);
             if (SMALL) {
               highlightTrailhead(orderedTrails[0].trailheadID, 0);
-              showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+              showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
             }
           }
         });
@@ -1040,7 +1040,7 @@ function startup() {
     if (SMALL && USE_LOCAL) {
       highlightTrailhead(orderedTrails[0].trailheadID, 0);
       orderedTrailIndex = 0;
-      showTrailDetails(orderedTrails[0].trailhead, orderedTrails[0].trail);
+      showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
     }
   }
 
