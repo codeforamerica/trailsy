@@ -1588,11 +1588,16 @@ function startup() {
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
-    $(".email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
-    $(".twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
+    var emailSubject = encodeURIComponent("Heading to the " + trail.properties.name);
+    var emailBody = encodeURIComponent("Check out more trails at tothetrails.com!");
+    $(".email a").attr("href", "mailto:?subject=" + emailSubject + "&body=" + emailBody).attr("target", "_blank");
+
+    var tweet = encodeURIComponent("Heading to the " + trail.properties.name + ". Find it on tothetrails.com!");
+    $(".twitter a").attr("href", "http://twitter.com/home?status=" + tweet).attr("target", "_blank");
+
+    var facebookStatus = encodeURIComponent("Heading to the " + trail.properties.name + "!");
     $(".facebook a").attr("href", 
-     "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=Heading to " +
-     trail.properties.name + "!").attr("target", "_blank");
+     "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=" + facebookStatus).attr("target", "_blank");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
 
     if (trail.properties.steward_fullname) {
