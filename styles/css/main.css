@@ -871,7 +871,6 @@ At some point, update mediaqueries to be in EMS
     list-style: none;
     background-color: #ffffff;
     height: 100%;
-    overflow: scroll;
   }
 }
 @media only screen and (min-width: 530px) {
@@ -1426,7 +1425,6 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     max-height: 25em;
     position: relative;
-    overflow: scroll;
     background-color: #ffffff;
   }
 }
