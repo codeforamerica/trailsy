@@ -3013,7 +3013,8 @@ At some point, update mediaqueries to be in EMS
 				} */
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
-    width: 5em;
+    /*the height needs to be fixed because of the way the logo is saved on the backend */
+    height: 80px;
     float: left;
     position: relative;
     display: inline-block;
@@ -3592,7 +3593,8 @@ At some point, update mediaqueries to be in EMS
 				}*/
   }
   .detailPanel .detailPanelBody .detailFooter .icon-large {
-    height: 5em;
+    /*the height needs to be fixed because of the way the logo is saved on the backend */
+    height: 80px;
     float: left;
     position: relative;
     display: inline-block;
