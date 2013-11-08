@@ -1579,7 +1579,7 @@ function startup() {
 
   function slideDetailPanel(e) {
     console.log("slideDetailPanel");
-    if ($(e.target).parent().hasClass("expanded")) {
+    if ($(e.target).parents(".detailPanel").hasClass("expanded")) {
       $('.detailPanel').addClass('contracted');
       $('.detailPanel').removeClass('expanded');
       $('.trailListColumn').css({
