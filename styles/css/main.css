@@ -2477,6 +2477,25 @@ At some point, update mediaqueries to be in EMS
     line-height: 20px;
     font-size: 12px;
     color: #ffffff;
+    /*trying to get linked used in admin interface to show up in status. the a { display:none;} is blocking this.
+			&#red a {
+				color:@color-yellow;
+				text-decoration: none;
+				display:inline !important;
+				&:hover {
+					text-decoration:underline;
+					display:inline !important;
+					}
+				}
+			&#yellow a {
+				color:black;
+				text-decoration: none;
+				display:inline !important;
+				&:hover {
+					text-decoration:underline;
+					display:inline !important;
+				}
+			} */
   }
   .detailPanel .status#yellow {
     background-color: #f3ca64;
@@ -2772,6 +2791,15 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription a {
+    color: #00adef;
+    text-decoration: none;
+    display: inline !important;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription a:hover {
+    text-decoration: underline;
+    display: inline !important;
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer {
     height: auto;
@@ -3171,10 +3199,23 @@ At some point, update mediaqueries to be in EMS
     z-index: 999;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
-    font-size: 16px;
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     color: #ffffff;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#red a {
+    color: #f3ca64;
+    text-decoration: none;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#red a:hover {
+    text-decoration: underline;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#yellow a {
+    color: black;
+    text-decoration: none;
+  }
+  .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#yellow a:hover {
+    text-decoration: underline;
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer .statusMessage#yellow {
     background-color: #f3ca64;
@@ -3344,6 +3385,13 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #58595b;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription a {
+    color: #00adef;
+    text-decoration: none;
+  }
+  .detailPanel .detailPanelBody .detailMiddleRow .detailDescription a:hover {
+    text-decoration: underline;
   }
   .detailPanel .detailPanelBody .detailBottomRow {
     position: relative;

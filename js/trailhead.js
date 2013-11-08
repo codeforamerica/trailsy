@@ -34,8 +34,8 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsy-dev.herokuapp.com";
+  //var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -356,15 +356,27 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
-        var nameIndex = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
-        var descriptionIndex;
+        var normalizedTrailName = trail.properties.name.toLowerCase();
+        var normalizedSearchFilter = currentFilters.searchFilter.toLowerCase();
+        var equivalentWords = [[" and "," & "], ["tow path", "towpath"]];
+        $.each(equivalentWords, function(i, el) {
+          var regexToken = "(" + el[0] + "|" + el[1] + ")";
+
+          normalizedSearchFilter = normalizedSearchFilter.replace(el[0], regexToken);
+          normalizedSearchFilter = normalizedSearchFilter.replace(el[1], regexToken);
+        });
+
+        var searchRegex = RegExp(normalizedSearchFilter);
+        var nameMatched = !!normalizedTrailName.match(searchRegex);
+        var descriptionMatched;
         if (trail.properties.description === null) {
-          descriptionIndex = -1;
+          descriptionMatched = false;
         } else {
-          descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+          var normalizedDescription = trail.properties.description.toLowerCase();
+          descriptionMatched = !!normalizedDescription.match(searchRegex)
         }
 
-        if (nameIndex == -1 && descriptionIndex == -1) {
+        if (!nameMatched && !descriptionMatched) {
           delete filteredTrailData[trail_id];
         }
       }
@@ -1549,9 +1561,9 @@ function startup() {
       "&daddr=" + trailhead.geometry.coordinates[1] + "," + trailhead.geometry.coordinates[0];
     $('.detailPanel .detailDirections a').attr("href", directionsUrl).attr("target", "_blank");
     // 
-    $("#email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
-    $("#twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
-    $("#facebook a").attr("href", 
+    $(".email a").attr("href", "mailto:?subject=Heading to the " + trail.properties.name + "&body=Check out more trails at tothetrails.com!").attr("target", "_blank");
+    $(".twitter a").attr("href", "http://twitter.com/home?status=Headed%20to%20" + trail.properties.name + ".%20Find%20it%20on%20tothetrails.com!").attr("target", "_blank");
+    $(".facebook a").attr("href", 
      "http://www.facebook.com/sharer/sharer.php?s=100&p[url]=tothetrails.com&p[images][0]=&p[title]=To%20The%20Trails!&p[summary]=Heading to " +
      trail.properties.name + "!").attr("target", "_blank");
     $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons');
