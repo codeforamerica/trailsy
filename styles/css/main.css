@@ -2927,7 +2927,8 @@ At some point, update mediaqueries to be in EMS
     float: left;
     transition: all 0.25s ease;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections .linkHeader {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections a {
+    display: block;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2940,7 +2941,7 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections:hover {
     background-color: #00adef;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections:hover > .linkHeader {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections:hover > a {
     color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap {
@@ -2954,7 +2955,8 @@ At some point, update mediaqueries to be in EMS
     cursor: pointer;
     transition: all 0.25s ease;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap .linkHeader {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap a {
+    display: block;
     vertical-align: middle;
     text-decoration: none;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2967,7 +2969,7 @@ At some point, update mediaqueries to be in EMS
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap:hover {
     background-color: #00adef;
   }
-  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap:hover > .linkHeader {
+  .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap:hover > a {
     color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailTrailheadAmenities {
@@ -3500,6 +3502,7 @@ At some point, update mediaqueries to be in EMS
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailDirections a {
+    display: block;
     width: 100%;
     vertical-align: middle;
     text-decoration: none;
@@ -3529,6 +3532,7 @@ At some point, update mediaqueries to be in EMS
     transition: all 0.25s ease;
   }
   .detailPanel .detailPanelBody .detailBottomRow .detailLinksToMore .detailPrintMap a {
+    display: block;
     width: 100%;
     vertical-align: middle;
     text-decoration: none;
