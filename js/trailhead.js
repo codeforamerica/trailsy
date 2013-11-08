@@ -169,6 +169,7 @@ function startup() {
   var geoSetupDone = false;
   var segmentTrailnameCache = {};
   var currentTrailData;
+  var searchKeyTimeout = null;
 
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
@@ -299,9 +300,9 @@ function startup() {
             });
           } else {
             addTrailsToTrailheads(originalTrailData, originalTrailheads);
-            if (SMALL) {
-              highlightTrailhead(orderedTrails[0].trailheadID, 0);
-              showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
+            if (SMALL &&($(".slideDrawer").hasClass("closedDrawer")) ){
+                highlightTrailhead(orderedTrails[0].trailheadID, 0);
+                showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
             }
           }
         });
@@ -336,54 +337,7 @@ function startup() {
           }
         }
       }
-      // if (currentFilters.lengthFilter) {
-      //   var distInclude = false;
-      //   if (currentFilters.lengthFilter.length === 0) {
-      //     distInclude = true;
-      //   }
-      //   for (var j = 0; j < currentFilters.lengthFilter.length; j++) {
-      //     var distance = currentFilters.lengthFilter[j];
-      //     var trailDist = trail.properties["length"];
-      //     if ((distance.toLowerCase() == "short" && trailDist <= SHORT_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "medium" && trailDist > SHORT_MAX_DISTANCE && trailDist <= MEDIUM_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "long" && trailDist > MEDIUM_MAX_DISTANCE && trailDist <= LONG_MAX_DISTANCE) ||
-      //       (distance.toLowerCase() == "verylong" && trailDist > LONG_MAX_DISTANCE)) {
-      //       distInclude = true;
-      //       break;
-      //     }
-      //   }
-      //   if (!distInclude) {
-      //     delete currentTrailData[trail_id];
-      //   }
-      // }
-      // if (currentFilters.searchFilter) {
-      //   var normalizedTrailName = trail.properties.name.toLowerCase();
-      //   var normalizedSearchFilter = currentFilters.searchFilter.toLowerCase();
-      //   var equivalentWords = [
-      //     [" and ", " & "],
-      //     ["tow path", "towpath"]
-      //   ];
-      //   $.each(equivalentWords, function(i, el) {
-      //     var regexToken = "(" + el[0] + "|" + el[1] + ")";
-
-      //     normalizedSearchFilter = normalizedSearchFilter.replace(el[0], regexToken);
-      //     normalizedSearchFilter = normalizedSearchFilter.replace(el[1], regexToken);
-      //   });
-
-      //   var searchRegex = new RegExp(normalizedSearchFilter);
-      //   var nameMatched = !! normalizedTrailName.match(searchRegex);
-        // var descriptionMatched;
-        // if (trail.properties.description === null) {
-        //   descriptionMatched = false;
-        // } else {
-        //   var normalizedDescription = trail.properties.description.toLowerCase();
-        //   descriptionMatched = !! normalizedDescription.match(searchRegex);
-        // }
-
-    //     if (!nameMatched && !descriptionMatched) {
-    //       delete currentTrailData[trail_id];
-    //     }
-    //   }
+ 
     });
     addTrailsToTrailheads(currentTrailData, originalTrailheads);
   }
@@ -412,7 +366,10 @@ function startup() {
           updateFilterObject(filterType, currentUIFilterState);
         }
       } else {
-        updateFilterObject(filterType, currentUIFilterState);
+        clearTimeout(searchKeyTimeout);
+        searchKeyTimeout = setTimeout(function () {
+          updateFilterObject(filterType, currentUIFilterState);
+        }, 300);
       }
     } else if (($currentTarget).hasClass('search-submit')) {
       updateFilterObject(filterType, currentUIFilterState);
@@ -1119,7 +1076,7 @@ function startup() {
       wanted = true;
     }
     else {
-      console.log('no match');
+      // console.log('no match');
     }
     return wanted;
   }
@@ -1231,6 +1188,8 @@ function startup() {
     console.log("makeTrailDivs");
     orderedTrails = [];
     var divCount = 1;
+    if(myTrailheads.length === 0) return;
+
     $(".trailList").html("");
     for (var j = 0; j < myTrailheads.length; j++) {
       var trailhead = myTrailheads[j];
@@ -1914,33 +1873,16 @@ function startup() {
     // get segment collection for each
     for (var i = 0; i < trailhead.trails.length; i++) {
       var trailID = trailhead.trails[i];
-      var trailName = currentTrailData[trailID].properties.name;
+      // var trailName = currentTrailData[trailID].properties.name;
 
-
-      // var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
-      //   "(segments.trail1 = '" + trailName + "' or " +
-      //   "segments.trail2 = '" + trailName + "' or " +
-      //   "segments.trail3 = '" + trailName + "' or " +
-      //   "segments.trail4 = '" + trailName + "' or " +
-      //   "segments.trail5 = '" + trailName + "' or " +
-      //   "segments.trail6 = '" + trailName + "' or " +
-      //   "segments.trail1 = '" + trailName + " Trail' or " +
-      //   "segments.trail2 = '" + trailName + " Trail' or " +
-      //   "segments.trail3 = '" + trailName + " Trail' or " +
-      //   "segments.trail4 = '" + trailName + " Trail' or " +
-      //   "segments.trail5 = '" + trailName + " Trail' or " +
-      //   "segments.trail6 = '" + trailName + " Trail') and " +
-      //   "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trailID, index) {
         return function(callback) {
           var callData = {
             type: "GET",
             // path: "/trailsegments.json"
-            path: "/trailsegments.json?trailID=" + trailID
+            path: "/trailsegments.json?trail_id=" + trailID
           };
           makeAPICall(callData, function(response) {
-            console.log("ma response");
-            console.log(response);
             responses[index] = response;
             callback(null, trailID);
           });
@@ -2010,7 +1952,6 @@ function startup() {
           // console.log("invalid!");
         }
       }
-      console.log(valid);
       if (valid) {
         trailFeatureArray.push(trailFeatureCollection);
       }
@@ -2117,6 +2058,7 @@ function startup() {
         weight: ACTIVE_TRAIL_WEIGHT,
         color: ACTIVE_TRAIL_COLOR
       });
+      currentHighlightedTrailLayer.bringToFront();
     } else {
       console.log("ERROR: trail layer missing");
       console.log(currentTrailLayers);
