@@ -364,15 +364,27 @@ function startup() {
         }
       }
       if (currentFilters.searchFilter) {
-        var nameIndex = trail.properties.name.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
-        var descriptionIndex;
+        var normalizedTrailName = trail.properties.name.toLowerCase();
+        var normalizedSearchFilter = currentFilters.searchFilter.toLowerCase();
+        var equivalentWords = [[" and "," & "], ["tow path", "towpath"]];
+        $.each(equivalentWords, function(i, el) {
+          var regexToken = "(" + el[0] + "|" + el[1] + ")";
+
+          normalizedSearchFilter = normalizedSearchFilter.replace(el[0], regexToken);
+          normalizedSearchFilter = normalizedSearchFilter.replace(el[1], regexToken);
+        });
+
+        var searchRegex = RegExp(normalizedSearchFilter);
+        var nameMatched = !!normalizedTrailName.match(searchRegex);
+        var descriptionMatched;
         if (trail.properties.description === null) {
-          descriptionIndex = -1;
+          descriptionMatched = false;
         } else {
-          descriptionIndex = trail.properties.description.toLowerCase().indexOf(currentFilters.searchFilter.toLowerCase());
+          var normalizedDescription = trail.properties.description.toLowerCase();
+          descriptionMatched = !!normalizedDescription.match(searchRegex)
         }
 
-        if (nameIndex == -1 && descriptionIndex == -1) {
+        if (!nameMatched && !descriptionMatched) {
           delete filteredTrailData[trail_id];
         }
       }
