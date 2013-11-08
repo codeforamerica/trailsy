@@ -226,16 +226,21 @@ function startup() {
   // =====================================================================//
   // Kick things off
 
-  var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
-      "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier versions of that web browser." + 
-      "<p>Please upgrade to the latest version of " +
-      "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
-      "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
-      "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
-      "<p>If you are currently using Windows XP, you'll need to download and use Chrome or Firefox." +
-      "<img src='/img/Overlay-Image-01.png' alt='trees'>";
+  showOverlay();
+  initialSetup();
 
-  var overlayHTML = "<span class='closeOverlay'>x</span>" +
+  // =====================================================================//
+  function showOverlay() {
+    var overlayHTMLIE = "<h1>Welcome to To The Trails!</h1>" + 
+    "<p>We're sorry, but To The Trails is not compatible with Microsoft Internet Explorer 8 or earlier versions of that web browser." + 
+    "<p>Please upgrade to the latest version of " +
+    "<a href='http://windows.microsoft.com/en-us/internet-explorer/download-ie'>Internet Explorer</a>, " + 
+    "<a href='http://google.com/chrome'>Google Chrome</a>, or " +  
+    "<a href='http://getfirefox.com'>Mozilla Firefox</a>." +
+    "<p>If you are currently using Windows XP, you'll need to download and use Chrome or Firefox." +
+    "<img src='/img/Overlay-Image-01.png' alt='trees'>";
+
+    var overlayHTML = "<span class='closeOverlay'>x</span>" +
     "<h1>Welcome To The Trails!</h1>" +
     "<p>ToTheTrails.com helps you find and navigate the trails of Summit County, Ohio." +
     "<p>Pick trails, find your way, and keep your bearings as you move between trails and parks in Cuyahoga Valley National Park and Metro Parks, Serving Summit County and beyond." +
@@ -243,30 +248,28 @@ function startup() {
     "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you." +
     "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
-  var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
+    var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
     "<p>We look forward to seeing you for our public launch." +
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
-  if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
-    console.log("closed");
-    $(".overlay-panel").html(closedOverlayHTML);
-    $(".overlay").show();
-  } else {
-    if ($("html").hasClass("lt-ie8")) {
-      $(".overlay-panel").html(overlayHTMLIE);
+    if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+      console.log("closed");
+      $(".overlay-panel").html(closedOverlayHTML);
+      $(".overlay").show();
     } else {
-      $(".overlay-panel").html(overlayHTML);
+      if ($("html").hasClass("lt-ie8")) {
+        $(".overlay-panel").html(overlayHTMLIE);
+      } else {
+        $(".overlay-panel").html(overlayHTML);
+      }
+
+      $(".overlay-panel").click(function() {
+        $(".overlay").hide();
+      });
     }
 
-    $(".overlay-panel").click(function() {
-      $(".overlay").hide();
-    });
+    $(".overlay").show();
   }
-
-  $(".overlay").show();
-  initialSetup();
-
-
 
   // The next three functions perform trailhead/trail mapping
   // on a) initial startup, b) requested re-sort of trailheads based on the map, 
