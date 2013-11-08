@@ -369,14 +369,14 @@ function startup() {
           normalizedSearchFilter = normalizedSearchFilter.replace(el[1], regexToken);
         });
 
-        var searchRegex = RegExp(normalizedSearchFilter);
+        var searchRegex = new RegExp(normalizedSearchFilter);
         var nameMatched = !!normalizedTrailName.match(searchRegex);
         var descriptionMatched;
         if (trail.properties.description === null) {
           descriptionMatched = false;
         } else {
           var normalizedDescription = trail.properties.description.toLowerCase();
-          descriptionMatched = !!normalizedDescription.match(searchRegex)
+          descriptionMatched = !!normalizedDescription.match(searchRegex);
         }
 
         if (!nameMatched && !descriptionMatched) {
@@ -761,7 +761,8 @@ function startup() {
   function createSegmentTrailnameCache() {
     console.log("createSegmentTrailnameCache");
     for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
-      var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+      // var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+      var segment = trailSegments.features[segmentIndex];
       for (var i = 0; i < 6; i++) {
         var fieldName = "trail" + i;
         if (segment.properties[fieldName]) {
@@ -1224,17 +1225,6 @@ function startup() {
         };
         orderedTrails.push(trailInfoObject);
       }
-
-
-      // diagnostic div to show trailheads with no trail matches
-      // (These shouldn't happen any more because of the trailheadTrailIDs.length check above.)
-      if (trailheadTrailIDs.length === 0) {
-        $trailDiv = $("<div class='trail-box'>").appendTo("#trailList");
-        $("<span class='trail' id='list|" + trailheadName + "'>" + trailheadName + " - NO TRAILS (" +
-          [val.properties.trail1, val.properties.trail2, val.properties.trail3].join(", ") + ")</span>").appendTo($trailDiv);
-        $("<span class='trailSource'>" + trailheadSource + "</span>").appendTo($trailDiv);
-      }
-    // });
     }
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
     console.log("end makeTrailDivs");
@@ -1847,7 +1837,6 @@ function startup() {
       //   "segments.trail5 = '" + trailName + " Trail' or " +
       //   "segments.trail6 = '" + trailName + " Trail') and " +
       //   "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
-      alert("new!");
       var queryTask = function(trailID) {
         return function(callback) {
           var callData = {
