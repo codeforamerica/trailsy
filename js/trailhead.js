@@ -212,9 +212,10 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $('.hamburgerLine').click(moveSlideDrawer);
+  $('.hamburgerBox').click(moveSlideDrawer);
   // $(document).on('click', closeSlideDrawerOnly);
   $(document).on('click', '.slider', slideDetailPanel);
+  $(document).on('click', '.detailPanel.contracted', function(){showDetailPanel(true)});
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   $(".aboutLink").click(openAboutPage);
@@ -1576,21 +1577,28 @@ function startup() {
 
   }
 
-
-  function slideDetailPanel(e) {
-    console.log("slideDetailPanel");
-    if ($(e.target).parent().hasClass("expanded")) {
-      $('.detailPanel').addClass('contracted');
-      $('.detailPanel').removeClass('expanded');
-      $('.trailListColumn').css({
-        overflow: 'hidden'
-      });
-    } else {
+  function showDetailPanel(show){
+    if (show){
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
       $('.trailListColumn').css({
         overflow: 'scroll'
       });
+    } else {
+      $('.detailPanel').addClass('contracted');
+      $('.detailPanel').removeClass('expanded');
+      $('.trailListColumn').css({
+        overflow: 'hidden'
+      });
+    }
+  }
+
+  function slideDetailPanel(e) {
+    console.log("slideDetailPanel");
+    if ($(e.target).parents(".detailPanel").hasClass("expanded")) {
+      showDetailPanel(false);
+    } else {
+      showDetailPanel(true);
     }
   }
 
@@ -1828,6 +1836,8 @@ function startup() {
     for (var i = 0; i < trailhead.trails.length; i++) {
       var trailID = trailhead.trails[i];
       var trailName = currentTrailData[trailID].properties.name;
+
+
       // var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
       //   "(segments.trail1 = '" + trailName + "' or " +
       //   "segments.trail2 = '" + trailName + "' or " +
@@ -1842,19 +1852,21 @@ function startup() {
       //   "segments.trail5 = '" + trailName + " Trail' or " +
       //   "segments.trail6 = '" + trailName + " Trail') and " +
       //   "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
-      var queryTask = function(trailID) {
+      var queryTask = function(trailID, index) {
         return function(callback) {
           var callData = {
             type: "GET",
-            path: "trailsegments.json"
-            // path: "/trailsegments.json/?trailID=" + trailID
+            // path: "/trailsegments.json"
+            path: "/trailsegments.json?trailID=" + trailID
           };
           makeAPICall(callData, function(response) {
+            console.log("ma response");
+            console.log(response);
             responses[index] = response;
             callback(null, trailID);
           });
         };
-      }(trailID);
+      }(trailID, i);
       queryTaskArray.push(queryTask);
     }
     async.parallel(queryTaskArray, function(err, results) {
