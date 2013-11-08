@@ -212,7 +212,7 @@ function startup() {
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
-  $('.hamburgerLine').click(moveSlideDrawer);
+  $('.hamburgerBox').click(moveSlideDrawer);
   // $(document).on('click', closeSlideDrawerOnly);
   $(document).on('click', '.slider', slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
