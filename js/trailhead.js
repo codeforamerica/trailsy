@@ -215,6 +215,7 @@ function startup() {
   $('.hamburgerBox').click(moveSlideDrawer);
   // $(document).on('click', closeSlideDrawerOnly);
   $(document).on('click', '.slider', slideDetailPanel);
+  $(document).on('click', '.detailPanel.contracted', function(){showDetailPanel(true)});
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   $(".aboutLink").click(openAboutPage);
@@ -1576,21 +1577,28 @@ function startup() {
 
   }
 
-
-  function slideDetailPanel(e) {
-    console.log("slideDetailPanel");
-    if ($(e.target).parent().hasClass("expanded")) {
-      $('.detailPanel').addClass('contracted');
-      $('.detailPanel').removeClass('expanded');
-      $('.trailListColumn').css({
-        overflow: 'hidden'
-      });
-    } else {
+  function showDetailPanel(show){
+    if (show){
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
       $('.trailListColumn').css({
         overflow: 'scroll'
       });
+    } else {
+      $('.detailPanel').addClass('contracted');
+      $('.detailPanel').removeClass('expanded');
+      $('.trailListColumn').css({
+        overflow: 'hidden'
+      });
+    }
+  }
+
+  function slideDetailPanel(e) {
+    console.log("slideDetailPanel");
+    if ($(e.target).parents(".detailPanel").hasClass("expanded")) {
+      showDetailPanel(false);
+    } else {
+      showDetailPanel(true);
     }
   }
 
