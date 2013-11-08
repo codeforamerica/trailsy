@@ -1,9 +1,9 @@
 $(document).ready(function() {
     // Collapsible Menu
-    function accordion(e) {
+    function accordion(e, expanded) {
         //variables
         var $trigger = $(e), //trigger firing the event
-            visible = true; //flag for wayfinding
+            visible = expanded; //flag for wayfinding
 
             $trigger.hover().css({'cursor': 'pointer'});
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
         $trigger.click(function() {
             console.log("ACCORDION")
             //conditional check
-            if ( ! visible ) {
+            if ( visible ) {
                 //  if visible is false...remove 'active' class
                 $trigger.removeClass('active');
                 //  ...and add the down triangle
@@ -40,12 +40,12 @@ $(document).ready(function() {
     }
 
     //call to widget trigger1
-    accordion('.trigger1'),
+    accordion('.trigger1', true),
     //call to widget trigger2
-    accordion('.trigger2');
-    accordion('.trigger3');
+    accordion('.trigger2', true);
+    accordion('.trigger3', true);
     accordion('.triggerAbout');
-
+  
 });//end document.ready()
 
 
