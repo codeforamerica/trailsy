@@ -324,14 +324,14 @@ function startup() {
   //  Filter function + helper functions, triggered by UI events declared above.
 
   function applyFilterChange(currentFilters) {
-    var filteredTrailData = $.extend(true, {}, originalTrailData);
+    currentTrailData = $.extend(true, {}, originalTrailData);
     $.each(originalTrailData, function(trail_id, trail) {
       if (currentFilters.activityFilter) {
         for (var i = 0; i < currentFilters.activityFilter.length; i++) {
           var activity = currentFilters.activityFilter[i];
           var trailActivity = trail.properties[activity];
           if (!trailActivity || trailActivity.toLowerCase().charAt(0) !== "y") {
-            delete filteredTrailData[trail_id];
+            delete currentTrailData[trail_id];
           }
         }
       }
@@ -352,7 +352,7 @@ function startup() {
           }
         }
         if (!distInclude) {
-          delete filteredTrailData[trail_id];
+          delete currentTrailData[trail_id];
         }
       }
       if (currentFilters.searchFilter) {
@@ -377,12 +377,11 @@ function startup() {
         }
 
         if (!nameMatched && !descriptionMatched) {
-          delete filteredTrailData[trail_id];
+          delete currentTrailData[trail_id];
         }
       }
     });
-    currentTrailData = $.extend(true, {}, filteredTrailData);
-    addTrailsToTrailheads(filteredTrailData, originalTrailheads);
+    addTrailsToTrailheads(currentTrailData, originalTrailheads);
   }
 
   function filterChangeHandler(e) {
