@@ -1914,33 +1914,16 @@ function startup() {
     // get segment collection for each
     for (var i = 0; i < trailhead.trails.length; i++) {
       var trailID = trailhead.trails[i];
-      var trailName = currentTrailData[trailID].properties.name;
+      // var trailName = currentTrailData[trailID].properties.name;
 
-
-      // var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
-      //   "(segments.trail1 = '" + trailName + "' or " +
-      //   "segments.trail2 = '" + trailName + "' or " +
-      //   "segments.trail3 = '" + trailName + "' or " +
-      //   "segments.trail4 = '" + trailName + "' or " +
-      //   "segments.trail5 = '" + trailName + "' or " +
-      //   "segments.trail6 = '" + trailName + "' or " +
-      //   "segments.trail1 = '" + trailName + " Trail' or " +
-      //   "segments.trail2 = '" + trailName + " Trail' or " +
-      //   "segments.trail3 = '" + trailName + " Trail' or " +
-      //   "segments.trail4 = '" + trailName + " Trail' or " +
-      //   "segments.trail5 = '" + trailName + " Trail' or " +
-      //   "segments.trail6 = '" + trailName + " Trail') and " +
-      //   "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
       var queryTask = function(trailID, index) {
         return function(callback) {
           var callData = {
             type: "GET",
             // path: "/trailsegments.json"
-            path: "/trailsegments.json?trailID=" + trailID
+            path: "/trailsegments.json?trail_id=" + trailID
           };
           makeAPICall(callData, function(response) {
-            console.log("ma response");
-            console.log(response);
             responses[index] = response;
             callback(null, trailID);
           });
@@ -2010,7 +1993,6 @@ function startup() {
           // console.log("invalid!");
         }
       }
-      console.log(valid);
       if (valid) {
         trailFeatureArray.push(trailFeatureCollection);
       }
@@ -2117,6 +2099,7 @@ function startup() {
         weight: ACTIVE_TRAIL_WEIGHT,
         color: ACTIVE_TRAIL_COLOR
       });
+      currentHighlightedTrailLayer.bringToFront();
     } else {
       console.log("ERROR: trail layer missing");
       console.log(currentTrailLayers);
