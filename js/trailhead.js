@@ -300,9 +300,9 @@ function startup() {
             });
           } else {
             addTrailsToTrailheads(originalTrailData, originalTrailheads);
-            if (SMALL) {
-              highlightTrailhead(orderedTrails[0].trailheadID, 0);
-              showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
+            if (SMALL &&($(".slideDrawer").hasClass("closedDrawer")) ){
+                highlightTrailhead(orderedTrails[0].trailheadID, 0);
+                showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
             }
           }
         });
@@ -1188,6 +1188,8 @@ function startup() {
     console.log("makeTrailDivs");
     orderedTrails = [];
     var divCount = 1;
+    if(myTrailheads.length === 0) return;
+
     $(".trailList").html("");
     for (var j = 0; j < myTrailheads.length; j++) {
       var trailhead = myTrailheads[j];
