@@ -1828,6 +1828,8 @@ function startup() {
     for (var i = 0; i < trailhead.trails.length; i++) {
       var trailID = trailhead.trails[i];
       var trailName = currentTrailData[trailID].properties.name;
+
+
       // var trail_query = "select st_collect(the_geom) the_geom, '" + trailName + "' trailname from " + TRAILSEGMENTS_TABLE + " segments where " +
       //   "(segments.trail1 = '" + trailName + "' or " +
       //   "segments.trail2 = '" + trailName + "' or " +
@@ -1842,19 +1844,21 @@ function startup() {
       //   "segments.trail5 = '" + trailName + " Trail' or " +
       //   "segments.trail6 = '" + trailName + " Trail') and " +
       //   "(source = '" + trailData[trailID].properties.source + "' or " + (trailName == "Ohio & Erie Canal Towpath Trail") + ")";
-      var queryTask = function(trailID) {
+      var queryTask = function(trailID, index) {
         return function(callback) {
           var callData = {
             type: "GET",
-            path: "trailsegments.json"
-            // path: "/trailsegments.json/?trailID=" + trailID
+            // path: "/trailsegments.json"
+            path: "/trailsegments.json?trailID=" + trailID
           };
           makeAPICall(callData, function(response) {
+            console.log("ma response");
+            console.log(response);
             responses[index] = response;
             callback(null, trailID);
           });
         };
-      }(trailID);
+      }(trailID, i);
       queryTaskArray.push(queryTask);
     }
     async.parallel(queryTaskArray, function(err, results) {
