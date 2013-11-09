@@ -277,14 +277,29 @@
 	.sansSerif-light;
 	text-decoration: none;
 	margin: 0em 0em 0em 0em;
-}
-.trail-popup-line-named {
-	cursor: pointer;
-	color: @color-dark-blue !important;
-	padding: .7em 25% .5em .5em;
-	border-top: 1px solid @color-light-gray;
-	&:hover {
-		background: fade(@color-light-gray, 40%);
+	.trail-popup-line-named {
+		cursor: pointer;
+		color: @color-dark-blue !important;
+		padding: .7em 25% .5em .5em;
+		border-top: 1px solid @color-light-gray;
+		&:hover {
+			background: fade(@color-light-gray, 40%);
+		}
+		&:hover b {
+			border-left: .6em solid @color-white;
+		}
+	}
+	b {
+		position: absolute;
+		margin: 0em .5em 0 .25em;
+		right: .3em;
+		top: 33%;
+		bottom: 33%; 
+		border-bottom: .6em solid transparent;
+		border-top: .6em solid transparent;
+		border-left: .6em solid @color-dark-blue;
+		display: inline-block;
+		height: 0;
 	}
 }
 

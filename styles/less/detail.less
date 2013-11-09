@@ -153,6 +153,9 @@
 					    display: inline-block;
 					    height: 0;
 					    width: 0;
+  &.disabled{ 
+  display:none;
+}
 					}
 				}
 				&.controlRight {
@@ -168,45 +171,40 @@
 					    border-left: .8em solid @color-white;
 					    display: inline-block;
 					    height: 0;
+  &.disabled{ 
+  display:none;
+}
 					}
 				}
 			}
 		}
-		.status {
+		.statusMessage {
 			position: relative;
 			height: auto;
 			width: 100%;
 			z-index: 999;
 			.sansSerif-light;
-			font-size: 12px;
+			font-size: 16px;
 			color: @color-white;
-			
-		/*trying to get linked used in admin interface to show up in status. the a { display:none;} is blocking this.
 			&#red a {
 				color:@color-yellow;
 				text-decoration: none;
-				display:inline !important;
 				&:hover {
 					text-decoration:underline;
-					display:inline !important;
-					}
 				}
+			}
 			&#yellow a {
 				color:black;
 				text-decoration: none;
-				display:inline !important;
 				&:hover {
 					text-decoration:underline;
-					display:inline !important;
 				}
-			} */
+			}
 			&#yellow {
 				background-color: @color-yellow;
-
 			}
 			&#red {
 				background-color: @color-red;
-
 			}
 			img {
 				height: auto;
@@ -221,6 +219,12 @@
 				position: relative;
 				display: inline-block;
 				padding: 1em 1.33em 1em 0em;
+			}
+			.truncate {
+			  width: 90%;
+			  white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
 			}
 		}
 		.trail-box {
