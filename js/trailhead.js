@@ -61,6 +61,7 @@ function startup() {
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = SMALL ? false : true; // Set this to a true value to preload/use a local trail segment cache
+  var USE_SEGMENT_LAYER = true; // performance testing on mobile
   var USE_COMPLEX_SEGMENT_LAYER = SMALL ? false : true;
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
@@ -77,6 +78,7 @@ function startup() {
   var map;
   var mapDivName = SMALL ? "trailMapSmall" : "trailMapLarge";
   var CLOSED = false;
+  var customSmoothFactor = SMALL ? 1.5 : 1.0;
 
   var originalTrailData = {}; // all of the trails metadata (from traildata table), with trail ID as key
   // for yes/no features, check for first letter "y" or "n".
@@ -712,18 +714,21 @@ function startup() {
     // }
     makeAPICall(callData, function(response) {
       trailSegments = response;
-      if (USE_COMPLEX_SEGMENT_LAYER) {
-        allSegmentLayer = makeAllSegmentLayer(response);
-      }
-      else {
-        allSegmentLayer = L.geoJson(response, {
-          style: {
-            color: NORMAL_SEGMENT_COLOR,
-            weight: NORMAL_SEGMENT_WEIGHT,
-            opacity: 1,
-            clickable: false
-          }
-        });
+      if (USE_SEGMENT_LAYER) {
+        if (USE_COMPLEX_SEGMENT_LAYER) {
+          allSegmentLayer = makeAllSegmentLayer(response);
+        }
+        else {
+          allSegmentLayer = L.geoJson(response, {
+            style: {
+              color: NORMAL_SEGMENT_COLOR,
+              weight: NORMAL_SEGMENT_WEIGHT,
+              opacity: 1,
+              clickable: false,
+              smoothFactor: customSmoothFactor
+            }
+          });
+        }
       }
       if (typeof callback == "function") {
         callback();
@@ -788,7 +793,8 @@ function startup() {
           color: NORMAL_SEGMENT_COLOR,
           weight: NORMAL_SEGMENT_WEIGHT,
           opacity: 1,
-          clickable: false
+          clickable: false,
+          smoothFactor: customSmoothFactor
           // dashArray: "5,5"
         };
       },
@@ -2070,7 +2076,8 @@ function startup() {
           weight: NORMAL_SEGMENT_WEIGHT,
           color: NORMAL_SEGMENT_COLOR,
           opacity: 1,
-          clickable: false
+          clickable: false,
+          customSmoothFactor: SMALL ? 3.0 : 1.0
         };
       },
       onEachFeature: function(feature, layer) {
