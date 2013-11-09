@@ -507,12 +507,12 @@ At some point, update mediaqueries to be in EMS
   
     height: 2em;
     width: 100%;
-    background-color: #b0d576;
+    background-color: #91c73d;
     transition: all 0.25s ease;
     border-bottom: .1em white solid;
   }
   .searchSection:hover {
-    background-color: #91c73d;
+    background-color: #b0d576;
   }
   .searchSection .icon {
     font-size: 12px;
@@ -549,11 +549,11 @@ At some point, update mediaqueries to be in EMS
     height: 2em;
     width: 100%;
     border-bottom: .1em white solid;
-    background-color: #b0d576;
+    background-color: #91c73d;
     transition: all 0.25s ease;
   }
   .aboutSection:hover {
-    background-color: #91c73d;
+    background-color: #b0d576;
   }
   .aboutSection .icon {
     font-size: 12px;
@@ -587,7 +587,7 @@ At some point, update mediaqueries to be in EMS
   .aboutPage .aboutPageBanner {
     position: relative;
     width: 100%;
-    background-color: #00adef;
+    background-color: #91c73d;
     padding: .5em 1.75em .5em 1.75em;
   }
   .aboutPage span {
@@ -701,11 +701,11 @@ At some point, update mediaqueries to be in EMS
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
-    background-color: #b0d576;
+    background-color: #91c73d;
     transition: all 0.25s ease;
   }
   .trailsNearYouResults:hover {
-    background-color: #91c73d;
+    background-color: #b0d576;
   }
   .trailsNearYouResults .icon {
     font-size: 12px;
@@ -1425,9 +1425,9 @@ At some point, update mediaqueries to be in EMS
 @media only screen and (max-width: 529px)  {
   .trailList {
     width: 100%;
-    max-height: 25em;
     position: relative;
     background-color: #ffffff;
+    margin-bottom: 60px;
   }
 }
 @media only screen and (min-width: 530px) {
@@ -2466,6 +2466,9 @@ At some point, update mediaqueries to be in EMS
     height: 0;
     width: 0;
   }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft b.disabled {
+    display: none;
+  }
   .detailPanel .detailPanelBanner .detailPanelControls.controlRight {
     width: 2em;
     top: 0;
@@ -2480,6 +2483,9 @@ At some point, update mediaqueries to be in EMS
     border-left: 0.8em solid #ffffff;
     display: inline-block;
     height: 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight b.disabled {
+    display: none;
   }
   .detailPanel .statusMessage {
     position: relative;
