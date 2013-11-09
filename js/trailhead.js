@@ -34,8 +34,8 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
-  // var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsy.herokuapp.com";
+  var API_HOST = "http://127.0.0.1:3000";
+  // var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -1427,7 +1427,7 @@ function startup() {
       $('.detailPanel .detailTrailheadCity').html("");
       $('.detailPanel .detailTrailheadState').html("");
       $('.detailPanel .detailTrailheadZip').html("");
-      $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
+      $('.detailPanel .statusMessage').remove();
       $('.detailPanel .detailActivityRow .hike').html("");
       $('.detailPanel .detailActivityRow .cycle').html("");
       $('.detailPanel .detailActivityRow .handicap').html("");
@@ -1510,7 +1510,7 @@ function startup() {
       if (!SMALL) {
         $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
       } else {
-        $('.detailPanel .trail-box').append("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+        $('.detailPanel .detailPanelBanner').after("<div class='statusMessage' id='yellow'>" + "<img src='img/icon_alert_yellow.png'>" + "<span class='truncate'>" + trail.properties.statustext + "</span>" + "</div>");
       }
     }
 
@@ -1518,7 +1518,7 @@ function startup() {
       if (!SMALL) {
         $('.detailPanel .detailPanelPictureContainer').append("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
       } else {
-        $('.detailPanel .trail-box').append("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span>" + trail.properties.statustext + "</span>" + "</div>");
+        $('.detailPanel .detailPanelBanner').after("<div class='statusMessage' id='red'>" + "<img src='img/icon_alert_red.png'>" + "<span class='truncate'>" + trail.properties.statustext + "</span>" + "</div>");
       }
     }
 
@@ -1627,12 +1627,14 @@ function startup() {
     if (show){
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
+      $('.statusMessage span').removeClass('truncate');
       $('.trailListColumn').css({
         overflow: 'scroll'
       });
     } else {
       $('.detailPanel').addClass('contracted');
       $('.detailPanel').removeClass('expanded');
+      $('.statusMessage span').addClass('truncate');
       $('.trailListColumn').css({
         overflow: 'hidden'
       });

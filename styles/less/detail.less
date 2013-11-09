@@ -172,6 +172,55 @@
 				}
 			}
 		}
+		.statusMessage {
+			position: relative;
+			height: auto;
+			width: 100%;
+			z-index: 999;
+			.sansSerif-light;
+			font-size: 16px;
+			color: @color-white;
+			&#red a {
+				color:@color-yellow;
+				text-decoration: none;
+				&:hover {
+					text-decoration:underline;
+				}
+			}
+			&#yellow a {
+				color:black;
+				text-decoration: none;
+				&:hover {
+					text-decoration:underline;
+				}
+			}
+			&#yellow {
+				background-color: @color-yellow;
+			}
+			&#red {
+				background-color: @color-red;
+			}
+			img {
+				height: auto;
+				width: 10%;
+				vertical-align: top;
+				position: relative;
+				display: inline-block;
+			}
+			span {
+				height: auto;
+				width: 90%;
+				position: relative;
+				display: inline-block;
+				padding: 1em 1.33em 1em 0em;
+			}
+			.truncate {
+			  width: 90%;
+			  white-space: nowrap;
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			}
+		}
 		.trail-box {
 			position: relative;
 			height: auto;
@@ -225,50 +274,6 @@
 					line-height: 2.667em;
 					color: @color-mid-green;
 					cursor: pointer;
-				}
-			}
-			.statusMessage {
-				position: relative;
-				bottom: 1em;
-				height: auto;
-				width: 100%;
-				z-index: 999;
-				.sansSerif-light;
-				font-size: 16px;
-				color: @color-white;
-				&#red a {
-					color:@color-yellow;
-					text-decoration: none;
-					&:hover {
-						text-decoration:underline;
-					}
-				}
-				&#yellow a {
-					color:black;
-					text-decoration: none;
-					&:hover {
-						text-decoration:underline;
-					}
-				}
-				&#yellow {
-					background-color: @color-yellow;
-				}
-				&#red {
-					background-color: @color-red;
-				}
-				img {
-					height: auto;
-					width: 10%;
-					vertical-align: top;
-					position: relative;
-					display: inline-block;
-				}
-				span {
-					height: auto;
-					width: 90%;
-					position: relative;
-					display: inline-block;
-					padding: 1em 1.33em 1em 0em;
 				}
 			}
 			.trailheadInfo {
