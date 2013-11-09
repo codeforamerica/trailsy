@@ -1,11 +1,14 @@
 $(document).ready(function() {
     // Collapsible Menu
-    function accordion(e, expanded) {
+    function accordion(e) {
         //variables
         var $trigger = $(e), //trigger firing the event
-            visible = expanded; //flag for wayfinding
+            visible = $trigger.hasClass('active'); //flag for wayfinding
 
             $trigger.hover().css({'cursor': 'pointer'});
+
+      if(visible) $trigger.children('.icon').html('&nbsp;&#x25B2;');
+      else $trigger.children('.icon').html('&nbsp;&#x25BC;');
 
         //event
         $trigger.click(function() {
@@ -40,10 +43,10 @@ $(document).ready(function() {
     }
 
     //call to widget trigger1
-    accordion('.trigger1', true),
+    accordion('.trigger1'),
     //call to widget trigger2
-    accordion('.trigger2', true);
-    accordion('.trigger3', true);
+    accordion('.trigger2');
+    accordion('.trigger3');
     accordion('.triggerAbout');
   
 });//end document.ready()
