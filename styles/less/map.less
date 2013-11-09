@@ -286,15 +286,13 @@
 			background: fade(@color-light-gray, 40%);
 		}
 		&:hover b {
-			border-left: .6em solid @color-white;
+/*			border-left: .6em solid @color-white;*/
 		}
 	}
 	b {
 		position: absolute;
 		margin: 0em .5em 0 .25em;
 		right: .3em;
-		top: 33%;
-		bottom: 33%; 
 		border-bottom: .6em solid transparent;
 		border-top: .6em solid transparent;
 		border-left: .6em solid @color-dark-blue;
@@ -310,10 +308,10 @@
 .trailMapContainer {
 	@media @mobile {
 		position: absolute;
-		top: 0;
+		top: 48px; /* size of header */
 		right: 0;
 		left: 0;
-		bottom: 0;
+		bottom: 84px; /* size of footer/detail panel */
 		z-index: 8000;
 	}
 	/* Desktop */
