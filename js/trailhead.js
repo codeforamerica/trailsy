@@ -34,8 +34,8 @@ function startup() {
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
   // var API_HOST = window.location.hostname;
-  var API_HOST = "http://127.0.0.1:3000";
-  // var API_HOST = "http://trailsy.herokuapp.com";
+  // var API_HOST = "http://127.0.0.1:3000";
+  var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -1194,9 +1194,15 @@ function startup() {
     orderedTrails = [];
     var divCount = 1;
     if(myTrailheads.length === 0) return;
-
+    var lastTimeStamp;
+    var newTimeStamp;
+    var time;
     $(".trailList").html("");
     for (var j = 0; j < myTrailheads.length; j++) {
+      // newTimeStamp = Date.now();
+      // time = newTimeStamp - lastTimeStamp;
+      // lastTimeStamp = newTimeStamp;
+      // console.log(time + ": " + "next trailhead");
       var trailhead = myTrailheads[j];
       // $.each(trailheads, function(index, trailhead) {
       var trailheadName = trailhead.properties.name;
@@ -1213,6 +1219,10 @@ function startup() {
 
       // Making a new div for text / each trail 
       for (var i = 0; i < trailheadTrailIDs.length; i++) {
+        // newTimeStamp = Date.now();
+        // time = newTimeStamp - lastTimeStamp;
+        // lastTimeStamp = newTimeStamp;
+        // console.log(time + ": " + "new trail");
 
         var trailID = trailheadTrailIDs[i];
         var trail = currentTrailData[trailID];
@@ -1220,45 +1230,49 @@ function startup() {
         var trailLength = currentTrailData[trailID].properties.length;
         var trailCurrentIndex = divCount++;
 
-        //  Add park name var when it makes it into the database
-        $trailDiv = $("<div>").addClass('trail-box')
-          .attr("data-source", "list")
-          .attr("data-trailid", trailID)
-          .attr("data-trailname", trailName)
-          .attr("data-trail-length", trailLength)
-          .attr("data-trailheadName", trailheadName)
-          .attr("data-trailheadid", trailheadID)
-          .attr("data-index", i)
-          .appendTo(".trailList")
-          .click(populateTrailsForTrailheadDiv)
-          .click(function(trail, trailhead) {
-            return function(e) {
-              showTrailDetails(trail, trailhead);
-            };
-          }(trail, trailhead));
+        var trailDivText = "<div class='trail-box' " + 
+        "data-source='list' " +
+        "data-trailid='" + trailID + "' " +
+        "data-trailname='" + trailName + "' " +
+        "data-trail-length='" + trailLength + "' " +
+        "data-trailheadName='" + trailheadName + "' " +
+        "data-trailheadid='" + trailheadID + "' " +
+        "data-index='" + i + "' " + 
 
-        var $trailInfo = $("<div>").addClass("trailInfo").appendTo($trailDiv);
-        var $trailheadInfo = $("<div>").addClass("trailheadInfo").appendTo($trailDiv);
+        "</div>";
 
-        // Making a new div for Detail Panel
-        $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
-        $("<div class='trailCurrentIndex' >" + trailCurrentIndex + "</div>").appendTo($trailInfo);
-        $("<div class='trail' >" + trailName + "</div>").appendTo($trailInfo);
+        $trailDiv = $(trailDivText)
+        .appendTo(".trailList")
+        .click(populateTrailsForTrailheadDiv)
+        .click(function(trail, trailhead) {
+          return function(e) {
+            showTrailDetails(trail, trailhead);
+          };
+        }(trail, trailhead));
+
+        // $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
+        
+        var trailheadInfoText = "<div class='trailheadInfo'>" + 
+        "<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>" +
+        "<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>" +
+        "<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>" + 
+        "</div>";
 
         var mileString = trailLength == 1 ? "mile" : "miles";
-        $("<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>").appendTo($trailInfo);
-
+        var trailInfoText = "<div class='trailInfo'>" + 
+        "<div class='trailCurrentIndex' >" + trailCurrentIndex + "</div>" + 
+        "<div class='trail' >" + trailName + "</div>" +
+        "<div class='trailLength' >" + trailLength + " " + mileString + " long" + "</div>";
         if (parkName) {
-          // console.log("has a park name");
-          $("<div class='parkName' >" + trailhead.properties.park + "</div>").appendTo($trailInfo);
+          trailInfoText = trailInfoText + "<div class='parkName' >" + trailhead.properties.park + "</div>";
         }
+        trailInfoText = trailInfoText + "</div>";
 
-        //  Here we generate icons for each activity filter that is true..?
+        var trailSourceText = "<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>";
 
-        $("<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>").appendTo($trailheadInfo);
-        $("<div class='trailheadName' >" + trailheadName + " Trailhead" + "</div>").appendTo($trailheadInfo);
-        $("<div class='trailheadDistance' >" + trailheadDistance + " miles away" + "</div>").appendTo($trailheadInfo);
-
+        $trailDiv.append(trailInfoText + trailheadInfoText +  trailSourceText);
+        
+        
         var trailInfoObject = {
           trailID: trailID,
           trail: trail,
@@ -1267,6 +1281,10 @@ function startup() {
           index: i
         };
         orderedTrails.push(trailInfoObject);
+        // newTimeStamp = Date.now();
+        // time = newTimeStamp - lastTimeStamp;
+        // lastTimeStamp = newTimeStamp;
+        // console.log(time + ": " + "end loop");
       }
     }
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
@@ -2147,9 +2165,5 @@ function startup() {
     return s ? this.before(s).remove() : jQuery("<p>").append(this.eq(0).clone()).html();
   };
 
-  function logger(message) {
-    if (typeof console !== "undefined") {
-      console.log(message);
-    }
-  }
+  
 }
