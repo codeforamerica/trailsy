@@ -223,7 +223,11 @@ function startup() {
   $(".closeAbout").click(closeAboutPage);
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
-
+  //if mobile, we expand 2 of the sidebar sections 
+  if(SMALL){
+    $(".trigger1").addClass("active");
+    $(".trigger3").addClass("active");
+  }
 
   // =====================================================================//
   // Kick things off
@@ -300,9 +304,9 @@ function startup() {
             });
           } else {
             addTrailsToTrailheads(originalTrailData, originalTrailheads);
-            if (SMALL) {
-              highlightTrailhead(orderedTrails[0].trailheadID, 0);
-              showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
+            if (SMALL &&($(".slideDrawer").hasClass("closedDrawer")) ){
+                highlightTrailhead(orderedTrails[0].trailheadID, 0);
+                showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
             }
           }
         });
@@ -1189,6 +1193,8 @@ function startup() {
     console.log("makeTrailDivs");
     orderedTrails = [];
     var divCount = 1;
+    if(myTrailheads.length === 0) return;
+
     $(".trailList").html("");
     for (var j = 0; j < myTrailheads.length; j++) {
       var trailhead = myTrailheads[j];
@@ -1331,8 +1337,10 @@ function startup() {
   }
 
   function detailPanelHoverOut(e) {
-    $(".controlRight").removeClass("enabled").addClass("disabled");
-    $(".controlLeft").removeClass("enabled").addClass("disabled");
+    if(!SMALL){
+      $(".controlRight").removeClass("enabled").addClass("disabled");
+      $(".controlLeft").removeClass("enabled").addClass("disabled");
+    }
   }
 
   function changeDetailPanel(e) {

@@ -3,15 +3,18 @@ $(document).ready(function() {
     function accordion(e) {
         //variables
         var $trigger = $(e), //trigger firing the event
-            visible = true; //flag for wayfinding
+            visible = $trigger.hasClass('active'); //flag for wayfinding
 
             $trigger.hover().css({'cursor': 'pointer'});
+
+      if(visible) $trigger.children('.icon').html('&nbsp;&#x25B2;');
+      else $trigger.children('.icon').html('&nbsp;&#x25BC;');
 
         //event
         $trigger.click(function() {
             console.log("ACCORDION")
             //conditional check
-            if ( ! visible ) {
+            if ( visible ) {
                 //  if visible is false...remove 'active' class
                 $trigger.removeClass('active');
                 //  ...and add the down triangle
@@ -45,7 +48,7 @@ $(document).ready(function() {
     accordion('.trigger2');
     accordion('.trigger3');
     accordion('.triggerAbout');
-
+  
 });//end document.ready()
 
 
