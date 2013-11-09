@@ -223,7 +223,11 @@ function startup() {
   $(".closeAbout").click(closeAboutPage);
   //  Shouldn't the UI event of a Map Callout click opening the detail panel go here?
 
-
+  //if mobile, we expand 2 of the sidebar sections 
+  if(SMALL){
+    $(".trigger1").addClass("active");
+    $(".trigger3").addClass("active");
+  }
 
   // =====================================================================//
   // Kick things off
