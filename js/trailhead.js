@@ -201,9 +201,10 @@ function startup() {
 
   // $("#redoSearch").click(reorderTrailsWithNewLocation);
   $(document).on('click', '.trailhead-trailname', trailnameClick); // Open the detail panel!
-  $(document).on('click', '.closeDetail', closeDetailPanel); // Close the detail panel!
-  $(document).on('click', '.detailPanelControls', changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
-  $(document).on('change', '.filter', filterChangeHandler);
+  $('.closeDetail').click(closeDetailPanel); // Close the detail panel!
+  $('.detailPanelControls').click(changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
+  $('.filter').change(filterChangeHandler);
+
   $(".clearSelection").click(clearSelectionHandler);
   $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
   $(".search-key").keyup(function(e) {
@@ -218,8 +219,9 @@ function startup() {
 
   //  Detail Panel Navigation UI events
   $('.hamburgerBox').click(moveSlideDrawer);
-  // $(document).on('click', closeSlideDrawerOnly);
+
   $(document).on('click', '.slider', slideDetailPanel);
+
   $(document).on('click', '.detailPanel.contracted', function(){showDetailPanel(true)});
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
@@ -424,14 +426,6 @@ function startup() {
     } else if (($currentTarget).hasClass('search-submit')) {
       updateFilterObject(filterType, currentUIFilterState);
     }
-    // if the event target has a class search-key
-    // see if it is keycode 13
-    //  if true, call updatefilterobject
-    //  with filtertype=searchFilter
-    //  contents/value of searchbox which we get via jquery
-    //  if the event target has a class search-button
-    //  check to see if the value does not equal empty string
-    //  if it does not equal empty string, call updatefilterobject with filtertype=search filter & contents of box.
   }
 
   function updateFilterObject(filterType, currentUIFilterState) {
