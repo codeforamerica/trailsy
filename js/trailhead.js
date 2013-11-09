@@ -200,29 +200,23 @@ function startup() {
   // UI events to react to
 
   // $("#redoSearch").click(reorderTrailsWithNewLocation);
-  $(document).on('click', '.trailhead-trailname', trailnameClick); // Open the detail panel!
+  $('.trailMapContainer').on('click', '.trailhead-trailname', trailnameClick); // Open the detail panel!
+
   $('.closeDetail').click(closeDetailPanel); // Close the detail panel!
   $('.detailPanelControls').click(changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $('.filter').change(filterChangeHandler);
 
   $(".clearSelection").click(clearSelectionHandler);
-  $(document).on('click', '.trail-popup-line-named', trailPopupLineClick);
-  $(".search-key").keyup(function(e) {
-    // if (e.which == 13) {
-    //   console.log($('.search-key').val());
-    processSearch(e);
-    // }
-  });
+  $('.trailMapContainer').on('click', '.trail-popup-line-named', trailPopupLineClick);
+  $(".search-key").keyup(function(e) { processSearch(e); });
   $(".offsetZoomControl").click(offsetZoomIn);
-
   $(".search-submit").click(processSearch);
 
   //  Detail Panel Navigation UI events
   $('.hamburgerBox').click(moveSlideDrawer);
 
-  $(document).on('click', '.slider', slideDetailPanel);
-
-  $(document).on('click', '.detailPanel.contracted', function(){showDetailPanel(true)});
+  $('.slider').click(slideDetailPanel);
+  $('.detailPanel.contracted slider').click(function(){ showDetailPanel(true); });
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   $(".aboutLink").click(openAboutPage);
