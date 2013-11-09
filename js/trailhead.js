@@ -299,9 +299,10 @@ function startup() {
       fetchTraildata(function() { traildataFetched = true; });
       fetchTrailsegments(function() { trailsegmentsFetched = true; });
       if (USE_LOCAL) {
+        setTimeout(waitForTrailSegments, 0);
         setTimeout(waitForDataAndSegments, 0);
         setTimeout(waitForAllTrailData, 0);       
-      } else { // USE_LOCAL = false
+      } else {
         setTimeout(waitForDataAndTrailHeads, 0);     
         setTimeout(waitForTrailSegments, 0);   
       }    
