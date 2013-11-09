@@ -852,7 +852,7 @@ function startup() {
             }
           }
           $popupHTML.append($trailPopupLineDiv);
-          $popupHTML.append("<b>");
+          $trailPopupLineDiv.append("<b>");
         }
       }
 

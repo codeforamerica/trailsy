@@ -2061,14 +2061,13 @@ At some point, update mediaqueries to be in EMS
   background: rgba(227, 227, 225, 0.4);
 }
 .trail-popup .trail-popup-line-named:hover b {
-  border-left: 0.6em solid #ffffff;
+  /*			border-left: .6em solid @color-white;*/
+
 }
 .trail-popup b {
   position: absolute;
   margin: 0em .5em 0 .25em;
   right: .3em;
-  top: 33%;
-  bottom: 33%;
   border-bottom: .6em solid transparent;
   border-top: .6em solid transparent;
   border-left: 0.6em solid #00adef;
