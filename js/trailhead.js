@@ -1332,8 +1332,10 @@ function startup() {
   }
 
   function detailPanelHoverOut(e) {
-    $(".controlRight").removeClass("enabled").addClass("disabled");
-    $(".controlLeft").removeClass("enabled").addClass("disabled");
+    if(!SMALL){
+      $(".controlRight").removeClass("enabled").addClass("disabled");
+      $(".controlLeft").removeClass("enabled").addClass("disabled");
+    }
   }
 
   function changeDetailPanel(e) {

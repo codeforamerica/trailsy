@@ -2410,6 +2410,9 @@ At some point, update mediaqueries to be in EMS
     height: 0;
     width: 0;
   }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlLeft b.disabled {
+    display: none;
+  }
   .detailPanel .detailPanelBanner .detailPanelControls.controlRight {
     width: 2em;
     top: 0;
@@ -2424,6 +2427,9 @@ At some point, update mediaqueries to be in EMS
     border-left: 0.8em solid #ffffff;
     display: inline-block;
     height: 0;
+  }
+  .detailPanel .detailPanelBanner .detailPanelControls.controlRight b.disabled {
+    display: none;
   }
   .detailPanel .status {
     position: relative;
