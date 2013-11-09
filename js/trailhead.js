@@ -725,10 +725,10 @@ function startup() {
           }
         });
       }
-    });
-    if (typeof callback == "function") {
-      callback();
-    }
+      if (typeof callback == "function") {
+        callback();
+      }
+    });   
   }
 
   // this creates a lookup object so we can quickly look up if a trail has any segment data available
