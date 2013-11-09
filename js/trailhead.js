@@ -885,7 +885,7 @@ function startup() {
                 }
               }
               var popupHTML = invisLayer.feature.properties.popupHTML;
-              currentTrailPopup = new L.Popup().setContent(popupHTML).setLatLng(originalEvent.latlng).openOn(map);
+              currentTrailPopup = new L.Popup({ autoPan: SMALL ? false : true}).setContent(popupHTML).setLatLng(originalEvent.latlng).openOn(map);
               currentWeightedSegment = target;
             };
           }(e, e.target), 250);
@@ -1894,7 +1894,8 @@ function startup() {
     highlightTrailInPopup(trailhead, highlightedTrailIndex);
     var popup = new L.Popup({
       offset: [0, -12],
-      autoPanPadding: [100, 100]
+      autoPanPadding: [10, 10],
+      autoPan: SMALL ? false : true
     })
       .setContent(trailhead.popupContent)
       .setLatLng(trailhead.marker.getLatLng())
@@ -2131,7 +2132,7 @@ function startup() {
 
     // if the entire trail layer will fit in a reasonable zoom full-screen, 
     // use fitBounds to place the entire layer onscreen
-    if (layerBoundsZoom <= MAX_ZOOM && layerBoundsZoom >= MIN_ZOOM) {
+    if (!SMALL && layerBoundsZoom <= MAX_ZOOM && layerBoundsZoom >= MIN_ZOOM) {
       map.fitBounds(layer.getBounds(), {
         paddingTopLeft: centerOffset
       });
