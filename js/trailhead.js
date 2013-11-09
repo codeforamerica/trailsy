@@ -53,15 +53,15 @@ function startup() {
 
   //  Near-Global Variables
   var METERSTOMILESFACTOR = 0.00062137;
-  var MAX_ZOOM = 17;
-  var MIN_ZOOM = 14;
+  var MAX_ZOOM = SMALL ? 16 : 17;
+  var MIN_ZOOM = SMALL ? 13 : 14;
   var SECONDARY_TRAIL_ZOOM = 13;
   var SHORT_MAX_DISTANCE = 2.0;
   var MEDIUM_MAX_DISTANCE = 5.0;
   var LONG_MAX_DISTANCE = 10.0;
   var SHOW_ALL_TRAILS = 1;
   var USE_LOCAL = SMALL ? false : true; // Set this to a true value to preload/use a local trail segment cache
-  var USE_ALL_SEGMENT_LAYER = SMALL ? false : true;
+  var USE_COMPLEX_SEGMENT_LAYER = SMALL ? false : true;
   var NORMAL_SEGMENT_COLOR = "#678729";
   var NORMAL_SEGMENT_WEIGHT = 3;
   var HOVER_SEGMENT_COLOR = "#678729";
@@ -308,6 +308,11 @@ function startup() {
                 highlightTrailhead(orderedTrails[0].trailheadID, 0);
                 showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
             }
+            fetchTrailsegments(function() {
+              if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+                map.addLayer(allSegmentLayer);
+              }
+            })
           }
         });
       });
@@ -707,13 +712,23 @@ function startup() {
     // }
     makeAPICall(callData, function(response) {
       trailSegments = response;
-      if (USE_ALL_SEGMENT_LAYER) {
+      if (USE_COMPLEX_SEGMENT_LAYER) {
         allSegmentLayer = makeAllSegmentLayer(response);
       }
-      if (typeof callback == "function") {
-        callback();
+      else {
+        allSegmentLayer = L.geoJson(response, {
+          style: {
+            color: NORMAL_SEGMENT_COLOR,
+            weight: NORMAL_SEGMENT_WEIGHT,
+            opacity: 1,
+            clickable: false
+          }
+        });
       }
     });
+    if (typeof callback == "function") {
+      callback();
+    }
   }
 
   // this creates a lookup object so we can quickly look up if a trail has any segment data available
