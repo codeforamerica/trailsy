@@ -2149,7 +2149,7 @@ function startup() {
   }
 
   function makeAPICall(callData, doneCallback) {
-    console.log('makeAPICall');
+    console.log('makeAPICall: ' + callData.path);
     if (!($.isEmptyObject(callData.data))) {
       callData.data = JSON.stringify(callData.data);
     }
@@ -2169,7 +2169,7 @@ function startup() {
       $("#results").text("error: " + JSON.stringify(errorThrown));
     }).done(function(response, textStatus, jqXHR) {
       if (typeof doneCallback === 'function') {
-        console.log("calling doneCallback");
+        console.log("calling doneCallback: " + callData.path);
         doneCallback.call(this, response);
       }
     });
