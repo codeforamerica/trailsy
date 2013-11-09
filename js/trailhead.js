@@ -172,7 +172,9 @@ function startup() {
   var segmentTrailnameCache = {};
   var currentTrailData;
   var searchKeyTimeout = null;
-
+  var trailheadsFetched = false;
+  var traildataFetched = false;
+  var trailsegmentsFetched = false;
   var allInvisibleSegmentsArray = [];
   var allVisibleSegmentsArray = [];
   // Trailhead Variables
@@ -293,34 +295,71 @@ function startup() {
       if (geoSetupDone) {
         return;
       }
-      fetchTrailheads(currentUserLocation, function() {
-        fetchTraildata(function() {
-          if (USE_LOCAL) {
-            fetchTrailsegments(function() {
-              createSegmentTrailnameCache();
-              addTrailsToTrailheads(originalTrailData, originalTrailheads);
-              // if we haven't added the segment layer yet, add it.
-              if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-                map.addLayer(allSegmentLayer);
-              }
-            });
-          } else {
-            addTrailsToTrailheads(originalTrailData, originalTrailheads);
-            if (SMALL &&($(".slideDrawer").hasClass("closedDrawer")) ){
-                highlightTrailhead(orderedTrails[0].trailheadID, 0);
-                showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
-            }
-            fetchTrailsegments(function() {
-              if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-                map.addLayer(allSegmentLayer);
-              }
-            })
-          }
-        });
-      });
+      fetchTrailheads(currentUserLocation, function() { trailheadsFetched = true; });
+      fetchTraildata(function() { traildataFetched = true; });
+      fetchTrailsegments(function() { trailsegmentsFetched = true; });
+      if (USE_LOCAL) {
+        setTimeout(waitForTrailSegments, 0);
+        setTimeout(waitForDataAndSegments, 0);
+        setTimeout(waitForAllTrailData, 0);       
+      } else {
+        setTimeout(waitForDataAndTrailHeads, 0);     
+        setTimeout(waitForTrailSegments, 0);   
+      }    
     });
   }
 
+  function waitForTrailSegments() {
+    // console.log("waitForTrailSegments");
+    if (trailsegmentsFetched) {
+      if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+        map.addLayer(allSegmentLayer);
+      }
+    }
+    else {
+      setTimeout(waitForTrailSegments, 100);
+    }
+  }
+  
+  function waitForDataAndSegments() {
+    // console.log("waitForDataAndSegments");
+    if (traildataFetched && trailsegmentsFetched) {
+      createSegmentTrailnameCache();
+    }
+    else {
+      setTimeout(waitForDataAndSegments, 100);
+    }
+  }
+
+  function waitForDataAndTrailHeads() {
+    // console.log("waitForDataAndTrailHeads");
+    if (traildataFetched && trailheadsFetched) {
+      addTrailsToTrailheads(originalTrailData, originalTrailheads);
+      if (SMALL &&($(".slideDrawer").hasClass("closedDrawer")) ){
+        highlightTrailhead(orderedTrails[0].trailheadID, 0);
+        showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
+      }
+    }
+    else {
+      setTimeout(waitForDataAndTrailHeads, 100);
+    }
+  }
+
+  function waitForAllTrailData() {
+    // console.log("waitForAllTrailData");
+    if (traildataFetched && trailsegmentsFetched && trailheadsFetched) {
+      addTrailsToTrailheads(originalTrailData, originalTrailheads);
+      // if we haven't added the segment layer yet, add it.
+      if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
+        map.addLayer(allSegmentLayer);
+      }
+    }
+    else {
+      setTimeout(waitForAllTrailData, 100);
+    }
+  }
+  
+  
   // set currentUserLocation to the center of the currently viewed map
   // then get the ordered trailheads and add trailData to trailheads
 
