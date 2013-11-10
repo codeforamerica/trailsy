@@ -1244,6 +1244,7 @@ function startup() {
     }
     currentTrailheadLayerGroup = L.layerGroup(currentTrailheadMarkerArray);
     map.addLayer(currentTrailheadLayerGroup);
+    console.log("mapActiveTrailheads end");
   }
 
   // given trailheads, now populated with matching trail names,
@@ -1258,7 +1259,7 @@ function startup() {
     $(".trailList").html("");
     var myTrailheadsLength = myTrailheads.length;
     for (var j = 0; j < myTrailheadsLength; j++) {
-      console.log("makeTrailDivs trailhead: " + j);
+      // console.log("makeTrailDivs trailhead: " + j);
       // newTimeStamp = Date.now();
       // time = newTimeStamp - lastTimeStamp;
       // lastTimeStamp = newTimeStamp;
@@ -1280,7 +1281,7 @@ function startup() {
       // Making a new div for text / each trail
       var trailIDsLength = trailheadTrailIDs.length; 
       for (var i = 0; i < trailIDsLength; i++) {
-        console.log("makeTrailDivs " + i);
+        // console.log("makeTrailDivs " + i);
         var trailID = trailheadTrailIDs[i];
         var trail = currentTrailData[trailID];
         var trailName = currentTrailData[trailID].properties.name;
@@ -1967,35 +1968,50 @@ function startup() {
 
   function getAllTrailPathsForTrailheadRemote(trailhead, highlightedTrailIndex) {
     console.log("getAllTrailPathsForTrailheadRemote");
-    var responses = [];
+
     var queryTaskArray = [];
+    var trailFeatureArray = [];
     // got trailhead.trails, now get the segment collection for all of them
     // get segment collection for each
     for (var i = 0; i < trailhead.trails.length; i++) {
+      var trailFeatureCollection = {
+        type: "FeatureCollection",
+        features: [{
+          geometry: {
+            geometries: [],
+            type: "GeometryCollection"
+          },
+          type: "Feature"
+        }]
+      };
       var trailID = trailhead.trails[i];
-      // var trailName = currentTrailData[trailID].properties.name;
+      var trailName = originalTrailData[trailID].properties.name;
 
-      var queryTask = function(trailID, index) {
+      var queryTask = function(trailID, index, featureCollection) {
         return function(callback) {
           var callData = {
             type: "GET",
-            // path: "/trailsegments.json"
             path: "/trailsegments.json?trail_id=" + trailID
           };
           makeAPICall(callData, function(response) {
-            responses[index] = response;
+            featureCollection.features[0].properties = {
+              trailname: trailName
+            };
+            for (var f = 0; f < response.features.length; f++) {
+              featureCollection.features[0].geometry.geometries.push(response.features[f].geometry);
+            }
+            trailFeatureArray[index] = featureCollection;
             callback(null, trailID);
           });
         };
-      }(trailID, i);
+      }(trailID, i, trailFeatureCollection);
       queryTaskArray.push(queryTask);
     }
     async.parallel(queryTaskArray, function(err, results) {
-      responses = mergeResponses(responses);
-      drawMultiTrailLayer(responses);
-      setTimeout(function() {
-        setCurrentTrail(highlightedTrailIndex);
-      }, 0);     
+      console.log("async finish");
+      trailFeatureArray = mergeResponses(trailFeatureArray);
+      drawMultiTrailLayer(trailFeatureArray);
+      setCurrentTrail(highlightedTrailIndex);
     });
   }
 
@@ -2120,7 +2136,7 @@ function startup() {
         color: NORMAL_SEGMENT_COLOR,
         opacity: 1,
         clickable: false,
-        customSmoothFactor: SMALL ? 3.0 : 1.0
+        smoothFactor: customSmoothFactor
       },
       onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
