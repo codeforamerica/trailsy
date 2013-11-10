@@ -319,7 +319,7 @@ function startup() {
   
   function waitForDataAndSegments() {
     // console.log("waitForDataAndSegments");
-    if (traildataFetched && trailsegmentsFetched && orderedTrails.length) {
+    if (traildataFetched && trailsegmentsFetched) {
       createSegmentTrailnameCache();
     }
     else {
