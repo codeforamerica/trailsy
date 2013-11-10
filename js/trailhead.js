@@ -1190,48 +1190,47 @@ function startup() {
   // and add it to the trailhead object
 
   function makeTrailheadPopups() {
+    console.log("makeTrailheadPopups start");
     for (var trailheadIndex = 0; trailheadIndex < originalTrailheads.length; trailheadIndex++) {
       var trailhead = originalTrailheads[trailheadIndex];
-      var $popupContentMainDiv = $("<div>").addClass("trailhead-popup");
-      var $popupTrailheadDiv = $("<div>").addClass("trailhead-box").html($("<div class='popupTrailheadNames'>" + trailhead.properties.name + "</div>")).appendTo($popupContentMainDiv);
-      $popupTrailheadDiv.append($("<img>").addClass("calloutTrailheadIcon").attr({
-        src: "img/icon_trailhead_active.png"
-      }));
+
+      var popupContentMainDivHTML = "<div class='trailhead-popup'>";
+      var popupTrailheadDivHTML = "<div class='trailhead-box'><div class='popupTrailheadNames'>" + trailhead.properties.name + "</div>" +
+      "<img class='calloutTrailheadIcon' src='img/icon_trailhead_active.png'>";
+      popupContentMainDivHTML = popupContentMainDivHTML + popupTrailheadDivHTML;
+
       for (var trailsIndex = 0; trailsIndex < trailhead.trails.length; trailsIndex++) {
         var trail = currentTrailData[trailhead.trails[trailsIndex]];
-        var $popupTrailDiv = $("<div>").addClass("trailhead-trailname trail" + (trailsIndex + 1))
-          .attr("data-trailname", trail.properties.name)
-          .attr("data-trailid", trail.properties.id)
-          .attr("data-trailheadname", trailhead.properties.name)
-          .attr("data-trailheadid", trailhead.properties.id)
-          .attr("data-index", trailsIndex);
-        var status = "";
+
+        var popupTrailDivHTMLStart = "<div class='trailhead-trailname trail" + (trailsIndex + 1) + "' " + 
+        "data-trailname='" + trail.properties.name + "' " + 
+        "data-trailid='" + trail.properties.id + "' " +
+        "data-trailheadname='" + trailhead.properties.name + "' " +
+        "data-trailheadid='" + trailhead.properties.id + "' " +
+        "data-index='" + trailsIndex + "'>";
+        var statusHTML = "";
         if (trail.properties.status == 1) {
-          $popupTrailDiv.append($("<img>").addClass("status").attr({
-            src: "img/icon_alert_yellow.png",
-            title: "alert"
-          }));
+          statusHTML = "<img class='status' src='img/icon_alert_yellow.png' title='alert'>";
         }
-        if (trail.properties.status == 2) {
-          $popupTrailDiv.append($("<img>").addClass("status").attr({
-            src: "img/icon_alert_red.png",
-            title: "alert"
-          }));
+        else if (trail.properties.status == 2) {
+          statusHTML = "<img class='status' src='img/icon_alert_red.png' title='alert'>";
         }
-        $popupTrailDiv.append("<div class='popupTrailNames'>" + trail.properties.name + "</div>");
-        $popupTrailDiv.append("<b>")
-        // .append(trail.properties.name)
-        .appendTo($popupTrailheadDiv);
+
+        var trailNameHTML = "<div class='popupTrailNames'>" + trail.properties.name + "</div><b></b>";
+        var popupTrailDivHTML = popupTrailDivHTMLStart + statusHTML + trailNameHTML + "</div>";
+        popupContentMainDivHTML = popupContentMainDivHTML + popupTrailDivHTML;
       }
-      trailhead.popupContent = $popupContentMainDiv.outerHTML();
+      popupContentMainDivHTML = popupContentMainDivHTML + "</div>";
+      trailhead.popupContent = popupContentMainDivHTML;
     }
+    console.log("makeTrailheadPopups end");
   }
 
   // given trailheads, add all of the markers to the map in a single Leaflet layer group
   // except for trailheads with no matched trails
 
   function mapActiveTrailheads(myTrailheads) {
-    console.log("mapActiveTrailheads");
+    console.log("mapActiveTrailheads start");
     var currentTrailheadMarkerArray = [];
     for (var i = 0; i < myTrailheads.length; i++) {
       if (myTrailheads[i].trails.length) {
@@ -1357,7 +1356,7 @@ function startup() {
 
   function metersToMiles(i) {
     return (i * METERSTOMILESFACTOR).toFixed(1);
-populateTrailsForTrailheadDiv  }
+  }
 
 
   // detail panel section
