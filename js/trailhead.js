@@ -1839,6 +1839,9 @@ function startup() {
     }
     var parsed = parseTrailElementData($myTarget);
     highlightTrailhead(parsed.trailheadID, parsed.highlightedTrailIndex);
+    var trail = currentTrailData[parsed.trailID];
+    var trailhead = getTrailheadById(parsed.trailheadID);
+    showTrailDetails(trail, trailhead);
   }
 
   function populateTrailsForTrailheadTrailName(e) {
