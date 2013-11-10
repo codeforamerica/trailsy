@@ -1256,7 +1256,9 @@ function startup() {
     orderedTrails = [];
     var divCount = 1;
     if(myTrailheads.length === 0) return;
-    $(".trailList").html("");
+    var topLevelID = SMALL ? "mobile" : "desktop";
+    var trailListElementList = document.getElementById(topLevelID).getElementsByClassName("trailList");
+    trailListElementList[0].innerHTML = "";
     var myTrailheadsLength = myTrailheads.length;
     for (var j = 0; j < myTrailheadsLength; j++) {
       // console.log("makeTrailDivs trailhead: " + j);
@@ -1265,18 +1267,18 @@ function startup() {
       // lastTimeStamp = newTimeStamp;
       // console.log(time + ": " + "next trailhead");
       var trailhead = myTrailheads[j];
-      // $.each(trailheads, function(index, trailhead) {
+
       var trailheadName = trailhead.properties.name;
       var trailheadID = trailhead.properties.id;
       var parkName = trailhead.properties.park;
       var trailheadTrailIDs = trailhead.trails;
       if (trailheadTrailIDs.length === 0) {
-        // return true; // next $.each
         continue;
       }
       var trailheadSource = trailhead.properties.source;
       var trailheadDistance = metersToMiles(trailhead.properties.distance);
-      var $trailDiv;
+
+      
 
       // Making a new div for text / each trail
       var trailIDsLength = trailheadTrailIDs.length; 
@@ -1295,13 +1297,7 @@ function startup() {
         "data-trail-length='" + trailLength + "' " +
         "data-trailheadName='" + trailheadName + "' " +
         "data-trailheadid='" + trailheadID + "' " +
-        "data-index='" + i + "' " + 
-
-        "</div>";
-
-        
-
-        // $("<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>").appendTo($trailDiv);
+        "data-index='" + i + "'>";
         
         var trailheadInfoText = "<div class='trailheadInfo'>" + 
         "<img class='trailheadIcon' src='img/icon_trailhead_active.png'/>" +
@@ -1319,13 +1315,13 @@ function startup() {
         }
         trailInfoText = trailInfoText + "</div>";
 
-        var trailSourceText = "<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div>";
+        var trailSourceText = "<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div></div>";
 
-        // $trailDiv.append(trailInfoText + trailheadInfoText +  trailSourceText);
+        var trailDivWrapper = document.createElement('div');
+        var trailDivComplete = trailDivText + trailInfoText + trailheadInfoText + trailSourceText;
+        trailDivWrapper.innerHTML = trailDivComplete;
+        trailListElementList[0].insertAdjacentHTML('beforeend', trailDivWrapper.firstChild.outerHTML);
 
-        $trailDiv = $(trailDivText + trailInfoText + trailheadInfoText +  trailSourceText)
-        .appendTo(".trailList");
-  
         var trailInfoObject = {
           trailID: trailID,
           trail: trail,
