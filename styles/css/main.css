@@ -2085,6 +2085,12 @@ At some point, update mediaqueries to be in EMS
   display: inline-block;
   height: 0;
 }
+.trail-popup .trail-popup-line-unnamed {
+  cursor: pointer;
+  color: #58595b !important;
+  padding: .7em 25% .5em .5em;
+  border-top: 1px solid #e3e3e1;
+}
 .trailhead-trailname {
   cursor: pointer;
 }
