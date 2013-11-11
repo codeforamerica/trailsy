@@ -2077,8 +2077,9 @@ function startup() {
         }]
       };
       var valid = 0;
-      for (var segmentIndex = 0; segmentIndex < trailSegments.features.length; segmentIndex++) {
-        var segment = $.extend(true, {}, trailSegments.features[segmentIndex]);
+      var segmentsLength = trailSegments.features.length;
+      for (var segmentIndex = 0; segmentIndex < segmentsLength; segmentIndex++) {
+        var segment = trailSegments.features[segmentIndex];
         if ((segment.properties.trail1 == trailName ||
             segment.properties.trail1 + " Trail" == trailName ||
             segment.properties.trail2 == trailName ||
@@ -2107,7 +2108,8 @@ function startup() {
         trailFeatureArray.push(trailFeatureCollection);
       }
     }
-    console.log(trailFeatureArray);
+    console.log("getAllTrailPathsForTrailheadLocal end");
+
     responses = mergeResponses(trailFeatureArray);
     drawMultiTrailLayer(responses);
     setCurrentTrail(highlightedTrailIndex);
