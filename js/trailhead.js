@@ -1260,6 +1260,7 @@ function startup() {
     var trailListElementList = document.getElementById(topLevelID).getElementsByClassName("trailList");
     trailListElementList[0].innerHTML = "";
     var myTrailheadsLength = myTrailheads.length;
+    var trailListContents = "";
     for (var j = 0; j < myTrailheadsLength; j++) {
       // console.log("makeTrailDivs trailhead: " + j);
       // newTimeStamp = Date.now();
@@ -1316,11 +1317,13 @@ function startup() {
         trailInfoText = trailInfoText + "</div>";
 
         var trailSourceText = "<div class='trailSource' id='" + trailheadSource + "'>" + trailheadSource + "</div></div>";
-
-        var trailDivWrapper = document.createElement('div');
         var trailDivComplete = trailDivText + trailInfoText + trailheadInfoText + trailSourceText;
-        trailDivWrapper.innerHTML = trailDivComplete;
-        trailListElementList[0].insertAdjacentHTML('beforeend', trailDivWrapper.firstChild.outerHTML);
+
+        trailListContents = trailListContents + trailDivComplete;
+        // var trailDivWrapper = document.createElement('div');
+        // var trailDivComplete = trailDivText + trailInfoText + trailheadInfoText + trailSourceText;
+        // trailDivWrapper.innerHTML = trailDivComplete;
+        // trailListElementList[0].insertAdjacentHTML('beforeend', trailDivWrapper.firstChild.outerHTML);
 
         var trailInfoObject = {
           trailID: trailID,
@@ -1336,6 +1339,7 @@ function startup() {
         // console.log(time + ": " + "end loop");
       }
     }
+    trailListElementList[0].innerHTML = trailListContents;
     $(".trail-box").click(populateTrailsForTrailheadDiv).click(trailDivClickHandler);
     $(".trails-count").html(orderedTrails.length + " RESULTS FOUND");
     console.log("end makeTrailDivs 4");
