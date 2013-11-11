@@ -180,6 +180,8 @@ function startup() {
   // Trailhead Variables
   // Not sure if these should be global, but hey whatev
 
+  var remoteSegmentCache = {};
+
   var trailheadIconOptions = {
     iconSize: [52 * 0.60, 66 * 0.60],
     iconAnchor: [13 * 0.60, 33 * 0.60],
@@ -1974,6 +1976,7 @@ function startup() {
 
     var queryTaskArray = [];
     var trailFeatureArray = [];
+    var newRemoteSegmentCache = {};
     // got trailhead.trails, now get the segment collection for all of them
     // get segment collection for each
     for (var i = 0; i < trailhead.trails.length; i++) {
@@ -1992,31 +1995,42 @@ function startup() {
 
       var queryTask = function(trailID, index, featureCollection) {
         return function(callback) {
-          var callData = {
-            type: "GET",
-            path: "/trailsegments.json?trail_id=" + trailID
-          };
-          makeAPICall(callData, function(response) {
-            featureCollection.features[0].properties = {
-              trailname: trailName
-            };
-            for (var f = 0; f < response.features.length; f++) {
-              featureCollection.features[0].geometry.geometries.push(response.features[f].geometry);
-            }
+          if (remoteSegmentCache[trailID]) {
+            featureCollection = remoteSegmentCache[trailID];
+            newRemoteSegmentCache[trailID] = remoteSegmentCache[trailID];
             trailFeatureArray[index] = featureCollection;
             callback(null, trailID);
-          });
+          }
+          else {
+            var callData = {
+              type: "GET",
+              path: "/trailsegments.json?trail_id=" + trailID
+            };
+            makeAPICall(callData, function(response) {
+              featureCollection.features[0].properties = {
+                trailname: trailName
+              };
+              for (var f = 0; f < response.features.length; f++) {
+                featureCollection.features[0].geometry.geometries.push(response.features[f].geometry);
+              }
+              trailFeatureArray[index] = featureCollection;
+              newRemoteSegmentCache[trailID] = featureCollection;
+              callback(null, trailID);
+            });
+          }
         };
       }(trailID, i, trailFeatureCollection);
       queryTaskArray.push(queryTask);
     }
     async.parallel(queryTaskArray, function(err, results) {
       console.log("async finish");
+      remoteSegmentCache = newRemoteSegmentCache;
       trailFeatureArray = mergeResponses(trailFeatureArray);
       drawMultiTrailLayer(trailFeatureArray);
       setCurrentTrail(highlightedTrailIndex);
     });
   }
+
 
   // LOCAL EDITION:
   // given a trailhead and a trail index within that trailhead
