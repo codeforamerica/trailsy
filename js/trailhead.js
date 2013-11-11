@@ -796,8 +796,8 @@ function startup() {
   function trailnameInListOfTrails(trailname) {
     // console.log("trailnameInListOfTrails");
     var result = false;
-    $.each(currentTrailData, function(key, value) {
-      if (currentTrailData[key].properties.name == trailname) {
+    $.each(originalTrailData, function(key, value) {
+      if (originalTrailData[key].properties.name == trailname) {
         result = key;
         return false;
       }
@@ -872,31 +872,49 @@ function startup() {
 
       var newTrailFeatureGroup = new L.FeatureGroup([allInvisibleSegmentsArray[i], allVisibleSegmentsArray[i]]);
 
-      var $popupHTML = $("<div class='trail-popup'>");
+      // var $popupHTML = $("<div class='trail-popup'>");
+  
+      var popupHTML = "<div class='trail-popup'>";
+
       for (var j = 1; j <= 6; j++) {
         var trailField = "trail" + j;
         if (invisLayer.feature.properties[trailField]) {
-          var $trailPopupLineDiv;
+          // var $trailPopupLineDiv;
+          var trailPopupLineDiv;
           if (trailnameInListOfTrails(invisLayer.feature.properties[trailField])) {
-            // NOTE: color should be in the css, not here
-            $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
-              .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
-              .attr("data-trailname", invisLayer.feature.properties[trailField])
-              .html(invisLayer.feature.properties[trailField])
+            trailPopupLineDiv = "<div class='trail-popup-line trail-popup-line-named' " + 
+            "data-steward='" + invisLayer.feature.properties.steward + "' " + 
+            "data-source='" + invisLayer.feature.properties.source + "' " +
+            "data-trailname='" + invisLayer.feature.properties[trailField] + "'> " +
+            invisLayer.feature.properties[trailField] + 
+            "<b></b></div>";
+              // $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
+              // .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
+              // .attr("data-trailname", invisLayer.feature.properties[trailField])
+              // .html(invisLayer.feature.properties[trailField]);
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
-              $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
-              $trailPopupLineDiv.append("<b>");
+              trailPopupLineDiv = "<div class='trail-popup-line' trail-popup-line-unnamed'>" + 
+              invisLayer.feature.properties[trailField] + 
+              "<b></b>" +
+              "</div>";
+              // $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
+              // $trailPopupLineDiv.append("<b>");
             } else {
+              trailPopupLineDiv = "";
+              // $trailPopupLineDiv = $("");
               // console.log("skipping trail segment name because it has an underscore in it");
             }
           }
-          $popupHTML.append($trailPopupLineDiv);
-          $trailPopupLineDiv.append("<b>");
+          popupHTML = popupHTML + trailPopupLineDiv;
+          // $popupHTML.append($trailPopupLineDiv);
+          // $trailPopupLineDiv.append("<b>");
         }
       }
+      popupHTML = popupHTML + "</div>";
 
-      invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
+      invisLayer.feature.properties.popupHTML = popupHTML;
+      // invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
       var eventType;
       // this should be a test for touch, not small
       if (TOUCH) {
