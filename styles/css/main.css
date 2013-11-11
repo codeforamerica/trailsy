@@ -350,7 +350,8 @@ At some point, update mediaqueries to be in EMS
     display: block;
     max-height: 50em;
     overflow: scroll;
-    lbackground-color: transparent;
+    -webkit-overflow-scrolling: touch;
+    background-color: transparent;
     -moz-transition: all 300ms;
     -webkit-transition: all 300ms;
     transition: all 300ms;
@@ -383,7 +384,8 @@ At some point, update mediaqueries to be in EMS
   
     background-color: transparent;
     max-height: 35em;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
   .accordion .panel-title {
     margin: 0;
@@ -3842,8 +3844,6 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
-  /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
 
