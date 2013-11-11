@@ -1891,6 +1891,9 @@ At some point, update mediaqueries to be in EMS
     background: #00adef;
     border: 1px solid #00adef;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected b {
+    display: none;
+  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
     height: auto;
@@ -3889,6 +3892,8 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
+  /* 2 */
+
   -ms-text-size-adjust: 100%;
   /* 2 */
 
