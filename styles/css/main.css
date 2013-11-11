@@ -651,6 +651,7 @@ At some point, update mediaqueries to be in EMS
     color: #58595b;
     max-height: 15em;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   .aboutCopy .aboutHeadline {
     color: #91c73d;
@@ -1439,6 +1440,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     background-color: #ffffff;
   }
 }
