@@ -81,23 +81,23 @@ At some point, update mediaqueries to be in EMS
 /* Look into justification for overriding styles*/
 /* Make sure you need the semicolons inside and outside of the {} on the pseudo-class lines*/
 /* Variables used: color, typography */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .desktopTitle {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .mobileTitle {
     display: none;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .title-row {
     position: relative;
     width: 100%;
@@ -149,7 +149,7 @@ At some point, update mediaqueries to be in EMS
     display: inline-block;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .title-row {
     position: relative;
     width: 100%;
@@ -200,10 +200,10 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Filter Module */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .is-vishidden {
     position: absolute;
     width: 1px;
@@ -213,7 +213,7 @@ At some point, update mediaqueries to be in EMS
     clip: rect(1px, 1px, 1px, 1px);
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .searchbar {
     line-height: 1;
     padding: 1em 1.75em 0 1.75em;
@@ -261,7 +261,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #d9f0fc;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .searchbar {
     background-color: #ffffff;
     line-height: 1;
@@ -313,7 +313,7 @@ At some point, update mediaqueries to be in EMS
     background-size: 100% 100%;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .slideDrawer {
     position: absolute;
     position: fixed;
@@ -341,7 +341,7 @@ At some point, update mediaqueries to be in EMS
     left: 0em;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .slideDrawer {
     display: none;
   }
@@ -351,7 +351,7 @@ At some point, update mediaqueries to be in EMS
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .accordion {
     display: block;
     max-height: 50em;
@@ -382,7 +382,7 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .accordion {
     /*		display: none;*/
   
@@ -411,7 +411,7 @@ At some point, update mediaqueries to be in EMS
     margin: 0;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .panel-container {
     margin-bottom: .1em;
     /* More Options */
@@ -453,7 +453,7 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .panel-container {
     margin: 0;
     /* More Options */
@@ -505,7 +505,7 @@ At some point, update mediaqueries to be in EMS
     outline: none;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .searchSection {
     /*		margin-left:.42em !important;*/
   
@@ -536,7 +536,7 @@ At some point, update mediaqueries to be in EMS
     background-color: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .searchSection {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
@@ -548,7 +548,7 @@ At some point, update mediaqueries to be in EMS
     padding-top: 4em;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .aboutSection {
     height: 2em;
     width: 100%;
@@ -577,10 +577,10 @@ At some point, update mediaqueries to be in EMS
     background-color: none;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .aboutPage {
     position: relative;
     display: none;
@@ -624,10 +624,10 @@ At some point, update mediaqueries to be in EMS
     opacity: 0.8;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .aboutLink {
     margin: 0;
     padding: 1em 2em 0em 2.66em;
@@ -643,7 +643,7 @@ At some point, update mediaqueries to be in EMS
     text-decoration: none;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .aboutCopy {
     margin: .25em 1.5em .5em 1.5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -673,7 +673,7 @@ At some point, update mediaqueries to be in EMS
     margin-left: -1.5em;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .aboutCopy {
     padding: .25em 1.5em .5em 1.5em;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -702,7 +702,7 @@ At some point, update mediaqueries to be in EMS
     margin-left: -1.5em;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
@@ -720,7 +720,7 @@ At some point, update mediaqueries to be in EMS
     color: white;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailsNearYouResults {
     height: 2em;
     width: 100%;
@@ -738,19 +738,19 @@ At some point, update mediaqueries to be in EMS
     color: white;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .panel-content {
     list-style-type: none;
     margin: 0;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .panel-content {
     list-style-type: none;
     margin: 0;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .js .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -770,7 +770,7 @@ At some point, update mediaqueries to be in EMS
     width: auto;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .js .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -790,7 +790,7 @@ At some point, update mediaqueries to be in EMS
     width: auto;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .no-js .visuallyhidden {
     clip: auto;
     height: auto;
@@ -816,7 +816,7 @@ At some point, update mediaqueries to be in EMS
     width: 0;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .no-js .visuallyhidden {
     clip: auto;
     height: auto;
@@ -842,7 +842,7 @@ At some point, update mediaqueries to be in EMS
     width: 0;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .clearfix {
     *zoom: 1;
   }
@@ -856,7 +856,7 @@ At some point, update mediaqueries to be in EMS
     clear: both;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .clearfix {
     *zoom: 1;
   }
@@ -870,7 +870,7 @@ At some point, update mediaqueries to be in EMS
     clear: both;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .list-reset {
     padding: 0;
     list-style: none;
@@ -878,14 +878,14 @@ At some point, update mediaqueries to be in EMS
     height: 100%;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .list-reset {
     padding: 0;
     list-style: none;
     background-color: #ffffff;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailLength-title {
     height: 1em;
     width: 100%;
@@ -903,7 +903,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailLength-title {
     height: 1em;
     width: 100%;
@@ -921,7 +921,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailUse-title {
     height: 1em;
     width: 100%;
@@ -939,7 +939,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailUse-title {
     height: 1em;
     width: 100%;
@@ -962,7 +962,7 @@ At some point, update mediaqueries to be in EMS
   -moz-user-select: none;
   -webkit-user-select: none;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailFilters .lengthRow {
     display: block;
     margin-right: 1.75em;
@@ -1205,7 +1205,7 @@ At some point, update mediaqueries to be in EMS
     text-decoration: underline;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailFilters {
     height: auto;
   }
@@ -1432,7 +1432,7 @@ At some point, update mediaqueries to be in EMS
 /*@import "search.less";*/
 /* List Module */
 /* This border should become a variable */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailList {
     width: 100%;
     position: relative;
@@ -1440,7 +1440,7 @@ At some point, update mediaqueries to be in EMS
     margin-bottom: 60px;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailList {
     width: 100%;
     max-height: 22em;
@@ -1451,7 +1451,7 @@ At some point, update mediaqueries to be in EMS
     background-color: #ffffff;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trail {
     display: none;
   }
@@ -1468,7 +1468,7 @@ At some point, update mediaqueries to be in EMS
 	}
 }
 */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailList-title {
     display: none;
   }
@@ -1476,7 +1476,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailList-title {
     width: 100%;
     height: 40px;
@@ -1499,7 +1499,7 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Border should be replaced*/
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trail-box {
     position: relative;
     height: auto;
@@ -1621,7 +1621,7 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trail-box {
     position: relative;
     height: auto;
@@ -1746,12 +1746,12 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailSource {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailSource {
     display: none;
     position: absolute;
@@ -1765,12 +1765,12 @@ At some point, update mediaqueries to be in EMS
   }
   @sans Serif-light;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #redoSearch {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #redoSearch {
     position: absolute;
     top: 40px;
@@ -1785,7 +1785,7 @@ At some point, update mediaqueries to be in EMS
 }
 /* Map Elements
 ============================== */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .leaflet-popup-content-wrapper {
     border-radius: 0px;
     width: auto;
@@ -1913,7 +1913,7 @@ At some point, update mediaqueries to be in EMS
     border-top: 1px solid #bbbdbf;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .leaflet-popup-content-wrapper {
     border-radius: 0px;
     width: auto;
@@ -2099,7 +2099,7 @@ At some point, update mediaqueries to be in EMS
   /* Desktop */
 
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailMapContainer {
     position: absolute;
     top: 48px;
@@ -2113,7 +2113,7 @@ At some point, update mediaqueries to be in EMS
     z-index: 8000;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailMapContainer {
     height: 100%;
     min-height: 600px;
@@ -2121,7 +2121,7 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #trailMapSmall {
     position: absolute;
     width: 100%;
@@ -2130,17 +2130,17 @@ At some point, update mediaqueries to be in EMS
     z-index: 1;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #trailMapSmall {
     display: none;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #trailMapLarge {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #trailMapLarge {
     position: absolute;
     width: 100%;
@@ -2160,7 +2160,7 @@ At some point, update mediaqueries to be in EMS
 .trailHoverOnActive {
   color: #6d544b;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .leaflet-left {
     display: none;
   }
@@ -2184,12 +2184,12 @@ At some point, update mediaqueries to be in EMS
   }
 }
 /* Not sure that we have a trail map title currently*/
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailMap-title {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailMap-title {
     margin-top: -10px;
     margin-left: 10px;
@@ -2207,12 +2207,12 @@ At some point, update mediaqueries to be in EMS
     color: #000;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #crosshair {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #crosshair {
     position: absolute;
     top: 250px;
@@ -2321,7 +2321,7 @@ At some point, update mediaqueries to be in EMS
   background: #FFF;
   border-radius: 10px;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .trailListColumn {
     position: absolute;
     top: 0;
@@ -2336,7 +2336,7 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .trailListColumn {
     position: absolute;
     top: 2em;
@@ -2366,7 +2366,7 @@ At some point, update mediaqueries to be in EMS
 }
 }
 */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .detailPanel {
     width: 100%;
     height: 100%;
@@ -2406,6 +2406,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel.contracted {
     position: absolute;
+    top: 87%;
     top: calc(100% - 84px);
     top: -webkit-calc(100% - 84px);
     overflow: visible;
@@ -3163,7 +3164,7 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .detailPanel {
     position: relative;
     display: none;
@@ -3757,12 +3758,12 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .closeDetail {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .closeDetail {
     position: absolute;
     cursor: pointer;
@@ -4168,7 +4169,7 @@ html {
   height: 100%;
 }
 /* Background color */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   body {
     background-color: #ffffff;
     height: 100%;
@@ -4188,12 +4189,12 @@ html {
 section {
   overflow: auto;
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #desktop {
     display: none;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #desktop {
     position: absolute;
     left: 0;
@@ -4202,7 +4203,7 @@ section {
     bottom: 0;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #mobile {
     position: relative;
     height: 100%;
@@ -4210,7 +4211,7 @@ section {
     z-index: 1;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #mobile {
     display: none;
     position: relative;
@@ -4219,7 +4220,7 @@ section {
   }
 }
 /* Responsive container */
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   .container {
     display: none;
     position: relative;
@@ -4228,7 +4229,7 @@ section {
     margin: 0;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   .container {
     position: absolute;
     top: 0;
@@ -4237,7 +4238,7 @@ section {
     right: 0;
   }
 }
-@media only screen and (max-width: 529px)  {
+@media only screen and (max-width: 768px) {
   #main {
     display: none;
     position: relative;
@@ -4246,7 +4247,7 @@ section {
     overflow: hidden;
   }
 }
-@media only screen and (min-width: 530px) {
+@media only screen and (min-width: 769px) {
   #main {
     position: relative;
     height: 100%;
