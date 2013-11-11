@@ -618,10 +618,14 @@ function startup() {
   function hideUiOnMapDrag() {
     mapDragUiHide = true;
 
-    $('.title-row').addClass('dragging-map');
-    $('.detailPanel').addClass('dragging-map');
-    $('.trailMapContainer').addClass('dragging-map');
-    map.invalidateSize({ animate: false });
+    // Hide the top UI
+    $('.title-row').addClass('dragging-map'); 
+    // Hide the bottom UI
+    $('.detailPanel').addClass('dragging-map'); 
+    // Resize the map container to be bigger
+    $('.trailMapContainer').addClass('dragging-map'); 
+    // Make sure the map catches up to the fact that we resized the container
+    map.invalidateSize({ animate: false }); 
   }
 
   function unhideUiOnMapDrag() {
@@ -630,6 +634,8 @@ function startup() {
     $('.title-row').removeClass('dragging-map');
     $('.detailPanel').removeClass('dragging-map');
 
+    // Wait with resizing the map until the UI is actually hidden, otherwise
+    // it will resize too early and there will be a blank space for a bit.
     window.setTimeout(function() {
       if (!mapDragUiHide) {
         $('.trailMapContainer').removeClass('dragging-map');
