@@ -1785,6 +1785,9 @@ At some point, update mediaqueries to be in EMS
 }
 /* Map Elements
 ============================== */
+.leaflet-tile-container img {
+  -webkit-backface-visibility: hidden;
+}
 @media only screen and (max-width: 768px) {
   .leaflet-popup-content-wrapper {
     border-radius: 0px;
