@@ -651,13 +651,8 @@ function startup() {
       paddingTopLeft: centerOffset
     });
 
-    map.on('dragstart', function() {
-      hideUiOnMapDrag();
-    });
-
-    map.on('dragend', function() {
-      unhideUiOnMapDrag()
-    });
+    map.on('dragstart', hideUiOnMapDrag);
+    map.on('dragend', unhideUiOnMapDrag);
 
     map.on("zoomend", function(e) {
       console.log("zoomend start");
