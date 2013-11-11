@@ -23,6 +23,16 @@
 		top: 0;
 		margin: 0;
 		z-index: 9000;
+
+		-webkit-transition: -webkit-transform @time-dragging-map-hide;
+		-moz-transition: -moz-transform @time-dragging-map-hide;
+		transition: transform @time-dragging-map-hide;
+		&.dragging-map {
+			-webkit-transform: translateY(-3em);
+			-moz-transform: translateY(-3em);
+			transform: translateY(-3em);
+		}
+
 		header {
 			width: 100%;
 			margin: 0;
