@@ -46,6 +46,9 @@
 /* Most Text */
 /* Yellows/Reds For Alerts */
 /* UI */
+/*========*/
+/* Timing */
+/*========*/
 /* Typography */
 @font-face {
   font-family: 'mission_gothicbold';
@@ -105,6 +108,14 @@ At some point, update mediaqueries to be in EMS
     top: 0;
     margin: 0;
     z-index: 9000;
+    -webkit-transition: -webkit-transform 250ms;
+    -moz-transition: -moz-transform 250ms;
+    transition: transform 250ms;
+  }
+  .title-row.dragging-map {
+    -webkit-transform: translateY(-3em);
+    -moz-transform: translateY(-3em);
+    transform: translateY(-3em);
   }
   .title-row header {
     width: 100%;
@@ -2106,6 +2117,10 @@ At some point, update mediaqueries to be in EMS
   
     z-index: 8000;
   }
+  .trailMapContainer.dragging-map {
+    bottom: -40px;
+    top: -76px;
+  }
 }
 @media only screen and (min-width: 530px) {
   .trailMapContainer {
@@ -2403,6 +2418,14 @@ At some point, update mediaqueries to be in EMS
     top: calc(100% - 84px);
     top: -webkit-calc(100% - 84px);
     overflow: visible;
+    -webkit-transition: -webkit-transform 250ms;
+    -moz-transition: -moz-transform 250ms;
+    transition: transform 250ms;
+  }
+  .detailPanel.contracted.dragging-map {
+    -webkit-transform: translateY(109px);
+    -moz-transform: translateY(109px);
+    transform: translateY(109px);
   }
   .detailPanel.contracted .detailPanelSlider {
     border-top-left-radius: 3em;

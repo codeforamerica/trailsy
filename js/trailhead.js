@@ -613,6 +613,31 @@ function startup() {
     }
   }
 
+  var mapDragUiHide = false;
+
+  function hideUiOnMapDrag() {
+    mapDragUiHide = true;
+
+    $('.title-row').addClass('dragging-map');
+    $('.detailPanel').addClass('dragging-map');
+    $('.trailMapContainer').addClass('dragging-map');
+    map.invalidateSize({ animate: false });
+  }
+
+  function unhideUiOnMapDrag() {
+    mapDragUiHide = false;
+
+    $('.title-row').removeClass('dragging-map');
+    $('.detailPanel').removeClass('dragging-map');
+
+    window.setTimeout(function() {
+      if (!mapDragUiHide) {
+        $('.trailMapContainer').removeClass('dragging-map');
+        map.invalidateSize({ animate: false });
+      }    
+    }, 250); // TODO make a const
+  }
+
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
     console.log(mapDivName);
@@ -625,6 +650,15 @@ function startup() {
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: centerOffset
     });
+
+    map.on('dragstart', function() {
+      hideUiOnMapDrag();
+    });
+
+    map.on('dragend', function() {
+      unhideUiOnMapDrag()
+    });
+
     map.on("zoomend", function(e) {
       console.log("zoomend start");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {

@@ -315,6 +315,13 @@
 		left: 0;
 		bottom: 84px; /* size of footer/detail panel */
 		z-index: 8000;
+
+		&.dragging-map {
+			bottom: -40px; // To hide the possible copyright while dragging
+			top: 48px - 84px - 40px; 
+			// The distance delta in top needs to match the bottom so that the
+			// center stays the same
+		}
 	}
 	/* Desktop */
 	@media @desktop {
