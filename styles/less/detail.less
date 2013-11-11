@@ -80,9 +80,19 @@
 		}
 		&.contracted {
 			position: absolute;
-			top: calc(~'100% - 84px');
-			top: -webkit-calc(~'100% - 84px');
+            bottom: 0px;
+            height:85px;
 			overflow: visible;
+
+			-webkit-transition: -webkit-transform @time-dragging-map-hide;
+			-moz-transition: -moz-transform @time-dragging-map-hide;
+			transition: transform @time-dragging-map-hide;
+			&.dragging-map {
+				-webkit-transform: translateY(84px + 25px);
+				-moz-transform: translateY(84px + 25px);
+				transform: translateY(84px + 25px);
+			}
+
 			.detailPanelSlider {
 				border-top-left-radius:3em;
 				border-top-right-radius:3em;
@@ -162,9 +172,9 @@
 					    display: inline-block;
 					    height: 0;
 					    width: 0;
-  &.disabled{ 
-  display:none;
-}
+                        &.disabled{ 
+                          display:none;
+                        }
 					}
 				}
 				&.controlRight {
@@ -180,9 +190,9 @@
 					    border-left: .8em solid @color-white;
 					    display: inline-block;
 					    height: 0;
-  &.disabled{ 
-  display:none;
-}
+                        &.disabled{ 
+                          display:none;
+                        }
 					}
 				}
 			}

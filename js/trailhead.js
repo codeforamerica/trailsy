@@ -16,9 +16,9 @@ function startup() {
   console.log("trailhead.js");
 
   var SMALL;
-  if (Modernizr.mq("only screen and (max-width: 529px)")) {
+  if (Modernizr.mq("only screen and (max-width: 768px)")) {
     SMALL = true;
-  } else if (Modernizr.mq("only screen and (min-width: 530px)")) {
+  } else if (Modernizr.mq("only screen and (min-width: 769px)")) {
     SMALL = false;
   }
 
@@ -613,6 +613,37 @@ function startup() {
     }
   }
 
+  var mapDragUiHide = false;
+
+  function hideUiOnMapDrag() {
+    mapDragUiHide = true;
+
+    // Hide the top UI
+    $('.title-row').addClass('dragging-map'); 
+    // Hide the bottom UI
+    $('.detailPanel').addClass('dragging-map'); 
+    // Resize the map container to be bigger
+    $('.trailMapContainer').addClass('dragging-map'); 
+    // Make sure the map catches up to the fact that we resized the container
+    map.invalidateSize({ animate: false }); 
+  }
+
+  function unhideUiOnMapDrag() {
+    mapDragUiHide = false;
+
+    $('.title-row').removeClass('dragging-map');
+    $('.detailPanel').removeClass('dragging-map');
+
+    // Wait with resizing the map until the UI is actually hidden, otherwise
+    // it will resize too early and there will be a blank space for a bit.
+    window.setTimeout(function() {
+      if (!mapDragUiHide) {
+        $('.trailMapContainer').removeClass('dragging-map');
+        map.invalidateSize({ animate: false });
+      }    
+    }, 250); // TODO make a const
+  }
+
   function createMap(startingMapLocation, startingMapZoom) {
     console.log("createMap");
     console.log(mapDivName);
@@ -625,6 +656,10 @@ function startup() {
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: centerOffset
     });
+
+    map.on('dragstart', hideUiOnMapDrag);
+    map.on('dragend', unhideUiOnMapDrag);
+
     map.on("zoomend", function(e) {
       console.log("zoomend start");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
