@@ -616,12 +616,15 @@ function startup() {
       paddingTopLeft: centerOffset
     });
     map.on("zoomend", function(e) {
-      // console.log("zoomend");
+      console.log("zoomend start");
       if (SHOW_ALL_TRAILS && allSegmentLayer) {
         if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
           // console.log(allSegmentLayer);
-          map.addLayer(allSegmentLayer);
-          allSegmentLayer.bringToBack();
+          setTimeout(function() {
+            map.addLayer(allSegmentLayer);
+            allSegmentLayer.bringToBack();
+          }, 0);
+
         }
         if (map.getZoom() < SECONDARY_TRAIL_ZOOM && map.hasLayer(allSegmentLayer)) {
           if (currentTrailPopup) {
@@ -630,6 +633,7 @@ function startup() {
           map.removeLayer(allSegmentLayer);
         }
       }
+      console.log("zoomend end");
     });
     map.on('popupclose', popupCloseHandler);
     return map;
@@ -1061,18 +1065,18 @@ function startup() {
     }
     setTimeout(function() {
       fixDuplicateTrailheadTrails(myTrailheads);
-      // setTimeout(function() {
-        makeTrailheadPopups(myTrailheads);
-        mapActiveTrailheads(myTrailheads);
-        // setTimeout(function() {
-          makeTrailDivs(myTrailheads);
+      makeTrailheadPopups(myTrailheads);
+      mapActiveTrailheads(myTrailheads);
+      setTimeout(function() {
+        makeTrailDivs(myTrailheads);
+        setTimeout(function() {
           if (SMALL && USE_LOCAL) {
             highlightTrailhead(orderedTrails[0].trailheadID, 0);
             orderedTrailIndex = 0;
             showTrailDetails(orderedTrails[0].trail, orderedTrails[0].trailhead);
           }
-        // }, 0);
-      // }, 0);    
+        }, 0);
+      }, 0);  
     }, 0);
   }
 
@@ -2225,12 +2229,11 @@ function startup() {
     else {
       var newZoom = layerBoundsZoom > MAX_ZOOM ? MAX_ZOOM : layerBoundsZoom;
       newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
-      setTimeout(function() {
+      // setTimeout(function() {
         console.log("setView");
-        map.invalidateSize();
         map.setView(currentTrailhead.marker.getLatLng(), newZoom);
         console.log("setView end");
-      }, 0);
+      // }, 0);
     }
     console.log("zoomToLayer end");
   }
