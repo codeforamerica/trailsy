@@ -447,29 +447,28 @@
 	right: 0.83em;
 	display: block;
 	z-index: 1000;
-	.offsetZoomIn {
-		height: 35px;
-		width: 35px;
-		font: bold 22px 'Lucida Console', Monaco, monospace;
-		text-align: center;
-		background-color: white;
-		color: #808285;
-		&:hover {
 
-			background-color: @color-light-gray;
-		}
-	}
-	.offsetZoomOut {
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  .offsetZoomIn,
+  .offsetZoomOut {
 		height: 35px;
 		width: 35px;
-		margin-top: 38px;
-		font: bold 22px 'Lucida Console', Monaco, monospace;
+		font: bold 22px 'Lucida Console', Monaco, monospace;  	
 		text-align: center;
 		background-color: white;
 		color: #808285;
 		&:hover {
 			background-color: @color-light-gray;
 		}
+		&:active {
+			background-color: @color-light-mid-gray;
+		}
+  }
+	.offsetZoomOut {
+		margin-top: 38px;
 	}
 }
 
