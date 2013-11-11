@@ -2443,6 +2443,9 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: inline-block;
     max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .detailPanel .detailPanelBanner .trailIndex {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2455,7 +2458,7 @@ At some point, update mediaqueries to be in EMS
     margin-right: 1.5em;
     display: inline-block;
     position: relative;
-    max-width: 10%;
+    max-width: 15%;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: inline-block;
@@ -3854,6 +3857,8 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
+  /* 2 */
+
   -ms-text-size-adjust: 100%;
   /* 2 */
 
