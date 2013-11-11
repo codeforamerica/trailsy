@@ -1,6 +1,10 @@
 /* Map Elements
 ============================== */
 
+.leaflet-tile-container img {
+  -webkit-backface-visibility: hidden;
+}
+
 .leaflet-popup-content-wrapper {
 	@media @mobile {
 		border-radius: 0px;
@@ -299,6 +303,12 @@
 		display: inline-block;
 		height: 0;
 	}
+	.trail-popup-line-unnamed {
+		cursor: pointer;
+		color: @color-mid-gray !important;
+		padding: .7em 25% .5em .5em;
+		border-top: 1px solid @color-light-gray;
+	}
 }
 
 .trailhead-trailname {
@@ -306,6 +316,8 @@
 }
 
 .trailMapContainer {
+	background: @color-map-background;
+
 	@media @mobile {
 		position: absolute;
 		top: 48px; /* size of header */
@@ -313,6 +325,13 @@
 		left: 0;
 		bottom: 84px; /* size of footer/detail panel */
 		z-index: 8000;
+
+		&.dragging-map {
+			bottom: -40px; // To hide the possible copyright while dragging
+			top: 48px - 84px - 40px; 
+			// The distance delta in top needs to match the bottom so that the
+			// center stays the same
+		}
 	}
 	/* Desktop */
 	@media @desktop {
@@ -432,29 +451,28 @@
 	right: 0.83em;
 	display: block;
 	z-index: 1000;
-	.offsetZoomIn {
-		height: 35px;
-		width: 35px;
-		font: bold 22px 'Lucida Console', Monaco, monospace;
-		text-align: center;
-		background-color: white;
-		color: #808285;
-		&:hover {
 
-			background-color: @color-light-gray;
-		}
-	}
-	.offsetZoomOut {
+	-webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+
+  .offsetZoomIn,
+  .offsetZoomOut {
 		height: 35px;
 		width: 35px;
-		margin-top: 38px;
-		font: bold 22px 'Lucida Console', Monaco, monospace;
+		font: bold 22px 'Lucida Console', Monaco, monospace;  	
 		text-align: center;
 		background-color: white;
 		color: #808285;
 		&:hover {
 			background-color: @color-light-gray;
 		}
+		&:active {
+			background-color: @color-light-mid-gray;
+		}
+  }
+	.offsetZoomOut {
+		margin-top: 38px;
 	}
 }
 
