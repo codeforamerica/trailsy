@@ -2428,6 +2428,9 @@ At some point, update mediaqueries to be in EMS
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
+    position: relative;
+    display: inline-block;
+    max-width: 80%;
   }
   .detailPanel .detailPanelBanner .trailIndex {
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
@@ -2438,6 +2441,9 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
     float: right;
     margin-right: 1.5em;
+    display: inline-block;
+    position: relative;
+    max-width: 10%;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: inline-block;
@@ -3141,7 +3147,7 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     display: none;
     width: 100%;
-    height: 26.5em;
+    max-height: 26.5em;
     background-color: #ffffff;
   }
   .detailPanel .detailPanelBanner {
@@ -3149,8 +3155,11 @@ At some point, update mediaqueries to be in EMS
     width: 100%;
     background-color: #00adef;
     padding: .5em 1.75em .5em 1.75em;
+    max-height: 3.5em;
   }
   .detailPanel .detailPanelBanner .trailName {
+    display: inline-block;
+    max-width: 75%;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3166,11 +3175,17 @@ At some point, update mediaqueries to be in EMS
     font-size: 12px;
     float: right;
     margin-right: 1.75em;
+    display: inline-block;
+    position: relative;
+    max-width: 15%;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     width: 2em;
     height: 150%;
     position: absolute;
+    max-height: 56px;
+    /* This is a magic number */
+  
     background-color: #00adef;
     z-index: 999;
     cursor: pointer ;
@@ -3209,7 +3224,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBody {
     position: relative;
-    height: 24em;
+    max-height: 23em;
     width: 24em;
     overflow: scroll;
   }
