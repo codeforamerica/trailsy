@@ -16,9 +16,9 @@ function startup() {
   console.log("trailhead.js");
 
   var SMALL;
-  if (Modernizr.mq("only screen and (max-width: 529px)")) {
+  if (Modernizr.mq("only screen and (max-width: 768px)")) {
     SMALL = true;
-  } else if (Modernizr.mq("only screen and (min-width: 530px)")) {
+  } else if (Modernizr.mq("only screen and (min-width: 769px)")) {
     SMALL = false;
   }
 
