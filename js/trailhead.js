@@ -264,7 +264,19 @@ function startup() {
       if ($("html").hasClass("lt-ie8")) {
         $(".overlay-panel").html(overlayHTMLIE);
       } else {
-        $(".overlay-panel").html(overlayHTML);
+        if (window.localStorage && window.localStorage['already-visited']) {
+          // The user has already visited the page – skip showing the 
+          // generic welcome message
+          return;
+        } else {
+          $(".overlay-panel").html(overlayHTML);
+
+          // Saving so that the welcome message is not shown the second
+          // time around.
+          if (window.localStorage) {
+            window.localStorage['already-visited'] = true;
+          }
+        }
       }
 
       $(".overlay-panel").click(function() {
