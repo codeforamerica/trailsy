@@ -345,12 +345,15 @@ At some point, update mediaqueries to be in EMS
     display: none;
   }
 }
+.accordion {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
 @media only screen and (max-width: 529px)  {
   .accordion {
     display: block;
     max-height: 50em;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
     background-color: transparent;
     -moz-transition: all 300ms;
     -webkit-transition: all 300ms;
@@ -384,8 +387,6 @@ At some point, update mediaqueries to be in EMS
   
     background-color: transparent;
     max-height: 35em;
-    overflow-x: hidden;
-    overflow-y: scroll;
   }
   .accordion .panel-title {
     margin: 0;
