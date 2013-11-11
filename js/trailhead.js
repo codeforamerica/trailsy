@@ -893,16 +893,10 @@ function startup() {
             invisLayer.feature.properties[trailField] + 
             "<b></b></div>";
             atLeastOne = true;
-          } else {
-            if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
-              trailPopupLineDiv = "<div class='trail-popup-line' trail-popup-line-unnamed'>" + 
-              invisLayer.feature.properties[trailField] + 
-              "<b></b>" +
-              "</div>";
-              atLeastOne = true;
-            } else {
-              trailPopupLineDiv = invisLayer.feature.properties[trailField];
-            }
+          } else {   
+            trailPopupLineDiv = "<div class='trail-popup-line trail-popup-line-unnamed'>" + 
+            invisLayer.feature.properties[trailField] + 
+            "</div>";
           }
           popupHTML = popupHTML + trailPopupLineDiv;
         }
