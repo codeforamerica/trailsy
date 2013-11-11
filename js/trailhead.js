@@ -202,14 +202,12 @@ function startup() {
   // UI events to react to
 
   // $("#redoSearch").click(reorderTrailsWithNewLocation);
-  $('.trailMapContainer').on('click', '.trailhead-trailname', trailnameClick); // Open the detail panel!
 
   $('.closeDetail').click(closeDetailPanel); // Close the detail panel!
   $('.detailPanelControls').click(changeDetailPanel); // Shuffle Through Trails Shown in Detail Panel
   $('.filter').change(filterChangeHandler);
 
   $(".clearSelection").click(clearSelectionHandler);
-  $('.trailMapContainer').on('click', '.trail-popup-line-named', trailPopupLineClick);
   $(".search-key").keyup(function(e) { processSearch(e); });
   $(".offsetZoomControl").click(offsetZoomIn);
   $(".search-submit").click(processSearch);
@@ -636,6 +634,7 @@ function startup() {
       console.log("zoomend end");
     });
     map.on('popupclose', popupCloseHandler);
+    map.on('popupopen', popupOpenHandler);
     return map;
   }
 
@@ -718,6 +717,11 @@ function startup() {
 
   function popupCloseHandler(e) {
     currentTrailPopup = null;
+  }
+
+  function popupOpenHandler(e) {
+    $(".trail-popup-line-named").click(trailPopupLineClick);
+    $(".trailhead-trailname").click(trailnameClick); // Open the detail panel!
   }
 
   // get the trailData from the API
@@ -874,7 +878,7 @@ function startup() {
       // var $popupHTML = $("<div class='trail-popup'>");
   
       var popupHTML = "<div class='trail-popup'>";
-
+      var atLeastOne = false;
       for (var j = 1; j <= 6; j++) {
         // console.log("trailHTML start");
 
@@ -888,14 +892,16 @@ function startup() {
             "data-trailname='" + invisLayer.feature.properties[trailField] + "'> " +
             invisLayer.feature.properties[trailField] + 
             "<b></b></div>";
+            atLeastOne = true;
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
               trailPopupLineDiv = "<div class='trail-popup-line' trail-popup-line-unnamed'>" + 
               invisLayer.feature.properties[trailField] + 
               "<b></b>" +
               "</div>";
+              atLeastOne = true;
             } else {
-              trailPopupLineDiv = "";
+              trailPopupLineDiv = invisLayer.feature.properties[trailField];
             }
           }
           popupHTML = popupHTML + trailPopupLineDiv;
@@ -1828,7 +1834,6 @@ function startup() {
   // given jquery
 
   function parseTrailElementData($element) {
-    console.log($element);
     var trailheadID = $element.data("trailheadid");
     var highlightedTrailIndex = $element.data("index") || 0;
     var trailID = $element.data("trailid");
@@ -1863,7 +1868,8 @@ function startup() {
   }
 
   function populateTrailsForTrailheadTrailName(e) {
-    console.log($(e.target).data("trailheadid"));
+    console.log("populateTrailsForTrailheadTrailName");
+
     var $myTarget;
     if ($(e.target).data("trailheadid")) {
       $myTarget = $(e.target);
@@ -1871,7 +1877,6 @@ function startup() {
       $myTarget = $(e.target.parentNode);
     }
     var parsed = parseTrailElementData($myTarget);
-    console.log(parsed);
     var trailhead = getTrailheadById(parsed.trailheadID);
     // for (var i = 0; i < trailheads.length; i++) {
     //   if (trailheads[i].properties.id == parsed.trailheadID) {
@@ -2216,6 +2221,7 @@ function startup() {
       console.log(currentTrailLayers);
       console.log(index);
     }
+    console.log("setCurrentTrail end");
   }
 
   // given a leaflet layer, zoom to fit its bounding box, up to MAX_ZOOM
