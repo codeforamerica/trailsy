@@ -952,6 +952,11 @@ At some point, update mediaqueries to be in EMS
     color: #bbbdbf;
   }
 }
+.trailFilters {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
 @media only screen and (max-width: 529px)  {
   .trailFilters .lengthRow {
     display: block;
@@ -3842,8 +3847,6 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
-  /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
 
