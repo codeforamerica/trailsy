@@ -45,6 +45,7 @@
 /**/
 /* Most Text */
 /* Yellows/Reds For Alerts */
+/* UI */
 /* Typography */
 @font-face {
   font-family: 'mission_gothicbold';
@@ -2083,6 +2084,7 @@ At some point, update mediaqueries to be in EMS
   cursor: pointer;
 }
 .trailMapContainer {
+  background: #dddddd;
   /* Desktop */
 
 }
