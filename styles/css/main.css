@@ -2448,7 +2448,7 @@ At some point, update mediaqueries to be in EMS
     color: #ffffff;
     position: relative;
     display: inline-block;
-    max-width: 80%;
+    max-width: 70%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2464,7 +2464,7 @@ At some point, update mediaqueries to be in EMS
     margin-right: 1.5em;
     display: inline-block;
     position: relative;
-    max-width: 15%;
+    max-width: 20%;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     display: inline-block;
@@ -3180,7 +3180,7 @@ At some point, update mediaqueries to be in EMS
   }
   .detailPanel .detailPanelBanner .trailName {
     display: inline-block;
-    max-width: 75%;
+    max-width: 70%;
     font-family: mission_gothiclight, Helvetica, Arial, sans-serif;
     font-weight: 100;
     font-size: 16px;
@@ -3198,7 +3198,7 @@ At some point, update mediaqueries to be in EMS
     margin-right: 1.75em;
     display: inline-block;
     position: relative;
-    max-width: 15%;
+    max-width: 20%;
   }
   .detailPanel .detailPanelBanner .detailPanelControls {
     width: 2em;
