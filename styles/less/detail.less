@@ -80,9 +80,8 @@
 		}
 		&.contracted {
 			position: absolute;
-			top: 87%;
-			top: calc(~'100% - 84px');
-			top: -webkit-calc(~'100% - 84px');
+            bottom: 0px;
+            height:85px;
 			overflow: visible;
 			.detailPanelSlider {
 				border-top-left-radius:3em;
@@ -163,9 +162,9 @@
 					    display: inline-block;
 					    height: 0;
 					    width: 0;
-  &.disabled{ 
-  display:none;
-}
+                        &.disabled{ 
+                          display:none;
+                        }
 					}
 				}
 				&.controlRight {
@@ -181,9 +180,9 @@
 					    border-left: .8em solid @color-white;
 					    display: inline-block;
 					    height: 0;
-  &.disabled{ 
-  display:none;
-}
+                        &.disabled{ 
+                          display:none;
+                        }
 					}
 				}
 			}
