@@ -793,16 +793,19 @@ function startup() {
   }
   // returns true if trailname is in trailData
 
+  var trailNameLookup = null;
   function trailnameInListOfTrails(trailname) {
     // console.log("trailnameInListOfTrails");
-    var result = false;
-    $.each(originalTrailData, function(key, value) {
-      if (originalTrailData[key].properties.name == trailname) {
-        result = key;
-        return false;
-      }
-    });
-    return result;
+    if (trailNameLookup === null) {
+      trailNameLookup = {};
+      $.each(originalTrailData, function(key, value) {
+        var myTrailName = value.properties.name;
+        trailNameLookup[myTrailName] = true;
+      });
+    }
+
+    // console.log("trailnameInListOfTrails end");
+    return trailNameLookup[trailname];    
   }
 
   function segmentHasTrailWithMetadata(feature) {
@@ -828,33 +831,29 @@ function startup() {
     // console.log("visibleAllTrailLayer start");
     // make a normal visible layer for the segments, and add each of those layers to the allVisibleSegmentsArray
     var visibleAllTrailLayer = L.geoJson(response, {
-      style: function visibleStyle() {
-        return {
-          color: NORMAL_SEGMENT_COLOR,
-          weight: NORMAL_SEGMENT_WEIGHT,
-          opacity: 1,
-          clickable: false,
-          smoothFactor: customSmoothFactor
-          // dashArray: "5,5"
-        };
+      style: {
+        color: NORMAL_SEGMENT_COLOR,
+        weight: NORMAL_SEGMENT_WEIGHT,
+        opacity: 1,
+        clickable: false,
+        smoothFactor: customSmoothFactor     
       },
       onEachFeature: function visibleOnEachFeature(feature, layer) {
         // console.log("visibleAllTrailLayer onEachFeature");
         allVisibleSegmentsArray.push(layer);
       }
     });
+
     // make invisible layers
 
     // make the special invisible layer for mouse/touch events. much wider paths.
     // make popup html for each segment
     var invisibleAllTrailLayer = L.geoJson(response, {
-      style: function invisibleStyle() {
-        return {
-          opacity: 0,
-          weight: 20,
-          clickable: true,
-          smoothFactor: 10
-        };
+      style: {
+        opacity: 0,
+        weight: 20,
+        clickable: true,
+        smoothFactor: 10
       },
       onEachFeature: function invisibleOnEachFeature(feature, layer) {
         // console.log("invisibleAllTrailLayer onEachFeature");
@@ -877,9 +876,10 @@ function startup() {
       var popupHTML = "<div class='trail-popup'>";
 
       for (var j = 1; j <= 6; j++) {
+        // console.log("trailHTML start");
+
         var trailField = "trail" + j;
         if (invisLayer.feature.properties[trailField]) {
-          // var $trailPopupLineDiv;
           var trailPopupLineDiv;
           if (trailnameInListOfTrails(invisLayer.feature.properties[trailField])) {
             trailPopupLineDiv = "<div class='trail-popup-line trail-popup-line-named' " + 
@@ -888,40 +888,33 @@ function startup() {
             "data-trailname='" + invisLayer.feature.properties[trailField] + "'> " +
             invisLayer.feature.properties[trailField] + 
             "<b></b></div>";
-              // $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-named'>")
-              // .attr("data-steward", invisLayer.feature.properties.steward).attr("data-source", invisLayer.feature.properties.source)
-              // .attr("data-trailname", invisLayer.feature.properties[trailField])
-              // .html(invisLayer.feature.properties[trailField]);
           } else {
             if (trailnameInListOfTrails(invisLayer.feature.properties[trailField].indexOf("_")) === -1) {
               trailPopupLineDiv = "<div class='trail-popup-line' trail-popup-line-unnamed'>" + 
               invisLayer.feature.properties[trailField] + 
               "<b></b>" +
               "</div>";
-              // $trailPopupLineDiv = $("<div class='trail-popup-line trail-popup-line-unnamed'>").html(invisLayer.feature.properties[trailField]);
-              // $trailPopupLineDiv.append("<b>");
             } else {
               trailPopupLineDiv = "";
-              // $trailPopupLineDiv = $("");
-              // console.log("skipping trail segment name because it has an underscore in it");
             }
           }
           popupHTML = popupHTML + trailPopupLineDiv;
-          // $popupHTML.append($trailPopupLineDiv);
-          // $trailPopupLineDiv.append("<b>");
         }
+        // console.log("trailHTML end");
+
       }
+
+
       popupHTML = popupHTML + "</div>";
 
       invisLayer.feature.properties.popupHTML = popupHTML;
-      // invisLayer.feature.properties.popupHTML = $popupHTML.outerHTML();
       var eventType;
-      // this should be a test for touch, not small
       if (TOUCH) {
         eventType = "click";
       } else {
         eventType = "mouseover";
       }
+
       newTrailFeatureGroup.addEventListener(eventType, function featureGroupEventListener(invisLayer) {
         return function newMouseover(e) {
           // console.log("new mouseover");
@@ -974,6 +967,7 @@ function startup() {
           };
         }(e), 1250);
       });
+
       allSegmentLayer.addLayer(newTrailFeatureGroup);
     }
 
