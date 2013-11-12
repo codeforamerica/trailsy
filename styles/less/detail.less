@@ -679,6 +679,7 @@
 				position:relative;
 				display:block;	
 				margin-bottom:.5em;
+				margin-top:1em;
 			}
 			.extraLine2 {
 				border-bottom: 1px solid @color-light-gray;
@@ -690,7 +691,7 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: .5em 1em .75em 1em;
+				/*padding: .5em 1em .75em 1em; */
 				.icon-large {
 					/*the height needs to be fixed because of the way the logo is saved on the backend */
 					height: 80px;
@@ -698,51 +699,50 @@
 					position: relative;
 					display: inline-block;
 					margin-right:1em;
+					margin-left:.5em;
+					margin-top:.5em;
+					margin-bottom:.5em;
 				}
 				.detailStewardInfo {
 					position: relative;
 					display: inline;
 					height: auto;
 					width: auto;
-					margin-left: 1em;
-					
-				}
-				.detailStewardInfo a {
-					text-decoration:none;
 					display:block;
-					color:@color-dark-blue;
-					&:hover {
-						text-decoration:underline;
+					/*margin-left: 1em;*/
+		
+					.detailPanelHeader {
+						margin-top:1em;
+						position: relative;
+						display: block;
+						.sansSerif-light;
+						color: @color-light-mid-gray;
+						position: relative;
+						font-size: 12px;
+						width: auto;
+						text-transform: uppercase;
+						/*margin-top: -1.5em;*/
+					}
+					.detailStewardInfo a, .detailSource{
+						text-decoration:none;
+						display:block;
+						color:@color-dark-blue;
+						.sansSerif-light;
+						font-size: 16px;
+						cursor: pointer;
+						&:hover {
+							text-decoration:underline;
+						}
+					}
+					 
+
+					
+					.detailSourcePhone {
+						.sansSerif-light;
+						color: @color-mid-gray;
+						font-size: 16px;
 					}
 				}
-				.detailPanelHeader {
-					position: relative;
-					display: block;
-					.sansSerif-light;
-					color: @color-light-mid-gray;
-					position: relative;
-					font-size: 12px;
-					width: auto;
-					text-transform: uppercase;
-					margin-top: -1.5em;
-				}
-				.detailSource {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 16px;
-					width: 100%;
-					cursor: pointer;
-				}
-				.detailSourcePhone {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 16px;
-				}
-				/* not needed? .detailSourceURL {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 12px;
-				} */
 			}
 		}
 	}
@@ -1168,7 +1168,7 @@
 						height: 1.25em;
 						background-color: @color-light-mid-gray;
 						float: right;
-						margin: 0em 0em .25em 1em;
+						margin: 0em 0em .5em 1em;
 						padding: 0 .5em 0 0em;
 						cursor: pointer;
 						transition: all 0.25s ease;
@@ -1205,7 +1205,6 @@
 				display: inline-block;
 				height: auto;
 				width: 100%;
-				padding: 1em 1.75em 1em 1.75em;
 				.icon-large {
 					/*the height needs to be fixed because of the way the logo is saved on the backend */
 					height: 80px;
@@ -1214,6 +1213,10 @@
 					position: relative;
 					display: inline-block;
 					margin-right:1em;
+					margin-top:.5em;
+					margin-left:1em;
+					margin-bottom:1em;
+
 				}
 
 				.detailStewardInfo {
@@ -1221,44 +1224,39 @@
 					display: inline;
 					height: auto;
 					width: auto;
-					margin-left: 1em;
-					margin-top: .25em;
-				}
-				.detailStewardInfo a {
-					text-decoration:none;
-					display:block;
-					color:@color-dark-blue;
-					&:hover {
-						text-decoration:underline;
+					margin-right:1em;
+			
+					.detailPanelHeader {
+						position: relative;
+						display: block;
+						.sansSerif-light;
+						color: @color-light-mid-gray;
+						position: relative;
+						font-size: 12px;
+						width: auto;
+						text-transform: uppercase;
 					}
-				}
-				.detailPanelHeader {
-					position: relative;
-					display: block;
-					.sansSerif-light;
-					color: @color-light-mid-gray;
-					position: relative;
-					font-size: 12px;
-					width: auto;
-					text-transform: uppercase;
-				}
-				.detailSource {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 16px;
-					width: 100%;
-					cursor: pointer;
-				} 
-				.detailSourcePhone {
-					.sansSerif-light;
-					color: @color-mid-gray;
-					font-size: 16px;
+					.detailStewardInfo a, .detailSource {
+						text-decoration:none;
+						display:block;
+						color:@color-dark-blue;
+						.sansSerif-light;
+						&:hover {
+							text-decoration:underline;
+						}
+					}
+					.detailSourcePhone {
+						.sansSerif-light;
+						color: @color-mid-gray;
+						font-size: 16px;
+					}
 				}
 				/* not needed? .detailSourceURL {
 					.sansSerif-light;
 					color: @color-mid-gray;
 					font-size: 12px;
 				}*/
+				
 			}
 		}
 	}
