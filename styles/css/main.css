@@ -1854,6 +1854,9 @@ At some point, update mediaqueries to be in EMS
     background: #00adef;
     border: 1px solid #00adef;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected b {
+    display: none;
+  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
     height: auto;
@@ -4112,22 +4115,19 @@ table {
 }
 /* Other Universal */
 html {
-  overflow-y: scroll;
+  overflow: hidden;
   height: 100%;
 }
 /* Background color */
+body {
+  overflow: hidden;
+  background-color: #ffffff;
+}
 @media only screen and (max-width: 768px) {
   body {
-    background-color: #ffffff;
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
-  }
-}
-@media desktop {
-  body {
-    background-color: #ffffff;
   }
 }
 [data-role*="page"] {
