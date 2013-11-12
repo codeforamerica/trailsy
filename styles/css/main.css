@@ -3892,8 +3892,6 @@ html {
   /* 1 */
 
   -webkit-text-size-adjust: 100%;
-  /* 2 */
-
   -ms-text-size-adjust: 100%;
   /* 2 */
 
@@ -4193,22 +4191,19 @@ table {
 }
 /* Other Universal */
 html {
-  overflow-y: scroll;
+  overflow: hidden;
   height: 100%;
 }
 /* Background color */
+body {
+  overflow: hidden;
+  background-color: #ffffff;
+}
 @media only screen and (max-width: 768px) {
   body {
-    background-color: #ffffff;
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow-x: hidden;
-  }
-}
-@media desktop {
-  body {
-    background-color: #ffffff;
   }
 }
 [data-role*="page"] {

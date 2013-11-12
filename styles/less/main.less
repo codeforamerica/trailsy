@@ -57,21 +57,18 @@
 
 /* Other Universal */
 html {
-  overflow-y: scroll;
+  overflow: hidden;
   height: 100%;
 }
 
 /* Background color */
 body {
+  overflow: hidden;
+  background-color: @color-white;
 	@media @mobile {
-	background-color: @color-white;
-	height: 100%;
-	padding: 0;
+  	height: 100%;
+  	padding: 0;
     margin: 0;
-	overflow-x: hidden;
-	}
-	@media desktop {
-	background-color: @color-white;
 	}
 }
 
