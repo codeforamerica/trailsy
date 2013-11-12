@@ -215,8 +215,7 @@ function startup() {
   //  Detail Panel Navigation UI events
   $('.hamburgerBox').click(moveSlideDrawer);
 
-  $('.slider').click(slideDetailPanel);
-  $('.detailPanel.contracted slider').click(function(){ showDetailPanel(true); });
+  $('.slider, .detailPanelBanner').click(slideDetailPanel);
   $(".detailPanel").hover(detailPanelHoverIn, detailPanelHoverOut);
 
   $(".aboutLink").click(openAboutPage);
@@ -550,8 +549,8 @@ function startup() {
           } else {
             handleGeoError(error);
           }
-        }
-      );
+        },
+        options);
     } else {
       // for now, just returns Akron
       // should use browser geolocation,
@@ -1779,6 +1778,7 @@ function startup() {
   }
 
   function showDetailPanel(show){
+    console.log("showDetailPanel");
     if (show){
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
