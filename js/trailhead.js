@@ -211,6 +211,7 @@ function startup() {
   $(".search-key").keyup(function(e) { processSearch(e); });
   $(".offsetZoomControl").click(offsetZoomIn);
   $(".search-submit").click(processSearch);
+  $(".geolocateButton").click(centerOnLocation);
 
   //  Detail Panel Navigation UI events
   $('.hamburgerBox').click(moveSlideDrawer);
@@ -610,6 +611,10 @@ function startup() {
     if (typeof callback == "function") {
       callback();
     }
+  }
+
+  function centerOnLocation() {
+    map.setView(currentUserLocation, map.getZoom());
   }
 
   var mapDragUiHide = false;
