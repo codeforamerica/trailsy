@@ -1891,6 +1891,9 @@ At some point, update mediaqueries to be in EMS
     background: #00adef;
     border: 1px solid #00adef;
   }
+  .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname.selected b {
+    display: none;
+  }
   .leaflet-popup-content-wrapper .leaflet-popup-content .trailhead-popup .trailhead-box .trailhead-trailname .popupTrailNames {
     position: relative;
     height: auto;
@@ -2253,29 +2256,29 @@ At some point, update mediaqueries to be in EMS
   right: 0.83em;
   display: block;
   z-index: 1000;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
-.offsetZoomControl .offsetZoomIn {
-  height: 35px;
-  width: 35px;
-  font: bold 22px 'Lucida Console', Monaco, monospace;
-  text-align: center;
-  background-color: white;
-  color: #808285;
-}
-.offsetZoomControl .offsetZoomIn:hover {
-  background-color: #e3e3e1;
-}
+.offsetZoomControl .offsetZoomIn,
 .offsetZoomControl .offsetZoomOut {
   height: 35px;
   width: 35px;
-  margin-top: 38px;
   font: bold 22px 'Lucida Console', Monaco, monospace;
   text-align: center;
   background-color: white;
   color: #808285;
 }
+.offsetZoomControl .offsetZoomIn:hover,
 .offsetZoomControl .offsetZoomOut:hover {
   background-color: #e3e3e1;
+}
+.offsetZoomControl .offsetZoomIn:active,
+.offsetZoomControl .offsetZoomOut:active {
+  background-color: #bbbdbf;
+}
+.offsetZoomControl .offsetZoomOut {
+  margin-top: 38px;
 }
 .overlay {
   width: 100%;
