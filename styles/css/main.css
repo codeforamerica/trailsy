@@ -161,8 +161,8 @@ At some point, update mediaqueries to be in EMS
   }
   .title-row header .navbar-inner .geolocateBox {
     float: right;
-    width: 3em;
     height: 3em;
+    width: 3em;
   }
   .title-row header .navbar-inner .geolocateBox a {
     display: block;
