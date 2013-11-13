@@ -17,41 +17,38 @@
 		line-height: 1;
 		padding: 1em 1.75em 0 1.75em;
 		.search-key {
-			display: block;
+			display: inline-block;
 			.sansSerif-light;
+			font-size: 13px;
 			color: @color-light-mid-gray;
-			width: 100%;
-			height: 2em;
+			width: 77%;
+			height: 2.5em;
 		  	border: 1px solid;
 		  	border-color: @color-light-mid-gray;
 			padding-left: .5em;
 			padding-right: 0;
-			padding-top: .5em;
+			padding-top: .7em;
 			padding-bottom: .5em;
 			position: relative;
 			top: 0;
 			line-height: 1.5em;
 			border-collapse: separate;
 			border-spacing: 2px;
-			background-image: url(img/icon_search.png);
-			background-repeat: no-repeat;
-			background-position: 10px 10px;
 		}
 		.search-submit {
-			display: none;
-/*			display: inline-block;*/
-			position: absolute;
+			display: inline-block;
+			float:right;
+			/*position: absolute;*/
 			border: none;
 			height: 2em;
-			top: 4em;
-			right: 1em;
-			z-index: 1;
+			/*z-index: 1;*/
 			width: 2.5em;
 			padding: 0;
-			cursor: pointer;
-			background-color: @color-light-blue;
+			background: @color-light-blue url(/img/icon_mag_blue.png) no-repeat;
+				background-size: 100% 100%;
 			&:hover {
-				background-color: @color-light-blue;
+				background: @color-dark-blue url(/img/icon_mag_white.png) no-repeat;
+				background-size: 100% 100%;
 			}
 		}
 	}
@@ -633,7 +630,7 @@
 		width: 100%;
 		background-color: @color-white;
 		padding: 0 0 0 1.75em;
-		margin-top:1.5em;
+		margin-top:1em;
 		margin-bottom: -1.5em;
 		h2 {
 			.sansSerif-light();
@@ -662,7 +659,7 @@
 		width: 100%;
 		background-color: @color-white;
 		padding: 0 0 0 1.75em;
-		margin-top:1em;
+		margin-top:1.75em;
 		margin-bottom: -.5em;
 		h2 {
 			.sansSerif-light();
