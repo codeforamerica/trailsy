@@ -33,7 +33,7 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = window.location.hostname;
+  // var API_HOST = window.location.protocol + "//" + window.location.host;
   //var API_HOST = "http://127.0.0.1:3000";
   var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
@@ -42,11 +42,11 @@ function startup() {
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     // API_HOST = "http://trailsyserver-dev.herokuapp.com";
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
     // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
@@ -233,6 +233,10 @@ function startup() {
   // Kick things off
 
   showOverlay();
+
+  if ($("html").hasClass("lt-ie8")) {
+     return;  //abort, dont load
+  }
   initialSetup();
 
   // =====================================================================//
@@ -252,11 +256,13 @@ function startup() {
     "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you." +
     "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
-    var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
-    "<p>We look forward to seeing you for our public launch." +
+    var closedOverlayHTML = "<h1>Visit us on your desktop!</h1>" +
+    "<p>We'll be launching To The Trails for mobile devices on November 15th, but desktop access is available now!" +
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
-    if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+
+    // restricting SMALL devices only as of 11/13/2013
+    if ((window.location.hostname === "www.tothetrails.com" && SMALL) || CLOSED) {
       console.log("closed");
       $(".overlay-panel").html(closedOverlayHTML);
       $(".overlay").show();
@@ -1788,16 +1794,10 @@ function startup() {
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
       $('.statusMessage span').removeClass('truncate');
-      $('.trailListColumn').css({
-        overflow: 'scroll'
-      });
     } else {
       $('.detailPanel').addClass('contracted');
       $('.detailPanel').removeClass('expanded');
       $('.statusMessage span').addClass('truncate');
-      $('.trailListColumn').css({
-        overflow: 'hidden'
-      });
     }
   }
 
