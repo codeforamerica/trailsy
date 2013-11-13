@@ -73,6 +73,9 @@ be necessary to reproduce the bug.
 4. Commit and push your changes.
 5. Submit a pull request.
 
+##Reuse
+If you are looking to reuse and customize Trailsy, you can find .eps files for the artwork <a href="https://github.com/katielewis/trailsy-designassets" target="_blank">here</a>.
+
 ## Copyright
 Copyright (c) 2013 Code for America. See [LICENSE][] for details.
 
