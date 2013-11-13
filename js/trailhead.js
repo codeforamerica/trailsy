@@ -1752,7 +1752,7 @@ function startup() {
       }
       $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
       
-      $('.detailPanel .detailFooter .detailSourcePhone.detailSource').html("<a href='" + trail.properties.steward_phone + "'>" + 
+      $('.detailPanel .detailFooter .detailSourcePhone').html("<a href='" + trail.properties.steward_phone + "'>" + 
         trail.properties.steward_phone + "</a>"); 
     } else {
       $('.detailPanel .detailFooter').hide();
