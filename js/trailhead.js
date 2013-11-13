@@ -255,11 +255,13 @@ function startup() {
     "<p>ToTheTrails.com is currently in public beta. It's a work in progress! We'd love to hear how this site is working for you." +
     "<p>Send feedback and report bugs to <a href='mailto:hello@tothetrails.com?Subject=Feedback' target='_top'>hello@tothetrails.com</a>. Learn more on our 'About' page.";
 
-    var closedOverlayHTML = "<h1>Come visit us Nov 13th!</h1>" +
-    "<p>We look forward to seeing you for our public launch." +
+    var closedOverlayHTML = "<h1>Visit us on your desktop!</h1>" +
+    "<p>We'll be launching To The Trails for mobile devices on November 15th, but desktop access is available now!" +
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
-    if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+
+    // restricting SMALL devices only as of 11/13/2013
+    if ((window.location.hostname === "www.tothetrails.com" && SMALL) || CLOSED) {
       console.log("closed");
       $(".overlay-panel").html(closedOverlayHTML);
       $(".overlay").show();
