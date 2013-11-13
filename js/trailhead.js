@@ -33,20 +33,20 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = window.location.hostname;
+  var API_HOST = window.location.protocol + "//" + window.location.host;
   //var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsy.herokuapp.com";
+  // var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     // API_HOST = "http://trailsyserver-dev.herokuapp.com";
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = window.location.href;
+    API_HOST = window.location.protocol + "//" + window.location.host;
     // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
