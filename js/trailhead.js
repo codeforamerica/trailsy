@@ -1787,16 +1787,10 @@ function startup() {
       $('.detailPanel').addClass('expanded');
       $('.detailPanel').removeClass('contracted');
       $('.statusMessage span').removeClass('truncate');
-      $('.trailListColumn').css({
-        overflow: 'scroll'
-      });
     } else {
       $('.detailPanel').addClass('contracted');
       $('.detailPanel').removeClass('expanded');
       $('.statusMessage span').addClass('truncate');
-      $('.trailListColumn').css({
-        overflow: 'hidden'
-      });
     }
   }
 
