@@ -232,6 +232,10 @@ function startup() {
   // Kick things off
 
   showOverlay();
+
+  if ($("html").hasClass("lt-ie8")) {
+     return;  //abort, dont load
+  }
   initialSetup();
 
   // =====================================================================//
