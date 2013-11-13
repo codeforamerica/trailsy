@@ -326,7 +326,7 @@ function startup() {
     // console.log("waitForTrailSegments");
     if (trailsegmentsFetched) {
       if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-        map.addLayer(allSegmentLayer);
+        map.addLayer(allSegmentLayer).bringToBack();
       }
     }
     else {
@@ -350,7 +350,7 @@ function startup() {
       addTrailsToTrailheads(originalTrailData, originalTrailheads);
       // if we haven't added the segment layer yet, add it.
       if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-        map.addLayer(allSegmentLayer);
+        map.addLayer(allSegmentLayer).bringToBack();
       }
     }
     else {
@@ -2139,8 +2139,10 @@ function startup() {
             segment.properties.trail5 + " Trail" == trailName ||
             segment.properties.trail6 == trailName ||
             segment.properties.trail6 + " Trail" == trailName) &&
-          (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
-          // 1) {
+          // this was intended to use only trailhead source's data for a trail, but 
+          // it causes more problems than it solves.
+          // (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
+          1) {
           trailFeatureCollection.features[0].properties = {
             trailname: trailName
           };
@@ -2223,7 +2225,7 @@ function startup() {
       onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
       }
-    }).addTo(map).bringToFront();
+    }).addTo(map);
     //.bringToFront();
     zoomToLayer(currentMultiTrailLayer);
   }
