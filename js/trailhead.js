@@ -1751,9 +1751,12 @@ function startup() {
         $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url).show();
       }
       $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
-      
-      $('.detailPanel .detailFooter .detailSourcePhone').html("<a href='" + trail.properties.steward_phone + "'>" + 
-        trail.properties.steward_phone + "</a>"); 
+      if (SMALL) {
+        $('.detailPanel .detailSourcePhone').html("<a href='tel:" + trail.properties.steward_phone + "'>" + trail.properties.steward_phone + "</a>"); 
+      }
+      else {
+        $('.detailPanel .detailSourcePhone').html(trail.properties.steward_phone);
+      }
     } else {
       $('.detailPanel .detailFooter').hide();
     }
