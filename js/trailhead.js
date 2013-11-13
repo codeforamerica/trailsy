@@ -42,11 +42,11 @@ function startup() {
   // var API_HOST = "http://10.0.2.2:3000" // for virtualbox IE
   if (window.location.hostname.split(".")[0] == "trailsy-dev") {
     // API_HOST = "http://trailsyserver-dev.herokuapp.com";
-    API_HOST = window.location.host;
+    API_HOST = window.location.protocol + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsyserver-dev") {
-    API_HOST = window.location.host;
+    API_HOST = window.location.protocol + window.location.host;
   } else if (window.location.hostname.split(".")[0] == "trailsy" || window.location.hostname == "www.tothetrails.com") {
-    API_HOST = window.location.host;
+    API_HOST = window.location.protocol + window.location.host;
     // API_HOST = "http://trailsyserver-prod.herokuapp.com";
   }
 
@@ -696,7 +696,7 @@ function startup() {
     var callData = {
       loc: location.lat + "," + location.lng,
       type: "GET",
-      path: "trailheads.json?loc=" + location.lat + "," + location.lng
+      path: "/trailheads.json?loc=" + location.lat + "," + location.lng
     };
     makeAPICall(callData, function(response) {
       populateOriginalTrailheads(response);
@@ -776,7 +776,7 @@ function startup() {
     console.log("fetchTraildata");
     var callData = {
       type: "GET",
-      path: "trails.json"
+      path: "/trails.json"
     };
     makeAPICall(callData, function(response) {
       populateTrailData(response);
@@ -797,7 +797,7 @@ function startup() {
     console.log("fetchTrailsegments");
     var callData = {
       type: "GET",
-      path: "trailsegments.json"
+      path: "/trailsegments.json"
     };
     // if (SMALL) {
     //   callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
@@ -2066,7 +2066,7 @@ function startup() {
           else {
             var callData = {
               type: "GET",
-              path: "trailsegments.json?trail_id=" + trailID
+              path: "/trailsegments.json?trail_id=" + trailID
             };
             makeAPICall(callData, function(response) {
               featureCollection.features[0].properties = {
