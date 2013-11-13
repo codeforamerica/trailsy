@@ -1553,30 +1553,7 @@ function startup() {
   }
 
   function resetDetailPanel() {
-    if (!SMALL) {
-      $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
-      $('.detailPanel .detailPanelPictureCredits').remove();
-      $('.detailPanel .detailConditionsDescription').html("");
-      $('.detailPanel .detailTrailSurface').html("");
-      $('.detailPanel .detailTrailheadName').html("");
-      $('.detailPanel .detailTrailheadPark').html("");
-      $('.detailPanel .detailTrailheadAddress').html("");
-      $('.detailPanel .detailTrailheadCity').html("");
-      $('.detailPanel .detailTrailheadState').html("");
-      $('.detailPanel .detailTrailheadZip').html("");
-      $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
-      $('.detailPanel .detailTopRow#right .hike').html("");
-      $('.detailPanel .detailTopRow#right .cycle').html("");
-      $('.detailPanel .detailTopRow#right .handicap').html("");
-      $('.detailPanel .detailTopRow#right .horse').html("");
-      $('.detailPanel .detailTopRow#right .xcountryski').html("")
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
-      $('.detailPanel .detailDescription').html("");
-      $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
-    } else {
+    // if (!SMALL) {
       $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
       $('.detailPanel .detailPanelPictureCredits').remove();
       $('.detailPanel .detailConditionsDescription').html("");
@@ -1588,18 +1565,42 @@ function startup() {
       $('.detailPanel .detailTrailheadState').html("");
       $('.detailPanel .detailTrailheadZip').html("");
       $('.detailPanel .statusMessage').remove();
-      $('.detailPanel .detailActivityRow .hike').html("");
-      $('.detailPanel .detailActivityRow .cycle').html("");
-      $('.detailPanel .detailActivityRow .handicap').html("");
-      $('.detailPanel .detailActivityRow .horse').html("");
-      $('.detailPanel .detailActivityRow .xcountryski').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
+      $('.detailPanel .hike').html("");
+      $('.detailPanel .cycle').html("");
+      $('.detailPanel .handicap').html("");
+      $('.detailPanel .horse').html("");
+      $('.detailPanel .xcountryski').html("")
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .kiosk').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("");
       $('.detailPanel .detailDescription').html("");
       $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
-    }
+    // }
+    // } else {
+    //   $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
+    //   $('.detailPanel .detailPanelPictureCredits').remove();
+    //   $('.detailPanel .detailConditionsDescription').html("");
+    //   $('.detailPanel .detailTrailSurface').html("");
+    //   $('.detailPanel .detailTrailheadName').html("");
+    //   $('.detailPanel .detailTrailheadPark').html("");
+    //   $('.detailPanel .detailTrailheadAddress').html("");
+    //   $('.detailPanel .detailTrailheadCity').html("");
+    //   $('.detailPanel .detailTrailheadState').html("");
+    //   $('.detailPanel .detailTrailheadZip').html("");
+    //   $('.detailPanel .statusMessage').remove();
+    //   $('.detailPanel .detailActivityRow .hike').html("");
+    //   $('.detailPanel .detailActivityRow .cycle').html("");
+    //   $('.detailPanel .detailActivityRow .handicap').html("");
+    //   $('.detailPanel .detailActivityRow .horse').html("");
+    //   $('.detailPanel .detailActivityRow .xcountryski').html("");
+    //   $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("xxx");
+    //   $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .kiosk').html("");
+    //   $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("");
+    //   $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("");
+    //   $('.detailPanel .detailDescription').html("");
+    //   $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
+    // }
   }
 
   function decorateDetailPanel(trail, trailhead) {
@@ -1723,16 +1724,16 @@ function startup() {
     }
 
     if (trailhead.properties.parking && trailhead.properties.parking.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
+      $('.detailPanel .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
     }
     if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
+      $('.detailPanel .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
     }
     if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");
+      $('.detailPanel .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");
     }
     if (trailhead.properties.kiosk && trailhead.properties.kiosk.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .kiosk').html("<img class='amenity-icons' title='Information kiosk on site.' src='img/icon_kiosk_green.png'>");
+      $('.detailPanel .kiosk').html("<img class='amenity-icons' title='Information kiosk on site.' src='img/icon_kiosk_green.png'>");
     }
 
     $('.detailPanel .detailSource').html(trailhead.properties.source);
