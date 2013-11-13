@@ -33,9 +33,9 @@ function startup() {
   // API_HOST: The API server. Here we assign a default server, then 
   // test to check whether we're using the Heroky dev app or the Heroku production app
   // and reassign API_HOST if necessary
-  // var API_HOST = window.location.host;
+  var API_HOST = window.location.host;
   //var API_HOST = "http://127.0.0.1:3000";
-  var API_HOST = "http://trailsy.herokuapp.com";
+  // var API_HOST = "http://trailsy.herokuapp.com";
   // var API_HOST = "http://trailsyserver-dev.herokuapp.com";
   // var API_HOST = "http://trailsyserver-prod.herokuapp.com";
   // var API_HOST = "http://10.0.1.102:3000";
@@ -696,7 +696,7 @@ function startup() {
     var callData = {
       loc: location.lat + "," + location.lng,
       type: "GET",
-      path: "/trailheads.json?loc=" + location.lat + "," + location.lng
+      path: "trailheads.json?loc=" + location.lat + "," + location.lng
     };
     makeAPICall(callData, function(response) {
       populateOriginalTrailheads(response);
@@ -776,7 +776,7 @@ function startup() {
     console.log("fetchTraildata");
     var callData = {
       type: "GET",
-      path: "/trails.json"
+      path: "trails.json"
     };
     makeAPICall(callData, function(response) {
       populateTrailData(response);
@@ -797,7 +797,7 @@ function startup() {
     console.log("fetchTrailsegments");
     var callData = {
       type: "GET",
-      path: "/trailsegments.json"
+      path: "trailsegments.json"
     };
     // if (SMALL) {
     //   callData.path = "/trailsegments.json?simplify=" + ALL_SEGMENT_LAYER_SIMPLIFY;
@@ -2066,7 +2066,7 @@ function startup() {
           else {
             var callData = {
               type: "GET",
-              path: "/trailsegments.json?trail_id=" + trailID
+              path: "trailsegments.json?trail_id=" + trailID
             };
             makeAPICall(callData, function(response) {
               featureCollection.features[0].properties = {
