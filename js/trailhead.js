@@ -524,6 +524,13 @@ function startup() {
       map.setZoomAround(offsetLatLng, map.getZoom() + 1);
     } else if ($(e.target).hasClass("offsetZoomOut")) {
       map.setZoomAround(offsetLatLng, map.getZoom() - 1);
+
+    } else if ($(e.target).hasClass("offsetGeolocate")) {
+      // console.log('Centering on geolocaton');
+      var userPoint = map.latLngToContainerPoint(currentUserLocation);
+      var offsetUserLocation = userPoint.subtract(offset.divideBy(2));
+      var offsetUserLatLng = map.containerPointToLatLng(offsetUserLocation)
+      map.setView(offsetUserLatLng, map.getZoom());
     }
   }
 
@@ -565,6 +572,12 @@ function startup() {
       currentUserLocation = AKRON;
       handleGeoError("no geolocation", callback);
     }
+
+    // If user location exists, turn on geolocation button
+    if (currentUserLocation) {
+      $(".offsetGeolocate").show()
+    }
+
   }
 
   function handleGeoSuccess(position, callback) {
