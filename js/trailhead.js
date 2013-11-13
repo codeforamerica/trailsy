@@ -2305,6 +2305,7 @@ function startup() {
       callData.data = JSON.stringify(callData.data);
     }
     var url = API_HOST + callData.path;
+    console.log(url);
     var request = $.ajax({
       type: callData.type,
       url: url,
