@@ -450,9 +450,10 @@
 .offsetZoomControl {
 	cursor: pointer;
 	position: absolute;
-	top: 0.83em;
-	right: 0.83em;
+	top: 2em;
+	right: 2em;
 	display: block;
+	width: 35px;
 	z-index: 1000;
 
 	-webkit-user-select: none;
@@ -467,6 +468,9 @@
 		text-align: center;
 		background-color: white;
 		color: #808285;
+		display: inline-block;
+		line-height: 35px;
+		margin-bottom: 5px;
 		&:hover {
 			background-color: @color-light-gray;
 		}
@@ -474,9 +478,6 @@
 			background-color: @color-light-mid-gray;
 		}
   }
-	.offsetZoomOut {
-		margin-top: 38px;
-	}
 }
 
 
