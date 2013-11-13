@@ -259,7 +259,8 @@ function startup() {
     "<p>We look forward to seeing you for our public launch." +
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
-    if (window.location.hostname === "www.tothetrails.com" || CLOSED) {
+    // restricting SMALL devices only as of 11/13/2013
+    if ((window.location.hostname === "trailsy-dev.herokuapp.com" && SMALL) || CLOSED) {
       console.log("closed");
       $(".overlay-panel").html(closedOverlayHTML);
       $(".overlay").show();
