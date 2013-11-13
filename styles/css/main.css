@@ -2724,7 +2724,9 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     height: auto;
     width: 100%;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     background-color: #ffffff;
   }
   .detailPanel .detailPanelBody .detailLengthRow {
@@ -3278,7 +3280,9 @@ At some point, update mediaqueries to be in EMS
     position: relative;
     max-height: 23em;
     width: 24em;
-    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   .detailPanel .detailPanelBody .detailPanelPictureContainer {
     height: auto;
