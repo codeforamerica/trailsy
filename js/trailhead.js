@@ -26,8 +26,8 @@ function startup() {
   // Map generated in CfA Account
   var MAPBOX_MAP_ID = "codeforamerica.map-j35lxf9d";
   var AKRON = {
-    lat: 41.1,
-    lng: -81.5
+    lat: 41.082020,
+    lng: -81.518506
   };
 
   // API_HOST: The API server. Here we assign a default server, then 
