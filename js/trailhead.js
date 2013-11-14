@@ -573,11 +573,6 @@ function startup() {
       handleGeoError("no geolocation", callback);
     }
 
-    // If user location exists, turn on geolocation button
-    if (currentUserLocation) {
-      $(".offsetGeolocate").show()
-    }
-
   }
 
   function handleGeoSuccess(position, callback) {
@@ -607,6 +602,10 @@ function startup() {
         pulsing: true,
         accuracy: 0
       }).addTo(map);
+    }
+    // If user location exists, turn on geolocation button
+    if (currentUserLocation) {
+      $(".offsetGeolocate").show()
     }
     // console.log(currentUserLocation);
     userMarker.setLatLng(currentUserLocation);
