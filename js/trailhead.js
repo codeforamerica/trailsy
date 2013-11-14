@@ -678,7 +678,7 @@ function startup() {
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: centerOffset
     });
-    L.control.scale().addTo(map);
+    // L.control.scale().addTo(map);
     map.on('dragstart', hideUiOnMapDrag);
     map.on('dragend', unhideUiOnMapDrag);
 
