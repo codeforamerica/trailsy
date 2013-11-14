@@ -159,6 +159,24 @@ At some point, update mediaqueries to be in EMS
     margin-left: -3.25em;
     display: inline-block;
   }
+  .title-row header .navbar-inner .geolocateBox {
+    float: right;
+    height: 3em;
+    width: 3em;
+  }
+  .title-row header .navbar-inner .geolocateBox a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 3em;
+    cursor: pointer;
+    color: #91c73d;
+    background: url("../../img/target-white.png") center center no-repeat;
+  }
+  .title-row header .navbar-inner .geolocateBox a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
 }
 @media only screen and (min-width: 769px) {
   .title-row {
@@ -2259,8 +2277,7 @@ At some point, update mediaqueries to be in EMS
   -moz-user-select: none;
   user-select: none;
 }
-.offsetZoomControl .offsetZoomIn,
-.offsetZoomControl .offsetZoomOut {
+.offsetZoomControl a {
   height: 35px;
   width: 35px;
   font: bold 22px 'Lucida Console', Monaco, monospace;
@@ -2271,13 +2288,14 @@ At some point, update mediaqueries to be in EMS
   line-height: 35px;
   margin-bottom: 5px;
 }
-.offsetZoomControl .offsetZoomIn:hover,
-.offsetZoomControl .offsetZoomOut:hover {
+.offsetZoomControl a:hover {
   background-color: #e3e3e1;
 }
-.offsetZoomControl .offsetZoomIn:active,
-.offsetZoomControl .offsetZoomOut:active {
+.offsetZoomControl a:active {
   background-color: #bbbdbf;
+}
+.offsetZoomControl .offsetGeolocate {
+  background: url("../../img/target-black.png") #ffffff center center no-repeat;
 }
 .overlay {
   width: 100%;
