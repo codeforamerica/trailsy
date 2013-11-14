@@ -2302,9 +2302,11 @@ function startup() {
       var newZoom = layerBoundsZoom > MAX_ZOOM ? MAX_ZOOM : layerBoundsZoom;
       newZoom = newZoom < MIN_ZOOM ? MIN_ZOOM : newZoom;
       // setTimeout(function() {
-        console.log("setView");
-        map.setView(currentTrailhead.marker.getLatLng(), newZoom);
-        console.log("setView end");
+        var originalLatLng = currentTrailhead.marker.getLatLng();
+        var projected = map.project(originalLatLng, newZoom);
+        var offsetProjected = projected.subtract(centerOffset.divideBy(2));
+        var newLatLng = map.unproject(offsetProjected, newZoom);
+        map.setView(newLatLng, newZoom);
       // }, 0);
     }
     console.log("zoomToLayer end");
