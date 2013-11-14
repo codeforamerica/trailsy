@@ -327,7 +327,7 @@ function startup() {
     // console.log("waitForTrailSegments");
     if (trailsegmentsFetched) {
       if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-        map.addLayer(allSegmentLayer);
+        map.addLayer(allSegmentLayer).bringToBack();
       }
     }
     else {
@@ -351,7 +351,7 @@ function startup() {
       addTrailsToTrailheads(originalTrailData, originalTrailheads);
       // if we haven't added the segment layer yet, add it.
       if (map.getZoom() >= SECONDARY_TRAIL_ZOOM && !(map.hasLayer(allSegmentLayer))) {
-        map.addLayer(allSegmentLayer);
+        map.addLayer(allSegmentLayer).bringToBack();
       }
     }
     else {
@@ -678,7 +678,7 @@ function startup() {
     map.fitBounds(map.getBounds(), {
       paddingTopLeft: centerOffset
     });
-
+    L.control.scale().addTo(map);
     map.on('dragstart', hideUiOnMapDrag);
     map.on('dragend', unhideUiOnMapDrag);
 
@@ -1570,30 +1570,6 @@ function startup() {
   }
 
   function resetDetailPanel() {
-    if (!SMALL) {
-      $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
-      $('.detailPanel .detailPanelPictureCredits').remove();
-      $('.detailPanel .detailConditionsDescription').html("");
-      $('.detailPanel .detailTrailSurface').html("");
-      $('.detailPanel .detailTrailheadName').html("");
-      $('.detailPanel .detailTrailheadPark').html("");
-      $('.detailPanel .detailTrailheadAddress').html("");
-      $('.detailPanel .detailTrailheadCity').html("");
-      $('.detailPanel .detailTrailheadState').html("");
-      $('.detailPanel .detailTrailheadZip').html("");
-      $('.detailPanel .detailPanelPictureContainer .statusMessage').remove();
-      $('.detailPanel .detailTopRow#right .hike').html("");
-      $('.detailPanel .detailTopRow#right .cycle').html("");
-      $('.detailPanel .detailTopRow#right .handicap').html("");
-      $('.detailPanel .detailTopRow#right .horse').html("");
-      $('.detailPanel .detailTopRow#right .xcountryski').html("")
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
-      $('.detailPanel .detailDescription').html("");
-      $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
-    } else {
       $('.detailPanel .detailPanelPicture').attr("src", "img/ImagePlaceholder.jpg");
       $('.detailPanel .detailPanelPictureCredits').remove();
       $('.detailPanel .detailConditionsDescription').html("");
@@ -1605,18 +1581,17 @@ function startup() {
       $('.detailPanel .detailTrailheadState').html("");
       $('.detailPanel .detailTrailheadZip').html("");
       $('.detailPanel .statusMessage').remove();
-      $('.detailPanel .detailActivityRow .hike').html("");
-      $('.detailPanel .detailActivityRow .cycle').html("");
-      $('.detailPanel .detailActivityRow .handicap').html("");
-      $('.detailPanel .detailActivityRow .horse').html("");
-      $('.detailPanel .detailActivityRow .xcountryski').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #drinkwater').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #kiosk').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #restrooms').html("");
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons #parking').html("");
+      $('.detailPanel .hike').html("");
+      $('.detailPanel .cycle').html("");
+      $('.detailPanel .handicap').html("");
+      $('.detailPanel .horse').html("");
+      $('.detailPanel .xcountryski').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .kiosk').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("");
+      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("");
       $('.detailPanel .detailDescription').html("");
       $('.detailPanel .detailStewardLogo').attr("src", "/img/logoPlaceholder.jpg");
-    }
   }
 
   function decorateDetailPanel(trail, trailhead) {
@@ -1740,16 +1715,16 @@ function startup() {
     }
 
     if (trailhead.properties.parking && trailhead.properties.parking.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
+      $('.detailPanel .parking').html("<img class='amenity-icons' title='Parking available on site.' src='img/icon_parking_green.png'>");
     }
     if (trailhead.properties.drinkwater && trailhead.properties.drinkwater.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
+      $('.detailPanel .water').html("<img class='amenity-icons' title='NOTE: Drinking water not available during winter temperatures.' src='img/icon_water_green.png'>");
     }
     if (trailhead.properties.restrooms && trailhead.properties.restrooms.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");
+      $('.detailPanel .restrooms').html("<img class='amenity-icons' title='Restrooms on site.' src='img/icon_restroom_green.png'>");
     }
     if (trailhead.properties.kiosk && trailhead.properties.kiosk.toLowerCase().indexOf('y') === 0) {
-      $('.detailPanel .detailBottomRow .detailTrailheadAmenities .detailTrailheadIcons .kiosk').html("<img class='amenity-icons' title='Information kiosk on site.' src='img/icon_kiosk_green.png'>");
+      $('.detailPanel .kiosk').html("<img class='amenity-icons' title='Information kiosk on site.' src='img/icon_kiosk_green.png'>");
     }
 
     $('.detailPanel .detailSource').html(trailhead.properties.source);
@@ -1793,7 +1768,12 @@ function startup() {
         $('.detailPanel .detailStewardLogo').attr("src", trail.properties.steward_logo_url).show();
       }
       $('.detailPanel .detailFooter .detailSource').html(trail.properties.steward_fullname).attr("href", trail.properties.steward_url).attr("target", "_blank");
-      $('.detailPanel .detailFooter .detailSourcePhone').html(trail.properties.steward_phone);
+      if (SMALL) {
+        $('.detailPanel .detailSourcePhone').html("<a href='tel:" + trail.properties.steward_phone + "'>" + trail.properties.steward_phone + "</a>"); 
+      }
+      else {
+        $('.detailPanel .detailSourcePhone').html(trail.properties.steward_phone);
+      }
     } else {
       $('.detailPanel .detailFooter').hide();
     }
@@ -1825,7 +1805,7 @@ function startup() {
   //  Mobile-only function changing the position of the detailPanel
 
   function moveSlideDrawer(e) {
-    console.log("moveSlideDrawer")
+    console.log("moveSlideDrawer");
     if ($(".slideDrawer").hasClass("closedDrawer")) {
       console.log("openSlideDrawer");
       $('.slideDrawer').removeClass('closedDrawer');
@@ -2155,8 +2135,10 @@ function startup() {
             segment.properties.trail5 + " Trail" == trailName ||
             segment.properties.trail6 == trailName ||
             segment.properties.trail6 + " Trail" == trailName) &&
-          (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
-          // 1) {
+          // this was intended to use only trailhead source's data for a trail, but 
+          // it causes more problems than it solves.
+          // (segment.properties.source == trailSource || trailName == "Ohio & Erie Canal Towpath Trail")) {
+          1) {
           trailFeatureCollection.features[0].properties = {
             trailname: trailName
           };
@@ -2239,7 +2221,7 @@ function startup() {
       onEachFeature: function(feature, layer) {
         currentTrailLayers.push(layer);
       }
-    }).addTo(map).bringToFront();
+    }).addTo(map);
     //.bringToFront();
     zoomToLayer(currentMultiTrailLayer);
   }
