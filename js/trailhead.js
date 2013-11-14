@@ -635,7 +635,7 @@ function startup() {
   }
 
   function showGeoOverlay() {
-    var noGeolocationOverlayHTML = "<p>We weren't able to get your current location, so we'll give you trailhead distances from downtown Akron.";
+    var noGeolocationOverlayHTML = "<span class='closeOverlay'>x</span><p>We weren't able to get your current location, so we'll give you trailhead distances from downtown Akron.";
     $(".overlay-panel").html(noGeolocationOverlayHTML);
     $(".overlay").show();
     $(".overlay-panel").click(function() {
