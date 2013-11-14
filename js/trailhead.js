@@ -605,7 +605,7 @@ function startup() {
     }
     // If user location exists, turn on geolocation button
     if (currentUserLocation) {
-      $(".offsetGeolocate").show()
+      $(".offsetGeolocate").show();
     }
     // console.log(currentUserLocation);
     userMarker.setLatLng(currentUserLocation);
@@ -616,11 +616,11 @@ function startup() {
 
   function handleGeoError(error, callback) {
     console.log("handleGeoError");
-    currentUserLocation = AKRON;
     console.log(error);
     if (!map) {
       console.log("making map anyway");
       map = createMap(AKRON, 11);
+      currentUserLocation = AKRON;
     }
     if (map && userMarker && error.code === 3) {
       map.removeLayer(userMarker);
