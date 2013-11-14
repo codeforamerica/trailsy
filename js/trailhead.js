@@ -260,7 +260,6 @@ function startup() {
     "<p>We'll be launching To The Trails for mobile devices on November 15th, but desktop access is available now!" +
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
-
     // restricting SMALL devices only as of 11/13/2013
     if ((window.location.hostname === "www.tothetrails.com" && SMALL) || CLOSED) {
       console.log("closed");
@@ -570,6 +569,7 @@ function startup() {
       // should use browser geolocation,
       // and only return Akron if we're far from home base
       currentUserLocation = AKRON;
+      showGeoOverlay();
       handleGeoError("no geolocation", callback);
     }
 
@@ -621,6 +621,9 @@ function startup() {
       console.log("making map anyway");
       map = createMap(AKRON, 11);
       currentUserLocation = AKRON;
+      if (error.code === 1) {
+        showGeoOverlay();
+      }
     }
     if (map && userMarker && error.code === 3) {
       map.removeLayer(userMarker);
@@ -629,6 +632,15 @@ function startup() {
     if (typeof callback == "function") {
       callback();
     }
+  }
+
+  function showGeoOverlay() {
+    var noGeolocationOverlayHTML = "<p>We weren't able to get your current location, so we'll give you trailhead distances from downtown Akron.";
+    $(".overlay-panel").html(noGeolocationOverlayHTML);
+    $(".overlay").show();
+    $(".overlay-panel").click(function() {
+      $(".overlay").hide();
+    });
   }
 
   function centerOnLocation() {
