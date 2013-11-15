@@ -261,7 +261,10 @@ function startup() {
     "<img src='/img/Overlay-Image-01.png' alt='trees'>";
 
     // restricting SMALL devices only as of 11/13/2013
-    if ((window.location.hostname === "www.tothetrails.com" && SMALL) || CLOSED) {
+    // if ((window.location.hostname === "www.tothetrails.com" && SMALL) || CLOSED) {
+
+    // open to all 11/15/2013
+    if (CLOSED) {
       console.log("closed");
       $(".overlay-panel").html(closedOverlayHTML);
       $(".overlay").show();
