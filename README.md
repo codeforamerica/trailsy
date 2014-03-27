@@ -7,7 +7,7 @@ To The Trails is a web application where citizens can find information about the
 The app incorporates data from multiple agencies and park stewards, including the Cuyahoga Valley National Park and Metro Parks, Serving Summit County.
 To The Trails helps citizens find trails that fit their needs based on attributes like length, amenities and activities.
 
-The current production version is at [http://tothetrails.com]().
+The current production version is at [www.tothetrails.com](http://www.tothetrails.com/).
 
 #### Credits
 
