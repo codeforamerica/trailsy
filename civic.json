@@ -1,5 +1,5 @@
 {
-    "status": "Official", 
+    "status": "Beta", 
     "tags": [
         "inactive", 
         "fellowship", 
@@ -8,6 +8,7 @@
         "summit county", 
         "outdoors", 
         "hiking", 
-        "map"
+        "map", 
+        "opentrails"
     ]
 }
